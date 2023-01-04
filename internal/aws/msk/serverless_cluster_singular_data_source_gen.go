@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,174 +19,163 @@ func init() {
 // serverlessClusterDataSource returns the Terraform awscc_msk_serverless_cluster data source.
 // This Terraform data source corresponds to the CloudFormation AWS::MSK::ServerlessCluster resource.
 func serverlessClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"client_authentication": {
-			// Property: ClientAuthentication
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Sasl": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Iam": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Enabled": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Enabled"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Iam"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Sasl"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"sasl": {
-						// Property: Sasl
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"iam": {
-									// Property: Iam
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"enabled": {
-												// Property: Enabled
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
+		}, /*END ATTRIBUTE*/
+		// Property: ClientAuthentication
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Sasl": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Iam": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Enabled": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Enabled"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Iam"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Sasl"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"client_authentication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Sasl
+				"sasl": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Iam
+						"iam": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Enabled
+								"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"cluster_name": {
-			// Property: ClusterName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A key-value pair to associate with a resource.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair to associate with a resource.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A key-value pair to associate with a resource.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VpcConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "SecurityGroups": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "SubnetIds": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "SubnetIds"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"vpc_configs": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: SecurityGroups
+					"security_groups": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SubnetIds
+					"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"vpc_configs": {
-			// Property: VpcConfigs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "SecurityGroups": {
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "SubnetIds": {
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "SubnetIds"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"security_groups": {
-						// Property: SecurityGroups
-						Type:     types.SetType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"subnet_ids": {
-						// Property: SubnetIds
-						Type:     types.SetType{ElemType: types.StringType},
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::MSK::ServerlessCluster",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MSK::ServerlessCluster").WithTerraformTypeName("awscc_msk_serverless_cluster")
 	opts = opts.WithTerraformSchema(schema)
@@ -203,7 +192,7 @@ func serverlessClusterDataSource(ctx context.Context) (datasource.DataSource, er
 		"vpc_configs":           "VpcConfigs",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

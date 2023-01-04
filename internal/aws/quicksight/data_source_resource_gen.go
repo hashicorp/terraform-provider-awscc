@@ -4,14 +4,22 @@ package quicksight
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,3795 +29,3530 @@ func init() {
 // dataSourceResource returns the Terraform awscc_quicksight_data_source resource.
 // This Terraform resource corresponds to the CloudFormation AWS::QuickSight::DataSource resource.
 func dataSourceResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"alternate_data_source_parameters": {
-			// Property: AlternateDataSourceParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request\n            with the structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is null,\n            the \u003ccode\u003eCredentials\u003c/code\u003e originally used with this \u003ccode\u003eDataSourceParameters\u003c/code\u003e\n            are automatically allowed.\u003c/p\u003e",
-			//	  "items": {
-			//	    "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-			//	    "properties": {
-			//	      "AmazonElasticsearchParameters": {
-			//	        "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Domain": {
-			//	            "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-			//	            "maxLength": 64,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Domain"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "AmazonOpenSearchParameters": {
-			//	        "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Domain": {
-			//	            "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
-			//	            "maxLength": 64,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Domain"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "AthenaParameters": {
-			//	        "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "WorkGroup": {
-			//	            "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "AuroraParameters": {
-			//	        "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "AuroraPostgreSqlParameters": {
-			//	        "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "MariaDbParameters": {
-			//	        "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "MySqlParameters": {
-			//	        "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "OracleParameters": {
-			//	        "properties": {
-			//	          "Database": {
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "PostgreSqlParameters": {
-			//	        "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "PrestoParameters": {
-			//	        "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Catalog": {
-			//	            "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 0,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Catalog",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "RdsParameters": {
-			//	        "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "InstanceId": {
-			//	            "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-			//	            "maxLength": 64,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "InstanceId"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "RedshiftParameters": {
-			//	        "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "ClusterId": {
-			//	            "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-			//	            "maxLength": 64,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 0,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "S3Parameters": {
-			//	        "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "ManifestFileLocation": {
-			//	            "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-			//	            "properties": {
-			//	              "Bucket": {
-			//	                "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "Key": {
-			//	                "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Bucket",
-			//	              "Key"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "ManifestFileLocation"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "SnowflakeParameters": {
-			//	        "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Warehouse": {
-			//	            "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 0,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Warehouse"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "SparkParameters": {
-			//	        "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "SqlServerParameters": {
-			//	        "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "TeradataParameters": {
-			//	        "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Database": {
-			//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Host": {
-			//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Port": {
-			//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	            "maximum": 65535,
-			//	            "minimum": 1,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Database",
-			//	          "Host",
-			//	          "Port"
-			//	        ],
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AlternateDataSourceParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request\n            with the structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is null,\n            the \u003ccode\u003eCredentials\u003c/code\u003e originally used with this \u003ccode\u003eDataSourceParameters\u003c/code\u003e\n            are automatically allowed.\u003c/p\u003e",
+		//	  "items": {
+		//	    "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+		//	    "properties": {
+		//	      "AmazonElasticsearchParameters": {
+		//	        "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Domain": {
+		//	            "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Domain"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "AmazonOpenSearchParameters": {
+		//	        "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Domain": {
+		//	            "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Domain"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "AthenaParameters": {
+		//	        "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "WorkGroup": {
+		//	            "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "AuroraParameters": {
+		//	        "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "AuroraPostgreSqlParameters": {
+		//	        "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "MariaDbParameters": {
+		//	        "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "MySqlParameters": {
+		//	        "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "OracleParameters": {
+		//	        "properties": {
+		//	          "Database": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "PostgreSqlParameters": {
+		//	        "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "PrestoParameters": {
+		//	        "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Catalog": {
+		//	            "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Catalog",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "RdsParameters": {
+		//	        "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "InstanceId": {
+		//	            "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "InstanceId"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "RedshiftParameters": {
+		//	        "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "ClusterId": {
+		//	            "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+		//	            "maxLength": 64,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "S3Parameters": {
+		//	        "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "ManifestFileLocation": {
+		//	            "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "Bucket": {
+		//	                "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "Key": {
+		//	                "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Bucket",
+		//	              "Key"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ManifestFileLocation"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "SnowflakeParameters": {
+		//	        "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Warehouse": {
+		//	            "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Warehouse"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "SparkParameters": {
+		//	        "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "SqlServerParameters": {
+		//	        "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "TeradataParameters": {
+		//	        "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Database": {
+		//	            "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Database",
+		//	          "Host",
+		//	          "Port"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"alternate_data_source_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AmazonElasticsearchParameters
+					"amazon_elasticsearch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Domain
+							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 64),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: AmazonOpenSearchParameters
+					"amazon_open_search_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Domain
+							"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The Amazon OpenSearch Service domain.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 64),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Amazon OpenSearch Service parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: AthenaParameters
+					"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: WorkGroup
+							"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The workgroup that Amazon Athena uses.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Amazon Athena parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: AuroraParameters
+					"aurora_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Amazon Aurora parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: AuroraPostgreSqlParameters
+					"aurora_postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MariaDbParameters
+					"maria_db_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>MariaDB parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MySqlParameters
+					"my_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>MySQL parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: OracleParameters
+					"oracle_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PostgreSqlParameters
+					"postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>PostgreSQL parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PrestoParameters
+					"presto_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Catalog
+							"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Catalog.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Presto parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RdsParameters
+					"rds_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: InstanceId
+							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Instance ID.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 64),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Amazon RDS parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RedshiftParameters
+					"redshift_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ClusterId
+							"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 64),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(0.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: S3Parameters
+					"s3_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ManifestFileLocation
+							"manifest_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Bucket
+									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Amazon S3 bucket.</p>",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Amazon S3 key that identifies an object.</p>",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>Amazon S3 manifest file location.</p>",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>S3 parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SnowflakeParameters
+					"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Warehouse
+							"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Warehouse.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Snowflake parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SparkParameters
+					"spark_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Spark parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SqlServerParameters
+					"sql_server_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>SQL Server parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TeradataParameters
+					"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Database
+							"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Database.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Teradata parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "<p>A set of alternate data source parameters that you want to share for the credentials\n            stored with this data source. The credentials are applied in tandem with the data source\n            parameters when you copy a data source by using a create or update request. The API\n            operation compares the <code>DataSourceParameters</code> structure that's in the request\n            with the structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the credentials from this\n            existing data source. If the <code>AlternateDataSourceParameters</code> list is null,\n            the <code>Credentials</code> originally used with this <code>DataSourceParameters</code>\n            are automatically allowed.</p>",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"amazon_elasticsearch_parameters": {
-						// Property: AmazonElasticsearchParameters
-						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"domain": {
-									// Property: Domain
-									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"amazon_open_search_parameters": {
-						// Property: AmazonOpenSearchParameters
-						Description: "<p>Amazon OpenSearch Service parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"domain": {
-									// Property: Domain
-									Description: "<p>The Amazon OpenSearch Service domain.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"athena_parameters": {
-						// Property: AthenaParameters
-						Description: "<p>Amazon Athena parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"work_group": {
-									// Property: WorkGroup
-									Description: "<p>The workgroup that Amazon Athena uses.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"aurora_parameters": {
-						// Property: AuroraParameters
-						Description: "<p>Amazon Aurora parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"aurora_postgre_sql_parameters": {
-						// Property: AuroraPostgreSqlParameters
-						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"maria_db_parameters": {
-						// Property: MariaDbParameters
-						Description: "<p>MariaDB parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"my_sql_parameters": {
-						// Property: MySqlParameters
-						Description: "<p>MySQL parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"oracle_parameters": {
-						// Property: OracleParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Type:     types.Float64Type,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"postgre_sql_parameters": {
-						// Property: PostgreSqlParameters
-						Description: "<p>PostgreSQL parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"presto_parameters": {
-						// Property: PrestoParameters
-						Description: "<p>Presto parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"catalog": {
-									// Property: Catalog
-									Description: "<p>Catalog.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"rds_parameters": {
-						// Property: RdsParameters
-						Description: "<p>Amazon RDS parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"instance_id": {
-									// Property: InstanceId
-									Description: "<p>Instance ID.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"redshift_parameters": {
-						// Property: RedshiftParameters
-						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cluster_id": {
-									// Property: ClusterId
-									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
-									Type:        types.Float64Type,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(0.000000, 65535.000000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"s3_parameters": {
-						// Property: S3Parameters
-						Description: "<p>S3 parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"manifest_file_location": {
-									// Property: ManifestFileLocation
-									Description: "<p>Amazon S3 manifest file location.</p>",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Description: "<p>Amazon S3 bucket.</p>",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-											"key": {
-												// Property: Key
-												Description: "<p>Amazon S3 key that identifies an object.</p>",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"snowflake_parameters": {
-						// Property: SnowflakeParameters
-						Description: "<p>Snowflake parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"warehouse": {
-									// Property: Warehouse
-									Description: "<p>Warehouse.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 128),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"spark_parameters": {
-						// Property: SparkParameters
-						Description: "<p>Spark parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"sql_server_parameters": {
-						// Property: SqlServerParameters
-						Description: "<p>SQL Server parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"teradata_parameters": {
-						// Property: TeradataParameters
-						Description: "<p>Teradata parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 50),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the data source.\u003c/p\u003e",
-			//	  "type": "string"
-			//	}
-			Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"aws_account_id": {
-			// Property: AwsAccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 12,
-			//	  "minLength": 12,
-			//	  "pattern": "^[0-9]{12}$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(12, 12),
-				validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"created_time": {
-			// Property: CreatedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eThe time that this data source was created.\u003c/p\u003e",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Description: "<p>The time that this data source was created.</p>",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"credentials": {
-			// Property: Credentials
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eData source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.\u003c/p\u003e",
-			//	  "properties": {
-			//	    "CopySourceArn": {
-			//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
-			//	      "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+",
-			//	      "type": "string"
-			//	    },
-			//	    "CredentialPair": {
-			//	      "description": "\u003cp\u003eThe combination of user name and password that are used as credentials.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "AlternateDataSourceParameters": {
-			//	          "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
-			//	          "items": {
-			//	            "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-			//	            "properties": {
-			//	              "AmazonElasticsearchParameters": {
-			//	                "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Domain": {
-			//	                    "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-			//	                    "maxLength": 64,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Domain"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "AmazonOpenSearchParameters": {
-			//	                "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Domain": {
-			//	                    "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
-			//	                    "maxLength": 64,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Domain"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "AthenaParameters": {
-			//	                "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "WorkGroup": {
-			//	                    "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "AuroraParameters": {
-			//	                "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "AuroraPostgreSqlParameters": {
-			//	                "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "MariaDbParameters": {
-			//	                "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "MySqlParameters": {
-			//	                "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "OracleParameters": {
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "PostgreSqlParameters": {
-			//	                "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "PrestoParameters": {
-			//	                "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Catalog": {
-			//	                    "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 0,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Catalog",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "RdsParameters": {
-			//	                "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "InstanceId": {
-			//	                    "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-			//	                    "maxLength": 64,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "InstanceId"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "RedshiftParameters": {
-			//	                "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "ClusterId": {
-			//	                    "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-			//	                    "maxLength": 64,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 0,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "S3Parameters": {
-			//	                "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "ManifestFileLocation": {
-			//	                    "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-			//	                    "properties": {
-			//	                      "Bucket": {
-			//	                        "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-			//	                        "maxLength": 1024,
-			//	                        "minLength": 1,
-			//	                        "type": "string"
-			//	                      },
-			//	                      "Key": {
-			//	                        "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-			//	                        "maxLength": 1024,
-			//	                        "minLength": 1,
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "Bucket",
-			//	                      "Key"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "ManifestFileLocation"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "SnowflakeParameters": {
-			//	                "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Warehouse": {
-			//	                    "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 0,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Warehouse"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "SparkParameters": {
-			//	                "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "SqlServerParameters": {
-			//	                "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "TeradataParameters": {
-			//	                "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-			//	                "properties": {
-			//	                  "Database": {
-			//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	                    "maxLength": 256,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "number"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Database",
-			//	                  "Host",
-			//	                  "Port"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 50,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "Password": {
-			//	          "description": "\u003cp\u003ePassword.\u003c/p\u003e",
-			//	          "maxLength": 1024,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Username": {
-			//	          "description": "\u003cp\u003eUser name.\u003c/p\u003e",
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Password",
-			//	        "Username"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SecretArn": {
-			//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.\u003c/p\u003e",
-			//	      "maxLength": 2048,
-			//	      "minLength": 1,
-			//	      "pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "<p>Data source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.</p>",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"copy_source_arn": {
-						// Property: CopySourceArn
-						Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"credential_pair": {
-						// Property: CredentialPair
-						Description: "<p>The combination of user name and password that are used as credentials.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"alternate_data_source_parameters": {
-									// Property: AlternateDataSourceParameters
-									Description: "<p>A set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the <code>DataSourceParameters</code> structure that's in the request with the\n            structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the <code>AlternateDataSourceParameters</code> list is\n            null, the <code>DataSourceParameters</code> originally used with these\n                <code>Credentials</code> is automatically allowed.</p>",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"amazon_elasticsearch_parameters": {
-												// Property: AmazonElasticsearchParameters
-												Description: "<p>Amazon Elasticsearch Service parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"domain": {
-															// Property: Domain
-															Description: "<p>The Amazon Elasticsearch Service domain.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 64),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"amazon_open_search_parameters": {
-												// Property: AmazonOpenSearchParameters
-												Description: "<p>Amazon OpenSearch Service parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"domain": {
-															// Property: Domain
-															Description: "<p>The Amazon OpenSearch Service domain.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 64),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"athena_parameters": {
-												// Property: AthenaParameters
-												Description: "<p>Amazon Athena parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"work_group": {
-															// Property: WorkGroup
-															Description: "<p>The workgroup that Amazon Athena uses.</p>",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"aurora_parameters": {
-												// Property: AuroraParameters
-												Description: "<p>Amazon Aurora parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"aurora_postgre_sql_parameters": {
-												// Property: AuroraPostgreSqlParameters
-												Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"maria_db_parameters": {
-												// Property: MariaDbParameters
-												Description: "<p>MariaDB parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"my_sql_parameters": {
-												// Property: MySqlParameters
-												Description: "<p>MySQL parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"oracle_parameters": {
-												// Property: OracleParameters
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Type:     types.Float64Type,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"postgre_sql_parameters": {
-												// Property: PostgreSqlParameters
-												Description: "<p>PostgreSQL parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"presto_parameters": {
-												// Property: PrestoParameters
-												Description: "<p>Presto parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"catalog": {
-															// Property: Catalog
-															Description: "<p>Catalog.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"rds_parameters": {
-												// Property: RdsParameters
-												Description: "<p>Amazon RDS parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"instance_id": {
-															// Property: InstanceId
-															Description: "<p>Instance ID.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 64),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"redshift_parameters": {
-												// Property: RedshiftParameters
-												Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"cluster_id": {
-															// Property: ClusterId
-															Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 64),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
-															Type:        types.Float64Type,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(0.000000, 65535.000000),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"s3_parameters": {
-												// Property: S3Parameters
-												Description: "<p>S3 parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"manifest_file_location": {
-															// Property: ManifestFileLocation
-															Description: "<p>Amazon S3 manifest file location.</p>",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"bucket": {
-																		// Property: Bucket
-																		Description: "<p>Amazon S3 bucket.</p>",
-																		Type:        types.StringType,
-																		Required:    true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 1024),
-																		},
-																	},
-																	"key": {
-																		// Property: Key
-																		Description: "<p>Amazon S3 key that identifies an object.</p>",
-																		Type:        types.StringType,
-																		Required:    true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 1024),
-																		},
-																	},
-																},
-															),
-															Required: true,
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"snowflake_parameters": {
-												// Property: SnowflakeParameters
-												Description: "<p>Snowflake parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"warehouse": {
-															// Property: Warehouse
-															Description: "<p>Warehouse.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 128),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"spark_parameters": {
-												// Property: SparkParameters
-												Description: "<p>Spark parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"sql_server_parameters": {
-												// Property: SqlServerParameters
-												Description: "<p>SQL Server parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"teradata_parameters": {
-												// Property: TeradataParameters
-												Description: "<p>Teradata parameters.</p>",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"database": {
-															// Property: Database
-															Description: "<p>Database.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-															},
-														},
-														"host": {
-															// Property: Host
-															Description: "<p>Host.</p>",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 256),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "<p>Port.</p>",
-															Type:        types.Float64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.FloatBetween(1.000000, 65535.000000),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(1, 50),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"password": {
-									// Property: Password
-									Description: "<p>Password.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-								"username": {
-									// Property: Username
-									Description: "<p>User name.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"secret_arn": {
-						// Property: SecretArn
-						Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 2048),
-							validate.StringMatch(regexp.MustCompile("^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-			// Credentials is a write-only property.
-		},
-		"data_source_id": {
-			// Property: DataSourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"data_source_parameters": {
-			// Property: DataSourceParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
-			//	  "properties": {
-			//	    "AmazonElasticsearchParameters": {
-			//	      "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Domain": {
-			//	          "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Domain"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "AmazonOpenSearchParameters": {
-			//	      "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Domain": {
-			//	          "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Domain"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "AthenaParameters": {
-			//	      "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "WorkGroup": {
-			//	          "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "AuroraParameters": {
-			//	      "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "AuroraPostgreSqlParameters": {
-			//	      "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "MariaDbParameters": {
-			//	      "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "MySqlParameters": {
-			//	      "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "OracleParameters": {
-			//	      "properties": {
-			//	        "Database": {
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "PostgreSqlParameters": {
-			//	      "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "PrestoParameters": {
-			//	      "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Catalog": {
-			//	          "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Catalog",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "RdsParameters": {
-			//	      "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "InstanceId": {
-			//	          "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "InstanceId"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "RedshiftParameters": {
-			//	      "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "ClusterId": {
-			//	          "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 0,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "S3Parameters": {
-			//	      "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "ManifestFileLocation": {
-			//	          "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
-			//	          "properties": {
-			//	            "Bucket": {
-			//	              "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
-			//	              "maxLength": 1024,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "Key": {
-			//	              "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
-			//	              "maxLength": 1024,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Bucket",
-			//	            "Key"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ManifestFileLocation"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SnowflakeParameters": {
-			//	      "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Warehouse": {
-			//	          "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Warehouse"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SparkParameters": {
-			//	      "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SqlServerParameters": {
-			//	      "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "TeradataParameters": {
-			//	      "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Host": {
-			//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Port": {
-			//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
-			//	          "maximum": 65535,
-			//	          "minimum": 1,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Host",
-			//	        "Port"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"amazon_elasticsearch_parameters": {
-						// Property: AmazonElasticsearchParameters
-						Description: "<p>Amazon Elasticsearch Service parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"domain": {
-									// Property: Domain
-									Description: "<p>The Amazon Elasticsearch Service domain.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"amazon_open_search_parameters": {
-						// Property: AmazonOpenSearchParameters
-						Description: "<p>Amazon OpenSearch Service parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"domain": {
-									// Property: Domain
-									Description: "<p>The Amazon OpenSearch Service domain.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"athena_parameters": {
-						// Property: AthenaParameters
-						Description: "<p>Amazon Athena parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"work_group": {
-									// Property: WorkGroup
-									Description: "<p>The workgroup that Amazon Athena uses.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"aurora_parameters": {
-						// Property: AuroraParameters
-						Description: "<p>Amazon Aurora parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"aurora_postgre_sql_parameters": {
-						// Property: AuroraPostgreSqlParameters
-						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"maria_db_parameters": {
-						// Property: MariaDbParameters
-						Description: "<p>MariaDB parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"my_sql_parameters": {
-						// Property: MySqlParameters
-						Description: "<p>MySQL parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"oracle_parameters": {
-						// Property: OracleParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Type:     types.Float64Type,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"postgre_sql_parameters": {
-						// Property: PostgreSqlParameters
-						Description: "<p>PostgreSQL parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"presto_parameters": {
-						// Property: PrestoParameters
-						Description: "<p>Presto parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"catalog": {
-									// Property: Catalog
-									Description: "<p>Catalog.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"rds_parameters": {
-						// Property: RdsParameters
-						Description: "<p>Amazon RDS parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"instance_id": {
-									// Property: InstanceId
-									Description: "<p>Instance ID.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"redshift_parameters": {
-						// Property: RedshiftParameters
-						Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cluster_id": {
-									// Property: ClusterId
-									Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
-									Type:        types.Float64Type,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(0.000000, 65535.000000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"s3_parameters": {
-						// Property: S3Parameters
-						Description: "<p>S3 parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"manifest_file_location": {
-									// Property: ManifestFileLocation
-									Description: "<p>Amazon S3 manifest file location.</p>",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Description: "<p>Amazon S3 bucket.</p>",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-											"key": {
-												// Property: Key
-												Description: "<p>Amazon S3 key that identifies an object.</p>",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"snowflake_parameters": {
-						// Property: SnowflakeParameters
-						Description: "<p>Snowflake parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"warehouse": {
-									// Property: Warehouse
-									Description: "<p>Warehouse.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 128),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"spark_parameters": {
-						// Property: SparkParameters
-						Description: "<p>Spark parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"sql_server_parameters": {
-						// Property: SqlServerParameters
-						Description: "<p>SQL Server parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"teradata_parameters": {
-						// Property: TeradataParameters
-						Description: "<p>Teradata parameters.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "<p>Database.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-								},
-								"host": {
-									// Property: Host
-									Description: "<p>Host.</p>",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"port": {
-									// Property: Port
-									Description: "<p>Port.</p>",
-									Type:        types.Float64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.FloatBetween(1.000000, 65535.000000),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"error_info": {
-			// Property: ErrorInfo
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eError information for the data source creation or update.\u003c/p\u003e",
-			//	  "properties": {
-			//	    "Message": {
-			//	      "description": "\u003cp\u003eError message.\u003c/p\u003e",
-			//	      "type": "string"
-			//	    },
-			//	    "Type": {
-			//	      "enum": [
-			//	        "ACCESS_DENIED",
-			//	        "COPY_SOURCE_NOT_FOUND",
-			//	        "TIMEOUT",
-			//	        "ENGINE_VERSION_NOT_SUPPORTED",
-			//	        "UNKNOWN_HOST",
-			//	        "GENERIC_SQL_FAILURE",
-			//	        "CONFLICT",
-			//	        "UNKNOWN"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "<p>Error information for the data source creation or update.</p>",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"message": {
-						// Property: Message
-						Description: "<p>Error message.</p>",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"ACCESS_DENIED",
-								"COPY_SOURCE_NOT_FOUND",
-								"TIMEOUT",
-								"ENGINE_VERSION_NOT_SUPPORTED",
-								"UNKNOWN_HOST",
-								"GENERIC_SQL_FAILURE",
-								"CONFLICT",
-								"UNKNOWN",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"last_updated_time": {
-			// Property: LastUpdatedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eThe last time that this data source was updated.\u003c/p\u003e",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Description: "<p>The last time that this data source was updated.</p>",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eA display name for the data source.\u003c/p\u003e",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "<p>A display name for the data source.</p>",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"permissions": {
-			// Property: Permissions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eA list of resource permissions on the data source.\u003c/p\u003e",
-			//	  "items": {
-			//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
-			//	    "properties": {
-			//	      "Actions": {
-			//	        "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "maxItems": 16,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      },
-			//	      "Principal": {
-			//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Actions",
-			//	      "Principal"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 64,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "<p>A list of resource permissions on the data source.</p>",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"actions": {
-						// Property: Actions
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the data source.\u003c/p\u003e",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The Amazon Resource Name (ARN) of the data source.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AwsAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe time that this data source was created.\u003c/p\u003e",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The time that this data source was created.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Credentials
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eData source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "CopySourceArn": {
+		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When \u003ccode\u003eCopySourceArn\u003c/code\u003e is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            \u003ccode\u003eDataSourceCredentials\u003c/code\u003e structure.\u003c/p\u003e",
+		//	      "pattern": "^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+",
+		//	      "type": "string"
+		//	    },
+		//	    "CredentialPair": {
+		//	      "description": "\u003cp\u003eThe combination of user name and password that are used as credentials.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "AlternateDataSourceParameters": {
+		//	          "description": "\u003cp\u003eA set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the \u003ccode\u003eDataSourceParameters\u003c/code\u003e structure that's in the request with the\n            structures in the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the \u003ccode\u003eAlternateDataSourceParameters\u003c/code\u003e list is\n            null, the \u003ccode\u003eDataSourceParameters\u003c/code\u003e originally used with these\n                \u003ccode\u003eCredentials\u003c/code\u003e is automatically allowed.\u003c/p\u003e",
+		//	          "items": {
+		//	            "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "AmazonElasticsearchParameters": {
+		//	                "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Domain": {
+		//	                    "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+		//	                    "maxLength": 64,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Domain"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "AmazonOpenSearchParameters": {
+		//	                "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Domain": {
+		//	                    "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+		//	                    "maxLength": 64,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Domain"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "AthenaParameters": {
+		//	                "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "WorkGroup": {
+		//	                    "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "AuroraParameters": {
+		//	                "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "AuroraPostgreSqlParameters": {
+		//	                "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "MariaDbParameters": {
+		//	                "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "MySqlParameters": {
+		//	                "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "OracleParameters": {
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "PostgreSqlParameters": {
+		//	                "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "PrestoParameters": {
+		//	                "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Catalog": {
+		//	                    "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Catalog",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "RdsParameters": {
+		//	                "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "InstanceId": {
+		//	                    "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+		//	                    "maxLength": 64,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "InstanceId"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "RedshiftParameters": {
+		//	                "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "ClusterId": {
+		//	                    "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+		//	                    "maxLength": 64,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 0,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "S3Parameters": {
+		//	                "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "ManifestFileLocation": {
+		//	                    "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+		//	                    "properties": {
+		//	                      "Bucket": {
+		//	                        "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+		//	                        "maxLength": 1024,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Key": {
+		//	                        "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+		//	                        "maxLength": 1024,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Bucket",
+		//	                      "Key"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ManifestFileLocation"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SnowflakeParameters": {
+		//	                "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Warehouse": {
+		//	                    "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Warehouse"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SparkParameters": {
+		//	                "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SqlServerParameters": {
+		//	                "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "TeradataParameters": {
+		//	                "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Database": {
+		//	                    "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Database",
+		//	                  "Host",
+		//	                  "Port"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 50,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Password": {
+		//	          "description": "\u003cp\u003ePassword.\u003c/p\u003e",
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Username": {
+		//	          "description": "\u003cp\u003eUser name.\u003c/p\u003e",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Password",
+		//	        "Username"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.\u003c/p\u003e",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "pattern": "^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CopySourceArn
+				"copy_source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of a data source that has the credential pair that you\n            want to use. When <code>CopySourceArn</code> is not null, the credential pair from the\n            data source in the ARN is used as the credentials for the\n            <code>DataSourceCredentials</code> structure.</p>",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:quicksight:[-a-z0-9]*:[0-9]{12}:datasource/.+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CredentialPair
+				"credential_pair": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AlternateDataSourceParameters
+						"alternate_data_source_parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AmazonElasticsearchParameters
+									"amazon_elasticsearch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Domain
+											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 64),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Amazon Elasticsearch Service parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: AmazonOpenSearchParameters
+									"amazon_open_search_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Domain
+											"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The Amazon OpenSearch Service domain.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 64),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Amazon OpenSearch Service parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: AthenaParameters
+									"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: WorkGroup
+											"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The workgroup that Amazon Athena uses.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Amazon Athena parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: AuroraParameters
+									"aurora_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Amazon Aurora parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: AuroraPostgreSqlParameters
+									"aurora_postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MariaDbParameters
+									"maria_db_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>MariaDB parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MySqlParameters
+									"my_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>MySQL parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OracleParameters
+									"oracle_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: PostgreSqlParameters
+									"postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>PostgreSQL parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: PrestoParameters
+									"presto_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Catalog
+											"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Catalog.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Presto parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RdsParameters
+									"rds_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: InstanceId
+											"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Instance ID.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 64),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Amazon RDS parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RedshiftParameters
+									"redshift_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ClusterId
+											"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 64),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(0.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+													float64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: S3Parameters
+									"s3_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ManifestFileLocation
+											"manifest_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Bucket
+													"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Amazon S3 bucket.</p>",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 1024),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Key
+													"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>Amazon S3 key that identifies an object.</p>",
+														Required:    true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthBetween(1, 1024),
+														}, /*END VALIDATORS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "<p>Amazon S3 manifest file location.</p>",
+												Required:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>S3 parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SnowflakeParameters
+									"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Warehouse
+											"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Warehouse.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Snowflake parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SparkParameters
+									"spark_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Spark parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SqlServerParameters
+									"sql_server_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>SQL Server parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TeradataParameters
+									"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Database
+											"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Database.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Teradata parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "<p>A set of alternate data source parameters that you want to share for these\n            credentials. The credentials are applied in tandem with the data source parameters when\n            you copy a data source by using a create or update request. The API operation compares\n            the <code>DataSourceParameters</code> structure that's in the request with the\n            structures in the <code>AlternateDataSourceParameters</code> allow list. If the\n            structures are an exact match, the request is allowed to use the new data source with\n            the existing credentials. If the <code>AlternateDataSourceParameters</code> list is\n            null, the <code>DataSourceParameters</code> originally used with these\n                <code>Credentials</code> is automatically allowed.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 50),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Password
+						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Password.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1024),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Username
+						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>User name.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The combination of user name and password that are used as credentials.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of the secret associated with the data source in Amazon Secrets Manager.</p>",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:[-a-z0-9]*:secretsmanager:[-a-z0-9]*:[0-9]{12}:secret:.+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>Data source credentials. This is a variant type structure. For this structure to be\n            valid, only one of the attributes can be non-null.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Credentials is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: DataSourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"data_source_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DataSourceParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "AmazonElasticsearchParameters": {
+		//	      "description": "\u003cp\u003eAmazon Elasticsearch Service parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Domain": {
+		//	          "description": "\u003cp\u003eThe Amazon Elasticsearch Service domain.\u003c/p\u003e",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Domain"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "AmazonOpenSearchParameters": {
+		//	      "description": "\u003cp\u003eAmazon OpenSearch Service parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Domain": {
+		//	          "description": "\u003cp\u003eThe Amazon OpenSearch Service domain.\u003c/p\u003e",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Domain"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "AthenaParameters": {
+		//	      "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "WorkGroup": {
+		//	          "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "AuroraParameters": {
+		//	      "description": "\u003cp\u003eAmazon Aurora parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "AuroraPostgreSqlParameters": {
+		//	      "description": "\u003cp\u003eAmazon Aurora with PostgreSQL compatibility parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MariaDbParameters": {
+		//	      "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "MySqlParameters": {
+		//	      "description": "\u003cp\u003eMySQL parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "OracleParameters": {
+		//	      "properties": {
+		//	        "Database": {
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PostgreSqlParameters": {
+		//	      "description": "\u003cp\u003ePostgreSQL parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PrestoParameters": {
+		//	      "description": "\u003cp\u003ePresto parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Catalog": {
+		//	          "description": "\u003cp\u003eCatalog.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Catalog",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RdsParameters": {
+		//	      "description": "\u003cp\u003eAmazon RDS parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "InstanceId": {
+		//	          "description": "\u003cp\u003eInstance ID.\u003c/p\u003e",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "InstanceId"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RedshiftParameters": {
+		//	      "description": "\u003cp\u003eAmazon Redshift parameters. The \u003ccode\u003eClusterId\u003c/code\u003e field can be blank if\n            \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are both set. The \u003ccode\u003eHost\u003c/code\u003e and\n            \u003ccode\u003ePort\u003c/code\u003e fields can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e field is set.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "ClusterId": {
+		//	          "description": "\u003cp\u003eCluster ID. This field can be blank if the \u003ccode\u003eHost\u003c/code\u003e and \u003ccode\u003ePort\u003c/code\u003e are\n            provided.\u003c/p\u003e",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost. This field can be blank if \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort. This field can be blank if the \u003ccode\u003eClusterId\u003c/code\u003e is provided.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "S3Parameters": {
+		//	      "description": "\u003cp\u003eS3 parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "ManifestFileLocation": {
+		//	          "description": "\u003cp\u003eAmazon S3 manifest file location.\u003c/p\u003e",
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "description": "\u003cp\u003eAmazon S3 bucket.\u003c/p\u003e",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Key": {
+		//	              "description": "\u003cp\u003eAmazon S3 key that identifies an object.\u003c/p\u003e",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Bucket",
+		//	            "Key"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ManifestFileLocation"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SnowflakeParameters": {
+		//	      "description": "\u003cp\u003eSnowflake parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Warehouse": {
+		//	          "description": "\u003cp\u003eWarehouse.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Warehouse"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SparkParameters": {
+		//	      "description": "\u003cp\u003eSpark parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SqlServerParameters": {
+		//	      "description": "\u003cp\u003eSQL Server parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TeradataParameters": {
+		//	      "description": "\u003cp\u003eTeradata parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "\u003cp\u003eDatabase.\u003c/p\u003e",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Host",
+		//	        "Port"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"data_source_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AmazonElasticsearchParameters
+				"amazon_elasticsearch_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Domain
+						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The Amazon Elasticsearch Service domain.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Amazon Elasticsearch Service parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AmazonOpenSearchParameters
+				"amazon_open_search_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Domain
+						"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The Amazon OpenSearch Service domain.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Amazon OpenSearch Service parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AthenaParameters
+				"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: WorkGroup
+						"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The workgroup that Amazon Athena uses.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Amazon Athena parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AuroraParameters
+				"aurora_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Amazon Aurora parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AuroraPostgreSqlParameters
+				"aurora_postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MariaDbParameters
+				"maria_db_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>MariaDB parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MySqlParameters
+				"my_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>MySQL parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OracleParameters
+				"oracle_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PostgreSqlParameters
+				"postgre_sql_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>PostgreSQL parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PrestoParameters
+				"presto_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Catalog
+						"catalog": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Catalog.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Presto parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RdsParameters
+				"rds_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InstanceId
+						"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Instance ID.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Amazon RDS parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RedshiftParameters
+				"redshift_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterId
+						"cluster_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Cluster ID. This field can be blank if the <code>Host</code> and <code>Port</code> are\n            provided.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host. This field can be blank if <code>ClusterId</code> is provided.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port. This field can be blank if the <code>ClusterId</code> is provided.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Amazon Redshift parameters. The <code>ClusterId</code> field can be blank if\n            <code>Host</code> and <code>Port</code> are both set. The <code>Host</code> and\n            <code>Port</code> fields can be blank if the <code>ClusterId</code> field is set.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3Parameters
+				"s3_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ManifestFileLocation
+						"manifest_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Amazon S3 bucket.</p>",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1024),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "<p>Amazon S3 key that identifies an object.</p>",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1024),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "<p>Amazon S3 manifest file location.</p>",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>S3 parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SnowflakeParameters
+				"snowflake_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Warehouse
+						"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Warehouse.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Snowflake parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SparkParameters
+				"spark_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Spark parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SqlServerParameters
+				"sql_server_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>SQL Server parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TeradataParameters
+				"teradata_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Database.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Teradata parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The parameters that Amazon QuickSight uses to connect to your underlying data source.\n            This is a variant type structure. For this structure to be valid, only one of the\n            attributes can be non-null.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ErrorInfo
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eError information for the data source creation or update.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "Message": {
+		//	      "description": "\u003cp\u003eError message.\u003c/p\u003e",
+		//	      "type": "string"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "ACCESS_DENIED",
+		//	        "COPY_SOURCE_NOT_FOUND",
+		//	        "TIMEOUT",
+		//	        "ENGINE_VERSION_NOT_SUPPORTED",
+		//	        "UNKNOWN_HOST",
+		//	        "GENERIC_SQL_FAILURE",
+		//	        "CONFLICT",
+		//	        "UNKNOWN"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"error_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>Error message.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ACCESS_DENIED",
+							"COPY_SOURCE_NOT_FOUND",
+							"TIMEOUT",
+							"ENGINE_VERSION_NOT_SUPPORTED",
+							"UNKNOWN_HOST",
+							"GENERIC_SQL_FAILURE",
+							"CONFLICT",
+							"UNKNOWN",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>Error information for the data source creation or update.</p>",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastUpdatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe last time that this data source was updated.\u003c/p\u003e",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>The last time that this data source was updated.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eA display name for the data source.\u003c/p\u003e",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>A display name for the data source.</p>",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Permissions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eA list of resource permissions on the data source.\u003c/p\u003e",
+		//	  "items": {
+		//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
+		//	    "properties": {
+		//	      "Actions": {
+		//	        "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 16,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Principal": {
+		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Actions",
+		//	      "Principal"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 64,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actions
+					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 16),
-						},
-					},
-					"principal": {
-						// Property: Principal
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 16),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 64),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"ssl_properties": {
-			// Property: SslProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.\u003c/p\u003e",
-			//	  "properties": {
-			//	    "DisableSsl": {
-			//	      "description": "\u003cp\u003eA Boolean option to control whether SSL should be disabled.\u003c/p\u003e",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>A list of resource permissions on the data source.</p>",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SslProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eSecure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "DisableSsl": {
+		//	      "description": "\u003cp\u003eA Boolean option to control whether SSL should be disabled.\u003c/p\u003e",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"ssl_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DisableSsl
+				"disable_ssl": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "<p>Secure Socket Layer (SSL) properties that apply when QuickSight connects to your\n            underlying data source.</p>",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"disable_ssl": {
-						// Property: DisableSsl
-						Description: "<p>A Boolean option to control whether SSL should be disabled.</p>",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CREATION_IN_PROGRESS",
+		//	    "CREATION_SUCCESSFUL",
+		//	    "CREATION_FAILED",
+		//	    "UPDATE_IN_PROGRESS",
+		//	    "UPDATE_SUCCESSFUL",
+		//	    "UPDATE_FAILED",
+		//	    "DELETED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "CREATION_IN_PROGRESS",
-			//	    "CREATION_SUCCESSFUL",
-			//	    "CREATION_FAILED",
-			//	    "UPDATE_IN_PROGRESS",
-			//	    "UPDATE_SUCCESSFUL",
-			//	    "UPDATE_FAILED",
-			//	    "DELETED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the data source.\u003c/p\u003e",
-			//	  "items": {
-			//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the data source.\u003c/p\u003e",
+		//	  "items": {
+		//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>Tag key.</p>",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>Tag value.</p>",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-				},
-			),
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the data source.</p>",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ADOBE_ANALYTICS",
+		//	    "AMAZON_ELASTICSEARCH",
+		//	    "AMAZON_OPENSEARCH",
+		//	    "ATHENA",
+		//	    "AURORA",
+		//	    "AURORA_POSTGRESQL",
+		//	    "AWS_IOT_ANALYTICS",
+		//	    "GITHUB",
+		//	    "JIRA",
+		//	    "MARIADB",
+		//	    "MYSQL",
+		//	    "ORACLE",
+		//	    "POSTGRESQL",
+		//	    "PRESTO",
+		//	    "REDSHIFT",
+		//	    "S3",
+		//	    "SALESFORCE",
+		//	    "SERVICENOW",
+		//	    "SNOWFLAKE",
+		//	    "SPARK",
+		//	    "SQLSERVER",
+		//	    "TERADATA",
+		//	    "TWITTER",
+		//	    "TIMESTREAM"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 200),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "ADOBE_ANALYTICS",
-			//	    "AMAZON_ELASTICSEARCH",
-			//	    "AMAZON_OPENSEARCH",
-			//	    "ATHENA",
-			//	    "AURORA",
-			//	    "AURORA_POSTGRESQL",
-			//	    "AWS_IOT_ANALYTICS",
-			//	    "GITHUB",
-			//	    "JIRA",
-			//	    "MARIADB",
-			//	    "MYSQL",
-			//	    "ORACLE",
-			//	    "POSTGRESQL",
-			//	    "PRESTO",
-			//	    "REDSHIFT",
-			//	    "S3",
-			//	    "SALESFORCE",
-			//	    "SERVICENOW",
-			//	    "SNOWFLAKE",
-			//	    "SPARK",
-			//	    "SQLSERVER",
-			//	    "TERADATA",
-			//	    "TWITTER",
-			//	    "TIMESTREAM"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"ADOBE_ANALYTICS",
 					"AMAZON_ELASTICSEARCH",
 					"AMAZON_OPENSEARCH",
@@ -3834,65 +3577,61 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"TERADATA",
 					"TWITTER",
 					"TIMESTREAM",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"vpc_connection_properties": {
-			// Property: VpcConnectionProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
-			//	  "properties": {
-			//	    "VpcConnectionArn": {
-			//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "VpcConnectionArn"
-			//	  ],
-			//	  "type": "object"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpcConnectionProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eVPC connection properties.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "VpcConnectionArn": {
+		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) for the VPC connection.\u003c/p\u003e",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "VpcConnectionArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"vpc_connection_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcConnectionArn
+				"vpc_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "<p>VPC connection properties.</p>",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"vpc_connection_arn": {
-						// Property: VpcConnectionArn
-						Description: "<p>The Amazon Resource Name (ARN) for the VPC connection.</p>",
-						Type:        types.StringType,
-						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Definition of the AWS::QuickSight::DataSource Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::DataSource").WithTerraformTypeName("awscc_quicksight_data_source")
 	opts = opts.WithTerraformSchema(schema)
@@ -3963,7 +3702,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

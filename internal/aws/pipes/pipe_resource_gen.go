@@ -4,14 +4,24 @@ package pipes
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,3567 +31,3380 @@ func init() {
 // pipeResource returns the Terraform awscc_pipes_pipe resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Pipes::Pipe resource.
 func pipeResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"current_state": {
-			// Property: CurrentState
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "RUNNING",
-			//	    "STOPPED",
-			//	    "CREATING",
-			//	    "UPDATING",
-			//	    "DELETING",
-			//	    "STARTING",
-			//	    "STOPPING",
-			//	    "CREATE_FAILED",
-			//	    "UPDATE_FAILED",
-			//	    "START_FAILED",
-			//	    "STOP_FAILED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CurrentState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "RUNNING",
+		//	    "STOPPED",
+		//	    "CREATING",
+		//	    "UPDATING",
+		//	    "DELETING",
+		//	    "STARTING",
+		//	    "STOPPING",
+		//	    "CREATE_FAILED",
+		//	    "UPDATE_FAILED",
+		//	    "START_FAILED",
+		//	    "STOP_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"current_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 512,
-			//	  "minLength": 0,
-			//	  "pattern": "^.*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 512,
+		//	  "minLength": 0,
+		//	  "pattern": "^.*$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 512),
-				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"desired_state": {
-			// Property: DesiredState
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "RUNNING",
-			//	    "STOPPED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 512),
+				stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DesiredState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "RUNNING",
+		//	    "STOPPED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"desired_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"RUNNING",
 					"STOPPED",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"enrichment": {
-			// Property: Enrichment
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Enrichment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"enrichment": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1600),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"enrichment_parameters": {
-			// Property: EnrichmentParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "HttpParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "HeaderParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PathParameterValues": {
-			//	          "items": {
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "QueryStringParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "InputTemplate": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"http_parameters": {
-						// Property: HttpParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"header_parameters": {
-									// Property: HeaderParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"path_parameter_values": {
-									// Property: PathParameterValues
-									Type:     types.ListType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 1),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"query_string_parameters": {
-									// Property: QueryStringParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"input_template": {
-						// Property: InputTemplate
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 1600),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnrichmentParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "HttpParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "HeaderParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PathParameterValues": {
+		//	          "items": {
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "QueryStringParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "InputTemplate": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"enrichment_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HttpParameters
+				"http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderParameters
+						"header_parameters": // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PathParameterValues
+						"path_parameter_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: QueryStringParameters
+						"query_string_parameters": // Pattern: ""
+						schema.MapAttribute{       /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InputTemplate
+				"input_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "pattern": "^[\\.\\-_A-Za-z0-9]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\.\\-_A-Za-z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-				validate.StringMatch(regexp.MustCompile("^[\\.\\-_A-Za-z0-9]+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\.\\-_A-Za-z0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
-		},
-		"source": {
-			// Property: Source
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1600),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Source
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"source_parameters": {
-			// Property: SourceParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "ActiveMQBrokerParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "BasicAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "QueueName": {
-			//	          "maxLength": 1000,
-			//	          "minLength": 1,
-			//	          "pattern": "^[\\s\\S]*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Credentials",
-			//	        "QueueName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "DynamoDBStreamParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 1000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "DeadLetterConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Arn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRecordAgeInSeconds": {
-			//	          "maximum": 604800,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRetryAttempts": {
-			//	          "maximum": 10000,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "OnPartialBatchItemFailure": {
-			//	          "enum": [
-			//	            "AUTOMATIC_BISECT"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "ParallelizationFactor": {
-			//	          "maximum": 10,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "StartingPosition"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "FilterCriteria": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Filters": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Pattern": {
-			//	                "maxLength": 4096,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 5,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "KinesisStreamParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "DeadLetterConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Arn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRecordAgeInSeconds": {
-			//	          "maximum": 604800,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRetryAttempts": {
-			//	          "maximum": 10000,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "OnPartialBatchItemFailure": {
-			//	          "enum": [
-			//	            "AUTOMATIC_BISECT"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "ParallelizationFactor": {
-			//	          "maximum": 10,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST",
-			//	            "AT_TIMESTAMP"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "StartingPositionTimestamp": {
-			//	          "format": "date-time",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "StartingPosition"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ManagedStreamingKafkaParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "ConsumerGroupID": {
-			//	          "maxLength": 200,
-			//	          "minLength": 1,
-			//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
-			//	          "type": "string"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "ClientCertificateTlsAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "SaslScram512Auth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "TopicName": {
-			//	          "maxLength": 249,
-			//	          "minLength": 1,
-			//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TopicName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "RabbitMQBrokerParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "BasicAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "QueueName": {
-			//	          "maxLength": 1000,
-			//	          "minLength": 1,
-			//	          "pattern": "^[\\s\\S]*$",
-			//	          "type": "string"
-			//	        },
-			//	        "VirtualHost": {
-			//	          "maxLength": 200,
-			//	          "minLength": 1,
-			//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Credentials",
-			//	        "QueueName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SelfManagedKafkaParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AdditionalBootstrapServers": {
-			//	          "items": {
-			//	            "maxLength": 300,
-			//	            "minLength": 1,
-			//	            "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}$",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 2,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "ConsumerGroupID": {
-			//	          "maxLength": 200,
-			//	          "minLength": 1,
-			//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
-			//	          "type": "string"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "BasicAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientCertificateTlsAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "SaslScram256Auth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "SaslScram512Auth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "ServerRootCaCertificate": {
-			//	          "description": "Optional SecretManager ARN which stores the database credentials",
-			//	          "maxLength": 1600,
-			//	          "minLength": 1,
-			//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	          "type": "string"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "TopicName": {
-			//	          "maxLength": 249,
-			//	          "minLength": 1,
-			//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
-			//	          "type": "string"
-			//	        },
-			//	        "Vpc": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "SecurityGroup": {
-			//	              "description": "List of SecurityGroupId.",
-			//	              "items": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "^sg-[0-9a-zA-Z]*$",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 5,
-			//	              "minItems": 0,
-			//	              "type": "array"
-			//	            },
-			//	            "Subnets": {
-			//	              "description": "List of SubnetId.",
-			//	              "items": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "^subnet-[0-9a-z]*$",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 16,
-			//	              "minItems": 0,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TopicName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SqsQueueParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"active_mq_broker_parameters": {
-						// Property: ActiveMQBrokerParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth": {
-												// Property: BasicAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 300),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"queue_name": {
-									// Property: QueueName
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1000),
-										validate.StringMatch(regexp.MustCompile("^[\\s\\S]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.RequiresReplace(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"dynamo_db_stream_parameters": {
-						// Property: DynamoDBStreamParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 1000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"dead_letter_config": {
-									// Property: DeadLetterConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"arn": {
-												// Property: Arn
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 300),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_record_age_in_seconds": {
-									// Property: MaximumRecordAgeInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(-1, 604800),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_retry_attempts": {
-									// Property: MaximumRetryAttempts
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(-1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"on_partial_batch_item_failure": {
-									// Property: OnPartialBatchItemFailure
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"AUTOMATIC_BISECT",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"parallelization_factor": {
-									// Property: ParallelizationFactor
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"TRIM_HORIZON",
-											"LATEST",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.RequiresReplace(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"filter_criteria": {
-						// Property: FilterCriteria
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"filters": {
-									// Property: Filters
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"pattern": {
-												// Property: Pattern
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 4096),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 5),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"kinesis_stream_parameters": {
-						// Property: KinesisStreamParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"dead_letter_config": {
-									// Property: DeadLetterConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"arn": {
-												// Property: Arn
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 300),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_record_age_in_seconds": {
-									// Property: MaximumRecordAgeInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(-1, 604800),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_retry_attempts": {
-									// Property: MaximumRetryAttempts
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(-1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"on_partial_batch_item_failure": {
-									// Property: OnPartialBatchItemFailure
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"AUTOMATIC_BISECT",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"parallelization_factor": {
-									// Property: ParallelizationFactor
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"TRIM_HORIZON",
-											"LATEST",
-											"AT_TIMESTAMP",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.RequiresReplace(),
-									},
-								},
-								"starting_position_timestamp": {
-									// Property: StartingPositionTimestamp
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IsRFC3339Time(),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-										resource.RequiresReplace(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"managed_streaming_kafka_parameters": {
-						// Property: ManagedStreamingKafkaParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"consumer_group_id": {
-									// Property: ConsumerGroupID
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 200),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-\\/*:_+=.@-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-										resource.RequiresReplace(),
-									},
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"client_certificate_tls_auth": {
-												// Property: ClientCertificateTlsAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"sasl_scram_512_auth": {
-												// Property: SaslScram512Auth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 300),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"TRIM_HORIZON",
-											"LATEST",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-										resource.RequiresReplace(),
-									},
-								},
-								"topic_name": {
-									// Property: TopicName
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 249),
-										validate.StringMatch(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.RequiresReplace(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"rabbit_mq_broker_parameters": {
-						// Property: RabbitMQBrokerParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth": {
-												// Property: BasicAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 300),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"queue_name": {
-									// Property: QueueName
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1000),
-										validate.StringMatch(regexp.MustCompile("^[\\s\\S]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.RequiresReplace(),
-									},
-								},
-								"virtual_host": {
-									// Property: VirtualHost
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 200),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-\\/*:_+=.@-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-										resource.RequiresReplace(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"self_managed_kafka_parameters": {
-						// Property: SelfManagedKafkaParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"additional_bootstrap_servers": {
-									// Property: AdditionalBootstrapServers
-									Type:     types.ListType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 2),
-										validate.ArrayForEach(validate.StringLenBetween(1, 300)),
-										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}$"), "")),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"consumer_group_id": {
-									// Property: ConsumerGroupID
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 200),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-\\/*:_+=.@-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth": {
-												// Property: BasicAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"client_certificate_tls_auth": {
-												// Property: ClientCertificateTlsAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"sasl_scram_256_auth": {
-												// Property: SaslScram256Auth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"sasl_scram_512_auth": {
-												// Property: SaslScram512Auth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 300),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"server_root_ca_certificate": {
-									// Property: ServerRootCaCertificate
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1600),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ActiveMQBrokerParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "BasicAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "QueueName": {
+		//	          "maxLength": 1000,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\s\\S]*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Credentials",
+		//	        "QueueName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DynamoDBStreamParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 1000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "DeadLetterConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Arn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRecordAgeInSeconds": {
+		//	          "maximum": 604800,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRetryAttempts": {
+		//	          "maximum": 10000,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "OnPartialBatchItemFailure": {
+		//	          "enum": [
+		//	            "AUTOMATIC_BISECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ParallelizationFactor": {
+		//	          "maximum": 10,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "StartingPosition"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "FilterCriteria": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Filters": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Pattern": {
+		//	                "maxLength": 4096,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "KinesisStreamParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "DeadLetterConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Arn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRecordAgeInSeconds": {
+		//	          "maximum": 604800,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRetryAttempts": {
+		//	          "maximum": 10000,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "OnPartialBatchItemFailure": {
+		//	          "enum": [
+		//	            "AUTOMATIC_BISECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ParallelizationFactor": {
+		//	          "maximum": 10,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST",
+		//	            "AT_TIMESTAMP"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "StartingPositionTimestamp": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "StartingPosition"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ManagedStreamingKafkaParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ConsumerGroupID": {
+		//	          "maxLength": 200,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "ClientCertificateTlsAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SaslScram512Auth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TopicName": {
+		//	          "maxLength": 249,
+		//	          "minLength": 1,
+		//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TopicName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RabbitMQBrokerParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "BasicAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "QueueName": {
+		//	          "maxLength": 1000,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\s\\S]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "VirtualHost": {
+		//	          "maxLength": 200,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Credentials",
+		//	        "QueueName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SelfManagedKafkaParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AdditionalBootstrapServers": {
+		//	          "items": {
+		//	            "maxLength": 300,
+		//	            "minLength": 1,
+		//	            "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 2,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ConsumerGroupID": {
+		//	          "maxLength": 200,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "BasicAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientCertificateTlsAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SaslScram256Auth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SaslScram512Auth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerRootCaCertificate": {
+		//	          "description": "Optional SecretManager ARN which stores the database credentials",
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "type": "string"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TopicName": {
+		//	          "maxLength": 249,
+		//	          "minLength": 1,
+		//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
+		//	          "type": "string"
+		//	        },
+		//	        "Vpc": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SecurityGroup": {
+		//	              "description": "List of SecurityGroupId.",
+		//	              "items": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "^sg-[0-9a-zA-Z]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "minItems": 0,
+		//	              "type": "array"
+		//	            },
+		//	            "Subnets": {
+		//	              "description": "List of SubnetId.",
+		//	              "items": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "^subnet-[0-9a-z]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 16,
+		//	              "minItems": 0,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TopicName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SqsQueueParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"source_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActiveMQBrokerParameters
+				"active_mq_broker_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuth
+								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1600),
-										validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 300),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: QueueName
+						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1000),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DynamoDBStreamParameters
+				"dynamo_db_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 1000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DeadLetterConfig
+						"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"TRIM_HORIZON",
-											"LATEST",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"topic_name": {
-									// Property: TopicName
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 249),
-										validate.StringMatch(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
-									},
-								},
-								"vpc": {
-									// Property: Vpc
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"security_group": {
-												// Property: SecurityGroup
-												Description: "List of SecurityGroupId.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(0, 5),
-													validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), "")),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"subnets": {
-												// Property: Subnets
-												Description: "List of SubnetId.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(0, 16),
-													validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^subnet-[0-9a-z]*$"), "")),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 300),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRecordAgeInSeconds
+						"maximum_record_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(-1, 604800),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRetryAttempts
+						"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(-1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OnPartialBatchItemFailure
+						"on_partial_batch_item_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"AUTOMATIC_BISECT",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ParallelizationFactor
+						"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"TRIM_HORIZON",
+									"LATEST",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FilterCriteria
+				"filter_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Filters
+						"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Pattern
+									"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 4096),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 5),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KinesisStreamParameters
+				"kinesis_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DeadLetterConfig
+						"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"sqs_queue_parameters": {
-						// Property: SqsQueueParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 10000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 300),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 300),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRecordAgeInSeconds
+						"maximum_record_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(-1, 604800),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRetryAttempts
+						"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(-1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OnPartialBatchItemFailure
+						"on_partial_batch_item_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"AUTOMATIC_BISECT",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ParallelizationFactor
+						"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"TRIM_HORIZON",
+									"LATEST",
+									"AT_TIMESTAMP",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPositionTimestamp
+						"starting_position_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								validate.IsRFC3339Time(),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedStreamingKafkaParameters
+				"managed_streaming_kafka_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ConsumerGroupID
+						"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 200),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-\\/*:_+=.@-]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ClientCertificateTlsAuth
+								"client_certificate_tls_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SaslScram512Auth
+								"sasl_scram_512_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 300),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"TRIM_HORIZON",
+									"LATEST",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TopicName
+						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 249),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RabbitMQBrokerParameters
+				"rabbit_mq_broker_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuth
+								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 300),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: QueueName
+						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1000),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[\\s\\S]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VirtualHost
+						"virtual_host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 200),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-\\/*:_+=.@-]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+								stringplanmodifier.RequiresReplace(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SelfManagedKafkaParameters
+				"self_managed_kafka_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalBootstrapServers
+						"additional_bootstrap_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 2),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 300),
+									stringvalidator.RegexMatches(regexp.MustCompile("^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ConsumerGroupID
+						"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 200),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-\\/*:_+=.@-]*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuth
+								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCertificateTlsAuth
+								"client_certificate_tls_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SaslScram256Auth
+								"sasl_scram_256_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SaslScram512Auth
+								"sasl_scram_512_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 300),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServerRootCaCertificate
+						"server_root_ca_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Optional SecretManager ARN which stores the database credentials",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1600),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"TRIM_HORIZON",
+									"LATEST",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TopicName
+						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 249),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[^.]([a-zA-Z0-9\\-_.]+)$"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Vpc
+						"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroup
+								"security_group": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of SecurityGroupId.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(0, 5),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 1024),
+											stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Subnets
+								"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of SubnetId.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.SizeBetween(0, 16),
+										listvalidator.ValueStringsAre(
+											stringvalidator.LengthBetween(1, 1024),
+											stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*$"), ""),
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SqsQueueParameters
+				"sqs_queue_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(1, 10000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.Between(0, 300),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// SourceParameters is a write-only property.
-		},
-		"state_reason": {
-			// Property: StateReason
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 512,
-			//	  "minLength": 0,
-			//	  "pattern": "^.*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: StateReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 512,
+		//	  "minLength": 0,
+		//	  "pattern": "^.*$",
+		//	  "type": "string"
+		//	}
+		"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "minLength": 0,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			//
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"target": {
-			// Property: Target
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Target
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"target": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
-		},
-		"target_parameters": {
-			// Property: TargetParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "BatchJobParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ArrayProperties": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Size": {
-			//	              "default": 0,
-			//	              "maximum": 10000,
-			//	              "minimum": 2,
-			//	              "type": "integer"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ContainerOverrides": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Command": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Environment": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Name": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "InstanceType": {
-			//	              "type": "string"
-			//	            },
-			//	            "ResourceRequirements": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Type": {
-			//	                    "enum": [
-			//	                      "GPU",
-			//	                      "MEMORY",
-			//	                      "VCPU"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Type",
-			//	                  "Value"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "DependsOn": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "JobId": {
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "enum": [
-			//	                  "N_TO_N",
-			//	                  "SEQUENTIAL"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 20,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "JobDefinition": {
-			//	          "type": "string"
-			//	        },
-			//	        "JobName": {
-			//	          "type": "string"
-			//	        },
-			//	        "Parameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "RetryStrategy": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Attempts": {
-			//	              "default": 0,
-			//	              "maximum": 10,
-			//	              "minimum": 1,
-			//	              "type": "integer"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "JobDefinition",
-			//	        "JobName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "CloudWatchLogsParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "LogStreamName": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Timestamp": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "EcsTaskParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CapacityProviderStrategy": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Base": {
-			//	                "default": 0,
-			//	                "maximum": 100000,
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              },
-			//	              "CapacityProvider": {
-			//	                "maxLength": 255,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "Weight": {
-			//	                "default": 0,
-			//	                "maximum": 1000,
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "CapacityProvider"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 6,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "EnableECSManagedTags": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "EnableExecuteCommand": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "Group": {
-			//	          "type": "string"
-			//	        },
-			//	        "LaunchType": {
-			//	          "enum": [
-			//	            "EC2",
-			//	            "FARGATE",
-			//	            "EXTERNAL"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "NetworkConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AwsvpcConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "AssignPublicIp": {
-			//	                  "enum": [
-			//	                    "ENABLED",
-			//	                    "DISABLED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "SecurityGroups": {
-			//	                  "items": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^sg-[0-9a-zA-Z]*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "maxItems": 5,
-			//	                  "minItems": 0,
-			//	                  "type": "array"
-			//	                },
-			//	                "Subnets": {
-			//	                  "items": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^subnet-[0-9a-z]*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "maxItems": 16,
-			//	                  "minItems": 0,
-			//	                  "type": "array"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Subnets"
-			//	              ],
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Overrides": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ContainerOverrides": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Command": {
-			//	                    "items": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "Cpu": {
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "Environment": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Name": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "EnvironmentFiles": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Type": {
-			//	                          "enum": [
-			//	                            "s3"
-			//	                          ],
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Type",
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "Memory": {
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "MemoryReservation": {
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "Name": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "ResourceRequirements": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Type": {
-			//	                          "enum": [
-			//	                            "GPU",
-			//	                            "InferenceAccelerator"
-			//	                          ],
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Type",
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Cpu": {
-			//	              "type": "string"
-			//	            },
-			//	            "EphemeralStorage": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "SizeInGiB": {
-			//	                  "default": 0,
-			//	                  "maximum": 200,
-			//	                  "minimum": 21,
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "SizeInGiB"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "ExecutionRoleArn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "InferenceAcceleratorOverrides": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DeviceName": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DeviceType": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Memory": {
-			//	              "type": "string"
-			//	            },
-			//	            "TaskRoleArn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PlacementConstraints": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Expression": {
-			//	                "maxLength": 2000,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "enum": [
-			//	                  "distinctInstance",
-			//	                  "memberOf"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 10,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "PlacementStrategy": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Field": {
-			//	                "maxLength": 255,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "enum": [
-			//	                  "random",
-			//	                  "spread",
-			//	                  "binpack"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 5,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "PlatformVersion": {
-			//	          "type": "string"
-			//	        },
-			//	        "PropagateTags": {
-			//	          "enum": [
-			//	            "TASK_DEFINITION"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "ReferenceId": {
-			//	          "maxLength": 1024,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "Tags": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Key": {
-			//	                "maxLength": 128,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 256,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Key",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array"
-			//	        },
-			//	        "TaskCount": {
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "TaskDefinitionArn": {
-			//	          "maxLength": 1600,
-			//	          "minLength": 1,
-			//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TaskDefinitionArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "EventBridgeEventBusParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DetailType": {
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "EndpointId": {
-			//	          "maxLength": 50,
-			//	          "minLength": 1,
-			//	          "pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
-			//	          "type": "string"
-			//	        },
-			//	        "Resources": {
-			//	          "items": {
-			//	            "maxLength": 1600,
-			//	            "minLength": 1,
-			//	            "pattern": "^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 10,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "Source": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "Time": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "HttpParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "HeaderParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PathParameterValues": {
-			//	          "items": {
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "QueryStringParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "InputTemplate": {
-			//	      "type": "string"
-			//	    },
-			//	    "KinesisStreamParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "PartitionKey": {
-			//	          "maxLength": 256,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "PartitionKey"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "LambdaFunctionParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InvocationType": {
-			//	          "enum": [
-			//	            "REQUEST_RESPONSE",
-			//	            "FIRE_AND_FORGET"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "RedshiftDataParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "Redshift Database",
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "DbUser": {
-			//	          "description": "Database user name",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "SecretManagerArn": {
-			//	          "description": "Optional SecretManager ARN which stores the database credentials",
-			//	          "maxLength": 1600,
-			//	          "minLength": 1,
-			//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	          "type": "string"
-			//	        },
-			//	        "Sqls": {
-			//	          "description": "A list of SQLs.",
-			//	          "items": {
-			//	            "description": "A single Redshift SQL",
-			//	            "maxLength": 100000,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "StatementName": {
-			//	          "description": "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
-			//	          "maxLength": 500,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "WithEvent": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Sqls"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SageMakerPipelineParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "PipelineParameterList": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Name": {
-			//	                "maxLength": 256,
-			//	                "minLength": 1,
-			//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Name",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 200,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "SqsQueueParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "MessageDeduplicationId": {
-			//	          "maxLength": 100,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "MessageGroupId": {
-			//	          "maxLength": 100,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "StepFunctionStateMachineParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InvocationType": {
-			//	          "enum": [
-			//	            "REQUEST_RESPONSE",
-			//	            "FIRE_AND_FORGET"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"batch_job_parameters": {
-						// Property: BatchJobParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"array_properties": {
-									// Property: ArrayProperties
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"size": {
-												// Property: Size
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntBetween(2, 10000),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64Value(0)),
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1600),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TargetParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BatchJobParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ArrayProperties": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Size": {
+		//	              "default": 0,
+		//	              "maximum": 10000,
+		//	              "minimum": 2,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ContainerOverrides": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Command": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Environment": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "InstanceType": {
+		//	              "type": "string"
+		//	            },
+		//	            "ResourceRequirements": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Type": {
+		//	                    "enum": [
+		//	                      "GPU",
+		//	                      "MEMORY",
+		//	                      "VCPU"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Type",
+		//	                  "Value"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "DependsOn": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "JobId": {
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "N_TO_N",
+		//	                  "SEQUENTIAL"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 20,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "JobDefinition": {
+		//	          "type": "string"
+		//	        },
+		//	        "JobName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Parameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "RetryStrategy": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Attempts": {
+		//	              "default": 0,
+		//	              "maximum": 10,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "JobDefinition",
+		//	        "JobName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "CloudWatchLogsParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "LogStreamName": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Timestamp": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EcsTaskParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CapacityProviderStrategy": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Base": {
+		//	                "default": 0,
+		//	                "maximum": 100000,
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              },
+		//	              "CapacityProvider": {
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "Weight": {
+		//	                "default": 0,
+		//	                "maximum": 1000,
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "CapacityProvider"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 6,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "EnableECSManagedTags": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "EnableExecuteCommand": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "Group": {
+		//	          "type": "string"
+		//	        },
+		//	        "LaunchType": {
+		//	          "enum": [
+		//	            "EC2",
+		//	            "FARGATE",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "NetworkConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AwsvpcConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "AssignPublicIp": {
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "SecurityGroups": {
+		//	                  "items": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^sg-[0-9a-zA-Z]*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 5,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "Subnets": {
+		//	                  "items": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^subnet-[0-9a-z]*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 16,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Subnets"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Overrides": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ContainerOverrides": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Command": {
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "Cpu": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Environment": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Name": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "EnvironmentFiles": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Type": {
+		//	                          "enum": [
+		//	                            "s3"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type",
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "Memory": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "MemoryReservation": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Name": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ResourceRequirements": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Type": {
+		//	                          "enum": [
+		//	                            "GPU",
+		//	                            "InferenceAccelerator"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type",
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Cpu": {
+		//	              "type": "string"
+		//	            },
+		//	            "EphemeralStorage": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SizeInGiB": {
+		//	                  "default": 0,
+		//	                  "maximum": 200,
+		//	                  "minimum": 21,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "SizeInGiB"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ExecutionRoleArn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "InferenceAcceleratorOverrides": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DeviceName": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DeviceType": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Memory": {
+		//	              "type": "string"
+		//	            },
+		//	            "TaskRoleArn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PlacementConstraints": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Expression": {
+		//	                "maxLength": 2000,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "distinctInstance",
+		//	                  "memberOf"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "PlacementStrategy": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Field": {
+		//	                "maxLength": 255,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "random",
+		//	                  "spread",
+		//	                  "binpack"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "PlatformVersion": {
+		//	          "type": "string"
+		//	        },
+		//	        "PropagateTags": {
+		//	          "enum": [
+		//	            "TASK_DEFINITION"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ReferenceId": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Tags": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Key": {
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 256,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Key",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "TaskCount": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "TaskDefinitionArn": {
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TaskDefinitionArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "EventBridgeEventBusParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DetailType": {
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "EndpointId": {
+		//	          "maxLength": 50,
+		//	          "minLength": 1,
+		//	          "pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "Resources": {
+		//	          "items": {
+		//	            "maxLength": 1600,
+		//	            "minLength": 1,
+		//	            "pattern": "^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "Source": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "Time": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "HttpParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "HeaderParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PathParameterValues": {
+		//	          "items": {
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "QueryStringParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "InputTemplate": {
+		//	      "type": "string"
+		//	    },
+		//	    "KinesisStreamParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PartitionKey": {
+		//	          "maxLength": 256,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PartitionKey"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "LambdaFunctionParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InvocationType": {
+		//	          "enum": [
+		//	            "REQUEST_RESPONSE",
+		//	            "FIRE_AND_FORGET"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RedshiftDataParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "Redshift Database",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "DbUser": {
+		//	          "description": "Database user name",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "SecretManagerArn": {
+		//	          "description": "Optional SecretManager ARN which stores the database credentials",
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "type": "string"
+		//	        },
+		//	        "Sqls": {
+		//	          "description": "A list of SQLs.",
+		//	          "items": {
+		//	            "description": "A single Redshift SQL",
+		//	            "maxLength": 100000,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "StatementName": {
+		//	          "description": "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
+		//	          "maxLength": 500,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "WithEvent": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Sqls"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SageMakerPipelineParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PipelineParameterList": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Name": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 200,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SqsQueueParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MessageDeduplicationId": {
+		//	          "maxLength": 100,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "MessageGroupId": {
+		//	          "maxLength": 100,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "StepFunctionStateMachineParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InvocationType": {
+		//	          "enum": [
+		//	            "REQUEST_RESPONSE",
+		//	            "FIRE_AND_FORGET"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"target_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BatchJobParameters
+				"batch_job_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ArrayProperties
+						"array_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Size
+								"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"container_overrides": {
-									// Property: ContainerOverrides
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"command": {
-												// Property: Command
-												Type:     types.ListType{ElemType: types.StringType},
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(2, 10000),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										generic.Int64DefaultValue(0),
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ContainerOverrides
+						"container_overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Command
+								"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Environment
+								"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"environment": {
-												// Property: Environment
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"name": {
-															// Property: Name
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceRequirements
+								"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Type
+											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"GPU",
+														"MEMORY",
+														"VCPU",
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DependsOn
+						"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: JobId
+									"job_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"N_TO_N",
+												"SEQUENTIAL",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 20),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: JobDefinition
+						"job_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: JobName
+						"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Parameters
+						"parameters":        // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RetryStrategy
+						"retry_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Attempts
+								"attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(1, 10),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										generic.Int64DefaultValue(0),
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CloudWatchLogsParameters
+				"cloudwatch_logs_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogStreamName
+						"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Timestamp
+						"timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.RegexMatches(regexp.MustCompile("^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcsTaskParameters
+				"ecs_task_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityProviderStrategy
+						"capacity_provider_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Base
+									"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(0, 100000),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											generic.Int64DefaultValue(0),
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: CapacityProvider
+									"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 255),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Weight
+									"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(0, 1000),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											generic.Int64DefaultValue(0),
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 6),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EnableECSManagedTags
+						"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EnableExecuteCommand
+						"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Group
+						"group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: LaunchType
+						"launch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"EC2",
+									"FARGATE",
+									"EXTERNAL",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkConfiguration
+						"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AwsvpcConfiguration
+								"awsvpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AssignPublicIp
+										"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"ENABLED",
+													"DISABLED",
 												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroups
+										"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(0, 5),
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), ""),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Subnets
+										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Required:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.SizeBetween(0, 16),
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^subnet-[0-9a-z]*$"), ""),
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Overrides
+						"overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerOverrides
+								"container_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Command
+											"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Cpu
+											"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"instance_type": {
-												// Property: InstanceType
-												Type:     types.StringType,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Environment
+											"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resource_requirements": {
-												// Property: ResourceRequirements
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"type": {
-															// Property: Type
-															Type:     types.StringType,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: EnvironmentFiles
+											"environment_files": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
+																	"s3",
+																),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Memory
+											"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: MemoryReservation
+											"memory_reservation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+													int64planmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ResourceRequirements
+											"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.OneOf(
 																	"GPU",
-																	"MEMORY",
-																	"VCPU",
-																}),
-															},
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
+																	"InferenceAccelerator",
+																),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-														},
-													},
-												),
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"depends_on": {
-									// Property: DependsOn
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"job_id": {
-												// Property: JobId
-												Type:     types.StringType,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Cpu
+								"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EphemeralStorage
+								"ephemeral_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SizeInGiB
+										"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(21, 200),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												generic.Int64DefaultValue(0),
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ExecutionRoleArn
+								"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InferenceAcceleratorOverrides
+								"inference_accelerator_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DeviceName
+											"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"type": {
-												// Property: Type
-												Type:     types.StringType,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DeviceType
+											"device_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"N_TO_N",
-														"SEQUENTIAL",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Optional: true,
 									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 20),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"job_definition": {
-									// Property: JobDefinition
-									Type:     types.StringType,
-									Required: true,
-								},
-								"job_name": {
-									// Property: JobName
-									Type:     types.StringType,
-									Required: true,
-								},
-								"parameters": {
-									// Property: Parameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Memory
+								"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"retry_strategy": {
-									// Property: RetryStrategy
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"attempts": {
-												// Property: Attempts
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntBetween(1, 10),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64Value(0)),
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TaskRoleArn
+								"task_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"cloudwatch_logs_parameters": {
-						// Property: CloudWatchLogsParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"log_stream_name": {
-									// Property: LogStreamName
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"timestamp": {
-									// Property: Timestamp
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ecs_task_parameters": {
-						// Property: EcsTaskParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"capacity_provider_strategy": {
-									// Property: CapacityProviderStrategy
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"base": {
-												// Property: Base
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntBetween(0, 100000),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64Value(0)),
-													resource.UseStateForUnknown(),
-												},
-											},
-											"capacity_provider": {
-												// Property: CapacityProvider
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 255),
-												},
-											},
-											"weight": {
-												// Property: Weight
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntBetween(0, 1000),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													DefaultValue(types.Int64Value(0)),
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 6),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"enable_ecs_managed_tags": {
-									// Property: EnableECSManagedTags
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"enable_execute_command": {
-									// Property: EnableExecuteCommand
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"group": {
-									// Property: Group
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"launch_type": {
-									// Property: LaunchType
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EC2",
-											"FARGATE",
-											"EXTERNAL",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"network_configuration": {
-									// Property: NetworkConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"awsvpc_configuration": {
-												// Property: AwsvpcConfiguration
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"assign_public_ip": {
-															// Property: AssignPublicIp
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"ENABLED",
-																	"DISABLED",
-																}),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"security_groups": {
-															// Property: SecurityGroups
-															Type:     types.ListType{ElemType: types.StringType},
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayLenBetween(0, 5),
-																validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^sg-[0-9a-zA-Z]*$"), "")),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"subnets": {
-															// Property: Subnets
-															Type:     types.ListType{ElemType: types.StringType},
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayLenBetween(0, 16),
-																validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^subnet-[0-9a-z]*$"), "")),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"overrides": {
-									// Property: Overrides
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"container_overrides": {
-												// Property: ContainerOverrides
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"command": {
-															// Property: Command
-															Type:     types.ListType{ElemType: types.StringType},
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"cpu": {
-															// Property: Cpu
-															Type:     types.Int64Type,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"environment": {
-															// Property: Environment
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"environment_files": {
-															// Property: EnvironmentFiles
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"type": {
-																		// Property: Type
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringInSlice([]string{
-																				"s3",
-																			}),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"memory": {
-															// Property: Memory
-															Type:     types.Int64Type,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"memory_reservation": {
-															// Property: MemoryReservation
-															Type:     types.Int64Type,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"name": {
-															// Property: Name
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"resource_requirements": {
-															// Property: ResourceRequirements
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"type": {
-																		// Property: Type
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringInSlice([]string{
-																				"GPU",
-																				"InferenceAccelerator",
-																			}),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"cpu": {
-												// Property: Cpu
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"ephemeral_storage": {
-												// Property: EphemeralStorage
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"size_in_gi_b": {
-															// Property: SizeInGiB
-															Type:     types.Int64Type,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.IntBetween(21, 200),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																DefaultValue(types.Int64Value(0)),
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"execution_role_arn": {
-												// Property: ExecutionRoleArn
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"inference_accelerator_overrides": {
-												// Property: InferenceAcceleratorOverrides
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"device_name": {
-															// Property: DeviceName
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"device_type": {
-															// Property: DeviceType
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"memory": {
-												// Property: Memory
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"task_role_arn": {
-												// Property: TaskRoleArn
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1600),
-													validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"placement_constraints": {
-									// Property: PlacementConstraints
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"expression": {
-												// Property: Expression
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 2000),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"type": {
-												// Property: Type
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"distinctInstance",
-														"memberOf",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 10),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"placement_strategy": {
-									// Property: PlacementStrategy
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"field": {
-												// Property: Field
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 255),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"type": {
-												// Property: Type
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"random",
-														"spread",
-														"binpack",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 5),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"platform_version": {
-									// Property: PlatformVersion
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"propagate_tags": {
-									// Property: PropagateTags
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"TASK_DEFINITION",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"reference_id": {
-									// Property: ReferenceId
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1024),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"tags": {
-									// Property: Tags
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 128),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"task_count": {
-									// Property: TaskCount
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntAtLeast(1),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"task_definition_arn": {
-									// Property: TaskDefinitionArn
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1600),
-										validate.StringMatch(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"event_bridge_event_bus_parameters": {
-						// Property: EventBridgeEventBusParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"detail_type": {
-									// Property: DetailType
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"endpoint_id": {
-									// Property: EndpointId
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 50),
-										validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"resources": {
-									// Property: Resources
-									Type:     types.ListType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 10),
-										validate.ArrayForEach(validate.StringLenBetween(1, 1600)),
-										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), "")),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source": {
-									// Property: Source
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"time": {
-									// Property: Time
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"http_parameters": {
-						// Property: HttpParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"header_parameters": {
-									// Property: HeaderParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"path_parameter_values": {
-									// Property: PathParameterValues
-									Type:     types.ListType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 1),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"query_string_parameters": {
-									// Property: QueryStringParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"input_template": {
-						// Property: InputTemplate
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"kinesis_stream_parameters": {
-						// Property: KinesisStreamParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"partition_key": {
-									// Property: PartitionKey
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"lambda_function_parameters": {
-						// Property: LambdaFunctionParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"invocation_type": {
-									// Property: InvocationType
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"REQUEST_RESPONSE",
-											"FIRE_AND_FORGET",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"redshift_data_parameters": {
-						// Property: RedshiftDataParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "Redshift Database",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 64),
-									},
-								},
-								"db_user": {
-									// Property: DbUser
-									Description: "Database user name",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"secret_manager_arn": {
-									// Property: SecretManagerArn
-									Description: "Optional SecretManager ARN which stores the database credentials",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1600),
-										validate.StringMatch(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"sqls": {
-									// Property: Sqls
-									Description: "A list of SQLs.",
-									Type:        types.ListType{ElemType: types.StringType},
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenAtLeast(1),
-										validate.ArrayForEach(validate.StringLenBetween(1, 100000)),
-									},
-								},
-								"statement_name": {
-									// Property: StatementName
-									Description: "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 500),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"with_event": {
-									// Property: WithEvent
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"sage_maker_pipeline_parameters": {
-						// Property: SageMakerPipelineParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"pipeline_parameter_list": {
-									// Property: PipelineParameterList
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"name": {
-												// Property: Name
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 256),
-													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 1024),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 200),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"sqs_queue_parameters": {
-						// Property: SqsQueueParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"message_deduplication_id": {
-									// Property: MessageDeduplicationId
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 100),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"message_group_id": {
-									// Property: MessageGroupId
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 100),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"step_function_state_machine_parameters": {
-						// Property: StepFunctionStateMachineParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"invocation_type": {
-									// Property: InvocationType
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"REQUEST_RESPONSE",
-											"FIRE_AND_FORGET",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1600),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PlacementConstraints
+						"placement_constraints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 2000),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"distinctInstance",
+												"memberOf",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 10),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PlacementStrategy
+						"placement_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Field
+									"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 255),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"random",
+												"spread",
+												"binpack",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 5),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PlatformVersion
+						"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PropagateTags
+						"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"TASK_DEFINITION",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ReferenceId
+						"reference_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 1024),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Tags
+						"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 128),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 256),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TaskCount
+						"task_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TaskDefinitionArn
+						"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1600),
+								stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EventBridgeEventBusParameters
+				"event_bridge_event_bus_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DetailType
+						"detail_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointId
+						"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 50),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Resources
+						"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 10),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 1600),
+									stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Source
+						"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Time
+						"time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+								stringvalidator.RegexMatches(regexp.MustCompile("^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HttpParameters
+				"http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderParameters
+						"header_parameters": // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PathParameterValues
+						"path_parameter_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: QueryStringParameters
+						"query_string_parameters": // Pattern: ""
+						schema.MapAttribute{       /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InputTemplate
+				"input_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KinesisStreamParameters
+				"kinesis_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PartitionKey
+						"partition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionParameters
+				"lambda_function_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InvocationType
+						"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"REQUEST_RESPONSE",
+									"FIRE_AND_FORGET",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RedshiftDataParameters
+				"redshift_data_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Redshift Database",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 64),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DbUser
+						"db_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Database user name",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 128),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SecretManagerArn
+						"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Optional SecretManager ARN which stores the database credentials",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1600),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Sqls
+						"sqls": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of SQLs.",
+							Required:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtLeast(1),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 100000),
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StatementName
+						"statement_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 500),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WithEvent
+						"with_event": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SageMakerPipelineParameters
+				"sage_maker_pipeline_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PipelineParameterList
+						"pipeline_parameter_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 200),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SqsQueueParameters
+				"sqs_queue_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MessageDeduplicationId
+						"message_deduplication_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MessageGroupId
+						"message_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 100),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StepFunctionStateMachineParameters
+				"step_function_state_machine_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InvocationType
+						"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"REQUEST_RESPONSE",
+									"FIRE_AND_FORGET",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// TargetParameters is a write-only property.
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Definition of AWS::Pipes::Pipe Resource Type",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pipes::Pipe").WithTerraformTypeName("awscc_pipes_pipe")
 	opts = opts.WithTerraformSchema(schema)
@@ -3726,7 +3549,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

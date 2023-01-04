@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,49 +19,45 @@ func init() {
 // pullThroughCacheRuleDataSource returns the Terraform awscc_ecr_pull_through_cache_rule data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ECR::PullThroughCacheRule resource.
 func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"ecr_repository_prefix": {
-			// Property: EcrRepositoryPrefix
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
-			//	  "maxLength": 20,
-			//	  "minLength": 2,
-			//	  "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: EcrRepositoryPrefix
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
+		//	  "maxLength": 20,
+		//	  "minLength": 2,
+		//	  "pattern": "^([a-z0-9]+(?:[._-][a-z0-9]+)*)$",
+		//	  "type": "string"
+		//	}
+		"ecr_repository_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ECRRepositoryPrefix is a custom alias for upstream registry url.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"upstream_registry_url": {
-			// Property: UpstreamRegistryUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: UpstreamRegistryUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
+		//	  "type": "string"
+		//	}
+		"upstream_registry_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ECR::PullThroughCacheRule",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::PullThroughCacheRule").WithTerraformTypeName("awscc_ecr_pull_through_cache_rule")
 	opts = opts.WithTerraformSchema(schema)
@@ -70,7 +66,7 @@ func pullThroughCacheRuleDataSource(ctx context.Context) (datasource.DataSource,
 		"upstream_registry_url": "UpstreamRegistryUrl",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

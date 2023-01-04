@@ -4,14 +4,19 @@ package iotwireless
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,631 +26,572 @@ func init() {
 // wirelessDeviceResource returns the Terraform awscc_iotwireless_wireless_device resource.
 // This Terraform resource corresponds to the CloudFormation AWS::IoTWireless::WirelessDevice resource.
 func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Wireless device arn. Returned after successful create.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Wireless device arn. Returned after successful create.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device arn. Returned after successful create.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Wireless device description",
-			//	  "maxLength": 2048,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Wireless device description",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device description",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(2048),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"destination_name": {
-			// Property: DestinationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Wireless device destination name",
-			//	  "maxLength": 128,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Wireless device destination name",
+		//	  "maxLength": 128,
+		//	  "type": "string"
+		//	}
+		"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device destination name",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(128),
-			},
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Wireless device Id. Returned after successful create.",
-			//	  "maxLength": 256,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(128),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Wireless device Id. Returned after successful create.",
+		//	  "maxLength": 256,
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device Id. Returned after successful create.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"last_uplink_received_at": {
-			// Property: LastUplinkReceivedAt
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date and time when the most recent uplink was received.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastUplinkReceivedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time when the most recent uplink was received.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"last_uplink_received_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date and time when the most recent uplink was received.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"lo_ra_wan": {
-			// Property: LoRaWAN
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
-			//	  "oneOf": [
-			//	    {
-			//	      "required": [
-			//	        "OtaaV11"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "OtaaV10x"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "AbpV11"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "AbpV10x"
-			//	      ]
-			//	    }
-			//	  ],
-			//	  "properties": {
-			//	    "AbpV10x": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DevAddr": {
-			//	          "pattern": "[a-fA-F0-9]{8}",
-			//	          "type": "string"
-			//	        },
-			//	        "SessionKeys": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AppSKey": {
-			//	              "pattern": "[a-fA-F0-9]{32}",
-			//	              "type": "string"
-			//	            },
-			//	            "NwkSKey": {
-			//	              "pattern": "[a-fA-F0-9]{32}",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "NwkSKey",
-			//	            "AppSKey"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "DevAddr",
-			//	        "SessionKeys"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "AbpV11": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DevAddr": {
-			//	          "pattern": "[a-fA-F0-9]{8}",
-			//	          "type": "string"
-			//	        },
-			//	        "SessionKeys": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AppSKey": {
-			//	              "pattern": "[a-fA-F0-9]{32}",
-			//	              "type": "string"
-			//	            },
-			//	            "FNwkSIntKey": {
-			//	              "pattern": "[a-fA-F0-9]{32}",
-			//	              "type": "string"
-			//	            },
-			//	            "NwkSEncKey": {
-			//	              "pattern": "[a-fA-F0-9]{32}",
-			//	              "type": "string"
-			//	            },
-			//	            "SNwkSIntKey": {
-			//	              "pattern": "[a-fA-F0-9]{32}",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "FNwkSIntKey",
-			//	            "SNwkSIntKey",
-			//	            "NwkSEncKey",
-			//	            "AppSKey"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "DevAddr",
-			//	        "SessionKeys"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "DevEui": {
-			//	      "pattern": "[a-f0-9]{16}",
-			//	      "type": "string"
-			//	    },
-			//	    "DeviceProfileId": {
-			//	      "maxLength": 256,
-			//	      "type": "string"
-			//	    },
-			//	    "OtaaV10x": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AppEui": {
-			//	          "pattern": "[a-fA-F0-9]{16}",
-			//	          "type": "string"
-			//	        },
-			//	        "AppKey": {
-			//	          "pattern": "[a-fA-F0-9]{32}",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "AppKey",
-			//	        "AppEui"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "OtaaV11": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AppKey": {
-			//	          "pattern": "[a-fA-F0-9]{32}",
-			//	          "type": "string"
-			//	        },
-			//	        "JoinEui": {
-			//	          "pattern": "[a-fA-F0-9]{16}",
-			//	          "type": "string"
-			//	        },
-			//	        "NwkKey": {
-			//	          "pattern": "[a-fA-F0-9]{32}",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "AppKey",
-			//	        "NwkKey",
-			//	        "JoinEui"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ServiceProfileId": {
-			//	      "maxLength": 256,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LoRaWAN
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "OtaaV11"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "OtaaV10x"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "AbpV11"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "AbpV10x"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "AbpV10x": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DevAddr": {
+		//	          "pattern": "[a-fA-F0-9]{8}",
+		//	          "type": "string"
+		//	        },
+		//	        "SessionKeys": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AppSKey": {
+		//	              "pattern": "[a-fA-F0-9]{32}",
+		//	              "type": "string"
+		//	            },
+		//	            "NwkSKey": {
+		//	              "pattern": "[a-fA-F0-9]{32}",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "NwkSKey",
+		//	            "AppSKey"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DevAddr",
+		//	        "SessionKeys"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "AbpV11": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DevAddr": {
+		//	          "pattern": "[a-fA-F0-9]{8}",
+		//	          "type": "string"
+		//	        },
+		//	        "SessionKeys": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AppSKey": {
+		//	              "pattern": "[a-fA-F0-9]{32}",
+		//	              "type": "string"
+		//	            },
+		//	            "FNwkSIntKey": {
+		//	              "pattern": "[a-fA-F0-9]{32}",
+		//	              "type": "string"
+		//	            },
+		//	            "NwkSEncKey": {
+		//	              "pattern": "[a-fA-F0-9]{32}",
+		//	              "type": "string"
+		//	            },
+		//	            "SNwkSIntKey": {
+		//	              "pattern": "[a-fA-F0-9]{32}",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "FNwkSIntKey",
+		//	            "SNwkSIntKey",
+		//	            "NwkSEncKey",
+		//	            "AppSKey"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DevAddr",
+		//	        "SessionKeys"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DevEui": {
+		//	      "pattern": "[a-f0-9]{16}",
+		//	      "type": "string"
+		//	    },
+		//	    "DeviceProfileId": {
+		//	      "maxLength": 256,
+		//	      "type": "string"
+		//	    },
+		//	    "OtaaV10x": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AppEui": {
+		//	          "pattern": "[a-fA-F0-9]{16}",
+		//	          "type": "string"
+		//	        },
+		//	        "AppKey": {
+		//	          "pattern": "[a-fA-F0-9]{32}",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AppKey",
+		//	        "AppEui"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "OtaaV11": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AppKey": {
+		//	          "pattern": "[a-fA-F0-9]{32}",
+		//	          "type": "string"
+		//	        },
+		//	        "JoinEui": {
+		//	          "pattern": "[a-fA-F0-9]{16}",
+		//	          "type": "string"
+		//	        },
+		//	        "NwkKey": {
+		//	          "pattern": "[a-fA-F0-9]{32}",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AppKey",
+		//	        "NwkKey",
+		//	        "JoinEui"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ServiceProfileId": {
+		//	      "maxLength": 256,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"lo_ra_wan": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AbpV10x
+				"abp_v10_x": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DevAddr
+						"dev_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SessionKeys
+						"session_keys": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AppSKey
+								"app_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NwkSKey
+								"nwk_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AbpV11
+				"abp_v11": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DevAddr
+						"dev_addr": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SessionKeys
+						"session_keys": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AppSKey
+								"app_s_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: FNwkSIntKey
+								"f_nwk_s_int_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NwkSEncKey
+								"nwk_s_enc_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SNwkSIntKey
+								"s_nwk_s_int_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DevEui
+				"dev_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("[a-f0-9]{16}"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceProfileId
+				"device_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(256),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OtaaV10x
+				"otaa_v10_x": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppEui
+						"app_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: AppKey
+						"app_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OtaaV11
+				"otaa_v11": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AppKey
+						"app_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: JoinEui
+						"join_eui": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NwkKey
+						"nwk_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceProfileId
+				"service_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(256),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The combination of Package, Station and Model which represents the version of the LoRaWAN Wireless Device.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"abp_v10_x": {
-						// Property: AbpV10x
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"dev_addr": {
-									// Property: DevAddr
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
-									},
-								},
-								"session_keys": {
-									// Property: SessionKeys
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"app_s_key": {
-												// Property: AppSKey
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-												},
-											},
-											"nwk_s_key": {
-												// Property: NwkSKey
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"abp_v11": {
-						// Property: AbpV11
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"dev_addr": {
-									// Property: DevAddr
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{8}"), ""),
-									},
-								},
-								"session_keys": {
-									// Property: SessionKeys
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"app_s_key": {
-												// Property: AppSKey
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-												},
-											},
-											"f_nwk_s_int_key": {
-												// Property: FNwkSIntKey
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-												},
-											},
-											"nwk_s_enc_key": {
-												// Property: NwkSEncKey
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-												},
-											},
-											"s_nwk_s_int_key": {
-												// Property: SNwkSIntKey
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"dev_eui": {
-						// Property: DevEui
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("[a-f0-9]{16}"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"device_profile_id": {
-						// Property: DeviceProfileId
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"otaa_v10_x": {
-						// Property: OtaaV10x
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"app_eui": {
-									// Property: AppEui
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
-									},
-								},
-								"app_key": {
-									// Property: AppKey
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"otaa_v11": {
-						// Property: OtaaV11
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"app_key": {
-									// Property: AppKey
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-									},
-								},
-								"join_eui": {
-									// Property: JoinEui
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{16}"), ""),
-									},
-								},
-								"nwk_key": {
-									// Property: NwkKey
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("[a-fA-F0-9]{32}"), ""),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"service_profile_id": {
-						// Property: ServiceProfileId
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.RequiredAttributes(
-					validate.OneOfRequired(
-						validate.Required(
-							"otaa_v11",
-						),
-						validate.Required(
-							"otaa_v10_x",
-						),
-						validate.Required(
-							"abp_v11",
-						),
-						validate.Required(
-							"abp_v10_x",
-						),
-					),
-				),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Wireless device name",
-			//	  "maxLength": 256,
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Wireless device name",
+		//	  "maxLength": 256,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device name",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(256),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of key-value pairs that contain metadata for the device. Currently not supported, will not create if tags are passed.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(200),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"thing_arn": {
-			// Property: ThingArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Thing arn. Passed into update to associate Thing with Wireless device.",
-			//	  "type": "string"
-			//	}
-			Description: "Thing arn. Passed into update to associate Thing with Wireless device.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"thing_name": {
-			// Property: ThingName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
-			//	  "type": "string"
-			//	}
-			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
-			Type:        types.StringType,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ThingArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Thing arn. Passed into update to associate Thing with Wireless device.",
+		//	  "type": "string"
+		//	}
+		"thing_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Thing arn. Passed into update to associate Thing with Wireless device.",
+			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Wireless device type, currently only Sidewalk and LoRa",
-			//	  "enum": [
-			//	    "Sidewalk",
-			//	    "LoRaWAN"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ThingName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+		//	  "type": "string"
+		//	}
+		"thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Thing Arn. If there is a Thing created, this can be returned with a Get call.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Wireless device type, currently only Sidewalk and LoRa",
+		//	  "enum": [
+		//	    "Sidewalk",
+		//	    "LoRaWAN"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Wireless device type, currently only Sidewalk and LoRa",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"Sidewalk",
 					"LoRaWAN",
-				}),
-			},
-		},
-	}
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Create and manage wireless gateways, including LoRa gateways.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTWireless::WirelessDevice").WithTerraformTypeName("awscc_iotwireless_wireless_device")
 	opts = opts.WithTerraformSchema(schema)
@@ -688,7 +634,7 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,46 +19,42 @@ func init() {
 // logStreamDataSource returns the Terraform awscc_logs_log_stream data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Logs::LogStream resource.
 func logStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"log_group_name": {
-			// Property: LogGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the log group where the log stream is created.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: LogGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the log group where the log stream is created.",
+		//	  "type": "string"
+		//	}
+		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the log group where the log stream is created.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"log_stream_name": {
-			// Property: LogStreamName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the log stream. The name must be unique wihtin the log group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LogStreamName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the log stream. The name must be unique wihtin the log group.",
+		//	  "type": "string"
+		//	}
+		"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the log stream. The name must be unique wihtin the log group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Logs::LogStream",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogStream").WithTerraformTypeName("awscc_logs_log_stream")
 	opts = opts.WithTerraformSchema(schema)
@@ -67,7 +63,7 @@ func logStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"log_stream_name": "LogStreamName",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

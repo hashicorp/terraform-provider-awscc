@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,130 +19,119 @@ func init() {
 // scheduledActionDataSource returns the Terraform awscc_autoscaling_scheduled_action data source.
 // This Terraform data source corresponds to the CloudFormation AWS::AutoScaling::ScheduledAction resource.
 func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auto_scaling_group_name": {
-			// Property: AutoScalingGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the Auto Scaling group.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScalingGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Auto Scaling group.",
+		//	  "type": "string"
+		//	}
+		"auto_scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Auto Scaling group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"desired_capacity": {
-			// Property: DesiredCapacity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DesiredCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
+		//	  "type": "integer"
+		//	}
+		"desired_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"end_time": {
-			// Property: EndTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EndTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+		//	  "type": "string"
+		//	}
+		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"max_size": {
-			// Property: MaxSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The minimum size of the Auto Scaling group.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MaxSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The minimum size of the Auto Scaling group.",
+		//	  "type": "integer"
+		//	}
+		"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The minimum size of the Auto Scaling group.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"min_size": {
-			// Property: MinSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The minimum size of the Auto Scaling group.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MinSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The minimum size of the Auto Scaling group.",
+		//	  "type": "integer"
+		//	}
+		"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The minimum size of the Auto Scaling group.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"recurrence": {
-			// Property: Recurrence
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Recurrence
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
+		//	  "type": "string"
+		//	}
+		"recurrence": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"scheduled_action_name": {
-			// Property: ScheduledActionName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Auto-generated unique identifier",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ScheduledActionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Auto-generated unique identifier",
+		//	  "type": "string"
+		//	}
+		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Auto-generated unique identifier",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"start_time": {
-			// Property: StartTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StartTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+		//	  "type": "string"
+		//	}
+		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"time_zone": {
-			// Property: TimeZone
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time zone for the cron expression.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TimeZone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time zone for the cron expression.",
+		//	  "type": "string"
+		//	}
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time zone for the cron expression.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::AutoScaling::ScheduledAction",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::ScheduledAction").WithTerraformTypeName("awscc_autoscaling_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -158,7 +147,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"time_zone":               "TimeZone",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -4,14 +4,16 @@ package ses
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,67 +23,64 @@ func init() {
 // dedicatedIpPoolResource returns the Terraform awscc_ses_dedicated_ip_pool resource.
 // This Terraform resource corresponds to the CloudFormation AWS::SES::DedicatedIpPool resource.
 func dedicatedIpPoolResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"pool_name": {
-			// Property: PoolName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the dedicated IP pool.",
-			//	  "pattern": "^[a-z0-9_-]{0,64}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: PoolName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the dedicated IP pool.",
+		//	  "pattern": "^[a-z0-9_-]{0,64}$",
+		//	  "type": "string"
+		//	}
+		"pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the dedicated IP pool.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[a-z0-9_-]{0,64}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"scaling_mode": {
-			// Property: ScalingMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
-			//	  "pattern": "^(STANDARD|MANAGED)$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9_-]{0,64}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ScalingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
+		//	  "pattern": "^(STANDARD|MANAGED)$",
+		//	  "type": "string"
+		//	}
+		"scaling_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^(STANDARD|MANAGED)$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^(STANDARD|MANAGED)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::SES::DedicatedIpPool",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::DedicatedIpPool").WithTerraformTypeName("awscc_ses_dedicated_ip_pool")
 	opts = opts.WithTerraformSchema(schema)
@@ -95,7 +94,7 @@ func dedicatedIpPoolResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

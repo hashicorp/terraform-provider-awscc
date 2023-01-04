@@ -5,12 +5,17 @@ package iotsitewise
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,1257 +25,1178 @@ func init() {
 // assetModelResource returns the Terraform awscc_iotsitewise_asset_model resource.
 // This Terraform resource corresponds to the CloudFormation AWS::IoTSiteWise::AssetModel resource.
 func assetModelResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"asset_model_arn": {
-			// Property: AssetModelArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the asset model, which has the following format.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssetModelArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the asset model, which has the following format.",
+		//	  "type": "string"
+		//	}
+		"asset_model_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the asset model, which has the following format.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"asset_model_composite_models": {
-			// Property: AssetModelCompositeModels
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
-			//	    "properties": {
-			//	      "CompositeModelProperties": {
-			//	        "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Contains information about an asset model property.",
-			//	          "properties": {
-			//	            "DataType": {
-			//	              "description": "The data type of the asset model property.",
-			//	              "enum": [
-			//	                "STRING",
-			//	                "INTEGER",
-			//	                "DOUBLE",
-			//	                "BOOLEAN",
-			//	                "STRUCT"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "DataTypeSpec": {
-			//	              "description": "The data type of the structure for this property.",
-			//	              "enum": [
-			//	                "AWS/ALARM_STATE"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "LogicalId": {
-			//	              "description": "Customer provided ID for property.",
-			//	              "maxLength": 256,
-			//	              "minLength": 1,
-			//	              "pattern": "",
-			//	              "type": "string"
-			//	            },
-			//	            "Name": {
-			//	              "description": "The name of the asset model property.",
-			//	              "type": "string"
-			//	            },
-			//	            "Type": {
-			//	              "additionalProperties": false,
-			//	              "description": "The property type",
-			//	              "properties": {
-			//	                "Attribute": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "DefaultValue": {
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "Metric": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Expression": {
-			//	                      "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Variables": {
-			//	                      "description": "The list of variables used in the expression.",
-			//	                      "insertionOrder": false,
-			//	                      "items": {
-			//	                        "additionalProperties": false,
-			//	                        "properties": {
-			//	                          "Name": {
-			//	                            "description": "The friendly name of the variable to be used in the expression.",
-			//	                            "type": "string"
-			//	                          },
-			//	                          "Value": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The variable that identifies an asset property from which to use values.",
-			//	                            "properties": {
-			//	                              "HierarchyLogicalId": {
-			//	                                "maxLength": 256,
-			//	                                "minLength": 1,
-			//	                                "pattern": "",
-			//	                                "type": "string"
-			//	                              },
-			//	                              "PropertyLogicalId": {
-			//	                                "maxLength": 256,
-			//	                                "minLength": 1,
-			//	                                "pattern": "",
-			//	                                "type": "string"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "PropertyLogicalId"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "Name",
-			//	                          "Value"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      },
-			//	                      "type": "array"
-			//	                    },
-			//	                    "Window": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-			//	                      "properties": {
-			//	                        "Tumbling": {
-			//	                          "additionalProperties": false,
-			//	                          "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-			//	                          "properties": {
-			//	                            "Interval": {
-			//	                              "description": "The time interval for the tumbling window.",
-			//	                              "type": "string"
-			//	                            },
-			//	                            "Offset": {
-			//	                              "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			//	                              "type": "string"
-			//	                            }
-			//	                          },
-			//	                          "required": [
-			//	                            "Interval"
-			//	                          ],
-			//	                          "type": "object"
-			//	                        }
-			//	                      },
-			//	                      "type": "object"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Expression",
-			//	                    "Variables",
-			//	                    "Window"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "Transform": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Expression": {
-			//	                      "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Variables": {
-			//	                      "description": "The list of variables used in the expression.",
-			//	                      "insertionOrder": false,
-			//	                      "items": {
-			//	                        "additionalProperties": false,
-			//	                        "properties": {
-			//	                          "Name": {
-			//	                            "description": "The friendly name of the variable to be used in the expression.",
-			//	                            "type": "string"
-			//	                          },
-			//	                          "Value": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The variable that identifies an asset property from which to use values.",
-			//	                            "properties": {
-			//	                              "HierarchyLogicalId": {
-			//	                                "maxLength": 256,
-			//	                                "minLength": 1,
-			//	                                "pattern": "",
-			//	                                "type": "string"
-			//	                              },
-			//	                              "PropertyLogicalId": {
-			//	                                "maxLength": 256,
-			//	                                "minLength": 1,
-			//	                                "pattern": "",
-			//	                                "type": "string"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "PropertyLogicalId"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "Name",
-			//	                          "Value"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      },
-			//	                      "type": "array"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Expression",
-			//	                    "Variables"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "TypeName": {
-			//	                  "enum": [
-			//	                    "Measurement",
-			//	                    "Attribute",
-			//	                    "Transform",
-			//	                    "Metric"
-			//	                  ],
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "TypeName"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Unit": {
-			//	              "description": "The unit of the asset model property, such as Newtons or RPM.",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "LogicalId",
-			//	            "Name",
-			//	            "DataType",
-			//	            "Type"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "Description": {
-			//	        "description": "A description for the asset composite model.",
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "A unique, friendly name for the asset composite model.",
-			//	        "type": "string"
-			//	      },
-			//	      "Type": {
-			//	        "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Name",
-			//	      "Type"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"composite_model_properties": {
-						// Property: CompositeModelProperties
-						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"data_type": {
-									// Property: DataType
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelCompositeModels
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Contains a composite model definition in an asset model. This composite model definition is applied to all assets created from the asset model.",
+		//	    "properties": {
+		//	      "CompositeModelProperties": {
+		//	        "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Contains information about an asset model property.",
+		//	          "properties": {
+		//	            "DataType": {
+		//	              "description": "The data type of the asset model property.",
+		//	              "enum": [
+		//	                "STRING",
+		//	                "INTEGER",
+		//	                "DOUBLE",
+		//	                "BOOLEAN",
+		//	                "STRUCT"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "DataTypeSpec": {
+		//	              "description": "The data type of the structure for this property.",
+		//	              "enum": [
+		//	                "AWS/ALARM_STATE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LogicalId": {
+		//	              "description": "Customer provided ID for property.",
+		//	              "maxLength": 256,
+		//	              "minLength": 1,
+		//	              "pattern": "",
+		//	              "type": "string"
+		//	            },
+		//	            "Name": {
+		//	              "description": "The name of the asset model property.",
+		//	              "type": "string"
+		//	            },
+		//	            "Type": {
+		//	              "additionalProperties": false,
+		//	              "description": "The property type",
+		//	              "properties": {
+		//	                "Attribute": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "DefaultValue": {
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "Metric": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Variables": {
+		//	                      "description": "The list of variables used in the expression.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "Name": {
+		//	                            "description": "The friendly name of the variable to be used in the expression.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Value": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The variable that identifies an asset property from which to use values.",
+		//	                            "properties": {
+		//	                              "HierarchyLogicalId": {
+		//	                                "maxLength": 256,
+		//	                                "minLength": 1,
+		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyLogicalId": {
+		//	                                "maxLength": 256,
+		//	                                "minLength": 1,
+		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "PropertyLogicalId"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Name",
+		//	                          "Value"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array"
+		//	                    },
+		//	                    "Window": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+		//	                      "properties": {
+		//	                        "Tumbling": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+		//	                          "properties": {
+		//	                            "Interval": {
+		//	                              "description": "The time interval for the tumbling window.",
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Offset": {
+		//	                              "description": "The shift or reference point on timeline for the contiguous time intervals.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Interval"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Expression",
+		//	                    "Variables",
+		//	                    "Window"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "Transform": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Variables": {
+		//	                      "description": "The list of variables used in the expression.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "Name": {
+		//	                            "description": "The friendly name of the variable to be used in the expression.",
+		//	                            "type": "string"
+		//	                          },
+		//	                          "Value": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The variable that identifies an asset property from which to use values.",
+		//	                            "properties": {
+		//	                              "HierarchyLogicalId": {
+		//	                                "maxLength": 256,
+		//	                                "minLength": 1,
+		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              },
+		//	                              "PropertyLogicalId": {
+		//	                                "maxLength": 256,
+		//	                                "minLength": 1,
+		//	                                "pattern": "",
+		//	                                "type": "string"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "PropertyLogicalId"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Name",
+		//	                          "Value"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Expression",
+		//	                    "Variables"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "TypeName": {
+		//	                  "enum": [
+		//	                    "Measurement",
+		//	                    "Attribute",
+		//	                    "Transform",
+		//	                    "Metric"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "TypeName"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Unit": {
+		//	              "description": "The unit of the asset model property, such as Newtons or RPM.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "LogicalId",
+		//	            "Name",
+		//	            "DataType",
+		//	            "Type"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description for the asset composite model.",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "A unique, friendly name for the asset composite model.",
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "description": "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name",
+		//	      "Type"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"asset_model_composite_models": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CompositeModelProperties
+					"composite_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DataType
+								"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The data type of the asset model property.",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
 											"STRING",
 											"INTEGER",
 											"DOUBLE",
 											"BOOLEAN",
 											"STRUCT",
-										}),
-									},
-								},
-								"data_type_spec": {
-									// Property: DataTypeSpec
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DataTypeSpec
+								"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The data type of the structure for this property.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
 											"AWS/ALARM_STATE",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"logical_id": {
-									// Property: LogicalId
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LogicalId
+								"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Customer provided ID for property.",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 256),
-									},
-								},
-								"name": {
-									// Property: Name
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 256),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the asset model property.",
-									Type:        types.StringType,
 									Required:    true,
-								},
-								"type": {
-									// Property: Type
-									Description: "The property type",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"attribute": {
-												// Property: Attribute
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"default_value": {
-															// Property: DefaultValue
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"metric": {
-												// Property: Metric
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"expression": {
-															// Property: Expression
-															Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-															Type:        types.StringType,
-															Required:    true,
-														},
-														"variables": {
-															// Property: Variables
-															Description: "The list of variables used in the expression.",
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Description: "The friendly name of the variable to be used in the expression.",
-																		Type:        types.StringType,
-																		Required:    true,
-																	},
-																	"value": {
-																		// Property: Value
-																		Description: "The variable that identifies an asset property from which to use values.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"hierarchy_logical_id": {
-																					// Property: HierarchyLogicalId
-																					Type:     types.StringType,
-																					Optional: true,
-																					Computed: true,
-																					Validators: []tfsdk.AttributeValidator{
-																						validate.StringLenBetween(1, 256),
-																					},
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																				"property_logical_id": {
-																					// Property: PropertyLogicalId
-																					Type:     types.StringType,
-																					Required: true,
-																					Validators: []tfsdk.AttributeValidator{
-																						validate.StringLenBetween(1, 256),
-																					},
-																				},
-																			},
-																		),
-																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																Multiset(),
-															},
-														},
-														"window": {
-															// Property: Window
-															Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"tumbling": {
-																		// Property: Tumbling
-																		Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"interval": {
-																					// Property: Interval
-																					Description: "The time interval for the tumbling window.",
-																					Type:        types.StringType,
-																					Required:    true,
-																				},
-																				"offset": {
-																					// Property: Offset
-																					Description: "The shift or reference point on timeline for the contiguous time intervals.",
-																					Type:        types.StringType,
-																					Optional:    true,
-																					Computed:    true,
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																			},
-																		),
+								}, /*END ATTRIBUTE*/
+								// Property: Type
+								"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Attribute
+										"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: DefaultValue
+												"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Optional: true,
+													Computed: true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Metric
+										"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Variables
+												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The friendly name of the variable to be used in the expression.",
+																Required:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Value
+															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyLogicalId
+																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Optional: true,
 																		Computed: true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
-															),
-															Required: true,
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"transform": {
-												// Property: Transform
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"expression": {
-															// Property: Expression
-															Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-															Type:        types.StringType,
-															Required:    true,
-														},
-														"variables": {
-															// Property: Variables
-															Description: "The list of variables used in the expression.",
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Description: "The friendly name of the variable to be used in the expression.",
-																		Type:        types.StringType,
-																		Required:    true,
-																	},
-																	"value": {
-																		// Property: Value
-																		Description: "The variable that identifies an asset property from which to use values.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"hierarchy_logical_id": {
-																					// Property: HierarchyLogicalId
-																					Type:     types.StringType,
-																					Optional: true,
-																					Computed: true,
-																					Validators: []tfsdk.AttributeValidator{
-																						validate.StringLenBetween(1, 256),
-																					},
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																				"property_logical_id": {
-																					// Property: PropertyLogicalId
-																					Type:     types.StringType,
-																					Required: true,
-																					Validators: []tfsdk.AttributeValidator{
-																						validate.StringLenBetween(1, 256),
-																					},
-																				},
-																			},
-																		),
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 256),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyLogicalId
+																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																Multiset(),
-															},
-														},
-													},
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 256),
+																		}, /*END VALIDATORS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The variable that identifies an asset property from which to use values.",
+																Required:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The list of variables used in the expression.",
+													Required:    true,
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Window
+												"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Tumbling
+														"tumbling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Interval
+																"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The time interval for the tumbling window.",
+																	Required:    true,
+																}, /*END ATTRIBUTE*/
+																// Property: Offset
+																"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The shift or reference point on timeline for the contiguous time intervals.",
+																	Optional:    true,
+																	Computed:    true,
+																	PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																		stringplanmodifier.UseStateForUnknown(),
+																	}, /*END PLAN MODIFIERS*/
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+															Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+															Optional:    true,
+															Computed:    true,
+															PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+																objectplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Transform
+										"transform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Variables
+												"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Name
+															"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The friendly name of the variable to be used in the expression.",
+																Required:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Value
+															"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: HierarchyLogicalId
+																	"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Optional: true,
+																		Computed: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 256),
+																		}, /*END VALIDATORS*/
+																		PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																			stringplanmodifier.UseStateForUnknown(),
+																		}, /*END PLAN MODIFIERS*/
+																	}, /*END ATTRIBUTE*/
+																	// Property: PropertyLogicalId
+																	"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+																		Required: true,
+																		Validators: []validator.String{ /*START VALIDATORS*/
+																			stringvalidator.LengthBetween(1, 256),
+																		}, /*END VALIDATORS*/
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The variable that identifies an asset property from which to use values.",
+																Required:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "The list of variables used in the expression.",
+													Required:    true,
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														generic.Multiset(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TypeName
+										"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"Measurement",
+													"Attribute",
+													"Transform",
+													"Metric",
 												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"type_name": {
-												// Property: TypeName
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"Measurement",
-														"Attribute",
-														"Transform",
-														"Metric",
-													}),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-								"unit": {
-									// Property: Unit
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The property type",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Unit
+								"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The unit of the asset model property, such as Newtons or RPM.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"description": {
-						// Property: Description
-						Description: "A description for the asset composite model.",
-						Type:        types.StringType,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description for the asset composite model.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique, friendly name for the asset composite model.",
-						Type:        types.StringType,
 						Required:    true,
-					},
-					"type": {
-						// Property: Type
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of the composite model. For alarm composite models, this type is AWS/ALARM",
-						Type:        types.StringType,
 						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"asset_model_description": {
-			// Property: AssetModelDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description for the asset model.",
-			//	  "type": "string"
-			//	}
-			Description: "A description for the asset model.",
-			Type:        types.StringType,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The composite asset models that are part of this asset model. Composite asset models are asset models that contain specific properties.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"asset_model_hierarchies": {
-			// Property: AssetModelHierarchies
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Contains information about an asset model hierarchy.",
-			//	    "properties": {
-			//	      "ChildAssetModelId": {
-			//	        "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-			//	        "type": "string"
-			//	      },
-			//	      "LogicalId": {
-			//	        "description": "Customer provided ID for hierarchy.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "The name of the asset model hierarchy.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "LogicalId",
-			//	      "Name",
-			//	      "ChildAssetModelId"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"child_asset_model_id": {
-						// Property: ChildAssetModelId
-						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-					"logical_id": {
-						// Property: LogicalId
-						Description: "Customer provided ID for hierarchy.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-					"name": {
-						// Property: Name
-						Description: "The name of the asset model hierarchy.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"asset_model_id": {
-			// Property: AssetModelId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the asset model.",
-			//	  "type": "string"
-			//	}
-			Description: "The ID of the asset model.",
-			Type:        types.StringType,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description for the asset model.",
+		//	  "type": "string"
+		//	}
+		"asset_model_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description for the asset model.",
+			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"asset_model_name": {
-			// Property: AssetModelName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique, friendly name for the asset model.",
-			//	  "type": "string"
-			//	}
-			Description: "A unique, friendly name for the asset model.",
-			Type:        types.StringType,
-			Required:    true,
-		},
-		"asset_model_properties": {
-			// Property: AssetModelProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Contains information about an asset model property.",
-			//	    "properties": {
-			//	      "DataType": {
-			//	        "description": "The data type of the asset model property.",
-			//	        "enum": [
-			//	          "STRING",
-			//	          "INTEGER",
-			//	          "DOUBLE",
-			//	          "BOOLEAN",
-			//	          "STRUCT"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "DataTypeSpec": {
-			//	        "description": "The data type of the structure for this property.",
-			//	        "enum": [
-			//	          "AWS/ALARM_STATE"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "LogicalId": {
-			//	        "description": "Customer provided ID for property.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "The name of the asset model property.",
-			//	        "type": "string"
-			//	      },
-			//	      "Type": {
-			//	        "additionalProperties": false,
-			//	        "description": "The property type",
-			//	        "properties": {
-			//	          "Attribute": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DefaultValue": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Metric": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Expression": {
-			//	                "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-			//	                "type": "string"
-			//	              },
-			//	              "Variables": {
-			//	                "description": "The list of variables used in the expression.",
-			//	                "insertionOrder": false,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Name": {
-			//	                      "description": "The friendly name of the variable to be used in the expression.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Value": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "The variable that identifies an asset property from which to use values.",
-			//	                      "properties": {
-			//	                        "HierarchyLogicalId": {
-			//	                          "maxLength": 256,
-			//	                          "minLength": 1,
-			//	                          "pattern": "",
-			//	                          "type": "string"
-			//	                        },
-			//	                        "PropertyLogicalId": {
-			//	                          "maxLength": 256,
-			//	                          "minLength": 1,
-			//	                          "pattern": "",
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "PropertyLogicalId"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Name",
-			//	                    "Value"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Window": {
-			//	                "additionalProperties": false,
-			//	                "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-			//	                "properties": {
-			//	                  "Tumbling": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-			//	                    "properties": {
-			//	                      "Interval": {
-			//	                        "description": "The time interval for the tumbling window.",
-			//	                        "type": "string"
-			//	                      },
-			//	                      "Offset": {
-			//	                        "description": "The shift or reference point on timeline for the contiguous time intervals.",
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "Interval"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Expression",
-			//	              "Variables",
-			//	              "Window"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Transform": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Expression": {
-			//	                "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-			//	                "type": "string"
-			//	              },
-			//	              "Variables": {
-			//	                "description": "The list of variables used in the expression.",
-			//	                "insertionOrder": false,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Name": {
-			//	                      "description": "The friendly name of the variable to be used in the expression.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Value": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "The variable that identifies an asset property from which to use values.",
-			//	                      "properties": {
-			//	                        "HierarchyLogicalId": {
-			//	                          "maxLength": 256,
-			//	                          "minLength": 1,
-			//	                          "pattern": "",
-			//	                          "type": "string"
-			//	                        },
-			//	                        "PropertyLogicalId": {
-			//	                          "maxLength": 256,
-			//	                          "minLength": 1,
-			//	                          "pattern": "",
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "PropertyLogicalId"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Name",
-			//	                    "Value"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Expression",
-			//	              "Variables"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "TypeName": {
-			//	            "enum": [
-			//	              "Measurement",
-			//	              "Attribute",
-			//	              "Transform",
-			//	              "Metric"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "TypeName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Unit": {
-			//	        "description": "The unit of the asset model property, such as Newtons or RPM.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "LogicalId",
-			//	      "Name",
-			//	      "DataType",
-			//	      "Type"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"data_type": {
-						// Property: DataType
-						Description: "The data type of the asset model property.",
-						Type:        types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelHierarchies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Contains information about an asset model hierarchy.",
+		//	    "properties": {
+		//	      "ChildAssetModelId": {
+		//	        "description": "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
+		//	        "type": "string"
+		//	      },
+		//	      "LogicalId": {
+		//	        "description": "Customer provided ID for hierarchy.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "The name of the asset model hierarchy.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "LogicalId",
+		//	      "Name",
+		//	      "ChildAssetModelId"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"asset_model_hierarchies": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ChildAssetModelId
+					"child_asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID of the asset model. All assets in this hierarchy must be instances of the child AssetModelId asset model.",
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalId
+					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Customer provided ID for hierarchy.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name of the asset model hierarchy.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The hierarchy definitions of the asset model. Each hierarchy specifies an asset model whose assets can be children of any other assets created from this asset model. You can specify up to 10 hierarchies per asset model.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the asset model.",
+		//	  "type": "string"
+		//	}
+		"asset_model_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the asset model.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique, friendly name for the asset model.",
+		//	  "type": "string"
+		//	}
+		"asset_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique, friendly name for the asset model.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AssetModelProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Contains information about an asset model property.",
+		//	    "properties": {
+		//	      "DataType": {
+		//	        "description": "The data type of the asset model property.",
+		//	        "enum": [
+		//	          "STRING",
+		//	          "INTEGER",
+		//	          "DOUBLE",
+		//	          "BOOLEAN",
+		//	          "STRUCT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "DataTypeSpec": {
+		//	        "description": "The data type of the structure for this property.",
+		//	        "enum": [
+		//	          "AWS/ALARM_STATE"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "LogicalId": {
+		//	        "description": "Customer provided ID for property.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "The name of the asset model property.",
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "additionalProperties": false,
+		//	        "description": "The property type",
+		//	        "properties": {
+		//	          "Attribute": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DefaultValue": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Metric": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Expression": {
+		//	                "description": "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+		//	                "type": "string"
+		//	              },
+		//	              "Variables": {
+		//	                "description": "The list of variables used in the expression.",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "description": "The friendly name of the variable to be used in the expression.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Value": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "The variable that identifies an asset property from which to use values.",
+		//	                      "properties": {
+		//	                        "HierarchyLogicalId": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyLogicalId": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "PropertyLogicalId"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Name",
+		//	                    "Value"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Window": {
+		//	                "additionalProperties": false,
+		//	                "description": "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+		//	                "properties": {
+		//	                  "Tumbling": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+		//	                    "properties": {
+		//	                      "Interval": {
+		//	                        "description": "The time interval for the tumbling window.",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Offset": {
+		//	                        "description": "The shift or reference point on timeline for the contiguous time intervals.",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Interval"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Expression",
+		//	              "Variables",
+		//	              "Window"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Transform": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Expression": {
+		//	                "description": "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+		//	                "type": "string"
+		//	              },
+		//	              "Variables": {
+		//	                "description": "The list of variables used in the expression.",
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Name": {
+		//	                      "description": "The friendly name of the variable to be used in the expression.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Value": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "The variable that identifies an asset property from which to use values.",
+		//	                      "properties": {
+		//	                        "HierarchyLogicalId": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "PropertyLogicalId": {
+		//	                          "maxLength": 256,
+		//	                          "minLength": 1,
+		//	                          "pattern": "",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "PropertyLogicalId"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Name",
+		//	                    "Value"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Expression",
+		//	              "Variables"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "TypeName": {
+		//	            "enum": [
+		//	              "Measurement",
+		//	              "Attribute",
+		//	              "Transform",
+		//	              "Metric"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TypeName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Unit": {
+		//	        "description": "The unit of the asset model property, such as Newtons or RPM.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "LogicalId",
+		//	      "Name",
+		//	      "DataType",
+		//	      "Type"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"asset_model_properties": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DataType
+					"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The data type of the asset model property.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"STRING",
 								"INTEGER",
 								"DOUBLE",
 								"BOOLEAN",
 								"STRUCT",
-							}),
-						},
-					},
-					"data_type_spec": {
-						// Property: DataTypeSpec
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DataTypeSpec
+					"data_type_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The data type of the structure for this property.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"AWS/ALARM_STATE",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"logical_id": {
-						// Property: LogicalId
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: LogicalId
+					"logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Customer provided ID for property.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-					"name": {
-						// Property: Name
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the asset model property.",
-						Type:        types.StringType,
 						Required:    true,
-					},
-					"type": {
-						// Property: Type
-						Description: "The property type",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"attribute": {
-									// Property: Attribute
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"default_value": {
-												// Property: DefaultValue
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"metric": {
-									// Property: Metric
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"expression": {
-												// Property: Expression
-												Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"variables": {
-												// Property: Variables
-												Description: "The list of variables used in the expression.",
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"name": {
-															// Property: Name
-															Description: "The friendly name of the variable to be used in the expression.",
-															Type:        types.StringType,
-															Required:    true,
-														},
-														"value": {
-															// Property: Value
-															Description: "The variable that identifies an asset property from which to use values.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"hierarchy_logical_id": {
-																		// Property: HierarchyLogicalId
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 256),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"property_logical_id": {
-																		// Property: PropertyLogicalId
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 256),
-																		},
-																	},
-																},
-															),
-															Required: true,
-														},
-													},
-												),
-												Required: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													Multiset(),
-												},
-											},
-											"window": {
-												// Property: Window
-												Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"tumbling": {
-															// Property: Tumbling
-															Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"interval": {
-																		// Property: Interval
-																		Description: "The time interval for the tumbling window.",
-																		Type:        types.StringType,
-																		Required:    true,
-																	},
-																	"offset": {
-																		// Property: Offset
-																		Description: "The shift or reference point on timeline for the contiguous time intervals.",
-																		Type:        types.StringType,
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
-															),
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Attribute
+							"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DefaultValue
+									"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Metric
+							"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The mathematical expression that defines the metric aggregation function. You can specify up to 10 functions per expression.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Variables
+									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The friendly name of the variable to be used in the expression.",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyLogicalId
+														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Optional: true,
 															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"transform": {
-									// Property: Transform
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"expression": {
-												// Property: Expression
-												Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"variables": {
-												// Property: Variables
-												Description: "The list of variables used in the expression.",
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"name": {
-															// Property: Name
-															Description: "The friendly name of the variable to be used in the expression.",
-															Type:        types.StringType,
-															Required:    true,
-														},
-														"value": {
-															// Property: Value
-															Description: "The variable that identifies an asset property from which to use values.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"hierarchy_logical_id": {
-																		// Property: HierarchyLogicalId
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 256),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"property_logical_id": {
-																		// Property: PropertyLogicalId
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 256),
-																		},
-																	},
-																},
-															),
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyLogicalId
+														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-														},
-													},
-												),
-												Required: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													Multiset(),
-												},
-											},
-										},
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The variable that identifies an asset property from which to use values.",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "The list of variables used in the expression.",
+										Required:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Window
+									"window": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Tumbling
+											"tumbling": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Interval
+													"interval": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The time interval for the tumbling window.",
+														Required:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Offset
+													"offset": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The shift or reference point on timeline for the contiguous time intervals.",
+														Optional:    true,
+														Computed:    true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and contiguous time interval. This window is used in metric and aggregation computations.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The window (time interval) over which AWS IoT SiteWise computes the metric's aggregation expression",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Transform
+							"transform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The mathematical expression that defines the transformation function. You can specify up to 10 functions per expression.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Variables
+									"variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The friendly name of the variable to be used in the expression.",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Value
+												"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: HierarchyLogicalId
+														"hierarchy_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Optional: true,
+															Computed: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+															}, /*END VALIDATORS*/
+															PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+																stringplanmodifier.UseStateForUnknown(),
+															}, /*END PLAN MODIFIERS*/
+														}, /*END ATTRIBUTE*/
+														// Property: PropertyLogicalId
+														"property_logical_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 256),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "The variable that identifies an asset property from which to use values.",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "The list of variables used in the expression.",
+										Required:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											generic.Multiset(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TypeName
+							"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"Measurement",
+										"Attribute",
+										"Transform",
+										"Metric",
 									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"type_name": {
-									// Property: TypeName
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"Measurement",
-											"Attribute",
-											"Transform",
-											"Metric",
-										}),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-					"unit": {
-						// Property: Unit
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The property type",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Unit
+					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The unit of the asset model property, such as Newtons or RPM.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The property definitions of the asset model. You can specify up to 200 properties per asset model.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::AssetModel",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::AssetModel").WithTerraformTypeName("awscc_iotsitewise_asset_model")
 	opts = opts.WithTerraformSchema(schema)
@@ -1314,7 +1240,7 @@ func assetModelResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

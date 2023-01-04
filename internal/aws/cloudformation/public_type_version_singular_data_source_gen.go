@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,133 +19,123 @@ func init() {
 // publicTypeVersionDataSource returns the Terraform awscc_cloudformation_public_type_version data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFormation::PublicTypeVersion resource.
 func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Number (ARN) of the extension.",
-			//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Number (ARN) of the extension.",
+		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Number (ARN) of the extension.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"log_delivery_bucket": {
-			// Property: LogDeliveryBucket
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A url to the S3 bucket where logs for the testType run will be available",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LogDeliveryBucket
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A url to the S3 bucket where logs for the testType run will be available",
+		//	  "type": "string"
+		//	}
+		"log_delivery_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A url to the S3 bucket where logs for the testType run will be available",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"public_type_arn": {
-			// Property: PublicTypeArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
-			//	  "maxLength": 1024,
-			//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PublicTypeArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
+		//	  "maxLength": 1024,
+		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:([0-9]{12})?:type/.+",
+		//	  "type": "string"
+		//	}
+		"public_type_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Number (ARN) assigned to the public extension upon publication",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"public_version_number": {
-			// Property: PublicVersionNumber
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version number of a public third-party extension",
-			//	  "maxLength": 64,
-			//	  "minLength": 5,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PublicVersionNumber
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of a public third-party extension",
+		//	  "maxLength": 64,
+		//	  "minLength": 5,
+		//	  "type": "string"
+		//	}
+		"public_version_number": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version number of a public third-party extension",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"publisher_id": {
-			// Property: PublisherId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
-			//	  "maxLength": 40,
-			//	  "minLength": 1,
-			//	  "pattern": "[0-9a-zA-Z]{40}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PublisherId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
+		//	  "maxLength": 40,
+		//	  "minLength": 1,
+		//	  "pattern": "[0-9a-zA-Z]{40}",
+		//	  "type": "string"
+		//	}
+		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The kind of extension",
-			//	  "enum": [
-			//	    "RESOURCE",
-			//	    "MODULE",
-			//	    "HOOK"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The kind of extension",
+		//	  "enum": [
+		//	    "RESOURCE",
+		//	    "MODULE",
+		//	    "HOOK"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The kind of extension",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"type_name": {
-			// Property: TypeName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			//	  "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TypeName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
+		//	  "pattern": "[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}::[A-Za-z0-9]{2,64}(::MODULE){0,1}",
+		//	  "type": "string"
+		//	}
+		"type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the type being registered.\n\nWe recommend that type names adhere to the following pattern: company_or_organization::service::type.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"type_version_arn": {
-			// Property: TypeVersionArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
-			//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TypeVersionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Number (ARN) of the extension with the versionId.",
+		//	  "pattern": "arn:aws[A-Za-z0-9-]{0,64}:cloudformation:[A-Za-z0-9-]{1,64}:[0-9]{12}:type/.+",
+		//	  "type": "string"
+		//	}
+		"type_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Number (ARN) of the extension with the versionId.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFormation::PublicTypeVersion",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::PublicTypeVersion").WithTerraformTypeName("awscc_cloudformation_public_type_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -160,7 +150,7 @@ func publicTypeVersionDataSource(ctx context.Context) (datasource.DataSource, er
 		"type_version_arn":      "TypeVersionArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -4,14 +4,20 @@ package transfer
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,198 +27,193 @@ func init() {
 // profileResource returns the Terraform awscc_transfer_profile resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Transfer::Profile resource.
 func profileResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the profile.",
-			//	  "maxLength": 1600,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:.*",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the profile.",
+		//	  "maxLength": 1600,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:.*",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the profile.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"as_2_id": {
-			// Property: As2Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AS2 identifier agreed with a trading partner.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: As2Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AS2 identifier agreed with a trading partner.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"as_2_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AS2 identifier agreed with a trading partner.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
-		},
-		"certificate_ids": {
-			// Property: CertificateIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "description": "A unique identifier for the certificate.",
-			//	    "maxLength": 22,
-			//	    "minLength": 22,
-			//	    "pattern": "^cert-([0-9a-f]{17})$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "A unique identifier for the certificate.",
+		//	    "maxLength": 22,
+		//	    "minLength": 22,
+		//	    "pattern": "^cert-([0-9a-f]{17})$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"certificate_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "List of the certificate IDs associated with this profile to be used for encryption and signing of AS2 messages.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayForEach(validate.StringLenBetween(22, 22)),
-				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^cert-([0-9a-f]{17})$"), "")),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"profile_id": {
-			// Property: ProfileId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the profile",
-			//	  "maxLength": 19,
-			//	  "minLength": 19,
-			//	  "pattern": "^p-([0-9a-f]{17})$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(22, 22),
+					stringvalidator.RegexMatches(regexp.MustCompile("^cert-([0-9a-f]{17})$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProfileId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the profile",
+		//	  "maxLength": 19,
+		//	  "minLength": 19,
+		//	  "pattern": "^p-([0-9a-f]{17})$",
+		//	  "type": "string"
+		//	}
+		"profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the profile",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"profile_type": {
-			// Property: ProfileType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Enum specifying whether the profile is local or associated with a trading partner.",
-			//	  "enum": [
-			//	    "LOCAL",
-			//	    "PARTNER"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProfileType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Enum specifying whether the profile is local or associated with a trading partner.",
+		//	  "enum": [
+		//	    "LOCAL",
+		//	    "PARTNER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"profile_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Enum specifying whether the profile is local or associated with a trading partner.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"LOCAL",
 					"PARTNER",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Creates a key-value pair for a specific resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The name assigned to the tag that you create.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "Contains one or more values that you assigned to the key name you create.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Creates a key-value pair for a specific resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The name assigned to the tag that you create.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "Contains one or more values that you assigned to the key name you create.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name assigned to the tag that you create.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Contains one or more values that you assigned to the key name you create.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Transfer::Profile",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Profile").WithTerraformTypeName("awscc_transfer_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -232,7 +233,7 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

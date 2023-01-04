@@ -4,14 +4,20 @@ package redshift
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,230 +27,221 @@ func init() {
 // endpointAuthorizationResource returns the Terraform awscc_redshift_endpoint_authorization resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Redshift::EndpointAuthorization resource.
 func endpointAuthorizationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"account": {
-			// Property: Account
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The target AWS account ID to grant or revoke access for.",
-			//	  "pattern": "^\\d{12}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Account
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The target AWS account ID to grant or revoke access for.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"account": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The target AWS account ID to grant or revoke access for.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^\\d{12}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"allowed_all_vp_cs": {
-			// Property: AllowedAllVPCs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
-			//	  "type": "boolean"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\d{12}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AllowedAllVPCs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
+		//	  "type": "boolean"
+		//	}
+		"allowed_all_vp_cs": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
-			Type:        types.BoolType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"allowed_vp_cs": {
-			// Property: AllowedVPCs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The VPCs allowed access to the cluster.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AllowedVPCs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The VPCs allowed access to the cluster.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"allowed_vp_cs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The VPCs allowed access to the cluster.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorize_time": {
-			// Property: AuthorizeTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time (UTC) when the authorization was created.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizeTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time (UTC) when the authorization was created.",
+		//	  "type": "string"
+		//	}
+		"authorize_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time (UTC) when the authorization was created.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"cluster_identifier": {
-			// Property: ClusterIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The cluster identifier.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The cluster identifier.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The cluster identifier.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"cluster_status": {
-			// Property: ClusterStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the cluster.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the cluster.",
+		//	  "type": "string"
+		//	}
+		"cluster_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"endpoint_count": {
-			// Property: EndpointCount
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of Redshift-managed VPC endpoints created for the authorization.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of Redshift-managed VPC endpoints created for the authorization.",
+		//	  "type": "integer"
+		//	}
+		"endpoint_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of Redshift-managed VPC endpoints created for the authorization.",
-			Type:        types.Int64Type,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"force": {
-			// Property: Force
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Force
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
+		//	  "type": "boolean"
+		//	}
+		"force": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Force is a write-only property.
-		},
-		"grantee": {
-			// Property: Grantee
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS account ID of the grantee of the cluster.",
-			//	  "pattern": "^\\d{12}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Grantee
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account ID of the grantee of the cluster.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"grantee": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS account ID of the grantee of the cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"grantor": {
-			// Property: Grantor
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS account ID of the cluster owner.",
-			//	  "pattern": "^\\d{12}$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Grantor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account ID of the cluster owner.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"grantor": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS account ID of the cluster owner.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the authorization action.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the authorization action.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the authorization action.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"vpc_ids": {
-			// Property: VpcIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpcIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"vpc_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^vpc-[A-Za-z0-9]{1,17}$"), "")),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.RegexMatches(regexp.MustCompile("^vpc-[A-Za-z0-9]{1,17}$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across AWS accounts.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EndpointAuthorization").WithTerraformTypeName("awscc_redshift_endpoint_authorization")
 	opts = opts.WithTerraformSchema(schema)
@@ -271,7 +268,7 @@ func endpointAuthorizationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(60)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

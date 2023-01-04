@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,776 +19,707 @@ func init() {
 // tableDataSource returns the Terraform awscc_dynamodb_table data source.
 // This Terraform data source corresponds to the CloudFormation AWS::DynamoDB::Table resource.
 func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"attribute_definitions": {
-			// Property: AttributeDefinitions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "AttributeName": {
-			//	        "type": "string"
-			//	      },
-			//	      "AttributeType": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "AttributeName",
-			//	      "AttributeType"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"attribute_name": {
-						// Property: AttributeName
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: AttributeDefinitions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AttributeName": {
+		//	        "type": "string"
+		//	      },
+		//	      "AttributeType": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AttributeName",
+		//	      "AttributeType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"attribute_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AttributeName
+					"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"attribute_type": {
-						// Property: AttributeType
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: AttributeType
+					"attribute_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"billing_mode": {
-			// Property: BillingMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: BillingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"billing_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"contributor_insights_specification": {
-			// Property: ContributorInsightsSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Enabled": {
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Enabled"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"enabled": {
-						// Property: Enabled
-						Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: ContributorInsightsSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"contributor_insights_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: GlobalSecondaryIndexes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ContributorInsightsSpecification": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Enabled": {
+		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Enabled"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "IndexName": {
+		//	        "type": "string"
+		//	      },
+		//	      "KeySchema": {
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AttributeName": {
+		//	              "type": "string"
+		//	            },
+		//	            "KeyType": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "KeyType",
+		//	            "AttributeName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Projection": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "NonKeyAttributes": {
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "ProjectionType": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ProvisionedThroughput": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ReadCapacityUnits": {
+		//	            "type": "integer"
+		//	          },
+		//	          "WriteCapacityUnits": {
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "WriteCapacityUnits",
+		//	          "ReadCapacityUnits"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "IndexName",
+		//	      "Projection",
+		//	      "KeySchema"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"global_secondary_indexes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ContributorInsightsSpecification
+					"contributor_insights_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Enabled
+							"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"global_secondary_indexes": {
-			// Property: GlobalSecondaryIndexes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "ContributorInsightsSpecification": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Enabled": {
-			//	            "type": "boolean"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Enabled"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "IndexName": {
-			//	        "type": "string"
-			//	      },
-			//	      "KeySchema": {
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AttributeName": {
-			//	              "type": "string"
-			//	            },
-			//	            "KeyType": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "KeyType",
-			//	            "AttributeName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "Projection": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "NonKeyAttributes": {
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "ProjectionType": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "ProvisionedThroughput": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ReadCapacityUnits": {
-			//	            "type": "integer"
-			//	          },
-			//	          "WriteCapacityUnits": {
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "WriteCapacityUnits",
-			//	          "ReadCapacityUnits"
-			//	        ],
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "IndexName",
-			//	      "Projection",
-			//	      "KeySchema"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"contributor_insights_specification": {
-						// Property: ContributorInsightsSpecification
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"enabled": {
-									// Property: Enabled
-									Type:     types.BoolType,
+					}, /*END ATTRIBUTE*/
+					// Property: IndexName
+					"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: KeySchema
+					"key_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AttributeName
+								"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"index_name": {
-						// Property: IndexName
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"key_schema": {
-						// Property: KeySchema
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"attribute_name": {
-									// Property: AttributeName
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+								// Property: KeyType
+								"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"key_type": {
-									// Property: KeyType
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Projection
+					"projection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NonKeyAttributes
+							"non_key_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProjectionType
+							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ProvisionedThroughput
+					"provisioned_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ReadCapacityUnits
+							"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: WriteCapacityUnits
+							"write_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ImportSourceSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "InputCompressionType": {
+		//	      "type": "string"
+		//	    },
+		//	    "InputFormat": {
+		//	      "type": "string"
+		//	    },
+		//	    "InputFormatOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Csv": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Delimiter": {
+		//	              "type": "string"
+		//	            },
+		//	            "HeaderList": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "S3BucketSource": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "S3Bucket": {
+		//	          "type": "string"
+		//	        },
+		//	        "S3BucketOwner": {
+		//	          "type": "string"
+		//	        },
+		//	        "S3KeyPrefix": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "S3Bucket"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3BucketSource",
+		//	    "InputFormat"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"import_source_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InputCompressionType
+				"input_compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InputFormat
+				"input_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InputFormatOptions
+				"input_format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Csv
+						"csv": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Delimiter
+								"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
+								}, /*END ATTRIBUTE*/
+								// Property: HeaderList
+								"header_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3BucketSource
+				"s3_bucket_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Bucket
+						"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3BucketOwner
+						"s3_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3KeyPrefix
+						"s3_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: KeySchema
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "object"
+		//	}
+		"key_schema": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KinesisStreamSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "StreamArn": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "StreamArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"kinesis_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StreamArn
+				"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: LocalSecondaryIndexes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "IndexName": {
+		//	        "type": "string"
+		//	      },
+		//	      "KeySchema": {
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AttributeName": {
+		//	              "type": "string"
+		//	            },
+		//	            "KeyType": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "KeyType",
+		//	            "AttributeName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Projection": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "NonKeyAttributes": {
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "ProjectionType": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "IndexName",
+		//	      "Projection",
+		//	      "KeySchema"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"local_secondary_indexes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: IndexName
+					"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"projection": {
-						// Property: Projection
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"non_key_attributes": {
-									// Property: NonKeyAttributes
-									Type:     types.ListType{ElemType: types.StringType},
+					}, /*END ATTRIBUTE*/
+					// Property: KeySchema
+					"key_schema": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AttributeName
+								"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"projection_type": {
-									// Property: ProjectionType
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+								// Property: KeyType
+								"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
 						Computed: true,
-					},
-					"provisioned_throughput": {
-						// Property: ProvisionedThroughput
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"read_capacity_units": {
-									// Property: ReadCapacityUnits
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"write_capacity_units": {
-									// Property: WriteCapacityUnits
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
+					}, /*END ATTRIBUTE*/
+					// Property: Projection
+					"projection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: NonKeyAttributes
+							"non_key_attributes": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProjectionType
+							"projection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"import_source_specification": {
-			// Property: ImportSourceSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "InputCompressionType": {
-			//	      "type": "string"
-			//	    },
-			//	    "InputFormat": {
-			//	      "type": "string"
-			//	    },
-			//	    "InputFormatOptions": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Csv": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Delimiter": {
-			//	              "type": "string"
-			//	            },
-			//	            "HeaderList": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": true
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "S3BucketSource": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "S3Bucket": {
-			//	          "type": "string"
-			//	        },
-			//	        "S3BucketOwner": {
-			//	          "type": "string"
-			//	        },
-			//	        "S3KeyPrefix": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "S3Bucket"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "S3BucketSource",
-			//	    "InputFormat"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"input_compression_type": {
-						// Property: InputCompressionType
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"input_format": {
-						// Property: InputFormat
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"input_format_options": {
-						// Property: InputFormatOptions
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"csv": {
-									// Property: Csv
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"delimiter": {
-												// Property: Delimiter
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"header_list": {
-												// Property: HeaderList
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"s3_bucket_source": {
-						// Property: S3BucketSource
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"s3_bucket": {
-									// Property: S3Bucket
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"s3_bucket_owner": {
-									// Property: S3BucketOwner
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"s3_key_prefix": {
-									// Property: S3KeyPrefix
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: PointInTimeRecoverySpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PointInTimeRecoveryEnabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"point_in_time_recovery_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PointInTimeRecoveryEnabled
+				"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"key_schema": {
-			// Property: KeySchema
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "object"
-			//	}
-			Type:     types.MapType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: ProvisionedThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ReadCapacityUnits": {
+		//	      "type": "integer"
+		//	    },
+		//	    "WriteCapacityUnits": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "WriteCapacityUnits",
+		//	    "ReadCapacityUnits"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"provisioned_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReadCapacityUnits
+				"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WriteCapacityUnits
+				"write_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"kinesis_stream_specification": {
-			// Property: KinesisStreamSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "StreamArn": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "StreamArn"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"stream_arn": {
-						// Property: StreamArn
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: SSESpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "KMSMasterKeyId": {
+		//	      "type": "string"
+		//	    },
+		//	    "SSEEnabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "SSEType": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SSEEnabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"sse_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KMSMasterKeyId
+				"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SSEEnabled
+				"sse_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SSEType
+				"sse_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"local_secondary_indexes": {
-			// Property: LocalSecondaryIndexes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "IndexName": {
-			//	        "type": "string"
-			//	      },
-			//	      "KeySchema": {
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AttributeName": {
-			//	              "type": "string"
-			//	            },
-			//	            "KeyType": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "KeyType",
-			//	            "AttributeName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "Projection": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "NonKeyAttributes": {
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "ProjectionType": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "IndexName",
-			//	      "Projection",
-			//	      "KeySchema"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"index_name": {
-						// Property: IndexName
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"key_schema": {
-						// Property: KeySchema
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"attribute_name": {
-									// Property: AttributeName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"key_type": {
-									// Property: KeyType
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"projection": {
-						// Property: Projection
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"non_key_attributes": {
-									// Property: NonKeyAttributes
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"projection_type": {
-									// Property: ProjectionType
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: StreamArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"point_in_time_recovery_specification": {
-			// Property: PointInTimeRecoverySpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "PointInTimeRecoveryEnabled": {
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"point_in_time_recovery_enabled": {
-						// Property: PointInTimeRecoveryEnabled
-						Type:     types.BoolType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: StreamSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "StreamViewType": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "StreamViewType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: StreamViewType
+				"stream_view_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"provisioned_throughput": {
-			// Property: ProvisionedThroughput
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "ReadCapacityUnits": {
-			//	      "type": "integer"
-			//	    },
-			//	    "WriteCapacityUnits": {
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "WriteCapacityUnits",
-			//	    "ReadCapacityUnits"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"read_capacity_units": {
-						// Property: ReadCapacityUnits
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"write_capacity_units": {
-						// Property: WriteCapacityUnits
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: TableClass
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"table_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"sse_specification": {
-			// Property: SSESpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "KMSMasterKeyId": {
-			//	      "type": "string"
-			//	    },
-			//	    "SSEEnabled": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "SSEType": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "SSEEnabled"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"kms_master_key_id": {
-						// Property: KMSMasterKeyId
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"sse_enabled": {
-						// Property: SSEEnabled
-						Type:     types.BoolType,
-						Computed: true,
-					},
-					"sse_type": {
-						// Property: SSEType
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: TableName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"stream_arn": {
-			// Property: StreamArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"stream_specification": {
-			// Property: StreamSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "StreamViewType": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "StreamViewType"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"stream_view_type": {
-						// Property: StreamViewType
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"table_class": {
-			// Property: TableClass
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"table_name": {
-			// Property: TableName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"time_to_live_specification": {
-			// Property: TimeToLiveSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "AttributeName": {
-			//	      "type": "string"
-			//	    },
-			//	    "Enabled": {
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Enabled",
-			//	    "AttributeName"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"attribute_name": {
-						// Property: AttributeName
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"enabled": {
-						// Property: Enabled
-						Type:     types.BoolType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: TimeToLiveSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AttributeName": {
+		//	      "type": "string"
+		//	    },
+		//	    "Enabled": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled",
+		//	    "AttributeName"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"time_to_live_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttributeName
+				"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::DynamoDB::Table",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DynamoDB::Table").WithTerraformTypeName("awscc_dynamodb_table")
 	opts = opts.WithTerraformSchema(schema)
@@ -840,7 +771,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"write_capacity_units":                 "WriteCapacityUnits",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

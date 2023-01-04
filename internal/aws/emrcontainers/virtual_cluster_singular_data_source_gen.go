@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,200 +19,184 @@ func init() {
 // virtualClusterDataSource returns the Terraform awscc_emrcontainers_virtual_cluster data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EMRContainers::VirtualCluster resource.
 func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"container_provider": {
-			// Property: ContainerProvider
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Container provider of the virtual cluster.",
-			//	  "properties": {
-			//	    "Id": {
-			//	      "description": "The ID of the container cluster",
-			//	      "maxLength": 100,
-			//	      "minLength": 1,
-			//	      "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
-			//	      "type": "string"
-			//	    },
-			//	    "Info": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "EksInfo": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Namespace": {
-			//	              "maxLength": 63,
-			//	              "minLength": 1,
-			//	              "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Namespace"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "EksInfo"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Type": {
-			//	      "description": "The type of the container provider",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type",
-			//	    "Id",
-			//	    "Info"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Container provider of the virtual cluster.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"id": {
-						// Property: Id
-						Description: "The ID of the container cluster",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"info": {
-						// Property: Info
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"eks_info": {
-									// Property: EksInfo
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"namespace": {
-												// Property: Namespace
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
+		}, /*END ATTRIBUTE*/
+		// Property: ContainerProvider
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Container provider of the virtual cluster.",
+		//	  "properties": {
+		//	    "Id": {
+		//	      "description": "The ID of the container cluster",
+		//	      "maxLength": 100,
+		//	      "minLength": 1,
+		//	      "pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*",
+		//	      "type": "string"
+		//	    },
+		//	    "Info": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EksInfo": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Namespace": {
+		//	              "maxLength": 63,
+		//	              "minLength": 1,
+		//	              "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Namespace"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EksInfo"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "description": "The type of the container provider",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type",
+		//	    "Id",
+		//	    "Info"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"container_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the container cluster",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Info
+				"info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EksInfo
+						"eks_info": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Namespace
+								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"type": {
-						// Property: Type
-						Description: "The type of the container provider",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Id of the virtual cluster.",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of the container provider",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Container provider of the virtual cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Id of the virtual cluster.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the virtual cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of the virtual cluster.",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of the virtual cluster.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the virtual cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this virtual cluster.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "An arbitrary set of tags (key-value pairs) for this virtual cluster.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this virtual cluster.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this virtual cluster.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An arbitrary set of tags (key-value pairs) for this virtual cluster.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this virtual cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EMRContainers::VirtualCluster",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMRContainers::VirtualCluster").WithTerraformTypeName("awscc_emrcontainers_virtual_cluster")
 	opts = opts.WithTerraformSchema(schema)
@@ -230,7 +214,7 @@ func virtualClusterDataSource(ctx context.Context) (datasource.DataSource, error
 		"value":              "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

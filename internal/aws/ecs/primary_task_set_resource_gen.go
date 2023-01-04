@@ -6,9 +6,11 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,67 +21,63 @@ func init() {
 // primaryTaskSetResource returns the Terraform awscc_ecs_primary_task_set resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ECS::PrimaryTaskSet resource.
 func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"cluster": {
-			// Property: Cluster
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Cluster
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
+		//	  "type": "string"
+		//	}
+		"cluster": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The short name or full Amazon Resource Name (ARN) of the cluster that hosts the service to create the task set in.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"service": {
-			// Property: Service
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Service
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
+		//	  "type": "string"
+		//	}
+		"service": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The short name or full Amazon Resource Name (ARN) of the service to create the task set in.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"task_set_id": {
-			// Property: TaskSetId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID or full Amazon Resource Name (ARN) of the task set.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TaskSetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID or full Amazon Resource Name (ARN) of the task set.",
+		//	  "type": "string"
+		//	}
+		"task_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID or full Amazon Resource Name (ARN) of the task set.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "A pseudo-resource that manages which of your ECS task sets is primary.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::PrimaryTaskSet").WithTerraformTypeName("awscc_ecs_primary_task_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -94,7 +92,7 @@ func primaryTaskSetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,12 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,105 +22,98 @@ func init() {
 // applicationVersionResource returns the Terraform awscc_elasticbeanstalk_application_version resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ElasticBeanstalk::ApplicationVersion resource.
 func applicationVersionResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"application_name": {
-			// Property: ApplicationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the Elastic Beanstalk application that is associated with this application version. ",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplicationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Elastic Beanstalk application that is associated with this application version. ",
+		//	  "type": "string"
+		//	}
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Elastic Beanstalk application that is associated with this application version. ",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description of this application version.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description of this application version.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of this application version.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"source_bundle": {
-			// Property: SourceBundle
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
-			//	  "properties": {
-			//	    "S3Bucket": {
-			//	      "description": "The Amazon S3 bucket where the data is located.",
-			//	      "type": "string"
-			//	    },
-			//	    "S3Key": {
-			//	      "description": "The Amazon S3 key where the data is located.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "S3Bucket",
-			//	    "S3Key"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceBundle
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
+		//	  "properties": {
+		//	    "S3Bucket": {
+		//	      "description": "The Amazon S3 bucket where the data is located.",
+		//	      "type": "string"
+		//	    },
+		//	    "S3Key": {
+		//	      "description": "The Amazon S3 key where the data is located.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3Bucket",
+		//	    "S3Key"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_bundle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 bucket where the data is located.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Key
+				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 key where the data is located.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"s3_bucket": {
-						// Property: S3Bucket
-						Description: "The Amazon S3 bucket where the data is located.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-					"s3_key": {
-						// Property: S3Key
-						Description: "The Amazon S3 key where the data is located.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-				},
-			),
-			Required: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Required:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::ElasticBeanstalk::ApplicationVersion",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticBeanstalk::ApplicationVersion").WithTerraformTypeName("awscc_elasticbeanstalk_application_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -135,7 +131,7 @@ func applicationVersionResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

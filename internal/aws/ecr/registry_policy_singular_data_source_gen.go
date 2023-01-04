@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,49 +19,46 @@ func init() {
 // registryPolicyDataSource returns the Terraform awscc_ecr_registry_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ECR::RegistryPolicy resource.
 func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"policy_text": {
-			// Property: PolicyText
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: PolicyText
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
+		//	  "type": "object"
+		//	}
+		"policy_text": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The JSON policy text to apply to your registry. The policy text follows the same format as IAM policy text. For more information, see Registry permissions (https://docs.aws.amazon.com/AmazonECR/latest/userguide/registry-permissions.html) in the Amazon Elastic Container Registry User Guide.",
-			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"registry_id": {
-			// Property: RegistryId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The registry id.",
-			//	  "maxLength": 12,
-			//	  "minLength": 12,
-			//	  "pattern": "^[0-9]{12}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RegistryId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The registry id.",
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"registry_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The registry id.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ECR::RegistryPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECR::RegistryPolicy").WithTerraformTypeName("awscc_ecr_registry_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -70,7 +67,7 @@ func registryPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"registry_id": "RegistryId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

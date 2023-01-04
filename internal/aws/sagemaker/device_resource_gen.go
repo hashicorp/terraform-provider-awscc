@@ -4,14 +4,18 @@ package sagemaker
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,192 +25,183 @@ func init() {
 // deviceResource returns the Terraform awscc_sagemaker_device resource.
 // This Terraform resource corresponds to the CloudFormation AWS::SageMaker::Device resource.
 func deviceResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"device": {
-			// Property: Device
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The Edge Device you want to register against a device fleet",
-			//	  "properties": {
-			//	    "Description": {
-			//	      "description": "Description of the device",
-			//	      "maxLength": 40,
-			//	      "minLength": 1,
-			//	      "pattern": "[\\S\\s]+",
-			//	      "type": "string"
-			//	    },
-			//	    "DeviceName": {
-			//	      "description": "The name of the device",
-			//	      "maxLength": 63,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	      "type": "string"
-			//	    },
-			//	    "IotThingName": {
-			//	      "description": "AWS Internet of Things (IoT) object name.",
-			//	      "maxLength": 128,
-			//	      "pattern": "[a-zA-Z0-9:_-]+",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "DeviceName"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Device
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Edge Device you want to register against a device fleet",
+		//	  "properties": {
+		//	    "Description": {
+		//	      "description": "Description of the device",
+		//	      "maxLength": 40,
+		//	      "minLength": 1,
+		//	      "pattern": "[\\S\\s]+",
+		//	      "type": "string"
+		//	    },
+		//	    "DeviceName": {
+		//	      "description": "The name of the device",
+		//	      "maxLength": 63,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	      "type": "string"
+		//	    },
+		//	    "IotThingName": {
+		//	      "description": "AWS Internet of Things (IoT) object name.",
+		//	      "maxLength": 128,
+		//	      "pattern": "[a-zA-Z0-9:_-]+",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DeviceName"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"device": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Description of the device",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 40),
+						stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceName
+				"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the device",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 63),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IotThingName
+				"iot_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "AWS Internet of Things (IoT) object name.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(128),
+						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The Edge Device you want to register against a device fleet",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"description": {
-						// Property: Description
-						Description: "Description of the device",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 40),
-							validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"device_name": {
-						// Property: DeviceName
-						Description: "The name of the device",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 63),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.RequiresReplace(),
-						},
-					},
-					"iot_thing_name": {
-						// Property: IotThingName
-						Description: "AWS Internet of Things (IoT) object name.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(128),
-							validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9:_-]+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"device_fleet_name": {
-			// Property: DeviceFleetName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the edge device fleet",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeviceFleetName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the edge device fleet",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$",
+		//	  "type": "string"
+		//	}
+		"device_fleet_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the edge device fleet",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 63),
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$"), ""),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Associate tags with the resource",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "Associate tags with the resource",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*_*[a-zA-Z0-9])*$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Associate tags with the resource",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key value of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Associate tags with the resource",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::SageMaker::Device",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Device").WithTerraformTypeName("awscc_sagemaker_device")
 	opts = opts.WithTerraformSchema(schema)
@@ -226,7 +221,7 @@ func deviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

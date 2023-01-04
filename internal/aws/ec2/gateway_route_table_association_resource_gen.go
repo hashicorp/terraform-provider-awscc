@@ -6,9 +6,11 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,67 +21,63 @@ func init() {
 // gatewayRouteTableAssociationResource returns the Terraform awscc_ec2_gateway_route_table_association resource.
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::GatewayRouteTableAssociation resource.
 func gatewayRouteTableAssociationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"association_id": {
-			// Property: AssociationId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The route table association ID.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssociationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The route table association ID.",
+		//	  "type": "string"
+		//	}
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The route table association ID.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"gateway_id": {
-			// Property: GatewayId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the gateway.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: GatewayId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the gateway.",
+		//	  "type": "string"
+		//	}
+		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the gateway.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"route_table_id": {
-			// Property: RouteTableId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the route table.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RouteTableId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the route table.",
+		//	  "type": "string"
+		//	}
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the route table.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Associates a gateway with a route table. The gateway and route table must be in the same VPC. This association causes the incoming traffic to the gateway to be routed according to the routes in the route table.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::GatewayRouteTableAssociation").WithTerraformTypeName("awscc_ec2_gateway_route_table_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -94,7 +92,7 @@ func gatewayRouteTableAssociationResource(ctx context.Context) (resource.Resourc
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

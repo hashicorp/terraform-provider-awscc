@@ -54,7 +54,7 @@ Required:
 <a id="nestedatt--server_certificates"></a>
 ### Nested Schema for `server_certificates`
 
-Optional:
+Read-Only:
 
 - `server_certificate_arn` (String)
 - `server_certificate_status` (String)

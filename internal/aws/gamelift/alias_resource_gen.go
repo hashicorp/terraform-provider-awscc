@@ -4,14 +4,16 @@ package gamelift
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,177 +23,156 @@ func init() {
 // aliasResource returns the Terraform awscc_gamelift_alias resource.
 // This Terraform resource corresponds to the CloudFormation AWS::GameLift::Alias resource.
 func aliasResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"alias_id": {
-			// Property: AliasId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique alias ID",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AliasId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique alias ID",
+		//	  "type": "string"
+		//	}
+		"alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique alias ID",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A human-readable description of the alias.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A human-readable description of the alias.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A human-readable description of the alias.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1024),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": ".*\\S.*",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1024),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": ".*\\S.*",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A descriptive label that is associated with an alias. Alias names do not need to be unique.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1024),
-				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-			},
-		},
-		"routing_strategy": {
-			// Property: RoutingStrategy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "anyOf": [
-			//	    {
-			//	      "required": [
-			//	        "FleetId"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "Message"
-			//	      ]
-			//	    }
-			//	  ],
-			//	  "description": "A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message.",
-			//	  "properties": {
-			//	    "FleetId": {
-			//	      "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-			//	      "pattern": "^fleet-\\S+",
-			//	      "type": "string"
-			//	    },
-			//	    "Message": {
-			//	      "description": "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
-			//	      "type": "string"
-			//	    },
-			//	    "Type": {
-			//	      "description": "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
-			//	      "enum": [
-			//	        "SIMPLE",
-			//	        "TERMINAL"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RoutingStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "anyOf": [
+		//	    {
+		//	      "required": [
+		//	        "FleetId"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "Message"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "description": "A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message.",
+		//	  "properties": {
+		//	    "FleetId": {
+		//	      "description": "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
+		//	      "pattern": "^fleet-\\S+",
+		//	      "type": "string"
+		//	    },
+		//	    "Message": {
+		//	      "description": "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
+		//	      "type": "string"
+		//	    },
+		//	    "Type": {
+		//	      "description": "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
+		//	      "enum": [
+		//	        "SIMPLE",
+		//	        "TERMINAL"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"routing_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FleetId
+				"fleet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.RegexMatches(regexp.MustCompile("^fleet-\\S+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Message
+				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SIMPLE",
+							"TERMINAL",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A routing configuration that specifies where traffic is directed for this alias, such as to a fleet or to a message.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"fleet_id": {
-						// Property: FleetId
-						Description: "A unique identifier for a fleet that the alias points to. If you specify SIMPLE for the Type property, you must specify this property.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("^fleet-\\S+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"message": {
-						// Property: Message
-						Description: "The message text to be used with a terminal routing strategy. If you specify TERMINAL for the Type property, you must specify this property.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Description: "Simple routing strategy. The alias resolves to one specific fleet. Use this type when routing to active fleets.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"SIMPLE",
-								"TERMINAL",
-							}),
-						},
-					},
-				},
-			),
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.RequiredAttributes(
-					validate.AnyOfRequired(
-						validate.Required(
-							"fleet_id",
-						),
-						validate.Required(
-							"message",
-						),
-					),
-				),
-			},
-		},
-	}
+			Required:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::GameLift::Alias resource creates an alias for an Amazon GameLift (GameLift) fleet destination.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Alias").WithTerraformTypeName("awscc_gamelift_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -210,7 +191,7 @@ func aliasResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

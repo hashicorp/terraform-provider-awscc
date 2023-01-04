@@ -4,14 +4,20 @@ package elasticache
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,241 +27,230 @@ func init() {
 // userResource returns the Terraform awscc_elasticache_user resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ElastiCache::User resource.
 func userResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"access_string": {
-			// Property: AccessString
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Access permissions string used for this user account.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessString
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Access permissions string used for this user account.",
+		//	  "type": "string"
+		//	}
+		"access_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Access permissions string used for this user account.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// AccessString is a write-only property.
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the user account.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the user account.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the user account.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authentication_mode": {
-			// Property: AuthenticationMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Passwords": {
-			//	      "$comment": "List of passwords.",
-			//	      "description": "Passwords used for this user account. You can create up to two passwords for each user.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "Type": {
-			//	      "description": "Authentication Type",
-			//	      "enum": [
-			//	        "password",
-			//	        "no-password-required",
-			//	        "iam"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"passwords": {
-						// Property: Passwords
-						Description: "Passwords used for this user account. You can create up to two passwords for each user.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Description: "Authentication Type",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"password",
-								"no-password-required",
-								"iam",
-							}),
-						},
-					},
-				},
-			),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthenticationMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Passwords": {
+		//	      "$comment": "List of passwords.",
+		//	      "description": "Passwords used for this user account. You can create up to two passwords for each user.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Type": {
+		//	      "description": "Authentication Type",
+		//	      "enum": [
+		//	        "password",
+		//	        "no-password-required",
+		//	        "iam"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"authentication_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Passwords
+				"passwords": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Passwords used for this user account. You can create up to two passwords for each user.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Authentication Type",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"password",
+							"no-password-required",
+							"iam",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// AuthenticationMode is a write-only property.
-		},
-		"engine": {
-			// Property: Engine
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Must be redis.",
-			//	  "enum": [
-			//	    "redis"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Must be redis.",
+		//	  "enum": [
+		//	    "redis"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Must be redis.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"redis",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"no_password_required": {
-			// Property: NoPasswordRequired
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates a password is not required for this user account.",
-			//	  "type": "boolean"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NoPasswordRequired
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates a password is not required for this user account.",
+		//	  "type": "boolean"
+		//	}
+		"no_password_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates a password is not required for this user account.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// NoPasswordRequired is a write-only property.
-		},
-		"passwords": {
-			// Property: Passwords
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "$comment": "List of passwords.",
-			//	  "description": "Passwords used for this user account. You can create up to two passwords for each user.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Passwords
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "$comment": "List of passwords.",
+		//	  "description": "Passwords used for this user account. You can create up to two passwords for each user.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"passwords": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Passwords used for this user account. You can create up to two passwords for each user.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Passwords is a write-only property.
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates the user status. Can be \"active\", \"modifying\" or \"deleting\".",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"user_id": {
-			// Property: UserId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the user.",
-			//	  "pattern": "[a-z][a-z0-9\\\\-]*",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UserId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the user.",
+		//	  "pattern": "[a-z][a-z0-9\\\\-]*",
+		//	  "type": "string"
+		//	}
+		"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the user.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("[a-z][a-z0-9\\\\-]*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"user_name": {
-			// Property: UserName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The username of the user.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-z][a-z0-9\\\\-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UserName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The username of the user.",
+		//	  "type": "string"
+		//	}
+		"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The username of the user.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::ElastiCache::User",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::User").WithTerraformTypeName("awscc_elasticache_user")
 	opts = opts.WithTerraformSchema(schema)
@@ -283,7 +278,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -77,7 +77,7 @@ Optional:
 <a id="nestedatt--policy_status"></a>
 ### Nested Schema for `policy_status`
 
-Optional:
+Read-Only:
 
 - `is_public` (Boolean) Specifies whether the Object lambda Access Point Policy is Public or not. Object lambda Access Points are private by default.
 
@@ -85,7 +85,7 @@ Optional:
 <a id="nestedatt--public_access_block_configuration"></a>
 ### Nested Schema for `public_access_block_configuration`
 
-Optional:
+Read-Only:
 
 - `block_public_acls` (Boolean) Specifies whether Amazon S3 should block public access control lists (ACLs) to this object lambda access point. Setting this element to TRUE causes the following behavior:
 - PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.

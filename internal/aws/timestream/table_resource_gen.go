@@ -4,14 +4,19 @@ package timestream
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,336 +26,314 @@ func init() {
 // tableResource returns the Terraform awscc_timestream_table resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Timestream::Table resource.
 func tableResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"database_name": {
-			// Property: DatabaseName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name for the database which the table to be created belongs to.",
-			//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name for the database which the table to be created belongs to.",
+		//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
+		//	  "type": "string"
+		//	}
+		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name for the database which the table to be created belongs to.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{3,256}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"magnetic_store_write_properties": {
-			// Property: MagneticStoreWriteProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The properties that determine whether magnetic store writes are enabled.",
-			//	  "properties": {
-			//	    "EnableMagneticStoreWrites": {
-			//	      "description": "Boolean flag indicating whether magnetic store writes are enabled.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "MagneticStoreRejectedDataLocation": {
-			//	      "additionalProperties": false,
-			//	      "description": "Location to store information about records that were asynchronously rejected during magnetic store writes.",
-			//	      "properties": {
-			//	        "S3Configuration": {
-			//	          "additionalProperties": false,
-			//	          "description": "S3 configuration for location to store rejections from magnetic store writes",
-			//	          "properties": {
-			//	            "BucketName": {
-			//	              "description": "The bucket name used to store the data.",
-			//	              "type": "string"
-			//	            },
-			//	            "EncryptionOption": {
-			//	              "description": "Either SSE_KMS or SSE_S3.",
-			//	              "type": "string"
-			//	            },
-			//	            "KmsKeyId": {
-			//	              "description": "Must be provided if SSE_KMS is specified as the encryption option",
-			//	              "type": "string"
-			//	            },
-			//	            "ObjectKeyPrefix": {
-			//	              "description": "String used to prefix all data in the bucket.",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "EncryptionOption",
-			//	            "BucketName"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "EnableMagneticStoreWrites"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]{3,256}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MagneticStoreWriteProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The properties that determine whether magnetic store writes are enabled.",
+		//	  "properties": {
+		//	    "EnableMagneticStoreWrites": {
+		//	      "description": "Boolean flag indicating whether magnetic store writes are enabled.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MagneticStoreRejectedDataLocation": {
+		//	      "additionalProperties": false,
+		//	      "description": "Location to store information about records that were asynchronously rejected during magnetic store writes.",
+		//	      "properties": {
+		//	        "S3Configuration": {
+		//	          "additionalProperties": false,
+		//	          "description": "S3 configuration for location to store rejections from magnetic store writes",
+		//	          "properties": {
+		//	            "BucketName": {
+		//	              "description": "The bucket name used to store the data.",
+		//	              "type": "string"
+		//	            },
+		//	            "EncryptionOption": {
+		//	              "description": "Either SSE_KMS or SSE_S3.",
+		//	              "type": "string"
+		//	            },
+		//	            "KmsKeyId": {
+		//	              "description": "Must be provided if SSE_KMS is specified as the encryption option",
+		//	              "type": "string"
+		//	            },
+		//	            "ObjectKeyPrefix": {
+		//	              "description": "String used to prefix all data in the bucket.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "EncryptionOption",
+		//	            "BucketName"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EnableMagneticStoreWrites"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"magnetic_store_write_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableMagneticStoreWrites
+				"enable_magnetic_store_writes": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Boolean flag indicating whether magnetic store writes are enabled.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MagneticStoreRejectedDataLocation
+				"magnetic_store_rejected_data_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Configuration
+						"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The bucket name used to store the data.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionOption
+								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Either SSE_KMS or SSE_S3.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKeyId
+								"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Must be provided if SSE_KMS is specified as the encryption option",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ObjectKeyPrefix
+								"object_key_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "String used to prefix all data in the bucket.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "S3 configuration for location to store rejections from magnetic store writes",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Location to store information about records that were asynchronously rejected during magnetic store writes.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The properties that determine whether magnetic store writes are enabled.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"enable_magnetic_store_writes": {
-						// Property: EnableMagneticStoreWrites
-						Description: "Boolean flag indicating whether magnetic store writes are enabled.",
-						Type:        types.BoolType,
-						Required:    true,
-					},
-					"magnetic_store_rejected_data_location": {
-						// Property: MagneticStoreRejectedDataLocation
-						Description: "Location to store information about records that were asynchronously rejected during magnetic store writes.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"s3_configuration": {
-									// Property: S3Configuration
-									Description: "S3 configuration for location to store rejections from magnetic store writes",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket_name": {
-												// Property: BucketName
-												Description: "The bucket name used to store the data.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"encryption_option": {
-												// Property: EncryptionOption
-												Description: "Either SSE_KMS or SSE_S3.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"kms_key_id": {
-												// Property: KmsKeyId
-												Description: "Must be provided if SSE_KMS is specified as the encryption option",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"object_key_prefix": {
-												// Property: ObjectKeyPrefix
-												Description: "String used to prefix all data in the bucket.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The table name exposed as a read-only attribute.",
-			//	  "type": "string"
-			//	}
-			Description: "The table name exposed as a read-only attribute.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"retention_properties": {
-			// Property: RetentionProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The retention duration of the memory store and the magnetic store.",
-			//	  "properties": {
-			//	    "MagneticStoreRetentionPeriodInDays": {
-			//	      "description": "The duration for which data must be stored in the magnetic store.",
-			//	      "type": "string"
-			//	    },
-			//	    "MemoryStoreRetentionPeriodInHours": {
-			//	      "description": "The duration for which data must be stored in the memory store.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "The retention duration of the memory store and the magnetic store.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"magnetic_store_retention_period_in_days": {
-						// Property: MagneticStoreRetentionPeriodInDays
-						Description: "The duration for which data must be stored in the magnetic store.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"memory_store_retention_period_in_hours": {
-						// Property: MemoryStoreRetentionPeriodInHours
-						Description: "The duration for which data must be stored in the memory store.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"table_name": {
-			// Property: TableName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
-			//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
-			//	  "type": "string"
-			//	}
-			Description: "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_.-]{3,256}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "You can use the Resource Tags property to apply tags to resources, which can help you identify and categorize those resources.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The table name exposed as a read-only attribute.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The table name exposed as a read-only attribute.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RetentionProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The retention duration of the memory store and the magnetic store.",
+		//	  "properties": {
+		//	    "MagneticStoreRetentionPeriodInDays": {
+		//	      "description": "The duration for which data must be stored in the magnetic store.",
+		//	      "type": "string"
+		//	    },
+		//	    "MemoryStoreRetentionPeriodInHours": {
+		//	      "description": "The duration for which data must be stored in the memory store.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"retention_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MagneticStoreRetentionPeriodInDays
+				"magnetic_store_retention_period_in_days": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The duration for which data must be stored in the magnetic store.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MemoryStoreRetentionPeriodInHours
+				"memory_store_retention_period_in_hours": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The duration for which data must be stored in the memory store.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The retention duration of the memory store and the magnetic store.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TableName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
+		//	  "pattern": "^[a-zA-Z0-9_.-]{3,256}$",
+		//	  "type": "string"
+		//	}
+		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_.-]{3,256}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "You can use the Resource Tags property to apply tags to resources, which can help you identify and categorize those resources.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(200),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::Timestream::Table resource creates a Timestream Table.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::Table").WithTerraformTypeName("awscc_timestream_table")
 	opts = opts.WithTerraformSchema(schema)
@@ -380,7 +363,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

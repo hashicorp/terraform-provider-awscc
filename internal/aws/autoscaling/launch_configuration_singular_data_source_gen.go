@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,428 +19,394 @@ func init() {
 // launchConfigurationDataSource returns the Terraform awscc_autoscaling_launch_configuration data source.
 // This Terraform data source corresponds to the CloudFormation AWS::AutoScaling::LaunchConfiguration resource.
 func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"associate_public_ip_address": {
-			// Property: AssociatePublicIpAddress
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssociatePublicIpAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
+		//	  "type": "boolean"
+		//	}
+		"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"block_device_mappings": {
-			// Property: BlockDeviceMappings
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "BlockDeviceMapping is a property of AWS::AutoScaling::LaunchConfiguration that describes a block device mapping for an Auto Scaling group.",
-			//	    "properties": {
-			//	      "DeviceName": {
-			//	        "description": "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
-			//	        "type": "string"
-			//	      },
-			//	      "Ebs": {
-			//	        "additionalProperties": false,
-			//	        "description": "Parameters used to automatically set up EBS volumes when an instance is launched.",
-			//	        "properties": {
-			//	          "DeleteOnTermination": {
-			//	            "description": "Indicates whether the volume is deleted on instance termination. ",
-			//	            "type": "boolean"
-			//	          },
-			//	          "Encrypted": {
-			//	            "description": "Specifies whether the volume should be encrypted. ",
-			//	            "type": "boolean"
-			//	          },
-			//	          "Iops": {
-			//	            "description": "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
-			//	            "type": "integer"
-			//	          },
-			//	          "SnapshotId": {
-			//	            "description": "The snapshot ID of the volume to use.",
-			//	            "type": "string"
-			//	          },
-			//	          "Throughput": {
-			//	            "description": "The throughput (MiBps) to provision for a gp3 volume.",
-			//	            "type": "integer"
-			//	          },
-			//	          "VolumeSize": {
-			//	            "description": "The volume size, in GiBs.",
-			//	            "type": "integer"
-			//	          },
-			//	          "VolumeType": {
-			//	            "description": "The volume type.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "NoDevice": {
-			//	        "description": "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
-			//	        "type": "boolean"
-			//	      },
-			//	      "VirtualName": {
-			//	        "description": "The name of the virtual device.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "DeviceName"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"device_name": {
-						// Property: DeviceName
+		}, /*END ATTRIBUTE*/
+		// Property: BlockDeviceMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "BlockDeviceMapping is a property of AWS::AutoScaling::LaunchConfiguration that describes a block device mapping for an Auto Scaling group.",
+		//	    "properties": {
+		//	      "DeviceName": {
+		//	        "description": "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
+		//	        "type": "string"
+		//	      },
+		//	      "Ebs": {
+		//	        "additionalProperties": false,
+		//	        "description": "Parameters used to automatically set up EBS volumes when an instance is launched.",
+		//	        "properties": {
+		//	          "DeleteOnTermination": {
+		//	            "description": "Indicates whether the volume is deleted on instance termination. ",
+		//	            "type": "boolean"
+		//	          },
+		//	          "Encrypted": {
+		//	            "description": "Specifies whether the volume should be encrypted. ",
+		//	            "type": "boolean"
+		//	          },
+		//	          "Iops": {
+		//	            "description": "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
+		//	            "type": "integer"
+		//	          },
+		//	          "SnapshotId": {
+		//	            "description": "The snapshot ID of the volume to use.",
+		//	            "type": "string"
+		//	          },
+		//	          "Throughput": {
+		//	            "description": "The throughput (MiBps) to provision for a gp3 volume.",
+		//	            "type": "integer"
+		//	          },
+		//	          "VolumeSize": {
+		//	            "description": "The volume size, in GiBs.",
+		//	            "type": "integer"
+		//	          },
+		//	          "VolumeType": {
+		//	            "description": "The volume type.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "NoDevice": {
+		//	        "description": "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
+		//	        "type": "boolean"
+		//	      },
+		//	      "VirtualName": {
+		//	        "description": "The name of the virtual device.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "DeviceName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"block_device_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DeviceName
+					"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"ebs": {
-						// Property: Ebs
+					}, /*END ATTRIBUTE*/
+					// Property: Ebs
+					"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeleteOnTermination
+							"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether the volume is deleted on instance termination. ",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Encrypted
+							"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether the volume should be encrypted. ",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Iops
+							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SnapshotId
+							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The snapshot ID of the volume to use.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Throughput
+							"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The throughput (MiBps) to provision for a gp3 volume.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeSize
+							"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The volume size, in GiBs.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeType
+							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The volume type.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "Parameters used to automatically set up EBS volumes when an instance is launched.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"delete_on_termination": {
-									// Property: DeleteOnTermination
-									Description: "Indicates whether the volume is deleted on instance termination. ",
-									Type:        types.BoolType,
-									Computed:    true,
-								},
-								"encrypted": {
-									// Property: Encrypted
-									Description: "Specifies whether the volume should be encrypted. ",
-									Type:        types.BoolType,
-									Computed:    true,
-								},
-								"iops": {
-									// Property: Iops
-									Description: "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
-									Type:        types.Int64Type,
-									Computed:    true,
-								},
-								"snapshot_id": {
-									// Property: SnapshotId
-									Description: "The snapshot ID of the volume to use.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"throughput": {
-									// Property: Throughput
-									Description: "The throughput (MiBps) to provision for a gp3 volume.",
-									Type:        types.Int64Type,
-									Computed:    true,
-								},
-								"volume_size": {
-									// Property: VolumeSize
-									Description: "The volume size, in GiBs.",
-									Type:        types.Int64Type,
-									Computed:    true,
-								},
-								"volume_type": {
-									// Property: VolumeType
-									Description: "The volume type.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"no_device": {
-						// Property: NoDevice
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: NoDevice
+					"no_device": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
-						Type:        types.BoolType,
 						Computed:    true,
-					},
-					"virtual_name": {
-						// Property: VirtualName
+					}, /*END ATTRIBUTE*/
+					// Property: VirtualName
+					"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the virtual device.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"classic_link_vpc_id": {
-			// Property: ClassicLinkVPCId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ClassicLinkVPCId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
+		//	  "type": "string"
+		//	}
+		"classic_link_vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"classic_link_vpc_security_groups": {
-			// Property: ClassicLinkVPCSecurityGroups
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ClassicLinkVPCSecurityGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"classic_link_vpc_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"ebs_optimized": {
-			// Property: EbsOptimized
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EbsOptimized
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
+		//	  "type": "boolean"
+		//	}
+		"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"iam_instance_profile": {
-			// Property: IamInstanceProfile
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IamInstanceProfile
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
+		//	  "type": "string"
+		//	}
+		"iam_instance_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"image_id": {
-			// Property: ImageId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ImageId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
+		//	  "type": "string"
+		//	}
+		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"instance_id": {
-			// Property: InstanceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
+		//	  "type": "string"
+		//	}
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"instance_monitoring": {
-			// Property: InstanceMonitoring
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceMonitoring
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
+		//	  "type": "boolean"
+		//	}
+		"instance_monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"instance_type": {
-			// Property: InstanceType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the instance type of the EC2 instance.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the instance type of the EC2 instance.",
+		//	  "type": "string"
+		//	}
+		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the instance type of the EC2 instance.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"kernel_id": {
-			// Property: KernelId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the ID of the kernel associated with the EC2 AMI.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: KernelId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the ID of the kernel associated with the EC2 AMI.",
+		//	  "type": "string"
+		//	}
+		"kernel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the ID of the kernel associated with the EC2 AMI.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"key_name": {
-			// Property: KeyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the name of the EC2 key pair.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: KeyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the name of the EC2 key pair.",
+		//	  "type": "string"
+		//	}
+		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the name of the EC2 key pair.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"launch_configuration_name": {
-			// Property: LaunchConfigurationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the launch configuration. This name must be unique per Region per account.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LaunchConfigurationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the launch configuration. This name must be unique per Region per account.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"launch_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the launch configuration. This name must be unique per Region per account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"metadata_options": {
-			// Property: MetadataOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The metadata options for the instances.",
-			//	  "properties": {
-			//	    "HttpEndpoint": {
-			//	      "description": "This parameter enables or disables the HTTP metadata endpoint on your instances.",
-			//	      "type": "string"
-			//	    },
-			//	    "HttpPutResponseHopLimit": {
-			//	      "description": "The desired HTTP PUT response hop limit for instance metadata requests.",
-			//	      "type": "integer"
-			//	    },
-			//	    "HttpTokens": {
-			//	      "description": "The state of token usage for your instance metadata requests.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MetadataOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The metadata options for the instances.",
+		//	  "properties": {
+		//	    "HttpEndpoint": {
+		//	      "description": "This parameter enables or disables the HTTP metadata endpoint on your instances.",
+		//	      "type": "string"
+		//	    },
+		//	    "HttpPutResponseHopLimit": {
+		//	      "description": "The desired HTTP PUT response hop limit for instance metadata requests.",
+		//	      "type": "integer"
+		//	    },
+		//	    "HttpTokens": {
+		//	      "description": "The state of token usage for your instance metadata requests.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HttpEndpoint
+				"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This parameter enables or disables the HTTP metadata endpoint on your instances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpPutResponseHopLimit
+				"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The desired HTTP PUT response hop limit for instance metadata requests.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpTokens
+				"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of token usage for your instance metadata requests.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The metadata options for the instances.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"http_endpoint": {
-						// Property: HttpEndpoint
-						Description: "This parameter enables or disables the HTTP metadata endpoint on your instances.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"http_put_response_hop_limit": {
-						// Property: HttpPutResponseHopLimit
-						Description: "The desired HTTP PUT response hop limit for instance metadata requests.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"http_tokens": {
-						// Property: HttpTokens
-						Description: "The state of token usage for your instance metadata requests.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"placement_tenancy": {
-			// Property: PlacementTenancy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The tenancy of the instance, either default or dedicated.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PlacementTenancy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tenancy of the instance, either default or dedicated.",
+		//	  "type": "string"
+		//	}
+		"placement_tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The tenancy of the instance, either default or dedicated.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"ram_disk_id": {
-			// Property: RamDiskId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the RAM disk to select.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RamDiskId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the RAM disk to select.",
+		//	  "type": "string"
+		//	}
+		"ram_disk_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the RAM disk to select.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"security_groups": {
-			// Property: SecurityGroups
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"spot_price": {
-			// Property: SpotPrice
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SpotPrice
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
+		//	  "type": "string"
+		//	}
+		"spot_price": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"user_data": {
-			// Property: UserData
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Base64-encoded user data to make available to the launched EC2 instances.",
-			//	  "maxLength": 21847,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: UserData
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Base64-encoded user data to make available to the launched EC2 instances.",
+		//	  "maxLength": 21847,
+		//	  "type": "string"
+		//	}
+		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Base64-encoded user data to make available to the launched EC2 instances.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::AutoScaling::LaunchConfiguration",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::LaunchConfiguration").WithTerraformTypeName("awscc_autoscaling_launch_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -480,7 +446,7 @@ func launchConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"volume_type":                      "VolumeType",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

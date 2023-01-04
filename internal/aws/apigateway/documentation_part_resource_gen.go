@@ -5,12 +5,16 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,188 +24,177 @@ func init() {
 // documentationPartResource returns the Terraform awscc_apigateway_documentation_part resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ApiGateway::DocumentationPart resource.
 func documentationPartResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"documentation_part_id": {
-			// Property: DocumentationPartId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the documentation Part.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DocumentationPartId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the documentation Part.",
+		//	  "type": "string"
+		//	}
+		"documentation_part_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the documentation Part.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"location": {
-			// Property: Location
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The location of the API entity that the documentation applies to.",
-			//	  "properties": {
-			//	    "Method": {
-			//	      "description": "The HTTP verb of a method.",
-			//	      "type": "string"
-			//	    },
-			//	    "Name": {
-			//	      "description": "The name of the targeted API entity.",
-			//	      "type": "string"
-			//	    },
-			//	    "Path": {
-			//	      "description": "The URL path of the target.",
-			//	      "type": "string"
-			//	    },
-			//	    "StatusCode": {
-			//	      "description": "The HTTP status code of a response.",
-			//	      "type": "string"
-			//	    },
-			//	    "Type": {
-			//	      "description": "The type of API entity that the documentation content applies to.",
-			//	      "enum": [
-			//	        "API",
-			//	        "AUTHORIZER",
-			//	        "MODEL",
-			//	        "RESOURCE",
-			//	        "METHOD",
-			//	        "PATH_PARAMETER",
-			//	        "QUERY_PARAMETER",
-			//	        "REQUEST_HEADER",
-			//	        "REQUEST_BODY",
-			//	        "RESPONSE",
-			//	        "RESPONSE_HEADER",
-			//	        "RESPONSE_BODY"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Location
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The location of the API entity that the documentation applies to.",
+		//	  "properties": {
+		//	    "Method": {
+		//	      "description": "The HTTP verb of a method.",
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "description": "The name of the targeted API entity.",
+		//	      "type": "string"
+		//	    },
+		//	    "Path": {
+		//	      "description": "The URL path of the target.",
+		//	      "type": "string"
+		//	    },
+		//	    "StatusCode": {
+		//	      "description": "The HTTP status code of a response.",
+		//	      "type": "string"
+		//	    },
+		//	    "Type": {
+		//	      "description": "The type of API entity that the documentation content applies to.",
+		//	      "enum": [
+		//	        "API",
+		//	        "AUTHORIZER",
+		//	        "MODEL",
+		//	        "RESOURCE",
+		//	        "METHOD",
+		//	        "PATH_PARAMETER",
+		//	        "QUERY_PARAMETER",
+		//	        "REQUEST_HEADER",
+		//	        "REQUEST_BODY",
+		//	        "RESPONSE",
+		//	        "RESPONSE_HEADER",
+		//	        "RESPONSE_BODY"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Method
+				"method": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The HTTP verb of a method.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the targeted API entity.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Path
+				"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL path of the target.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StatusCode
+				"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The HTTP status code of a response.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of API entity that the documentation content applies to.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"API",
+							"AUTHORIZER",
+							"MODEL",
+							"RESOURCE",
+							"METHOD",
+							"PATH_PARAMETER",
+							"QUERY_PARAMETER",
+							"REQUEST_HEADER",
+							"REQUEST_BODY",
+							"RESPONSE",
+							"RESPONSE_HEADER",
+							"RESPONSE_BODY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The location of the API entity that the documentation applies to.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"method": {
-						// Property: Method
-						Description: "The HTTP verb of a method.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
-						Description: "The name of the targeted API entity.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"path": {
-						// Property: Path
-						Description: "The URL path of the target.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"status_code": {
-						// Property: StatusCode
-						Description: "The HTTP status code of a response.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Description: "The type of API entity that the documentation content applies to.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"API",
-								"AUTHORIZER",
-								"MODEL",
-								"RESOURCE",
-								"METHOD",
-								"PATH_PARAMETER",
-								"QUERY_PARAMETER",
-								"REQUEST_HEADER",
-								"REQUEST_BODY",
-								"RESPONSE",
-								"RESPONSE_HEADER",
-								"RESPONSE_BODY",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"properties": {
-			// Property: Properties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The documentation content map of the targeted API entity.",
-			//	  "type": "string"
-			//	}
+			Required:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Properties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The documentation content map of the targeted API entity.",
+		//	  "type": "string"
+		//	}
+		"properties": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The documentation content map of the targeted API entity.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"rest_api_id": {
-			// Property: RestApiId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Identifier of the targeted API entity",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Identifier of the targeted API entity",
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Identifier of the targeted API entity",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::ApiGateway::DocumentationPart",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DocumentationPart").WithTerraformTypeName("awscc_apigateway_documentation_part")
 	opts = opts.WithTerraformSchema(schema)
@@ -222,7 +215,7 @@ func documentationPartResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

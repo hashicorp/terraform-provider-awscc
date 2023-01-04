@@ -4,14 +4,23 @@ package transfer
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,1185 +30,1123 @@ func init() {
 // workflowResource returns the Terraform awscc_transfer_workflow resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Transfer::Workflow resource.
 func workflowResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
-			//	  "maxLength": 1600,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:.*",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+		//	  "maxLength": 1600,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:.*",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A textual description for the workflow.",
-			//	  "maxLength": 256,
-			//	  "minLength": 0,
-			//	  "pattern": "^[\\w\\- ]*$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A textual description for the workflow.",
+		//	  "maxLength": 256,
+		//	  "minLength": 0,
+		//	  "pattern": "^[\\w\\- ]*$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A textual description for the workflow.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-				validate.StringMatch(regexp.MustCompile("^[\\w\\- ]*$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"on_exception_steps": {
-			// Property: OnExceptionSteps
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "The basic building block of a workflow.",
-			//	    "properties": {
-			//	      "CopyStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that performs a file copy.",
-			//	        "properties": {
-			//	          "DestinationFileLocation": {
-			//	            "additionalProperties": false,
-			//	            "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
-			//	            "properties": {
-			//	              "S3FileLocation": {
-			//	                "additionalProperties": false,
-			//	                "description": "Specifies the details for the S3 file being copied.",
-			//	                "properties": {
-			//	                  "Bucket": {
-			//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
-			//	                    "maxLength": 63,
-			//	                    "minLength": 3,
-			//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Key": {
-			//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 0,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "OverwriteExisting": {
-			//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
-			//	            "enum": [
-			//	              "TRUE",
-			//	              "FALSE"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "CustomStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that invokes a lambda function.",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Target": {
-			//	            "description": "The ARN for the lambda function that is being called.",
-			//	            "maxLength": 170,
-			//	            "minLength": 0,
-			//	            "pattern": "arn:[a-z-]+:lambda:.*$",
-			//	            "type": "string"
-			//	          },
-			//	          "TimeoutSeconds": {
-			//	            "description": "Timeout, in seconds, for the step.",
-			//	            "maximum": 1800,
-			//	            "minimum": 1,
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "DeleteStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that deletes the file.",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "TagStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that creates one or more tags.",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Tags": {
-			//	            "description": "Array that contains from 1 to 10 key/value pairs.",
-			//	            "insertionOrder": false,
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
-			//	              "properties": {
-			//	                "Key": {
-			//	                  "description": "The name assigned to the tag that you create.",
-			//	                  "maxLength": 128,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                },
-			//	                "Value": {
-			//	                  "description": "The value that corresponds to the key.",
-			//	                  "maxLength": 256,
-			//	                  "minLength": 0,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Key",
-			//	                "Value"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "maxItems": 10,
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "Type": {
-			//	        "enum": [
-			//	          "COPY",
-			//	          "CUSTOM",
-			//	          "DELETE",
-			//	          "TAG"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 8,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\- ]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OnExceptionSteps
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The basic building block of a workflow.",
+		//	    "properties": {
+		//	      "CopyStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that performs a file copy.",
+		//	        "properties": {
+		//	          "DestinationFileLocation": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+		//	            "properties": {
+		//	              "S3FileLocation": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies the details for the S3 file being copied.",
+		//	                "properties": {
+		//	                  "Bucket": {
+		//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
+		//	                    "maxLength": 63,
+		//	                    "minLength": 3,
+		//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Key": {
+		//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 0,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "OverwriteExisting": {
+		//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+		//	            "enum": [
+		//	              "TRUE",
+		//	              "FALSE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "CustomStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that invokes a lambda function.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Target": {
+		//	            "description": "The ARN for the lambda function that is being called.",
+		//	            "maxLength": 170,
+		//	            "minLength": 0,
+		//	            "pattern": "arn:[a-z-]+:lambda:.*$",
+		//	            "type": "string"
+		//	          },
+		//	          "TimeoutSeconds": {
+		//	            "description": "Timeout, in seconds, for the step.",
+		//	            "maximum": 1800,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "DeleteStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that deletes the file.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "TagStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that creates one or more tags.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Tags": {
+		//	            "description": "Array that contains from 1 to 10 key/value pairs.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
+		//	              "properties": {
+		//	                "Key": {
+		//	                  "description": "The name assigned to the tag that you create.",
+		//	                  "maxLength": 128,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "description": "The value that corresponds to the key.",
+		//	                  "maxLength": 256,
+		//	                  "minLength": 0,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Key",
+		//	                "Value"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 10,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "COPY",
+		//	          "CUSTOM",
+		//	          "DELETE",
+		//	          "TAG"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 8,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"on_exception_steps": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CopyStepDetails
+					"copy_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file being copied.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(3, 63),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for the S3 file being copied.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"TRUE",
+										"FALSE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file copy.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CustomStepDetails
+					"custom_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Target
+							"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN for the lambda function that is being called.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 170),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeoutSeconds
+							"timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Timeout, in seconds, for the step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(1, 1800),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that invokes a lambda function.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DeleteStepDetails
+					"delete_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that deletes the file.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TagStepDetails
+					"tag_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name assigned to the tag that you create.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 128),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value that corresponds to the key.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(0, 256),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Array that contains from 1 to 10 key/value pairs.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.SizeAtMost(10),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that creates one or more tags.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"COPY",
+								"CUSTOM",
+								"DELETE",
+								"TAG",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"copy_step_details": {
-						// Property: CopyStepDetails
-						Description: "Details for a step that performs a file copy.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"destination_file_location": {
-									// Property: DestinationFileLocation
-									Description: "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"s3_file_location": {
-												// Property: S3FileLocation
-												Description: "Specifies the details for the S3 file being copied.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"bucket": {
-															// Property: Bucket
-															Description: "Specifies the S3 bucket that contains the file being copied.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(3, 63),
-																validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"key": {
-															// Property: Key
-															Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 1024),
-																validate.StringMatch(regexp.MustCompile(".*"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"overwrite_existing": {
-									// Property: OverwriteExisting
-									Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"TRUE",
-											"FALSE",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"custom_step_details": {
-						// Property: CustomStepDetails
-						Description: "Details for a step that invokes a lambda function.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"target": {
-									// Property: Target
-									Description: "The ARN for the lambda function that is being called.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 170),
-										validate.StringMatch(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"timeout_seconds": {
-									// Property: TimeoutSeconds
-									Description: "Timeout, in seconds, for the step.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 1800),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"delete_step_details": {
-						// Property: DeleteStepDetails
-						Description: "Details for a step that deletes the file.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"tag_step_details": {
-						// Property: TagStepDetails
-						Description: "Details for a step that creates one or more tags.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"tags": {
-									// Property: Tags
-									Description: "Array that contains from 1 to 10 key/value pairs.",
-									Attributes: tfsdk.SetNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"key": {
-												// Property: Key
-												Description: "The name assigned to the tag that you create.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 128),
-												},
-											},
-											"value": {
-												// Property: Value
-												Description: "The value that corresponds to the key.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenAtMost(10),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"COPY",
-								"CUSTOM",
-								"DELETE",
-								"TAG",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(8),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"steps": {
-			// Property: Steps
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the details for the steps that are in the specified workflow.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "The basic building block of a workflow.",
-			//	    "properties": {
-			//	      "CopyStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that performs a file copy.",
-			//	        "properties": {
-			//	          "DestinationFileLocation": {
-			//	            "additionalProperties": false,
-			//	            "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
-			//	            "properties": {
-			//	              "S3FileLocation": {
-			//	                "additionalProperties": false,
-			//	                "description": "Specifies the details for the S3 file being copied.",
-			//	                "properties": {
-			//	                  "Bucket": {
-			//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
-			//	                    "maxLength": 63,
-			//	                    "minLength": 3,
-			//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Key": {
-			//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 0,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "OverwriteExisting": {
-			//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
-			//	            "enum": [
-			//	              "TRUE",
-			//	              "FALSE"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "CustomStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that invokes a lambda function.",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Target": {
-			//	            "description": "The ARN for the lambda function that is being called.",
-			//	            "maxLength": 170,
-			//	            "minLength": 0,
-			//	            "pattern": "arn:[a-z-]+:lambda:.*$",
-			//	            "type": "string"
-			//	          },
-			//	          "TimeoutSeconds": {
-			//	            "description": "Timeout, in seconds, for the step.",
-			//	            "maximum": 1800,
-			//	            "minimum": 1,
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "DeleteStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that deletes the file.",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "TagStepDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "Details for a step that creates one or more tags.",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "The name of the step, used as an identifier.",
-			//	            "maxLength": 30,
-			//	            "minLength": 0,
-			//	            "pattern": "^[\\w-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "SourceFileLocation": {
-			//	            "description": "Specifies which file to use as input to the workflow step.",
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Tags": {
-			//	            "description": "Array that contains from 1 to 10 key/value pairs.",
-			//	            "insertionOrder": false,
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
-			//	              "properties": {
-			//	                "Key": {
-			//	                  "description": "The name assigned to the tag that you create.",
-			//	                  "maxLength": 128,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                },
-			//	                "Value": {
-			//	                  "description": "The value that corresponds to the key.",
-			//	                  "maxLength": 256,
-			//	                  "minLength": 0,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Key",
-			//	                "Value"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "maxItems": 10,
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "Type": {
-			//	        "enum": [
-			//	          "COPY",
-			//	          "CUSTOM",
-			//	          "DELETE",
-			//	          "TAG"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 8,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Specifies the details for the steps that are in the specified workflow.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"copy_step_details": {
-						// Property: CopyStepDetails
-						Description: "Details for a step that performs a file copy.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"destination_file_location": {
-									// Property: DestinationFileLocation
-									Description: "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"s3_file_location": {
-												// Property: S3FileLocation
-												Description: "Specifies the details for the S3 file being copied.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"bucket": {
-															// Property: Bucket
-															Description: "Specifies the S3 bucket that contains the file being copied.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(3, 63),
-																validate.StringMatch(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"key": {
-															// Property: Key
-															Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 1024),
-																validate.StringMatch(regexp.MustCompile(".*"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"overwrite_existing": {
-									// Property: OverwriteExisting
-									Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"TRUE",
-											"FALSE",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"custom_step_details": {
-						// Property: CustomStepDetails
-						Description: "Details for a step that invokes a lambda function.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"target": {
-									// Property: Target
-									Description: "The ARN for the lambda function that is being called.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 170),
-										validate.StringMatch(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"timeout_seconds": {
-									// Property: TimeoutSeconds
-									Description: "Timeout, in seconds, for the step.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(1, 1800),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"delete_step_details": {
-						// Property: DeleteStepDetails
-						Description: "Details for a step that deletes the file.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"tag_step_details": {
-						// Property: TagStepDetails
-						Description: "Details for a step that creates one or more tags.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "The name of the step, used as an identifier.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 30),
-										validate.StringMatch(regexp.MustCompile("^[\\w-]*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_file_location": {
-									// Property: SourceFileLocation
-									Description: "Specifies which file to use as input to the workflow step.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-										validate.StringMatch(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"tags": {
-									// Property: Tags
-									Description: "Array that contains from 1 to 10 key/value pairs.",
-									Attributes: tfsdk.SetNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"key": {
-												// Property: Key
-												Description: "The name assigned to the tag that you create.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 128),
-												},
-											},
-											"value": {
-												// Property: Value
-												Description: "The value that corresponds to the key.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 256),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenAtMost(10),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"COPY",
-								"CUSTOM",
-								"DELETE",
-								"TAG",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(8),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Creates a key-value pair for a specific resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The name assigned to the tag that you create.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "Contains one or more values that you assigned to the key name you create.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Description: "The name assigned to the tag that you create.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
-						Description: "Contains one or more values that you assigned to the key name you create.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"workflow_id": {
-			// Property: WorkflowId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the workflow.",
-			//	  "maxLength": 19,
-			//	  "minLength": 19,
-			//	  "pattern": "^w-([a-z0-9]{17})$",
-			//	  "type": "string"
-			//	}
-			Description: "A unique identifier for the workflow.",
-			Type:        types.StringType,
+			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(8),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Steps
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the details for the steps that are in the specified workflow.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The basic building block of a workflow.",
+		//	    "properties": {
+		//	      "CopyStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that performs a file copy.",
+		//	        "properties": {
+		//	          "DestinationFileLocation": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+		//	            "properties": {
+		//	              "S3FileLocation": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies the details for the S3 file being copied.",
+		//	                "properties": {
+		//	                  "Bucket": {
+		//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
+		//	                    "maxLength": 63,
+		//	                    "minLength": 3,
+		//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Key": {
+		//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 0,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "OverwriteExisting": {
+		//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+		//	            "enum": [
+		//	              "TRUE",
+		//	              "FALSE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "CustomStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that invokes a lambda function.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Target": {
+		//	            "description": "The ARN for the lambda function that is being called.",
+		//	            "maxLength": 170,
+		//	            "minLength": 0,
+		//	            "pattern": "arn:[a-z-]+:lambda:.*$",
+		//	            "type": "string"
+		//	          },
+		//	          "TimeoutSeconds": {
+		//	            "description": "Timeout, in seconds, for the step.",
+		//	            "maximum": 1800,
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "DeleteStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that deletes the file.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "TagStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that creates one or more tags.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Tags": {
+		//	            "description": "Array that contains from 1 to 10 key/value pairs.",
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.",
+		//	              "properties": {
+		//	                "Key": {
+		//	                  "description": "The name assigned to the tag that you create.",
+		//	                  "maxLength": 128,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "description": "The value that corresponds to the key.",
+		//	                  "maxLength": 256,
+		//	                  "minLength": 0,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Key",
+		//	                "Value"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 10,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "COPY",
+		//	          "CUSTOM",
+		//	          "DELETE",
+		//	          "TAG"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 8,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"steps": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CopyStepDetails
+					"copy_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file being copied.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(3, 63),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for the S3 file being copied.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"TRUE",
+										"FALSE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file copy.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: CustomStepDetails
+					"custom_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Target
+							"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ARN for the lambda function that is being called.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 170),
+									stringvalidator.RegexMatches(regexp.MustCompile("arn:[a-z-]+:lambda:.*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TimeoutSeconds
+							"timeout_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Timeout, in seconds, for the step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(1, 1800),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that invokes a lambda function.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DeleteStepDetails
+					"delete_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that deletes the file.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TagStepDetails
+					"tag_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Tags
+							"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The name assigned to the tag that you create.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 128),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The value that corresponds to the key.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(0, 256),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Array that contains from 1 to 10 key/value pairs.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Set{ /*START VALIDATORS*/
+									setvalidator.SizeAtMost(10),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that creates one or more tags.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"COPY",
+								"CUSTOM",
+								"DELETE",
+								"TAG",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the details for the steps that are in the specified workflow.",
+			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(8),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Creates a key-value pair for a specific resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The name assigned to the tag that you create.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "Contains one or more values that you assigned to the key name you create.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The name assigned to the tag that you create.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Contains one or more values that you assigned to the key name you create.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WorkflowId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the workflow.",
+		//	  "maxLength": 19,
+		//	  "minLength": 19,
+		//	  "pattern": "^w-([a-z0-9]{17})$",
+		//	  "type": "string"
+		//	}
+		"workflow_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique identifier for the workflow.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Transfer::Workflow",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Workflow").WithTerraformTypeName("awscc_transfer_workflow")
 	opts = opts.WithTerraformSchema(schema)
@@ -1232,7 +1179,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

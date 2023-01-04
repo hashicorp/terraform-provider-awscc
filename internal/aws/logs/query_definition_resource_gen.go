@@ -4,14 +4,18 @@ package logs
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,107 +25,105 @@ func init() {
 // queryDefinitionResource returns the Terraform awscc_logs_query_definition resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Logs::QueryDefinition resource.
 func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"log_group_names": {
-			// Property: LogGroupNames
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Optionally define specific log groups as part of your query definition",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "description": "LogGroup name",
-			//	    "maxLength": 512,
-			//	    "minLength": 1,
-			//	    "pattern": "[\\.\\-_/#A-Za-z0-9]+",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: LogGroupNames
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Optionally define specific log groups as part of your query definition",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "LogGroup name",
+		//	    "maxLength": 512,
+		//	    "minLength": 1,
+		//	    "pattern": "[\\.\\-_/#A-Za-z0-9]+",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"log_group_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Optionally define specific log groups as part of your query definition",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayForEach(validate.StringLenBetween(1, 512)),
-				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), "")),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the saved query definition",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 512),
+					stringvalidator.RegexMatches(regexp.MustCompile("[\\.\\-_/#A-Za-z0-9]+"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the saved query definition",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the saved query definition",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-				validate.StringMatch(regexp.MustCompile("^([^:*\\/]+\\/?)*[^:*\\/]+$"), ""),
-			},
-		},
-		"query_definition_id": {
-			// Property: QueryDefinitionId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique identifier of a query definition",
-			//	  "maxLength": 256,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([^:*\\/]+\\/?)*[^:*\\/]+$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: QueryDefinitionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique identifier of a query definition",
+		//	  "maxLength": 256,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"query_definition_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier of a query definition",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"query_string": {
-			// Property: QueryString
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The query string to use for this definition",
-			//	  "maxLength": 10000,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: QueryString
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The query string to use for this definition",
+		//	  "maxLength": 10000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The query string to use for this definition",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 10000),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 10000),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The resource schema for AWSLogs QueryDefinition",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::QueryDefinition").WithTerraformTypeName("awscc_logs_query_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -137,7 +139,7 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

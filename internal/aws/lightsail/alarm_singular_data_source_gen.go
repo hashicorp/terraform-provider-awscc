@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,187 +19,174 @@ func init() {
 // alarmDataSource returns the Terraform awscc_lightsail_alarm data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Lightsail::Alarm resource.
 func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"alarm_arn": {
-			// Property: AlarmArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AlarmArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"alarm_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"alarm_name": {
-			// Property: AlarmName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
-			//	  "pattern": "\\w[\\w\\-]*\\w",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AlarmName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
+		//	  "pattern": "\\w[\\w\\-]*\\w",
+		//	  "type": "string"
+		//	}
+		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"comparison_operator": {
-			// Property: ComparisonOperator
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ComparisonOperator
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
+		//	  "type": "string"
+		//	}
+		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"contact_protocols": {
-			// Property: ContactProtocols
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ContactProtocols
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"contact_protocols": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"datapoints_to_alarm": {
-			// Property: DatapointsToAlarm
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DatapointsToAlarm
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
+		//	  "type": "integer"
+		//	}
+		"datapoints_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"evaluation_periods": {
-			// Property: EvaluationPeriods
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationPeriods
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
+		//	  "type": "integer"
+		//	}
+		"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"metric_name": {
-			// Property: MetricName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the metric to associate with the alarm.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MetricName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the metric to associate with the alarm.",
+		//	  "type": "string"
+		//	}
+		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the metric to associate with the alarm.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"monitored_resource_name": {
-			// Property: MonitoredResourceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The validation status of the SSL/TLS certificate.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MonitoredResourceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The validation status of the SSL/TLS certificate.",
+		//	  "type": "string"
+		//	}
+		"monitored_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The validation status of the SSL/TLS certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"notification_enabled": {
-			// Property: NotificationEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NotificationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
+		//	  "type": "boolean"
+		//	}
+		"notification_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"notification_triggers": {
-			// Property: NotificationTriggers
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The alarm states that trigger a notification.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NotificationTriggers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The alarm states that trigger a notification.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"notification_triggers": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The alarm states that trigger a notification.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The current state of the alarm.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current state of the alarm.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The current state of the alarm.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"threshold": {
-			// Property: Threshold
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The value against which the specified statistic is compared.",
-			//	  "type": "number"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Threshold
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The value against which the specified statistic is compared.",
+		//	  "type": "number"
+		//	}
+		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The value against which the specified statistic is compared.",
-			Type:        types.Float64Type,
 			Computed:    true,
-		},
-		"treat_missing_data": {
-			// Property: TreatMissingData
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Sets how this alarm will handle missing data points.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TreatMissingData
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Sets how this alarm will handle missing data points.",
+		//	  "type": "string"
+		//	}
+		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Sets how this alarm will handle missing data points.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Lightsail::Alarm",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Alarm").WithTerraformTypeName("awscc_lightsail_alarm")
 	opts = opts.WithTerraformSchema(schema)
@@ -219,7 +206,7 @@ func alarmDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"treat_missing_data":      "TreatMissingData",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

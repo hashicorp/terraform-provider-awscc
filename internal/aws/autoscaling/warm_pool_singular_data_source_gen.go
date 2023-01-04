@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,86 +19,77 @@ func init() {
 // warmPoolDataSource returns the Terraform awscc_autoscaling_warm_pool data source.
 // This Terraform data source corresponds to the CloudFormation AWS::AutoScaling::WarmPool resource.
 func warmPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auto_scaling_group_name": {
-			// Property: AutoScalingGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScalingGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"auto_scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"instance_reuse_policy": {
-			// Property: InstanceReusePolicy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "ReuseOnScaleIn": {
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"reuse_on_scale_in": {
-						// Property: ReuseOnScaleIn
-						Type:     types.BoolType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceReusePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ReuseOnScaleIn": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"instance_reuse_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReuseOnScaleIn
+				"reuse_on_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"max_group_prepared_capacity": {
-			// Property: MaxGroupPreparedCapacity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+		}, /*END ATTRIBUTE*/
+		// Property: MaxGroupPreparedCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"max_group_prepared_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"min_size": {
-			// Property: MinSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+		}, /*END ATTRIBUTE*/
+		// Property: MinSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"pool_state": {
-			// Property: PoolState
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: PoolState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"pool_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::AutoScaling::WarmPool",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::WarmPool").WithTerraformTypeName("awscc_autoscaling_warm_pool")
 	opts = opts.WithTerraformSchema(schema)
@@ -111,7 +102,7 @@ func warmPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"reuse_on_scale_in":           "ReuseOnScaleIn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

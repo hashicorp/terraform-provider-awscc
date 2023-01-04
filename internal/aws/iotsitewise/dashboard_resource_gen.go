@@ -6,9 +6,12 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,157 +22,148 @@ func init() {
 // dashboardResource returns the Terraform awscc_iotsitewise_dashboard resource.
 // This Terraform resource corresponds to the CloudFormation AWS::IoTSiteWise::Dashboard resource.
 func dashboardResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"dashboard_arn": {
-			// Property: DashboardArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the dashboard.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DashboardArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the dashboard.",
+		//	  "type": "string"
+		//	}
+		"dashboard_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the dashboard.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"dashboard_definition": {
-			// Property: DashboardDefinition
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The dashboard definition specified in a JSON literal.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DashboardDefinition
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The dashboard definition specified in a JSON literal.",
+		//	  "type": "string"
+		//	}
+		"dashboard_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The dashboard definition specified in a JSON literal.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"dashboard_description": {
-			// Property: DashboardDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description for the dashboard.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DashboardDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description for the dashboard.",
+		//	  "type": "string"
+		//	}
+		"dashboard_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description for the dashboard.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"dashboard_id": {
-			// Property: DashboardId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the dashboard.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DashboardId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the dashboard.",
+		//	  "type": "string"
+		//	}
+		"dashboard_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the dashboard.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"dashboard_name": {
-			// Property: DashboardName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A friendly name for the dashboard.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DashboardName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A friendly name for the dashboard.",
+		//	  "type": "string"
+		//	}
+		"dashboard_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A friendly name for the dashboard.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"project_id": {
-			// Property: ProjectId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the project in which to create the dashboard.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the project in which to create the dashboard.",
+		//	  "type": "string"
+		//	}
+		"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the project in which to create the dashboard.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of key-value pairs that contain metadata for the dashboard.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key-value pairs that contain metadata for the dashboard.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of key-value pairs that contain metadata for the dashboard.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::IoTSiteWise::Dashboard",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Dashboard").WithTerraformTypeName("awscc_iotsitewise_dashboard")
 	opts = opts.WithTerraformSchema(schema)
@@ -190,7 +184,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -190,7 +190,7 @@ Required:
 <a id="nestedatt--version"></a>
 ### Nested Schema for `version`
 
-Optional:
+Read-Only:
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
 - `created_time` (String) <p>The time that this dashboard version was created.</p>
@@ -207,7 +207,7 @@ Optional:
 <a id="nestedatt--version--errors"></a>
 ### Nested Schema for `version.errors`
 
-Optional:
+Read-Only:
 
 - `message` (String) <p>Message.</p>
 - `type` (String)
@@ -216,7 +216,7 @@ Optional:
 <a id="nestedatt--version--sheets"></a>
 ### Nested Schema for `version.sheets`
 
-Optional:
+Read-Only:
 
 - `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>

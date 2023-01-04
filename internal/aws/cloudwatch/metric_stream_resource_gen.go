@@ -5,12 +5,17 @@ package cloudwatch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,449 +25,434 @@ func init() {
 // metricStreamResource returns the Terraform awscc_cloudwatch_metric_stream resource.
 // This Terraform resource corresponds to the CloudFormation AWS::CloudWatch::MetricStream resource.
 func metricStreamResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Amazon Resource Name of the metric stream.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name of the metric stream.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name of the metric stream.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"creation_date": {
-			// Property: CreationDate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date of creation of the metric stream.",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreationDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date of creation of the metric stream.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date of creation of the metric stream.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"exclude_filters": {
-			// Property: ExcludeFilters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Define which metrics will be not streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "This structure defines the metrics that will be streamed.",
-			//	    "properties": {
-			//	      "Namespace": {
-			//	        "description": "Only metrics with Namespace matching this value will be streamed.",
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Namespace"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 1000,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ExcludeFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Define which metrics will be not streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "This structure defines the metrics that will be streamed.",
+		//	    "properties": {
+		//	      "Namespace": {
+		//	        "description": "Only metrics with Namespace matching this value will be streamed.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1000,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"exclude_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Only metrics with Namespace matching this value will be streamed.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "Define which metrics will be not streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"namespace": {
-						// Property: Namespace
-						Description: "Only metrics with Namespace matching this value will be streamed.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 255),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(1000),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"firehose_arn": {
-			// Property: FirehoseArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the Kinesis Firehose where to stream the data.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
-			Description: "The ARN of the Kinesis Firehose where to stream the data.",
-			Type:        types.StringType,
-			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-			},
-		},
-		"include_filters": {
-			// Property: IncludeFilters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "This structure defines the metrics that will be streamed.",
-			//	    "properties": {
-			//	      "Namespace": {
-			//	        "description": "Only metrics with Namespace matching this value will be streamed.",
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Namespace"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 1000,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"namespace": {
-						// Property: Namespace
-						Description: "Only metrics with Namespace matching this value will be streamed.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 255),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(1000),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"last_update_date": {
-			// Property: LastUpdateDate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date of the last update of the metric stream.",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Description: "The date of the last update of the metric stream.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of the metric stream.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "Name of the metric stream.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"output_format": {
-			// Property: OutputFormat
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The output format of the data streamed to the Kinesis Firehose.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "The output format of the data streamed to the Kinesis Firehose.",
-			Type:        types.StringType,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(1000),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FirehoseArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the Kinesis Firehose where to stream the data.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"firehose_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the Kinesis Firehose where to stream the data.",
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the role that provides access to the Kinesis Firehose.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
-			Description: "The ARN of the role that provides access to the Kinesis Firehose.",
-			Type:        types.StringType,
-			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-			},
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Displays the state of the Metric Stream.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "Displays the state of the Metric Stream.",
-			Type:        types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IncludeFilters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "This structure defines the metrics that will be streamed.",
+		//	    "properties": {
+		//	      "Namespace": {
+		//	        "description": "Only metrics with Namespace matching this value will be streamed.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1000,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"include_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Only metrics with Namespace matching this value will be streamed.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
+			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"statistics_configurations": {
-			// Property: StatisticsConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "This structure specifies a list of additional statistics to stream, and the metrics to stream those additional statistics for. All metrics that match the combination of metric name and namespace will be streamed with the extended statistics, no matter their dimensions.",
-			//	    "properties": {
-			//	      "AdditionalStatistics": {
-			//	        "description": "The additional statistics to stream for the metrics listed in IncludeMetrics.",
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "maxItems": 20,
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "IncludeMetrics": {
-			//	        "description": "An array that defines the metrics that are to have additional statistics streamed.",
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "A structure that specifies the metric name and namespace for one metric that is going to have additional statistics included in the stream.",
-			//	          "properties": {
-			//	            "MetricName": {
-			//	              "description": "The name of the metric.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "Namespace": {
-			//	              "description": "The namespace of the metric.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "MetricName",
-			//	            "Namespace"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 100,
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "AdditionalStatistics",
-			//	      "IncludeMetrics"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 100,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"additional_statistics": {
-						// Property: AdditionalStatistics
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(1000),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastUpdateDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date of the last update of the metric stream.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"last_update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date of the last update of the metric stream.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of the metric stream.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of the metric stream.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OutputFormat
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The output format of the data streamed to the Kinesis Firehose.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"output_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The output format of the data streamed to the Kinesis Firehose.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the role that provides access to the Kinesis Firehose.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the role that provides access to the Kinesis Firehose.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Displays the state of the Metric Stream.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Displays the state of the Metric Stream.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StatisticsConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "This structure specifies a list of additional statistics to stream, and the metrics to stream those additional statistics for. All metrics that match the combination of metric name and namespace will be streamed with the extended statistics, no matter their dimensions.",
+		//	    "properties": {
+		//	      "AdditionalStatistics": {
+		//	        "description": "The additional statistics to stream for the metrics listed in IncludeMetrics.",
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 20,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "IncludeMetrics": {
+		//	        "description": "An array that defines the metrics that are to have additional statistics streamed.",
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "A structure that specifies the metric name and namespace for one metric that is going to have additional statistics included in the stream.",
+		//	          "properties": {
+		//	            "MetricName": {
+		//	              "description": "The name of the metric.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Namespace": {
+		//	              "description": "The namespace of the metric.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MetricName",
+		//	            "Namespace"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "AdditionalStatistics",
+		//	      "IncludeMetrics"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 100,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"statistics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AdditionalStatistics
+					"additional_statistics": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The additional statistics to stream for the metrics listed in IncludeMetrics.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtMost(20),
-							validate.UniqueItems(),
-						},
-					},
-					"include_metrics": {
-						// Property: IncludeMetrics
-						Description: "An array that defines the metrics that are to have additional statistics streamed.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"metric_name": {
-									// Property: MetricName
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtMost(20),
+							listvalidator.UniqueValues(),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IncludeMetrics
+					"include_metrics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: MetricName
+								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the metric.",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-									},
-								},
-								"namespace": {
-									// Property: Namespace
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Namespace
+								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The namespace of the metric.",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtMost(100),
-							validate.UniqueItems(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(100),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A set of tags to assign to the delivery stream.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Metadata that you can assign to a Metric Stream, consisting of a key-value pair.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "A unique identifier for the tag.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "An optional string, which you can use to describe or define the tag.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "A set of tags to assign to the delivery stream.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Description: "A unique identifier for the tag.",
-						Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "An array that defines the metrics that are to have additional statistics streamed.",
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtMost(100),
+							listvalidator.UniqueValues(),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "By default, a metric stream always sends the MAX, MIN, SUM, and SAMPLECOUNT statistics for each metric that is streamed. You can use this parameter to have the metric stream also send additional statistics in the stream. This array can have up to 100 members.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(100),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A set of tags to assign to the delivery stream.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Metadata that you can assign to a Metric Stream, consisting of a key-value pair.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A unique identifier for the tag.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "An optional string, which you can use to describe or define the tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique identifier for the tag.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "An optional string, which you can use to describe or define the tag.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A set of tags to assign to the delivery stream.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for Metric Stream",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_stream")
 	opts = opts.WithTerraformSchema(schema)
@@ -495,31 +485,7 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	opts = opts.WithRequiredAttributesValidators(validate.AnyOfRequired(
-		validate.Required(
-			"firehose_arn",
-			"role_arn",
-			"output_format",
-		),
-		validate.AllOfRequired(
-			validate.Required(
-				"firehose_arn",
-				"role_arn",
-				"output_format",
-			),
-		),
-		validate.OneOfRequired(
-			validate.Required(
-				"include_filters",
-			),
-			validate.Required(
-				"exclude_filters",
-			),
-		),
-	),
-	)
-
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

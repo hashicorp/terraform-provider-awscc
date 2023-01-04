@@ -5,12 +5,16 @@ package globalaccelerator
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,165 +24,158 @@ func init() {
 // listenerResource returns the Terraform awscc_globalaccelerator_listener resource.
 // This Terraform resource corresponds to the CloudFormation AWS::GlobalAccelerator::Listener resource.
 func listenerResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"accelerator_arn": {
-			// Property: AcceleratorArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the accelerator.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AcceleratorArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the accelerator.",
+		//	  "type": "string"
+		//	}
+		"accelerator_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the accelerator.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"client_affinity": {
-			// Property: ClientAffinity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "NONE",
-			//	  "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
-			//	  "enum": [
-			//	    "NONE",
-			//	    "SOURCE_IP"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClientAffinity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "NONE",
+		//	  "description": "Client affinity lets you direct all requests from a user to the same endpoint.",
+		//	  "enum": [
+		//	    "NONE",
+		//	    "SOURCE_IP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"client_affinity": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Client affinity lets you direct all requests from a user to the same endpoint.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"NONE",
 					"SOURCE_IP",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.StringValue("NONE")),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"listener_arn": {
-			// Property: ListenerArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the listener.",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("NONE"),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ListenerArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the listener.",
+		//	  "type": "string"
+		//	}
+		"listener_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the listener.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"port_ranges": {
-			// Property: PortRanges
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A port range to support for connections from  clients to your accelerator.",
-			//	    "properties": {
-			//	      "FromPort": {
-			//	        "description": "A network port number",
-			//	        "maximum": 65535,
-			//	        "minimum": 0,
-			//	        "type": "integer"
-			//	      },
-			//	      "ToPort": {
-			//	        "description": "A network port number",
-			//	        "maximum": 65535,
-			//	        "minimum": 0,
-			//	        "type": "integer"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "FromPort",
-			//	      "ToPort"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"from_port": {
-						// Property: FromPort
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PortRanges
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A port range to support for connections from  clients to your accelerator.",
+		//	    "properties": {
+		//	      "FromPort": {
+		//	        "description": "A network port number",
+		//	        "maximum": 65535,
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
+		//	      "ToPort": {
+		//	        "description": "A network port number",
+		//	        "maximum": 65535,
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "FromPort",
+		//	      "ToPort"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"port_ranges": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FromPort
+					"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "A network port number",
-						Type:        types.Int64Type,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(0, 65535),
-						},
-					},
-					"to_port": {
-						// Property: ToPort
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(0, 65535),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ToPort
+					"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "A network port number",
-						Type:        types.Int64Type,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(0, 65535),
-						},
-					},
-				},
-			),
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(0, 65535),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Required: true,
-		},
-		"protocol": {
-			// Property: Protocol
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "TCP",
-			//	  "description": "The protocol for the listener.",
-			//	  "enum": [
-			//	    "TCP",
-			//	    "UDP"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Protocol
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "TCP",
+		//	  "description": "The protocol for the listener.",
+		//	  "enum": [
+		//	    "TCP",
+		//	    "UDP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The protocol for the listener.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"TCP",
 					"UDP",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.StringValue("TCP")),
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("TCP"),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::GlobalAccelerator::Listener",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GlobalAccelerator::Listener").WithTerraformTypeName("awscc_globalaccelerator_listener")
 	opts = opts.WithTerraformSchema(schema)
@@ -197,7 +194,7 @@ func listenerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

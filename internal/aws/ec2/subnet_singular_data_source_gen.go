@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,236 +19,215 @@ func init() {
 // subnetDataSource returns the Terraform awscc_ec2_subnet data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::Subnet resource.
 func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"assign_ipv_6_address_on_creation": {
-			// Property: AssignIpv6AddressOnCreation
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssignIpv6AddressOnCreation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"assign_ipv_6_address_on_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"availability_zone": {
-			// Property: AvailabilityZone
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"availability_zone_id": {
-			// Property: AvailabilityZoneId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZoneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"availability_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"cidr_block": {
-			// Property: CidrBlock
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CidrBlock
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"enable_dns_64": {
-			// Property: EnableDns64
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: EnableDns64
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"enable_dns_64": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"ipv_6_cidr_block": {
-			// Property: Ipv6CidrBlock
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6CidrBlock
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"ipv_6_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"ipv_6_cidr_blocks": {
-			// Property: Ipv6CidrBlocks
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6CidrBlocks
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"ipv_6_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Ipv6Native
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"ipv_6_native": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"ipv_6_native": {
-			// Property: Ipv6Native
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: MapPublicIpOnLaunch
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"map_public_ip_on_launch": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"map_public_ip_on_launch": {
-			// Property: MapPublicIpOnLaunch
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkAclAssociationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"network_acl_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"network_acl_association_id": {
-			// Property: NetworkAclAssociationId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: OutpostArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"outpost_arn": {
-			// Property: OutpostArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: PrivateDnsNameOptionsOnLaunch
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnableResourceNameDnsAAAARecord": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnableResourceNameDnsARecord": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "HostnameType": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"private_dns_name_options_on_launch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableResourceNameDnsAAAARecord
+				"enable_resource_name_dns_aaaa_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnableResourceNameDnsARecord
+				"enable_resource_name_dns_a_record": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HostnameType
+				"hostname_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"private_dns_name_options_on_launch": {
-			// Property: PrivateDnsNameOptionsOnLaunch
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "EnableResourceNameDnsAAAARecord": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "EnableResourceNameDnsARecord": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "HostnameType": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"enable_resource_name_dns_aaaa_record": {
-						// Property: EnableResourceNameDnsAAAARecord
-						Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"enable_resource_name_dns_a_record": {
-						// Property: EnableResourceNameDnsARecord
-						Type:     types.BoolType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"hostname_type": {
-						// Property: HostnameType
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"subnet_id": {
-			// Property: SubnetId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"vpc_id": {
-			// Property: VpcId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EC2::Subnet",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::Subnet").WithTerraformTypeName("awscc_ec2_subnet")
 	opts = opts.WithTerraformSchema(schema)
@@ -275,7 +254,7 @@ func subnetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_id":                               "VpcId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

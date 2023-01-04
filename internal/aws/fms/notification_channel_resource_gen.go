@@ -4,14 +4,16 @@ package fms
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,63 +23,60 @@ func init() {
 // notificationChannelResource returns the Terraform awscc_fms_notification_channel resource.
 // This Terraform resource corresponds to the CloudFormation AWS::FMS::NotificationChannel resource.
 func notificationChannelResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"sns_role_name": {
-			// Property: SnsRoleName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^\\s]+)$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: SnsRoleName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^\\s]+)$",
+		//	  "type": "string"
+		//	}
+		"sns_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1024),
-				validate.StringMatch(regexp.MustCompile("^([^\\s]+)$"), ""),
-			},
-		},
-		"sns_topic_arn": {
-			// Property: SnsTopicArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^\\s]+)$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]+)$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SnsTopicArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^\\s]+)$",
+		//	  "type": "string"
+		//	}
+		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1024),
-				validate.StringMatch(regexp.MustCompile("^([^\\s]+)$"), ""),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1024),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]+)$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Designates the IAM role and Amazon Simple Notification Service (SNS) topic that AWS Firewall Manager uses to record SNS logs.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::NotificationChannel").WithTerraformTypeName("awscc_fms_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -91,7 +90,7 @@ func notificationChannelResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

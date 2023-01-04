@@ -110,7 +110,7 @@ Required:
 <a id="nestedatt--version"></a>
 ### Nested Schema for `version`
 
-Optional:
+Read-Only:
 
 - `created_time` (String) <p>The time that this template version was created.</p>
 - `data_set_configurations` (Attributes List) <p>Schema of the dataset identified by the placeholder. Any dashboard created from this
@@ -128,7 +128,7 @@ Optional:
 <a id="nestedatt--version--data_set_configurations"></a>
 ### Nested Schema for `version.data_set_configurations`
 
-Optional:
+Read-Only:
 
 - `column_group_schema_list` (Attributes List) <p>A structure containing the list of column group schemas.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--column_group_schema_list))
 - `data_set_schema` (Attributes) <p>Dataset schema.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--data_set_schema))
@@ -137,7 +137,7 @@ Optional:
 <a id="nestedatt--version--data_set_configurations--column_group_schema_list"></a>
 ### Nested Schema for `version.data_set_configurations.column_group_schema_list`
 
-Optional:
+Read-Only:
 
 - `column_group_column_schema_list` (Attributes List) <p>A structure containing the list of schemas for column group columns.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--column_group_schema_list--column_group_column_schema_list))
 - `name` (String) <p>The name of the column group schema.</p>
@@ -145,7 +145,7 @@ Optional:
 <a id="nestedatt--version--data_set_configurations--column_group_schema_list--column_group_column_schema_list"></a>
 ### Nested Schema for `version.data_set_configurations.column_group_schema_list.name`
 
-Optional:
+Read-Only:
 
 - `name` (String) <p>The name of the column group's column schema.</p>
 
@@ -154,14 +154,14 @@ Optional:
 <a id="nestedatt--version--data_set_configurations--data_set_schema"></a>
 ### Nested Schema for `version.data_set_configurations.data_set_schema`
 
-Optional:
+Read-Only:
 
 - `column_schema_list` (Attributes List) <p>A structure containing the list of column schemas.</p> (see [below for nested schema](#nestedatt--version--data_set_configurations--data_set_schema--column_schema_list))
 
 <a id="nestedatt--version--data_set_configurations--data_set_schema--column_schema_list"></a>
 ### Nested Schema for `version.data_set_configurations.data_set_schema.column_schema_list`
 
-Optional:
+Read-Only:
 
 - `data_type` (String) <p>The data type of the column schema.</p>
 - `geographic_role` (String) <p>The geographic role of the column schema.</p>
@@ -173,7 +173,7 @@ Optional:
 <a id="nestedatt--version--errors"></a>
 ### Nested Schema for `version.errors`
 
-Optional:
+Read-Only:
 
 - `message` (String) <p>Description of the error type.</p>
 - `type` (String)
@@ -182,7 +182,7 @@ Optional:
 <a id="nestedatt--version--sheets"></a>
 ### Nested Schema for `version.sheets`
 
-Optional:
+Read-Only:
 
 - `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>

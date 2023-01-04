@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,136 +19,126 @@ func init() {
 // realtimeLogConfigDataSource returns the Terraform awscc_cloudfront_realtime_log_config data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFront::RealtimeLogConfig resource.
 func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"end_points": {
-			// Property: EndPoints
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "KinesisStreamConfig": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "RoleArn": {
-			//	            "type": "string"
-			//	          },
-			//	          "StreamArn": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "RoleArn",
-			//	          "StreamArn"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "StreamType": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "KinesisStreamConfig",
-			//	      "StreamType"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"kinesis_stream_config": {
-						// Property: KinesisStreamConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"role_arn": {
-									// Property: RoleArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"stream_arn": {
-									// Property: StreamArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+		}, /*END ATTRIBUTE*/
+		// Property: EndPoints
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "KinesisStreamConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "RoleArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "StreamArn": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "RoleArn",
+		//	          "StreamArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "StreamType": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "KinesisStreamConfig",
+		//	      "StreamType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"end_points": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: KinesisStreamConfig
+					"kinesis_stream_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StreamArn
+							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"stream_type": {
-						// Property: StreamType
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: StreamType
+					"stream_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"fields": {
-			// Property: Fields
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: Fields
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: SamplingRate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 100,
+		//	  "minimum": 1,
+		//	  "type": "number"
+		//	}
+		"sampling_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"sampling_rate": {
-			// Property: SamplingRate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maximum": 100,
-			//	  "minimum": 1,
-			//	  "type": "number"
-			//	}
-			Type:     types.Float64Type,
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFront::RealtimeLogConfig",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::RealtimeLogConfig").WithTerraformTypeName("awscc_cloudfront_realtime_log_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -164,7 +154,7 @@ func realtimeLogConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		"stream_type":           "StreamType",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

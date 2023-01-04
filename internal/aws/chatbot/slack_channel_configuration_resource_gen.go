@@ -4,14 +4,18 @@ package chatbot
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,201 +25,193 @@ func init() {
 // slackChannelConfigurationResource returns the Terraform awscc_chatbot_slack_channel_configuration resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Chatbot::SlackChannelConfiguration resource.
 func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Amazon Resource Name (ARN) of the configuration",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name (ARN) of the configuration",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN) of the configuration",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"configuration_name": {
-			// Property: ConfigurationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the configuration",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^[A-Za-z0-9-_]+$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConfigurationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the configuration",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z0-9-_]+$",
+		//	  "type": "string"
+		//	}
+		"configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the configuration",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9-_]+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"guardrail_policies": {
-			// Property: GuardrailPolicies
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9-_]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: GuardrailPolicies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"guardrail_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The list of IAM policy ARNs that are applied as channel guardrails. The AWS managed 'AdministratorAccess' policy is applied as a default if this is not set.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"iam_role_arn": {
-			// Property: IamRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the IAM role that defines the permissions for AWS Chatbot",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IamRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the IAM role that defines the permissions for AWS Chatbot",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the IAM role that defines the permissions for AWS Chatbot",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"logging_level": {
-			// Property: LoggingLevel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "NONE",
-			//	  "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-			//	  "pattern": "^(ERROR|INFO|NONE)$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LoggingLevel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "NONE",
+		//	  "description": "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
+		//	  "pattern": "^(ERROR|INFO|NONE)$",
+		//	  "type": "string"
+		//	}
+		"logging_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the logging level for this configuration:ERROR,INFO or NONE. This property affects the log entries pushed to Amazon CloudWatch logs",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^(ERROR|INFO|NONE)$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.StringValue("NONE")),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"slack_channel_id": {
-			// Property: SlackChannelId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The id of the Slack channel",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^[A-Za-z0-9]+$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^(ERROR|INFO|NONE)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("NONE"),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SlackChannelId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The id of the Slack channel",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"slack_channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id of the Slack channel",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9]+$"), ""),
-			},
-		},
-		"slack_workspace_id": {
-			// Property: SlackWorkspaceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The id of the Slack workspace",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^[0-9A-Z]{1,255}$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9]+$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SlackWorkspaceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The id of the Slack workspace",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9A-Z]{1,255}$",
+		//	  "type": "string"
+		//	}
+		"slack_workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id of the Slack workspace",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-				validate.StringMatch(regexp.MustCompile("^[0-9A-Z]{1,255}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"sns_topic_arns": {
-			// Property: SnsTopicArns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9A-Z]{1,255}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SnsTopicArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"sns_topic_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"user_role_required": {
-			// Property: UserRoleRequired
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": false,
-			//	  "description": "Enables use of a user role requirement in your chat configuration",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UserRoleRequired
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Enables use of a user role requirement in your chat configuration",
+		//	  "type": "boolean"
+		//	}
+		"user_role_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Enables use of a user role requirement in your chat configuration",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.BoolValue(false)),
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				generic.BoolDefaultValue(false),
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::Chatbot::SlackChannelConfiguration.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Chatbot::SlackChannelConfiguration").WithTerraformTypeName("awscc_chatbot_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -236,7 +232,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

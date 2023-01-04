@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,210 +19,197 @@ func init() {
 // agreementDataSource returns the Terraform awscc_transfer_agreement data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Transfer::Agreement resource.
 func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"access_role": {
-			// Property: AccessRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the access role for the agreement.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:.*role/.*",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the access role for the agreement.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:.*role/.*",
+		//	  "type": "string"
+		//	}
+		"access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the access role for the agreement.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"agreement_id": {
-			// Property: AgreementId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the agreement.",
-			//	  "maxLength": 19,
-			//	  "minLength": 19,
-			//	  "pattern": "^a-([0-9a-f]{17})$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AgreementId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the agreement.",
+		//	  "maxLength": 19,
+		//	  "minLength": 19,
+		//	  "pattern": "^a-([0-9a-f]{17})$",
+		//	  "type": "string"
+		//	}
+		"agreement_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the agreement.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
-			//	  "maxLength": 1600,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:.*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
+		//	  "maxLength": 1600,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:.*",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the agreement.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"base_directory": {
-			// Property: BaseDirectory
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the base directory for the agreement.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "^$|/.*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: BaseDirectory
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the base directory for the agreement.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "^$|/.*",
+		//	  "type": "string"
+		//	}
+		"base_directory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the base directory for the agreement.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A textual description for the agreement.",
-			//	  "maxLength": 200,
-			//	  "minLength": 1,
-			//	  "pattern": "^[\\w\\- ]*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A textual description for the agreement.",
+		//	  "maxLength": 200,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\w\\- ]*$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A textual description for the agreement.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"local_profile_id": {
-			// Property: LocalProfileId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the local profile.",
-			//	  "maxLength": 19,
-			//	  "minLength": 19,
-			//	  "pattern": "^p-([0-9a-f]{17})$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LocalProfileId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the local profile.",
+		//	  "maxLength": 19,
+		//	  "minLength": 19,
+		//	  "pattern": "^p-([0-9a-f]{17})$",
+		//	  "type": "string"
+		//	}
+		"local_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the local profile.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"partner_profile_id": {
-			// Property: PartnerProfileId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the partner profile.",
-			//	  "maxLength": 19,
-			//	  "minLength": 19,
-			//	  "pattern": "^p-([0-9a-f]{17})$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PartnerProfileId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the partner profile.",
+		//	  "maxLength": 19,
+		//	  "minLength": 19,
+		//	  "pattern": "^p-([0-9a-f]{17})$",
+		//	  "type": "string"
+		//	}
+		"partner_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the partner profile.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"server_id": {
-			// Property: ServerId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the server.",
-			//	  "maxLength": 19,
-			//	  "minLength": 19,
-			//	  "pattern": "^s-([0-9a-f]{17})$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ServerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the server.",
+		//	  "maxLength": 19,
+		//	  "minLength": 19,
+		//	  "pattern": "^s-([0-9a-f]{17})$",
+		//	  "type": "string"
+		//	}
+		"server_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the server.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the status of the agreement.",
-			//	  "enum": [
-			//	    "ACTIVE",
-			//	    "INACTIVE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the status of the agreement.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "INACTIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the status of the agreement.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Creates a key-value pair for a specific resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The name assigned to the tag that you create.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "Contains one or more values that you assigned to the key name you create.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Creates a key-value pair for a specific resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The name assigned to the tag that you create.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "Contains one or more values that you assigned to the key name you create.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name assigned to the tag that you create.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Contains one or more values that you assigned to the key name you create.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to group and search for agreements. Tags are metadata attached to agreements for any purpose.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Transfer::Agreement",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Agreement").WithTerraformTypeName("awscc_transfer_agreement")
 	opts = opts.WithTerraformSchema(schema)
@@ -241,7 +228,7 @@ func agreementDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":              "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

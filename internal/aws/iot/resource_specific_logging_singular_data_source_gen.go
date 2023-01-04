@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,89 +19,83 @@ func init() {
 // resourceSpecificLoggingDataSource returns the Terraform awscc_iot_resource_specific_logging data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::ResourceSpecificLogging resource.
 func resourceSpecificLoggingDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"log_level": {
-			// Property: LogLevel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			//	  "enum": [
-			//	    "ERROR",
-			//	    "WARN",
-			//	    "INFO",
-			//	    "DEBUG",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: LogLevel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+		//	  "enum": [
+		//	    "ERROR",
+		//	    "WARN",
+		//	    "INFO",
+		//	    "DEBUG",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"target_id": {
-			// Property: TargetId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
-			//	  "maxLength": 140,
-			//	  "minLength": 13,
-			//	  "pattern": "[a-zA-Z0-9.:_-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TargetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
+		//	  "maxLength": 140,
+		//	  "minLength": 13,
+		//	  "pattern": "[a-zA-Z0-9.:_-]+",
+		//	  "type": "string"
+		//	}
+		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"target_name": {
-			// Property: TargetName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The target name.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z0-9.:_-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TargetName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The target name.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9.:_-]+",
+		//	  "type": "string"
+		//	}
+		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The target name.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"target_type": {
-			// Property: TargetType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
-			//	  "enum": [
-			//	    "THING_GROUP",
-			//	    "CLIENT_ID",
-			//	    "SOURCE_IP",
-			//	    "PRINCIPAL_ID"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TargetType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
+		//	  "enum": [
+		//	    "THING_GROUP",
+		//	    "CLIENT_ID",
+		//	    "SOURCE_IP",
+		//	    "PRINCIPAL_ID"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoT::ResourceSpecificLogging",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ResourceSpecificLogging").WithTerraformTypeName("awscc_iot_resource_specific_logging")
 	opts = opts.WithTerraformSchema(schema)
@@ -112,7 +106,7 @@ func resourceSpecificLoggingDataSource(ctx context.Context) (datasource.DataSour
 		"target_type": "TargetType",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

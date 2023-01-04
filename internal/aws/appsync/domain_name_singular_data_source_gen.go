@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,80 +19,73 @@ func init() {
 // domainNameDataSource returns the Terraform awscc_appsync_domain_name data source.
 // This Terraform data source corresponds to the CloudFormation AWS::AppSync::DomainName resource.
 func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"app_sync_domain_name": {
-			// Property: AppSyncDomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AppSyncDomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"app_sync_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"certificate_arn": {
-			// Property: CertificateArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 2048,
-			//	  "minLength": 3,
-			//	  "pattern": "^arn:[a-z-]*:acm:[a-z0-9-]*:\\d{12}:certificate/[0-9A-Za-z_/-]*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 3,
+		//	  "pattern": "^arn:[a-z-]*:acm:[a-z0-9-]*:\\d{12}:certificate/[0-9A-Za-z_/-]*$",
+		//	  "type": "string"
+		//	}
+		"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"domain_name": {
-			// Property: DomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 253,
-			//	  "minLength": 1,
-			//	  "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 253,
+		//	  "minLength": 1,
+		//	  "pattern": "^(\\*[a-z\\d-]*\\.)?([a-z\\d-]+\\.)+[a-z\\d-]+$",
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"hosted_zone_id": {
-			// Property: HostedZoneId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: HostedZoneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::AppSync::DomainName",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppSync::DomainName").WithTerraformTypeName("awscc_appsync_domain_name")
 	opts = opts.WithTerraformSchema(schema)
@@ -104,7 +97,7 @@ func domainNameDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hosted_zone_id":       "HostedZoneId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

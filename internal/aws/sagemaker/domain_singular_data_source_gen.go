@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,1054 +19,983 @@ func init() {
 // domainDataSource returns the Terraform awscc_sagemaker_domain data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SageMaker::Domain resource.
 func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"app_network_access_type": {
-			// Property: AppNetworkAccessType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.",
-			//	  "enum": [
-			//	    "PublicInternetOnly",
-			//	    "VpcOnly"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AppNetworkAccessType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.",
+		//	  "enum": [
+		//	    "PublicInternetOnly",
+		//	    "VpcOnly"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"app_network_access_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"app_security_group_management": {
-			// Property: AppSecurityGroupManagement
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.",
-			//	  "enum": [
-			//	    "Service",
-			//	    "Customer"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AppSecurityGroupManagement
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.",
+		//	  "enum": [
+		//	    "Service",
+		//	    "Customer"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"app_security_group_management": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"auth_mode": {
-			// Property: AuthMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The mode of authentication that members use to access the domain.",
-			//	  "enum": [
-			//	    "SSO",
-			//	    "IAM"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AuthMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The mode of authentication that members use to access the domain.",
+		//	  "enum": [
+		//	    "SSO",
+		//	    "IAM"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"auth_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The mode of authentication that members use to access the domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"default_user_settings": {
-			// Property: DefaultUserSettings
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The default user settings.",
-			//	  "properties": {
-			//	    "ExecutionRole": {
-			//	      "description": "The user profile Amazon Resource Name (ARN).",
-			//	      "maxLength": 2048,
-			//	      "minLength": 20,
-			//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//	      "type": "string"
-			//	    },
-			//	    "JupyterServerAppSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "The Jupyter server's app settings.",
-			//	      "properties": {
-			//	        "DefaultResourceSpec": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "InstanceType": {
-			//	              "description": "The instance type that the image version runs on.",
-			//	              "enum": [
-			//	                "system",
-			//	                "ml.t3.micro",
-			//	                "ml.t3.small",
-			//	                "ml.t3.medium",
-			//	                "ml.t3.large",
-			//	                "ml.t3.xlarge",
-			//	                "ml.t3.2xlarge",
-			//	                "ml.m5.large",
-			//	                "ml.m5.xlarge",
-			//	                "ml.m5.2xlarge",
-			//	                "ml.m5.4xlarge",
-			//	                "ml.m5.8xlarge",
-			//	                "ml.m5.12xlarge",
-			//	                "ml.m5.16xlarge",
-			//	                "ml.m5.24xlarge",
-			//	                "ml.c5.large",
-			//	                "ml.c5.xlarge",
-			//	                "ml.c5.2xlarge",
-			//	                "ml.c5.4xlarge",
-			//	                "ml.c5.9xlarge",
-			//	                "ml.c5.12xlarge",
-			//	                "ml.c5.18xlarge",
-			//	                "ml.c5.24xlarge",
-			//	                "ml.p3.2xlarge",
-			//	                "ml.p3.8xlarge",
-			//	                "ml.p3.16xlarge",
-			//	                "ml.g4dn.xlarge",
-			//	                "ml.g4dn.2xlarge",
-			//	                "ml.g4dn.4xlarge",
-			//	                "ml.g4dn.8xlarge",
-			//	                "ml.g4dn.12xlarge",
-			//	                "ml.g4dn.16xlarge"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "LifecycleConfigArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageVersionArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "KernelGatewayAppSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "The kernel gateway app settings.",
-			//	      "properties": {
-			//	        "CustomImages": {
-			//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "description": "A custom SageMaker image.",
-			//	            "properties": {
-			//	              "AppImageConfigName": {
-			//	                "description": "The Name of the AppImageConfig.",
-			//	                "maxLength": 63,
-			//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	                "type": "string"
-			//	              },
-			//	              "ImageName": {
-			//	                "description": "The name of the CustomImage. Must be unique to your account.",
-			//	                "maxLength": 63,
-			//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
-			//	                "type": "string"
-			//	              },
-			//	              "ImageVersionNumber": {
-			//	                "description": "The version number of the CustomImage.",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "AppImageConfigName",
-			//	              "ImageName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 30,
-			//	          "minItems": 0,
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "DefaultResourceSpec": {
-			//	          "additionalProperties": false,
-			//	          "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
-			//	          "properties": {
-			//	            "InstanceType": {
-			//	              "description": "The instance type that the image version runs on.",
-			//	              "enum": [
-			//	                "system",
-			//	                "ml.t3.micro",
-			//	                "ml.t3.small",
-			//	                "ml.t3.medium",
-			//	                "ml.t3.large",
-			//	                "ml.t3.xlarge",
-			//	                "ml.t3.2xlarge",
-			//	                "ml.m5.large",
-			//	                "ml.m5.xlarge",
-			//	                "ml.m5.2xlarge",
-			//	                "ml.m5.4xlarge",
-			//	                "ml.m5.8xlarge",
-			//	                "ml.m5.12xlarge",
-			//	                "ml.m5.16xlarge",
-			//	                "ml.m5.24xlarge",
-			//	                "ml.c5.large",
-			//	                "ml.c5.xlarge",
-			//	                "ml.c5.2xlarge",
-			//	                "ml.c5.4xlarge",
-			//	                "ml.c5.9xlarge",
-			//	                "ml.c5.12xlarge",
-			//	                "ml.c5.18xlarge",
-			//	                "ml.c5.24xlarge",
-			//	                "ml.p3.2xlarge",
-			//	                "ml.p3.8xlarge",
-			//	                "ml.p3.16xlarge",
-			//	                "ml.g4dn.xlarge",
-			//	                "ml.g4dn.2xlarge",
-			//	                "ml.g4dn.4xlarge",
-			//	                "ml.g4dn.8xlarge",
-			//	                "ml.g4dn.12xlarge",
-			//	                "ml.g4dn.16xlarge"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "LifecycleConfigArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageVersionArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "RSessionAppSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "A collection of settings that apply to an RSessionGateway app.",
-			//	      "properties": {
-			//	        "CustomImages": {
-			//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "description": "A custom SageMaker image.",
-			//	            "properties": {
-			//	              "AppImageConfigName": {
-			//	                "description": "The Name of the AppImageConfig.",
-			//	                "maxLength": 63,
-			//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	                "type": "string"
-			//	              },
-			//	              "ImageName": {
-			//	                "description": "The name of the CustomImage. Must be unique to your account.",
-			//	                "maxLength": 63,
-			//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
-			//	                "type": "string"
-			//	              },
-			//	              "ImageVersionNumber": {
-			//	                "description": "The version number of the CustomImage.",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "AppImageConfigName",
-			//	              "ImageName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 30,
-			//	          "minItems": 0,
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "DefaultResourceSpec": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "InstanceType": {
-			//	              "description": "The instance type that the image version runs on.",
-			//	              "enum": [
-			//	                "system",
-			//	                "ml.t3.micro",
-			//	                "ml.t3.small",
-			//	                "ml.t3.medium",
-			//	                "ml.t3.large",
-			//	                "ml.t3.xlarge",
-			//	                "ml.t3.2xlarge",
-			//	                "ml.m5.large",
-			//	                "ml.m5.xlarge",
-			//	                "ml.m5.2xlarge",
-			//	                "ml.m5.4xlarge",
-			//	                "ml.m5.8xlarge",
-			//	                "ml.m5.12xlarge",
-			//	                "ml.m5.16xlarge",
-			//	                "ml.m5.24xlarge",
-			//	                "ml.c5.large",
-			//	                "ml.c5.xlarge",
-			//	                "ml.c5.2xlarge",
-			//	                "ml.c5.4xlarge",
-			//	                "ml.c5.9xlarge",
-			//	                "ml.c5.12xlarge",
-			//	                "ml.c5.18xlarge",
-			//	                "ml.c5.24xlarge",
-			//	                "ml.p3.2xlarge",
-			//	                "ml.p3.8xlarge",
-			//	                "ml.p3.16xlarge",
-			//	                "ml.g4dn.xlarge",
-			//	                "ml.g4dn.2xlarge",
-			//	                "ml.g4dn.4xlarge",
-			//	                "ml.g4dn.8xlarge",
-			//	                "ml.g4dn.12xlarge",
-			//	                "ml.g4dn.16xlarge"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "LifecycleConfigArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageVersionArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "RStudioServerProAppSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "A collection of settings that configure user interaction with the RStudioServerPro app.",
-			//	      "properties": {
-			//	        "AccessStatus": {
-			//	          "description": "Indicates whether the current user has access to the RStudioServerPro app.",
-			//	          "enum": [
-			//	            "ENABLED",
-			//	            "DISABLED"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "UserGroup": {
-			//	          "description": "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
-			//	          "enum": [
-			//	            "R_STUDIO_ADMIN",
-			//	            "R_STUDIO_USER"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "SecurityGroups": {
-			//	      "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "maxLength": 32,
-			//	        "pattern": "[-0-9a-zA-Z]+",
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 5,
-			//	      "minItems": 0,
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "SharingSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "The sharing settings.",
-			//	      "properties": {
-			//	        "NotebookOutputOption": {
-			//	          "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-			//	          "enum": [
-			//	            "Allowed",
-			//	            "Disabled"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "S3KmsKeyId": {
-			//	          "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-			//	          "maxLength": 2048,
-			//	          "pattern": ".*",
-			//	          "type": "string"
-			//	        },
-			//	        "S3OutputPath": {
-			//	          "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-			//	          "maxLength": 1024,
-			//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultUserSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The default user settings.",
+		//	  "properties": {
+		//	    "ExecutionRole": {
+		//	      "description": "The user profile Amazon Resource Name (ARN).",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "JupyterServerAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Jupyter server's app settings.",
+		//	      "properties": {
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "KernelGatewayAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The kernel gateway app settings.",
+		//	      "properties": {
+		//	        "CustomImages": {
+		//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A custom SageMaker image.",
+		//	            "properties": {
+		//	              "AppImageConfigName": {
+		//	                "description": "The Name of the AppImageConfig.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageName": {
+		//	                "description": "The name of the CustomImage. Must be unique to your account.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageVersionNumber": {
+		//	                "description": "The version number of the CustomImage.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AppImageConfigName",
+		//	              "ImageName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RSessionAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "A collection of settings that apply to an RSessionGateway app.",
+		//	      "properties": {
+		//	        "CustomImages": {
+		//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A custom SageMaker image.",
+		//	            "properties": {
+		//	              "AppImageConfigName": {
+		//	                "description": "The Name of the AppImageConfig.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageName": {
+		//	                "description": "The name of the CustomImage. Must be unique to your account.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageVersionNumber": {
+		//	                "description": "The version number of the CustomImage.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AppImageConfigName",
+		//	              "ImageName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RStudioServerProAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "A collection of settings that configure user interaction with the RStudioServerPro app.",
+		//	      "properties": {
+		//	        "AccessStatus": {
+		//	          "description": "Indicates whether the current user has access to the RStudioServerPro app.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "UserGroup": {
+		//	          "description": "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+		//	          "enum": [
+		//	            "R_STUDIO_ADMIN",
+		//	            "R_STUDIO_USER"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SecurityGroups": {
+		//	      "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "maxLength": 32,
+		//	        "pattern": "[-0-9a-zA-Z]+",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "SharingSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The sharing settings.",
+		//	      "properties": {
+		//	        "NotebookOutputOption": {
+		//	          "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+		//	          "enum": [
+		//	            "Allowed",
+		//	            "Disabled"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "S3KmsKeyId": {
+		//	          "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+		//	          "maxLength": 2048,
+		//	          "pattern": ".*",
+		//	          "type": "string"
+		//	        },
+		//	        "S3OutputPath": {
+		//	          "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+		//	          "maxLength": 1024,
+		//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"default_user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user profile Amazon Resource Name (ARN).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: JupyterServerAppSettings
+				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Jupyter server's app settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KernelGatewayAppSettings
+				"kernel_gateway_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomImages
+						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AppImageConfigName
+									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Name of the AppImageConfig.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageName
+									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CustomImage. Must be unique to your account.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageVersionNumber
+									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The version number of the CustomImage.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The kernel gateway app settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RSessionAppSettings
+				"r_session_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomImages
+						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AppImageConfigName
+									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Name of the AppImageConfig.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageName
+									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CustomImage. Must be unique to your account.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageVersionNumber
+									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The version number of the CustomImage.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A collection of settings that apply to an RSessionGateway app.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RStudioServerProAppSettings
+				"r_studio_server_pro_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessStatus
+						"access_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Indicates whether the current user has access to the RStudioServerPro app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UserGroup
+						"user_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A collection of settings that configure user interaction with the RStudioServerPro app.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroups
+				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SharingSettings
+				"sharing_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NotebookOutputOption
+						"notebook_output_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3KmsKeyId
+						"s3_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3OutputPath
+						"s3_output_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The sharing settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The default user settings.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"execution_role": {
-						// Property: ExecutionRole
-						Description: "The user profile Amazon Resource Name (ARN).",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"jupyter_server_app_settings": {
-						// Property: JupyterServerAppSettings
-						Description: "The Jupyter server's app settings.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"default_resource_spec": {
-									// Property: DefaultResourceSpec
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_type": {
-												// Property: InstanceType
-												Description: "The instance type that the image version runs on.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"lifecycle_config_arn": {
-												// Property: LifecycleConfigArn
-												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_arn": {
-												// Property: SageMakerImageArn
-												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_version_arn": {
-												// Property: SageMakerImageVersionArn
-												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"kernel_gateway_app_settings": {
-						// Property: KernelGatewayAppSettings
-						Description: "The kernel gateway app settings.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"custom_images": {
-									// Property: CustomImages
-									Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"app_image_config_name": {
-												// Property: AppImageConfigName
-												Description: "The Name of the AppImageConfig.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"image_name": {
-												// Property: ImageName
-												Description: "The name of the CustomImage. Must be unique to your account.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"image_version_number": {
-												// Property: ImageVersionNumber
-												Description: "The version number of the CustomImage.",
-												Type:        types.Int64Type,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"default_resource_spec": {
-									// Property: DefaultResourceSpec
-									Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_type": {
-												// Property: InstanceType
-												Description: "The instance type that the image version runs on.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"lifecycle_config_arn": {
-												// Property: LifecycleConfigArn
-												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_arn": {
-												// Property: SageMakerImageArn
-												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_version_arn": {
-												// Property: SageMakerImageVersionArn
-												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"r_session_app_settings": {
-						// Property: RSessionAppSettings
-						Description: "A collection of settings that apply to an RSessionGateway app.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"custom_images": {
-									// Property: CustomImages
-									Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"app_image_config_name": {
-												// Property: AppImageConfigName
-												Description: "The Name of the AppImageConfig.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"image_name": {
-												// Property: ImageName
-												Description: "The name of the CustomImage. Must be unique to your account.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"image_version_number": {
-												// Property: ImageVersionNumber
-												Description: "The version number of the CustomImage.",
-												Type:        types.Int64Type,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"default_resource_spec": {
-									// Property: DefaultResourceSpec
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_type": {
-												// Property: InstanceType
-												Description: "The instance type that the image version runs on.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"lifecycle_config_arn": {
-												// Property: LifecycleConfigArn
-												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_arn": {
-												// Property: SageMakerImageArn
-												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_version_arn": {
-												// Property: SageMakerImageVersionArn
-												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"r_studio_server_pro_app_settings": {
-						// Property: RStudioServerProAppSettings
-						Description: "A collection of settings that configure user interaction with the RStudioServerPro app.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"access_status": {
-									// Property: AccessStatus
-									Description: "Indicates whether the current user has access to the RStudioServerPro app.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"user_group": {
-									// Property: UserGroup
-									Description: "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"security_groups": {
-						// Property: SecurityGroups
-						Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"sharing_settings": {
-						// Property: SharingSettings
-						Description: "The sharing settings.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"notebook_output_option": {
-									// Property: NotebookOutputOption
-									Description: "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"s3_kms_key_id": {
-									// Property: S3KmsKeyId
-									Description: "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"s3_output_path": {
-									// Property: S3OutputPath
-									Description: "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"domain_arn": {
-			// Property: DomainArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the created domain.",
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:domain/.*",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the created domain.",
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:domain/.*",
+		//	  "type": "string"
+		//	}
+		"domain_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the created domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"domain_id": {
-			// Property: DomainId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The domain name.",
-			//	  "maxLength": 63,
-			//	  "pattern": "^d-(-*[a-z0-9])+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DomainId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The domain name.",
+		//	  "maxLength": 63,
+		//	  "pattern": "^d-(-*[a-z0-9])+",
+		//	  "type": "string"
+		//	}
+		"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The domain name.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"domain_name": {
-			// Property: DomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the domain.",
-			//	  "maxLength": 63,
-			//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the domain.",
+		//	  "maxLength": 63,
+		//	  "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"domain_settings": {
-			// Property: DomainSettings
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A collection of Domain settings.",
-			//	  "properties": {
-			//	    "RStudioServerProDomainSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
-			//	      "properties": {
-			//	        "DefaultResourceSpec": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "InstanceType": {
-			//	              "description": "The instance type that the image version runs on.",
-			//	              "enum": [
-			//	                "system",
-			//	                "ml.t3.micro",
-			//	                "ml.t3.small",
-			//	                "ml.t3.medium",
-			//	                "ml.t3.large",
-			//	                "ml.t3.xlarge",
-			//	                "ml.t3.2xlarge",
-			//	                "ml.m5.large",
-			//	                "ml.m5.xlarge",
-			//	                "ml.m5.2xlarge",
-			//	                "ml.m5.4xlarge",
-			//	                "ml.m5.8xlarge",
-			//	                "ml.m5.12xlarge",
-			//	                "ml.m5.16xlarge",
-			//	                "ml.m5.24xlarge",
-			//	                "ml.c5.large",
-			//	                "ml.c5.xlarge",
-			//	                "ml.c5.2xlarge",
-			//	                "ml.c5.4xlarge",
-			//	                "ml.c5.9xlarge",
-			//	                "ml.c5.12xlarge",
-			//	                "ml.c5.18xlarge",
-			//	                "ml.c5.24xlarge",
-			//	                "ml.p3.2xlarge",
-			//	                "ml.p3.8xlarge",
-			//	                "ml.p3.16xlarge",
-			//	                "ml.g4dn.xlarge",
-			//	                "ml.g4dn.2xlarge",
-			//	                "ml.g4dn.4xlarge",
-			//	                "ml.g4dn.8xlarge",
-			//	                "ml.g4dn.12xlarge",
-			//	                "ml.g4dn.16xlarge"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "LifecycleConfigArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
-			//	              "type": "string"
-			//	            },
-			//	            "SageMakerImageVersionArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "DomainExecutionRoleArn": {
-			//	          "description": "The ARN of the execution role for the RStudioServerPro Domain-level app.",
-			//	          "maxLength": 2048,
-			//	          "minLength": 20,
-			//	          "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//	          "type": "string"
-			//	        },
-			//	        "RStudioConnectUrl": {
-			//	          "description": "A URL pointing to an RStudio Connect server.",
-			//	          "pattern": "^(https:|http:|www\\.)\\S*",
-			//	          "type": "string"
-			//	        },
-			//	        "RStudioPackageManagerUrl": {
-			//	          "description": "A URL pointing to an RStudio Package Manager server.",
-			//	          "pattern": "^(https:|http:|www\\.)\\S*",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "DomainExecutionRoleArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SecurityGroupIds": {
-			//	      "description": "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "maxLength": 32,
-			//	        "pattern": "[-0-9a-zA-Z]+",
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 3,
-			//	      "minItems": 1,
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DomainSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A collection of Domain settings.",
+		//	  "properties": {
+		//	    "RStudioServerProDomainSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
+		//	      "properties": {
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "DomainExecutionRoleArn": {
+		//	          "description": "The ARN of the execution role for the RStudioServerPro Domain-level app.",
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "RStudioConnectUrl": {
+		//	          "description": "A URL pointing to an RStudio Connect server.",
+		//	          "pattern": "^(https:|http:|www\\.)\\S*",
+		//	          "type": "string"
+		//	        },
+		//	        "RStudioPackageManagerUrl": {
+		//	          "description": "A URL pointing to an RStudio Package Manager server.",
+		//	          "pattern": "^(https:|http:|www\\.)\\S*",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DomainExecutionRoleArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SecurityGroupIds": {
+		//	      "description": "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "maxLength": 32,
+		//	        "pattern": "[-0-9a-zA-Z]+",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 3,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"domain_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RStudioServerProDomainSettings
+				"r_studio_server_pro_domain_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DomainExecutionRoleArn
+						"domain_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the execution role for the RStudioServerPro Domain-level app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RStudioConnectUrl
+						"r_studio_connect_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A URL pointing to an RStudio Connect server.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RStudioPackageManagerUrl
+						"r_studio_package_manager_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A URL pointing to an RStudio Package Manager server.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A collection of Domain settings.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"r_studio_server_pro_domain_settings": {
-						// Property: RStudioServerProDomainSettings
-						Description: "A collection of settings that update the current configuration for the RStudioServerPro Domain-level app.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"default_resource_spec": {
-									// Property: DefaultResourceSpec
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_type": {
-												// Property: InstanceType
-												Description: "The instance type that the image version runs on.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"lifecycle_config_arn": {
-												// Property: LifecycleConfigArn
-												Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_arn": {
-												// Property: SageMakerImageArn
-												Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sage_maker_image_version_arn": {
-												// Property: SageMakerImageVersionArn
-												Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"domain_execution_role_arn": {
-									// Property: DomainExecutionRoleArn
-									Description: "The ARN of the execution role for the RStudioServerPro Domain-level app.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"r_studio_connect_url": {
-									// Property: RStudioConnectUrl
-									Description: "A URL pointing to an RStudio Connect server.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"r_studio_package_manager_url": {
-									// Property: RStudioPackageManagerUrl
-									Description: "A URL pointing to an RStudio Package Manager server.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"security_group_ids": {
-						// Property: SecurityGroupIds
-						Description: "The security groups for the Amazon Virtual Private Cloud that the Domain uses for communication between Domain-level apps and user apps.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"home_efs_file_system_id": {
-			// Property: HomeEfsFileSystemId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
-			//	  "maxLength": 32,
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: HomeEfsFileSystemId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
+		//	  "maxLength": 32,
+		//	  "type": "string"
+		//	}
+		"home_efs_file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon Elastic File System (EFS) managed by this Domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"kms_key_id": {
-			// Property: KmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.",
-			//	  "maxLength": 2048,
-			//	  "pattern": ".*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.",
+		//	  "maxLength": 2048,
+		//	  "pattern": ".*",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"security_group_id_for_domain_boundary": {
-			// Property: SecurityGroupIdForDomainBoundary
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.",
-			//	  "maxLength": 32,
-			//	  "pattern": "[-0-9a-zA-Z]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroupIdForDomainBoundary
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.",
+		//	  "maxLength": 32,
+		//	  "pattern": "[-0-9a-zA-Z]+",
+		//	  "type": "string"
+		//	}
+		"security_group_id_for_domain_boundary": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the security group that authorizes traffic between the RSessionGateway apps and the RStudioServerPro app.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"single_sign_on_managed_application_instance_id": {
-			// Property: SingleSignOnManagedApplicationInstanceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The SSO managed application instance ID.",
-			//	  "maxLength": 256,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SingleSignOnManagedApplicationInstanceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The SSO managed application instance ID.",
+		//	  "maxLength": 256,
+		//	  "type": "string"
+		//	}
+		"single_sign_on_managed_application_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The SSO managed application instance ID.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"subnet_ids": {
-			// Property: SubnetIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The VPC subnets that Studio uses for communication.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "maxLength": 32,
-			//	    "pattern": "[-0-9a-zA-Z]+",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 16,
-			//	  "minItems": 1,
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The VPC subnets that Studio uses for communication.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 32,
+		//	    "pattern": "[-0-9a-zA-Z]+",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 16,
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The VPC subnets that Studio uses for communication.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of tags to apply to the user profile.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of tags to apply to the user profile.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of tags to apply to the user profile.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"url": {
-			// Property: Url
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The URL to the created domain.",
-			//	  "maxLength": 1024,
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Url
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL to the created domain.",
+		//	  "maxLength": 1024,
+		//	  "type": "string"
+		//	}
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL to the created domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"vpc_id": {
-			// Property: VpcId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-			//	  "maxLength": 32,
-			//	  "pattern": "[-0-9a-zA-Z]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+		//	  "maxLength": 32,
+		//	  "pattern": "[-0-9a-zA-Z]+",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SageMaker::Domain",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::Domain").WithTerraformTypeName("awscc_sagemaker_domain")
 	opts = opts.WithTerraformSchema(schema)
@@ -1117,7 +1046,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_id":                                         "VpcId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

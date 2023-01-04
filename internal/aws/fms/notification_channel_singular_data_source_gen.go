@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,52 +19,48 @@ func init() {
 // notificationChannelDataSource returns the Terraform awscc_fms_notification_channel data source.
 // This Terraform data source corresponds to the CloudFormation AWS::FMS::NotificationChannel resource.
 func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"sns_role_name": {
-			// Property: SnsRoleName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^\\s]+)$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: SnsRoleName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^\\s]+)$",
+		//	  "type": "string"
+		//	}
+		"sns_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"sns_topic_arn": {
-			// Property: SnsTopicArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^\\s]+)$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SnsTopicArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^\\s]+)$",
+		//	  "type": "string"
+		//	}
+		"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::FMS::NotificationChannel",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::NotificationChannel").WithTerraformTypeName("awscc_fms_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -73,7 +69,7 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 		"sns_topic_arn": "SnsTopicArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

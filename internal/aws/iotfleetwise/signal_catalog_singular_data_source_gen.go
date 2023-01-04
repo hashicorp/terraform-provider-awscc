@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,598 +19,551 @@ func init() {
 // signalCatalogDataSource returns the Terraform awscc_iotfleetwise_signal_catalog data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoTFleetWise::SignalCatalog resource.
 func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 2048,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"last_modification_time": {
-			// Property: LastModificationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModificationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"last_modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 100,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z\\d\\-_:]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 100,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z\\d\\-_:]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"node_counts": {
-			// Property: NodeCounts
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "TotalActuators": {
-			//	      "type": "number"
-			//	    },
-			//	    "TotalAttributes": {
-			//	      "type": "number"
-			//	    },
-			//	    "TotalBranches": {
-			//	      "type": "number"
-			//	    },
-			//	    "TotalNodes": {
-			//	      "type": "number"
-			//	    },
-			//	    "TotalSensors": {
-			//	      "type": "number"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"total_actuators": {
-						// Property: TotalActuators
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"total_attributes": {
-						// Property: TotalAttributes
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"total_branches": {
-						// Property: TotalBranches
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"total_nodes": {
-						// Property: TotalNodes
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"total_sensors": {
-						// Property: TotalSensors
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: NodeCounts
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "TotalActuators": {
+		//	      "type": "number"
+		//	    },
+		//	    "TotalAttributes": {
+		//	      "type": "number"
+		//	    },
+		//	    "TotalBranches": {
+		//	      "type": "number"
+		//	    },
+		//	    "TotalNodes": {
+		//	      "type": "number"
+		//	    },
+		//	    "TotalSensors": {
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"node_counts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TotalActuators
+				"total_actuators": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalAttributes
+				"total_attributes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalBranches
+				"total_branches": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalNodes
+				"total_nodes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TotalSensors
+				"total_sensors": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"nodes": {
-			// Property: Nodes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "properties": {
-			//	      "Actuator": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "AllowedValues": {
-			//	            "insertionOrder": false,
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "minItems": 1,
-			//	            "type": "array"
-			//	          },
-			//	          "AssignedValue": {
-			//	            "type": "string"
-			//	          },
-			//	          "DataType": {
-			//	            "enum": [
-			//	              "INT8",
-			//	              "UINT8",
-			//	              "INT16",
-			//	              "UINT16",
-			//	              "INT32",
-			//	              "UINT32",
-			//	              "INT64",
-			//	              "UINT64",
-			//	              "BOOLEAN",
-			//	              "FLOAT",
-			//	              "DOUBLE",
-			//	              "STRING",
-			//	              "UNIX_TIMESTAMP",
-			//	              "INT8_ARRAY",
-			//	              "UINT8_ARRAY",
-			//	              "INT16_ARRAY",
-			//	              "UINT16_ARRAY",
-			//	              "INT32_ARRAY",
-			//	              "UINT32_ARRAY",
-			//	              "INT64_ARRAY",
-			//	              "UINT64_ARRAY",
-			//	              "BOOLEAN_ARRAY",
-			//	              "FLOAT_ARRAY",
-			//	              "DOUBLE_ARRAY",
-			//	              "STRING_ARRAY",
-			//	              "UNIX_TIMESTAMP_ARRAY",
-			//	              "UNKNOWN"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Description": {
-			//	            "maxLength": 2048,
-			//	            "minLength": 1,
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "FullyQualifiedName": {
-			//	            "type": "string"
-			//	          },
-			//	          "Max": {
-			//	            "type": "number"
-			//	          },
-			//	          "Min": {
-			//	            "type": "number"
-			//	          },
-			//	          "Unit": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "DataType",
-			//	          "FullyQualifiedName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Attribute": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "AllowedValues": {
-			//	            "insertionOrder": false,
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "minItems": 1,
-			//	            "type": "array"
-			//	          },
-			//	          "AssignedValue": {
-			//	            "type": "string"
-			//	          },
-			//	          "DataType": {
-			//	            "enum": [
-			//	              "INT8",
-			//	              "UINT8",
-			//	              "INT16",
-			//	              "UINT16",
-			//	              "INT32",
-			//	              "UINT32",
-			//	              "INT64",
-			//	              "UINT64",
-			//	              "BOOLEAN",
-			//	              "FLOAT",
-			//	              "DOUBLE",
-			//	              "STRING",
-			//	              "UNIX_TIMESTAMP",
-			//	              "INT8_ARRAY",
-			//	              "UINT8_ARRAY",
-			//	              "INT16_ARRAY",
-			//	              "UINT16_ARRAY",
-			//	              "INT32_ARRAY",
-			//	              "UINT32_ARRAY",
-			//	              "INT64_ARRAY",
-			//	              "UINT64_ARRAY",
-			//	              "BOOLEAN_ARRAY",
-			//	              "FLOAT_ARRAY",
-			//	              "DOUBLE_ARRAY",
-			//	              "STRING_ARRAY",
-			//	              "UNIX_TIMESTAMP_ARRAY",
-			//	              "UNKNOWN"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "DefaultValue": {
-			//	            "type": "string"
-			//	          },
-			//	          "Description": {
-			//	            "maxLength": 2048,
-			//	            "minLength": 1,
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "FullyQualifiedName": {
-			//	            "type": "string"
-			//	          },
-			//	          "Max": {
-			//	            "type": "number"
-			//	          },
-			//	          "Min": {
-			//	            "type": "number"
-			//	          },
-			//	          "Unit": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "DataType",
-			//	          "FullyQualifiedName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Branch": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Description": {
-			//	            "maxLength": 2048,
-			//	            "minLength": 1,
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "FullyQualifiedName": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "FullyQualifiedName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Sensor": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "AllowedValues": {
-			//	            "insertionOrder": false,
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "minItems": 1,
-			//	            "type": "array"
-			//	          },
-			//	          "DataType": {
-			//	            "enum": [
-			//	              "INT8",
-			//	              "UINT8",
-			//	              "INT16",
-			//	              "UINT16",
-			//	              "INT32",
-			//	              "UINT32",
-			//	              "INT64",
-			//	              "UINT64",
-			//	              "BOOLEAN",
-			//	              "FLOAT",
-			//	              "DOUBLE",
-			//	              "STRING",
-			//	              "UNIX_TIMESTAMP",
-			//	              "INT8_ARRAY",
-			//	              "UINT8_ARRAY",
-			//	              "INT16_ARRAY",
-			//	              "UINT16_ARRAY",
-			//	              "INT32_ARRAY",
-			//	              "UINT32_ARRAY",
-			//	              "INT64_ARRAY",
-			//	              "UINT64_ARRAY",
-			//	              "BOOLEAN_ARRAY",
-			//	              "FLOAT_ARRAY",
-			//	              "DOUBLE_ARRAY",
-			//	              "STRING_ARRAY",
-			//	              "UNIX_TIMESTAMP_ARRAY",
-			//	              "UNKNOWN"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Description": {
-			//	            "maxLength": 2048,
-			//	            "minLength": 1,
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "FullyQualifiedName": {
-			//	            "type": "string"
-			//	          },
-			//	          "Max": {
-			//	            "type": "number"
-			//	          },
-			//	          "Min": {
-			//	            "type": "number"
-			//	          },
-			//	          "Unit": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "DataType",
-			//	          "FullyQualifiedName"
-			//	        ],
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 500,
-			//	  "minItems": 1,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"actuator": {
-						// Property: Actuator
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allowed_values": {
-									// Property: AllowedValues
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"assigned_value": {
-									// Property: AssignedValue
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"data_type": {
-									// Property: DataType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"description": {
-									// Property: Description
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"fully_qualified_name": {
-									// Property: FullyQualifiedName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"max": {
-									// Property: Max
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"min": {
-									// Property: Min
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"unit": {
-									// Property: Unit
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+		}, /*END ATTRIBUTE*/
+		// Property: Nodes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "properties": {
+		//	      "Actuator": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AllowedValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "AssignedValue": {
+		//	            "type": "string"
+		//	          },
+		//	          "DataType": {
+		//	            "enum": [
+		//	              "INT8",
+		//	              "UINT8",
+		//	              "INT16",
+		//	              "UINT16",
+		//	              "INT32",
+		//	              "UINT32",
+		//	              "INT64",
+		//	              "UINT64",
+		//	              "BOOLEAN",
+		//	              "FLOAT",
+		//	              "DOUBLE",
+		//	              "STRING",
+		//	              "UNIX_TIMESTAMP",
+		//	              "INT8_ARRAY",
+		//	              "UINT8_ARRAY",
+		//	              "INT16_ARRAY",
+		//	              "UINT16_ARRAY",
+		//	              "INT32_ARRAY",
+		//	              "UINT32_ARRAY",
+		//	              "INT64_ARRAY",
+		//	              "UINT64_ARRAY",
+		//	              "BOOLEAN_ARRAY",
+		//	              "FLOAT_ARRAY",
+		//	              "DOUBLE_ARRAY",
+		//	              "STRING_ARRAY",
+		//	              "UNIX_TIMESTAMP_ARRAY",
+		//	              "UNKNOWN"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Description": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "FullyQualifiedName": {
+		//	            "type": "string"
+		//	          },
+		//	          "Max": {
+		//	            "type": "number"
+		//	          },
+		//	          "Min": {
+		//	            "type": "number"
+		//	          },
+		//	          "Unit": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DataType",
+		//	          "FullyQualifiedName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Attribute": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AllowedValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "AssignedValue": {
+		//	            "type": "string"
+		//	          },
+		//	          "DataType": {
+		//	            "enum": [
+		//	              "INT8",
+		//	              "UINT8",
+		//	              "INT16",
+		//	              "UINT16",
+		//	              "INT32",
+		//	              "UINT32",
+		//	              "INT64",
+		//	              "UINT64",
+		//	              "BOOLEAN",
+		//	              "FLOAT",
+		//	              "DOUBLE",
+		//	              "STRING",
+		//	              "UNIX_TIMESTAMP",
+		//	              "INT8_ARRAY",
+		//	              "UINT8_ARRAY",
+		//	              "INT16_ARRAY",
+		//	              "UINT16_ARRAY",
+		//	              "INT32_ARRAY",
+		//	              "UINT32_ARRAY",
+		//	              "INT64_ARRAY",
+		//	              "UINT64_ARRAY",
+		//	              "BOOLEAN_ARRAY",
+		//	              "FLOAT_ARRAY",
+		//	              "DOUBLE_ARRAY",
+		//	              "STRING_ARRAY",
+		//	              "UNIX_TIMESTAMP_ARRAY",
+		//	              "UNKNOWN"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "DefaultValue": {
+		//	            "type": "string"
+		//	          },
+		//	          "Description": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "FullyQualifiedName": {
+		//	            "type": "string"
+		//	          },
+		//	          "Max": {
+		//	            "type": "number"
+		//	          },
+		//	          "Min": {
+		//	            "type": "number"
+		//	          },
+		//	          "Unit": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DataType",
+		//	          "FullyQualifiedName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Branch": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Description": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "FullyQualifiedName": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "FullyQualifiedName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Sensor": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AllowedValues": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "DataType": {
+		//	            "enum": [
+		//	              "INT8",
+		//	              "UINT8",
+		//	              "INT16",
+		//	              "UINT16",
+		//	              "INT32",
+		//	              "UINT32",
+		//	              "INT64",
+		//	              "UINT64",
+		//	              "BOOLEAN",
+		//	              "FLOAT",
+		//	              "DOUBLE",
+		//	              "STRING",
+		//	              "UNIX_TIMESTAMP",
+		//	              "INT8_ARRAY",
+		//	              "UINT8_ARRAY",
+		//	              "INT16_ARRAY",
+		//	              "UINT16_ARRAY",
+		//	              "INT32_ARRAY",
+		//	              "UINT32_ARRAY",
+		//	              "INT64_ARRAY",
+		//	              "UINT64_ARRAY",
+		//	              "BOOLEAN_ARRAY",
+		//	              "FLOAT_ARRAY",
+		//	              "DOUBLE_ARRAY",
+		//	              "STRING_ARRAY",
+		//	              "UNIX_TIMESTAMP_ARRAY",
+		//	              "UNKNOWN"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Description": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "FullyQualifiedName": {
+		//	            "type": "string"
+		//	          },
+		//	          "Max": {
+		//	            "type": "number"
+		//	          },
+		//	          "Min": {
+		//	            "type": "number"
+		//	          },
+		//	          "Unit": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DataType",
+		//	          "FullyQualifiedName"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 500,
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"nodes": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actuator
+					"actuator": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AssignedValue
+							"assigned_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Max
+							"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Min
+							"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"attribute": {
-						// Property: Attribute
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allowed_values": {
-									// Property: AllowedValues
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"assigned_value": {
-									// Property: AssignedValue
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"data_type": {
-									// Property: DataType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"default_value": {
-									// Property: DefaultValue
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"description": {
-									// Property: Description
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"fully_qualified_name": {
-									// Property: FullyQualifiedName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"max": {
-									// Property: Max
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"min": {
-									// Property: Min
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"unit": {
-									// Property: Unit
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+					}, /*END ATTRIBUTE*/
+					// Property: Attribute
+					"attribute": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AssignedValue
+							"assigned_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultValue
+							"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Max
+							"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Min
+							"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"branch": {
-						// Property: Branch
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"description": {
-									// Property: Description
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"fully_qualified_name": {
-									// Property: FullyQualifiedName
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+					}, /*END ATTRIBUTE*/
+					// Property: Branch
+					"branch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"sensor": {
-						// Property: Sensor
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allowed_values": {
-									// Property: AllowedValues
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"data_type": {
-									// Property: DataType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"description": {
-									// Property: Description
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"fully_qualified_name": {
-									// Property: FullyQualifiedName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"max": {
-									// Property: Max
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"min": {
-									// Property: Min
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"unit": {
-									// Property: Unit
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+					}, /*END ATTRIBUTE*/
+					// Property: Sensor
+					"sensor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedValues
+							"allowed_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataType
+							"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Description
+							"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FullyQualifiedName
+							"fully_qualified_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Max
+							"max": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Min
+							"min": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Unit
+							"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoTFleetWise::SignalCatalog",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetWise::SignalCatalog").WithTerraformTypeName("awscc_iotfleetwise_signal_catalog")
 	opts = opts.WithTerraformSchema(schema)
@@ -644,7 +597,7 @@ func signalCatalogDataSource(ctx context.Context) (datasource.DataSource, error)
 		"value":                  "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

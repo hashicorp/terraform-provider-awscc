@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,474 +19,444 @@ func init() {
 // policyDataSource returns the Terraform awscc_fms_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::FMS::Policy resource.
 func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^\\s]*)$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^\\s]*)$",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"delete_all_policy_resources": {
-			// Property: DeleteAllPolicyResources
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: DeleteAllPolicyResources
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"delete_all_policy_resources": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"exclude_map": {
-			// Property: ExcludeMap
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An FMS includeMap or excludeMap.",
-			//	  "properties": {
-			//	    "ACCOUNT": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "An AWS account ID.",
-			//	        "maxLength": 12,
-			//	        "minLength": 12,
-			//	        "pattern": "^([0-9]*)$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "ORGUNIT": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "An Organizational Unit ID.",
-			//	        "maxLength": 68,
-			//	        "minLength": 16,
-			//	        "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ExcludeMap
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An FMS includeMap or excludeMap.",
+		//	  "properties": {
+		//	    "ACCOUNT": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "An AWS account ID.",
+		//	        "maxLength": 12,
+		//	        "minLength": 12,
+		//	        "pattern": "^([0-9]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ORGUNIT": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "An Organizational Unit ID.",
+		//	        "maxLength": 68,
+		//	        "minLength": 16,
+		//	        "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"exclude_map": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ACCOUNT
+				"account": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ORGUNIT
+				"orgunit": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An FMS includeMap or excludeMap.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"account": {
-						// Property: ACCOUNT
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"orgunit": {
-						// Property: ORGUNIT
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-				},
-			),
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ExcludeResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"exclude_resource_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"exclude_resource_tags": {
-			// Property: ExcludeResourceTags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[a-z0-9A-Z-]{36}$",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 36,
-			//	  "minLength": 36,
-			//	  "pattern": "^[a-z0-9A-Z-]{36}$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"include_map": {
-			// Property: IncludeMap
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An FMS includeMap or excludeMap.",
-			//	  "properties": {
-			//	    "ACCOUNT": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "An AWS account ID.",
-			//	        "maxLength": 12,
-			//	        "minLength": 12,
-			//	        "pattern": "^([0-9]*)$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "ORGUNIT": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "An Organizational Unit ID.",
-			//	        "maxLength": 68,
-			//	        "minLength": 16,
-			//	        "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IncludeMap
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An FMS includeMap or excludeMap.",
+		//	  "properties": {
+		//	    "ACCOUNT": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "An AWS account ID.",
+		//	        "maxLength": 12,
+		//	        "minLength": 12,
+		//	        "pattern": "^([0-9]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ORGUNIT": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "An Organizational Unit ID.",
+		//	        "maxLength": 68,
+		//	        "minLength": 16,
+		//	        "pattern": "^(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"include_map": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ACCOUNT
+				"account": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ORGUNIT
+				"orgunit": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An FMS includeMap or excludeMap.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"account": {
-						// Property: ACCOUNT
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"orgunit": {
-						// Property: ORGUNIT
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-				},
-			),
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@]+)$",
+		//	  "type": "string"
+		//	}
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"policy_name": {
-			// Property: PolicyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@]+)$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: RemediationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"remediation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"remediation_enabled": {
-			// Property: RemediationEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
-			Computed: true,
-		},
-		"resource_tags": {
-			// Property: ResourceTags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A resource tag.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 8,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A resource tag.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 8,
+		//	  "type": "array"
+		//	}
+		"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"resource_type": {
-			// Property: ResourceType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An AWS resource type",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^\\s]*)$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An AWS resource type",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^\\s]*)$",
+		//	  "type": "string"
+		//	}
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An AWS resource type",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"resource_type_list": {
-			// Property: ResourceTypeList
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "description": "An AWS resource type",
-			//	    "maxLength": 128,
-			//	    "minLength": 1,
-			//	    "pattern": "^([^\\s]*)$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceTypeList
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "description": "An AWS resource type",
+		//	    "maxLength": 128,
+		//	    "minLength": 1,
+		//	    "pattern": "^([^\\s]*)$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"resource_type_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourcesCleanUp
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"resources_clean_up": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"resources_clean_up": {
-			// Property: ResourcesCleanUp
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
-			Computed: true,
-		},
-		"security_service_policy_data": {
-			// Property: SecurityServicePolicyData
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Firewall security service policy data.",
-			//	  "properties": {
-			//	    "ManagedServiceData": {
-			//	      "description": "Firewall managed service data.",
-			//	      "maxLength": 8192,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "PolicyOption": {
-			//	      "additionalProperties": false,
-			//	      "description": "Firewall policy option.",
-			//	      "oneOf": [
-			//	        {
-			//	          "required": [
-			//	            "NetworkFirewallPolicy"
-			//	          ]
-			//	        },
-			//	        {
-			//	          "required": [
-			//	            "ThirdPartyFirewallPolicy"
-			//	          ]
-			//	        }
-			//	      ],
-			//	      "properties": {
-			//	        "NetworkFirewallPolicy": {
-			//	          "additionalProperties": false,
-			//	          "description": "Network firewall policy.",
-			//	          "properties": {
-			//	            "FirewallDeploymentModel": {
-			//	              "description": "Firewall deployment mode.",
-			//	              "enum": [
-			//	                "DISTRIBUTED",
-			//	                "CENTRALIZED"
-			//	              ],
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "FirewallDeploymentModel"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "ThirdPartyFirewallPolicy": {
-			//	          "additionalProperties": false,
-			//	          "description": "Third party firewall policy.",
-			//	          "properties": {
-			//	            "FirewallDeploymentModel": {
-			//	              "description": "Firewall deployment mode.",
-			//	              "enum": [
-			//	                "DISTRIBUTED",
-			//	                "CENTRALIZED"
-			//	              ],
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "FirewallDeploymentModel"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Type": {
-			//	      "description": "Firewall policy type.",
-			//	      "enum": [
-			//	        "WAF",
-			//	        "WAFV2",
-			//	        "SHIELD_ADVANCED",
-			//	        "SECURITY_GROUPS_COMMON",
-			//	        "SECURITY_GROUPS_CONTENT_AUDIT",
-			//	        "SECURITY_GROUPS_USAGE_AUDIT",
-			//	        "NETWORK_FIREWALL",
-			//	        "THIRD_PARTY_FIREWALL",
-			//	        "DNS_FIREWALL"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityServicePolicyData
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Firewall security service policy data.",
+		//	  "properties": {
+		//	    "ManagedServiceData": {
+		//	      "description": "Firewall managed service data.",
+		//	      "maxLength": 8192,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "PolicyOption": {
+		//	      "additionalProperties": false,
+		//	      "description": "Firewall policy option.",
+		//	      "oneOf": [
+		//	        {
+		//	          "required": [
+		//	            "NetworkFirewallPolicy"
+		//	          ]
+		//	        },
+		//	        {
+		//	          "required": [
+		//	            "ThirdPartyFirewallPolicy"
+		//	          ]
+		//	        }
+		//	      ],
+		//	      "properties": {
+		//	        "NetworkFirewallPolicy": {
+		//	          "additionalProperties": false,
+		//	          "description": "Network firewall policy.",
+		//	          "properties": {
+		//	            "FirewallDeploymentModel": {
+		//	              "description": "Firewall deployment mode.",
+		//	              "enum": [
+		//	                "DISTRIBUTED",
+		//	                "CENTRALIZED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "FirewallDeploymentModel"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ThirdPartyFirewallPolicy": {
+		//	          "additionalProperties": false,
+		//	          "description": "Third party firewall policy.",
+		//	          "properties": {
+		//	            "FirewallDeploymentModel": {
+		//	              "description": "Firewall deployment mode.",
+		//	              "enum": [
+		//	                "DISTRIBUTED",
+		//	                "CENTRALIZED"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "FirewallDeploymentModel"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "description": "Firewall policy type.",
+		//	      "enum": [
+		//	        "WAF",
+		//	        "WAFV2",
+		//	        "SHIELD_ADVANCED",
+		//	        "SECURITY_GROUPS_COMMON",
+		//	        "SECURITY_GROUPS_CONTENT_AUDIT",
+		//	        "SECURITY_GROUPS_USAGE_AUDIT",
+		//	        "NETWORK_FIREWALL",
+		//	        "THIRD_PARTY_FIREWALL",
+		//	        "DNS_FIREWALL"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"security_service_policy_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ManagedServiceData
+				"managed_service_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Firewall managed service data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PolicyOption
+				"policy_option": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: NetworkFirewallPolicy
+						"network_firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FirewallDeploymentModel
+								"firewall_deployment_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Firewall deployment mode.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Network firewall policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ThirdPartyFirewallPolicy
+						"third_party_firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FirewallDeploymentModel
+								"firewall_deployment_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Firewall deployment mode.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Third party firewall policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Firewall policy option.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Firewall policy type.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Firewall security service policy data.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"managed_service_data": {
-						// Property: ManagedServiceData
-						Description: "Firewall managed service data.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"policy_option": {
-						// Property: PolicyOption
-						Description: "Firewall policy option.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"network_firewall_policy": {
-									// Property: NetworkFirewallPolicy
-									Description: "Network firewall policy.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"firewall_deployment_model": {
-												// Property: FirewallDeploymentModel
-												Description: "Firewall deployment mode.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"third_party_firewall_policy": {
-									// Property: ThirdPartyFirewallPolicy
-									Description: "Third party firewall policy.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"firewall_deployment_model": {
-												// Property: FirewallDeploymentModel
-												Description: "Firewall deployment mode.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A policy tag.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([^\\s]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "pattern": "^([^\\s]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"type": {
-						// Property: Type
-						Description: "Firewall policy type.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A policy tag.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^([^\\s]*)$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "pattern": "^([^\\s]*)$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::FMS::Policy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FMS::Policy").WithTerraformTypeName("awscc_fms_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -517,7 +487,7 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                        "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,2100 +19,1894 @@ func init() {
 // connectorProfileDataSource returns the Terraform awscc_appflow_connector_profile data source.
 // This Terraform data source corresponds to the CloudFormation AWS::AppFlow::ConnectorProfile resource.
 func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"connection_mode": {
-			// Property: ConnectionMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
-			//	  "enum": [
-			//	    "Public",
-			//	    "Private"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConnectionMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
+		//	  "enum": [
+		//	    "Public",
+		//	    "Private"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"connection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"connector_label": {
-			// Property: ConnectorLabel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
-			//	  "maxLength": 256,
-			//	  "pattern": "[\\w!@#.-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorLabel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
+		//	  "maxLength": 256,
+		//	  "pattern": "[\\w!@#.-]+",
+		//	  "type": "string"
+		//	}
+		"connector_label": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"connector_profile_arn": {
-			// Property: ConnectorProfileArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique identifier for connector profile resources",
-			//	  "maxLength": 512,
-			//	  "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorProfileArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique identifier for connector profile resources",
+		//	  "maxLength": 512,
+		//	  "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
+		//	  "type": "string"
+		//	}
+		"connector_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier for connector profile resources",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"connector_profile_config": {
-			// Property: ConnectorProfileConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Connector specific configurations needed to create connector profile",
-			//	  "properties": {
-			//	    "ConnectorProfileCredentials": {
-			//	      "description": "Connector specific configuration needed to create connector profile based on Authentication mechanism",
-			//	      "properties": {
-			//	        "Amplitude": {
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "SecretKey": {
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiKey",
-			//	            "SecretKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "CustomConnector": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "ApiKey": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ApiSecretKey": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "ApiKey"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "AuthenticationType": {
-			//	              "enum": [
-			//	                "OAUTH2",
-			//	                "APIKEY",
-			//	                "BASIC",
-			//	                "CUSTOM"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "Basic": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Password": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "Username": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Username",
-			//	                "Password"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Custom": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "CredentialsMap": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A map for properties for custom authentication.",
-			//	                  "patternProperties": {
-			//	                    "": {
-			//	                      "description": "A string containing the value for the property",
-			//	                      "maxLength": 2048,
-			//	                      "minLength": 1,
-			//	                      "pattern": "\\S+",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "CustomAuthenticationType": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "CustomAuthenticationType"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Oauth2": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "AccessToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientId": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientSecret": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "OAuthRequest": {
-			//	                  "properties": {
-			//	                    "AuthCode": {
-			//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "RedirectUri": {
-			//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "RefreshToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "AuthenticationType"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Datadog": {
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ApplicationKey": {
-			//	              "description": "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiKey",
-			//	            "ApplicationKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Dynatrace": {
-			//	          "properties": {
-			//	            "ApiToken": {
-			//	              "description": "The API tokens used by Dynatrace API to authenticate various API calls.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiToken"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "GoogleAnalytics": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "RefreshToken": {
-			//	              "description": "The credentials used to acquire new access tokens.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "InforNexus": {
-			//	          "properties": {
-			//	            "AccessKeyId": {
-			//	              "description": "The Access Key portion of the credentials.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Datakey": {
-			//	              "description": "The encryption keys used to encrypt data.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "SecretAccessKey": {
-			//	              "description": "The secret key used to sign requests.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "UserId": {
-			//	              "description": "The identi?er for the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "AccessKeyId",
-			//	            "UserId",
-			//	            "SecretAccessKey",
-			//	            "Datakey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Marketo": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Redshift": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "SAPOData": {
-			//	          "properties": {
-			//	            "BasicAuthCredentials": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Password": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "Username": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Username",
-			//	                "Password"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "OAuthCredentials": {
-			//	              "properties": {
-			//	                "AccessToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientId": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientSecret": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ConnectorOAuthRequest": {
-			//	                  "properties": {
-			//	                    "AuthCode": {
-			//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "RedirectUri": {
-			//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "RefreshToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Salesforce": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientCredentialsArn": {
-			//	              "description": "The client credentials to fetch access token and refresh token.",
-			//	              "maxLength": 2048,
-			//	              "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "RefreshToken": {
-			//	              "description": "The credentials used to acquire new access tokens.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ServiceNow": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Username",
-			//	            "Password"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Singular": {
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Slack": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Snowflake": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Username",
-			//	            "Password"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Trendmicro": {
-			//	          "properties": {
-			//	            "ApiSecretKey": {
-			//	              "description": "The Secret Access Key portion of the credentials.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiSecretKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Veeva": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Username",
-			//	            "Password"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Zendesk": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ConnectorProfileProperties": {
-			//	      "description": "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
-			//	      "properties": {
-			//	        "CustomConnector": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "OAuth2Properties": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "OAuth2GrantType": {
-			//	                  "enum": [
-			//	                    "CLIENT_CREDENTIALS",
-			//	                    "AUTHORIZATION_CODE"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "TokenUrl": {
-			//	                  "maxLength": 256,
-			//	                  "minLength": 0,
-			//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	                  "type": "string"
-			//	                },
-			//	                "TokenUrlCustomProperties": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A map for properties for custom connector Token Url.",
-			//	                  "patternProperties": {
-			//	                    "": {
-			//	                      "description": "A string containing the value for the property",
-			//	                      "maxLength": 2048,
-			//	                      "minLength": 1,
-			//	                      "pattern": "\\S+",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "ProfileProperties": {
-			//	              "additionalProperties": false,
-			//	              "description": "A map for properties for custom connector.",
-			//	              "patternProperties": {
-			//	                "": {
-			//	                  "description": "A string containing the value for the property",
-			//	                  "maxLength": 2048,
-			//	                  "minLength": 1,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Datadog": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Datadog resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Dynatrace": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Dynatrace resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "InforNexus": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the InforNexus resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Marketo": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Marketo resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Redshift": {
-			//	          "properties": {
-			//	            "BucketName": {
-			//	              "description": "The name of the Amazon S3 bucket associated with Redshift.",
-			//	              "maxLength": 63,
-			//	              "minLength": 3,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "BucketPrefix": {
-			//	              "description": "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
-			//	              "maxLength": 128,
-			//	              "type": "string"
-			//	            },
-			//	            "ClusterIdentifier": {
-			//	              "description": "The unique identifier of the Amazon Redshift cluster.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "DataApiRoleArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
-			//	              "maxLength": 512,
-			//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
-			//	              "type": "string"
-			//	            },
-			//	            "DatabaseName": {
-			//	              "description": "The name of the Amazon Redshift database that will store the transferred data.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "DatabaseUrl": {
-			//	              "description": "The JDBC URL of the Amazon Redshift cluster.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "IsRedshiftServerless": {
-			//	              "description": "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
-			//	              "type": "boolean"
-			//	            },
-			//	            "RoleArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the IAM role.",
-			//	              "maxLength": 512,
-			//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
-			//	              "type": "string"
-			//	            },
-			//	            "WorkgroupName": {
-			//	              "description": "The name of the Amazon Redshift serverless workgroup",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "BucketName",
-			//	            "RoleArn"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "SAPOData": {
-			//	          "properties": {
-			//	            "ApplicationHostUrl": {
-			//	              "maxLength": 256,
-			//	              "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	              "type": "string"
-			//	            },
-			//	            "ApplicationServicePath": {
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientNumber": {
-			//	              "maxLength": 3,
-			//	              "minLength": 3,
-			//	              "pattern": "^\\d{3}$",
-			//	              "type": "string"
-			//	            },
-			//	            "LogonLanguage": {
-			//	              "maxLength": 2,
-			//	              "pattern": "^[a-zA-Z0-9_]*$",
-			//	              "type": "string"
-			//	            },
-			//	            "OAuthProperties": {
-			//	              "properties": {
-			//	                "AuthCodeUrl": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	                  "type": "string"
-			//	                },
-			//	                "OAuthScopes": {
-			//	                  "items": {
-			//	                    "maxLength": 128,
-			//	                    "pattern": "[/\\w]*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array",
-			//	                  "uniqueItems": true
-			//	                },
-			//	                "TokenUrl": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "PortNumber": {
-			//	              "maximum": 65535,
-			//	              "minimum": 1,
-			//	              "type": "integer"
-			//	            },
-			//	            "PrivateLinkServiceName": {
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Salesforce": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Salesforce resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "isSandboxEnvironment": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ServiceNow": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the ServiceNow resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Slack": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Slack resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Snowflake": {
-			//	          "properties": {
-			//	            "AccountName": {
-			//	              "description": "The name of the account.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "BucketName": {
-			//	              "description": "The name of the Amazon S3 bucket associated with Snow?ake.",
-			//	              "maxLength": 63,
-			//	              "minLength": 3,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "BucketPrefix": {
-			//	              "description": "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
-			//	              "maxLength": 128,
-			//	              "type": "string"
-			//	            },
-			//	            "PrivateLinkServiceName": {
-			//	              "description": "The Snow?ake Private Link service name to be used for private data transfers.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Region": {
-			//	              "description": "The region of the Snow?ake account.",
-			//	              "maxLength": 64,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Stage": {
-			//	              "description": "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: \u003c Database\u003e\u003c Schema\u003e\u003cStage Name\u003e.",
-			//	              "maxLength": 16,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Warehouse": {
-			//	              "description": "The name of the Snow?ake warehouse.",
-			//	              "maxLength": 512,
-			//	              "pattern": "[\\s\\w/!@#+=.-]*",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Warehouse",
-			//	            "Stage",
-			//	            "BucketName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Veeva": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Veeva resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Zendesk": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Zendesk resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorProfileConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Connector specific configurations needed to create connector profile",
+		//	  "properties": {
+		//	    "ConnectorProfileCredentials": {
+		//	      "description": "Connector specific configuration needed to create connector profile based on Authentication mechanism",
+		//	      "properties": {
+		//	        "Amplitude": {
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretKey": {
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiKey",
+		//	            "SecretKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "CustomConnector": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ApiKey": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ApiSecretKey": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ApiKey"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "AuthenticationType": {
+		//	              "enum": [
+		//	                "OAUTH2",
+		//	                "APIKEY",
+		//	                "BASIC",
+		//	                "CUSTOM"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Basic": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Password": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "Username": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Username",
+		//	                "Password"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Custom": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "CredentialsMap": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A map for properties for custom authentication.",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "description": "A string containing the value for the property",
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "pattern": "\\S+",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "CustomAuthenticationType": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "CustomAuthenticationType"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Oauth2": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "AccessToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientId": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientSecret": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "OAuthRequest": {
+		//	                  "properties": {
+		//	                    "AuthCode": {
+		//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RedirectUri": {
+		//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "RefreshToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AuthenticationType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Datadog": {
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ApplicationKey": {
+		//	              "description": "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiKey",
+		//	            "ApplicationKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Dynatrace": {
+		//	          "properties": {
+		//	            "ApiToken": {
+		//	              "description": "The API tokens used by Dynatrace API to authenticate various API calls.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiToken"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "GoogleAnalytics": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshToken": {
+		//	              "description": "The credentials used to acquire new access tokens.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "InforNexus": {
+		//	          "properties": {
+		//	            "AccessKeyId": {
+		//	              "description": "The Access Key portion of the credentials.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Datakey": {
+		//	              "description": "The encryption keys used to encrypt data.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretAccessKey": {
+		//	              "description": "The secret key used to sign requests.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "UserId": {
+		//	              "description": "The identi?er for the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AccessKeyId",
+		//	            "UserId",
+		//	            "SecretAccessKey",
+		//	            "Datakey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Marketo": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Redshift": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SAPOData": {
+		//	          "properties": {
+		//	            "BasicAuthCredentials": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Password": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "Username": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Username",
+		//	                "Password"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "OAuthCredentials": {
+		//	              "properties": {
+		//	                "AccessToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientId": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientSecret": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ConnectorOAuthRequest": {
+		//	                  "properties": {
+		//	                    "AuthCode": {
+		//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RedirectUri": {
+		//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "RefreshToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Salesforce": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientCredentialsArn": {
+		//	              "description": "The client credentials to fetch access token and refresh token.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshToken": {
+		//	              "description": "The credentials used to acquire new access tokens.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ServiceNow": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Username",
+		//	            "Password"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Singular": {
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Slack": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Snowflake": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Username",
+		//	            "Password"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Trendmicro": {
+		//	          "properties": {
+		//	            "ApiSecretKey": {
+		//	              "description": "The Secret Access Key portion of the credentials.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiSecretKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Veeva": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Username",
+		//	            "Password"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Zendesk": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ConnectorProfileProperties": {
+		//	      "description": "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
+		//	      "properties": {
+		//	        "CustomConnector": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "OAuth2Properties": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "OAuth2GrantType": {
+		//	                  "enum": [
+		//	                    "CLIENT_CREDENTIALS",
+		//	                    "AUTHORIZATION_CODE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenUrl": {
+		//	                  "maxLength": 256,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenUrlCustomProperties": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A map for properties for custom connector Token Url.",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "description": "A string containing the value for the property",
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "pattern": "\\S+",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "ProfileProperties": {
+		//	              "additionalProperties": false,
+		//	              "description": "A map for properties for custom connector.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "description": "A string containing the value for the property",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Datadog": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Datadog resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Dynatrace": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Dynatrace resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "InforNexus": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the InforNexus resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Marketo": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Marketo resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Redshift": {
+		//	          "properties": {
+		//	            "BucketName": {
+		//	              "description": "The name of the Amazon S3 bucket associated with Redshift.",
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "BucketPrefix": {
+		//	              "description": "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
+		//	              "maxLength": 128,
+		//	              "type": "string"
+		//	            },
+		//	            "ClusterIdentifier": {
+		//	              "description": "The unique identifier of the Amazon Redshift cluster.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "DataApiRoleArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+		//	              "maxLength": 512,
+		//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseName": {
+		//	              "description": "The name of the Amazon Redshift database that will store the transferred data.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseUrl": {
+		//	              "description": "The JDBC URL of the Amazon Redshift cluster.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "IsRedshiftServerless": {
+		//	              "description": "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the IAM role.",
+		//	              "maxLength": 512,
+		//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "WorkgroupName": {
+		//	              "description": "The name of the Amazon Redshift serverless workgroup",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BucketName",
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SAPOData": {
+		//	          "properties": {
+		//	            "ApplicationHostUrl": {
+		//	              "maxLength": 256,
+		//	              "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	              "type": "string"
+		//	            },
+		//	            "ApplicationServicePath": {
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientNumber": {
+		//	              "maxLength": 3,
+		//	              "minLength": 3,
+		//	              "pattern": "^\\d{3}$",
+		//	              "type": "string"
+		//	            },
+		//	            "LogonLanguage": {
+		//	              "maxLength": 2,
+		//	              "pattern": "^[a-zA-Z0-9_]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "OAuthProperties": {
+		//	              "properties": {
+		//	                "AuthCodeUrl": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	                  "type": "string"
+		//	                },
+		//	                "OAuthScopes": {
+		//	                  "items": {
+		//	                    "maxLength": 128,
+		//	                    "pattern": "[/\\w]*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                },
+		//	                "TokenUrl": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "PortNumber": {
+		//	              "maximum": 65535,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "PrivateLinkServiceName": {
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Salesforce": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Salesforce resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "isSandboxEnvironment": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ServiceNow": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the ServiceNow resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Slack": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Slack resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Snowflake": {
+		//	          "properties": {
+		//	            "AccountName": {
+		//	              "description": "The name of the account.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "BucketName": {
+		//	              "description": "The name of the Amazon S3 bucket associated with Snow?ake.",
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "BucketPrefix": {
+		//	              "description": "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
+		//	              "maxLength": 128,
+		//	              "type": "string"
+		//	            },
+		//	            "PrivateLinkServiceName": {
+		//	              "description": "The Snow?ake Private Link service name to be used for private data transfers.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Region": {
+		//	              "description": "The region of the Snow?ake account.",
+		//	              "maxLength": 64,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Stage": {
+		//	              "description": "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: \u003c Database\u003e\u003c Schema\u003e\u003cStage Name\u003e.",
+		//	              "maxLength": 16,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Warehouse": {
+		//	              "description": "The name of the Snow?ake warehouse.",
+		//	              "maxLength": 512,
+		//	              "pattern": "[\\s\\w/!@#+=.-]*",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Warehouse",
+		//	            "Stage",
+		//	            "BucketName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Veeva": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Veeva resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Zendesk": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Zendesk resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"connector_profile_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectorProfileCredentials
+				"connector_profile_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Amplitude
+						"amplitude": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretKey
+								"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CustomConnector
+						"custom_connector": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ApiKey
+										"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ApiSecretKey
+										"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: AuthenticationType
+								"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Basic
+								"basic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Custom
+								"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CredentialsMap
+										"credentials_map":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "A map for properties for custom authentication.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: CustomAuthenticationType
+										"custom_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Oauth2
+								"oauth_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AccessToken
+										"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientId
+										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientSecret
+										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: OAuthRequest
+										"o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthCode
+												"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code provided by the connector when it has been authenticated via the connected app.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: RedirectUri
+												"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RefreshToken
+										"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Datadog
+						"datadog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ApplicationKey
+								"application_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Dynatrace
+						"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiToken
+								"api_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: GoogleAnalytics
+						"google_analytics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InforNexus
+						"infor_nexus": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessKeyId
+								"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Access Key portion of the credentials.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Datakey
+								"datakey": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The encryption keys used to encrypt data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretAccessKey
+								"secret_access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The secret key used to sign requests.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: UserId
+								"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Marketo
+						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Redshift
+						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SAPOData
+						"sapo_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuthCredentials
+								"basic_auth_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthCredentials
+								"o_auth_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AccessToken
+										"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientId
+										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ClientSecret
+										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: ConnectorOAuthRequest
+										"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthCode
+												"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code provided by the connector when it has been authenticated via the connected app.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: RedirectUri
+												"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: RefreshToken
+										"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Salesforce
+						"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCredentialsArn
+								"client_credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client credentials to fetch access token and refresh token.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceNow
+						"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Singular
+						"singular": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Slack
+						"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Snowflake
+						"snowflake": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Trendmicro
+						"trendmicro": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiSecretKey
+								"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Secret Access Key portion of the credentials.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Veeva
+						"veeva": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Zendesk
+						"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectorProfileProperties
+				"connector_profile_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomConnector
+						"custom_connector": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OAuth2Properties
+								"o_auth_2_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: OAuth2GrantType
+										"o_auth_2_grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrl
+										"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrlCustomProperties
+										"token_url_custom_properties": // Pattern: ""
+										schema.MapAttribute{           /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "A map for properties for custom connector Token Url.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ProfileProperties
+								"profile_properties": // Pattern: ""
+								schema.MapAttribute{  /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A map for properties for custom connector.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Datadog
+						"datadog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Datadog resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Dynatrace
+						"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Dynatrace resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InforNexus
+						"infor_nexus": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the InforNexus resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Marketo
+						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Marketo resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Redshift
+						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 bucket associated with Redshift.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BucketPrefix
+								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClusterIdentifier
+								"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The unique identifier of the Amazon Redshift cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataApiRoleArn
+								"data_api_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseName
+								"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon Redshift database that will store the transferred data.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseUrl
+								"database_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JDBC URL of the Amazon Redshift cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsRedshiftServerless
+								"is_redshift_serverless": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the IAM role.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: WorkgroupName
+								"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon Redshift serverless workgroup",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SAPOData
+						"sapo_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApplicationHostUrl
+								"application_host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ApplicationServicePath
+								"application_service_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientNumber
+								"client_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: LogonLanguage
+								"logon_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthProperties
+								"o_auth_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCodeUrl
+										"auth_code_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: OAuthScopes
+										"o_auth_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrl
+										"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: PortNumber
+								"port_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateLinkServiceName
+								"private_link_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Salesforce
+						"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Salesforce resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: isSandboxEnvironment
+								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceNow
+						"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the ServiceNow resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Slack
+						"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Slack resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Snowflake
+						"snowflake": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountName
+								"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the account.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: BucketPrefix
+								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateLinkServiceName
+								"private_link_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Snow?ake Private Link service name to be used for private data transfers.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Region
+								"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The region of the Snow?ake account.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Stage
+								"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Warehouse
+								"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Snow?ake warehouse.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Veeva
+						"veeva": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Veeva resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Zendesk
+						"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Zendesk resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Connector specific configurations needed to create connector profile",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"connector_profile_credentials": {
-						// Property: ConnectorProfileCredentials
-						Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"amplitude": {
-									// Property: Amplitude
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"secret_key": {
-												// Property: SecretKey
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"custom_connector": {
-									// Property: CustomConnector
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"api_key": {
-															// Property: ApiKey
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"api_secret_key": {
-															// Property: ApiSecretKey
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"authentication_type": {
-												// Property: AuthenticationType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"basic": {
-												// Property: Basic
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"password": {
-															// Property: Password
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"username": {
-															// Property: Username
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"custom": {
-												// Property: Custom
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"credentials_map": {
-															// Property: CredentialsMap
-															Description: "A map for properties for custom authentication.",
-															// Pattern: ""
-															Type:     types.MapType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"custom_authentication_type": {
-															// Property: CustomAuthenticationType
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"oauth_2": {
-												// Property: Oauth2
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"access_token": {
-															// Property: AccessToken
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"client_id": {
-															// Property: ClientId
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"client_secret": {
-															// Property: ClientSecret
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"o_auth_request": {
-															// Property: OAuthRequest
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"auth_code": {
-																		// Property: AuthCode
-																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"redirect_uri": {
-																		// Property: RedirectUri
-																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"refresh_token": {
-															// Property: RefreshToken
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"datadog": {
-									// Property: Datadog
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"application_key": {
-												// Property: ApplicationKey
-												Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"dynatrace": {
-									// Property: Dynatrace
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_token": {
-												// Property: ApiToken
-												Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"google_analytics": {
-									// Property: GoogleAnalytics
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"refresh_token": {
-												// Property: RefreshToken
-												Description: "The credentials used to acquire new access tokens.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"infor_nexus": {
-									// Property: InforNexus
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_key_id": {
-												// Property: AccessKeyId
-												Description: "The Access Key portion of the credentials.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"datakey": {
-												// Property: Datakey
-												Description: "The encryption keys used to encrypt data.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"secret_access_key": {
-												// Property: SecretAccessKey
-												Description: "The secret key used to sign requests.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"user_id": {
-												// Property: UserId
-												Description: "The identi?er for the user.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"marketo": {
-									// Property: Marketo
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"redshift": {
-									// Property: Redshift
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"sapo_data": {
-									// Property: SAPOData
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth_credentials": {
-												// Property: BasicAuthCredentials
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"password": {
-															// Property: Password
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"username": {
-															// Property: Username
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"o_auth_credentials": {
-												// Property: OAuthCredentials
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"access_token": {
-															// Property: AccessToken
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"client_id": {
-															// Property: ClientId
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"client_secret": {
-															// Property: ClientSecret
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"connector_o_auth_request": {
-															// Property: ConnectorOAuthRequest
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"auth_code": {
-																		// Property: AuthCode
-																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"redirect_uri": {
-																		// Property: RedirectUri
-																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"refresh_token": {
-															// Property: RefreshToken
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"salesforce": {
-									// Property: Salesforce
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_credentials_arn": {
-												// Property: ClientCredentialsArn
-												Description: "The client credentials to fetch access token and refresh token.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"refresh_token": {
-												// Property: RefreshToken
-												Description: "The credentials used to acquire new access tokens.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"service_now": {
-									// Property: ServiceNow
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"singular": {
-									// Property: Singular
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"slack": {
-									// Property: Slack
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"snowflake": {
-									// Property: Snowflake
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"trendmicro": {
-									// Property: Trendmicro
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_secret_key": {
-												// Property: ApiSecretKey
-												Description: "The Secret Access Key portion of the credentials.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"veeva": {
-									// Property: Veeva
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"zendesk": {
-									// Property: Zendesk
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"connector_profile_properties": {
-						// Property: ConnectorProfileProperties
-						Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"custom_connector": {
-									// Property: CustomConnector
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"o_auth_2_properties": {
-												// Property: OAuth2Properties
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"o_auth_2_grant_type": {
-															// Property: OAuth2GrantType
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"token_url": {
-															// Property: TokenUrl
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"token_url_custom_properties": {
-															// Property: TokenUrlCustomProperties
-															Description: "A map for properties for custom connector Token Url.",
-															// Pattern: ""
-															Type:     types.MapType{ElemType: types.StringType},
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"profile_properties": {
-												// Property: ProfileProperties
-												Description: "A map for properties for custom connector.",
-												// Pattern: ""
-												Type:     types.MapType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"datadog": {
-									// Property: Datadog
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Datadog resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"dynatrace": {
-									// Property: Dynatrace
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Dynatrace resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"infor_nexus": {
-									// Property: InforNexus
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the InforNexus resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"marketo": {
-									// Property: Marketo
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Marketo resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"redshift": {
-									// Property: Redshift
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket_name": {
-												// Property: BucketName
-												Description: "The name of the Amazon S3 bucket associated with Redshift.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"bucket_prefix": {
-												// Property: BucketPrefix
-												Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"cluster_identifier": {
-												// Property: ClusterIdentifier
-												Description: "The unique identifier of the Amazon Redshift cluster.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"data_api_role_arn": {
-												// Property: DataApiRoleArn
-												Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"database_name": {
-												// Property: DatabaseName
-												Description: "The name of the Amazon Redshift database that will store the transferred data.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"database_url": {
-												// Property: DatabaseUrl
-												Description: "The JDBC URL of the Amazon Redshift cluster.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"is_redshift_serverless": {
-												// Property: IsRedshiftServerless
-												Description: "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
-												Type:        types.BoolType,
-												Computed:    true,
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Description: "The Amazon Resource Name (ARN) of the IAM role.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"workgroup_name": {
-												// Property: WorkgroupName
-												Description: "The name of the Amazon Redshift serverless workgroup",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"sapo_data": {
-									// Property: SAPOData
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"application_host_url": {
-												// Property: ApplicationHostUrl
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"application_service_path": {
-												// Property: ApplicationServicePath
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"client_number": {
-												// Property: ClientNumber
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"logon_language": {
-												// Property: LogonLanguage
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"o_auth_properties": {
-												// Property: OAuthProperties
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code_url": {
-															// Property: AuthCodeUrl
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"o_auth_scopes": {
-															// Property: OAuthScopes
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"token_url": {
-															// Property: TokenUrl
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"port_number": {
-												// Property: PortNumber
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"private_link_service_name": {
-												// Property: PrivateLinkServiceName
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"salesforce": {
-									// Property: Salesforce
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Salesforce resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"is_sandbox_environment": {
-												// Property: isSandboxEnvironment
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"service_now": {
-									// Property: ServiceNow
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the ServiceNow resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"slack": {
-									// Property: Slack
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Slack resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"snowflake": {
-									// Property: Snowflake
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"account_name": {
-												// Property: AccountName
-												Description: "The name of the account.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"bucket_name": {
-												// Property: BucketName
-												Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"bucket_prefix": {
-												// Property: BucketPrefix
-												Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"private_link_service_name": {
-												// Property: PrivateLinkServiceName
-												Description: "The Snow?ake Private Link service name to be used for private data transfers.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"region": {
-												// Property: Region
-												Description: "The region of the Snow?ake account.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"stage": {
-												// Property: Stage
-												Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"warehouse": {
-												// Property: Warehouse
-												Description: "The name of the Snow?ake warehouse.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"veeva": {
-									// Property: Veeva
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Veeva resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"zendesk": {
-									// Property: Zendesk
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Zendesk resource",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"connector_profile_name": {
-			// Property: ConnectorProfileName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The maximum number of items to retrieve in a single batch.",
-			//	  "maxLength": 256,
-			//	  "pattern": "[\\w/!@#+=.-]+",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorProfileName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum number of items to retrieve in a single batch.",
+		//	  "maxLength": 256,
+		//	  "pattern": "[\\w/!@#+=.-]+",
+		//	  "type": "string"
+		//	}
+		"connector_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The maximum number of items to retrieve in a single batch.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"connector_type": {
-			// Property: ConnectorType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of Saas providers that need connector profile to be created",
-			//	  "enum": [
-			//	    "Salesforce",
-			//	    "Singular",
-			//	    "Slack",
-			//	    "Redshift",
-			//	    "Marketo",
-			//	    "Googleanalytics",
-			//	    "Zendesk",
-			//	    "Servicenow",
-			//	    "SAPOData",
-			//	    "Datadog",
-			//	    "Trendmicro",
-			//	    "Snowflake",
-			//	    "Dynatrace",
-			//	    "Infornexus",
-			//	    "Amplitude",
-			//	    "Veeva",
-			//	    "CustomConnector"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of Saas providers that need connector profile to be created",
+		//	  "enum": [
+		//	    "Salesforce",
+		//	    "Singular",
+		//	    "Slack",
+		//	    "Redshift",
+		//	    "Marketo",
+		//	    "Googleanalytics",
+		//	    "Zendesk",
+		//	    "Servicenow",
+		//	    "SAPOData",
+		//	    "Datadog",
+		//	    "Trendmicro",
+		//	    "Snowflake",
+		//	    "Dynatrace",
+		//	    "Infornexus",
+		//	    "Amplitude",
+		//	    "Veeva",
+		//	    "CustomConnector"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"connector_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "List of Saas providers that need connector profile to be created",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"credentials_arn": {
-			// Property: CredentialsArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique Arn for Connector-Profile resource",
-			//	  "maxLength": 512,
-			//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CredentialsArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique Arn for Connector-Profile resource",
+		//	  "maxLength": 512,
+		//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
+		//	  "type": "string"
+		//	}
+		"credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique Arn for Connector-Profile resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"kms_arn": {
-			// Property: KMSArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:aws:kms:.*:[0-9]+:.*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: KMSArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:aws:kms:.*:[0-9]+:.*",
+		//	  "type": "string"
+		//	}
+		"kms_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::AppFlow::ConnectorProfile",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::ConnectorProfile").WithTerraformTypeName("awscc_appflow_connector_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -2203,7 +1997,7 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		"zendesk":                       "Zendesk",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

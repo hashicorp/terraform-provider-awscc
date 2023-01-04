@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,180 +19,168 @@ func init() {
 // endpointAuthorizationDataSource returns the Terraform awscc_redshift_endpoint_authorization data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Redshift::EndpointAuthorization resource.
 func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"account": {
-			// Property: Account
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The target AWS account ID to grant or revoke access for.",
-			//	  "pattern": "^\\d{12}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Account
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The target AWS account ID to grant or revoke access for.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"account": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The target AWS account ID to grant or revoke access for.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"allowed_all_vp_cs": {
-			// Property: AllowedAllVPCs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AllowedAllVPCs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
+		//	  "type": "boolean"
+		//	}
+		"allowed_all_vp_cs": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether all VPCs in the grantee account are allowed access to the cluster.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"allowed_vp_cs": {
-			// Property: AllowedVPCs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The VPCs allowed access to the cluster.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AllowedVPCs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The VPCs allowed access to the cluster.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"allowed_vp_cs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The VPCs allowed access to the cluster.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"authorize_time": {
-			// Property: AuthorizeTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time (UTC) when the authorization was created.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizeTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time (UTC) when the authorization was created.",
+		//	  "type": "string"
+		//	}
+		"authorize_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time (UTC) when the authorization was created.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"cluster_identifier": {
-			// Property: ClusterIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The cluster identifier.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The cluster identifier.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The cluster identifier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"cluster_status": {
-			// Property: ClusterStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the cluster.",
+		//	  "type": "string"
+		//	}
+		"cluster_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"endpoint_count": {
-			// Property: EndpointCount
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of Redshift-managed VPC endpoints created for the authorization.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EndpointCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of Redshift-managed VPC endpoints created for the authorization.",
+		//	  "type": "integer"
+		//	}
+		"endpoint_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of Redshift-managed VPC endpoints created for the authorization.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"force": {
-			// Property: Force
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Force
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
+		//	  "type": "boolean"
+		//	}
+		"force": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: " Indicates whether to force the revoke action. If true, the Redshift-managed VPC endpoints associated with the endpoint authorization are also deleted.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"grantee": {
-			// Property: Grantee
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS account ID of the grantee of the cluster.",
-			//	  "pattern": "^\\d{12}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Grantee
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account ID of the grantee of the cluster.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"grantee": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS account ID of the grantee of the cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"grantor": {
-			// Property: Grantor
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS account ID of the cluster owner.",
-			//	  "pattern": "^\\d{12}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Grantor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account ID of the cluster owner.",
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"grantor": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS account ID of the cluster owner.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the authorization action.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the authorization action.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the authorization action.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"vpc_ids": {
-			// Property: VpcIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^vpc-[A-Za-z0-9]{1,17}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"vpc_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The virtual private cloud (VPC) identifiers to grant or revoke access to.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Redshift::EndpointAuthorization",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::EndpointAuthorization").WithTerraformTypeName("awscc_redshift_endpoint_authorization")
 	opts = opts.WithTerraformSchema(schema)
@@ -211,7 +199,7 @@ func endpointAuthorizationDataSource(ctx context.Context) (datasource.DataSource
 		"vpc_ids":            "VpcIds",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

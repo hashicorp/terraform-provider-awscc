@@ -4,14 +4,18 @@ package ssm
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,184 +25,181 @@ func init() {
 // documentResource returns the Terraform awscc_ssm_document resource.
 // This Terraform resource corresponds to the CloudFormation AWS::SSM::Document resource.
 func documentResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"attachments": {
-			// Property: Attachments
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of key and value pairs that describe attachments to a version of a document.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key of a key-value pair that identifies the location of an attachment to a document.",
-			//	        "enum": [
-			//	          "SourceUrl",
-			//	          "S3FileUrl",
-			//	          "AttachmentReference"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "The name of the document attachment file.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      },
-			//	      "Values": {
-			//	        "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "maxLength": 100000,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "maxItems": 1,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 20,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
-			Description: "A list of key and value pairs that describe attachments to a version of a document.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Attachments
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key and value pairs that describe attachments to a version of a document.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key of a key-value pair that identifies the location of an attachment to a document.",
+		//	        "enum": [
+		//	          "SourceUrl",
+		//	          "S3FileUrl",
+		//	          "AttachmentReference"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "The name of the document attachment file.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Values": {
+		//	        "description": "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "maxLength": 100000,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 1,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"attachments": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key of a key-value pair that identifies the location of an attachment to a document.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"SourceUrl",
 								"S3FileUrl",
 								"AttachmentReference",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the document attachment file.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"values": {
-						// Property: Values
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Values
+					"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The value of a key-value pair that identifies the location of an attachment to a document. The format for Value depends on the type of key you specify.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 1),
-							validate.ArrayForEach(validate.StringLenBetween(1, 100000)),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 20),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"content": {
-			// Property: Content
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The content for the Systems Manager document in JSON, YAML or String format.",
-			//	  "type": "string"
-			//	}
-			Description: "The content for the Systems Manager document in JSON, YAML or String format.",
-			Type:        types.StringType,
-			Required:    true,
-		},
-		"document_format": {
-			// Property: DocumentFormat
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "JSON",
-			//	  "description": "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
-			//	  "enum": [
-			//	    "YAML",
-			//	    "JSON",
-			//	    "TEXT"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
-			Type:        types.StringType,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 1),
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 100000),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of key and value pairs that describe attachments to a version of a document.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 20),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Content
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The content for the Systems Manager document in JSON, YAML or String format.",
+		//	  "type": "string"
+		//	}
+		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The content for the Systems Manager document in JSON, YAML or String format.",
+			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DocumentFormat
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "JSON",
+		//	  "description": "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
+		//	  "enum": [
+		//	    "YAML",
+		//	    "JSON",
+		//	    "TEXT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"document_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Specify the document format for the request. The document format can be either JSON or YAML. JSON is the default format.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"YAML",
 					"JSON",
 					"TEXT",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.StringValue("JSON")),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"document_type": {
-			// Property: DocumentType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of document to create.",
-			//	  "enum": [
-			//	    "ApplicationConfiguration",
-			//	    "ApplicationConfigurationSchema",
-			//	    "Automation",
-			//	    "Automation.ChangeTemplate",
-			//	    "ChangeCalendar",
-			//	    "CloudFormation",
-			//	    "Command",
-			//	    "DeploymentStrategy",
-			//	    "Package",
-			//	    "Policy",
-			//	    "ProblemAnalysis",
-			//	    "ProblemAnalysisTemplate",
-			//	    "Session"
-			//	  ],
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("JSON"),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DocumentType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of document to create.",
+		//	  "enum": [
+		//	    "ApplicationConfiguration",
+		//	    "ApplicationConfigurationSchema",
+		//	    "Automation",
+		//	    "Automation.ChangeTemplate",
+		//	    "ChangeCalendar",
+		//	    "CloudFormation",
+		//	    "Command",
+		//	    "DeploymentStrategy",
+		//	    "Package",
+		//	    "Policy",
+		//	    "ProblemAnalysis",
+		//	    "ProblemAnalysisTemplate",
+		//	    "Session"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"document_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of document to create.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"ApplicationConfiguration",
 					"ApplicationConfigurationSchema",
 					"Automation",
@@ -212,264 +213,255 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 					"ProblemAnalysis",
 					"ProblemAnalysisTemplate",
 					"Session",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the Systems Manager document.",
-			//	  "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the Systems Manager document.",
+		//	  "pattern": "^[a-zA-Z0-9_\\-.]{3,128}$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the Systems Manager document.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{3,128}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"requires": {
-			// Property: Requires
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Name": {
-			//	        "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
-			//	        "maxLength": 200,
-			//	        "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
-			//	        "type": "string"
-			//	      },
-			//	      "Version": {
-			//	        "description": "The document version required by the current document.",
-			//	        "maxLength": 8,
-			//	        "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{3,128}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Requires
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Name": {
+		//	        "description": "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
+		//	        "maxLength": 200,
+		//	        "pattern": "^[a-zA-Z0-9_\\-.:/]{3,200}$",
+		//	        "type": "string"
+		//	      },
+		//	      "Version": {
+		//	        "description": "The document version required by the current document.",
+		//	        "maxLength": 8,
+		//	        "pattern": "([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"requires": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the required SSM document. The name can be an Amazon Resource Name (ARN).",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(200),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.:/]{3,200}$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"version": {
-						// Property: Version
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(200),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-.:/]{3,200}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Version
+					"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The document version required by the current document.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(8),
-							validate.StringMatch(regexp.MustCompile("([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(1),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The name of the tag.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value of the tag.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 1000,
-			//	  "type": "array"
-			//	}
-			Description: "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(8),
+							stringvalidator.RegexMatches(regexp.MustCompile("([$]LATEST|[$]DEFAULT|^[1-9][0-9]*$)"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of SSM documents required by a document. For example, an ApplicationConfiguration document requires an ApplicationConfigurationSchema document.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The name of the tag.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value of the tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1000,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the tag.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value of the tag.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(1000),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"target_type": {
-			// Property: TargetType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specify a target type to define the kinds of resources the document can run on.",
-			//	  "pattern": "^\\/[\\w\\.\\-\\:\\/]*$",
-			//	  "type": "string"
-			//	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Optional metadata that you assign to a resource. Tags enable you to categorize a resource in different ways, such as by purpose, owner, or environment.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(1000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TargetType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specify a target type to define the kinds of resources the document can run on.",
+		//	  "pattern": "^\\/[\\w\\.\\-\\:\\/]*$",
+		//	  "type": "string"
+		//	}
+		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specify a target type to define the kinds of resources the document can run on.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^\\/[\\w\\.\\-\\:\\/]*$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"update_method": {
-			// Property: UpdateMethod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "Replace",
-			//	  "description": "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
-			//	  "enum": [
-			//	    "Replace",
-			//	    "NewVersion"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\/[\\w\\.\\-\\:\\/]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UpdateMethod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "Replace",
+		//	  "description": "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
+		//	  "enum": [
+		//	    "Replace",
+		//	    "NewVersion"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"update_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Update method - when set to 'Replace', the update will replace the existing document; when set to 'NewVersion', the update will create a new version.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"Replace",
 					"NewVersion",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.StringValue("Replace")),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"version_name": {
-			// Property: VersionName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
-			//	  "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("Replace"),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VersionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
+		//	  "pattern": "^[a-zA-Z0-9_\\-.]{1,128}$",
+		//	  "type": "string"
+		//	}
+		"version_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An optional field specifying the version of the artifact you are creating with the document. This value is unique across all versions of a document, and cannot be changed.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{1,128}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-.]{1,128}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::SSM::Document resource is an SSM document in AWS Systems Manager that defines the actions that Systems Manager performs, which can be used to set up and run commands on your instances.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::Document").WithTerraformTypeName("awscc_ssm_document")
 	opts = opts.WithTerraformSchema(schema)
@@ -495,7 +487,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,60 +19,55 @@ func init() {
 // documentationVersionDataSource returns the Terraform awscc_apigateway_documentation_version data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ApiGateway::DocumentationVersion resource.
 func documentationVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the API documentation snapshot.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the API documentation snapshot.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the API documentation snapshot.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"documentation_version": {
-			// Property: DocumentationVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version identifier of the API documentation snapshot.",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DocumentationVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version identifier of the API documentation snapshot.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"documentation_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version identifier of the API documentation snapshot.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"rest_api_id": {
-			// Property: RestApiId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the API.",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the API.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the API.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ApiGateway::DocumentationVersion",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::DocumentationVersion").WithTerraformTypeName("awscc_apigateway_documentation_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -82,7 +77,7 @@ func documentationVersionDataSource(ctx context.Context) (datasource.DataSource,
 		"rest_api_id":           "RestApiId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

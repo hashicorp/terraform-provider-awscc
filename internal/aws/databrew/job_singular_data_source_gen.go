@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,1233 +19,1144 @@ func init() {
 // jobDataSource returns the Terraform awscc_databrew_job data source.
 // This Terraform data source corresponds to the CloudFormation AWS::DataBrew::Job resource.
 func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"data_catalog_outputs": {
-			// Property: DataCatalogOutputs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "CatalogId": {
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "DatabaseName": {
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "DatabaseOptions": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "TableName": {
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "TempDirectory": {
-			//	            "additionalProperties": false,
-			//	            "description": "S3 Output location",
-			//	            "properties": {
-			//	              "Bucket": {
-			//	                "type": "string"
-			//	              },
-			//	              "BucketOwner": {
-			//	                "maxLength": 12,
-			//	                "minLength": 12,
-			//	                "type": "string"
-			//	              },
-			//	              "Key": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Bucket"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "TableName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Overwrite": {
-			//	        "type": "boolean"
-			//	      },
-			//	      "S3Options": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Location": {
-			//	            "additionalProperties": false,
-			//	            "description": "S3 Output location",
-			//	            "properties": {
-			//	              "Bucket": {
-			//	                "type": "string"
-			//	              },
-			//	              "BucketOwner": {
-			//	                "maxLength": 12,
-			//	                "minLength": 12,
-			//	                "type": "string"
-			//	              },
-			//	              "Key": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Bucket"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Location"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "TableName": {
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "DatabaseName",
-			//	      "TableName"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"catalog_id": {
-						// Property: CatalogId
-						Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DataCatalogOutputs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "CatalogId": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "DatabaseName": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "DatabaseOptions": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "TableName": {
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "TempDirectory": {
+		//	            "additionalProperties": false,
+		//	            "description": "S3 Output location",
+		//	            "properties": {
+		//	              "Bucket": {
+		//	                "type": "string"
+		//	              },
+		//	              "BucketOwner": {
+		//	                "maxLength": 12,
+		//	                "minLength": 12,
+		//	                "type": "string"
+		//	              },
+		//	              "Key": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Bucket"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TableName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Overwrite": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "S3Options": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Location": {
+		//	            "additionalProperties": false,
+		//	            "description": "S3 Output location",
+		//	            "properties": {
+		//	              "Bucket": {
+		//	                "type": "string"
+		//	              },
+		//	              "BucketOwner": {
+		//	                "maxLength": 12,
+		//	                "minLength": 12,
+		//	                "type": "string"
+		//	              },
+		//	              "Key": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Bucket"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Location"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "TableName": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "DatabaseName",
+		//	      "TableName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"data_catalog_outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CatalogId
+					"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"database_name": {
-						// Property: DatabaseName
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: DatabaseName
+					"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"database_options": {
-						// Property: DatabaseOptions
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"table_name": {
-									// Property: TableName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"temp_directory": {
-									// Property: TempDirectory
-									Description: "S3 Output location",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"bucket_owner": {
-												// Property: BucketOwner
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"overwrite": {
-						// Property: Overwrite
-						Type:     types.BoolType,
-						Computed: true,
-					},
-					"s3_options": {
-						// Property: S3Options
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"location": {
-									// Property: Location
-									Description: "S3 Output location",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"bucket_owner": {
-												// Property: BucketOwner
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"table_name": {
-						// Property: TableName
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"database_outputs": {
-			// Property: DatabaseOutputs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "DatabaseOptions": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "TableName": {
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "TempDirectory": {
-			//	            "additionalProperties": false,
-			//	            "description": "S3 Output location",
-			//	            "properties": {
-			//	              "Bucket": {
-			//	                "type": "string"
-			//	              },
-			//	              "BucketOwner": {
-			//	                "maxLength": 12,
-			//	                "minLength": 12,
-			//	                "type": "string"
-			//	              },
-			//	              "Key": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Bucket"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "TableName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "DatabaseOutputMode": {
-			//	        "description": "Database table name",
-			//	        "enum": [
-			//	          "NEW_TABLE"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "GlueConnectionName": {
-			//	        "description": "Glue connection name",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "GlueConnectionName",
-			//	      "DatabaseOptions"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"database_options": {
-						// Property: DatabaseOptions
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"table_name": {
-									// Property: TableName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"temp_directory": {
-									// Property: TempDirectory
-									Description: "S3 Output location",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"bucket_owner": {
-												// Property: BucketOwner
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"database_output_mode": {
-						// Property: DatabaseOutputMode
-						Description: "Database table name",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"glue_connection_name": {
-						// Property: GlueConnectionName
-						Description: "Glue connection name",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"dataset_name": {
-			// Property: DatasetName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Dataset name",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "Dataset name",
-			Type:        types.StringType,
-			Computed:    true,
-		},
-		"encryption_key_arn": {
-			// Property: EncryptionKeyArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Encryption Key Arn",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
-			Description: "Encryption Key Arn",
-			Type:        types.StringType,
-			Computed:    true,
-		},
-		"encryption_mode": {
-			// Property: EncryptionMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Encryption mode",
-			//	  "enum": [
-			//	    "SSE-KMS",
-			//	    "SSE-S3"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "Encryption mode",
-			Type:        types.StringType,
-			Computed:    true,
-		},
-		"job_sample": {
-			// Property: JobSample
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Job Sample",
-			//	  "properties": {
-			//	    "Mode": {
-			//	      "description": "Sample configuration mode for profile jobs.",
-			//	      "enum": [
-			//	        "FULL_DATASET",
-			//	        "CUSTOM_ROWS"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Size": {
-			//	      "description": "Sample configuration size for profile jobs.",
-			//	      "format": "int64",
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Job Sample",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"mode": {
-						// Property: Mode
-						Description: "Sample configuration mode for profile jobs.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"size": {
-						// Property: Size
-						Description: "Sample configuration size for profile jobs.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"log_subscription": {
-			// Property: LogSubscription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Log subscription",
-			//	  "enum": [
-			//	    "ENABLE",
-			//	    "DISABLE"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "Log subscription",
-			Type:        types.StringType,
-			Computed:    true,
-		},
-		"max_capacity": {
-			// Property: MaxCapacity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Max capacity",
-			//	  "type": "integer"
-			//	}
-			Description: "Max capacity",
-			Type:        types.Int64Type,
-			Computed:    true,
-		},
-		"max_retries": {
-			// Property: MaxRetries
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Max retries",
-			//	  "type": "integer"
-			//	}
-			Description: "Max retries",
-			Type:        types.Int64Type,
-			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Job name",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "Job name",
-			Type:        types.StringType,
-			Computed:    true,
-		},
-		"output_location": {
-			// Property: OutputLocation
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Output location",
-			//	  "properties": {
-			//	    "Bucket": {
-			//	      "type": "string"
-			//	    },
-			//	    "BucketOwner": {
-			//	      "maxLength": 12,
-			//	      "minLength": 12,
-			//	      "type": "string"
-			//	    },
-			//	    "Key": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Bucket"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Output location",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bucket": {
-						// Property: Bucket
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"bucket_owner": {
-						// Property: BucketOwner
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"outputs": {
-			// Property: Outputs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "CompressionFormat": {
-			//	        "enum": [
-			//	          "GZIP",
-			//	          "LZ4",
-			//	          "SNAPPY",
-			//	          "BZIP2",
-			//	          "DEFLATE",
-			//	          "LZO",
-			//	          "BROTLI",
-			//	          "ZSTD",
-			//	          "ZLIB"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "Format": {
-			//	        "enum": [
-			//	          "CSV",
-			//	          "JSON",
-			//	          "PARQUET",
-			//	          "GLUEPARQUET",
-			//	          "AVRO",
-			//	          "ORC",
-			//	          "XML",
-			//	          "TABLEAUHYPER"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "FormatOptions": {
-			//	        "additionalProperties": false,
-			//	        "description": "Format options for job Output",
-			//	        "properties": {
-			//	          "Csv": {
-			//	            "additionalProperties": false,
-			//	            "description": "Output Csv options",
-			//	            "properties": {
-			//	              "Delimiter": {
-			//	                "maxLength": 1,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "Location": {
-			//	        "additionalProperties": false,
-			//	        "description": "S3 Output location",
-			//	        "properties": {
-			//	          "Bucket": {
-			//	            "type": "string"
-			//	          },
-			//	          "BucketOwner": {
-			//	            "maxLength": 12,
-			//	            "minLength": 12,
-			//	            "type": "string"
-			//	          },
-			//	          "Key": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Bucket"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "MaxOutputFiles": {
-			//	        "maximum": 999,
-			//	        "minimum": 1,
-			//	        "type": "integer"
-			//	      },
-			//	      "Overwrite": {
-			//	        "type": "boolean"
-			//	      },
-			//	      "PartitionColumns": {
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Location"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"compression_format": {
-						// Property: CompressionFormat
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"format": {
-						// Property: Format
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"format_options": {
-						// Property: FormatOptions
-						Description: "Format options for job Output",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"csv": {
-									// Property: Csv
-									Description: "Output Csv options",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"delimiter": {
-												// Property: Delimiter
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"location": {
-						// Property: Location
-						Description: "S3 Output location",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bucket": {
+					}, /*END ATTRIBUTE*/
+					// Property: DatabaseOptions
+					"database_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TableName
+							"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TempDirectory
+							"temp_directory": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Bucket
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"bucket_owner": {
+									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: BucketOwner
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"key": {
+									"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: Key
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "S3 Output location",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"max_output_files": {
-						// Property: MaxOutputFiles
-						Type:     types.Int64Type,
+					}, /*END ATTRIBUTE*/
+					// Property: Overwrite
+					"overwrite": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"overwrite": {
-						// Property: Overwrite
-						Type:     types.BoolType,
+					}, /*END ATTRIBUTE*/
+					// Property: S3Options
+					"s3_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Location
+							"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Bucket
+									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: BucketOwner
+									"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "S3 Output location",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"partition_columns": {
-						// Property: PartitionColumns
-						Type:     types.ListType{ElemType: types.StringType},
+					}, /*END ATTRIBUTE*/
+					// Property: TableName
+					"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"profile_configuration": {
-			// Property: ProfileConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Profile Job configuration",
-			//	  "properties": {
-			//	    "ColumnStatisticsConfigurations": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Selectors": {
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Name": {
-			//	                  "maxLength": 255,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                },
-			//	                "Regex": {
-			//	                  "maxLength": 255,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "minItems": 1,
-			//	            "type": "array"
-			//	          },
-			//	          "Statistics": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "IncludedStatistics": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "maxLength": 128,
-			//	                  "minLength": 1,
-			//	                  "pattern": "^[A-Z\\_]+$",
-			//	                  "type": "string"
-			//	                },
-			//	                "minItems": 1,
-			//	                "type": "array"
-			//	              },
-			//	              "Overrides": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Parameters": {
-			//	                      "additionalProperties": false,
-			//	                      "patternProperties": {
-			//	                        "": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "type": "object"
-			//	                    },
-			//	                    "Statistic": {
-			//	                      "maxLength": 128,
-			//	                      "minLength": 1,
-			//	                      "pattern": "^[A-Z\\_]+$",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Statistic",
-			//	                    "Parameters"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "minItems": 1,
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Statistics"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "DatasetStatisticsConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "IncludedStatistics": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "pattern": "^[A-Z\\_]+$",
-			//	            "type": "string"
-			//	          },
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "Overrides": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Parameters": {
-			//	                "additionalProperties": false,
-			//	                "patternProperties": {
-			//	                  "": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "Statistic": {
-			//	                "maxLength": 128,
-			//	                "minLength": 1,
-			//	                "pattern": "^[A-Z\\_]+$",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Statistic",
-			//	              "Parameters"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "EntityDetectorConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AllowedStatistics": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Statistics": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "maxLength": 128,
-			//	                "minLength": 1,
-			//	                "pattern": "^[A-Z\\_]+$",
-			//	                "type": "string"
-			//	              },
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Statistics"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "EntityTypes": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "pattern": "^[A-Z_][A-Z\\\\d_]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "EntityTypes"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ProfileColumns": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Name": {
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Regex": {
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Profile Job configuration",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"column_statistics_configurations": {
-						// Property: ColumnStatisticsConfigurations
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"selectors": {
-									// Property: Selectors
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"name": {
-												// Property: Name
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"regex": {
-												// Property: Regex
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"statistics": {
-									// Property: Statistics
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"included_statistics": {
-												// Property: IncludedStatistics
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"overrides": {
-												// Property: Overrides
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"parameters": {
-															// Property: Parameters
-															// Pattern: ""
-															Type:     types.MapType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"statistic": {
-															// Property: Statistic
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseOutputs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "DatabaseOptions": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "TableName": {
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "TempDirectory": {
+		//	            "additionalProperties": false,
+		//	            "description": "S3 Output location",
+		//	            "properties": {
+		//	              "Bucket": {
+		//	                "type": "string"
+		//	              },
+		//	              "BucketOwner": {
+		//	                "maxLength": 12,
+		//	                "minLength": 12,
+		//	                "type": "string"
+		//	              },
+		//	              "Key": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Bucket"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TableName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "DatabaseOutputMode": {
+		//	        "description": "Database table name",
+		//	        "enum": [
+		//	          "NEW_TABLE"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "GlueConnectionName": {
+		//	        "description": "Glue connection name",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "GlueConnectionName",
+		//	      "DatabaseOptions"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"database_outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DatabaseOptions
+					"database_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: TableName
+							"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TempDirectory
+							"temp_directory": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Bucket
+									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: BucketOwner
+									"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "S3 Output location",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"dataset_statistics_configuration": {
-						// Property: DatasetStatisticsConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"included_statistics": {
+					}, /*END ATTRIBUTE*/
+					// Property: DatabaseOutputMode
+					"database_output_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Database table name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: GlueConnectionName
+					"glue_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Glue connection name",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DatasetName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Dataset name",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"dataset_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Dataset name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Encryption Key Arn",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"encryption_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Encryption Key Arn",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Encryption mode",
+		//	  "enum": [
+		//	    "SSE-KMS",
+		//	    "SSE-S3"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"encryption_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Encryption mode",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: JobSample
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Job Sample",
+		//	  "properties": {
+		//	    "Mode": {
+		//	      "description": "Sample configuration mode for profile jobs.",
+		//	      "enum": [
+		//	        "FULL_DATASET",
+		//	        "CUSTOM_ROWS"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Size": {
+		//	      "description": "Sample configuration size for profile jobs.",
+		//	      "format": "int64",
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"job_sample": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Sample configuration mode for profile jobs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Size
+				"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Sample configuration size for profile jobs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Job Sample",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LogSubscription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Log subscription",
+		//	  "enum": [
+		//	    "ENABLE",
+		//	    "DISABLE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"log_subscription": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Log subscription",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MaxCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Max capacity",
+		//	  "type": "integer"
+		//	}
+		"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Max capacity",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MaxRetries
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Max retries",
+		//	  "type": "integer"
+		//	}
+		"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Max retries",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Job name",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Job name",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OutputLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Output location",
+		//	  "properties": {
+		//	    "Bucket": {
+		//	      "type": "string"
+		//	    },
+		//	    "BucketOwner": {
+		//	      "maxLength": 12,
+		//	      "minLength": 12,
+		//	      "type": "string"
+		//	    },
+		//	    "Key": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Bucket"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"output_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bucket
+				"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: BucketOwner
+				"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Key
+				"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Output location",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Outputs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "CompressionFormat": {
+		//	        "enum": [
+		//	          "GZIP",
+		//	          "LZ4",
+		//	          "SNAPPY",
+		//	          "BZIP2",
+		//	          "DEFLATE",
+		//	          "LZO",
+		//	          "BROTLI",
+		//	          "ZSTD",
+		//	          "ZLIB"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Format": {
+		//	        "enum": [
+		//	          "CSV",
+		//	          "JSON",
+		//	          "PARQUET",
+		//	          "GLUEPARQUET",
+		//	          "AVRO",
+		//	          "ORC",
+		//	          "XML",
+		//	          "TABLEAUHYPER"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "FormatOptions": {
+		//	        "additionalProperties": false,
+		//	        "description": "Format options for job Output",
+		//	        "properties": {
+		//	          "Csv": {
+		//	            "additionalProperties": false,
+		//	            "description": "Output Csv options",
+		//	            "properties": {
+		//	              "Delimiter": {
+		//	                "maxLength": 1,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Location": {
+		//	        "additionalProperties": false,
+		//	        "description": "S3 Output location",
+		//	        "properties": {
+		//	          "Bucket": {
+		//	            "type": "string"
+		//	          },
+		//	          "BucketOwner": {
+		//	            "maxLength": 12,
+		//	            "minLength": 12,
+		//	            "type": "string"
+		//	          },
+		//	          "Key": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Bucket"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "MaxOutputFiles": {
+		//	        "maximum": 999,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "Overwrite": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "PartitionColumns": {
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Location"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"outputs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CompressionFormat
+					"compression_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Format
+					"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: FormatOptions
+					"format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Csv
+							"csv": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Delimiter
+									"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Output Csv options",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Format options for job Output",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Location
+					"location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Bucket
+							"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: BucketOwner
+							"bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "S3 Output location",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MaxOutputFiles
+					"max_output_files": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Overwrite
+					"overwrite": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: PartitionColumns
+					"partition_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProfileConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Profile Job configuration",
+		//	  "properties": {
+		//	    "ColumnStatisticsConfigurations": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Selectors": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Regex": {
+		//	                  "maxLength": 255,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "Statistics": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "IncludedStatistics": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "maxLength": 128,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^[A-Z\\_]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
+		//	              "Overrides": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Parameters": {
+		//	                      "additionalProperties": false,
+		//	                      "patternProperties": {
+		//	                        "": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "Statistic": {
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^[A-Z\\_]+$",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Statistic",
+		//	                    "Parameters"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Statistics"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "DatasetStatisticsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IncludedStatistics": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[A-Z\\_]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Overrides": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Parameters": {
+		//	                "additionalProperties": false,
+		//	                "patternProperties": {
+		//	                  "": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "Statistic": {
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "pattern": "^[A-Z\\_]+$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Statistic",
+		//	              "Parameters"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EntityDetectorConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AllowedStatistics": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Statistics": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "pattern": "^[A-Z\\_]+$",
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Statistics"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "EntityTypes": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[A-Z_][A-Z\\\\d_]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EntityTypes"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ProfileColumns": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Name": {
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Regex": {
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"profile_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ColumnStatisticsConfigurations
+				"column_statistics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Selectors
+							"selectors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Regex
+										"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Statistics
+							"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: IncludedStatistics
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"overrides": {
+									"included_statistics": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
 									// Property: Overrides
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"parameters": {
+									"overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: Parameters
-												// Pattern: ""
-												Type:     types.MapType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"statistic": {
+												"parameters":        // Pattern: ""
+												schema.MapAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
 												// Property: Statistic
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"entity_detector_configuration": {
-						// Property: EntityDetectorConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allowed_statistics": {
-									// Property: AllowedStatistics
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"statistics": {
-												// Property: Statistics
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"entity_types": {
-									// Property: EntityTypes
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"profile_columns": {
-						// Property: ProfileColumns
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"regex": {
-									// Property: Regex
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"project_name": {
-			// Property: ProjectName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Project name",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+												"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatasetStatisticsConfiguration
+				"dataset_statistics_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IncludedStatistics
+						"included_statistics": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Overrides
+						"overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Parameters
+									"parameters":        // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Statistic
+									"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EntityDetectorConfiguration
+				"entity_detector_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowedStatistics
+						"allowed_statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Statistics
+								"statistics": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EntityTypes
+						"entity_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProfileColumns
+				"profile_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Regex
+							"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Profile Job configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Project name",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Project name",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"recipe": {
-			// Property: Recipe
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Name": {
-			//	      "description": "Recipe name",
-			//	      "type": "string"
-			//	    },
-			//	    "Version": {
-			//	      "description": "Recipe version",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
-						Description: "Recipe name",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"version": {
-						// Property: Version
-						Description: "Recipe version",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: Recipe
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Name": {
+		//	      "description": "Recipe name",
+		//	      "type": "string"
+		//	    },
+		//	    "Version": {
+		//	      "description": "Recipe version",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"recipe": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Recipe name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Recipe version",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Role arn",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Role arn",
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Role arn",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"timeout": {
-			// Property: Timeout
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Timeout",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Timeout
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Timeout",
+		//	  "type": "integer"
+		//	}
+		"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Timeout",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Job type",
-			//	  "enum": [
-			//	    "PROFILE",
-			//	    "RECIPE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Job type",
+		//	  "enum": [
+		//	    "PROFILE",
+		//	    "RECIPE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Job type",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"validation_configurations": {
-			// Property: ValidationConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Data quality rules configuration",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Configuration to attach Rulesets to the job",
-			//	    "properties": {
-			//	      "RulesetArn": {
-			//	        "description": "Arn of the Ruleset",
-			//	        "maxLength": 2048,
-			//	        "minLength": 20,
-			//	        "type": "string"
-			//	      },
-			//	      "ValidationMode": {
-			//	        "enum": [
-			//	          "CHECK_ALL"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "RulesetArn"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "Data quality rules configuration",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"ruleset_arn": {
-						// Property: RulesetArn
+		}, /*END ATTRIBUTE*/
+		// Property: ValidationConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Data quality rules configuration",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Configuration to attach Rulesets to the job",
+		//	    "properties": {
+		//	      "RulesetArn": {
+		//	        "description": "Arn of the Ruleset",
+		//	        "maxLength": 2048,
+		//	        "minLength": 20,
+		//	        "type": "string"
+		//	      },
+		//	      "ValidationMode": {
+		//	        "enum": [
+		//	          "CHECK_ALL"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "RulesetArn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"validation_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: RulesetArn
+					"ruleset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Arn of the Ruleset",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"validation_mode": {
-						// Property: ValidationMode
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: ValidationMode
+					"validation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Data quality rules configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::DataBrew::Job",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Job").WithTerraformTypeName("awscc_databrew_job")
 	opts = opts.WithTerraformSchema(schema)
@@ -1311,7 +1222,7 @@ func jobDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version":                          "Version",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

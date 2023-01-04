@@ -4,14 +4,22 @@ package lookoutmetrics
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,1208 +29,1157 @@ func init() {
 // anomalyDetectorResource returns the Terraform awscc_lookoutmetrics_anomaly_detector resource.
 // This Terraform resource corresponds to the CloudFormation AWS::LookoutMetrics::AnomalyDetector resource.
 func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"anomaly_detector_config": {
-			// Property: AnomalyDetectorConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuration options for the AnomalyDetector",
-			//	  "properties": {
-			//	    "AnomalyDetectorFrequency": {
-			//	      "description": "Frequency of anomaly detection",
-			//	      "enum": [
-			//	        "PT5M",
-			//	        "PT10M",
-			//	        "PT1H",
-			//	        "P1D"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "AnomalyDetectorFrequency"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AnomalyDetectorConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration options for the AnomalyDetector",
+		//	  "properties": {
+		//	    "AnomalyDetectorFrequency": {
+		//	      "description": "Frequency of anomaly detection",
+		//	      "enum": [
+		//	        "PT5M",
+		//	        "PT10M",
+		//	        "PT1H",
+		//	        "P1D"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AnomalyDetectorFrequency"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"anomaly_detector_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AnomalyDetectorFrequency
+				"anomaly_detector_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Frequency of anomaly detection",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"PT5M",
+							"PT10M",
+							"PT1H",
+							"P1D",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Configuration options for the AnomalyDetector",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"anomaly_detector_frequency": {
-						// Property: AnomalyDetectorFrequency
-						Description: "Frequency of anomaly detection",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"PT5M",
-								"PT10M",
-								"PT1H",
-								"P1D",
-							}),
-						},
-					},
-				},
-			),
-			Required: true,
-		},
-		"anomaly_detector_description": {
-			// Property: AnomalyDetectorDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description for the AnomalyDetector.",
-			//	  "maxLength": 256,
-			//	  "pattern": ".*\\S.*",
-			//	  "type": "string"
-			//	}
+			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AnomalyDetectorDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description for the AnomalyDetector.",
+		//	  "maxLength": 256,
+		//	  "pattern": ".*\\S.*",
+		//	  "type": "string"
+		//	}
+		"anomaly_detector_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description for the AnomalyDetector.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(256),
-				validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"anomaly_detector_name": {
-			// Property: AnomalyDetectorName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for the Amazon Lookout for Metrics Anomaly Detector",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AnomalyDetectorName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for the Amazon Lookout for Metrics Anomaly Detector",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	  "type": "string"
+		//	}
+		"anomaly_detector_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name for the Amazon Lookout for Metrics Anomaly Detector",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 63),
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"kms_key_arn": {
-			// Property: KmsKeyArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "KMS key used to encrypt the AnomalyDetector data",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "KMS key used to encrypt the AnomalyDetector data",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:aws.*:kms:.*:[0-9]{12}:key/.*",
+		//	  "type": "string"
+		//	}
+		"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "KMS key used to encrypt the AnomalyDetector data",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-				validate.StringMatch(regexp.MustCompile("arn:aws.*:kms:.*:[0-9]{12}:key/.*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"metric_set_list": {
-			// Property: MetricSetList
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of metric sets for anomaly detection",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "DimensionList": {
-			//	        "description": "Dimensions for this MetricSet.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "description": "Name of a column in the data.",
-			//	          "maxLength": 63,
-			//	          "minLength": 1,
-			//	          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	          "type": "string"
-			//	        },
-			//	        "minItems": 0,
-			//	        "type": "array"
-			//	      },
-			//	      "MetricList": {
-			//	        "description": "Metrics captured by this MetricSet.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AggregationFunction": {
-			//	              "description": "Operator used to aggregate metric values",
-			//	              "enum": [
-			//	                "AVG",
-			//	                "SUM"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "MetricName": {
-			//	              "description": "Name of a column in the data.",
-			//	              "maxLength": 63,
-			//	              "minLength": 1,
-			//	              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	              "type": "string"
-			//	            },
-			//	            "Namespace": {
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "pattern": "[^:].*",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "MetricName",
-			//	            "AggregationFunction"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      },
-			//	      "MetricSetDescription": {
-			//	        "description": "A description for the MetricSet.",
-			//	        "maxLength": 256,
-			//	        "pattern": ".*\\S.*",
-			//	        "type": "string"
-			//	      },
-			//	      "MetricSetFrequency": {
-			//	        "description": "A frequency period to aggregate the data",
-			//	        "enum": [
-			//	          "PT5M",
-			//	          "PT10M",
-			//	          "PT1H",
-			//	          "P1D"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "MetricSetName": {
-			//	        "description": "The name of the MetricSet.",
-			//	        "maxLength": 63,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	        "type": "string"
-			//	      },
-			//	      "MetricSource": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "AppFlowConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "FlowName": {
-			//	                "maxLength": 256,
-			//	                "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
-			//	                "type": "string"
-			//	              },
-			//	              "RoleArn": {
-			//	                "maxLength": 256,
-			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "RoleArn",
-			//	              "FlowName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "CloudwatchConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "RoleArn": {
-			//	                "maxLength": 256,
-			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "RoleArn"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "RDSSourceConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DBInstanceIdentifier": {
-			//	                "maxLength": 63,
-			//	                "minLength": 1,
-			//	                "pattern": "",
-			//	                "type": "string"
-			//	              },
-			//	              "DatabaseHost": {
-			//	                "maxLength": 253,
-			//	                "minLength": 1,
-			//	                "pattern": ".*\\S.*",
-			//	                "type": "string"
-			//	              },
-			//	              "DatabaseName": {
-			//	                "maxLength": 64,
-			//	                "minLength": 1,
-			//	                "pattern": "[a-zA-Z0-9_]+",
-			//	                "type": "string"
-			//	              },
-			//	              "DatabasePort": {
-			//	                "maximum": 65535,
-			//	                "minimum": 1,
-			//	                "type": "integer"
-			//	              },
-			//	              "RoleArn": {
-			//	                "maxLength": 256,
-			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	                "type": "string"
-			//	              },
-			//	              "SecretManagerArn": {
-			//	                "maxLength": 256,
-			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
-			//	                "type": "string"
-			//	              },
-			//	              "TableName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
-			//	                "type": "string"
-			//	              },
-			//	              "VpcConfiguration": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "SecurityGroupIdList": {
-			//	                    "items": {
-			//	                      "maxLength": 255,
-			//	                      "minLength": 1,
-			//	                      "pattern": "[-0-9a-zA-Z]+",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "SubnetIdList": {
-			//	                    "items": {
-			//	                      "maxLength": 255,
-			//	                      "pattern": "[\\-0-9a-zA-Z]+",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "SubnetIdList",
-			//	                  "SecurityGroupIdList"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DBInstanceIdentifier",
-			//	              "DatabaseHost",
-			//	              "DatabasePort",
-			//	              "SecretManagerArn",
-			//	              "DatabaseName",
-			//	              "TableName",
-			//	              "RoleArn",
-			//	              "VpcConfiguration"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "RedshiftSourceConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ClusterIdentifier": {
-			//	                "maxLength": 63,
-			//	                "minLength": 1,
-			//	                "pattern": "",
-			//	                "type": "string"
-			//	              },
-			//	              "DatabaseHost": {
-			//	                "maxLength": 253,
-			//	                "minLength": 1,
-			//	                "pattern": ".*\\S.*",
-			//	                "type": "string"
-			//	              },
-			//	              "DatabaseName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "pattern": "[a-z0-9]+",
-			//	                "type": "string"
-			//	              },
-			//	              "DatabasePort": {
-			//	                "maximum": 65535,
-			//	                "minimum": 1,
-			//	                "type": "integer"
-			//	              },
-			//	              "RoleArn": {
-			//	                "maxLength": 256,
-			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	                "type": "string"
-			//	              },
-			//	              "SecretManagerArn": {
-			//	                "maxLength": 256,
-			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
-			//	                "type": "string"
-			//	              },
-			//	              "TableName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
-			//	                "type": "string"
-			//	              },
-			//	              "VpcConfiguration": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "SecurityGroupIdList": {
-			//	                    "items": {
-			//	                      "maxLength": 255,
-			//	                      "minLength": 1,
-			//	                      "pattern": "[-0-9a-zA-Z]+",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "SubnetIdList": {
-			//	                    "items": {
-			//	                      "maxLength": 255,
-			//	                      "pattern": "[\\-0-9a-zA-Z]+",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "SubnetIdList",
-			//	                  "SecurityGroupIdList"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "ClusterIdentifier",
-			//	              "DatabaseHost",
-			//	              "DatabasePort",
-			//	              "SecretManagerArn",
-			//	              "DatabaseName",
-			//	              "TableName",
-			//	              "RoleArn",
-			//	              "VpcConfiguration"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "S3SourceConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "FileFormatDescriptor": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "CsvFormatDescriptor": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Charset": {
-			//	                        "maxLength": 63,
-			//	                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	                        "type": "string"
-			//	                      },
-			//	                      "ContainsHeader": {
-			//	                        "type": "boolean"
-			//	                      },
-			//	                      "Delimiter": {
-			//	                        "maxLength": 1,
-			//	                        "pattern": "[^\\r\\n]",
-			//	                        "type": "string"
-			//	                      },
-			//	                      "FileCompression": {
-			//	                        "enum": [
-			//	                          "NONE",
-			//	                          "GZIP"
-			//	                        ],
-			//	                        "type": "string"
-			//	                      },
-			//	                      "HeaderList": {
-			//	                        "items": {
-			//	                          "description": "Name of a column in the data.",
-			//	                          "maxLength": 63,
-			//	                          "minLength": 1,
-			//	                          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	                          "type": "string"
-			//	                        },
-			//	                        "type": "array"
-			//	                      },
-			//	                      "QuoteSymbol": {
-			//	                        "maxLength": 1,
-			//	                        "pattern": "[^\\r\\n]|^$",
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "JsonFormatDescriptor": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Charset": {
-			//	                        "maxLength": 63,
-			//	                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	                        "type": "string"
-			//	                      },
-			//	                      "FileCompression": {
-			//	                        "enum": [
-			//	                          "NONE",
-			//	                          "GZIP"
-			//	                        ],
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "HistoricalDataPathList": {
-			//	                "items": {
-			//	                  "maxLength": 1024,
-			//	                  "pattern": "^s3://[a-z0-9].+$",
-			//	                  "type": "string"
-			//	                },
-			//	                "maxItems": 1,
-			//	                "minItems": 1,
-			//	                "type": "array"
-			//	              },
-			//	              "RoleArn": {
-			//	                "maxLength": 256,
-			//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	                "type": "string"
-			//	              },
-			//	              "TemplatedPathList": {
-			//	                "items": {
-			//	                  "maxLength": 1024,
-			//	                  "pattern": "^s3://[a-zA-Z0-9_\\-\\/ {}=]+$",
-			//	                  "type": "string"
-			//	                },
-			//	                "maxItems": 1,
-			//	                "minItems": 1,
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "RoleArn",
-			//	              "FileFormatDescriptor"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "Offset": {
-			//	        "description": "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
-			//	        "maximum": 432000,
-			//	        "minimum": 0,
-			//	        "type": "integer"
-			//	      },
-			//	      "TimestampColumn": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ColumnFormat": {
-			//	            "description": "A timestamp format for the timestamps in the dataset",
-			//	            "maxLength": 63,
-			//	            "pattern": ".*\\S.*",
-			//	            "type": "string"
-			//	          },
-			//	          "ColumnName": {
-			//	            "description": "Name of a column in the data.",
-			//	            "maxLength": 63,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "Timezone": {
-			//	        "maxLength": 60,
-			//	        "pattern": ".*\\S.*",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "MetricSetName",
-			//	      "MetricList",
-			//	      "MetricSource"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 1,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "List of metric sets for anomaly detection",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"dimension_list": {
-						// Property: DimensionList
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws.*:kms:.*:[0-9]{12}:key/.*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MetricSetList
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of metric sets for anomaly detection",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "DimensionList": {
+		//	        "description": "Dimensions for this MetricSet.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "description": "Name of a column in the data.",
+		//	          "maxLength": 63,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	          "type": "string"
+		//	        },
+		//	        "minItems": 0,
+		//	        "type": "array"
+		//	      },
+		//	      "MetricList": {
+		//	        "description": "Metrics captured by this MetricSet.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AggregationFunction": {
+		//	              "description": "Operator used to aggregate metric values",
+		//	              "enum": [
+		//	                "AVG",
+		//	                "SUM"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "MetricName": {
+		//	              "description": "Name of a column in the data.",
+		//	              "maxLength": 63,
+		//	              "minLength": 1,
+		//	              "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	              "type": "string"
+		//	            },
+		//	            "Namespace": {
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "[^:].*",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "MetricName",
+		//	            "AggregationFunction"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "MetricSetDescription": {
+		//	        "description": "A description for the MetricSet.",
+		//	        "maxLength": 256,
+		//	        "pattern": ".*\\S.*",
+		//	        "type": "string"
+		//	      },
+		//	      "MetricSetFrequency": {
+		//	        "description": "A frequency period to aggregate the data",
+		//	        "enum": [
+		//	          "PT5M",
+		//	          "PT10M",
+		//	          "PT1H",
+		//	          "P1D"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "MetricSetName": {
+		//	        "description": "The name of the MetricSet.",
+		//	        "maxLength": 63,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	        "type": "string"
+		//	      },
+		//	      "MetricSource": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AppFlowConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FlowName": {
+		//	                "maxLength": 256,
+		//	                "pattern": "[a-zA-Z0-9][\\w!@#.-]+",
+		//	                "type": "string"
+		//	              },
+		//	              "RoleArn": {
+		//	                "maxLength": 256,
+		//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RoleArn",
+		//	              "FlowName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "CloudwatchConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "RoleArn": {
+		//	                "maxLength": 256,
+		//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RoleArn"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "RDSSourceConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DBInstanceIdentifier": {
+		//	                "maxLength": 63,
+		//	                "minLength": 1,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              },
+		//	              "DatabaseHost": {
+		//	                "maxLength": 253,
+		//	                "minLength": 1,
+		//	                "pattern": ".*\\S.*",
+		//	                "type": "string"
+		//	              },
+		//	              "DatabaseName": {
+		//	                "maxLength": 64,
+		//	                "minLength": 1,
+		//	                "pattern": "[a-zA-Z0-9_]+",
+		//	                "type": "string"
+		//	              },
+		//	              "DatabasePort": {
+		//	                "maximum": 65535,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              },
+		//	              "RoleArn": {
+		//	                "maxLength": 256,
+		//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	                "type": "string"
+		//	              },
+		//	              "SecretManagerArn": {
+		//	                "maxLength": 256,
+		//	                "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
+		//	                "type": "string"
+		//	              },
+		//	              "TableName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "VpcConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "SecurityGroupIdList": {
+		//	                    "items": {
+		//	                      "maxLength": 255,
+		//	                      "minLength": 1,
+		//	                      "pattern": "[-0-9a-zA-Z]+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "SubnetIdList": {
+		//	                    "items": {
+		//	                      "maxLength": 255,
+		//	                      "pattern": "[\\-0-9a-zA-Z]+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SubnetIdList",
+		//	                  "SecurityGroupIdList"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DBInstanceIdentifier",
+		//	              "DatabaseHost",
+		//	              "DatabasePort",
+		//	              "SecretManagerArn",
+		//	              "DatabaseName",
+		//	              "TableName",
+		//	              "RoleArn",
+		//	              "VpcConfiguration"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "RedshiftSourceConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ClusterIdentifier": {
+		//	                "maxLength": 63,
+		//	                "minLength": 1,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              },
+		//	              "DatabaseHost": {
+		//	                "maxLength": 253,
+		//	                "minLength": 1,
+		//	                "pattern": ".*\\S.*",
+		//	                "type": "string"
+		//	              },
+		//	              "DatabaseName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "pattern": "[a-z0-9]+",
+		//	                "type": "string"
+		//	              },
+		//	              "DatabasePort": {
+		//	                "maximum": 65535,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              },
+		//	              "RoleArn": {
+		//	                "maxLength": 256,
+		//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	                "type": "string"
+		//	              },
+		//	              "SecretManagerArn": {
+		//	                "maxLength": 256,
+		//	                "pattern": "arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+",
+		//	                "type": "string"
+		//	              },
+		//	              "TableName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z][a-zA-Z0-9_]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "VpcConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "SecurityGroupIdList": {
+		//	                    "items": {
+		//	                      "maxLength": 255,
+		//	                      "minLength": 1,
+		//	                      "pattern": "[-0-9a-zA-Z]+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "SubnetIdList": {
+		//	                    "items": {
+		//	                      "maxLength": 255,
+		//	                      "pattern": "[\\-0-9a-zA-Z]+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SubnetIdList",
+		//	                  "SecurityGroupIdList"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ClusterIdentifier",
+		//	              "DatabaseHost",
+		//	              "DatabasePort",
+		//	              "SecretManagerArn",
+		//	              "DatabaseName",
+		//	              "TableName",
+		//	              "RoleArn",
+		//	              "VpcConfiguration"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "S3SourceConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FileFormatDescriptor": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "CsvFormatDescriptor": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Charset": {
+		//	                        "maxLength": 63,
+		//	                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "ContainsHeader": {
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "Delimiter": {
+		//	                        "maxLength": 1,
+		//	                        "pattern": "[^\\r\\n]",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "FileCompression": {
+		//	                        "enum": [
+		//	                          "NONE",
+		//	                          "GZIP"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "HeaderList": {
+		//	                        "items": {
+		//	                          "description": "Name of a column in the data.",
+		//	                          "maxLength": 63,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "QuoteSymbol": {
+		//	                        "maxLength": 1,
+		//	                        "pattern": "[^\\r\\n]|^$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "JsonFormatDescriptor": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Charset": {
+		//	                        "maxLength": 63,
+		//	                        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "FileCompression": {
+		//	                        "enum": [
+		//	                          "NONE",
+		//	                          "GZIP"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "HistoricalDataPathList": {
+		//	                "items": {
+		//	                  "maxLength": 1024,
+		//	                  "pattern": "^s3://[a-z0-9].+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              },
+		//	              "RoleArn": {
+		//	                "maxLength": 256,
+		//	                "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	                "type": "string"
+		//	              },
+		//	              "TemplatedPathList": {
+		//	                "items": {
+		//	                  "maxLength": 1024,
+		//	                  "pattern": "^s3://[a-zA-Z0-9_\\-\\/ {}=]+$",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "RoleArn",
+		//	              "FileFormatDescriptor"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Offset": {
+		//	        "description": "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
+		//	        "maximum": 432000,
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
+		//	      "TimestampColumn": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ColumnFormat": {
+		//	            "description": "A timestamp format for the timestamps in the dataset",
+		//	            "maxLength": 63,
+		//	            "pattern": ".*\\S.*",
+		//	            "type": "string"
+		//	          },
+		//	          "ColumnName": {
+		//	            "description": "Name of a column in the data.",
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Timezone": {
+		//	        "maxLength": 60,
+		//	        "pattern": ".*\\S.*",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "MetricSetName",
+		//	      "MetricList",
+		//	      "MetricSource"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"metric_set_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DimensionList
+					"dimension_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "Dimensions for this MetricSet.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(0),
-							validate.ArrayForEach(validate.StringLenBetween(1, 63)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), "")),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"metric_list": {
-						// Property: MetricList
-						Description: "Metrics captured by this MetricSet.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"aggregation_function": {
-									// Property: AggregationFunction
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtLeast(0),
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 63),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MetricList
+					"metric_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AggregationFunction
+								"aggregation_function": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Operator used to aggregate metric values",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
 											"AVG",
 											"SUM",
-										}),
-									},
-								},
-								"metric_name": {
-									// Property: MetricName
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: MetricName
+								"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Name of a column in the data.",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-									},
-								},
-								"namespace": {
-									// Property: Namespace
-									Type:     types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 63),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Namespace
+								"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-										validate.StringMatch(regexp.MustCompile("[^:].*"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-						},
-					},
-					"metric_set_description": {
-						// Property: MetricSetDescription
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.RegexMatches(regexp.MustCompile("[^:].*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Metrics captured by this MetricSet.",
+						Required:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtLeast(1),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MetricSetDescription
+					"metric_set_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A description for the MetricSet.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"metric_set_frequency": {
-						// Property: MetricSetFrequency
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+							stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MetricSetFrequency
+					"metric_set_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A frequency period to aggregate the data",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"PT5M",
 								"PT10M",
 								"PT1H",
 								"P1D",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"metric_set_name": {
-						// Property: MetricSetName
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MetricSetName
+					"metric_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the MetricSet.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 63),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-						},
-					},
-					"metric_source": {
-						// Property: MetricSource
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"app_flow_config": {
-									// Property: AppFlowConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"flow_name": {
-												// Property: FlowName
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
-												},
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"cloudwatch_config": {
-									// Property: CloudwatchConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"role_arn": {
-												// Property: RoleArn
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"rds_source_config": {
-									// Property: RDSSourceConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"db_instance_identifier": {
-												// Property: DBInstanceIdentifier
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 63),
-												},
-											},
-											"database_host": {
-												// Property: DatabaseHost
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 253),
-													validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-												},
-											},
-											"database_name": {
-												// Property: DatabaseName
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 64),
-													validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
-												},
-											},
-											"database_port": {
-												// Property: DatabasePort
-												Type:     types.Int64Type,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntBetween(1, 65535),
-												},
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
-												},
-											},
-											"secret_manager_arn": {
-												// Property: SecretManagerArn
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+"), ""),
-												},
-											},
-											"table_name": {
-												// Property: TableName
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 100),
-													validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-												},
-											},
-											"vpc_configuration": {
-												// Property: VpcConfiguration
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"security_group_id_list": {
-															// Property: SecurityGroupIdList
-															Type:     types.ListType{ElemType: types.StringType},
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayForEach(validate.StringLenBetween(1, 255)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
-															},
-														},
-														"subnet_id_list": {
-															// Property: SubnetIdList
-															Type:     types.ListType{ElemType: types.StringType},
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayForEach(validate.StringLenAtMost(255)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"redshift_source_config": {
-									// Property: RedshiftSourceConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"cluster_identifier": {
-												// Property: ClusterIdentifier
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 63),
-												},
-											},
-											"database_host": {
-												// Property: DatabaseHost
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 253),
-													validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-												},
-											},
-											"database_name": {
-												// Property: DatabaseName
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 100),
-													validate.StringMatch(regexp.MustCompile("[a-z0-9]+"), ""),
-												},
-											},
-											"database_port": {
-												// Property: DatabasePort
-												Type:     types.Int64Type,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntBetween(1, 65535),
-												},
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
-												},
-											},
-											"secret_manager_arn": {
-												// Property: SecretManagerArn
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+"), ""),
-												},
-											},
-											"table_name": {
-												// Property: TableName
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 100),
-													validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
-												},
-											},
-											"vpc_configuration": {
-												// Property: VpcConfiguration
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"security_group_id_list": {
-															// Property: SecurityGroupIdList
-															Type:     types.ListType{ElemType: types.StringType},
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayForEach(validate.StringLenBetween(1, 255)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[-0-9a-zA-Z]+"), "")),
-															},
-														},
-														"subnet_id_list": {
-															// Property: SubnetIdList
-															Type:     types.ListType{ElemType: types.StringType},
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayForEach(validate.StringLenAtMost(255)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[\\-0-9a-zA-Z]+"), "")),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"s3_source_config": {
-									// Property: S3SourceConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"file_format_descriptor": {
-												// Property: FileFormatDescriptor
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"csv_format_descriptor": {
-															// Property: CsvFormatDescriptor
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"charset": {
-																		// Property: Charset
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenAtMost(63),
-																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"contains_header": {
-																		// Property: ContainsHeader
-																		Type:     types.BoolType,
-																		Optional: true,
-																		Computed: true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"delimiter": {
-																		// Property: Delimiter
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenAtMost(1),
-																			validate.StringMatch(regexp.MustCompile("[^\\r\\n]"), ""),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"file_compression": {
-																		// Property: FileCompression
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringInSlice([]string{
-																				"NONE",
-																				"GZIP",
-																			}),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"header_list": {
-																		// Property: HeaderList
-																		Type:     types.ListType{ElemType: types.StringType},
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.ArrayForEach(validate.StringLenBetween(1, 63)),
-																			validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), "")),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"quote_symbol": {
-																		// Property: QuoteSymbol
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenAtMost(1),
-																			validate.StringMatch(regexp.MustCompile("[^\\r\\n]|^$"), ""),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 63),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MetricSource
+					"metric_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AppFlowConfig
+							"app_flow_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FlowName
+									"flow_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9][\\w!@#.-]+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: CloudwatchConfig
+							"cloudwatch_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RDSSourceConfig
+							"rds_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DBInstanceIdentifier
+									"db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 63),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseHost
+									"database_host": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 253),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseName
+									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 64),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_]+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabasePort
+									"database_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(1, 65535),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SecretManagerArn
+									"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TableName
+									"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: VpcConfiguration
+									"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SecurityGroupIdList
+											"security_group_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Required:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.ValueStringsAre(
+														stringvalidator.LengthBetween(1, 255),
+														stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SubnetIdList
+											"subnet_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Required:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.ValueStringsAre(
+														stringvalidator.LengthAtMost(255),
+														stringvalidator.RegexMatches(regexp.MustCompile("[\\-0-9a-zA-Z]+"), ""),
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: RedshiftSourceConfig
+							"redshift_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ClusterIdentifier
+									"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 63),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseHost
+									"database_host": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 253),
+											stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabaseName
+									"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.RegexMatches(regexp.MustCompile("[a-z0-9]+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabasePort
+									"database_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.Between(1, 65535),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SecretManagerArn
+									"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:secret:AmazonLookoutMetrics-.+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TableName
+									"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 100),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]*$"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: VpcConfiguration
+									"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SecurityGroupIdList
+											"security_group_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Required:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.ValueStringsAre(
+														stringvalidator.LengthBetween(1, 255),
+														stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SubnetIdList
+											"subnet_id_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Required:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.ValueStringsAre(
+														stringvalidator.LengthAtMost(255),
+														stringvalidator.RegexMatches(regexp.MustCompile("[\\-0-9a-zA-Z]+"), ""),
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: S3SourceConfig
+							"s3_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FileFormatDescriptor
+									"file_format_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CsvFormatDescriptor
+											"csv_format_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Charset
+													"charset": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthAtMost(63),
+															stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: ContainsHeader
+													"contains_header": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+															boolplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Delimiter
+													"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthAtMost(1),
+															stringvalidator.RegexMatches(regexp.MustCompile("[^\\r\\n]"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: FileCompression
+													"file_compression": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"NONE",
+																"GZIP",
 															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"json_format_descriptor": {
-															// Property: JsonFormatDescriptor
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"charset": {
-																		// Property: Charset
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenAtMost(63),
-																			validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"file_compression": {
-																		// Property: FileCompression
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringInSlice([]string{
-																				"NONE",
-																				"GZIP",
-																			}),
-																		},
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: HeaderList
+													"header_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Optional:    true,
+														Computed:    true,
+														Validators: []validator.List{ /*START VALIDATORS*/
+															listvalidator.ValueStringsAre(
+																stringvalidator.LengthBetween(1, 63),
+																stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
 															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-											"historical_data_path_list": {
-												// Property: HistoricalDataPathList
-												Type:     types.ListType{ElemType: types.StringType},
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+															listplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: QuoteSymbol
+													"quote_symbol": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthAtMost(1),
+															stringvalidator.RegexMatches(regexp.MustCompile("[^\\r\\n]|^$"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Optional: true,
 												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(1, 1),
-													validate.ArrayForEach(validate.StringLenAtMost(1024)),
-													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^s3://[a-z0-9].+$"), "")),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
-												},
-											},
-											"templated_path_list": {
-												// Property: TemplatedPathList
-												Type:     types.ListType{ElemType: types.StringType},
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: JsonFormatDescriptor
+											"json_format_descriptor": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Charset
+													"charset": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.LengthAtMost(63),
+															stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: FileCompression
+													"file_compression": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														Validators: []validator.String{ /*START VALIDATORS*/
+															stringvalidator.OneOf(
+																"NONE",
+																"GZIP",
+															),
+														}, /*END VALIDATORS*/
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Optional: true,
 												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(1, 1),
-													validate.ArrayForEach(validate.StringLenAtMost(1024)),
-													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^s3://[a-zA-Z0-9_\\-\\/ {}=]+$"), "")),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+									// Property: HistoricalDataPathList
+									"historical_data_path_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 1),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtMost(1024),
+												stringvalidator.RegexMatches(regexp.MustCompile("^s3://[a-z0-9].+$"), ""),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RoleArn
+									"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(256),
+											stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):.*:.*:.*:.+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TemplatedPathList
+									"templated_path_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeBetween(1, 1),
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtMost(1024),
+												stringvalidator.RegexMatches(regexp.MustCompile("^s3://[a-zA-Z0-9_\\-\\/ {}=]+$"), ""),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Required: true,
-					},
-					"offset": {
-						// Property: Offset
+					}, /*END ATTRIBUTE*/
+					// Property: Offset
+					"offset": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "Offset, in seconds, between the frequency interval and the time at which the metrics are available.",
-						Type:        types.Int64Type,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(0, 432000),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"timestamp_column": {
-						// Property: TimestampColumn
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"column_format": {
-									// Property: ColumnFormat
-									Description: "A timestamp format for the timestamps in the dataset",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(63),
-										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"column_name": {
-									// Property: ColumnName
-									Description: "Name of a column in the data.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(0, 432000),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TimestampColumn
+					"timestamp_column": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ColumnFormat
+							"column_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A timestamp format for the timestamps in the dataset",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(63),
+									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ColumnName
+							"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Name of a column in the data.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 63),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"timezone": {
-						// Property: Timezone
-						Type:     types.StringType,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Timezone
+					"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(60),
-							validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 1),
-			},
-		},
-	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(60),
+							stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of metric sets for anomaly detection",
+			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 1),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "An Amazon Lookout for Metrics Detector",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::AnomalyDetector").WithTerraformTypeName("awscc_lookoutmetrics_anomaly_detector")
 	opts = opts.WithTerraformSchema(schema)
@@ -1283,7 +1240,7 @@ func anomalyDetectorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(15)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

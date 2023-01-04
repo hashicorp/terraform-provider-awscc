@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,80 +19,73 @@ func init() {
 // staticIpDataSource returns the Terraform awscc_lightsail_static_ip data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Lightsail::StaticIp resource.
 func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"attached_to": {
-			// Property: AttachedTo
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The instance where the static IP is attached.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AttachedTo
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The instance where the static IP is attached.",
+		//	  "type": "string"
+		//	}
+		"attached_to": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The instance where the static IP is attached.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"ip_address": {
-			// Property: IpAddress
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The static IP address.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IpAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The static IP address.",
+		//	  "type": "string"
+		//	}
+		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The static IP address.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"is_attached": {
-			// Property: IsAttached
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A Boolean value indicating whether the static IP is attached.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IsAttached
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A Boolean value indicating whether the static IP is attached.",
+		//	  "type": "boolean"
+		//	}
+		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A Boolean value indicating whether the static IP is attached.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"static_ip_arn": {
-			// Property: StaticIpArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: StaticIpArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"static_ip_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"static_ip_name": {
-			// Property: StaticIpName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the static IP address.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StaticIpName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the static IP address.",
+		//	  "type": "string"
+		//	}
+		"static_ip_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the static IP address.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Lightsail::StaticIp",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::StaticIp").WithTerraformTypeName("awscc_lightsail_static_ip")
 	opts = opts.WithTerraformSchema(schema)
@@ -104,7 +97,7 @@ func staticIpDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"static_ip_name": "StaticIpName",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

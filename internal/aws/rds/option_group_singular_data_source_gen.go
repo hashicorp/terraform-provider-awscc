@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,247 +19,234 @@ func init() {
 // optionGroupDataSource returns the Terraform awscc_rds_option_group data source.
 // This Terraform data source corresponds to the CloudFormation AWS::RDS::OptionGroup resource.
 func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"engine_name": {
-			// Property: EngineName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates the name of the engine that this option group can be applied to.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: EngineName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates the name of the engine that this option group can be applied to.",
+		//	  "type": "string"
+		//	}
+		"engine_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates the name of the engine that this option group can be applied to.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"major_engine_version": {
-			// Property: MajorEngineVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates the major engine version associated with this option group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MajorEngineVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates the major engine version associated with this option group.",
+		//	  "type": "string"
+		//	}
+		"major_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates the major engine version associated with this option group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"option_configurations": {
-			// Property: OptionConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates what options are available in the option group.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "The OptionConfiguration property type specifies an individual option, and its settings, within an AWS::RDS::OptionGroup resource.",
-			//	    "properties": {
-			//	      "DBSecurityGroupMemberships": {
-			//	        "description": "A list of DBSecurityGroupMembership name strings used for this option.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "OptionName": {
-			//	        "description": "The configuration of options to include in a group.",
-			//	        "type": "string"
-			//	      },
-			//	      "OptionSettings": {
-			//	        "description": "The option settings to include in an option group.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "The OptionSetting property type specifies the value for an option within an OptionSetting property.",
-			//	          "properties": {
-			//	            "Name": {
-			//	              "description": "The name of the option that has settings that you can set.",
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "description": "The current value of the option setting.",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "OptionVersion": {
-			//	        "description": "The version for the option.",
-			//	        "type": "string"
-			//	      },
-			//	      "Port": {
-			//	        "description": "The optional port for the option.",
-			//	        "type": "integer"
-			//	      },
-			//	      "VpcSecurityGroupMemberships": {
-			//	        "description": "A list of VpcSecurityGroupMembership name strings used for this option.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "OptionName"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "Indicates what options are available in the option group.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"db_security_group_memberships": {
-						// Property: DBSecurityGroupMemberships
+		}, /*END ATTRIBUTE*/
+		// Property: OptionConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates what options are available in the option group.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The OptionConfiguration property type specifies an individual option, and its settings, within an AWS::RDS::OptionGroup resource.",
+		//	    "properties": {
+		//	      "DBSecurityGroupMemberships": {
+		//	        "description": "A list of DBSecurityGroupMembership name strings used for this option.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "OptionName": {
+		//	        "description": "The configuration of options to include in a group.",
+		//	        "type": "string"
+		//	      },
+		//	      "OptionSettings": {
+		//	        "description": "The option settings to include in an option group.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "The OptionSetting property type specifies the value for an option within an OptionSetting property.",
+		//	          "properties": {
+		//	            "Name": {
+		//	              "description": "The name of the option that has settings that you can set.",
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The current value of the option setting.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "OptionVersion": {
+		//	        "description": "The version for the option.",
+		//	        "type": "string"
+		//	      },
+		//	      "Port": {
+		//	        "description": "The optional port for the option.",
+		//	        "type": "integer"
+		//	      },
+		//	      "VpcSecurityGroupMemberships": {
+		//	        "description": "A list of VpcSecurityGroupMembership name strings used for this option.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "OptionName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"option_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DBSecurityGroupMemberships
+					"db_security_group_memberships": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of DBSecurityGroupMembership name strings used for this option.",
-						Type:        types.SetType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"option_name": {
-						// Property: OptionName
+					}, /*END ATTRIBUTE*/
+					// Property: OptionName
+					"option_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The configuration of options to include in a group.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"option_settings": {
-						// Property: OptionSettings
-						Description: "The option settings to include in an option group.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
+					}, /*END ATTRIBUTE*/
+					// Property: OptionSettings
+					"option_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of the option that has settings that you can set.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"value": {
-									// Property: Value
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The current value of the option setting.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"option_version": {
-						// Property: OptionVersion
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The option settings to include in an option group.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: OptionVersion
+					"option_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The version for the option.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"port": {
-						// Property: Port
+					}, /*END ATTRIBUTE*/
+					// Property: Port
+					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The optional port for the option.",
-						Type:        types.Int64Type,
 						Computed:    true,
-					},
-					"vpc_security_group_memberships": {
-						// Property: VpcSecurityGroupMemberships
+					}, /*END ATTRIBUTE*/
+					// Property: VpcSecurityGroupMemberships
+					"vpc_security_group_memberships": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of VpcSecurityGroupMembership name strings used for this option.",
-						Type:        types.SetType{ElemType: types.StringType},
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"option_group_description": {
-			// Property: OptionGroupDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides a description of the option group.",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Indicates what options are available in the option group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OptionGroupDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides a description of the option group.",
+		//	  "type": "string"
+		//	}
+		"option_group_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides a description of the option group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"option_group_name": {
-			// Property: OptionGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the name of the option group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: OptionGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the name of the option group.",
+		//	  "type": "string"
+		//	}
+		"option_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the name of the option group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::RDS::OptionGroup",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::OptionGroup").WithTerraformTypeName("awscc_rds_option_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -281,7 +268,7 @@ func optionGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_security_group_memberships": "VpcSecurityGroupMemberships",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

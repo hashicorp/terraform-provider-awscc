@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,235 +19,223 @@ func init() {
 // metricFilterDataSource returns the Terraform awscc_logs_metric_filter data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Logs::MetricFilter resource.
 func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"filter_name": {
-			// Property: FilterName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the metric filter.",
-			//	  "maxLength": 512,
-			//	  "minLength": 1,
-			//	  "pattern": "^[^:*]{1,512}",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: FilterName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the metric filter.",
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "pattern": "^[^:*]{1,512}",
+		//	  "type": "string"
+		//	}
+		"filter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the metric filter.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"filter_pattern": {
-			// Property: FilterPattern
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Pattern that Logs follows to interpret each entry in a log.",
-			//	  "maxLength": 1024,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: FilterPattern
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Pattern that Logs follows to interpret each entry in a log.",
+		//	  "maxLength": 1024,
+		//	  "type": "string"
+		//	}
+		"filter_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Pattern that Logs follows to interpret each entry in a log.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"log_group_name": {
-			// Property: LogGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Existing log group that you want to associate with this filter.",
-			//	  "maxLength": 512,
-			//	  "minLength": 1,
-			//	  "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LogGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Existing log group that you want to associate with this filter.",
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "pattern": "^[.\\-_/#A-Za-z0-9]{1,512}",
+		//	  "type": "string"
+		//	}
+		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Existing log group that you want to associate with this filter.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"metric_transformations": {
-			// Property: MetricTransformations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A collection of information that defines how metric data gets emitted.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "DefaultValue": {
-			//	        "description": "The value to emit when a filter pattern does not match a log event. This value can be null.",
-			//	        "type": "number"
-			//	      },
-			//	      "Dimensions": {
-			//	        "description": "Dimensions are the key-value pairs that further define a metric",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "the key-value pairs that further define a metric.",
-			//	          "properties": {
-			//	            "Key": {
-			//	              "description": "The key of the dimension. Maximum length of 255.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "description": "The value of the dimension. Maximum length of 255.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Key",
-			//	            "Value"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 3,
-			//	        "minItems": 1,
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "MetricName": {
-			//	        "description": "The name of the CloudWatch metric. Metric name must be in ASCII format.",
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "MetricNamespace": {
-			//	        "$comment": "Namespaces can be up to 256 characters long; valid characters include 0-9A-Za-z.-_/#",
-			//	        "description": "The namespace of the CloudWatch metric.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "^[0-9a-zA-Z\\.\\-_\\/#]{1,256}",
-			//	        "type": "string"
-			//	      },
-			//	      "MetricValue": {
-			//	        "description": "The value to publish to the CloudWatch metric when a filter pattern matches a log event.",
-			//	        "maxLength": 100,
-			//	        "minLength": 1,
-			//	        "pattern": ".{1,100}",
-			//	        "type": "string"
-			//	      },
-			//	      "Unit": {
-			//	        "description": "The unit to assign to the metric. If you omit this, the unit is set as None.",
-			//	        "enum": [
-			//	          "Seconds",
-			//	          "Microseconds",
-			//	          "Milliseconds",
-			//	          "Bytes",
-			//	          "Kilobytes",
-			//	          "Megabytes",
-			//	          "Gigabytes",
-			//	          "Terabytes",
-			//	          "Bits",
-			//	          "Kilobits",
-			//	          "Megabits",
-			//	          "Gigabits",
-			//	          "Terabits",
-			//	          "Percent",
-			//	          "Count",
-			//	          "Bytes/Second",
-			//	          "Kilobytes/Second",
-			//	          "Megabytes/Second",
-			//	          "Gigabytes/Second",
-			//	          "Terabytes/Second",
-			//	          "Bits/Second",
-			//	          "Kilobits/Second",
-			//	          "Megabits/Second",
-			//	          "Gigabits/Second",
-			//	          "Terabits/Second",
-			//	          "Count/Second",
-			//	          "None"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "MetricName",
-			//	      "MetricNamespace",
-			//	      "MetricValue"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 1,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "A collection of information that defines how metric data gets emitted.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"default_value": {
-						// Property: DefaultValue
+		}, /*END ATTRIBUTE*/
+		// Property: MetricTransformations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A collection of information that defines how metric data gets emitted.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "DefaultValue": {
+		//	        "description": "The value to emit when a filter pattern does not match a log event. This value can be null.",
+		//	        "type": "number"
+		//	      },
+		//	      "Dimensions": {
+		//	        "description": "Dimensions are the key-value pairs that further define a metric",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "the key-value pairs that further define a metric.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "description": "The key of the dimension. Maximum length of 255.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The value of the dimension. Maximum length of 255.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 3,
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "MetricName": {
+		//	        "description": "The name of the CloudWatch metric. Metric name must be in ASCII format.",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "MetricNamespace": {
+		//	        "$comment": "Namespaces can be up to 256 characters long; valid characters include 0-9A-Za-z.-_/#",
+		//	        "description": "The namespace of the CloudWatch metric.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[0-9a-zA-Z\\.\\-_\\/#]{1,256}",
+		//	        "type": "string"
+		//	      },
+		//	      "MetricValue": {
+		//	        "description": "The value to publish to the CloudWatch metric when a filter pattern matches a log event.",
+		//	        "maxLength": 100,
+		//	        "minLength": 1,
+		//	        "pattern": ".{1,100}",
+		//	        "type": "string"
+		//	      },
+		//	      "Unit": {
+		//	        "description": "The unit to assign to the metric. If you omit this, the unit is set as None.",
+		//	        "enum": [
+		//	          "Seconds",
+		//	          "Microseconds",
+		//	          "Milliseconds",
+		//	          "Bytes",
+		//	          "Kilobytes",
+		//	          "Megabytes",
+		//	          "Gigabytes",
+		//	          "Terabytes",
+		//	          "Bits",
+		//	          "Kilobits",
+		//	          "Megabits",
+		//	          "Gigabits",
+		//	          "Terabits",
+		//	          "Percent",
+		//	          "Count",
+		//	          "Bytes/Second",
+		//	          "Kilobytes/Second",
+		//	          "Megabytes/Second",
+		//	          "Gigabytes/Second",
+		//	          "Terabytes/Second",
+		//	          "Bits/Second",
+		//	          "Kilobits/Second",
+		//	          "Megabits/Second",
+		//	          "Gigabits/Second",
+		//	          "Terabits/Second",
+		//	          "Count/Second",
+		//	          "None"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "MetricName",
+		//	      "MetricNamespace",
+		//	      "MetricValue"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"metric_transformations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DefaultValue
+					"default_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The value to emit when a filter pattern does not match a log event. This value can be null.",
-						Type:        types.Float64Type,
 						Computed:    true,
-					},
-					"dimensions": {
-						// Property: Dimensions
-						Description: "Dimensions are the key-value pairs that further define a metric",
-						Attributes: tfsdk.SetNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key": {
-									// Property: Key
+					}, /*END ATTRIBUTE*/
+					// Property: Dimensions
+					"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The key of the dimension. Maximum length of 255.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"value": {
-									// Property: Value
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The value of the dimension. Maximum length of 255.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"metric_name": {
-						// Property: MetricName
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Dimensions are the key-value pairs that further define a metric",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: MetricName
+					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the CloudWatch metric. Metric name must be in ASCII format.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"metric_namespace": {
-						// Property: MetricNamespace
+					}, /*END ATTRIBUTE*/
+					// Property: MetricNamespace
+					"metric_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The namespace of the CloudWatch metric.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"metric_value": {
-						// Property: MetricValue
+					}, /*END ATTRIBUTE*/
+					// Property: MetricValue
+					"metric_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value to publish to the CloudWatch metric when a filter pattern matches a log event.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"unit": {
-						// Property: Unit
+					}, /*END ATTRIBUTE*/
+					// Property: Unit
+					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The unit to assign to the metric. If you omit this, the unit is set as None.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of information that defines how metric data gets emitted.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Logs::MetricFilter",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::MetricFilter").WithTerraformTypeName("awscc_logs_metric_filter")
 	opts = opts.WithTerraformSchema(schema)
@@ -266,7 +254,7 @@ func metricFilterDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"value":                  "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -5,12 +5,19 @@ package pinpoint
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,869 +27,808 @@ func init() {
 // inAppTemplateResource returns the Terraform awscc_pinpoint_in_app_template resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource.
 func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"content": {
-			// Property: Content
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "BackgroundColor": {
-			//	        "type": "string"
-			//	      },
-			//	      "BodyConfig": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Alignment": {
-			//	            "enum": [
-			//	              "LEFT",
-			//	              "CENTER",
-			//	              "RIGHT"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Body": {
-			//	            "type": "string"
-			//	          },
-			//	          "TextColor": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "HeaderConfig": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Alignment": {
-			//	            "enum": [
-			//	              "LEFT",
-			//	              "CENTER",
-			//	              "RIGHT"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Header": {
-			//	            "type": "string"
-			//	          },
-			//	          "TextColor": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "ImageUrl": {
-			//	        "type": "string"
-			//	      },
-			//	      "PrimaryBtn": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Android": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "DefaultConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "BackgroundColor": {
-			//	                "type": "string"
-			//	              },
-			//	              "BorderRadius": {
-			//	                "type": "integer"
-			//	              },
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              },
-			//	              "Text": {
-			//	                "type": "string"
-			//	              },
-			//	              "TextColor": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "IOS": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Web": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "SecondaryBtn": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Android": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "DefaultConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "BackgroundColor": {
-			//	                "type": "string"
-			//	              },
-			//	              "BorderRadius": {
-			//	                "type": "integer"
-			//	              },
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              },
-			//	              "Text": {
-			//	                "type": "string"
-			//	              },
-			//	              "TextColor": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "IOS": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Web": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"background_color": {
-						// Property: BackgroundColor
-						Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Content
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BackgroundColor": {
+		//	        "type": "string"
+		//	      },
+		//	      "BodyConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Alignment": {
+		//	            "enum": [
+		//	              "LEFT",
+		//	              "CENTER",
+		//	              "RIGHT"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Body": {
+		//	            "type": "string"
+		//	          },
+		//	          "TextColor": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "HeaderConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Alignment": {
+		//	            "enum": [
+		//	              "LEFT",
+		//	              "CENTER",
+		//	              "RIGHT"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Header": {
+		//	            "type": "string"
+		//	          },
+		//	          "TextColor": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ImageUrl": {
+		//	        "type": "string"
+		//	      },
+		//	      "PrimaryBtn": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Android": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "DefaultConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "BackgroundColor": {
+		//	                "type": "string"
+		//	              },
+		//	              "BorderRadius": {
+		//	                "type": "integer"
+		//	              },
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              },
+		//	              "Text": {
+		//	                "type": "string"
+		//	              },
+		//	              "TextColor": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "IOS": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Web": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "SecondaryBtn": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Android": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "DefaultConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "BackgroundColor": {
+		//	                "type": "string"
+		//	              },
+		//	              "BorderRadius": {
+		//	                "type": "integer"
+		//	              },
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              },
+		//	              "Text": {
+		//	                "type": "string"
+		//	              },
+		//	              "TextColor": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "IOS": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Web": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"content": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BackgroundColor
+					"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"body_config": {
-						// Property: BodyConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"alignment": {
-									// Property: Alignment
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"LEFT",
-											"CENTER",
-											"RIGHT",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"body": {
-									// Property: Body
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"text_color": {
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BodyConfig
+					"body_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Alignment
+							"alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"LEFT",
+										"CENTER",
+										"RIGHT",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Body
+							"body": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TextColor
+							"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: HeaderConfig
+					"header_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Alignment
+							"alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"LEFT",
+										"CENTER",
+										"RIGHT",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Header
+							"header": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TextColor
+							"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ImageUrl
+					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: PrimaryBtn
+					"primary_btn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Android
+							"android": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultConfig
+							"default_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BackgroundColor
+									"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: BorderRadius
+									"border_radius": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Text
+									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: TextColor
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+									"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: IOS
+							"ios": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Web
+							"web": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"header_config": {
-						// Property: HeaderConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"alignment": {
-									// Property: Alignment
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"LEFT",
-											"CENTER",
-											"RIGHT",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"header": {
-									// Property: Header
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"text_color": {
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SecondaryBtn
+					"secondary_btn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Android
+							"android": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultConfig
+							"default_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BackgroundColor
+									"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: BorderRadius
+									"border_radius": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Text
+									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: TextColor
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+									"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: IOS
+							"ios": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Web
+							"web": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"LINK",
+												"DEEP_LINK",
+												"CLOSE",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"image_url": {
-						// Property: ImageUrl
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"primary_btn": {
-						// Property: PrimaryBtn
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"android": {
-									// Property: Android
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"default_config": {
-									// Property: DefaultConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"background_color": {
-												// Property: BackgroundColor
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"border_radius": {
-												// Property: BorderRadius
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"text": {
-												// Property: Text
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"text_color": {
-												// Property: TextColor
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"ios": {
-									// Property: IOS
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"web": {
-									// Property: Web
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"secondary_btn": {
-						// Property: SecondaryBtn
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"android": {
-									// Property: Android
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"default_config": {
-									// Property: DefaultConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"background_color": {
-												// Property: BackgroundColor
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"border_radius": {
-												// Property: BorderRadius
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"text": {
-												// Property: Text
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"text_color": {
-												// Property: TextColor
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"ios": {
-									// Property: IOS
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"web": {
-									// Property: Web
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"LINK",
-														"DEEP_LINK",
-														"CLOSE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"custom_config": {
-			// Property: CustomConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "object"
-			//	}
-			Type:     types.MapType{ElemType: types.StringType},
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "object"
+		//	}
+		"custom_config": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Layout
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "BOTTOM_BANNER",
+		//	    "TOP_BANNER",
+		//	    "OVERLAYS",
+		//	    "MOBILE_FEED",
+		//	    "MIDDLE_BANNER",
+		//	    "CAROUSEL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"layout": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"layout": {
-			// Property: Layout
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "BOTTOM_BANNER",
-			//	    "TOP_BANNER",
-			//	    "OVERLAYS",
-			//	    "MOBILE_FEED",
-			//	    "MIDDLE_BANNER",
-			//	    "CAROUSEL"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"BOTTOM_BANNER",
 					"TOP_BANNER",
 					"OVERLAYS",
 					"MOBILE_FEED",
 					"MIDDLE_BANNER",
 					"CAROUSEL",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "object"
-			//	}
-			Type:     types.MapType{ElemType: types.StringType},
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "object"
+		//	}
+		"tags": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TemplateDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"template_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"template_description": {
-			// Property: TemplateDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"template_name": {
-			// Property: TemplateName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TemplateName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Pinpoint::InAppTemplate",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pinpoint::InAppTemplate").WithTerraformTypeName("awscc_pinpoint_in_app_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -919,7 +865,7 @@ func inAppTemplateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

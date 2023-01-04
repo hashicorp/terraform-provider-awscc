@@ -49,7 +49,7 @@ Required:
 <a id="nestedatt--namespace"></a>
 ### Nested Schema for `namespace`
 
-Optional:
+Read-Only:
 
 - `admin_username` (String)
 - `creation_date` (String)

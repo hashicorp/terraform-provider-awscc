@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,82 +19,76 @@ func init() {
 // groupDataSource returns the Terraform awscc_identitystore_group data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IdentityStore::Group resource.
 func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A string containing the description of the group.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  　]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A string containing the description of the group.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  　]+$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A string containing the description of the group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"display_name": {
-			// Property: DisplayName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DisplayName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
+		//	  "type": "string"
+		//	}
+		"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A string containing the name of the group. This value is commonly displayed when the group is referenced.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"group_id": {
-			// Property: GroupId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique identifier for a group in the identity store.",
-			//	  "maxLength": 47,
-			//	  "minLength": 1,
-			//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier for a group in the identity store.",
+		//	  "maxLength": 47,
+		//	  "minLength": 1,
+		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier for a group in the identity store.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"identity_store_id": {
-			// Property: IdentityStoreId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The globally unique identifier for the identity store.",
-			//	  "maxLength": 36,
-			//	  "minLength": 1,
-			//	  "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityStoreId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The globally unique identifier for the identity store.",
+		//	  "maxLength": 36,
+		//	  "minLength": 1,
+		//	  "pattern": "^d-[0-9a-f]{10}$|^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$",
+		//	  "type": "string"
+		//	}
+		"identity_store_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The globally unique identifier for the identity store.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IdentityStore::Group",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IdentityStore::Group").WithTerraformTypeName("awscc_identitystore_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -105,7 +99,7 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"identity_store_id": "IdentityStoreId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

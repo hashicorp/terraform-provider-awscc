@@ -6,9 +6,15 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,339 +25,315 @@ func init() {
 // scheduledActionResource returns the Terraform awscc_redshift_scheduled_action resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Redshift::ScheduledAction resource.
 func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"enable": {
-			// Property: Enable
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Enable
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
+		//	  "type": "boolean"
+		//	}
+		"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"end_time": {
-			// Property: EndTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EndTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
+		//	  "type": "string"
+		//	}
+		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"iam_role": {
-			// Property: IamRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IAM role to assume to run the target action.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IamRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IAM role to assume to run the target action.",
+		//	  "type": "string"
+		//	}
+		"iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IAM role to assume to run the target action.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"next_invocations": {
-			// Property: NextInvocations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of times when the scheduled action will run.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NextInvocations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of times when the scheduled action will run.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"next_invocations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "List of times when the scheduled action will run.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"schedule": {
-			// Property: Schedule
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The schedule in `at( )` or `cron( )` format.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Schedule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The schedule in `at( )` or `cron( )` format.",
+		//	  "type": "string"
+		//	}
+		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The schedule in `at( )` or `cron( )` format.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"scheduled_action_description": {
-			// Property: ScheduledActionDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the scheduled action.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ScheduledActionDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the scheduled action.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"scheduled_action_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the scheduled action.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"scheduled_action_name": {
-			// Property: ScheduledActionName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the scheduled action. The name must be unique within an account.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ScheduledActionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the scheduled action. The name must be unique within an account.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the scheduled action. The name must be unique within an account.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"start_time": {
-			// Property: StartTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StartTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
+		//	  "type": "string"
+		//	}
+		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The state of the scheduled action.",
-			//	  "enum": [
-			//	    "ACTIVE",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the scheduled action.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The state of the scheduled action.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"target_action": {
-			// Property: TargetAction
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
-			//	  "properties": {
-			//	    "PauseCluster": {
-			//	      "additionalProperties": false,
-			//	      "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
-			//	      "properties": {
-			//	        "ClusterIdentifier": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ClusterIdentifier"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ResizeCluster": {
-			//	      "additionalProperties": false,
-			//	      "description": "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
-			//	      "properties": {
-			//	        "Classic": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "ClusterIdentifier": {
-			//	          "type": "string"
-			//	        },
-			//	        "ClusterType": {
-			//	          "type": "string"
-			//	        },
-			//	        "NodeType": {
-			//	          "type": "string"
-			//	        },
-			//	        "NumberOfNodes": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ClusterIdentifier"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ResumeCluster": {
-			//	      "additionalProperties": false,
-			//	      "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
-			//	      "properties": {
-			//	        "ClusterIdentifier": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ClusterIdentifier"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TargetAction
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
+		//	  "properties": {
+		//	    "PauseCluster": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
+		//	      "properties": {
+		//	        "ClusterIdentifier": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClusterIdentifier"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ResizeCluster": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
+		//	      "properties": {
+		//	        "Classic": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "ClusterIdentifier": {
+		//	          "type": "string"
+		//	        },
+		//	        "ClusterType": {
+		//	          "type": "string"
+		//	        },
+		//	        "NodeType": {
+		//	          "type": "string"
+		//	        },
+		//	        "NumberOfNodes": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClusterIdentifier"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ResumeCluster": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
+		//	      "properties": {
+		//	        "ClusterIdentifier": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClusterIdentifier"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"target_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PauseCluster
+				"pause_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterIdentifier
+						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResizeCluster
+				"resize_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Classic
+						"classic": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ClusterIdentifier
+						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClusterType
+						"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NodeType
+						"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NumberOfNodes
+						"number_of_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResumeCluster
+				"resume_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterIdentifier
+						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A JSON format string of the Amazon Redshift API operation with input parameters.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"pause_cluster": {
-						// Property: PauseCluster
-						Description: "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cluster_identifier": {
-									// Property: ClusterIdentifier
-									Type:     types.StringType,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"resize_cluster": {
-						// Property: ResizeCluster
-						Description: "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"classic": {
-									// Property: Classic
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"cluster_identifier": {
-									// Property: ClusterIdentifier
-									Type:     types.StringType,
-									Required: true,
-								},
-								"cluster_type": {
-									// Property: ClusterType
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"node_type": {
-									// Property: NodeType
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"number_of_nodes": {
-									// Property: NumberOfNodes
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"resume_cluster": {
-						// Property: ResumeCluster
-						Description: "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cluster_identifier": {
-									// Property: ClusterIdentifier
-									Type:     types.StringType,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The `AWS::Redshift::ScheduledAction` resource creates an Amazon Redshift Scheduled Action.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::ScheduledAction").WithTerraformTypeName("awscc_redshift_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -381,7 +363,7 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

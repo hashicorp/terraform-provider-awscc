@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,96 +19,87 @@ func init() {
 // templateDataSource returns the Terraform awscc_ses_template data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SES::Template resource.
 func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"template": {
-			// Property: Template
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The content of the email, composed of a subject line, an HTML part, and a text-only part",
-			//	  "properties": {
-			//	    "HtmlPart": {
-			//	      "description": "The HTML body of the email.",
-			//	      "type": "string"
-			//	    },
-			//	    "SubjectPart": {
-			//	      "description": "The subject line of the email.",
-			//	      "type": "string"
-			//	    },
-			//	    "TemplateName": {
-			//	      "description": "The name of the template.",
-			//	      "maxLength": 64,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//	      "type": "string"
-			//	    },
-			//	    "TextPart": {
-			//	      "description": "The email body that is visible to recipients whose email clients do not display HTML content.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "SubjectPart"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Template
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The content of the email, composed of a subject line, an HTML part, and a text-only part",
+		//	  "properties": {
+		//	    "HtmlPart": {
+		//	      "description": "The HTML body of the email.",
+		//	      "type": "string"
+		//	    },
+		//	    "SubjectPart": {
+		//	      "description": "The subject line of the email.",
+		//	      "type": "string"
+		//	    },
+		//	    "TemplateName": {
+		//	      "description": "The name of the template.",
+		//	      "maxLength": 64,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+		//	      "type": "string"
+		//	    },
+		//	    "TextPart": {
+		//	      "description": "The email body that is visible to recipients whose email clients do not display HTML content.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SubjectPart"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HtmlPart
+				"html_part": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The HTML body of the email.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubjectPart
+				"subject_part": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The subject line of the email.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TemplateName
+				"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TextPart
+				"text_part": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The email body that is visible to recipients whose email clients do not display HTML content.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The content of the email, composed of a subject line, an HTML part, and a text-only part",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"html_part": {
-						// Property: HtmlPart
-						Description: "The HTML body of the email.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"subject_part": {
-						// Property: SubjectPart
-						Description: "The subject line of the email.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"template_name": {
-						// Property: TemplateName
-						Description: "The name of the template.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"text_part": {
-						// Property: TextPart
-						Description: "The email body that is visible to recipients whose email clients do not display HTML content.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SES::Template",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::Template").WithTerraformTypeName("awscc_ses_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -121,7 +112,7 @@ func templateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"text_part":     "TextPart",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

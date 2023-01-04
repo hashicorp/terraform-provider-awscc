@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,70 +19,65 @@ func init() {
 // loggingDataSource returns the Terraform awscc_iot_logging data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::Logging resource.
 func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"account_id": {
-			// Property: AccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
-			//	  "maxLength": 12,
-			//	  "minLength": 12,
-			//	  "pattern": "^[0-9]{12}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Your 12-digit account ID (used as the primary identifier for the CloudFormation resource).",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"default_log_level": {
-			// Property: DefaultLogLevel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			//	  "enum": [
-			//	    "ERROR",
-			//	    "WARN",
-			//	    "INFO",
-			//	    "DEBUG",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultLogLevel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+		//	  "enum": [
+		//	    "ERROR",
+		//	    "WARN",
+		//	    "INFO",
+		//	    "DEBUG",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"default_log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The log level to use. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the role that allows IoT to write to Cloudwatch logs.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the role that allows IoT to write to Cloudwatch logs.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the role that allows IoT to write to Cloudwatch logs.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoT::Logging",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Logging").WithTerraformTypeName("awscc_iot_logging")
 	opts = opts.WithTerraformSchema(schema)
@@ -92,7 +87,7 @@ func loggingDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn":          "RoleArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

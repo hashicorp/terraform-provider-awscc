@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,168 +19,158 @@ func init() {
 // contactListDataSource returns the Terraform awscc_ses_contact_list data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SES::ContactList resource.
 func contactListDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"contact_list_name": {
-			// Property: ContactListName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the contact list.",
-			//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ContactListName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the contact list.",
+		//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+		//	  "type": "string"
+		//	}
+		"contact_list_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the contact list.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the contact list.",
-			//	  "maxLength": 500,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the contact list.",
+		//	  "maxLength": 500,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the contact list.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The tags (keys and values) associated with the contact list.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags (keys and values) associated with the contact list.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "The tags (keys and values) associated with the contact list.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Topics
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The topics associated with the contact list.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "DefaultSubscriptionStatus": {
+		//	        "type": "string"
+		//	      },
+		//	      "Description": {
+		//	        "description": "The description of the topic.",
+		//	        "maxLength": 500,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      },
+		//	      "DisplayName": {
+		//	        "description": "The display name of the topic.",
+		//	        "maxLength": 128,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      },
+		//	      "TopicName": {
+		//	        "description": "The name of the topic.",
+		//	        "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "TopicName",
+		//	      "DisplayName",
+		//	      "DefaultSubscriptionStatus"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"topics": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DefaultSubscriptionStatus
+					"default_subscription_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"topics": {
-			// Property: Topics
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The topics associated with the contact list.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "DefaultSubscriptionStatus": {
-			//	        "type": "string"
-			//	      },
-			//	      "Description": {
-			//	        "description": "The description of the topic.",
-			//	        "maxLength": 500,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      },
-			//	      "DisplayName": {
-			//	        "description": "The display name of the topic.",
-			//	        "maxLength": 128,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      },
-			//	      "TopicName": {
-			//	        "description": "The name of the topic.",
-			//	        "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "TopicName",
-			//	      "DisplayName",
-			//	      "DefaultSubscriptionStatus"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 20,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
-			Description: "The topics associated with the contact list.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"default_subscription_status": {
-						// Property: DefaultSubscriptionStatus
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"description": {
-						// Property: Description
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The description of the topic.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"display_name": {
-						// Property: DisplayName
+					}, /*END ATTRIBUTE*/
+					// Property: DisplayName
+					"display_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The display name of the topic.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"topic_name": {
-						// Property: TopicName
+					}, /*END ATTRIBUTE*/
+					// Property: TopicName
+					"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the topic.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The topics associated with the contact list.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SES::ContactList",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ContactList").WithTerraformTypeName("awscc_ses_contact_list")
 	opts = opts.WithTerraformSchema(schema)
@@ -196,7 +186,7 @@ func contactListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                       "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

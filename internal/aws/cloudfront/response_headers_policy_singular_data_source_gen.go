@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,581 +19,522 @@ func init() {
 // responseHeadersPolicyDataSource returns the Terraform awscc_cloudfront_response_headers_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFront::ResponseHeadersPolicy resource.
 func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"response_headers_policy_config": {
-			// Property: ResponseHeadersPolicyConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Comment": {
-			//	      "type": "string"
-			//	    },
-			//	    "CorsConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AccessControlAllowCredentials": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "AccessControlAllowHeaders": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Items": {
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Items"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "AccessControlAllowMethods": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Items": {
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Items"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "AccessControlAllowOrigins": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Items": {
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Items"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "AccessControlExposeHeaders": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Items": {
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Items"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "AccessControlMaxAgeSec": {
-			//	          "type": "integer"
-			//	        },
-			//	        "OriginOverride": {
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "AccessControlAllowOrigins",
-			//	        "AccessControlAllowHeaders",
-			//	        "AccessControlAllowMethods",
-			//	        "AccessControlAllowCredentials",
-			//	        "OriginOverride"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "CustomHeadersConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Items": {
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Header": {
-			//	                "type": "string"
-			//	              },
-			//	              "Override": {
-			//	                "type": "boolean"
-			//	              },
-			//	              "Value": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Header",
-			//	              "Value",
-			//	              "Override"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Items"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Name": {
-			//	      "type": "string"
-			//	    },
-			//	    "SecurityHeadersConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ContentSecurityPolicy": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ContentSecurityPolicy": {
-			//	              "type": "string"
-			//	            },
-			//	            "Override": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Override",
-			//	            "ContentSecurityPolicy"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "ContentTypeOptions": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Override": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Override"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "FrameOptions": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "FrameOption": {
-			//	              "pattern": "^(DENY|SAMEORIGIN)$",
-			//	              "type": "string"
-			//	            },
-			//	            "Override": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Override",
-			//	            "FrameOption"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "ReferrerPolicy": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Override": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "ReferrerPolicy": {
-			//	              "pattern": "^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Override",
-			//	            "ReferrerPolicy"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "StrictTransportSecurity": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AccessControlMaxAgeSec": {
-			//	              "type": "integer"
-			//	            },
-			//	            "IncludeSubdomains": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "Override": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "Preload": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Override",
-			//	            "AccessControlMaxAgeSec"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "XSSProtection": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ModeBlock": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "Override": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "Protection": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "ReportUri": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Override",
-			//	            "Protection"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ServerTimingHeadersConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Enabled": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "SamplingRate": {
-			//	          "maximum": 100,
-			//	          "minimum": 0,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Enabled"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"comment": {
-						// Property: Comment
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"cors_config": {
-						// Property: CorsConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"access_control_allow_credentials": {
-									// Property: AccessControlAllowCredentials
-									Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: ResponseHeadersPolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Comment": {
+		//	      "type": "string"
+		//	    },
+		//	    "CorsConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AccessControlAllowCredentials": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "AccessControlAllowHeaders": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Items": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Items"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AccessControlAllowMethods": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Items": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Items"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AccessControlAllowOrigins": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Items": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Items"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AccessControlExposeHeaders": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Items": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Items"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "AccessControlMaxAgeSec": {
+		//	          "type": "integer"
+		//	        },
+		//	        "OriginOverride": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "AccessControlAllowOrigins",
+		//	        "AccessControlAllowHeaders",
+		//	        "AccessControlAllowMethods",
+		//	        "AccessControlAllowCredentials",
+		//	        "OriginOverride"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "CustomHeadersConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Items": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Header": {
+		//	                "type": "string"
+		//	              },
+		//	              "Override": {
+		//	                "type": "boolean"
+		//	              },
+		//	              "Value": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Header",
+		//	              "Value",
+		//	              "Override"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Items"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Name": {
+		//	      "type": "string"
+		//	    },
+		//	    "SecurityHeadersConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ContentSecurityPolicy": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ContentSecurityPolicy": {
+		//	              "type": "string"
+		//	            },
+		//	            "Override": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Override",
+		//	            "ContentSecurityPolicy"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ContentTypeOptions": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Override": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Override"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "FrameOptions": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "FrameOption": {
+		//	              "pattern": "^(DENY|SAMEORIGIN)$",
+		//	              "type": "string"
+		//	            },
+		//	            "Override": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Override",
+		//	            "FrameOption"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ReferrerPolicy": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Override": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "ReferrerPolicy": {
+		//	              "pattern": "^(no-referrer|no-referrer-when-downgrade|origin|origin-when-cross-origin|same-origin|strict-origin|strict-origin-when-cross-origin|unsafe-url)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Override",
+		//	            "ReferrerPolicy"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "StrictTransportSecurity": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AccessControlMaxAgeSec": {
+		//	              "type": "integer"
+		//	            },
+		//	            "IncludeSubdomains": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "Override": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "Preload": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Override",
+		//	            "AccessControlMaxAgeSec"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "XSSProtection": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ModeBlock": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "Override": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "Protection": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "ReportUri": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Override",
+		//	            "Protection"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ServerTimingHeadersConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "SamplingRate": {
+		//	          "maximum": 100,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Enabled"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"response_headers_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comment
+				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CorsConfig
+				"cors_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessControlAllowCredentials
+						"access_control_allow_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccessControlAllowHeaders
+						"access_control_allow_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Items
+								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccessControlAllowMethods
+						"access_control_allow_methods": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Items
+								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccessControlAllowOrigins
+						"access_control_allow_origins": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Items
+								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccessControlExposeHeaders
+						"access_control_expose_headers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Items
+								"items": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: AccessControlMaxAgeSec
+						"access_control_max_age_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OriginOverride
+						"origin_override": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomHeadersConfig
+				"custom_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Items
+						"items": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Header
+									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Override
+									"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityHeadersConfig
+				"security_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContentSecurityPolicy
+						"content_security_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentSecurityPolicy
+								"content_security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"access_control_allow_headers": {
-									// Property: AccessControlAllowHeaders
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"items": {
-												// Property: Items
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Override
+								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"access_control_allow_methods": {
-									// Property: AccessControlAllowMethods
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"items": {
-												// Property: Items
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ContentTypeOptions
+						"content_type_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Override
+								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"access_control_allow_origins": {
-									// Property: AccessControlAllowOrigins
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"items": {
-												// Property: Items
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: FrameOptions
+						"frame_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: FrameOption
+								"frame_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"access_control_expose_headers": {
-									// Property: AccessControlExposeHeaders
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"items": {
-												// Property: Items
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Override
+								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"access_control_max_age_sec": {
-									// Property: AccessControlMaxAgeSec
-									Type:     types.Int64Type,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ReferrerPolicy
+						"referrer_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Override
+								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"origin_override": {
-									// Property: OriginOverride
-									Type:     types.BoolType,
+								}, /*END ATTRIBUTE*/
+								// Property: ReferrerPolicy
+								"referrer_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"custom_headers_config": {
-						// Property: CustomHeadersConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"items": {
-									// Property: Items
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"header": {
-												// Property: Header
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"override": {
-												// Property: Override
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StrictTransportSecurity
+						"strict_transport_security": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessControlMaxAgeSec
+								"access_control_max_age_sec": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"security_headers_config": {
-						// Property: SecurityHeadersConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"content_security_policy": {
-									// Property: ContentSecurityPolicy
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_security_policy": {
-												// Property: ContentSecurityPolicy
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"override": {
-												// Property: Override
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: IncludeSubdomains
+								"include_subdomains": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"content_type_options": {
-									// Property: ContentTypeOptions
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"override": {
-												// Property: Override
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Override
+								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"frame_options": {
-									// Property: FrameOptions
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"frame_option": {
-												// Property: FrameOption
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"override": {
-												// Property: Override
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Preload
+								"preload": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"referrer_policy": {
-									// Property: ReferrerPolicy
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"override": {
-												// Property: Override
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"referrer_policy": {
-												// Property: ReferrerPolicy
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: XSSProtection
+						"xss_protection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ModeBlock
+								"mode_block": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"strict_transport_security": {
-									// Property: StrictTransportSecurity
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_control_max_age_sec": {
-												// Property: AccessControlMaxAgeSec
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"include_subdomains": {
-												// Property: IncludeSubdomains
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"override": {
-												// Property: Override
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"preload": {
-												// Property: Preload
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Override
+								"override": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"xss_protection": {
-									// Property: XSSProtection
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"mode_block": {
-												// Property: ModeBlock
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"override": {
-												// Property: Override
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"protection": {
-												// Property: Protection
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"report_uri": {
-												// Property: ReportUri
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Protection
+								"protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"server_timing_headers_config": {
-						// Property: ServerTimingHeadersConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"enabled": {
-									// Property: Enabled
-									Type:     types.BoolType,
+								}, /*END ATTRIBUTE*/
+								// Property: ReportUri
+								"report_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"sampling_rate": {
-									// Property: SamplingRate
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServerTimingHeadersConfig
+				"server_timing_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SamplingRate
+						"sampling_rate": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFront::ResponseHeadersPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ResponseHeadersPolicy").WithTerraformTypeName("awscc_cloudfront_response_headers_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -634,7 +575,7 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		"xss_protection":                   "XSSProtection",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

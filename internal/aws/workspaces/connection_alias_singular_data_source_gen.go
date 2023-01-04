@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,169 +19,158 @@ func init() {
 // connectionAliasDataSource returns the Terraform awscc_workspaces_connection_alias data source.
 // This Terraform data source corresponds to the CloudFormation AWS::WorkSpaces::ConnectionAlias resource.
 func connectionAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"alias_id": {
-			// Property: AliasId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 68,
-			//	  "minLength": 13,
-			//	  "pattern": "^wsca-[0-9a-z]{8,63}$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AliasId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 68,
+		//	  "minLength": 13,
+		//	  "pattern": "^wsca-[0-9a-z]{8,63}$",
+		//	  "type": "string"
+		//	}
+		"alias_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"associations": {
-			// Property: Associations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "AssociatedAccountId": {
-			//	        "type": "string"
-			//	      },
-			//	      "AssociationStatus": {
-			//	        "enum": [
-			//	          "NOT_ASSOCIATED",
-			//	          "PENDING_ASSOCIATION",
-			//	          "ASSOCIATED_WITH_OWNER_ACCOUNT",
-			//	          "ASSOCIATED_WITH_SHARED_ACCOUNT",
-			//	          "PENDING_DISASSOCIATION"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "ConnectionIdentifier": {
-			//	        "maxLength": 20,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9]+$",
-			//	        "type": "string"
-			//	      },
-			//	      "ResourceId": {
-			//	        "maxLength": 1000,
-			//	        "minLength": 1,
-			//	        "pattern": ".+",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxLength": 25,
-			//	  "minLength": 1,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"associated_account_id": {
-						// Property: AssociatedAccountId
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Associations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AssociatedAccountId": {
+		//	        "type": "string"
+		//	      },
+		//	      "AssociationStatus": {
+		//	        "enum": [
+		//	          "NOT_ASSOCIATED",
+		//	          "PENDING_ASSOCIATION",
+		//	          "ASSOCIATED_WITH_OWNER_ACCOUNT",
+		//	          "ASSOCIATED_WITH_SHARED_ACCOUNT",
+		//	          "PENDING_DISASSOCIATION"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ConnectionIdentifier": {
+		//	        "maxLength": 20,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "ResourceId": {
+		//	        "maxLength": 1000,
+		//	        "minLength": 1,
+		//	        "pattern": ".+",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxLength": 25,
+		//	  "minLength": 1,
+		//	  "type": "array"
+		//	}
+		"associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AssociatedAccountId
+					"associated_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"association_status": {
-						// Property: AssociationStatus
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: AssociationStatus
+					"association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"connection_identifier": {
-						// Property: ConnectionIdentifier
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: ConnectionIdentifier
+					"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"resource_id": {
-						// Property: ResourceId
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: ResourceId
+					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"connection_alias_state": {
-			// Property: ConnectionAliasState
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "CREATING",
-			//	    "CREATED",
-			//	    "DELETING"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionAliasState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CREATING",
+		//	    "CREATED",
+		//	    "DELETING"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"connection_alias_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"connection_string": {
-			// Property: ConnectionString
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[.0-9a-zA-Z\\-]{1,255}$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionString
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[.0-9a-zA-Z\\-]{1,255}$",
+		//	  "type": "string"
+		//	}
+		"connection_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::WorkSpaces::ConnectionAlias",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WorkSpaces::ConnectionAlias").WithTerraformTypeName("awscc_workspaces_connection_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -199,7 +188,7 @@ func connectionAliasDataSource(ctx context.Context) (datasource.DataSource, erro
 		"value":                  "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

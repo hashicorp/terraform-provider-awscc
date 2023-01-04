@@ -4,14 +4,17 @@ package supportapp
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,183 +24,174 @@ func init() {
 // slackChannelConfigurationResource returns the Terraform awscc_supportapp_slack_channel_configuration resource.
 // This Terraform resource corresponds to the CloudFormation AWS::SupportApp::SlackChannelConfiguration resource.
 func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"channel_id": {
-			// Property: ChannelId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The channel ID in Slack, which identifies a channel within a workspace.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^\\S+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ChannelId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The channel ID in Slack, which identifies a channel within a workspace.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The channel ID in Slack, which identifies a channel within a workspace.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-				validate.StringMatch(regexp.MustCompile("^\\S+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"channel_name": {
-			// Property: ChannelName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The channel name in Slack.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^.+$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The channel name in Slack.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^.+$",
+		//	  "type": "string"
+		//	}
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The channel name in Slack.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-				validate.StringMatch(regexp.MustCompile("^.+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"channel_role_arn": {
-			// Property: ChannelRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 31,
-			//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 31,
+		//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$",
+		//	  "type": "string"
+		//	}
+		"channel_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(31, 2048),
-				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$"), ""),
-			},
-		},
-		"notify_on_add_correspondence_to_case": {
-			// Property: NotifyOnAddCorrespondenceToCase
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to notify when a correspondence is added to a case.",
-			//	  "type": "boolean"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(31, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnAddCorrespondenceToCase
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to notify when a correspondence is added to a case.",
+		//	  "type": "boolean"
+		//	}
+		"notify_on_add_correspondence_to_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to notify when a correspondence is added to a case.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"notify_on_case_severity": {
-			// Property: NotifyOnCaseSeverity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The severity level of a support case that a customer wants to get notified for.",
-			//	  "enum": [
-			//	    "none",
-			//	    "all",
-			//	    "high"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnCaseSeverity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The severity level of a support case that a customer wants to get notified for.",
+		//	  "enum": [
+		//	    "none",
+		//	    "all",
+		//	    "high"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"notify_on_case_severity": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The severity level of a support case that a customer wants to get notified for.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"none",
 					"all",
 					"high",
-				}),
-			},
-		},
-		"notify_on_create_or_reopen_case": {
-			// Property: NotifyOnCreateOrReopenCase
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to notify when a case is created or reopened.",
-			//	  "type": "boolean"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnCreateOrReopenCase
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to notify when a case is created or reopened.",
+		//	  "type": "boolean"
+		//	}
+		"notify_on_create_or_reopen_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to notify when a case is created or reopened.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"notify_on_resolve_case": {
-			// Property: NotifyOnResolveCase
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to notify when a case is resolved.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnResolveCase
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to notify when a case is resolved.",
+		//	  "type": "boolean"
+		//	}
+		"notify_on_resolve_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to notify when a case is resolved.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"team_id": {
-			// Property: TeamId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The team ID in Slack, which uniquely identifies a workspace.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^\\S+$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TeamId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The team ID in Slack, which uniquely identifies a workspace.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The team ID in Slack, which uniquely identifies a workspace.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-				validate.StringMatch(regexp.MustCompile("^\\S+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "An AWS Support App resource that creates, updates, lists and deletes Slack channel configurations.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackChannelConfiguration").WithTerraformTypeName("awscc_supportapp_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -217,7 +211,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

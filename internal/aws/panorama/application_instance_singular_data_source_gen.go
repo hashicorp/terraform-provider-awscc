@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,332 +19,307 @@ func init() {
 // applicationInstanceDataSource returns the Terraform awscc_panorama_application_instance data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Panorama::ApplicationInstance resource.
 func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"application_instance_id": {
-			// Property: ApplicationInstanceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplicationInstanceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+		//	  "type": "string"
+		//	}
+		"application_instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"application_instance_id_to_replace": {
-			// Property: ApplicationInstanceIdToReplace
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ApplicationInstanceIdToReplace
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+		//	  "type": "string"
+		//	}
+		"application_instance_id_to_replace": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"created_time": {
-			// Property: CreatedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"created_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"default_runtime_context_device": {
-			// Property: DefaultRuntimeContextDevice
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultRuntimeContextDevice
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+		//	  "type": "string"
+		//	}
+		"default_runtime_context_device": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"default_runtime_context_device_name": {
-			// Property: DefaultRuntimeContextDeviceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultRuntimeContextDeviceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+		//	  "type": "string"
+		//	}
+		"default_runtime_context_device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 0,
-			//	  "pattern": "^.*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 0,
+		//	  "pattern": "^.*$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"device_id": {
-			// Property: DeviceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DeviceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+		//	  "type": "string"
+		//	}
+		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"health_status": {
-			// Property: HealthStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "RUNNING",
-			//	    "ERROR",
-			//	    "NOT_AVAILABLE"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: HealthStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "RUNNING",
+		//	    "ERROR",
+		//	    "NOT_AVAILABLE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"health_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"last_updated_time": {
-			// Property: LastUpdatedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+		}, /*END ATTRIBUTE*/
+		// Property: LastUpdatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"last_updated_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"manifest_overrides_payload": {
-			// Property: ManifestOverridesPayload
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "PayloadData": {
-			//	      "maxLength": 51200,
-			//	      "minLength": 0,
-			//	      "pattern": "^.+$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"payload_data": {
-						// Property: PayloadData
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: ManifestOverridesPayload
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PayloadData": {
+		//	      "maxLength": 51200,
+		//	      "minLength": 0,
+		//	      "pattern": "^.+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"manifest_overrides_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PayloadData
+				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"manifest_payload": {
-			// Property: ManifestPayload
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "PayloadData": {
-			//	      "maxLength": 51200,
-			//	      "minLength": 1,
-			//	      "pattern": "^.+$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"payload_data": {
-						// Property: PayloadData
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: ManifestPayload
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "PayloadData": {
+		//	      "maxLength": 51200,
+		//	      "minLength": 1,
+		//	      "pattern": "^.+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"manifest_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PayloadData
+				"payload_data": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"runtime_role_arn": {
-			// Property: RuntimeRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: RuntimeRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:[a-z0-9][-.a-z0-9]{0,62}:iam::[0-9]{12}:role/.+$",
+		//	  "type": "string"
+		//	}
+		"runtime_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "DEPLOYMENT_PENDING",
-			//	    "DEPLOYMENT_REQUESTED",
-			//	    "DEPLOYMENT_IN_PROGRESS",
-			//	    "DEPLOYMENT_ERROR",
-			//	    "DEPLOYMENT_SUCCEEDED",
-			//	    "REMOVAL_PENDING",
-			//	    "REMOVAL_REQUESTED",
-			//	    "REMOVAL_IN_PROGRESS",
-			//	    "REMOVAL_FAILED",
-			//	    "REMOVAL_SUCCEEDED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "DEPLOYMENT_PENDING",
+		//	    "DEPLOYMENT_REQUESTED",
+		//	    "DEPLOYMENT_IN_PROGRESS",
+		//	    "DEPLOYMENT_ERROR",
+		//	    "DEPLOYMENT_SUCCEEDED",
+		//	    "REMOVAL_PENDING",
+		//	    "REMOVAL_REQUESTED",
+		//	    "REMOVAL_IN_PROGRESS",
+		//	    "REMOVAL_FAILED",
+		//	    "REMOVAL_SUCCEEDED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"status_description": {
-			// Property: StatusDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"status_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"status_filter": {
-			// Property: StatusFilter
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "DEPLOYMENT_SUCCEEDED",
-			//	    "DEPLOYMENT_ERROR",
-			//	    "REMOVAL_SUCCEEDED",
-			//	    "REMOVAL_FAILED",
-			//	    "PROCESSING_DEPLOYMENT",
-			//	    "PROCESSING_REMOVAL"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusFilter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "DEPLOYMENT_SUCCEEDED",
+		//	    "DEPLOYMENT_ERROR",
+		//	    "REMOVAL_SUCCEEDED",
+		//	    "REMOVAL_FAILED",
+		//	    "PROCESSING_DEPLOYMENT",
+		//	    "PROCESSING_REMOVAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of tags",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "A string used to identify this tag",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^.+$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "A string containing the value for the tag",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "pattern": "^.+$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "List of tags",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of tags",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A string used to identify this tag",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^.+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "A string containing the value for the tag",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "^.+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string used to identify this tag",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string containing the value for the tag",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of tags",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Panorama::ApplicationInstance",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Panorama::ApplicationInstance").WithTerraformTypeName("awscc_panorama_application_instance")
 	opts = opts.WithTerraformSchema(schema)
@@ -372,7 +347,7 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		"value":                               "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,82 +19,76 @@ func init() {
 // securityPolicyDataSource returns the Terraform awscc_opensearchserverless_security_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::OpenSearchServerless::SecurityPolicy resource.
 func securityPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the policy",
-			//	  "maxLength": 1000,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the policy",
+		//	  "maxLength": 1000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the policy",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the policy",
-			//	  "maxLength": 32,
-			//	  "minLength": 3,
-			//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the policy",
+		//	  "maxLength": 32,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the policy",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy": {
-			// Property: Policy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The JSON policy document that is the content for the policy",
-			//	  "maxLength": 20480,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The JSON policy document that is the content for the policy",
+		//	  "maxLength": 20480,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The JSON policy document that is the content for the policy",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The possible types for the network policy",
-			//	  "enum": [
-			//	    "encryption",
-			//	    "network"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The possible types for the network policy",
+		//	  "enum": [
+		//	    "encryption",
+		//	    "network"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The possible types for the network policy",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::OpenSearchServerless::SecurityPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::SecurityPolicy").WithTerraformTypeName("awscc_opensearchserverless_security_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -105,7 +99,7 @@ func securityPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"type":        "Type",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

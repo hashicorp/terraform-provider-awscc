@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,137 +19,129 @@ func init() {
 // loggingConfigurationDataSource returns the Terraform awscc_networkfirewall_logging_configuration data source.
 // This Terraform data source corresponds to the CloudFormation AWS::NetworkFirewall::LoggingConfiguration resource.
 func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"firewall_arn": {
-			// Property: FirewallArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:aws.*$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: FirewallArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws.*$",
+		//	  "type": "string"
+		//	}
+		"firewall_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"firewall_name": {
-			// Property: FirewallName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: FirewallName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"firewall_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"logging_configuration": {
-			// Property: LoggingConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "LogDestinationConfigs": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "LogDestination": {
-			//	            "additionalProperties": false,
-			//	            "description": "A key-value pair to configure the logDestinations.",
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "LogDestinationType": {
-			//	            "enum": [
-			//	              "S3",
-			//	              "CloudWatchLogs",
-			//	              "KinesisDataFirehose"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "LogType": {
-			//	            "enum": [
-			//	              "ALERT",
-			//	              "FLOW"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "LogType",
-			//	          "LogDestinationType",
-			//	          "LogDestination"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "LogDestinationConfigs"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"log_destination_configs": {
-						// Property: LogDestinationConfigs
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"log_destination": {
-									// Property: LogDestination
-									Description: "A key-value pair to configure the logDestinations.",
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"log_destination_type": {
-									// Property: LogDestinationType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"log_type": {
-									// Property: LogType
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "LogDestinationConfigs": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LogDestination": {
+		//	            "additionalProperties": false,
+		//	            "description": "A key-value pair to configure the logDestinations.",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "LogDestinationType": {
+		//	            "enum": [
+		//	              "S3",
+		//	              "CloudWatchLogs",
+		//	              "KinesisDataFirehose"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "LogType": {
+		//	            "enum": [
+		//	              "ALERT",
+		//	              "FLOW"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "LogType",
+		//	          "LogDestinationType",
+		//	          "LogDestination"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "LogDestinationConfigs"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LogDestinationConfigs
+				"log_destination_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LogDestination
+							"log_destination":   // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A key-value pair to configure the logDestinations.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LogDestinationType
+							"log_destination_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LogType
+							"log_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::NetworkFirewall::LoggingConfiguration",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::LoggingConfiguration").WithTerraformTypeName("awscc_networkfirewall_logging_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -163,7 +155,7 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 		"logging_configuration":   "LoggingConfiguration",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

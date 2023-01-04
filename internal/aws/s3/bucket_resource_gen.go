@@ -4,14 +4,22 @@ package s3
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,76 +29,72 @@ func init() {
 // bucketResource returns the Terraform awscc_s3_bucket resource.
 // This Terraform resource corresponds to the CloudFormation AWS::S3::Bucket resource.
 func bucketResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"accelerate_configuration": {
-			// Property: AccelerateConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuration for the transfer acceleration state.",
-			//	  "properties": {
-			//	    "AccelerationStatus": {
-			//	      "description": "Configures the transfer acceleration state for an Amazon S3 bucket.",
-			//	      "enum": [
-			//	        "Enabled",
-			//	        "Suspended"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "AccelerationStatus"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccelerateConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for the transfer acceleration state.",
+		//	  "properties": {
+		//	    "AccelerationStatus": {
+		//	      "description": "Configures the transfer acceleration state for an Amazon S3 bucket.",
+		//	      "enum": [
+		//	        "Enabled",
+		//	        "Suspended"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AccelerationStatus"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"accelerate_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccelerationStatus
+				"acceleration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Configures the transfer acceleration state for an Amazon S3 bucket.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Enabled",
+							"Suspended",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Configuration for the transfer acceleration state.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"acceleration_status": {
-						// Property: AccelerationStatus
-						Description: "Configures the transfer acceleration state for an Amazon S3 bucket.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"Enabled",
-								"Suspended",
-							}),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"access_control": {
-			// Property: AccessControl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A canned access control list (ACL) that grants predefined permissions to the bucket.",
-			//	  "enum": [
-			//	    "AuthenticatedRead",
-			//	    "AwsExecRead",
-			//	    "BucketOwnerFullControl",
-			//	    "BucketOwnerRead",
-			//	    "LogDeliveryWrite",
-			//	    "Private",
-			//	    "PublicRead",
-			//	    "PublicReadWrite"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "A canned access control list (ACL) that grants predefined permissions to the bucket.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AccessControl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A canned access control list (ACL) that grants predefined permissions to the bucket.",
+		//	  "enum": [
+		//	    "AuthenticatedRead",
+		//	    "AwsExecRead",
+		//	    "BucketOwnerFullControl",
+		//	    "BucketOwnerRead",
+		//	    "LogDeliveryWrite",
+		//	    "Private",
+		//	    "PublicRead",
+		//	    "PublicReadWrite"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"access_control": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A canned access control list (ACL) that grants predefined permissions to the bucket.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"AuthenticatedRead",
 					"AwsExecRead",
 					"BucketOwnerFullControl",
@@ -99,3771 +103,3553 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 					"Private",
 					"PublicRead",
 					"PublicReadWrite",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"analytics_configurations": {
-			// Property: AnalyticsConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
-			//	    "properties": {
-			//	      "Id": {
-			//	        "description": "The ID that identifies the analytics configuration.",
-			//	        "type": "string"
-			//	      },
-			//	      "Prefix": {
-			//	        "description": "The prefix that an object must have to be included in the analytics results.",
-			//	        "type": "string"
-			//	      },
-			//	      "StorageClassAnalysis": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes for an Amazon S3 bucket.",
-			//	        "properties": {
-			//	          "DataExport": {
-			//	            "additionalProperties": false,
-			//	            "description": "Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.",
-			//	            "properties": {
-			//	              "Destination": {
-			//	                "additionalProperties": false,
-			//	                "description": "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
-			//	                "properties": {
-			//	                  "BucketAccountId": {
-			//	                    "description": "The account ID that owns the destination S3 bucket. ",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "BucketArn": {
-			//	                    "description": "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Format": {
-			//	                    "description": "Specifies the file format used when exporting data to Amazon S3.",
-			//	                    "enum": [
-			//	                      "CSV",
-			//	                      "ORC",
-			//	                      "Parquet"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Prefix": {
-			//	                    "description": "The prefix to use when exporting data. The prefix is prepended to all results.",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "BucketArn",
-			//	                  "Format"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "OutputSchemaVersion": {
-			//	                "description": "The version of the output schema to use when exporting data.",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Destination",
-			//	              "OutputSchemaVersion"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "TagFilters": {
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
-			//	          "properties": {
-			//	            "Key": {
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Value",
-			//	            "Key"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "StorageClassAnalysis",
-			//	      "Id"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "The configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"id": {
-						// Property: Id
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AnalyticsConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Specifies the configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
+		//	    "properties": {
+		//	      "Id": {
+		//	        "description": "The ID that identifies the analytics configuration.",
+		//	        "type": "string"
+		//	      },
+		//	      "Prefix": {
+		//	        "description": "The prefix that an object must have to be included in the analytics results.",
+		//	        "type": "string"
+		//	      },
+		//	      "StorageClassAnalysis": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes for an Amazon S3 bucket.",
+		//	        "properties": {
+		//	          "DataExport": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.",
+		//	            "properties": {
+		//	              "Destination": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
+		//	                "properties": {
+		//	                  "BucketAccountId": {
+		//	                    "description": "The account ID that owns the destination S3 bucket. ",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "BucketArn": {
+		//	                    "description": "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Format": {
+		//	                    "description": "Specifies the file format used when exporting data to Amazon S3.",
+		//	                    "enum": [
+		//	                      "CSV",
+		//	                      "ORC",
+		//	                      "Parquet"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Prefix": {
+		//	                    "description": "The prefix to use when exporting data. The prefix is prepended to all results.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "BucketArn",
+		//	                  "Format"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "OutputSchemaVersion": {
+		//	                "description": "The version of the output schema to use when exporting data.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Destination",
+		//	              "OutputSchemaVersion"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "TagFilters": {
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Value",
+		//	            "Key"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "StorageClassAnalysis",
+		//	      "Id"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"analytics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID that identifies the analytics configuration.",
-						Type:        types.StringType,
 						Required:    true,
-					},
-					"prefix": {
-						// Property: Prefix
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The prefix that an object must have to be included in the analytics results.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"storage_class_analysis": {
-						// Property: StorageClassAnalysis
-						Description: "Specifies data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes for an Amazon S3 bucket.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"data_export": {
-									// Property: DataExport
-									Description: "Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"destination": {
-												// Property: Destination
-												Description: "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"bucket_account_id": {
-															// Property: BucketAccountId
-															Description: "The account ID that owns the destination S3 bucket. ",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"bucket_arn": {
-															// Property: BucketArn
-															Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
-															Type:        types.StringType,
-															Required:    true,
-														},
-														"format": {
-															// Property: Format
-															Description: "Specifies the file format used when exporting data to Amazon S3.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"CSV",
-																	"ORC",
-																	"Parquet",
-																}),
-															},
-														},
-														"prefix": {
-															// Property: Prefix
-															Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-											"output_schema_version": {
-												// Property: OutputSchemaVersion
-												Description: "The version of the output schema to use when exporting data.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-					"tag_filters": {
-						// Property: TagFilters
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key": {
-									// Property: Key
-									Type:     types.StringType,
-									Required: true,
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
-			//	  "type": "string"
-			//	}
-			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"bucket_encryption": {
-			// Property: BucketEncryption
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Specifies default encryption for a bucket using server-side encryption with either Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS).",
-			//	  "properties": {
-			//	    "ServerSideEncryptionConfiguration": {
-			//	      "description": "Specifies the default server-side-encryption configuration.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies the default server-side encryption configuration.",
-			//	        "properties": {
-			//	          "BucketKeyEnabled": {
-			//	            "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
-			//	            "type": "boolean"
-			//	          },
-			//	          "ServerSideEncryptionByDefault": {
-			//	            "additionalProperties": false,
-			//	            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
-			//	            "properties": {
-			//	              "KMSMasterKeyID": {
-			//	                "description": "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
-			//	                "type": "string"
-			//	              },
-			//	              "SSEAlgorithm": {
-			//	                "enum": [
-			//	                  "aws:kms",
-			//	                  "AES256"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "SSEAlgorithm"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ServerSideEncryptionConfiguration"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Specifies default encryption for a bucket using server-side encryption with either Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS).",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"server_side_encryption_configuration": {
-						// Property: ServerSideEncryptionConfiguration
-						Description: "Specifies the default server-side-encryption configuration.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bucket_key_enabled": {
-									// Property: BucketKeyEnabled
-									Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
-									Type:        types.BoolType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"server_side_encryption_by_default": {
-									// Property: ServerSideEncryptionByDefault
-									Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"kms_master_key_id": {
-												// Property: KMSMasterKeyID
-												Description: "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
-												Type:        types.StringType,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StorageClassAnalysis
+					"storage_class_analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DataExport
+							"data_export": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: BucketAccountId
+											"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The account ID that owns the destination S3 bucket. ",
 												Optional:    true,
 												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"sse_algorithm": {
-												// Property: SSEAlgorithm
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"aws:kms",
-														"AES256",
-													}),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"bucket_name": {
-			// Property: BucketName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
-			//	  "maxLength": 63,
-			//	  "minLength": 3,
-			//	  "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
-			//	  "type": "string"
-			//	}
-			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
-			Type:        types.StringType,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: BucketArn
+											"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
+												Required:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Format
+											"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the file format used when exporting data to Amazon S3.",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"CSV",
+														"ORC",
+														"Parquet",
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Prefix
+											"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: OutputSchemaVersion
+									"output_schema_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The version of the output schema to use when exporting data.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies how data related to the storage class analysis for an Amazon S3 bucket should be exported.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies data related to access patterns to be collected and made available to analyze the tradeoffs between different storage classes for an Amazon S3 bucket.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagFilters
+					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.UniqueValues(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The configuration and any analyses for the analytics filter of an Amazon S3 bucket.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(3, 63),
-				validate.StringMatch(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"cors_configuration": {
-			// Property: CorsConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Rules that define cross-origin resource sharing of objects in this bucket.",
-			//	  "properties": {
-			//	    "CorsRules": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.",
-			//	        "properties": {
-			//	          "AllowedHeaders": {
-			//	            "description": "Headers that are specified in the Access-Control-Request-Headers header.",
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          },
-			//	          "AllowedMethods": {
-			//	            "description": "An HTTP method that you allow the origin to execute.",
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "enum": [
-			//	                "GET",
-			//	                "PUT",
-			//	                "HEAD",
-			//	                "POST",
-			//	                "DELETE"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          },
-			//	          "AllowedOrigins": {
-			//	            "description": "One or more origins you want customers to be able to access the bucket from.",
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          },
-			//	          "ExposedHeaders": {
-			//	            "description": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          },
-			//	          "Id": {
-			//	            "description": "A unique identifier for this rule.",
-			//	            "maxLength": 255,
-			//	            "type": "string"
-			//	          },
-			//	          "MaxAge": {
-			//	            "description": "The time in seconds that your browser is to cache the preflight response for the specified resource.",
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "AllowedMethods",
-			//	          "AllowedOrigins"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "CorsRules"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Rules that define cross-origin resource sharing of objects in this bucket.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"cors_rules": {
-						// Property: CorsRules
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allowed_headers": {
-									// Property: AllowedHeaders
-									Description: "Headers that are specified in the Access-Control-Request-Headers header.",
-									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"allowed_methods": {
-									// Property: AllowedMethods
-									Description: "An HTTP method that you allow the origin to execute.",
-									Type:        types.ListType{ElemType: types.StringType},
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-										validate.ArrayForEach(validate.StringInSlice([]string{
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BucketEncryption
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies default encryption for a bucket using server-side encryption with either Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS).",
+		//	  "properties": {
+		//	    "ServerSideEncryptionConfiguration": {
+		//	      "description": "Specifies the default server-side-encryption configuration.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the default server-side encryption configuration.",
+		//	        "properties": {
+		//	          "BucketKeyEnabled": {
+		//	            "description": "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
+		//	            "type": "boolean"
+		//	          },
+		//	          "ServerSideEncryptionByDefault": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
+		//	            "properties": {
+		//	              "KMSMasterKeyID": {
+		//	                "description": "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
+		//	                "type": "string"
+		//	              },
+		//	              "SSEAlgorithm": {
+		//	                "enum": [
+		//	                  "aws:kms",
+		//	                  "AES256"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "SSEAlgorithm"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ServerSideEncryptionConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"bucket_encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ServerSideEncryptionConfiguration
+				"server_side_encryption_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketKeyEnabled
+							"bucket_key_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether Amazon S3 should use an S3 Bucket Key with server-side encryption using KMS (SSE-KMS) for new objects in the bucket. Existing objects are not affected. Setting the BucketKeyEnabled element to true causes Amazon S3 to use an S3 Bucket Key. By default, S3 Bucket Key is not enabled.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ServerSideEncryptionByDefault
+							"server_side_encryption_by_default": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: KMSMasterKeyID
+									"kms_master_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "\"KMSMasterKeyID\" can only be used when you set the value of SSEAlgorithm as aws:kms.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SSEAlgorithm
+									"sse_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"aws:kms",
+												"AES256",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the default server-side encryption to apply to new objects in the bucket. If a PUT Object request doesn't specify any server-side encryption, this default encryption will be applied.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Specifies the default server-side-encryption configuration.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies default encryption for a bucket using server-side encryption with either Amazon S3-managed keys (SSE-S3) or AWS KMS-managed keys (SSE-KMS).",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BucketName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+		//	  "maxLength": 63,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
+		//	  "type": "string"
+		//	}
+		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the bucket. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the bucket name.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CorsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Rules that define cross-origin resource sharing of objects in this bucket.",
+		//	  "properties": {
+		//	    "CorsRules": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A set of origins and methods (cross-origin access that you want to allow). You can add up to 100 rules to the configuration.",
+		//	        "properties": {
+		//	          "AllowedHeaders": {
+		//	            "description": "Headers that are specified in the Access-Control-Request-Headers header.",
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "AllowedMethods": {
+		//	            "description": "An HTTP method that you allow the origin to execute.",
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "enum": [
+		//	                "GET",
+		//	                "PUT",
+		//	                "HEAD",
+		//	                "POST",
+		//	                "DELETE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "AllowedOrigins": {
+		//	            "description": "One or more origins you want customers to be able to access the bucket from.",
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ExposedHeaders": {
+		//	            "description": "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Id": {
+		//	            "description": "A unique identifier for this rule.",
+		//	            "maxLength": 255,
+		//	            "type": "string"
+		//	          },
+		//	          "MaxAge": {
+		//	            "description": "The time in seconds that your browser is to cache the preflight response for the specified resource.",
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AllowedMethods",
+		//	          "AllowedOrigins"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "CorsRules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cors_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CorsRules
+				"cors_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedHeaders
+							"allowed_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Headers that are specified in the Access-Control-Request-Headers header.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: AllowedMethods
+							"allowed_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "An HTTP method that you allow the origin to execute.",
+								Required:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
 											"GET",
 											"PUT",
 											"HEAD",
 											"POST",
 											"DELETE",
-										})),
-									},
-								},
-								"allowed_origins": {
-									// Property: AllowedOrigins
-									Description: "One or more origins you want customers to be able to access the bucket from.",
-									Type:        types.ListType{ElemType: types.StringType},
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-									},
-								},
-								"exposed_headers": {
-									// Property: ExposedHeaders
-									Description: "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
-									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"id": {
-									// Property: Id
-									Description: "A unique identifier for this rule.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(255),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"max_age": {
-									// Property: MaxAge
-									Description: "The time in seconds that your browser is to cache the preflight response for the specified resource.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntAtLeast(0),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"domain_name": {
-			// Property: DomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IPv4 DNS name of the specified bucket.",
-			//	  "examples": [
-			//	    "mystack-mybucket-kdwwxmddtr2g.s3.amazonaws.com"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "The IPv4 DNS name of the specified bucket.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"dual_stack_domain_name": {
-			// Property: DualStackDomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).",
-			//	  "examples": [
-			//	    "mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"intelligent_tiering_configurations": {
-			// Property: IntelligentTieringConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the S3 Intelligent-Tiering configuration for an Amazon S3 bucket.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Id": {
-			//	        "description": "The ID used to identify the S3 Intelligent-Tiering configuration.",
-			//	        "type": "string"
-			//	      },
-			//	      "Prefix": {
-			//	        "description": "An object key name prefix that identifies the subset of objects to which the rule applies.",
-			//	        "type": "string"
-			//	      },
-			//	      "Status": {
-			//	        "description": "Specifies the status of the configuration.",
-			//	        "enum": [
-			//	          "Disabled",
-			//	          "Enabled"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "TagFilters": {
-			//	        "description": "A container for a key-value pair.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
-			//	          "properties": {
-			//	            "Key": {
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Value",
-			//	            "Key"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "Tierings": {
-			//	        "description": "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AccessTier": {
-			//	              "description": "S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.",
-			//	              "enum": [
-			//	                "ARCHIVE_ACCESS",
-			//	                "DEEP_ARCHIVE_ACCESS"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "Days": {
-			//	              "description": "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
-			//	              "type": "integer"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "AccessTier",
-			//	            "Days"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Id",
-			//	      "Status",
-			//	      "Tierings"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Specifies the S3 Intelligent-Tiering configuration for an Amazon S3 bucket.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"id": {
-						// Property: Id
-						Description: "The ID used to identify the S3 Intelligent-Tiering configuration.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-					"prefix": {
-						// Property: Prefix
-						Description: "An object key name prefix that identifies the subset of objects to which the rule applies.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"status": {
-						// Property: Status
-						Description: "Specifies the status of the configuration.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"Disabled",
-								"Enabled",
-							}),
-						},
-					},
-					"tag_filters": {
-						// Property: TagFilters
-						Description: "A container for a key-value pair.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key": {
-									// Property: Key
-									Type:     types.StringType,
-									Required: true,
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"tierings": {
-						// Property: Tierings
-						Description: "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"access_tier": {
-									// Property: AccessTier
-									Description: "S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ARCHIVE_ACCESS",
-											"DEEP_ARCHIVE_ACCESS",
-										}),
-									},
-								},
-								"days": {
-									// Property: Days
-									Description: "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
-									Type:        types.Int64Type,
-									Required:    true,
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"inventory_configurations": {
-			// Property: InventoryConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The inventory configuration for an Amazon S3 bucket.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Destination": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
-			//	        "properties": {
-			//	          "BucketAccountId": {
-			//	            "description": "The account ID that owns the destination S3 bucket. ",
-			//	            "type": "string"
-			//	          },
-			//	          "BucketArn": {
-			//	            "description": "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
-			//	            "type": "string"
-			//	          },
-			//	          "Format": {
-			//	            "description": "Specifies the file format used when exporting data to Amazon S3.",
-			//	            "enum": [
-			//	              "CSV",
-			//	              "ORC",
-			//	              "Parquet"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Prefix": {
-			//	            "description": "The prefix to use when exporting data. The prefix is prepended to all results.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "BucketArn",
-			//	          "Format"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Enabled": {
-			//	        "description": "Specifies whether the inventory is enabled or disabled.",
-			//	        "type": "boolean"
-			//	      },
-			//	      "Id": {
-			//	        "description": "The ID used to identify the inventory configuration.",
-			//	        "type": "string"
-			//	      },
-			//	      "IncludedObjectVersions": {
-			//	        "description": "Object versions to include in the inventory list.",
-			//	        "enum": [
-			//	          "All",
-			//	          "Current"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "OptionalFields": {
-			//	        "description": "Contains the optional fields that are included in the inventory results.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "enum": [
-			//	            "Size",
-			//	            "LastModifiedDate",
-			//	            "StorageClass",
-			//	            "ETag",
-			//	            "IsMultipartUploaded",
-			//	            "ReplicationStatus",
-			//	            "EncryptionStatus",
-			//	            "ObjectLockRetainUntilDate",
-			//	            "ObjectLockMode",
-			//	            "ObjectLockLegalHoldStatus",
-			//	            "IntelligentTieringAccessTier",
-			//	            "BucketKeyStatus"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "Prefix": {
-			//	        "description": "The prefix that is prepended to all inventory results.",
-			//	        "type": "string"
-			//	      },
-			//	      "ScheduleFrequency": {
-			//	        "description": "Specifies the schedule for generating inventory results.",
-			//	        "enum": [
-			//	          "Daily",
-			//	          "Weekly"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Destination",
-			//	      "Enabled",
-			//	      "Id",
-			//	      "IncludedObjectVersions",
-			//	      "ScheduleFrequency"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "The inventory configuration for an Amazon S3 bucket.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"destination": {
-						// Property: Destination
-						Description: "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bucket_account_id": {
-									// Property: BucketAccountId
-									Description: "The account ID that owns the destination S3 bucket. ",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"bucket_arn": {
-									// Property: BucketArn
-									Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"format": {
-									// Property: Format
-									Description: "Specifies the file format used when exporting data to Amazon S3.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"CSV",
-											"ORC",
-											"Parquet",
-										}),
-									},
-								},
-								"prefix": {
-									// Property: Prefix
-									Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-					"enabled": {
-						// Property: Enabled
-						Description: "Specifies whether the inventory is enabled or disabled.",
-						Type:        types.BoolType,
-						Required:    true,
-					},
-					"id": {
-						// Property: Id
-						Description: "The ID used to identify the inventory configuration.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-					"included_object_versions": {
-						// Property: IncludedObjectVersions
-						Description: "Object versions to include in the inventory list.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"All",
-								"Current",
-							}),
-						},
-					},
-					"optional_fields": {
-						// Property: OptionalFields
-						Description: "Contains the optional fields that are included in the inventory results.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-							validate.ArrayForEach(validate.StringInSlice([]string{
-								"Size",
-								"LastModifiedDate",
-								"StorageClass",
-								"ETag",
-								"IsMultipartUploaded",
-								"ReplicationStatus",
-								"EncryptionStatus",
-								"ObjectLockRetainUntilDate",
-								"ObjectLockMode",
-								"ObjectLockLegalHoldStatus",
-								"IntelligentTieringAccessTier",
-								"BucketKeyStatus",
-							})),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"prefix": {
-						// Property: Prefix
-						Description: "The prefix that is prepended to all inventory results.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"schedule_frequency": {
-						// Property: ScheduleFrequency
-						Description: "Specifies the schedule for generating inventory results.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"Daily",
-								"Weekly",
-							}),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"lifecycle_configuration": {
-			// Property: LifecycleConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Rules that define how Amazon S3 manages objects during their lifetime.",
-			//	  "properties": {
-			//	    "Rules": {
-			//	      "description": "A lifecycle rule for individual objects in an Amazon S3 bucket.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "You must specify at least one of the following properties: AbortIncompleteMultipartUpload, ExpirationDate, ExpirationInDays, NoncurrentVersionExpirationInDays, NoncurrentVersionTransition, NoncurrentVersionTransitions, Transition, or Transitions.",
-			//	        "properties": {
-			//	          "AbortIncompleteMultipartUpload": {
-			//	            "additionalProperties": false,
-			//	            "description": "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
-			//	            "properties": {
-			//	              "DaysAfterInitiation": {
-			//	                "description": "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DaysAfterInitiation"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "ExpirationDate": {
-			//	            "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//	            "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
-			//	            "type": "string"
-			//	          },
-			//	          "ExpirationInDays": {
-			//	            "type": "integer"
-			//	          },
-			//	          "ExpiredObjectDeleteMarker": {
-			//	            "type": "boolean"
-			//	          },
-			//	          "Id": {
-			//	            "maxLength": 255,
-			//	            "type": "string"
-			//	          },
-			//	          "NoncurrentVersionExpiration": {
-			//	            "additionalProperties": false,
-			//	            "description": "Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime",
-			//	            "properties": {
-			//	              "NewerNoncurrentVersions": {
-			//	                "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
-			//	                "type": "integer"
-			//	              },
-			//	              "NoncurrentDays": {
-			//	                "description": "Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action",
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "NoncurrentDays"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "NoncurrentVersionExpirationInDays": {
-			//	            "type": "integer"
-			//	          },
-			//	          "NoncurrentVersionTransition": {
-			//	            "additionalProperties": false,
-			//	            "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
-			//	            "properties": {
-			//	              "NewerNoncurrentVersions": {
-			//	                "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
-			//	                "type": "integer"
-			//	              },
-			//	              "StorageClass": {
-			//	                "description": "The class of storage used to store the object.",
-			//	                "enum": [
-			//	                  "DEEP_ARCHIVE",
-			//	                  "GLACIER",
-			//	                  "Glacier",
-			//	                  "GLACIER_IR",
-			//	                  "INTELLIGENT_TIERING",
-			//	                  "ONEZONE_IA",
-			//	                  "STANDARD_IA"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "TransitionInDays": {
-			//	                "description": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "StorageClass",
-			//	              "TransitionInDays"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "NoncurrentVersionTransitions": {
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
-			//	              "properties": {
-			//	                "NewerNoncurrentVersions": {
-			//	                  "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
-			//	                  "type": "integer"
-			//	                },
-			//	                "StorageClass": {
-			//	                  "description": "The class of storage used to store the object.",
-			//	                  "enum": [
-			//	                    "DEEP_ARCHIVE",
-			//	                    "GLACIER",
-			//	                    "Glacier",
-			//	                    "GLACIER_IR",
-			//	                    "INTELLIGENT_TIERING",
-			//	                    "ONEZONE_IA",
-			//	                    "STANDARD_IA"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "TransitionInDays": {
-			//	                  "description": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "StorageClass",
-			//	                "TransitionInDays"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          },
-			//	          "ObjectSizeGreaterThan": {
-			//	            "maxLength": 20,
-			//	            "pattern": "[0-9]+",
-			//	            "type": "string"
-			//	          },
-			//	          "ObjectSizeLessThan": {
-			//	            "maxLength": 20,
-			//	            "pattern": "[0-9]+",
-			//	            "type": "string"
-			//	          },
-			//	          "Prefix": {
-			//	            "type": "string"
-			//	          },
-			//	          "Status": {
-			//	            "enum": [
-			//	              "Enabled",
-			//	              "Disabled"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "TagFilters": {
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
-			//	              "properties": {
-			//	                "Key": {
-			//	                  "type": "string"
-			//	                },
-			//	                "Value": {
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Value",
-			//	                "Key"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          },
-			//	          "Transition": {
-			//	            "additionalProperties": false,
-			//	            "description": "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
-			//	            "properties": {
-			//	              "StorageClass": {
-			//	                "enum": [
-			//	                  "DEEP_ARCHIVE",
-			//	                  "GLACIER",
-			//	                  "Glacier",
-			//	                  "GLACIER_IR",
-			//	                  "INTELLIGENT_TIERING",
-			//	                  "ONEZONE_IA",
-			//	                  "STANDARD_IA"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "TransitionDate": {
-			//	                "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//	                "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
-			//	                "type": "string"
-			//	              },
-			//	              "TransitionInDays": {
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "StorageClass"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Transitions": {
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "description": "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
-			//	              "properties": {
-			//	                "StorageClass": {
-			//	                  "enum": [
-			//	                    "DEEP_ARCHIVE",
-			//	                    "GLACIER",
-			//	                    "Glacier",
-			//	                    "GLACIER_IR",
-			//	                    "INTELLIGENT_TIERING",
-			//	                    "ONEZONE_IA",
-			//	                    "STANDARD_IA"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "TransitionDate": {
-			//	                  "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-			//	                  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
-			//	                  "type": "string"
-			//	                },
-			//	                "TransitionInDays": {
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "StorageClass"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Status"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Rules"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Rules that define how Amazon S3 manages objects during their lifetime.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"rules": {
-						// Property: Rules
-						Description: "A lifecycle rule for individual objects in an Amazon S3 bucket.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"abort_incomplete_multipart_upload": {
-									// Property: AbortIncompleteMultipartUpload
-									Description: "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"days_after_initiation": {
-												// Property: DaysAfterInitiation
-												Description: "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
-												Type:        types.Int64Type,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntAtLeast(0),
-												},
-											},
-										},
+										),
 									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"expiration_date": {
-									// Property: ExpirationDate
-									Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"expiration_in_days": {
-									// Property: ExpirationInDays
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"expired_object_delete_marker": {
-									// Property: ExpiredObjectDeleteMarker
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"id": {
-									// Property: Id
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(255),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"noncurrent_version_expiration": {
-									// Property: NoncurrentVersionExpiration
-									Description: "Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"newer_noncurrent_versions": {
-												// Property: NewerNoncurrentVersions
-												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
-												Type:        types.Int64Type,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"noncurrent_days": {
-												// Property: NoncurrentDays
-												Description: "Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action",
-												Type:        types.Int64Type,
-												Required:    true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"noncurrent_version_expiration_in_days": {
-									// Property: NoncurrentVersionExpirationInDays
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"noncurrent_version_transition": {
-									// Property: NoncurrentVersionTransition
-									Description: "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"newer_noncurrent_versions": {
-												// Property: NewerNoncurrentVersions
-												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
-												Type:        types.Int64Type,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"storage_class": {
-												// Property: StorageClass
-												Description: "The class of storage used to store the object.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"DEEP_ARCHIVE",
-														"GLACIER",
-														"Glacier",
-														"GLACIER_IR",
-														"INTELLIGENT_TIERING",
-														"ONEZONE_IA",
-														"STANDARD_IA",
-													}),
-												},
-											},
-											"transition_in_days": {
-												// Property: TransitionInDays
-												Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
-												Type:        types.Int64Type,
-												Required:    true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"noncurrent_version_transitions": {
-									// Property: NoncurrentVersionTransitions
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"newer_noncurrent_versions": {
-												// Property: NewerNoncurrentVersions
-												Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
-												Type:        types.Int64Type,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"storage_class": {
-												// Property: StorageClass
-												Description: "The class of storage used to store the object.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"DEEP_ARCHIVE",
-														"GLACIER",
-														"Glacier",
-														"GLACIER_IR",
-														"INTELLIGENT_TIERING",
-														"ONEZONE_IA",
-														"STANDARD_IA",
-													}),
-												},
-											},
-											"transition_in_days": {
-												// Property: TransitionInDays
-												Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
-												Type:        types.Int64Type,
-												Required:    true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"object_size_greater_than": {
-									// Property: ObjectSizeGreaterThan
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(20),
-										validate.StringMatch(regexp.MustCompile("[0-9]+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"object_size_less_than": {
-									// Property: ObjectSizeLessThan
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(20),
-										validate.StringMatch(regexp.MustCompile("[0-9]+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"prefix": {
-									// Property: Prefix
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"status": {
-									// Property: Status
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"Enabled",
-											"Disabled",
-										}),
-									},
-								},
-								"tag_filters": {
-									// Property: TagFilters
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Required: true,
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"transition": {
-									// Property: Transition
-									Description: "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"storage_class": {
-												// Property: StorageClass
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"DEEP_ARCHIVE",
-														"GLACIER",
-														"Glacier",
-														"GLACIER_IR",
-														"INTELLIGENT_TIERING",
-														"ONEZONE_IA",
-														"STANDARD_IA",
-													}),
-												},
-											},
-											"transition_date": {
-												// Property: TransitionDate
-												Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"transition_in_days": {
-												// Property: TransitionInDays
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"transitions": {
-									// Property: Transitions
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"storage_class": {
-												// Property: StorageClass
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"DEEP_ARCHIVE",
-														"GLACIER",
-														"Glacier",
-														"GLACIER_IR",
-														"INTELLIGENT_TIERING",
-														"ONEZONE_IA",
-														"STANDARD_IA",
-													}),
-												},
-											},
-											"transition_date": {
-												// Property: TransitionDate
-												Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"transition_in_days": {
-												// Property: TransitionInDays
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.UniqueItems(),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"logging_configuration": {
-			// Property: LoggingConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Settings that define where logs are stored.",
-			//	  "properties": {
-			//	    "DestinationBucketName": {
-			//	      "description": "The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.",
-			//	      "type": "string"
-			//	    },
-			//	    "LogFilePrefix": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Settings that define where logs are stored.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"destination_bucket_name": {
-						// Property: DestinationBucketName
-						Description: "The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"log_file_prefix": {
-						// Property: LogFilePrefix
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"metrics_configurations": {
-			// Property: MetricsConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Settings that define a metrics configuration for the CloudWatch request metrics from the bucket.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "AccessPointArn": {
-			//	        "type": "string"
-			//	      },
-			//	      "Id": {
-			//	        "type": "string"
-			//	      },
-			//	      "Prefix": {
-			//	        "type": "string"
-			//	      },
-			//	      "TagFilters": {
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
-			//	          "properties": {
-			//	            "Key": {
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Value",
-			//	            "Key"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Id"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Settings that define a metrics configuration for the CloudWatch request metrics from the bucket.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"access_point_arn": {
-						// Property: AccessPointArn
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"id": {
-						// Property: Id
-						Type:     types.StringType,
-						Required: true,
-					},
-					"prefix": {
-						// Property: Prefix
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"tag_filters": {
-						// Property: TagFilters
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key": {
-									// Property: Key
-									Type:     types.StringType,
-									Required: true,
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"notification_configuration": {
-			// Property: NotificationConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuration that defines how Amazon S3 handles bucket notifications.",
-			//	  "properties": {
-			//	    "EventBridgeConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.",
-			//	      "properties": {
-			//	        "EventBridgeEnabled": {
-			//	          "default": "true",
-			//	          "description": "Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.",
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "EventBridgeEnabled"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "LambdaConfigurations": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Describes the AWS Lambda functions to invoke and the events for which to invoke them.",
-			//	        "properties": {
-			//	          "Event": {
-			//	            "description": "The Amazon S3 bucket event for which to invoke the AWS Lambda function.",
-			//	            "type": "string"
-			//	          },
-			//	          "Filter": {
-			//	            "additionalProperties": false,
-			//	            "description": "The filtering rules that determine which objects invoke the AWS Lambda function.",
-			//	            "properties": {
-			//	              "S3Key": {
-			//	                "additionalProperties": false,
-			//	                "description": "A container for object key name prefix and suffix filtering rules.",
-			//	                "properties": {
-			//	                  "Rules": {
-			//	                    "insertionOrder": true,
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
-			//	                      "properties": {
-			//	                        "Name": {
-			//	                          "maxLength": 1024,
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Value",
-			//	                        "Name"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array",
-			//	                    "uniqueItems": true
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Rules"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "S3Key"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Function": {
-			//	            "description": "The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Function",
-			//	          "Event"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "QueueConfigurations": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.",
-			//	        "properties": {
-			//	          "Event": {
-			//	            "description": "The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.",
-			//	            "type": "string"
-			//	          },
-			//	          "Filter": {
-			//	            "additionalProperties": false,
-			//	            "description": "The filtering rules that determine which objects trigger notifications.",
-			//	            "properties": {
-			//	              "S3Key": {
-			//	                "additionalProperties": false,
-			//	                "description": "A container for object key name prefix and suffix filtering rules.",
-			//	                "properties": {
-			//	                  "Rules": {
-			//	                    "insertionOrder": true,
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
-			//	                      "properties": {
-			//	                        "Name": {
-			//	                          "maxLength": 1024,
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Value",
-			//	                        "Name"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array",
-			//	                    "uniqueItems": true
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Rules"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "S3Key"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Queue": {
-			//	            "description": "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Event",
-			//	          "Queue"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "TopicConfigurations": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "The topic to which notifications are sent and the events for which notifications are generated.",
-			//	        "properties": {
-			//	          "Event": {
-			//	            "description": "The Amazon S3 bucket event about which to send notifications.",
-			//	            "type": "string"
-			//	          },
-			//	          "Filter": {
-			//	            "additionalProperties": false,
-			//	            "description": "The filtering rules that determine for which objects to send notifications.",
-			//	            "properties": {
-			//	              "S3Key": {
-			//	                "additionalProperties": false,
-			//	                "description": "A container for object key name prefix and suffix filtering rules.",
-			//	                "properties": {
-			//	                  "Rules": {
-			//	                    "insertionOrder": true,
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
-			//	                      "properties": {
-			//	                        "Name": {
-			//	                          "maxLength": 1024,
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Value",
-			//	                        "Name"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array",
-			//	                    "uniqueItems": true
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Rules"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "S3Key"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Topic": {
-			//	            "description": "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Event",
-			//	          "Topic"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Configuration that defines how Amazon S3 handles bucket notifications.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"event_bridge_configuration": {
-						// Property: EventBridgeConfiguration
-						Description: "Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"event_bridge_enabled": {
-									// Property: EventBridgeEnabled
-									Description: "Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.",
-									Type:        types.BoolType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.StringValue("true")),
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"lambda_configurations": {
-						// Property: LambdaConfigurations
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"event": {
-									// Property: Event
-									Description: "The Amazon S3 bucket event for which to invoke the AWS Lambda function.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"filter": {
-									// Property: Filter
-									Description: "The filtering rules that determine which objects invoke the AWS Lambda function.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"s3_key": {
-												// Property: S3Key
-												Description: "A container for object key name prefix and suffix filtering rules.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"rules": {
-															// Property: Rules
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenAtMost(1024),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.UniqueItems(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"function": {
-									// Property: Function
-									Description: "The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"queue_configurations": {
-						// Property: QueueConfigurations
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"event": {
-									// Property: Event
-									Description: "The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"filter": {
-									// Property: Filter
-									Description: "The filtering rules that determine which objects trigger notifications.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"s3_key": {
-												// Property: S3Key
-												Description: "A container for object key name prefix and suffix filtering rules.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"rules": {
-															// Property: Rules
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenAtMost(1024),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.UniqueItems(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"queue": {
-									// Property: Queue
-									Description: "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"topic_configurations": {
-						// Property: TopicConfigurations
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"event": {
-									// Property: Event
-									Description: "The Amazon S3 bucket event about which to send notifications.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"filter": {
-									// Property: Filter
-									Description: "The filtering rules that determine for which objects to send notifications.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"s3_key": {
-												// Property: S3Key
-												Description: "A container for object key name prefix and suffix filtering rules.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"rules": {
-															// Property: Rules
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenAtMost(1024),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.UniqueItems(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"topic": {
-									// Property: Topic
-									Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"object_lock_configuration": {
-			// Property: ObjectLockConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Places an Object Lock configuration on the specified bucket.",
-			//	  "properties": {
-			//	    "ObjectLockEnabled": {
-			//	      "type": "string"
-			//	    },
-			//	    "Rule": {
-			//	      "additionalProperties": false,
-			//	      "description": "The Object Lock rule in place for the specified object.",
-			//	      "properties": {
-			//	        "DefaultRetention": {
-			//	          "additionalProperties": false,
-			//	          "description": "The default retention period that you want to apply to new objects placed in the specified bucket.",
-			//	          "properties": {
-			//	            "Days": {
-			//	              "type": "integer"
-			//	            },
-			//	            "Mode": {
-			//	              "enum": [
-			//	                "COMPLIANCE",
-			//	                "GOVERNANCE"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "Years": {
-			//	              "type": "integer"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Places an Object Lock configuration on the specified bucket.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"object_lock_enabled": {
-						// Property: ObjectLockEnabled
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"rule": {
-						// Property: Rule
-						Description: "The Object Lock rule in place for the specified object.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"default_retention": {
-									// Property: DefaultRetention
-									Description: "The default retention period that you want to apply to new objects placed in the specified bucket.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"days": {
-												// Property: Days
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"mode": {
-												// Property: Mode
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"COMPLIANCE",
-														"GOVERNANCE",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"years": {
-												// Property: Years
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"object_lock_enabled": {
-			// Property: ObjectLockEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether this bucket has an Object Lock configuration enabled.",
-			//	  "type": "boolean"
-			//	}
-			Description: "Indicates whether this bucket has an Object Lock configuration enabled.",
-			Type:        types.BoolType,
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: AllowedOrigins
+							"allowed_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more origins you want customers to be able to access the bucket from.",
+								Required:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ExposedHeaders
+							"exposed_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "One or more headers in the response that you want customers to be able to access from their applications (for example, from a JavaScript XMLHttpRequest object).",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for this rule.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(255),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MaxAge
+							"max_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The time in seconds that your browser is to cache the preflight response for the specified resource.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(0),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Required: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Rules that define cross-origin resource sharing of objects in this bucket.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"ownership_controls": {
-			// Property: OwnershipControls
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Specifies the container element for object ownership rules.",
-			//	  "properties": {
-			//	    "Rules": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ObjectOwnership": {
-			//	            "description": "Specifies an object ownership rule.",
-			//	            "enum": [
-			//	              "ObjectWriter",
-			//	              "BucketOwnerPreferred",
-			//	              "BucketOwnerEnforced"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Rules"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Specifies the container element for object ownership rules.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"rules": {
-						// Property: Rules
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"object_ownership": {
-									// Property: ObjectOwnership
-									Description: "Specifies an object ownership rule.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ObjectWriter",
-											"BucketOwnerPreferred",
-											"BucketOwnerEnforced",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"public_access_block_configuration": {
-			// Property: PublicAccessBlockConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuration that defines how Amazon S3 handles public access.",
-			//	  "properties": {
-			//	    "BlockPublicAcls": {
-			//	      "description": "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "BlockPublicPolicy": {
-			//	      "description": "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.\nEnabling this setting doesn't affect existing bucket policies.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "IgnorePublicAcls": {
-			//	      "description": "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.\nEnabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "RestrictPublicBuckets": {
-			//	      "description": "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Configuration that defines how Amazon S3 handles public access.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"block_public_acls": {
-						// Property: BlockPublicAcls
-						Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"block_public_policy": {
-						// Property: BlockPublicPolicy
-						Description: "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.\nEnabling this setting doesn't affect existing bucket policies.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ignore_public_acls": {
-						// Property: IgnorePublicAcls
-						Description: "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.\nEnabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"restrict_public_buckets": {
-						// Property: RestrictPublicBuckets
-						Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"regional_domain_name": {
-			// Property: RegionalDomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Returns the regional domain name of the specified bucket.",
-			//	  "examples": [
-			//	    "mystack-mybucket-kdwwxmddtr2g.s3.us-east-2.amazonaws.com"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "Returns the regional domain name of the specified bucket.",
-			Type:        types.StringType,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IPv4 DNS name of the specified bucket.",
+		//	  "examples": [
+		//	    "mystack-mybucket-kdwwxmddtr2g.s3.amazonaws.com"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv4 DNS name of the specified bucket.",
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"replication_configuration": {
-			// Property: ReplicationConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuration for replicating objects in an S3 bucket.",
-			//	  "properties": {
-			//	    "Role": {
-			//	      "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.",
-			//	      "type": "string"
-			//	    },
-			//	    "Rules": {
-			//	      "description": "A container for one or more replication rules.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies which Amazon S3 objects to replicate and where to store the replicas.",
-			//	        "properties": {
-			//	          "DeleteMarkerReplication": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Status": {
-			//	                "enum": [
-			//	                  "Disabled",
-			//	                  "Enabled"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Destination": {
-			//	            "additionalProperties": false,
-			//	            "description": "Specifies which Amazon S3 bucket to store replicated objects in and their storage class.",
-			//	            "properties": {
-			//	              "AccessControlTranslation": {
-			//	                "additionalProperties": false,
-			//	                "description": "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.",
-			//	                "properties": {
-			//	                  "Owner": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Owner"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Account": {
-			//	                "type": "string"
-			//	              },
-			//	              "Bucket": {
-			//	                "type": "string"
-			//	              },
-			//	              "EncryptionConfiguration": {
-			//	                "additionalProperties": false,
-			//	                "description": "Specifies encryption-related information for an Amazon S3 bucket that is a destination for replicated objects.",
-			//	                "properties": {
-			//	                  "ReplicaKmsKeyID": {
-			//	                    "description": "Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "ReplicaKmsKeyID"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Metrics": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "EventThreshold": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Minutes": {
-			//	                        "type": "integer"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "Minutes"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  },
-			//	                  "Status": {
-			//	                    "enum": [
-			//	                      "Disabled",
-			//	                      "Enabled"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Status"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "ReplicationTime": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Status": {
-			//	                    "enum": [
-			//	                      "Disabled",
-			//	                      "Enabled"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Time": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Minutes": {
-			//	                        "type": "integer"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "Minutes"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Status",
-			//	                  "Time"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "StorageClass": {
-			//	                "description": "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy.",
-			//	                "enum": [
-			//	                  "DEEP_ARCHIVE",
-			//	                  "GLACIER",
-			//	                  "GLACIER_IR",
-			//	                  "INTELLIGENT_TIERING",
-			//	                  "ONEZONE_IA",
-			//	                  "REDUCED_REDUNDANCY",
-			//	                  "STANDARD",
-			//	                  "STANDARD_IA"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Bucket"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Filter": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "And": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Prefix": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "TagFilters": {
-			//	                    "insertionOrder": true,
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
-			//	                      "properties": {
-			//	                        "Key": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Value",
-			//	                        "Key"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array",
-			//	                    "uniqueItems": true
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "Prefix": {
-			//	                "type": "string"
-			//	              },
-			//	              "TagFilter": {
-			//	                "additionalProperties": false,
-			//	                "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
-			//	                "properties": {
-			//	                  "Key": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Value",
-			//	                  "Key"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Id": {
-			//	            "description": "A unique identifier for the rule.",
-			//	            "maxLength": 255,
-			//	            "type": "string"
-			//	          },
-			//	          "Prefix": {
-			//	            "description": "An object key name prefix that identifies the object or objects to which the rule applies.",
-			//	            "maxLength": 1024,
-			//	            "type": "string"
-			//	          },
-			//	          "Priority": {
-			//	            "type": "integer"
-			//	          },
-			//	          "SourceSelectionCriteria": {
-			//	            "additionalProperties": false,
-			//	            "description": "A container that describes additional filters for identifying the source objects that you want to replicate.",
-			//	            "properties": {
-			//	              "ReplicaModifications": {
-			//	                "additionalProperties": false,
-			//	                "description": "A filter that you can specify for selection for modifications on replicas.",
-			//	                "properties": {
-			//	                  "Status": {
-			//	                    "description": "Specifies whether Amazon S3 replicates modifications on replicas.",
-			//	                    "enum": [
-			//	                      "Enabled",
-			//	                      "Disabled"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Status"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "SseKmsEncryptedObjects": {
-			//	                "additionalProperties": false,
-			//	                "description": "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
-			//	                "properties": {
-			//	                  "Status": {
-			//	                    "description": "Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.",
-			//	                    "enum": [
-			//	                      "Disabled",
-			//	                      "Enabled"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Status"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Status": {
-			//	            "description": "Specifies whether the rule is enabled.",
-			//	            "enum": [
-			//	              "Disabled",
-			//	              "Enabled"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Destination",
-			//	          "Status"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Role",
-			//	    "Rules"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Configuration for replicating objects in an S3 bucket.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"role": {
-						// Property: Role
-						Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.",
-						Type:        types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DualStackDomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).",
+		//	  "examples": [
+		//	    "mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"dual_stack_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IPv6 DNS name of the specified bucket. For more information about dual-stack endpoints, see [Using Amazon S3 Dual-Stack Endpoints](https://docs.aws.amazon.com/AmazonS3/latest/dev/dual-stack-endpoints.html).",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IntelligentTieringConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the S3 Intelligent-Tiering configuration for an Amazon S3 bucket.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Id": {
+		//	        "description": "The ID used to identify the S3 Intelligent-Tiering configuration.",
+		//	        "type": "string"
+		//	      },
+		//	      "Prefix": {
+		//	        "description": "An object key name prefix that identifies the subset of objects to which the rule applies.",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "description": "Specifies the status of the configuration.",
+		//	        "enum": [
+		//	          "Disabled",
+		//	          "Enabled"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "TagFilters": {
+		//	        "description": "A container for a key-value pair.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Value",
+		//	            "Key"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Tierings": {
+		//	        "description": "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AccessTier": {
+		//	              "description": "S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.",
+		//	              "enum": [
+		//	                "ARCHIVE_ACCESS",
+		//	                "DEEP_ARCHIVE_ACCESS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Days": {
+		//	              "description": "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AccessTier",
+		//	            "Days"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Id",
+		//	      "Status",
+		//	      "Tierings"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"intelligent_tiering_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the S3 Intelligent-Tiering configuration.",
 						Required:    true,
-					},
-					"rules": {
-						// Property: Rules
-						Description: "A container for one or more replication rules.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"delete_marker_replication": {
-									// Property: DeleteMarkerReplication
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"status": {
-												// Property: Status
-												Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An object key name prefix that identifies the subset of objects to which the rule applies.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the status of the configuration.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"Disabled",
+								"Enabled",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TagFilters
+					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "A container for a key-value pair.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.UniqueValues(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Tierings
+					"tierings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessTier
+								"access_tier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "S3 Intelligent-Tiering access tier. See Storage class for automatically optimizing frequently and infrequently accessed objects for a list of access tiers in the S3 Intelligent-Tiering storage class.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ARCHIVE_ACCESS",
+											"DEEP_ARCHIVE_ACCESS",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Days
+								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Description: "The number of consecutive days of no access after which an object will be eligible to be transitioned to the corresponding tier. The minimum number of days specified for Archive Access tier must be at least 90 days and Deep Archive Access tier must be at least 180 days. The maximum can be up to 2 years (730 days).",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Specifies a list of S3 Intelligent-Tiering storage class tiers in the configuration. At least one tier must be defined in the list. At most, you can specify two tiers in the list, one for each available AccessTier: ARCHIVE_ACCESS and DEEP_ARCHIVE_ACCESS.",
+						Required:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.UniqueValues(),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the S3 Intelligent-Tiering configuration for an Amazon S3 bucket.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InventoryConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The inventory configuration for an Amazon S3 bucket.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Destination": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
+		//	        "properties": {
+		//	          "BucketAccountId": {
+		//	            "description": "The account ID that owns the destination S3 bucket. ",
+		//	            "type": "string"
+		//	          },
+		//	          "BucketArn": {
+		//	            "description": "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
+		//	            "type": "string"
+		//	          },
+		//	          "Format": {
+		//	            "description": "Specifies the file format used when exporting data to Amazon S3.",
+		//	            "enum": [
+		//	              "CSV",
+		//	              "ORC",
+		//	              "Parquet"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Prefix": {
+		//	            "description": "The prefix to use when exporting data. The prefix is prepended to all results.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "BucketArn",
+		//	          "Format"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Enabled": {
+		//	        "description": "Specifies whether the inventory is enabled or disabled.",
+		//	        "type": "boolean"
+		//	      },
+		//	      "Id": {
+		//	        "description": "The ID used to identify the inventory configuration.",
+		//	        "type": "string"
+		//	      },
+		//	      "IncludedObjectVersions": {
+		//	        "description": "Object versions to include in the inventory list.",
+		//	        "enum": [
+		//	          "All",
+		//	          "Current"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "OptionalFields": {
+		//	        "description": "Contains the optional fields that are included in the inventory results.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "enum": [
+		//	            "Size",
+		//	            "LastModifiedDate",
+		//	            "StorageClass",
+		//	            "ETag",
+		//	            "IsMultipartUploaded",
+		//	            "ReplicationStatus",
+		//	            "EncryptionStatus",
+		//	            "ObjectLockRetainUntilDate",
+		//	            "ObjectLockMode",
+		//	            "ObjectLockLegalHoldStatus",
+		//	            "IntelligentTieringAccessTier",
+		//	            "BucketKeyStatus"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Prefix": {
+		//	        "description": "The prefix that is prepended to all inventory results.",
+		//	        "type": "string"
+		//	      },
+		//	      "ScheduleFrequency": {
+		//	        "description": "Specifies the schedule for generating inventory results.",
+		//	        "enum": [
+		//	          "Daily",
+		//	          "Weekly"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Destination",
+		//	      "Enabled",
+		//	      "Id",
+		//	      "IncludedObjectVersions",
+		//	      "ScheduleFrequency"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"inventory_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destination
+					"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketAccountId
+							"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The account ID that owns the destination S3 bucket. ",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: BucketArn
+							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the bucket to which data is exported.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Format
+							"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies the file format used when exporting data to Amazon S3.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"CSV",
+										"ORC",
+										"Parquet",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The prefix to use when exporting data. The prefix is prepended to all results.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Specifies information about where to publish analysis or configuration results for an Amazon S3 bucket and S3 Replication Time Control (S3 RTC).",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Enabled
+					"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies whether the inventory is enabled or disabled.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The ID used to identify the inventory configuration.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: IncludedObjectVersions
+					"included_object_versions": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Object versions to include in the inventory list.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"All",
+								"Current",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: OptionalFields
+					"optional_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Contains the optional fields that are included in the inventory results.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.UniqueValues(),
+							listvalidator.ValueStringsAre(
+								stringvalidator.OneOf(
+									"Size",
+									"LastModifiedDate",
+									"StorageClass",
+									"ETag",
+									"IsMultipartUploaded",
+									"ReplicationStatus",
+									"EncryptionStatus",
+									"ObjectLockRetainUntilDate",
+									"ObjectLockMode",
+									"ObjectLockLegalHoldStatus",
+									"IntelligentTieringAccessTier",
+									"BucketKeyStatus",
+								),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The prefix that is prepended to all inventory results.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ScheduleFrequency
+					"schedule_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Specifies the schedule for generating inventory results.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"Daily",
+								"Weekly",
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The inventory configuration for an Amazon S3 bucket.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LifecycleConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Rules that define how Amazon S3 manages objects during their lifetime.",
+		//	  "properties": {
+		//	    "Rules": {
+		//	      "description": "A lifecycle rule for individual objects in an Amazon S3 bucket.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "You must specify at least one of the following properties: AbortIncompleteMultipartUpload, ExpirationDate, ExpirationInDays, NoncurrentVersionExpirationInDays, NoncurrentVersionTransition, NoncurrentVersionTransitions, Transition, or Transitions.",
+		//	        "properties": {
+		//	          "AbortIncompleteMultipartUpload": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
+		//	            "properties": {
+		//	              "DaysAfterInitiation": {
+		//	                "description": "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DaysAfterInitiation"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "ExpirationDate": {
+		//	            "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+		//	            "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	            "type": "string"
+		//	          },
+		//	          "ExpirationInDays": {
+		//	            "type": "integer"
+		//	          },
+		//	          "ExpiredObjectDeleteMarker": {
+		//	            "type": "boolean"
+		//	          },
+		//	          "Id": {
+		//	            "maxLength": 255,
+		//	            "type": "string"
+		//	          },
+		//	          "NoncurrentVersionExpiration": {
+		//	            "additionalProperties": false,
+		//	            "description": "Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime",
+		//	            "properties": {
+		//	              "NewerNoncurrentVersions": {
+		//	                "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+		//	                "type": "integer"
+		//	              },
+		//	              "NoncurrentDays": {
+		//	                "description": "Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "NoncurrentDays"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "NoncurrentVersionExpirationInDays": {
+		//	            "type": "integer"
+		//	          },
+		//	          "NoncurrentVersionTransition": {
+		//	            "additionalProperties": false,
+		//	            "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
+		//	            "properties": {
+		//	              "NewerNoncurrentVersions": {
+		//	                "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+		//	                "type": "integer"
+		//	              },
+		//	              "StorageClass": {
+		//	                "description": "The class of storage used to store the object.",
+		//	                "enum": [
+		//	                  "DEEP_ARCHIVE",
+		//	                  "GLACIER",
+		//	                  "Glacier",
+		//	                  "GLACIER_IR",
+		//	                  "INTELLIGENT_TIERING",
+		//	                  "ONEZONE_IA",
+		//	                  "STANDARD_IA"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TransitionInDays": {
+		//	                "description": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "StorageClass",
+		//	              "TransitionInDays"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "NoncurrentVersionTransitions": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
+		//	              "properties": {
+		//	                "NewerNoncurrentVersions": {
+		//	                  "description": "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+		//	                  "type": "integer"
+		//	                },
+		//	                "StorageClass": {
+		//	                  "description": "The class of storage used to store the object.",
+		//	                  "enum": [
+		//	                    "DEEP_ARCHIVE",
+		//	                    "GLACIER",
+		//	                    "Glacier",
+		//	                    "GLACIER_IR",
+		//	                    "INTELLIGENT_TIERING",
+		//	                    "ONEZONE_IA",
+		//	                    "STANDARD_IA"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TransitionInDays": {
+		//	                  "description": "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "StorageClass",
+		//	                "TransitionInDays"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "ObjectSizeGreaterThan": {
+		//	            "maxLength": 20,
+		//	            "pattern": "[0-9]+",
+		//	            "type": "string"
+		//	          },
+		//	          "ObjectSizeLessThan": {
+		//	            "maxLength": 20,
+		//	            "pattern": "[0-9]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Prefix": {
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "enum": [
+		//	              "Enabled",
+		//	              "Disabled"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "TagFilters": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	              "properties": {
+		//	                "Key": {
+		//	                  "type": "string"
+		//	                },
+		//	                "Value": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Value",
+		//	                "Key"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          },
+		//	          "Transition": {
+		//	            "additionalProperties": false,
+		//	            "description": "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
+		//	            "properties": {
+		//	              "StorageClass": {
+		//	                "enum": [
+		//	                  "DEEP_ARCHIVE",
+		//	                  "GLACIER",
+		//	                  "Glacier",
+		//	                  "GLACIER_IR",
+		//	                  "INTELLIGENT_TIERING",
+		//	                  "ONEZONE_IA",
+		//	                  "STANDARD_IA"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "TransitionDate": {
+		//	                "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+		//	                "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	                "type": "string"
+		//	              },
+		//	              "TransitionInDays": {
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "StorageClass"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Transitions": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
+		//	              "properties": {
+		//	                "StorageClass": {
+		//	                  "enum": [
+		//	                    "DEEP_ARCHIVE",
+		//	                    "GLACIER",
+		//	                    "Glacier",
+		//	                    "GLACIER_IR",
+		//	                    "INTELLIGENT_TIERING",
+		//	                    "ONEZONE_IA",
+		//	                    "STANDARD_IA"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TransitionDate": {
+		//	                  "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+		//	                  "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	                  "type": "string"
+		//	                },
+		//	                "TransitionInDays": {
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "StorageClass"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Rules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AbortIncompleteMultipartUpload
+							"abort_incomplete_multipart_upload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DaysAfterInitiation
+									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days after which Amazon S3 aborts an incomplete multipart upload.",
+										Required:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.AtLeast(0),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the days since the initiation of an incomplete multipart upload that Amazon S3 will wait before permanently removing all parts of the upload.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationDate
+							"expiration_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationInDays
+							"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ExpiredObjectDeleteMarker
+							"expired_object_delete_marker": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(255),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionExpiration
+							"noncurrent_version_expiration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: NewerNoncurrentVersions
+									"newer_noncurrent_versions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: NoncurrentDays
+									"noncurrent_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specified the number of days an object is noncurrent before Amazon S3 can perform the associated action",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Container for the expiration rule that describes when noncurrent objects are expired. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 expire noncurrent object versions at a specific period in the object's lifetime",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionExpirationInDays
+							"noncurrent_version_expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionTransition
+							"noncurrent_version_transition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: NewerNoncurrentVersions
+									"newer_noncurrent_versions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: StorageClass
+									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The class of storage used to store the object.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"DEEP_ARCHIVE",
+												"GLACIER",
+												"Glacier",
+												"GLACIER_IR",
+												"INTELLIGENT_TIERING",
+												"ONEZONE_IA",
+												"STANDARD_IA",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TransitionInDays
+									"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Container for the transition rule that describes when noncurrent objects transition to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class. If your bucket is versioning-enabled (or versioning is suspended), you can set this action to request that Amazon S3 transition noncurrent object versions to the STANDARD_IA, ONEZONE_IA, INTELLIGENT_TIERING, GLACIER_IR, GLACIER, or DEEP_ARCHIVE storage class at a specific period in the object's lifetime.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NoncurrentVersionTransitions
+							"noncurrent_version_transitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: NewerNoncurrentVersions
+										"newer_noncurrent_versions": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Specified the number of newer noncurrent and current versions that must exists before performing the associated action",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: StorageClass
+										"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The class of storage used to store the object.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"DEEP_ARCHIVE",
+													"GLACIER",
+													"Glacier",
+													"GLACIER_IR",
+													"INTELLIGENT_TIERING",
+													"ONEZONE_IA",
+													"STANDARD_IA",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TransitionInDays
+										"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "Specifies the number of days an object is noncurrent before Amazon S3 can perform the associated action.",
+											Required:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeGreaterThan
+							"object_size_greater_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(20),
+									stringvalidator.RegexMatches(regexp.MustCompile("[0-9]+"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ObjectSizeLessThan
+							"object_size_less_than": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(20),
+									stringvalidator.RegexMatches(regexp.MustCompile("[0-9]+"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"Enabled",
+										"Disabled",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TagFilters
+							"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Value
+										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Transition
+							"transition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: StorageClass
+									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"DEEP_ARCHIVE",
+												"GLACIER",
+												"Glacier",
+												"GLACIER_IR",
+												"INTELLIGENT_TIERING",
+												"ONEZONE_IA",
+												"STANDARD_IA",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TransitionDate
+									"transition_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.RegexMatches(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TransitionInDays
+									"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "You must specify at least one of \"TransitionDate\" and \"TransitionInDays\"",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Transitions
+							"transitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: StorageClass
+										"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"DEEP_ARCHIVE",
+													"GLACIER",
+													"Glacier",
+													"GLACIER_IR",
+													"INTELLIGENT_TIERING",
+													"ONEZONE_IA",
+													"STANDARD_IA",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TransitionDate
+										"transition_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.RegexMatches(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TransitionInDays
+										"transition_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+												int64planmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.UniqueValues(),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A lifecycle rule for individual objects in an Amazon S3 bucket.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Rules that define how Amazon S3 manages objects during their lifetime.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LoggingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Settings that define where logs are stored.",
+		//	  "properties": {
+		//	    "DestinationBucketName": {
+		//	      "description": "The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.",
+		//	      "type": "string"
+		//	    },
+		//	    "LogFilePrefix": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"logging_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationBucketName
+				"destination_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of an Amazon S3 bucket where Amazon S3 store server access log files. You can store log files in any bucket that you own. By default, logs are stored in the bucket where the LoggingConfiguration property is defined.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogFilePrefix
+				"log_file_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Settings that define where logs are stored.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MetricsConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Settings that define a metrics configuration for the CloudWatch request metrics from the bucket.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AccessPointArn": {
+		//	        "type": "string"
+		//	      },
+		//	      "Id": {
+		//	        "type": "string"
+		//	      },
+		//	      "Prefix": {
+		//	        "type": "string"
+		//	      },
+		//	      "TagFilters": {
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Value",
+		//	            "Key"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Id"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"metrics_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AccessPointArn
+					"access_point_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Id
+					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: TagFilters
+					"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.UniqueValues(),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Settings that define a metrics configuration for the CloudWatch request metrics from the bucket.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NotificationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration that defines how Amazon S3 handles bucket notifications.",
+		//	  "properties": {
+		//	    "EventBridgeConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.",
+		//	      "properties": {
+		//	        "EventBridgeEnabled": {
+		//	          "default": "true",
+		//	          "description": "Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EventBridgeEnabled"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "LambdaConfigurations": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Describes the AWS Lambda functions to invoke and the events for which to invoke them.",
+		//	        "properties": {
+		//	          "Event": {
+		//	            "description": "The Amazon S3 bucket event for which to invoke the AWS Lambda function.",
+		//	            "type": "string"
+		//	          },
+		//	          "Filter": {
+		//	            "additionalProperties": false,
+		//	            "description": "The filtering rules that determine which objects invoke the AWS Lambda function.",
+		//	            "properties": {
+		//	              "S3Key": {
+		//	                "additionalProperties": false,
+		//	                "description": "A container for object key name prefix and suffix filtering rules.",
+		//	                "properties": {
+		//	                  "Rules": {
+		//	                    "insertionOrder": true,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
+		//	                      "properties": {
+		//	                        "Name": {
+		//	                          "maxLength": 1024,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Value",
+		//	                        "Name"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Rules"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "S3Key"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Function": {
+		//	            "description": "The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Function",
+		//	          "Event"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "QueueConfigurations": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The Amazon Simple Queue Service queues to publish messages to and the events for which to publish messages.",
+		//	        "properties": {
+		//	          "Event": {
+		//	            "description": "The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.",
+		//	            "type": "string"
+		//	          },
+		//	          "Filter": {
+		//	            "additionalProperties": false,
+		//	            "description": "The filtering rules that determine which objects trigger notifications.",
+		//	            "properties": {
+		//	              "S3Key": {
+		//	                "additionalProperties": false,
+		//	                "description": "A container for object key name prefix and suffix filtering rules.",
+		//	                "properties": {
+		//	                  "Rules": {
+		//	                    "insertionOrder": true,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
+		//	                      "properties": {
+		//	                        "Name": {
+		//	                          "maxLength": 1024,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Value",
+		//	                        "Name"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Rules"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "S3Key"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Queue": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Event",
+		//	          "Queue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "TopicConfigurations": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "The topic to which notifications are sent and the events for which notifications are generated.",
+		//	        "properties": {
+		//	          "Event": {
+		//	            "description": "The Amazon S3 bucket event about which to send notifications.",
+		//	            "type": "string"
+		//	          },
+		//	          "Filter": {
+		//	            "additionalProperties": false,
+		//	            "description": "The filtering rules that determine for which objects to send notifications.",
+		//	            "properties": {
+		//	              "S3Key": {
+		//	                "additionalProperties": false,
+		//	                "description": "A container for object key name prefix and suffix filtering rules.",
+		//	                "properties": {
+		//	                  "Rules": {
+		//	                    "insertionOrder": true,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies the Amazon S3 object key name to filter on and whether to filter on the suffix or prefix of the key name.",
+		//	                      "properties": {
+		//	                        "Name": {
+		//	                          "maxLength": 1024,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Value",
+		//	                        "Name"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Rules"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "S3Key"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Topic": {
+		//	            "description": "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Event",
+		//	          "Topic"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"notification_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EventBridgeConfiguration
+				"event_bridge_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EventBridgeEnabled
+						"event_bridge_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Specifies whether to send notifications to Amazon EventBridge when events occur in an Amazon S3 bucket.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(true),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes the Amazon EventBridge notification configuration for an Amazon S3 bucket.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaConfigurations
+				"lambda_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Event
+							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 bucket event for which to invoke the AWS Lambda function.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Key
+									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Rules
+											"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthAtMost(1024),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Required: true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.UniqueValues(),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for object key name prefix and suffix filtering rules.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The filtering rules that determine which objects invoke the AWS Lambda function.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Function
+							"function": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the AWS Lambda function that Amazon S3 invokes when the specified event type occurs.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: QueueConfigurations
+				"queue_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Event
+							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 bucket event about which you want to publish messages to Amazon SQS.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Key
+									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Rules
+											"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthAtMost(1024),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Required: true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.UniqueValues(),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for object key name prefix and suffix filtering rules.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The filtering rules that determine which objects trigger notifications.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Queue
+							"queue": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the Amazon SQS queue to which Amazon S3 publishes a message when it detects events of the specified type.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TopicConfigurations
+				"topic_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Event
+							"event": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 bucket event about which to send notifications.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: S3Key
+									"s3_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Rules
+											"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthAtMost(1024),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Required: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Required: true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.UniqueValues(),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for object key name prefix and suffix filtering rules.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The filtering rules that determine for which objects to send notifications.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Topic
+							"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Resource Name (ARN) of the Amazon SNS topic to which Amazon S3 publishes a message when it detects events of the specified type.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that defines how Amazon S3 handles bucket notifications.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ObjectLockConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Places an Object Lock configuration on the specified bucket.",
+		//	  "properties": {
+		//	    "ObjectLockEnabled": {
+		//	      "type": "string"
+		//	    },
+		//	    "Rule": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Object Lock rule in place for the specified object.",
+		//	      "properties": {
+		//	        "DefaultRetention": {
+		//	          "additionalProperties": false,
+		//	          "description": "The default retention period that you want to apply to new objects placed in the specified bucket.",
+		//	          "properties": {
+		//	            "Days": {
+		//	              "type": "integer"
+		//	            },
+		//	            "Mode": {
+		//	              "enum": [
+		//	                "COMPLIANCE",
+		//	                "GOVERNANCE"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Years": {
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"object_lock_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ObjectLockEnabled
+				"object_lock_enabled": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Rule
+				"rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultRetention
+						"default_retention": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Days
+								"days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Mode
+								"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"COMPLIANCE",
+											"GOVERNANCE",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Years
+								"years": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The default retention period that you want to apply to new objects placed in the specified bucket.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Object Lock rule in place for the specified object.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Places an Object Lock configuration on the specified bucket.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ObjectLockEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether this bucket has an Object Lock configuration enabled.",
+		//	  "type": "boolean"
+		//	}
+		"object_lock_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether this bucket has an Object Lock configuration enabled.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OwnershipControls
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the container element for object ownership rules.",
+		//	  "properties": {
+		//	    "Rules": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ObjectOwnership": {
+		//	            "description": "Specifies an object ownership rule.",
+		//	            "enum": [
+		//	              "ObjectWriter",
+		//	              "BucketOwnerPreferred",
+		//	              "BucketOwnerEnforced"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Rules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"ownership_controls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ObjectOwnership
+							"object_ownership": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies an object ownership rule.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ObjectWriter",
+										"BucketOwnerPreferred",
+										"BucketOwnerEnforced",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Required: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies the container element for object ownership rules.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PublicAccessBlockConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration that defines how Amazon S3 handles public access.",
+		//	  "properties": {
+		//	    "BlockPublicAcls": {
+		//	      "description": "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "BlockPublicPolicy": {
+		//	      "description": "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.\nEnabling this setting doesn't affect existing bucket policies.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "IgnorePublicAcls": {
+		//	      "description": "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.\nEnabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "RestrictPublicBuckets": {
+		//	      "description": "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"public_access_block_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BlockPublicAcls
+				"block_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should block public access control lists (ACLs) for this bucket and objects in this bucket. Setting this element to TRUE causes the following behavior:\n- PUT Bucket acl and PUT Object acl calls fail if the specified ACL is public.\n - PUT Object calls fail if the request includes a public ACL.\nEnabling this setting doesn't affect existing policies or ACLs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BlockPublicPolicy
+				"block_public_policy": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should block public bucket policies for this bucket. Setting this element to TRUE causes Amazon S3 to reject calls to PUT Bucket policy if the specified bucket policy allows public access.\nEnabling this setting doesn't affect existing bucket policies.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IgnorePublicAcls
+				"ignore_public_acls": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should ignore public ACLs for this bucket and objects in this bucket. Setting this element to TRUE causes Amazon S3 to ignore all public ACLs on this bucket and objects in this bucket.\nEnabling this setting doesn't affect the persistence of any existing ACLs and doesn't prevent new public ACLs from being set.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RestrictPublicBuckets
+				"restrict_public_buckets": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether Amazon S3 should restrict public bucket policies for this bucket. Setting this element to TRUE restricts access to this bucket to only AWS services and authorized users within this account if the bucket has a public policy.\nEnabling this setting doesn't affect previously stored bucket policies, except that public and cross-account access within any public bucket policy, including non-public delegation to specific accounts, is blocked.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration that defines how Amazon S3 handles public access.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RegionalDomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Returns the regional domain name of the specified bucket.",
+		//	  "examples": [
+		//	    "mystack-mybucket-kdwwxmddtr2g.s3.us-east-2.amazonaws.com"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"regional_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Returns the regional domain name of the specified bucket.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for replicating objects in an S3 bucket.",
+		//	  "properties": {
+		//	    "Role": {
+		//	      "description": "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.",
+		//	      "type": "string"
+		//	    },
+		//	    "Rules": {
+		//	      "description": "A container for one or more replication rules.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies which Amazon S3 objects to replicate and where to store the replicas.",
+		//	        "properties": {
+		//	          "DeleteMarkerReplication": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Status": {
+		//	                "enum": [
+		//	                  "Disabled",
+		//	                  "Enabled"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Destination": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies which Amazon S3 bucket to store replicated objects in and their storage class.",
+		//	            "properties": {
+		//	              "AccessControlTranslation": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.",
+		//	                "properties": {
+		//	                  "Owner": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Owner"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Account": {
+		//	                "type": "string"
+		//	              },
+		//	              "Bucket": {
+		//	                "type": "string"
+		//	              },
+		//	              "EncryptionConfiguration": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies encryption-related information for an Amazon S3 bucket that is a destination for replicated objects.",
+		//	                "properties": {
+		//	                  "ReplicaKmsKeyID": {
+		//	                    "description": "Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ReplicaKmsKeyID"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Metrics": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "EventThreshold": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Minutes": {
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Minutes"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Status": {
+		//	                    "enum": [
+		//	                      "Disabled",
+		//	                      "Enabled"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Status"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "ReplicationTime": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Status": {
+		//	                    "enum": [
+		//	                      "Disabled",
+		//	                      "Enabled"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Time": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Minutes": {
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Minutes"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Status",
+		//	                  "Time"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "StorageClass": {
+		//	                "description": "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy.",
+		//	                "enum": [
+		//	                  "DEEP_ARCHIVE",
+		//	                  "GLACIER",
+		//	                  "GLACIER_IR",
+		//	                  "INTELLIGENT_TIERING",
+		//	                  "ONEZONE_IA",
+		//	                  "REDUCED_REDUNDANCY",
+		//	                  "STANDARD",
+		//	                  "STANDARD_IA"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Bucket"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Filter": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "And": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Prefix": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "TagFilters": {
+		//	                    "insertionOrder": true,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	                      "properties": {
+		//	                        "Key": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Value",
+		//	                        "Key"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "Prefix": {
+		//	                "type": "string"
+		//	              },
+		//	              "TagFilter": {
+		//	                "additionalProperties": false,
+		//	                "description": "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
+		//	                "properties": {
+		//	                  "Key": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Value",
+		//	                  "Key"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Id": {
+		//	            "description": "A unique identifier for the rule.",
+		//	            "maxLength": 255,
+		//	            "type": "string"
+		//	          },
+		//	          "Prefix": {
+		//	            "description": "An object key name prefix that identifies the object or objects to which the rule applies.",
+		//	            "maxLength": 1024,
+		//	            "type": "string"
+		//	          },
+		//	          "Priority": {
+		//	            "type": "integer"
+		//	          },
+		//	          "SourceSelectionCriteria": {
+		//	            "additionalProperties": false,
+		//	            "description": "A container that describes additional filters for identifying the source objects that you want to replicate.",
+		//	            "properties": {
+		//	              "ReplicaModifications": {
+		//	                "additionalProperties": false,
+		//	                "description": "A filter that you can specify for selection for modifications on replicas.",
+		//	                "properties": {
+		//	                  "Status": {
+		//	                    "description": "Specifies whether Amazon S3 replicates modifications on replicas.",
+		//	                    "enum": [
+		//	                      "Enabled",
+		//	                      "Disabled"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Status"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "SseKmsEncryptedObjects": {
+		//	                "additionalProperties": false,
+		//	                "description": "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
+		//	                "properties": {
+		//	                  "Status": {
+		//	                    "description": "Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.",
+		//	                    "enum": [
+		//	                      "Disabled",
+		//	                      "Enabled"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Status"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Status": {
+		//	            "description": "Specifies whether the rule is enabled.",
+		//	            "enum": [
+		//	              "Disabled",
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Destination",
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Role",
+		//	    "Rules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"replication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Role
+				"role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM) role that Amazon S3 assumes when replicating objects.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Rules
+				"rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeleteMarkerReplication
+							"delete_marker_replication": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Status
+									"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"Disabled",
+												"Enabled",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Destination
+							"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccessControlTranslation
+									"access_control_translation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Owner
+											"owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Account
+									"account": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Bucket
+									"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+									// Property: EncryptionConfiguration
+									"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ReplicaKmsKeyID
+											"replica_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.",
+												Required:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies encryption-related information for an Amazon S3 bucket that is a destination for replicated objects.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Metrics
+									"metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: EventThreshold
+											"event_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Minutes
+													"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Required: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Optional: true,
 												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
+												PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+													objectplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
 														"Disabled",
 														"Enabled",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"destination": {
-									// Property: Destination
-									Description: "Specifies which Amazon S3 bucket to store replicated objects in and their storage class.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_control_translation": {
-												// Property: AccessControlTranslation
-												Description: "Specify this only in a cross-account scenario (where source and destination bucket owners are not the same), and you want to change replica ownership to the AWS account that owns the destination bucket. If this is not specified in the replication configuration, the replicas are owned by same AWS account that owns the source object.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"owner": {
-															// Property: Owner
-															Type:     types.StringType,
-															Required: true,
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"account": {
-												// Property: Account
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"bucket": {
-												// Property: Bucket
-												Type:     types.StringType,
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ReplicationTime
+									"replication_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Required: true,
-											},
-											"encryption_configuration": {
-												// Property: EncryptionConfiguration
-												Description: "Specifies encryption-related information for an Amazon S3 bucket that is a destination for replicated objects.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"replica_kms_key_id": {
-															// Property: ReplicaKmsKeyID
-															Description: "Specifies the ID (Key ARN or Alias ARN) of the customer managed customer master key (CMK) stored in AWS Key Management Service (KMS) for the destination bucket.",
-															Type:        types.StringType,
-															Required:    true,
-														},
-													},
-												),
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"Disabled",
+														"Enabled",
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Time
+											"time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Minutes
+													"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Required: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: StorageClass
+									"storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"DEEP_ARCHIVE",
+												"GLACIER",
+												"GLACIER_IR",
+												"INTELLIGENT_TIERING",
+												"ONEZONE_IA",
+												"REDUCED_REDUNDANCY",
+												"STANDARD",
+												"STANDARD_IA",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies which Amazon S3 bucket to store replicated objects in and their storage class.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: And
+									"and": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Prefix
+											"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"metrics": {
-												// Property: Metrics
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"event_threshold": {
-															// Property: EventThreshold
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"minutes": {
-																		// Property: Minutes
-																		Type:     types.Int64Type,
-																		Required: true,
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"status": {
-															// Property: Status
-															Type:     types.StringType,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TagFilters
+											"tag_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Key
+														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"Disabled",
-																	"Enabled",
-																}),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"replication_time": {
-												// Property: ReplicationTime
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"status": {
-															// Property: Status
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"Disabled",
-																	"Enabled",
-																}),
-															},
-														},
-														"time": {
-															// Property: Time
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"minutes": {
-																		// Property: Minutes
-																		Type:     types.Int64Type,
-																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-														},
-													},
-												),
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"storage_class": {
-												// Property: StorageClass
-												Description: "The storage class to use when replicating objects, such as S3 Standard or reduced redundancy.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"DEEP_ARCHIVE",
-														"GLACIER",
-														"GLACIER_IR",
-														"INTELLIGENT_TIERING",
-														"ONEZONE_IA",
-														"REDUCED_REDUNDANCY",
-														"STANDARD",
-														"STANDARD_IA",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-								"filter": {
-									// Property: Filter
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"and": {
-												// Property: And
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"prefix": {
-															// Property: Prefix
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"tag_filters": {
-															// Property: TagFilters
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"key": {
-																		// Property: Key
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.UniqueItems(),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"prefix": {
-												// Property: Prefix
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"tag_filter": {
-												// Property: TagFilter
-												Description: "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"key": {
-															// Property: Key
-															Type:     types.StringType,
-															Required: true,
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
-															Required: true,
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"id": {
-									// Property: Id
-									Description: "A unique identifier for the rule.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(255),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"prefix": {
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.UniqueValues(),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Prefix
-									Description: "An object key name prefix that identifies the object or objects to which the rule applies.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(1024),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"priority": {
-									// Property: Priority
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_selection_criteria": {
-									// Property: SourceSelectionCriteria
-									Description: "A container that describes additional filters for identifying the source objects that you want to replicate.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"replica_modifications": {
-												// Property: ReplicaModifications
-												Description: "A filter that you can specify for selection for modifications on replicas.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"status": {
-															// Property: Status
-															Description: "Specifies whether Amazon S3 replicates modifications on replicas.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"Enabled",
-																	"Disabled",
-																}),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"sse_kms_encrypted_objects": {
-												// Property: SseKmsEncryptedObjects
-												Description: "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"status": {
-															// Property: Status
-															Description: "Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"Disabled",
-																	"Enabled",
-																}),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
+									"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TagFilter
+									"tag_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Tags to use to identify a subset of objects for an Amazon S3 bucket.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A unique identifier for the rule.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(255),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An object key name prefix that identifies the object or objects to which the rule applies.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(1024),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Priority
+							"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceSelectionCriteria
+							"source_selection_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ReplicaModifications
+									"replica_modifications": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies whether Amazon S3 replicates modifications on replicas.",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"Enabled",
+														"Disabled",
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A filter that you can specify for selection for modifications on replicas.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SseKmsEncryptedObjects
+									"sse_kms_encrypted_objects": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Status
+											"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies whether Amazon S3 replicates objects created with server-side encryption using a customer master key (CMK) stored in AWS Key Management Service.",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"Disabled",
+														"Enabled",
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "A container for filter information for the selection of Amazon S3 objects encrypted with AWS KMS.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A container that describes additional filters for identifying the source objects that you want to replicate.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether the rule is enabled.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"Disabled",
+										"Enabled",
 									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"status": {
-									// Property: Status
-									Description: "Specifies whether the rule is enabled.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"Disabled",
-											"Enabled",
-										}),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An arbitrary set of tags (key-value pairs) for this S3 bucket.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "An arbitrary set of tags (key-value pairs) for this S3 bucket.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"versioning_configuration": {
-			// Property: VersioningConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Describes the versioning state of an Amazon S3 bucket.",
-			//	  "properties": {
-			//	    "Status": {
-			//	      "default": "Suspended",
-			//	      "description": "The versioning state of the bucket.",
-			//	      "enum": [
-			//	        "Enabled",
-			//	        "Suspended"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Status"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Describes the versioning state of an Amazon S3 bucket.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"status": {
-						// Property: Status
-						Description: "The versioning state of the bucket.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"Enabled",
-								"Suspended",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.StringValue("Suspended")),
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"website_configuration": {
-			// Property: WebsiteConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Specifies website configuration parameters for an Amazon S3 bucket.",
-			//	  "properties": {
-			//	    "ErrorDocument": {
-			//	      "description": "The name of the error document for the website.",
-			//	      "type": "string"
-			//	    },
-			//	    "IndexDocument": {
-			//	      "description": "The name of the index document for the website.",
-			//	      "type": "string"
-			//	    },
-			//	    "RedirectAllRequestsTo": {
-			//	      "additionalProperties": false,
-			//	      "description": "Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.",
-			//	      "properties": {
-			//	        "HostName": {
-			//	          "description": "Name of the host where requests are redirected.",
-			//	          "type": "string"
-			//	        },
-			//	        "Protocol": {
-			//	          "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
-			//	          "enum": [
-			//	            "http",
-			//	            "https"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "HostName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "RoutingRules": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies the redirect behavior and when a redirect is applied.",
-			//	        "properties": {
-			//	          "RedirectRule": {
-			//	            "additionalProperties": false,
-			//	            "description": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
-			//	            "properties": {
-			//	              "HostName": {
-			//	                "description": "The host name to use in the redirect request.",
-			//	                "type": "string"
-			//	              },
-			//	              "HttpRedirectCode": {
-			//	                "description": "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
-			//	                "type": "string"
-			//	              },
-			//	              "Protocol": {
-			//	                "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
-			//	                "enum": [
-			//	                  "http",
-			//	                  "https"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "ReplaceKeyPrefixWith": {
-			//	                "description": "The object key prefix to use in the redirect request.",
-			//	                "type": "string"
-			//	              },
-			//	              "ReplaceKeyWith": {
-			//	                "description": "The specific object key to use in the redirect request.d",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "RoutingRuleCondition": {
-			//	            "additionalProperties": false,
-			//	            "description": "A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals",
-			//	            "properties": {
-			//	              "HttpErrorCodeReturnedEquals": {
-			//	                "description": "The HTTP error code when the redirect is applied. ",
-			//	                "type": "string"
-			//	              },
-			//	              "KeyPrefixEquals": {
-			//	                "description": "The object key name prefix when the redirect is applied.",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "RedirectRule"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Specifies website configuration parameters for an Amazon S3 bucket.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"error_document": {
-						// Property: ErrorDocument
-						Description: "The name of the error document for the website.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"index_document": {
-						// Property: IndexDocument
-						Description: "The name of the index document for the website.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"redirect_all_requests_to": {
-						// Property: RedirectAllRequestsTo
-						Description: "Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"host_name": {
-									// Property: HostName
-									Description: "Name of the host where requests are redirected.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"protocol": {
-									// Property: Protocol
-									Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"http",
-											"https",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"routing_rules": {
-						// Property: RoutingRules
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"redirect_rule": {
-									// Property: RedirectRule
-									Description: "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"host_name": {
-												// Property: HostName
-												Description: "The host name to use in the redirect request.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"http_redirect_code": {
-												// Property: HttpRedirectCode
-												Description: "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"protocol": {
-												// Property: Protocol
-												Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"http",
-														"https",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"replace_key_prefix_with": {
-												// Property: ReplaceKeyPrefixWith
-												Description: "The object key prefix to use in the redirect request.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"replace_key_with": {
-												// Property: ReplaceKeyWith
-												Description: "The specific object key to use in the redirect request.d",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-								"routing_rule_condition": {
-									// Property: RoutingRuleCondition
-									Description: "A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"http_error_code_returned_equals": {
-												// Property: HttpErrorCodeReturnedEquals
-												Description: "The HTTP error code when the redirect is applied. ",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"key_prefix_equals": {
-												// Property: KeyPrefixEquals
-												Description: "The object key name prefix when the redirect is applied.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"website_url": {
-			// Property: WebsiteURL
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon S3 website endpoint for the specified bucket.",
-			//	  "examples": [
-			//	    "Example (IPv4): http://mystack-mybucket-kdwwxmddtr2g.s3-website-us-east-2.amazonaws.com/",
-			//	    "Example (IPv6): http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com/"
-			//	  ],
-			//	  "format": "uri",
-			//	  "type": "string"
-			//	}
-			Description: "The Amazon S3 website endpoint for the specified bucket.",
-			Type:        types.StringType,
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A container for one or more replication rules.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for replicating objects in an S3 bucket.",
+			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An arbitrary set of tags (key-value pairs) for this S3 bucket.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An arbitrary set of tags (key-value pairs) for this S3 bucket.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VersioningConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Describes the versioning state of an Amazon S3 bucket.",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "default": "Suspended",
+		//	      "description": "The versioning state of the bucket.",
+		//	      "enum": [
+		//	        "Enabled",
+		//	        "Suspended"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"versioning_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The versioning state of the bucket.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Enabled",
+							"Suspended",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						generic.StringDefaultValue("Suspended"),
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Describes the versioning state of an Amazon S3 bucket.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WebsiteConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies website configuration parameters for an Amazon S3 bucket.",
+		//	  "properties": {
+		//	    "ErrorDocument": {
+		//	      "description": "The name of the error document for the website.",
+		//	      "type": "string"
+		//	    },
+		//	    "IndexDocument": {
+		//	      "description": "The name of the index document for the website.",
+		//	      "type": "string"
+		//	    },
+		//	    "RedirectAllRequestsTo": {
+		//	      "additionalProperties": false,
+		//	      "description": "Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.",
+		//	      "properties": {
+		//	        "HostName": {
+		//	          "description": "Name of the host where requests are redirected.",
+		//	          "type": "string"
+		//	        },
+		//	        "Protocol": {
+		//	          "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+		//	          "enum": [
+		//	            "http",
+		//	            "https"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "HostName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RoutingRules": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies the redirect behavior and when a redirect is applied.",
+		//	        "properties": {
+		//	          "RedirectRule": {
+		//	            "additionalProperties": false,
+		//	            "description": "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
+		//	            "properties": {
+		//	              "HostName": {
+		//	                "description": "The host name to use in the redirect request.",
+		//	                "type": "string"
+		//	              },
+		//	              "HttpRedirectCode": {
+		//	                "description": "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
+		//	                "type": "string"
+		//	              },
+		//	              "Protocol": {
+		//	                "description": "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+		//	                "enum": [
+		//	                  "http",
+		//	                  "https"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "ReplaceKeyPrefixWith": {
+		//	                "description": "The object key prefix to use in the redirect request.",
+		//	                "type": "string"
+		//	              },
+		//	              "ReplaceKeyWith": {
+		//	                "description": "The specific object key to use in the redirect request.d",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "RoutingRuleCondition": {
+		//	            "additionalProperties": false,
+		//	            "description": "A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals",
+		//	            "properties": {
+		//	              "HttpErrorCodeReturnedEquals": {
+		//	                "description": "The HTTP error code when the redirect is applied. ",
+		//	                "type": "string"
+		//	              },
+		//	              "KeyPrefixEquals": {
+		//	                "description": "The object key name prefix when the redirect is applied.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "RedirectRule"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"website_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ErrorDocument
+				"error_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the error document for the website.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IndexDocument
+				"index_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the index document for the website.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RedirectAllRequestsTo
+				"redirect_all_requests_to": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HostName
+						"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Name of the host where requests are redirected.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Protocol
+						"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"http",
+									"https",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Specifies the redirect behavior of all requests to a website endpoint of an Amazon S3 bucket.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoutingRules
+				"routing_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RedirectRule
+							"redirect_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: HostName
+									"host_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The host name to use in the redirect request.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: HttpRedirectCode
+									"http_redirect_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The HTTP redirect code to use on the response. Not required if one of the siblings is present.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Protocol
+									"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Protocol to use when redirecting requests. The default is the protocol that is used in the original request.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"http",
+												"https",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ReplaceKeyPrefixWith
+									"replace_key_prefix_with": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The object key prefix to use in the redirect request.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ReplaceKeyWith
+									"replace_key_with": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The specific object key to use in the redirect request.d",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Container for redirect information. You can redirect requests to another host, to another page, or with another protocol. In the event of an error, you can specify a different error code to return.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: RoutingRuleCondition
+							"routing_rule_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: HttpErrorCodeReturnedEquals
+									"http_error_code_returned_equals": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The HTTP error code when the redirect is applied. ",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: KeyPrefixEquals
+									"key_prefix_equals": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The object key name prefix when the redirect is applied.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "A container for describing a condition that must be met for the specified redirect to apply.You must specify at least one of HttpErrorCodeReturnedEquals and KeyPrefixEquals",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies website configuration parameters for an Amazon S3 bucket.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WebsiteURL
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon S3 website endpoint for the specified bucket.",
+		//	  "examples": [
+		//	    "Example (IPv4): http://mystack-mybucket-kdwwxmddtr2g.s3-website-us-east-2.amazonaws.com/",
+		//	    "Example (IPv6): http://mystack-mybucket-kdwwxmddtr2g.s3.dualstack.us-east-2.amazonaws.com/"
+		//	  ],
+		//	  "format": "uri",
+		//	  "type": "string"
+		//	}
+		"website_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon S3 website endpoint for the specified bucket.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::S3::Bucket",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::Bucket").WithTerraformTypeName("awscc_s3_bucket")
 	opts = opts.WithTerraformSchema(schema)
@@ -4007,7 +3793,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -4,14 +4,19 @@ package iottwinmaker
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,215 +26,209 @@ func init() {
 // sceneResource returns the Terraform awscc_iottwinmaker_scene resource.
 // This Terraform resource corresponds to the CloudFormation AWS::IoTTwinMaker::Scene resource.
 func sceneResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the scene.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the scene.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the scene.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"capabilities": {
-			// Property: Capabilities
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of capabilities that the scene uses to render.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "maxLength": 256,
-			//	    "minLength": 0,
-			//	    "pattern": ".*",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Capabilities
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of capabilities that the scene uses to render.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 256,
+		//	    "minLength": 0,
+		//	    "pattern": ".*",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"capabilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of capabilities that the scene uses to render.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
-				validate.ArrayForEach(validate.StringLenBetween(0, 256)),
-				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"content_location": {
-			// Property: ContentLocation
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The relative path that specifies the location of the content definition file.",
-			//	  "maxLength": 256,
-			//	  "minLength": 0,
-			//	  "pattern": "[sS]3://[A-Za-z0-9._/-]+",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeBetween(0, 50),
+				setvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(0, 256),
+					stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ContentLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The relative path that specifies the location of the content definition file.",
+		//	  "maxLength": 256,
+		//	  "minLength": 0,
+		//	  "pattern": "[sS]3://[A-Za-z0-9._/-]+",
+		//	  "type": "string"
+		//	}
+		"content_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The relative path that specifies the location of the content definition file.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 256),
-				validate.StringMatch(regexp.MustCompile("[sS]3://[A-Za-z0-9._/-]+"), ""),
-			},
-		},
-		"creation_date_time": {
-			// Property: CreationDateTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date and time when the scene was created.",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("[sS]3://[A-Za-z0-9._/-]+"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreationDateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time when the scene was created.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date and time when the scene was created.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the scene.",
-			//	  "maxLength": 512,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the scene.",
+		//	  "maxLength": 512,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the scene.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 512),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"scene_id": {
-			// Property: SceneId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the scene.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 512),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SceneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the scene.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"scene_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the scene.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-				validate.StringMatch(regexp.MustCompile("[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A key-value pair to associate with a resource.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair to associate with a resource.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A key-value pair to associate with a resource.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"update_date_time": {
-			// Property: UpdateDateTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date and time of the current update.",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Description: "The date and time of the current update.",
-			Type:        types.StringType,
+			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"workspace_id": {
-			// Property: WorkspaceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the scene.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UpdateDateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time of the current update.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"update_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time of the current update.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: WorkspaceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the scene.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the scene.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-				validate.StringMatch(regexp.MustCompile("[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::IoTTwinMaker::Scene",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTTwinMaker::Scene").WithTerraformTypeName("awscc_iottwinmaker_scene")
 	opts = opts.WithTerraformSchema(schema)
@@ -250,7 +249,7 @@ func sceneResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,213 +19,202 @@ func init() {
 // fargateProfileDataSource returns the Terraform awscc_eks_fargate_profile data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EKS::FargateProfile resource.
 func fargateProfileDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"cluster_name": {
-			// Property: ClusterName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of the Cluster",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of the Cluster",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the Cluster",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"fargate_profile_name": {
-			// Property: FargateProfileName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of FargateProfile",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: FargateProfileName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of FargateProfile",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"fargate_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of FargateProfile",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"pod_execution_role_arn": {
-			// Property: PodExecutionRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IAM policy arn for pods",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PodExecutionRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IAM policy arn for pods",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"pod_execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IAM policy arn for pods",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"selectors": {
-			// Property: Selectors
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Labels": {
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "A key-value pair to associate with a pod.",
-			//	          "properties": {
-			//	            "Key": {
-			//	              "description": "The key name of the label.",
-			//	              "maxLength": 127,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "description": "The value for the label. ",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Key",
-			//	            "Value"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "Namespace": {
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Namespace"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"labels": {
-						// Property: Labels
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key": {
-									// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Selectors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Labels": {
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "A key-value pair to associate with a pod.",
+		//	          "properties": {
+		//	            "Key": {
+		//	              "description": "The key name of the label.",
+		//	              "maxLength": 127,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "The value for the label. ",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Key",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "Namespace": {
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Namespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"selectors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Labels
+					"labels": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The key name of the label.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"value": {
-									// Property: Value
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The value for the label. ",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-							},
-						),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
 						Computed: true,
-					},
-					"namespace": {
-						// Property: Namespace
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Namespace
+					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"subnets": {
-			// Property: Subnets
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 127,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Subnets
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EKS::FargateProfile",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::FargateProfile").WithTerraformTypeName("awscc_eks_fargate_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -243,7 +232,7 @@ func fargateProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		"value":                  "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

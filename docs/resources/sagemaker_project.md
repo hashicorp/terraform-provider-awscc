@@ -69,7 +69,7 @@ Required:
 <a id="nestedatt--service_catalog_provisioned_product_details"></a>
 ### Nested Schema for `service_catalog_provisioned_product_details`
 
-Optional:
+Read-Only:
 
 - `provisioned_product_id` (String) The identifier of the provisioning artifact (also known as a version).
 - `provisioned_product_status_message` (String) Provisioned Product Status Message

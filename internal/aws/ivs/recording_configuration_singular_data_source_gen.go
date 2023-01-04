@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,230 +19,213 @@ func init() {
 // recordingConfigurationDataSource returns the Terraform awscc_ivs_recording_configuration data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IVS::RecordingConfiguration resource.
 func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"destination_configuration": {
-			// Property: DestinationConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Recording Destination Configuration.",
-			//	  "properties": {
-			//	    "S3": {
-			//	      "additionalProperties": false,
-			//	      "description": "Recording S3 Destination Configuration.",
-			//	      "properties": {
-			//	        "BucketName": {
-			//	          "maxLength": 63,
-			//	          "minLength": 3,
-			//	          "pattern": "^[a-z0-9-.]+$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "BucketName"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "S3"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Recording Destination Configuration.",
+		//	  "properties": {
+		//	    "S3": {
+		//	      "additionalProperties": false,
+		//	      "description": "Recording S3 Destination Configuration.",
+		//	      "properties": {
+		//	        "BucketName": {
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "pattern": "^[a-z0-9-.]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BucketName"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3
+				"s3": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Recording S3 Destination Configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Recording Destination Configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"s3": {
-						// Property: S3
-						Description: "Recording S3 Destination Configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bucket_name": {
-									// Property: BucketName
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Recording Configuration Name.",
-			//	  "maxLength": 128,
-			//	  "minLength": 0,
-			//	  "pattern": "^[a-zA-Z0-9-_]*$",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Recording Configuration Name.",
+		//	  "maxLength": 128,
+		//	  "minLength": 0,
+		//	  "pattern": "^[a-zA-Z0-9-_]*$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Recording Configuration Name.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"recording_reconnect_window_seconds": {
-			// Property: RecordingReconnectWindowSeconds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 0,
-			//	  "description": "Recording Reconnect Window Seconds. (0 means disabled)",
-			//	  "maximum": 300,
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RecordingReconnectWindowSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 0,
+		//	  "description": "Recording Reconnect Window Seconds. (0 means disabled)",
+		//	  "maximum": 300,
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"recording_reconnect_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Recording Reconnect Window Seconds. (0 means disabled)",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Recording Configuration State.",
-			//	  "enum": [
-			//	    "CREATING",
-			//	    "CREATE_FAILED",
-			//	    "ACTIVE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Recording Configuration State.",
+		//	  "enum": [
+		//	    "CREATING",
+		//	    "CREATE_FAILED",
+		//	    "ACTIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Recording Configuration State.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"thumbnail_configuration": {
-			// Property: ThumbnailConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Recording Thumbnail Configuration.",
-			//	  "properties": {
-			//	    "RecordingMode": {
-			//	      "description": "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
-			//	      "enum": [
-			//	        "INTERVAL",
-			//	        "DISABLED"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "TargetIntervalSeconds": {
-			//	      "description": "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
-			//	      "maximum": 60,
-			//	      "minimum": 5,
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "RecordingMode"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ThumbnailConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Recording Thumbnail Configuration.",
+		//	  "properties": {
+		//	    "RecordingMode": {
+		//	      "description": "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
+		//	      "enum": [
+		//	        "INTERVAL",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TargetIntervalSeconds": {
+		//	      "description": "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+		//	      "maximum": 60,
+		//	      "minimum": 5,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RecordingMode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RecordingMode
+				"recording_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetIntervalSeconds
+				"target_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Recording Thumbnail Configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"recording_mode": {
-						// Property: RecordingMode
-						Description: "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"target_interval_seconds": {
-						// Property: TargetIntervalSeconds
-						Description: "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IVS::RecordingConfiguration",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::RecordingConfiguration").WithTerraformTypeName("awscc_ivs_recording_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -262,7 +245,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"value":                              "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,254 +19,236 @@ func init() {
 // domainConfigurationDataSource returns the Terraform awscc_iot_domain_configuration data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::DomainConfiguration resource.
 func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"authorizer_config": {
-			// Property: AuthorizerConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "AllowAuthorizerOverride": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "DefaultAuthorizerName": {
-			//	      "maxLength": 128,
-			//	      "minLength": 1,
-			//	      "pattern": "^[\\w=,@-]+$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"allow_authorizer_override": {
-						// Property: AllowAuthorizerOverride
-						Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizerConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AllowAuthorizerOverride": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "DefaultAuthorizerName": {
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "pattern": "^[\\w=,@-]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"authorizer_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowAuthorizerOverride
+				"allow_authorizer_override": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultAuthorizerName
+				"default_authorizer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainConfigurationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\w.-]+$",
+		//	  "type": "string"
+		//	}
+		"domain_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainConfigurationStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"domain_configuration_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 253,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ENDPOINT",
+		//	    "AWS_MANAGED",
+		//	    "CUSTOMER_MANAGED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"domain_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ServerCertificateArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "maxLength": 2048,
+		//	    "minLength": 1,
+		//	    "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"server_certificate_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ServerCertificates
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ServerCertificateArn": {
+		//	        "maxLength": 2048,
+		//	        "minLength": 1,
+		//	        "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "ServerCertificateStatus": {
+		//	        "enum": [
+		//	          "INVALID",
+		//	          "VALID"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "ServerCertificateStatusDetail": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"server_certificates": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ServerCertificateArn
+					"server_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"default_authorizer_name": {
-						// Property: DefaultAuthorizerName
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: ServerCertificateStatus
+					"server_certificate_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"domain_configuration_name": {
-			// Property: DomainConfigurationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^[\\w.-]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"domain_configuration_status": {
-			// Property: DomainConfigurationStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "ENABLED",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"domain_name": {
-			// Property: DomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 253,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"domain_type": {
-			// Property: DomainType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "ENDPOINT",
-			//	    "AWS_MANAGED",
-			//	    "CUSTOMER_MANAGED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"server_certificate_arns": {
-			// Property: ServerCertificateArns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "maxLength": 2048,
-			//	    "minLength": 1,
-			//	    "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 1,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"server_certificates": {
-			// Property: ServerCertificates
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "ServerCertificateArn": {
-			//	        "maxLength": 2048,
-			//	        "minLength": 1,
-			//	        "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
-			//	        "type": "string"
-			//	      },
-			//	      "ServerCertificateStatus": {
-			//	        "enum": [
-			//	          "INVALID",
-			//	          "VALID"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "ServerCertificateStatusDetail": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"server_certificate_arn": {
-						// Property: ServerCertificateArn
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: ServerCertificateStatusDetail
+					"server_certificate_status_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"server_certificate_status": {
-						// Property: ServerCertificateStatus
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"server_certificate_status_detail": {
-						// Property: ServerCertificateStatusDetail
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"service_type": {
-			// Property: ServiceType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "DATA",
-			//	    "CREDENTIAL_PROVIDER",
-			//	    "JOBS"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "DATA",
+		//	    "CREDENTIAL_PROVIDER",
+		//	    "JOBS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"service_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"validation_certificate_arn": {
-			// Property: ValidationCertificateArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ValidationCertificateArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$",
+		//	  "type": "string"
+		//	}
+		"validation_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoT::DomainConfiguration",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::DomainConfiguration").WithTerraformTypeName("awscc_iot_domain_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -291,7 +273,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"value":                            "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -5,12 +5,21 @@ package lambda
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,138 +29,138 @@ func init() {
 // urlResource returns the Terraform awscc_lambda_url resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Lambda::Url resource.
 func urlResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auth_type": {
-			// Property: AuthType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
-			//	  "enum": [
-			//	    "AWS_IAM",
-			//	    "NONE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AuthType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
+		//	  "enum": [
+		//	    "AWS_IAM",
+		//	    "NONE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Can be either AWS_IAM if the requests are authorized via IAM, or NONE if no authorization is configured on the Function URL.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"AWS_IAM",
 					"NONE",
-				}),
-			},
-		},
-		"cors": {
-			// Property: Cors
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "AllowCredentials": {
-			//	      "description": "Specifies whether credentials are included in the CORS request.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "AllowHeaders": {
-			//	      "description": "Represents a collection of allowed headers.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "maxLength": 1024,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 100,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "AllowMethods": {
-			//	      "description": "Represents a collection of allowed HTTP methods.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "enum": [
-			//	          "GET",
-			//	          "PUT",
-			//	          "HEAD",
-			//	          "POST",
-			//	          "PATCH",
-			//	          "DELETE",
-			//	          "*"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 6,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "AllowOrigins": {
-			//	      "description": "Represents a collection of allowed origins.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "maxLength": 253,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 100,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ExposeHeaders": {
-			//	      "description": "Represents a collection of exposed headers.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "maxLength": 1024,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 100,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "MaxAge": {
-			//	      "maximum": 86400,
-			//	      "minimum": 0,
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"allow_credentials": {
-						// Property: AllowCredentials
-						Description: "Specifies whether credentials are included in the CORS request.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"allow_headers": {
-						// Property: AllowHeaders
-						Description: "Represents a collection of allowed headers.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 100),
-							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"allow_methods": {
-						// Property: AllowMethods
-						Description: "Represents a collection of allowed HTTP methods.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 6),
-							validate.ArrayForEach(validate.StringInSlice([]string{
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Cors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AllowCredentials": {
+		//	      "description": "Specifies whether credentials are included in the CORS request.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "AllowHeaders": {
+		//	      "description": "Represents a collection of allowed headers.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "AllowMethods": {
+		//	      "description": "Represents a collection of allowed HTTP methods.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "enum": [
+		//	          "GET",
+		//	          "PUT",
+		//	          "HEAD",
+		//	          "POST",
+		//	          "PATCH",
+		//	          "DELETE",
+		//	          "*"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 6,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "AllowOrigins": {
+		//	      "description": "Represents a collection of allowed origins.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "maxLength": 253,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ExposeHeaders": {
+		//	      "description": "Represents a collection of exposed headers.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "MaxAge": {
+		//	      "maximum": 86400,
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cors": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllowCredentials
+				"allow_credentials": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether credentials are included in the CORS request.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowHeaders
+				"allow_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of allowed headers.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 100),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 1024),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowMethods
+				"allow_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of allowed HTTP methods.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 6),
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
 								"GET",
 								"PUT",
 								"HEAD",
@@ -159,176 +168,173 @@ func urlResource(ctx context.Context) (resource.Resource, error) {
 								"PATCH",
 								"DELETE",
 								"*",
-							})),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"allow_origins": {
-						// Property: AllowOrigins
-						Description: "Represents a collection of allowed origins.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 100),
-							validate.ArrayForEach(validate.StringLenBetween(1, 253)),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"expose_headers": {
-						// Property: ExposeHeaders
-						Description: "Represents a collection of exposed headers.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 100),
-							validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"max_age": {
-						// Property: MaxAge
-						Type:     types.Int64Type,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(0, 86400),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AllowOrigins
+				"allow_origins": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of allowed origins.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 100),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 253),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExposeHeaders
+				"expose_headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Represents a collection of exposed headers.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 100),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 1024),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxAge
+				"max_age": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(0, 86400),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"function_arn": {
-			// Property: FunctionArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FunctionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The full Amazon Resource Name (ARN) of the function associated with the Function URL.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"function_url": {
-			// Property: FunctionUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The generated url for this resource.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FunctionUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The generated url for this resource.",
+		//	  "type": "string"
+		//	}
+		"function_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The generated url for this resource.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"invoke_mode": {
-			// Property: InvokeMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
-			//	  "enum": [
-			//	    "BUFFERED",
-			//	    "RESPONSE_STREAM"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InvokeMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
+		//	  "enum": [
+		//	    "BUFFERED",
+		//	    "RESPONSE_STREAM"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"invoke_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The invocation mode for the function?s URL. Set to BUFFERED if you want to buffer responses before returning them to the client. Set to RESPONSE_STREAM if you want to stream responses, allowing faster time to first byte and larger response payload sizes. If not set, defaults to BUFFERED.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"BUFFERED",
 					"RESPONSE_STREAM",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"qualifier": {
-			// Property: Qualifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Qualifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The alias qualifier for the target function. If TargetFunctionArn is unqualified then Qualifier must be passed.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// Qualifier is a write-only property.
-		},
-		"target_function_arn": {
-			// Property: TargetFunctionArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TargetFunctionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"target_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the function associated with the Function URL.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// TargetFunctionArn is a write-only property.
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Lambda::Url",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::Url").WithTerraformTypeName("awscc_lambda_url")
 	opts = opts.WithTerraformSchema(schema)
@@ -357,7 +363,7 @@ func urlResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

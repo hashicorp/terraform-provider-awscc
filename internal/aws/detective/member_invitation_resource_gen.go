@@ -4,14 +4,17 @@ package detective
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,118 +24,112 @@ func init() {
 // memberInvitationResource returns the Terraform awscc_detective_member_invitation resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Detective::MemberInvitation resource.
 func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"disable_email_notification": {
-			// Property: DisableEmailNotification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": false,
-			//	  "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DisableEmailNotification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
+		//	  "type": "boolean"
+		//	}
+		"disable_email_notification": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "When set to true, invitation emails are not sent to the member accounts. Member accounts must still accept the invitation before they are added to the behavior graph. Updating this field has no effect.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.BoolValue(false)),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"graph_arn": {
-			// Property: GraphArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the graph to which the member account will be invited",
-			//	  "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				generic.BoolDefaultValue(false),
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: GraphArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the graph to which the member account will be invited",
+		//	  "pattern": "arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}",
+		//	  "type": "string"
+		//	}
+		"graph_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the graph to which the member account will be invited",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"member_email_address": {
-			// Property: MemberEmailAddress
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			//	  "pattern": ".*@.*",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:detective:(([a-z]+-)+[0-9]+):[0-9]{12}:graph:[0-9a-f]{32}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MemberEmailAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The root email address for the account to be invited, for validation. Updating this field has no effect.",
+		//	  "pattern": ".*@.*",
+		//	  "type": "string"
+		//	}
+		"member_email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The root email address for the account to be invited, for validation. Updating this field has no effect.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile(".*@.*"), ""),
-			},
-		},
-		"member_id": {
-			// Property: MemberId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS account ID to be invited to join the graph as a member",
-			//	  "pattern": "[0-9]{12}",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile(".*@.*"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MemberId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS account ID to be invited to join the graph as a member",
+		//	  "pattern": "[0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"member_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS account ID to be invited to join the graph as a member",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("[0-9]{12}"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"message": {
-			// Property: Message
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
-			//	  "maxLength": 1000,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[0-9]{12}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Message
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
+		//	  "maxLength": 1000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A message to be included in the email invitation sent to the invited account. Updating this field has no effect.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1000),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::Detective::MemberInvitation",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Detective::MemberInvitation").WithTerraformTypeName("awscc_detective_member_invitation")
 	opts = opts.WithTerraformSchema(schema)
@@ -149,7 +146,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

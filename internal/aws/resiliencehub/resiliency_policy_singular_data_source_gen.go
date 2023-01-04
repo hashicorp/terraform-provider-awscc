@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,165 +19,154 @@ func init() {
 // resiliencyPolicyDataSource returns the Terraform awscc_resiliencehub_resiliency_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ResilienceHub::ResiliencyPolicy resource.
 func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"data_location_constraint": {
-			// Property: DataLocationConstraint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Data Location Constraint of the Policy.",
-			//	  "enum": [
-			//	    "AnyLocation",
-			//	    "SameContinent",
-			//	    "SameCountry"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DataLocationConstraint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Data Location Constraint of the Policy.",
+		//	  "enum": [
+		//	    "AnyLocation",
+		//	    "SameContinent",
+		//	    "SameCountry"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"data_location_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Data Location Constraint of the Policy.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy": {
-			// Property: Policy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "additionalProperties": false,
-			//	      "description": "Failure Policy.",
-			//	      "properties": {
-			//	        "RpoInSecs": {
-			//	          "description": "RPO in seconds.",
-			//	          "type": "integer"
-			//	        },
-			//	        "RtoInSecs": {
-			//	          "description": "RTO in seconds.",
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "RtoInSecs",
-			//	        "RpoInSecs"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			//
-			// Pattern: ""
-			Attributes: tfsdk.MapNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"rpo_in_secs": {
-						// Property: RpoInSecs
+		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "additionalProperties": false,
+		//	      "description": "Failure Policy.",
+		//	      "properties": {
+		//	        "RpoInSecs": {
+		//	          "description": "RPO in seconds.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RtoInSecs": {
+		//	          "description": "RTO in seconds.",
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RtoInSecs",
+		//	        "RpoInSecs"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"policy":                  // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: RpoInSecs
+					"rpo_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "RPO in seconds.",
-						Type:        types.Int64Type,
 						Computed:    true,
-					},
-					"rto_in_secs": {
-						// Property: RtoInSecs
+					}, /*END ATTRIBUTE*/
+					// Property: RtoInSecs
+					"rto_in_secs": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "RTO in seconds.",
-						Type:        types.Int64Type,
 						Computed:    true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"policy_arn": {
-			// Property: PolicyArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Amazon Resource Name (ARN) of the Resiliency Policy.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name (ARN) of the Resiliency Policy.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN) of the Resiliency Policy.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy_description": {
-			// Property: PolicyDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Description of Resiliency Policy.",
-			//	  "maxLength": 500,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Description of Resiliency Policy.",
+		//	  "maxLength": 500,
+		//	  "type": "string"
+		//	}
+		"policy_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of Resiliency Policy.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy_name": {
-			// Property: PolicyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of Resiliency Policy.",
-			//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of Resiliency Policy.",
+		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+		//	  "type": "string"
+		//	}
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of Resiliency Policy.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			//
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"tier": {
-			// Property: Tier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Resiliency Policy Tier.",
-			//	  "enum": [
-			//	    "MissionCritical",
-			//	    "Critical",
-			//	    "Important",
-			//	    "CoreServices",
-			//	    "NonCritical"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Resiliency Policy Tier.",
+		//	  "enum": [
+		//	    "MissionCritical",
+		//	    "Critical",
+		//	    "Important",
+		//	    "CoreServices",
+		//	    "NonCritical"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"tier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Resiliency Policy Tier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ResilienceHub::ResiliencyPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ResilienceHub::ResiliencyPolicy").WithTerraformTypeName("awscc_resiliencehub_resiliency_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -193,7 +182,7 @@ func resiliencyPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		"tier":                     "Tier",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -4,14 +4,19 @@ package quicksight
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,923 +26,737 @@ func init() {
 // templateResource returns the Terraform awscc_quicksight_template resource.
 // This Terraform resource corresponds to the CloudFormation AWS::QuickSight::Template resource.
 func templateResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the template.\u003c/p\u003e",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the template.\u003c/p\u003e",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>The Amazon Resource Name (ARN) of the template.</p>",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"aws_account_id": {
-			// Property: AwsAccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 12,
-			//	  "minLength": 12,
-			//	  "pattern": "^[0-9]{12}$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AwsAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 12,
+		//	  "minLength": 12,
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(12, 12),
-				validate.StringMatch(regexp.MustCompile("^[0-9]{12}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"created_time": {
-			// Property: CreatedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eTime when this was created.\u003c/p\u003e",
-			//	  "format": "string",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(12, 12),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eTime when this was created.\u003c/p\u003e",
+		//	  "format": "string",
+		//	  "type": "string"
+		//	}
+		"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>Time when this was created.</p>",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// CreatedTime is a write-only property.
-		},
-		"last_updated_time": {
-			// Property: LastUpdatedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eTime when this was last updated.\u003c/p\u003e",
-			//	  "format": "string",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LastUpdatedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eTime when this was last updated.\u003c/p\u003e",
+		//	  "format": "string",
+		//	  "type": "string"
+		//	}
+		"last_updated_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>Time when this was last updated.</p>",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// LastUpdatedTime is a write-only property.
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eA display name for the template.\u003c/p\u003e",
-			//	  "maxLength": 2048,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eA display name for the template.\u003c/p\u003e",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "<p>A display name for the template.</p>",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 2048),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"permissions": {
-			// Property: Permissions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eA list of resource permissions to be set on the template. \u003c/p\u003e",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
-			//	    "properties": {
-			//	      "Actions": {
-			//	        "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "maxItems": 16,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      },
-			//	      "Principal": {
-			//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Actions",
-			//	      "Principal"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 64,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "<p>A list of resource permissions to be set on the template. </p>",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"actions": {
-						// Property: Actions
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Permissions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eA list of resource permissions to be set on the template. \u003c/p\u003e",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003ePermission for the resource.\u003c/p\u003e",
+		//	    "properties": {
+		//	      "Actions": {
+		//	        "description": "\u003cp\u003eThe IAM action to grant or revoke permissions on.\u003c/p\u003e",
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 16,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Principal": {
+		//	        "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:\u003c/p\u003e\n        \u003cul\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)\u003c/p\u003e\n            \u003c/li\u003e\n            \u003cli\u003e\n                \u003cp\u003eThe ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) \u003c/p\u003e\n            \u003c/li\u003e\n         \u003c/ul\u003e",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Actions",
+		//	      "Principal"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 64,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"permissions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Actions
+					"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "<p>The IAM action to grant or revoke permissions on.</p>",
-						Type:        types.ListType{ElemType: types.StringType},
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 16),
-						},
-					},
-					"principal": {
-						// Property: Principal
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 16),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Principal
+					"principal": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The Amazon Resource Name (ARN) of the principal. This can be one of the\n            following:</p>\n        <ul>\n            <li>\n                <p>The ARN of an Amazon QuickSight user or group associated with a data source or dataset. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an Amazon QuickSight user, group, or namespace associated with an analysis, dashboard, template, or theme. (This is common.)</p>\n            </li>\n            <li>\n                <p>The ARN of an AWS account root: This is an IAM ARN rather than a QuickSight\n                    ARN. Use this option only to share resources (templates) across AWS accounts.\n                    (This is less common.) </p>\n            </li>\n         </ul>",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 64),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"source_entity": {
-			// Property: SourceEntity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "\u003cp\u003eThe source entity of the template.\u003c/p\u003e",
-			//	  "properties": {
-			//	    "SourceAnalysis": {
-			//	      "additionalProperties": false,
-			//	      "description": "\u003cp\u003eThe source analysis of the template.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Arn": {
-			//	          "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-			//	          "type": "string"
-			//	        },
-			//	        "DataSetReferences": {
-			//	          "description": "\u003cp\u003eA structure containing information about the dataset references used as placeholders\n            in the template.\u003c/p\u003e",
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
-			//	            "properties": {
-			//	              "DataSetArn": {
-			//	                "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
-			//	                "type": "string"
-			//	              },
-			//	              "DataSetPlaceholder": {
-			//	                "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
-			//	                "pattern": ".*\\S.*",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataSetArn",
-			//	              "DataSetPlaceholder"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Arn",
-			//	        "DataSetReferences"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SourceTemplate": {
-			//	      "additionalProperties": false,
-			//	      "description": "\u003cp\u003eThe source template of the template.\u003c/p\u003e",
-			//	      "properties": {
-			//	        "Arn": {
-			//	          "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Arn"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "<p>The source entity of the template.</p>",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"source_analysis": {
-						// Property: SourceAnalysis
-						Description: "<p>The source analysis of the template.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"arn": {
-									// Property: Arn
-									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"data_set_references": {
-									// Property: DataSetReferences
-									Description: "<p>A structure containing information about the dataset references used as placeholders\n            in the template.</p>",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_set_arn": {
-												// Property: DataSetArn
-												Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"data_set_placeholder": {
-												// Property: DataSetPlaceholder
-												Description: "<p>Dataset placeholder.</p>",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-												},
-											},
-										},
-									),
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenAtLeast(1),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"source_template": {
-						// Property: SourceTemplate
-						Description: "<p>The source template of the template.</p>",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"arn": {
-									// Property: Arn
-									Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-									Type:        types.StringType,
-									Required:    true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-			// SourceEntity is a write-only property.
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the resource.\u003c/p\u003e",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Description: "<p>Tag key.</p>",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
-						Description: "<p>Tag value.</p>",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 200),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"template_id": {
-			// Property: TemplateId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 2048,
-			//	  "minLength": 1,
-			//	  "pattern": "[\\w\\-]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 2048),
-				validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"version": {
-			// Property: Version
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "\u003cp\u003eA version of a template.\u003c/p\u003e",
-			//	  "properties": {
-			//	    "CreatedTime": {
-			//	      "description": "\u003cp\u003eThe time that this template version was created.\u003c/p\u003e",
-			//	      "format": "string",
-			//	      "type": "string"
-			//	    },
-			//	    "DataSetConfigurations": {
-			//	      "description": "\u003cp\u003eSchema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.\u003c/p\u003e",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "\u003cp\u003eDataset configuration.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "ColumnGroupSchemaList": {
-			//	            "description": "\u003cp\u003eA structure containing the list of column group schemas.\u003c/p\u003e",
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "description": "\u003cp\u003eThe column group schema.\u003c/p\u003e",
-			//	              "properties": {
-			//	                "ColumnGroupColumnSchemaList": {
-			//	                  "description": "\u003cp\u003eA structure containing the list of schemas for column group columns.\u003c/p\u003e",
-			//	                  "items": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "\u003cp\u003eA structure describing the name, data type, and geographic role of the columns.\u003c/p\u003e",
-			//	                    "properties": {
-			//	                      "Name": {
-			//	                        "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "maxItems": 500,
-			//	                  "minItems": 0,
-			//	                  "type": "array"
-			//	                },
-			//	                "Name": {
-			//	                  "description": "\u003cp\u003eThe name of the column group schema.\u003c/p\u003e",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "maxItems": 500,
-			//	            "minItems": 0,
-			//	            "type": "array"
-			//	          },
-			//	          "DataSetSchema": {
-			//	            "additionalProperties": false,
-			//	            "description": "\u003cp\u003eDataset schema.\u003c/p\u003e",
-			//	            "properties": {
-			//	              "ColumnSchemaList": {
-			//	                "description": "\u003cp\u003eA structure containing the list of column schemas.\u003c/p\u003e",
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "\u003cp\u003eThe column schema.\u003c/p\u003e",
-			//	                  "properties": {
-			//	                    "DataType": {
-			//	                      "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "GeographicRole": {
-			//	                      "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Name": {
-			//	                      "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "maxItems": 500,
-			//	                "minItems": 0,
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Placeholder": {
-			//	            "description": "\u003cp\u003ePlaceholder.\u003c/p\u003e",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 30,
-			//	      "minItems": 0,
-			//	      "type": "array"
-			//	    },
-			//	    "Description": {
-			//	      "description": "\u003cp\u003eThe description of the template.\u003c/p\u003e",
-			//	      "maxLength": 512,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "Errors": {
-			//	      "description": "\u003cp\u003eErrors associated with this template version.\u003c/p\u003e",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "\u003cp\u003eList of errors that occurred when the template version creation failed.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Message": {
-			//	            "description": "\u003cp\u003eDescription of the error type.\u003c/p\u003e",
-			//	            "pattern": ".*\\S.*",
-			//	            "type": "string"
-			//	          },
-			//	          "Type": {
-			//	            "enum": [
-			//	              "SOURCE_NOT_FOUND",
-			//	              "DATA_SET_NOT_FOUND",
-			//	              "INTERNAL_FAILURE",
-			//	              "ACCESS_DENIED"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Sheets": {
-			//	      "description": "\u003cp\u003eA list of the associated sheets with the unique identifier and name of each sheet.\u003c/p\u003e",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "\u003cp\u003eA \u003ci\u003esheet\u003c/i\u003e, which is an object that contains a set of visuals that\n            are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard\n            contains at least one sheet. Each sheet contains at least one visualization widget, for\n            example a chart, pivot table, or narrative insight. Sheets can be associated with other\n            components, such as controls, filters, and so on.\u003c/p\u003e",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
-			//	            "pattern": ".*\\S.*",
-			//	            "type": "string"
-			//	          },
-			//	          "SheetId": {
-			//	            "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
-			//	            "maxLength": 2048,
-			//	            "minLength": 1,
-			//	            "pattern": "[\\w\\-]+",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 20,
-			//	      "minItems": 0,
-			//	      "type": "array"
-			//	    },
-			//	    "SourceEntityArn": {
-			//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.\u003c/p\u003e",
-			//	      "type": "string"
-			//	    },
-			//	    "Status": {
-			//	      "enum": [
-			//	        "CREATION_IN_PROGRESS",
-			//	        "CREATION_SUCCESSFUL",
-			//	        "CREATION_FAILED",
-			//	        "UPDATE_IN_PROGRESS",
-			//	        "UPDATE_SUCCESSFUL",
-			//	        "UPDATE_FAILED",
-			//	        "DELETED"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "ThemeArn": {
-			//	      "description": "\u003cp\u003eThe ARN of the theme associated with this version of the template.\u003c/p\u003e",
-			//	      "type": "string"
-			//	    },
-			//	    "VersionNumber": {
-			//	      "description": "\u003cp\u003eThe version number of the template version.\u003c/p\u003e",
-			//	      "minimum": 1,
-			//	      "type": "number"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "<p>A version of a template.</p>",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"created_time": {
-						// Property: CreatedTime
-						Description: "<p>The time that this template version was created.</p>",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"data_set_configurations": {
-						// Property: DataSetConfigurations
-						Description: "<p>Schema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.</p>",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"column_group_schema_list": {
-									// Property: ColumnGroupSchemaList
-									Description: "<p>A structure containing the list of column group schemas.</p>",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"column_group_column_schema_list": {
-												// Property: ColumnGroupColumnSchemaList
-												Description: "<p>A structure containing the list of schemas for column group columns.</p>",
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"name": {
-															// Property: Name
-															Description: "<p>The name of the column group's column schema.</p>",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(0, 500),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"name": {
-												// Property: Name
-												Description: "<p>The name of the column group schema.</p>",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(0, 500),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"data_set_schema": {
-									// Property: DataSetSchema
-									Description: "<p>Dataset schema.</p>",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"column_schema_list": {
-												// Property: ColumnSchemaList
-												Description: "<p>A structure containing the list of column schemas.</p>",
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_type": {
-															// Property: DataType
-															Description: "<p>The data type of the column schema.</p>",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"geographic_role": {
-															// Property: GeographicRole
-															Description: "<p>The geographic role of the column schema.</p>",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"name": {
-															// Property: Name
-															Description: "<p>The name of the column schema.</p>",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenBetween(0, 500),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"placeholder": {
-									// Property: Placeholder
-									Description: "<p>Placeholder.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 30),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"description": {
-						// Property: Description
-						Description: "<p>The description of the template.</p>",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 512),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"errors": {
-						// Property: Errors
-						Description: "<p>Errors associated with this template version.</p>",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"message": {
-									// Property: Message
-									Description: "<p>Description of the error type.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"type": {
-									// Property: Type
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"SOURCE_NOT_FOUND",
-											"DATA_SET_NOT_FOUND",
-											"INTERNAL_FAILURE",
-											"ACCESS_DENIED",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"sheets": {
-						// Property: Sheets
-						Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile(".*\\S.*"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"sheet_id": {
-									// Property: SheetId
-									Description: "<p>The unique identifier associated with a sheet.</p>",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 2048),
-										validate.StringMatch(regexp.MustCompile("[\\w\\-]+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 20),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"source_entity_arn": {
-						// Property: SourceEntityArn
-						Description: "<p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.</p>",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"status": {
-						// Property: Status
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"CREATION_IN_PROGRESS",
-								"CREATION_SUCCESSFUL",
-								"CREATION_FAILED",
-								"UPDATE_IN_PROGRESS",
-								"UPDATE_SUCCESSFUL",
-								"UPDATE_FAILED",
-								"DELETED",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"theme_arn": {
-						// Property: ThemeArn
-						Description: "<p>The ARN of the theme associated with this version of the template.</p>",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"version_number": {
-						// Property: VersionNumber
-						Description: "<p>The version number of the template version.</p>",
-						Type:        types.Float64Type,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.FloatAtLeast(1.000000),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-			// Version is a write-only property.
-		},
-		"version_description": {
-			// Property: VersionDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "\u003cp\u003eA description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time \u003ccode\u003eUpdateTemplate\u003c/code\u003e is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the \u003ccode\u003eVersionDescription\u003c/code\u003e field.\u003c/p\u003e",
-			//	  "maxLength": 512,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "<p>A description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time <code>UpdateTemplate</code> is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the <code>VersionDescription</code> field.</p>",
-			Type:        types.StringType,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>A list of resource permissions to be set on the template. </p>",
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 512),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceEntity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eThe source entity of the template.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "SourceAnalysis": {
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe source analysis of the template.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Arn": {
+		//	          "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
+		//	          "type": "string"
+		//	        },
+		//	        "DataSetReferences": {
+		//	          "description": "\u003cp\u003eA structure containing information about the dataset references used as placeholders\n            in the template.\u003c/p\u003e",
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eDataset reference.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "DataSetArn": {
+		//	                "description": "\u003cp\u003eDataset Amazon Resource Name (ARN).\u003c/p\u003e",
+		//	                "type": "string"
+		//	              },
+		//	              "DataSetPlaceholder": {
+		//	                "description": "\u003cp\u003eDataset placeholder.\u003c/p\u003e",
+		//	                "pattern": ".*\\S.*",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataSetArn",
+		//	              "DataSetPlaceholder"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Arn",
+		//	        "DataSetReferences"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SourceTemplate": {
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eThe source template of the template.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Arn": {
+		//	          "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of the resource.\u003c/p\u003e",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Arn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"source_entity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceAnalysis
+				"source_analysis": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DataSetReferences
+						"data_set_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataSetArn
+									"data_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Dataset Amazon Resource Name (ARN).</p>",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: DataSetPlaceholder
+									"data_set_placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "<p>Dataset placeholder.</p>",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "<p>A structure containing information about the dataset references used as placeholders\n            in the template.</p>",
+							Required:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeAtLeast(1),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The source analysis of the template.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SourceTemplate
+				"source_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Arn
+						"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>The source template of the template.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>The source entity of the template.</p>",
+			Required:    true,
+			// SourceEntity is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eContains a map of the key-value pairs for the resource tag or tags assigned to the resource.\u003c/p\u003e",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "\u003cp\u003eThe key or keys of the key-value pairs for the resource tag or tags assigned to the\n            resource.\u003c/p\u003e",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "\u003cp\u003eTag key.\u003c/p\u003e",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "\u003cp\u003eTag value.\u003c/p\u003e",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag key.</p>",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "<p>Tag value.</p>",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "<p>Contains a map of the key-value pairs for the resource tag or tags assigned to the resource.</p>",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TemplateId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "[\\w\\-]+",
+		//	  "type": "string"
+		//	}
+		"template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Required: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Version
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "\u003cp\u003eA version of a template.\u003c/p\u003e",
+		//	  "properties": {
+		//	    "CreatedTime": {
+		//	      "description": "\u003cp\u003eThe time that this template version was created.\u003c/p\u003e",
+		//	      "format": "string",
+		//	      "type": "string"
+		//	    },
+		//	    "DataSetConfigurations": {
+		//	      "description": "\u003cp\u003eSchema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.\u003c/p\u003e",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eDataset configuration.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "ColumnGroupSchemaList": {
+		//	            "description": "\u003cp\u003eA structure containing the list of column group schemas.\u003c/p\u003e",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "\u003cp\u003eThe column group schema.\u003c/p\u003e",
+		//	              "properties": {
+		//	                "ColumnGroupColumnSchemaList": {
+		//	                  "description": "\u003cp\u003eA structure containing the list of schemas for column group columns.\u003c/p\u003e",
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "\u003cp\u003eA structure describing the name, data type, and geographic role of the columns.\u003c/p\u003e",
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "description": "\u003cp\u003eThe name of the column group's column schema.\u003c/p\u003e",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 500,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "Name": {
+		//	                  "description": "\u003cp\u003eThe name of the column group schema.\u003c/p\u003e",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 500,
+		//	            "minItems": 0,
+		//	            "type": "array"
+		//	          },
+		//	          "DataSetSchema": {
+		//	            "additionalProperties": false,
+		//	            "description": "\u003cp\u003eDataset schema.\u003c/p\u003e",
+		//	            "properties": {
+		//	              "ColumnSchemaList": {
+		//	                "description": "\u003cp\u003eA structure containing the list of column schemas.\u003c/p\u003e",
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "\u003cp\u003eThe column schema.\u003c/p\u003e",
+		//	                  "properties": {
+		//	                    "DataType": {
+		//	                      "description": "\u003cp\u003eThe data type of the column schema.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "GeographicRole": {
+		//	                      "description": "\u003cp\u003eThe geographic role of the column schema.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Name": {
+		//	                      "description": "\u003cp\u003eThe name of the column schema.\u003c/p\u003e",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 500,
+		//	                "minItems": 0,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Placeholder": {
+		//	            "description": "\u003cp\u003ePlaceholder.\u003c/p\u003e",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 30,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    },
+		//	    "Description": {
+		//	      "description": "\u003cp\u003eThe description of the template.\u003c/p\u003e",
+		//	      "maxLength": 512,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "Errors": {
+		//	      "description": "\u003cp\u003eErrors associated with this template version.\u003c/p\u003e",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eList of errors that occurred when the template version creation failed.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Message": {
+		//	            "description": "\u003cp\u003eDescription of the error type.\u003c/p\u003e",
+		//	            "pattern": ".*\\S.*",
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "enum": [
+		//	              "SOURCE_NOT_FOUND",
+		//	              "DATA_SET_NOT_FOUND",
+		//	              "INTERNAL_FAILURE",
+		//	              "ACCESS_DENIED"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Sheets": {
+		//	      "description": "\u003cp\u003eA list of the associated sheets with the unique identifier and name of each sheet.\u003c/p\u003e",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "\u003cp\u003eA \u003ci\u003esheet\u003c/i\u003e, which is an object that contains a set of visuals that\n            are viewed together on one page in the Amazon QuickSight console. Every analysis and dashboard\n            contains at least one sheet. Each sheet contains at least one visualization widget, for\n            example a chart, pivot table, or narrative insight. Sheets can be associated with other\n            components, such as controls, filters, and so on.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "\u003cp\u003eThe name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.\u003c/p\u003e",
+		//	            "pattern": ".*\\S.*",
+		//	            "type": "string"
+		//	          },
+		//	          "SheetId": {
+		//	            "description": "\u003cp\u003eThe unique identifier associated with a sheet.\u003c/p\u003e",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "[\\w\\-]+",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 20,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    },
+		//	    "SourceEntityArn": {
+		//	      "description": "\u003cp\u003eThe Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.\u003c/p\u003e",
+		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "enum": [
+		//	        "CREATION_IN_PROGRESS",
+		//	        "CREATION_SUCCESSFUL",
+		//	        "CREATION_FAILED",
+		//	        "UPDATE_IN_PROGRESS",
+		//	        "UPDATE_SUCCESSFUL",
+		//	        "UPDATE_FAILED",
+		//	        "DELETED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ThemeArn": {
+		//	      "description": "\u003cp\u003eThe ARN of the theme associated with this version of the template.\u003c/p\u003e",
+		//	      "type": "string"
+		//	    },
+		//	    "VersionNumber": {
+		//	      "description": "\u003cp\u003eThe version number of the template version.\u003c/p\u003e",
+		//	      "minimum": 1,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CreatedTime
+				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The time that this template version was created.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DataSetConfigurations
+				"data_set_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ColumnGroupSchemaList
+							"column_group_schema_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ColumnGroupColumnSchemaList
+										"column_group_column_schema_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "<p>The name of the column group's column schema.</p>",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "<p>A structure containing the list of schemas for column group columns.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "<p>The name of the column group schema.</p>",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "<p>A structure containing the list of column group schemas.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataSetSchema
+							"data_set_schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ColumnSchemaList
+									"column_schema_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: DataType
+												"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The data type of the column schema.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: GeographicRole
+												"geographic_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The geographic role of the column schema.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: Name
+												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "<p>The name of the column schema.</p>",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Description: "<p>A structure containing the list of column schemas.</p>",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "<p>Dataset schema.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Placeholder
+							"placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Placeholder.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "<p>Schema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The description of the template.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Errors
+				"errors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Message
+							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Description of the error type.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "<p>Errors associated with this template version.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Sheets
+				"sheets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: SheetId
+							"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The unique identifier associated with a sheet.</p>",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourceEntityArn
+				"source_entity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ThemeArn
+				"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "<p>The ARN of the theme associated with this version of the template.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VersionNumber
+				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "<p>The version number of the template version.</p>",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "<p>A version of a template.</p>",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// Version is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: VersionDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "\u003cp\u003eA description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time \u003ccode\u003eUpdateTemplate\u003c/code\u003e is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the \u003ccode\u003eVersionDescription\u003c/code\u003e field.\u003c/p\u003e",
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"version_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "<p>A description of the current template version being created. This API operation creates the\n\t\t\tfirst version of the template. Every time <code>UpdateTemplate</code> is called, a new\n\t\t\tversion is created. Each version of the template maintains a description of the version\n\t\t\tin the <code>VersionDescription</code> field.</p>",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 512),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// VersionDescription is a write-only property.
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Definition of the AWS::QuickSight::Template Resource Type.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::QuickSight::Template").WithTerraformTypeName("awscc_quicksight_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -994,7 +813,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

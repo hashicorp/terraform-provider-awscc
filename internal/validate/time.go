@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-provider-awscc/internal/diag"
 )
 
@@ -23,16 +23,17 @@ func (validator isRFC3339TimeValidator) MarkdownDescription(ctx context.Context)
 }
 
 // Validate performs the validation.
-func (validator isRFC3339TimeValidator) Validate(ctx context.Context, request tfsdk.ValidateAttributeRequest, response *tfsdk.ValidateAttributeResponse) {
-	s, ok := validateString(ctx, request, response)
-	if !ok {
+func (validator isRFC3339TimeValidator) ValidateString(ctx context.Context, request validator.StringRequest, response *validator.StringResponse) {
+	if request.ConfigValue.IsNull() || request.ConfigValue.IsUnknown() {
 		return
 	}
 
-	if _, err := time.Parse(time.RFC3339, s); err != nil {
+	value := request.ConfigValue.ValueString()
+
+	if _, err := time.Parse(time.RFC3339, value); err != nil {
 		response.Diagnostics.Append(diag.NewInvalidFormatAttributeError(
-			request.AttributePath,
-			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", s, err),
+			request.Path,
+			fmt.Sprintf("expected value to be a valid RFC3339 date, got %s: %+v", value, err),
 		))
 
 		return
@@ -40,6 +41,6 @@ func (validator isRFC3339TimeValidator) Validate(ctx context.Context, request tf
 }
 
 // IsRFC3339Time returns a new string RFC33349Time validator.
-func IsRFC3339Time() tfsdk.AttributeValidator {
+func IsRFC3339Time() validator.String {
 	return isRFC3339TimeValidator{}
 }

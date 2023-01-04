@@ -75,7 +75,7 @@ Required:
 <a id="nestedatt--created_at"></a>
 ### Nested Schema for `created_at`
 
-Required:
+Read-Only:
 
 - `nanos` (Number) Nanoseconds.
 - `seconds` (String) Seconds since epoch.

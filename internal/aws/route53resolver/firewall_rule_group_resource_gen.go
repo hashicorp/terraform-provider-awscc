@@ -5,12 +5,18 @@ package route53resolver
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,440 +26,420 @@ func init() {
 // firewallRuleGroupResource returns the Terraform awscc_route53resolver_firewall_rule_group resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Route53Resolver::FirewallRuleGroup resource.
 func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Arn",
-			//	  "maxLength": 600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Arn",
+		//	  "maxLength": 600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Arn",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Rfc3339TimeString",
-			//	  "maxLength": 40,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Rfc3339TimeString",
+		//	  "maxLength": 40,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Rfc3339TimeString",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"creator_request_id": {
-			// Property: CreatorRequestId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The id of the creator request.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreatorRequestId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The id of the creator request.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"creator_request_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id of the creator request.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"firewall_rules": {
-			// Property: FirewallRules
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "FirewallRules",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Firewall Rule associating the Rule Group to a Domain List",
-			//	    "properties": {
-			//	      "Action": {
-			//	        "description": "Rule Action",
-			//	        "enum": [
-			//	          "ALLOW",
-			//	          "BLOCK",
-			//	          "ALERT"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "BlockOverrideDnsType": {
-			//	        "description": "BlockOverrideDnsType",
-			//	        "enum": [
-			//	          "CNAME"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "BlockOverrideDomain": {
-			//	        "description": "BlockOverrideDomain",
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "BlockOverrideTtl": {
-			//	        "description": "BlockOverrideTtl",
-			//	        "maximum": 604800,
-			//	        "minimum": 0,
-			//	        "type": "integer"
-			//	      },
-			//	      "BlockResponse": {
-			//	        "description": "BlockResponse",
-			//	        "enum": [
-			//	          "NODATA",
-			//	          "NXDOMAIN",
-			//	          "OVERRIDE"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "FirewallDomainListId": {
-			//	        "description": "ResourceId",
-			//	        "maxLength": 64,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Priority": {
-			//	        "description": "Rule Priority",
-			//	        "type": "integer"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "FirewallDomainListId",
-			//	      "Priority",
-			//	      "Action"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "FirewallRules",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"action": {
-						// Property: Action
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FirewallRules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FirewallRules",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Firewall Rule associating the Rule Group to a Domain List",
+		//	    "properties": {
+		//	      "Action": {
+		//	        "description": "Rule Action",
+		//	        "enum": [
+		//	          "ALLOW",
+		//	          "BLOCK",
+		//	          "ALERT"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "BlockOverrideDnsType": {
+		//	        "description": "BlockOverrideDnsType",
+		//	        "enum": [
+		//	          "CNAME"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "BlockOverrideDomain": {
+		//	        "description": "BlockOverrideDomain",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "BlockOverrideTtl": {
+		//	        "description": "BlockOverrideTtl",
+		//	        "maximum": 604800,
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
+		//	      "BlockResponse": {
+		//	        "description": "BlockResponse",
+		//	        "enum": [
+		//	          "NODATA",
+		//	          "NXDOMAIN",
+		//	          "OVERRIDE"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "FirewallDomainListId": {
+		//	        "description": "ResourceId",
+		//	        "maxLength": 64,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Priority": {
+		//	        "description": "Rule Priority",
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "FirewallDomainListId",
+		//	      "Priority",
+		//	      "Action"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"firewall_rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Action
+					"action": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Rule Action",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"ALLOW",
 								"BLOCK",
 								"ALERT",
-							}),
-						},
-					},
-					"block_override_dns_type": {
-						// Property: BlockOverrideDnsType
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BlockOverrideDnsType
+					"block_override_dns_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "BlockOverrideDnsType",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"CNAME",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"block_override_domain": {
-						// Property: BlockOverrideDomain
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BlockOverrideDomain
+					"block_override_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "BlockOverrideDomain",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 255),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"block_override_ttl": {
-						// Property: BlockOverrideTtl
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 255),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BlockOverrideTtl
+					"block_override_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "BlockOverrideTtl",
-						Type:        types.Int64Type,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(0, 604800),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"block_response": {
-						// Property: BlockResponse
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(0, 604800),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BlockResponse
+					"block_response": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "BlockResponse",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"NODATA",
 								"NXDOMAIN",
 								"OVERRIDE",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"firewall_domain_list_id": {
-						// Property: FirewallDomainListId
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: FirewallDomainListId
+					"firewall_domain_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "ResourceId",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 64),
-						},
-					},
-					"priority": {
-						// Property: Priority
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 64),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Priority
+					"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "Rule Priority",
-						Type:        types.Int64Type,
 						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ResourceId",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "ResourceId",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"modification_time": {
-			// Property: ModificationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Rfc3339TimeString",
-			//	  "maxLength": 40,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
-			Description: "Rfc3339TimeString",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "FirewallRuleGroupName",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
-			Description: "FirewallRuleGroupName",
-			Type:        types.StringType,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "FirewallRules",
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"owner_id": {
-			// Property: OwnerId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AccountId",
-			//	  "maxLength": 32,
-			//	  "minLength": 12,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ResourceId",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "ResourceId",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModificationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Rfc3339TimeString",
+		//	  "maxLength": 40,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"modification_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Rfc3339TimeString",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FirewallRuleGroupName",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "FirewallRuleGroupName",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OwnerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AccountId",
+		//	  "maxLength": 32,
+		//	  "minLength": 12,
+		//	  "type": "string"
+		//	}
+		"owner_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AccountId",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"rule_count": {
-			// Property: RuleCount
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Count",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RuleCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Count",
+		//	  "type": "integer"
+		//	}
+		"rule_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Count",
-			Type:        types.Int64Type,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"share_status": {
-			// Property: ShareStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
-			//	  "enum": [
-			//	    "NOT_SHARED",
-			//	    "SHARED_WITH_ME",
-			//	    "SHARED_BY_ME"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ShareStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
+		//	  "enum": [
+		//	    "NOT_SHARED",
+		//	    "SHARED_WITH_ME",
+		//	    "SHARED_BY_ME"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"share_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ShareStatus, possible values are NOT_SHARED, SHARED_WITH_ME, SHARED_BY_ME.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
-			//	  "enum": [
-			//	    "COMPLETE",
-			//	    "DELETING",
-			//	    "UPDATING",
-			//	    "INACTIVE_OWNER_ACCOUNT_CLOSED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
+		//	  "enum": [
+		//	    "COMPLETE",
+		//	    "DELETING",
+		//	    "UPDATING",
+		//	    "INACTIVE_OWNER_ACCOUNT_CLOSED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResolverFirewallRuleGroupAssociation, possible values are COMPLETE, DELETING, UPDATING, and INACTIVE_OWNER_ACCOUNT_CLOSED.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"status_message": {
-			// Property: StatusMessage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "FirewallRuleGroupStatus",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StatusMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "FirewallRuleGroupStatus",
+		//	  "type": "string"
+		//	}
+		"status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "FirewallRuleGroupStatus",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Tags",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 127,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 255,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Tags",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Tags",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 255,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 127),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 255),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::FirewallRuleGroup.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::FirewallRuleGroup").WithTerraformTypeName("awscc_route53resolver_firewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -487,7 +473,7 @@ func firewallRuleGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

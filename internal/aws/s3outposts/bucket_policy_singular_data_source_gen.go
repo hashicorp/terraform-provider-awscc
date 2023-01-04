@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,49 +19,46 @@ func init() {
 // bucketPolicyDataSource returns the Terraform awscc_s3outposts_bucket_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::S3Outposts::BucketPolicy resource.
 func bucketPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"bucket": {
-			// Property: Bucket
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Bucket
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
+		//	  "type": "string"
+		//	}
+		"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy_document": {
-			// Property: PolicyDocument
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A policy document containing permissions to add to the specified bucket.",
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A policy document containing permissions to add to the specified bucket.",
+		//	  "type": "object"
+		//	}
+		"policy_document": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A policy document containing permissions to add to the specified bucket.",
-			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::S3Outposts::BucketPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::BucketPolicy").WithTerraformTypeName("awscc_s3outposts_bucket_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -70,7 +67,7 @@ func bucketPolicyDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"policy_document": "PolicyDocument",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

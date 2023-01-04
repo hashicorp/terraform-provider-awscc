@@ -4,14 +4,19 @@ package connect
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,99 +26,97 @@ func init() {
 // hoursOfOperationResource returns the Terraform awscc_connect_hours_of_operation resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Connect::HoursOfOperation resource.
 func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"config": {
-			// Property: Config
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Configuration information for the hours of operation: day, start time, and end time.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Contains information about the hours of operation.",
-			//	    "properties": {
-			//	      "Day": {
-			//	        "description": "The day that the hours of operation applies to.",
-			//	        "enum": [
-			//	          "SUNDAY",
-			//	          "MONDAY",
-			//	          "TUESDAY",
-			//	          "WEDNESDAY",
-			//	          "THURSDAY",
-			//	          "FRIDAY",
-			//	          "SATURDAY"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "EndTime": {
-			//	        "additionalProperties": false,
-			//	        "description": "The end time that your contact center closes.",
-			//	        "properties": {
-			//	          "Hours": {
-			//	            "description": "The hours.",
-			//	            "maximum": 23,
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          },
-			//	          "Minutes": {
-			//	            "description": "The minutes.",
-			//	            "maximum": 59,
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Hours",
-			//	          "Minutes"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "StartTime": {
-			//	        "additionalProperties": false,
-			//	        "description": "The start time that your contact center opens.",
-			//	        "properties": {
-			//	          "Hours": {
-			//	            "description": "The hours.",
-			//	            "maximum": 23,
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          },
-			//	          "Minutes": {
-			//	            "description": "The minutes.",
-			//	            "maximum": 59,
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Hours",
-			//	          "Minutes"
-			//	        ],
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Day",
-			//	      "StartTime",
-			//	      "EndTime"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 100,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Configuration information for the hours of operation: day, start time, and end time.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"day": {
-						// Property: Day
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Config
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Configuration information for the hours of operation: day, start time, and end time.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Contains information about the hours of operation.",
+		//	    "properties": {
+		//	      "Day": {
+		//	        "description": "The day that the hours of operation applies to.",
+		//	        "enum": [
+		//	          "SUNDAY",
+		//	          "MONDAY",
+		//	          "TUESDAY",
+		//	          "WEDNESDAY",
+		//	          "THURSDAY",
+		//	          "FRIDAY",
+		//	          "SATURDAY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "EndTime": {
+		//	        "additionalProperties": false,
+		//	        "description": "The end time that your contact center closes.",
+		//	        "properties": {
+		//	          "Hours": {
+		//	            "description": "The hours.",
+		//	            "maximum": 23,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          },
+		//	          "Minutes": {
+		//	            "description": "The minutes.",
+		//	            "maximum": 59,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Hours",
+		//	          "Minutes"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "StartTime": {
+		//	        "additionalProperties": false,
+		//	        "description": "The start time that your contact center opens.",
+		//	        "properties": {
+		//	          "Hours": {
+		//	            "description": "The hours.",
+		//	            "maximum": 23,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          },
+		//	          "Minutes": {
+		//	            "description": "The minutes.",
+		//	            "maximum": 59,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Hours",
+		//	          "Minutes"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Day",
+		//	      "StartTime",
+		//	      "EndTime"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 100,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"config": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Day
+					"day": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The day that the hours of operation applies to.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"SUNDAY",
 								"MONDAY",
 								"TUESDAY",
@@ -121,236 +124,221 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 								"THURSDAY",
 								"FRIDAY",
 								"SATURDAY",
-							}),
-						},
-					},
-					"end_time": {
-						// Property: EndTime
+							),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: EndTime
+					"end_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Hours
+							"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The hours.",
+								Required:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 23),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Minutes
+							"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The minutes.",
+								Required:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 59),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "The end time that your contact center closes.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"hours": {
-									// Property: Hours
-									Description: "The hours.",
-									Type:        types.Int64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 23),
-									},
-								},
-								"minutes": {
-									// Property: Minutes
-									Description: "The minutes.",
-									Type:        types.Int64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 59),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-					"start_time": {
-						// Property: StartTime
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: StartTime
+					"start_time": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Hours
+							"hours": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The hours.",
+								Required:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 23),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Minutes
+							"minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The minutes.",
+								Required:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 59),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "The start time that your contact center opens.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"hours": {
-									// Property: Hours
-									Description: "The hours.",
-									Type:        types.Int64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 23),
-									},
-								},
-								"minutes": {
-									// Property: Minutes
-									Description: "The minutes.",
-									Type:        types.Int64Type,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 59),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-				},
-			),
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(100),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the hours of operation.",
-			//	  "maxLength": 250,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Configuration information for the hours of operation: day, start time, and end time.",
+			Required:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(100),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the hours of operation.",
+		//	  "maxLength": 250,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the hours of operation.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 250),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"hours_of_operation_arn": {
-			// Property: HoursOfOperationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for the hours of operation.",
-			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/operating-hours/[-a-zA-Z0-9]*$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 250),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HoursOfOperationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the hours of operation.",
+		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/operating-hours/[-a-zA-Z0-9]*$",
+		//	  "type": "string"
+		//	}
+		"hours_of_operation_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for the hours of operation.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"instance_arn": {
-			// Property: InstanceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the Amazon Connect instance.",
-			//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the Amazon Connect instance.",
+		//	  "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$",
+		//	  "type": "string"
+		//	}
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the Amazon Connect instance.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the hours of operation.",
-			//	  "maxLength": 127,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the hours of operation.",
+		//	  "maxLength": 127,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the hours of operation.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 127),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "One or more tags.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 256,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "One or more tags.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 127),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "One or more tags.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is maximum of 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"time_zone": {
-			// Property: TimeZone
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time zone of the hours of operation.",
-			//	  "type": "string"
-			//	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "One or more tags.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TimeZone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time zone of the hours of operation.",
+		//	  "type": "string"
+		//	}
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time zone of the hours of operation.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Connect::HoursOfOperation",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::HoursOfOperation").WithTerraformTypeName("awscc_connect_hours_of_operation")
 	opts = opts.WithTerraformSchema(schema)
@@ -376,7 +364,7 @@ func hoursOfOperationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

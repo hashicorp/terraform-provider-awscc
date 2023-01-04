@@ -6,9 +6,12 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,212 +22,194 @@ func init() {
 // deploymentConfigResource returns the Terraform awscc_codedeploy_deployment_config resource.
 // This Terraform resource corresponds to the CloudFormation AWS::CodeDeploy::DeploymentConfig resource.
 func deploymentConfigResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"compute_platform": {
-			// Property: ComputePlatform
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The destination platform type for the deployment (Lambda, Server, or ECS).",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ComputePlatform
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The destination platform type for the deployment (Lambda, Server, or ECS).",
+		//	  "type": "string"
+		//	}
+		"compute_platform": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The destination platform type for the deployment (Lambda, Server, or ECS).",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"deployment_config_name": {
-			// Property: DeploymentConfigName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeploymentConfigName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.",
+		//	  "type": "string"
+		//	}
+		"deployment_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the deployment configuration. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the deployment configuration name. For more information, see Name Type.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"minimum_healthy_hosts": {
-			// Property: MinimumHealthyHosts
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
-			//	  "properties": {
-			//	    "Type": {
-			//	      "type": "string"
-			//	    },
-			//	    "Value": {
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type",
-			//	    "Value"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MinimumHealthyHosts
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
+		//	  "properties": {
+		//	    "Type": {
+		//	      "type": "string"
+		//	    },
+		//	    "Value": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type",
+		//	    "Value"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"minimum_healthy_hosts": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The minimum number of healthy instances that should be available at any time during the deployment. There are two parameters expected in the input: type and value.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Required: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.Int64Type,
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"traffic_routing_config": {
-			// Property: TrafficRoutingConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The configuration that specifies how the deployment traffic is routed.",
-			//	  "properties": {
-			//	    "TimeBasedCanary": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CanaryInterval": {
-			//	          "type": "integer"
-			//	        },
-			//	        "CanaryPercentage": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CanaryPercentage",
-			//	        "CanaryInterval"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "TimeBasedLinear": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "LinearInterval": {
-			//	          "type": "integer"
-			//	        },
-			//	        "LinearPercentage": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "LinearInterval",
-			//	        "LinearPercentage"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Type": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TrafficRoutingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration that specifies how the deployment traffic is routed.",
+		//	  "properties": {
+		//	    "TimeBasedCanary": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CanaryInterval": {
+		//	          "type": "integer"
+		//	        },
+		//	        "CanaryPercentage": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CanaryPercentage",
+		//	        "CanaryInterval"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TimeBasedLinear": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "LinearInterval": {
+		//	          "type": "integer"
+		//	        },
+		//	        "LinearPercentage": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "LinearInterval",
+		//	        "LinearPercentage"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"traffic_routing_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TimeBasedCanary
+				"time_based_canary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CanaryInterval
+						"canary_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CanaryPercentage
+						"canary_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TimeBasedLinear
+				"time_based_linear": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LinearInterval
+						"linear_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LinearPercentage
+						"linear_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The configuration that specifies how the deployment traffic is routed.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"time_based_canary": {
-						// Property: TimeBasedCanary
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"canary_interval": {
-									// Property: CanaryInterval
-									Type:     types.Int64Type,
-									Required: true,
-								},
-								"canary_percentage": {
-									// Property: CanaryPercentage
-									Type:     types.Int64Type,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"time_based_linear": {
-						// Property: TimeBasedLinear
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"linear_interval": {
-									// Property: LinearInterval
-									Type:     types.Int64Type,
-									Required: true,
-								},
-								"linear_percentage": {
-									// Property: LinearPercentage
-									Type:     types.Int64Type,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CodeDeploy::DeploymentConfig",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeDeploy::DeploymentConfig").WithTerraformTypeName("awscc_codedeploy_deployment_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -248,7 +233,7 @@ func deploymentConfigResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -4,14 +4,16 @@ package emr
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,103 +23,98 @@ func init() {
 // studioSessionMappingResource returns the Terraform awscc_emr_studio_session_mapping resource.
 // This Terraform resource corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource.
 func studioSessionMappingResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"identity_name": {
-			// Property: IdentityName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: IdentityName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
+		//	  "type": "string"
+		//	}
+		"identity_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"identity_type": {
-			// Property: IdentityType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether the identity to map to the Studio is a user or a group.",
-			//	  "enum": [
-			//	    "USER",
-			//	    "GROUP"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the identity to map to the Studio is a user or a group.",
+		//	  "enum": [
+		//	    "USER",
+		//	    "GROUP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the identity to map to the Studio is a user or a group.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"USER",
 					"GROUP",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"session_policy_arn": {
-			// Property: SessionPolicyArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			//	  "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SessionPolicyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
+		//	  "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
+		//	  "type": "string"
+		//	}
+		"session_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$"), ""),
-			},
-		},
-		"studio_id": {
-			// Property: StudioId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
-			//	  "maxLength": 256,
-			//	  "minLength": 4,
-			//	  "pattern": "^es-[0-9A-Z]+",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StudioId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
+		//	  "maxLength": 256,
+		//	  "minLength": 4,
+		//	  "pattern": "^es-[0-9A-Z]+",
+		//	  "type": "string"
+		//	}
+		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(4, 256),
-				validate.StringMatch(regexp.MustCompile("^es-[0-9A-Z]+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(4, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^es-[0-9A-Z]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping")
 	opts = opts.WithTerraformSchema(schema)
@@ -133,7 +130,7 @@ func studioSessionMappingResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

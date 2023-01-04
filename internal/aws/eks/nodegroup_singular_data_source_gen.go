@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,434 +19,401 @@ func init() {
 // nodegroupDataSource returns the Terraform awscc_eks_nodegroup data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EKS::Nodegroup resource.
 func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"ami_type": {
-			// Property: AmiType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AMI type for your node group.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AmiType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AMI type for your node group.",
+		//	  "type": "string"
+		//	}
+		"ami_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AMI type for your node group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"capacity_type": {
-			// Property: CapacityType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The capacity type of your managed node group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CapacityType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The capacity type of your managed node group.",
+		//	  "type": "string"
+		//	}
+		"capacity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The capacity type of your managed node group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"cluster_name": {
-			// Property: ClusterName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of the cluster to create the node group in.",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ClusterName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of the cluster to create the node group in.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"cluster_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the cluster to create the node group in.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"disk_size": {
-			// Property: DiskSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The root device disk size (in GiB) for your node group instances.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DiskSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The root device disk size (in GiB) for your node group instances.",
+		//	  "type": "integer"
+		//	}
+		"disk_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The root device disk size (in GiB) for your node group instances.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"force_update_enabled": {
-			// Property: ForceUpdateEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": false,
-			//	  "description": "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ForceUpdateEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.",
+		//	  "type": "boolean"
+		//	}
+		"force_update_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Force the update if the existing node group's pods are unable to be drained due to a pod disruption budget issue.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"instance_types": {
-			// Property: InstanceTypes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specify the instance types for a node group.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceTypes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specify the instance types for a node group.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Specify the instance types for a node group.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"labels": {
-			// Property: Labels
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Labels
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
+		//	  "type": "object"
+		//	}
+		"labels": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
-			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"launch_template": {
-			// Property: LaunchTemplate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An object representing a node group's launch template specification.",
-			//	  "properties": {
-			//	    "Id": {
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "Name": {
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "Version": {
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LaunchTemplate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object representing a node group's launch template specification.",
+		//	  "properties": {
+		//	    "Id": {
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "Version": {
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Id
+				"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An object representing a node group's launch template specification.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"id": {
-						// Property: Id
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"version": {
-						// Property: Version
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"node_role": {
-			// Property: NodeRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the IAM role to associate with your node group.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: NodeRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the IAM role to associate with your node group.",
+		//	  "type": "string"
+		//	}
+		"node_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the IAM role to associate with your node group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"nodegroup_name": {
-			// Property: NodegroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique name to give your node group.",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NodegroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique name to give your node group.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"nodegroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique name to give your node group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"release_version": {
-			// Property: ReleaseVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AMI version of the Amazon EKS-optimized AMI to use with your node group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ReleaseVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AMI version of the Amazon EKS-optimized AMI to use with your node group.",
+		//	  "type": "string"
+		//	}
+		"release_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AMI version of the Amazon EKS-optimized AMI to use with your node group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"remote_access": {
-			// Property: RemoteAccess
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The remote access (SSH) configuration to use with your node group.",
-			//	  "properties": {
-			//	    "Ec2SshKey": {
-			//	      "type": "string"
-			//	    },
-			//	    "SourceSecurityGroups": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Ec2SshKey"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RemoteAccess
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The remote access (SSH) configuration to use with your node group.",
+		//	  "properties": {
+		//	    "Ec2SshKey": {
+		//	      "type": "string"
+		//	    },
+		//	    "SourceSecurityGroups": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Ec2SshKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"remote_access": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ec2SshKey
+				"ec_2_ssh_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SourceSecurityGroups
+				"source_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The remote access (SSH) configuration to use with your node group.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"ec_2_ssh_key": {
-						// Property: Ec2SshKey
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"source_security_groups": {
-						// Property: SourceSecurityGroups
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"scaling_config": {
-			// Property: ScalingConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The scaling configuration details for the Auto Scaling group that is created for your node group.",
-			//	  "properties": {
-			//	    "DesiredSize": {
-			//	      "minimum": 0,
-			//	      "type": "integer"
-			//	    },
-			//	    "MaxSize": {
-			//	      "minimum": 1,
-			//	      "type": "integer"
-			//	    },
-			//	    "MinSize": {
-			//	      "minimum": 0,
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ScalingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The scaling configuration details for the Auto Scaling group that is created for your node group.",
+		//	  "properties": {
+		//	    "DesiredSize": {
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    },
+		//	    "MaxSize": {
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "MinSize": {
+		//	      "minimum": 0,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DesiredSize
+				"desired_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxSize
+				"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinSize
+				"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The scaling configuration details for the Auto Scaling group that is created for your node group.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"desired_size": {
-						// Property: DesiredSize
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"max_size": {
-						// Property: MaxSize
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"min_size": {
-						// Property: MinSize
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"subnets": {
-			// Property: Subnets
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The subnets to use for the Auto Scaling group that is created for your node group.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Subnets
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The subnets to use for the Auto Scaling group that is created for your node group.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The subnets to use for the Auto Scaling group that is created for your node group.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
+		//	  "type": "object"
+		//	}
+		"tags": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
-			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"taints": {
-			// Property: Taints
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "An object representing a Taint specification for AWS EKS Nodegroup.",
-			//	    "properties": {
-			//	      "Effect": {
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Key": {
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Taints
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An object representing a Taint specification for AWS EKS Nodegroup.",
+		//	    "properties": {
+		//	      "Effect": {
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Key": {
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"taints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Effect
+					"effect": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "The Kubernetes taints to be applied to the nodes in the node group when they are created.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"effect": {
-						// Property: Effect
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"update_config": {
-			// Property: UpdateConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The node group update configuration.",
-			//	  "properties": {
-			//	    "MaxUnavailable": {
-			//	      "description": "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. ",
-			//	      "minimum": 1,
-			//	      "type": "number"
-			//	    },
-			//	    "MaxUnavailablePercentage": {
-			//	      "description": "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.",
-			//	      "maximum": 100,
-			//	      "minimum": 1,
-			//	      "type": "number"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "The node group update configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"max_unavailable": {
-						// Property: MaxUnavailable
-						Description: "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. ",
-						Type:        types.Float64Type,
-						Computed:    true,
-					},
-					"max_unavailable_percentage": {
-						// Property: MaxUnavailablePercentage
-						Description: "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.",
-						Type:        types.Float64Type,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"version": {
-			// Property: Version
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Kubernetes version to use for your managed nodes.",
-			//	  "type": "string"
-			//	}
-			Description: "The Kubernetes version to use for your managed nodes.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: UpdateConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The node group update configuration.",
+		//	  "properties": {
+		//	    "MaxUnavailable": {
+		//	      "description": "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. ",
+		//	      "minimum": 1,
+		//	      "type": "number"
+		//	    },
+		//	    "MaxUnavailablePercentage": {
+		//	      "description": "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.",
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"update_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxUnavailable
+				"max_unavailable": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of nodes unavailable at once during a version update. Nodes will be updated in parallel. This value or maxUnavailablePercentage is required to have a value.The maximum number is 100. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxUnavailablePercentage
+				"max_unavailable_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum percentage of nodes unavailable during a version update. This percentage of nodes will be updated in parallel, up to 100 nodes at once. This value or maxUnavailable is required to have a value.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The node group update configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Version
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Kubernetes version to use for your managed nodes.",
+		//	  "type": "string"
+		//	}
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Kubernetes version to use for your managed nodes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EKS::Nodegroup",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EKS::Nodegroup").WithTerraformTypeName("awscc_eks_nodegroup")
 	opts = opts.WithTerraformSchema(schema)
@@ -484,7 +451,7 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version":                    "Version",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,147 +19,135 @@ func init() {
 // topicRuleDestinationDataSource returns the Terraform awscc_iot_topic_rule_destination data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::TopicRuleDestination resource.
 func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Amazon Resource Name (ARN).",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name (ARN).",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN).",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"http_url_properties": {
-			// Property: HttpUrlProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "HTTP URL destination properties.",
-			//	  "properties": {
-			//	    "ConfirmationUrl": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: HttpUrlProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "HTTP URL destination properties.",
+		//	  "properties": {
+		//	    "ConfirmationUrl": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"http_url_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfirmationUrl
+				"confirmation_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "HTTP URL destination properties.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"confirmation_url": {
-						// Property: ConfirmationUrl
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the TopicRuleDestination.",
-			//	  "enum": [
-			//	    "ENABLED",
-			//	    "IN_PROGRESS",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the TopicRuleDestination.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "IN_PROGRESS",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the TopicRuleDestination.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status_reason": {
-			// Property: StatusReason
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The reasoning for the current status of the TopicRuleDestination.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StatusReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The reasoning for the current status of the TopicRuleDestination.",
+		//	  "type": "string"
+		//	}
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The reasoning for the current status of the TopicRuleDestination.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"vpc_properties": {
-			// Property: VpcProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "VPC destination properties.",
-			//	  "properties": {
-			//	    "RoleArn": {
-			//	      "type": "string"
-			//	    },
-			//	    "SecurityGroups": {
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "SubnetIds": {
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "VpcId": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "VPC destination properties.",
+		//	  "properties": {
+		//	    "RoleArn": {
+		//	      "type": "string"
+		//	    },
+		//	    "SecurityGroups": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "SubnetIds": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "VpcId": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vpc_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroups
+				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcId
+				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "VPC destination properties.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"role_arn": {
-						// Property: RoleArn
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"security_groups": {
-						// Property: SecurityGroups
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"subnet_ids": {
-						// Property: SubnetIds
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"vpc_id": {
-						// Property: VpcId
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoT::TopicRuleDestination",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::TopicRuleDestination").WithTerraformTypeName("awscc_iot_topic_rule_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -176,7 +164,7 @@ func topicRuleDestinationDataSource(ctx context.Context) (datasource.DataSource,
 		"vpc_properties":      "VpcProperties",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

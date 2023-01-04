@@ -4,14 +4,20 @@ package amplify
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,850 +27,807 @@ func init() {
 // appResource returns the Terraform awscc_amplify_app resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Amplify::App resource.
 func appResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"access_token": {
-			// Property: AccessToken
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessToken
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// AccessToken is a write-only property.
-		},
-		"app_id": {
-			// Property: AppId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 20,
-			//	  "minLength": 1,
-			//	  "pattern": "d[a-z0-9]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: AppId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 20,
+		//	  "minLength": 1,
+		//	  "pattern": "d[a-z0-9]+",
+		//	  "type": "string"
+		//	}
+		"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"app_name": {
-			// Property: AppName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "(?s).+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AppName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "(?s).+",
+		//	  "type": "string"
+		//	}
+		"app_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "pattern": "(?s).*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"auto_branch_creation_config": {
-			// Property: AutoBranchCreationConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "AutoBranchCreationPatterns": {
-			//	      "items": {
-			//	        "maxLength": 2048,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "BasicAuthConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "EnableBasicAuth": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "Password": {
-			//	          "maxLength": 255,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Username": {
-			//	          "maxLength": 255,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "BuildSpec": {
-			//	      "maxLength": 25000,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "EnableAutoBranchCreation": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "EnableAutoBuild": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "EnablePerformanceMode": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "EnablePullRequestPreview": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "EnvironmentVariables": {
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Name": {
-			//	            "maxLength": 255,
-			//	            "pattern": "(?s).*",
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 5500,
-			//	            "pattern": "(?s).*",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Name",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "Framework": {
-			//	      "maxLength": 255,
-			//	      "pattern": "(?s).*",
-			//	      "type": "string"
-			//	    },
-			//	    "PullRequestEnvironmentName": {
-			//	      "maxLength": 20,
-			//	      "pattern": "(?s).*",
-			//	      "type": "string"
-			//	    },
-			//	    "Stage": {
-			//	      "enum": [
-			//	        "EXPERIMENTAL",
-			//	        "BETA",
-			//	        "PULL_REQUEST",
-			//	        "PRODUCTION",
-			//	        "DEVELOPMENT"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"auto_branch_creation_patterns": {
-						// Property: AutoBranchCreationPatterns
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenBetween(1, 2048)),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"basic_auth_config": {
-						// Property: BasicAuthConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"enable_basic_auth": {
-									// Property: EnableBasicAuth
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"password": {
-									// Property: Password
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"username": {
-									// Property: Username
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoBranchCreationConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AutoBranchCreationPatterns": {
+		//	      "items": {
+		//	        "maxLength": 2048,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "BasicAuthConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EnableBasicAuth": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "Password": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Username": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "BuildSpec": {
+		//	      "maxLength": 25000,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "EnableAutoBranchCreation": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnableAutoBuild": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnablePerformanceMode": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnablePullRequestPreview": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "EnvironmentVariables": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Name": {
+		//	            "maxLength": 255,
+		//	            "pattern": "(?s).*",
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 5500,
+		//	            "pattern": "(?s).*",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "Framework": {
+		//	      "maxLength": 255,
+		//	      "pattern": "(?s).*",
+		//	      "type": "string"
+		//	    },
+		//	    "PullRequestEnvironmentName": {
+		//	      "maxLength": 20,
+		//	      "pattern": "(?s).*",
+		//	      "type": "string"
+		//	    },
+		//	    "Stage": {
+		//	      "enum": [
+		//	        "EXPERIMENTAL",
+		//	        "BETA",
+		//	        "PULL_REQUEST",
+		//	        "PRODUCTION",
+		//	        "DEVELOPMENT"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"auto_branch_creation_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoBranchCreationPatterns
+				"auto_branch_creation_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 2048),
 						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"build_spec": {
-						// Property: BuildSpec
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 25000),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"enable_auto_branch_creation": {
-						// Property: EnableAutoBranchCreation
-						Type:     types.BoolType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"enable_auto_build": {
-						// Property: EnableAutoBuild
-						Type:     types.BoolType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"enable_performance_mode": {
-						// Property: EnablePerformanceMode
-						Type:     types.BoolType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"enable_pull_request_preview": {
-						// Property: EnablePullRequestPreview
-						Type:     types.BoolType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"environment_variables": {
-						// Property: EnvironmentVariables
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(255),
-										validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(5500),
-										validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"framework": {
-						// Property: Framework
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(255),
-							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"pull_request_environment_name": {
-						// Property: PullRequestEnvironmentName
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(20),
-							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"stage": {
-						// Property: Stage
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"EXPERIMENTAL",
-								"BETA",
-								"PULL_REQUEST",
-								"PRODUCTION",
-								"DEVELOPMENT",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-			// AutoBranchCreationConfig is a write-only property.
-		},
-		"basic_auth_config": {
-			// Property: BasicAuthConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "EnableBasicAuth": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "Password": {
-			//	      "maxLength": 255,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "Username": {
-			//	      "maxLength": 255,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"enable_basic_auth": {
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BasicAuthConfig
+				"basic_auth_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: EnableBasicAuth
-						Type:     types.BoolType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"password": {
+						"enable_basic_auth": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Password
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 255),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"username": {
+						"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Username
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 255),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+						"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 255),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: BuildSpec
+				"build_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 25000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnableAutoBranchCreation
+				"enable_auto_branch_creation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnableAutoBuild
+				"enable_auto_build": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnablePerformanceMode
+				"enable_performance_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnablePullRequestPreview
+				"enable_pull_request_preview": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EnvironmentVariables
+				"environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(255),
+									stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(5500),
+									stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Framework
+				"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(255),
+						stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PullRequestEnvironmentName
+				"pull_request_environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(20),
+						stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Stage
+				"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"EXPERIMENTAL",
+							"BETA",
+							"PULL_REQUEST",
+							"PRODUCTION",
+							"DEVELOPMENT",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// AutoBranchCreationConfig is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: BasicAuthConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EnableBasicAuth": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "Password": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "Username": {
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"basic_auth_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EnableBasicAuth
+				"enable_basic_auth": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Password
+				"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Username
+				"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 255),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// BasicAuthConfig is a write-only property.
-		},
-		"build_spec": {
-			// Property: BuildSpec
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 25000,
-			//	  "minLength": 1,
-			//	  "pattern": "(?s).+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: BuildSpec
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 25000,
+		//	  "minLength": 1,
+		//	  "pattern": "(?s).+",
+		//	  "type": "string"
+		//	}
+		"build_spec": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 25000),
-				validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"custom_headers": {
-			// Property: CustomHeaders
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 25000,
-			//	  "minLength": 0,
-			//	  "pattern": "(?s).*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 25000),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomHeaders
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 25000,
+		//	  "minLength": 0,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"custom_headers": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 25000),
-				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"custom_rules": {
-			// Property: CustomRules
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Condition": {
-			//	        "maxLength": 2048,
-			//	        "minLength": 0,
-			//	        "pattern": "(?s).*",
-			//	        "type": "string"
-			//	      },
-			//	      "Source": {
-			//	        "maxLength": 2048,
-			//	        "minLength": 1,
-			//	        "pattern": "(?s).+",
-			//	        "type": "string"
-			//	      },
-			//	      "Status": {
-			//	        "maxLength": 7,
-			//	        "minLength": 3,
-			//	        "pattern": ".{3,7}",
-			//	        "type": "string"
-			//	      },
-			//	      "Target": {
-			//	        "maxLength": 2048,
-			//	        "minLength": 1,
-			//	        "pattern": "(?s).+",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Target",
-			//	      "Source"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"condition": {
-						// Property: Condition
-						Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 25000),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomRules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Condition": {
+		//	        "maxLength": 2048,
+		//	        "minLength": 0,
+		//	        "pattern": "(?s).*",
+		//	        "type": "string"
+		//	      },
+		//	      "Source": {
+		//	        "maxLength": 2048,
+		//	        "minLength": 1,
+		//	        "pattern": "(?s).+",
+		//	        "type": "string"
+		//	      },
+		//	      "Status": {
+		//	        "maxLength": 7,
+		//	        "minLength": 3,
+		//	        "pattern": ".{3,7}",
+		//	        "type": "string"
+		//	      },
+		//	      "Target": {
+		//	        "maxLength": 2048,
+		//	        "minLength": 1,
+		//	        "pattern": "(?s).+",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Target",
+		//	      "Source"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"custom_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Condition
+					"condition": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 2048),
-							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"source": {
-						// Property: Source
-						Type:     types.StringType,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 2048),
+							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Source
+					"source": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 2048),
-							validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
-						},
-					},
-					"status": {
-						// Property: Status
-						Type:     types.StringType,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 2048),
+							stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Status
+					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(3, 7),
-							validate.StringMatch(regexp.MustCompile(".{3,7}"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"target": {
-						// Property: Target
-						Type:     types.StringType,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(3, 7),
+							stringvalidator.RegexMatches(regexp.MustCompile(".{3,7}"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Target
+					"target": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 2048),
-							validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
-						},
-					},
-				},
-			),
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 2048),
+							stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"default_domain": {
-			// Property: DefaultDomain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultDomain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"default_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "pattern": "(?s).*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(1000),
-				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"enable_branch_auto_deletion": {
-			// Property: EnableBranchAutoDeletion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(1000),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnableBranchAutoDeletion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"enable_branch_auto_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"environment_variables": {
-			// Property: EnvironmentVariables
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Name": {
-			//	        "maxLength": 255,
-			//	        "pattern": "(?s).*",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 5500,
-			//	        "pattern": "(?s).*",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Name",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentVariables
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Name": {
+		//	        "maxLength": 255,
+		//	        "pattern": "(?s).*",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 5500,
+		//	        "pattern": "(?s).*",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(255),
-							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(255),
+							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(5500),
-							validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-						},
-					},
-				},
-			),
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(5500),
+							stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"iam_service_role": {
-			// Property: IAMServiceRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "minLength": 1,
-			//	  "pattern": "(?s).*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IAMServiceRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "minLength": 1,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"iam_service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1000),
-				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "(?s).+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1000),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "(?s).+",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-				validate.StringMatch(regexp.MustCompile("(?s).+"), ""),
-			},
-		},
-		"oauth_token": {
-			// Property: OauthToken
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "pattern": "(?s).*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).+"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OauthToken
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"oauth_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(1000),
-				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(1000),
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// OauthToken is a write-only property.
-		},
-		"platform": {
-			// Property: Platform
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "WEB",
-			//	    "WEB_DYNAMIC",
-			//	    "WEB_COMPUTE"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Platform
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "WEB",
+		//	    "WEB_DYNAMIC",
+		//	    "WEB_COMPUTE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"WEB",
 					"WEB_DYNAMIC",
 					"WEB_COMPUTE",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"repository": {
-			// Property: Repository
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": "(?s).*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Repository
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("(?s).*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "insertionOrder": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("(?s).*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "insertionOrder": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-					},
-				},
-			),
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::Amplify::App resource creates Apps in the Amplify Console. An App is a collection of branches.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Amplify::App").WithTerraformTypeName("awscc_amplify_app")
 	opts = opts.WithTerraformSchema(schema)
@@ -918,7 +881,7 @@ func appResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

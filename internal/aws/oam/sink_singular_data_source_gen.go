@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,85 +19,81 @@ func init() {
 // sinkDataSource returns the Terraform awscc_oam_sink data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Oam::Sink resource.
 func sinkDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon resource name (ARN) of the ObservabilityAccessManager Sink",
-			//	  "maxLength": 2048,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon resource name (ARN) of the ObservabilityAccessManager Sink",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon resource name (ARN) of the ObservabilityAccessManager Sink",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the ObservabilityAccessManager Sink.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9_.-]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the ObservabilityAccessManager Sink.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_.-]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the ObservabilityAccessManager Sink.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy": {
-			// Property: Policy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The policy of this ObservabilityAccessManager Sink.",
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The policy of this ObservabilityAccessManager Sink.",
+		//	  "type": "object"
+		//	}
+		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The policy of this ObservabilityAccessManager Sink.",
-			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Tags to apply to the sink",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	      "maxLength": 256,
-			//	      "minLength": 0,
-			//	      "pattern": "",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Tags to apply to the sink",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Tags to apply to the sink",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Oam::Sink",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Oam::Sink").WithTerraformTypeName("awscc_oam_sink")
 	opts = opts.WithTerraformSchema(schema)
@@ -108,7 +104,7 @@ func sinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":   "Tags",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

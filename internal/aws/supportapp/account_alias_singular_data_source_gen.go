@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,52 +19,48 @@ func init() {
 // accountAliasDataSource returns the Terraform awscc_supportapp_account_alias data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SupportApp::AccountAlias resource.
 func accountAliasDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"account_alias": {
-			// Property: AccountAlias
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An account alias associated with a customer's account.",
-			//	  "maxLength": 30,
-			//	  "minLength": 1,
-			//	  "pattern": "^[\\w\\- ]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccountAlias
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An account alias associated with a customer's account.",
+		//	  "maxLength": 30,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\w\\- ]+$",
+		//	  "type": "string"
+		//	}
+		"account_alias": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An account alias associated with a customer's account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"account_alias_resource_id": {
-			// Property: AccountAliasResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique identifier representing an alias tied to an account",
-			//	  "maxLength": 29,
-			//	  "minLength": 29,
-			//	  "pattern": "^[\\w\\- ]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AccountAliasResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique identifier representing an alias tied to an account",
+		//	  "maxLength": 29,
+		//	  "minLength": 29,
+		//	  "pattern": "^[\\w\\- ]+$",
+		//	  "type": "string"
+		//	}
+		"account_alias_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier representing an alias tied to an account",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SupportApp::AccountAlias",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::AccountAlias").WithTerraformTypeName("awscc_supportapp_account_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -73,7 +69,7 @@ func accountAliasDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"account_alias_resource_id": "AccountAliasResourceId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

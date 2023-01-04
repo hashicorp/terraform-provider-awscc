@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,31 +19,29 @@ func init() {
 // locationS3sDataSource returns the Terraform awscc_datasync_location_s3s data source.
 // This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationS3 resource.
 func locationS3sDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"id": {
+	attributes := map[string]schema.Attribute{
+		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
-			Type:        types.StringType,
 			Computed:    true,
 		},
-		"ids": {
+		"ids": schema.SetAttribute{
 			Description: "Set of Resource Identifiers.",
-			Type:        types.SetType{ElemType: types.StringType},
+			ElementType: types.StringType,
 			Computed:    true,
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Plural Data Source schema for AWS::DataSync::LocationS3",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationS3").WithTerraformTypeName("awscc_datasync_location_s3s")
 	opts = opts.WithTerraformSchema(schema)
 
-	v, err := NewPluralDataSource(ctx, opts...)
+	v, err := generic.NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

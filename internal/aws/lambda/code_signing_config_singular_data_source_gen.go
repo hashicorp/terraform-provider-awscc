@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,137 +19,127 @@ func init() {
 // codeSigningConfigDataSource returns the Terraform awscc_lambda_code_signing_config data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Lambda::CodeSigningConfig resource.
 func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"allowed_publishers": {
-			// Property: AllowedPublishers
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list",
-			//	  "properties": {
-			//	    "SigningProfileVersionArns": {
-			//	      "description": "List of Signing profile version Arns",
-			//	      "items": {
-			//	        "maxLength": 1024,
-			//	        "minLength": 12,
-			//	        "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 20,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "SigningProfileVersionArns"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowedPublishers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list",
+		//	  "properties": {
+		//	    "SigningProfileVersionArns": {
+		//	      "description": "List of Signing profile version Arns",
+		//	      "items": {
+		//	        "maxLength": 1024,
+		//	        "minLength": 12,
+		//	        "pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 20,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SigningProfileVersionArns"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"allowed_publishers": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SigningProfileVersionArns
+				"signing_profile_version_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of Signing profile version Arns",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "When the CodeSigningConfig is later on attached to a function, the function code will be expected to be signed by profiles from this list",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"signing_profile_version_arns": {
-						// Property: SigningProfileVersionArns
-						Description: "List of Signing profile version Arns",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"code_signing_config_arn": {
-			// Property: CodeSigningConfigArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique Arn for CodeSigningConfig resource",
-			//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CodeSigningConfigArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique Arn for CodeSigningConfig resource",
+		//	  "pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:code-signing-config:csc-[a-z0-9]{17}",
+		//	  "type": "string"
+		//	}
+		"code_signing_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique Arn for CodeSigningConfig resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"code_signing_config_id": {
-			// Property: CodeSigningConfigId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for CodeSigningConfig resource",
-			//	  "pattern": "csc-[a-zA-Z0-9-_\\.]{17}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CodeSigningConfigId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for CodeSigningConfig resource",
+		//	  "pattern": "csc-[a-zA-Z0-9-_\\.]{17}",
+		//	  "type": "string"
+		//	}
+		"code_signing_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for CodeSigningConfig resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"code_signing_policies": {
-			// Property: CodeSigningPolicies
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Policies to control how to act if a signature is invalid",
-			//	  "properties": {
-			//	    "UntrustedArtifactOnDeployment": {
-			//	      "default": "Warn",
-			//	      "description": "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
-			//	      "enum": [
-			//	        "Warn",
-			//	        "Enforce"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "UntrustedArtifactOnDeployment"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CodeSigningPolicies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Policies to control how to act if a signature is invalid",
+		//	  "properties": {
+		//	    "UntrustedArtifactOnDeployment": {
+		//	      "default": "Warn",
+		//	      "description": "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
+		//	      "enum": [
+		//	        "Warn",
+		//	        "Enforce"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "UntrustedArtifactOnDeployment"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"code_signing_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: UntrustedArtifactOnDeployment
+				"untrusted_artifact_on_deployment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Policies to control how to act if a signature is invalid",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"untrusted_artifact_on_deployment": {
-						// Property: UntrustedArtifactOnDeployment
-						Description: "Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description of the CodeSigningConfig",
-			//	  "maxLength": 256,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
-			Description: "A description of the CodeSigningConfig",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description of the CodeSigningConfig",
+		//	  "maxLength": 256,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A description of the CodeSigningConfig",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Lambda::CodeSigningConfig",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lambda::CodeSigningConfig").WithTerraformTypeName("awscc_lambda_code_signing_config")
 	opts = opts.WithTerraformSchema(schema)
@@ -163,7 +153,7 @@ func codeSigningConfigDataSource(ctx context.Context) (datasource.DataSource, er
 		"untrusted_artifact_on_deployment": "UntrustedArtifactOnDeployment",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

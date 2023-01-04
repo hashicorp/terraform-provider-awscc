@@ -4,14 +4,19 @@ package devopsguru
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,177 +26,174 @@ func init() {
 // resourceCollectionResource returns the Terraform awscc_devopsguru_resource_collection resource.
 // This Terraform resource corresponds to the CloudFormation AWS::DevOpsGuru::ResourceCollection resource.
 func resourceCollectionResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"resource_collection_filter": {
-			// Property: ResourceCollectionFilter
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
-			//	  "properties": {
-			//	    "CloudFormation": {
-			//	      "additionalProperties": false,
-			//	      "description": "CloudFormation resource for DevOps Guru to monitor",
-			//	      "properties": {
-			//	        "StackNames": {
-			//	          "description": "An array of CloudFormation stack names.",
-			//	          "items": {
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 1000,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Tags": {
-			//	      "description": "Tagged resources for DevOps Guru to monitor",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Tagged resource for DevOps Guru to monitor",
-			//	        "properties": {
-			//	          "AppBoundaryKey": {
-			//	            "description": "A Tag key for DevOps Guru app boundary.",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "TagValues": {
-			//	            "description": "Tag values of DevOps Guru app boundary.",
-			//	            "items": {
-			//	              "maxLength": 256,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "maxItems": 1000,
-			//	            "minItems": 1,
-			//	            "type": "array"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ResourceCollectionFilter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
+		//	  "properties": {
+		//	    "CloudFormation": {
+		//	      "additionalProperties": false,
+		//	      "description": "CloudFormation resource for DevOps Guru to monitor",
+		//	      "properties": {
+		//	        "StackNames": {
+		//	          "description": "An array of CloudFormation stack names.",
+		//	          "items": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z*]+[a-zA-Z0-9-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 1000,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Tags": {
+		//	      "description": "Tagged resources for DevOps Guru to monitor",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Tagged resource for DevOps Guru to monitor",
+		//	        "properties": {
+		//	          "AppBoundaryKey": {
+		//	            "description": "A Tag key for DevOps Guru app boundary.",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "TagValues": {
+		//	            "description": "Tag values of DevOps Guru app boundary.",
+		//	            "items": {
+		//	              "maxLength": 256,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 1000,
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"resource_collection_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CloudFormation
+				"cloudformation": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: StackNames
+						"stack_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "An array of CloudFormation stack names.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 1000),
+								listvalidator.ValueStringsAre(
+									stringvalidator.LengthBetween(1, 128),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z*]+[a-zA-Z0-9-]*$"), ""),
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "CloudFormation resource for DevOps Guru to monitor",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AppBoundaryKey
+							"app_boundary_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A Tag key for DevOps Guru app boundary.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TagValues
+							"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "Tag values of DevOps Guru app boundary.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeBetween(1, 1000),
+									listvalidator.ValueStringsAre(
+										stringvalidator.LengthBetween(1, 256),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Tagged resources for DevOps Guru to monitor",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Information about a filter used to specify which AWS resources are analyzed for anomalous behavior by DevOps Guru.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"cloudformation": {
-						// Property: CloudFormation
-						Description: "CloudFormation resource for DevOps Guru to monitor",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"stack_names": {
-									// Property: StackNames
-									Description: "An array of CloudFormation stack names.",
-									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(1, 1000),
-										validate.ArrayForEach(validate.StringLenBetween(1, 128)),
-										validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[a-zA-Z*]+[a-zA-Z0-9-]*$"), "")),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"tags": {
-						// Property: Tags
-						Description: "Tagged resources for DevOps Guru to monitor",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"app_boundary_key": {
-									// Property: AppBoundaryKey
-									Description: "A Tag key for DevOps Guru app boundary.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"tag_values": {
-									// Property: TagValues
-									Description: "Tag values of DevOps Guru app boundary.",
-									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(1, 1000),
-										validate.ArrayForEach(validate.StringLenBetween(1, 256)),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-		},
-		"resource_collection_type": {
-			// Property: ResourceCollectionType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of ResourceCollection",
-			//	  "enum": [
-			//	    "AWS_CLOUD_FORMATION",
-			//	    "AWS_TAGS"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceCollectionType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of ResourceCollection",
+		//	  "enum": [
+		//	    "AWS_CLOUD_FORMATION",
+		//	    "AWS_TAGS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"resource_collection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of ResourceCollection",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "This resource schema represents the ResourceCollection resource in the Amazon DevOps Guru.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::ResourceCollection").WithTerraformTypeName("awscc_devopsguru_resource_collection")
 	opts = opts.WithTerraformSchema(schema)
@@ -210,7 +212,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

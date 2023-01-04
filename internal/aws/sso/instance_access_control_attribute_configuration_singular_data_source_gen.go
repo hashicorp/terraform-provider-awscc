@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,194 +19,183 @@ func init() {
 // instanceAccessControlAttributeConfigurationDataSource returns the Terraform awscc_sso_instance_access_control_attribute_configuration data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SSO::InstanceAccessControlAttributeConfiguration resource.
 func instanceAccessControlAttributeConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"access_control_attributes": {
-			// Property: AccessControlAttributes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Source": {
-			//	            "insertionOrder": true,
-			//	            "items": {
-			//	              "maxLength": 256,
-			//	              "minLength": 0,
-			//	              "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
-			//	              "type": "string"
-			//	            },
-			//	            "maxItems": 1,
-			//	            "type": "array"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Source"
-			//	        ],
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessControlAttributes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Source": {
+		//	            "insertionOrder": true,
+		//	            "items": {
+		//	              "maxLength": 256,
+		//	              "minLength": 0,
+		//	              "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
+		//	              "type": "string"
+		//	            },
+		//	            "maxItems": 1,
+		//	            "type": "array"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Source"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array"
+		//	}
+		"access_control_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"source": {
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Source
+							"source": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceAccessControlAttributeConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead.",
+		//	  "properties": {
+		//	    "AccessControlAttributes": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Key": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Source": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "maxLength": 256,
+		//	                  "minLength": 0,
+		//	                  "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
+		//	                  "type": "string"
+		//	                },
+		//	                "maxItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Source"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Key",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 50,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AccessControlAttributes"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"instance_access_control_attribute_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AccessControlAttributes
+				"access_control_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Source
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"instance_access_control_attribute_configuration": {
-			// Property: InstanceAccessControlAttributeConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead.",
-			//	  "properties": {
-			//	    "AccessControlAttributes": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Key": {
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]+",
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Source": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "maxLength": 256,
-			//	                  "minLength": 0,
-			//	                  "pattern": "[\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@\\[\\]\\{\\}\\$\\\\\"]*",
-			//	                  "type": "string"
-			//	                },
-			//	                "maxItems": 1,
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Source"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Key",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 50,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "AccessControlAttributes"
-			//	  ],
-			//	  "type": "object"
-			//	}
+									"source": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The InstanceAccessControlAttributeConfiguration property has been deprecated but is still supported for backwards compatibility purposes. We recomend that you use  AccessControlAttributes property instead.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"access_control_attributes": {
-						// Property: AccessControlAttributes
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key": {
-									// Property: Key
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"value": {
-									// Property: Value
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"source": {
-												// Property: Source
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"instance_arn": {
-			// Property: InstanceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the AWS SSO instance under which the operation will be executed.",
-			//	  "maxLength": 1224,
-			//	  "minLength": 10,
-			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
-			//	  "type": "string"
-			//	}
-			Description: "The ARN of the AWS SSO instance under which the operation will be executed.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AWS SSO instance under which the operation will be executed.",
+		//	  "maxLength": 1224,
+		//	  "minLength": 10,
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+		//	  "type": "string"
+		//	}
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the AWS SSO instance under which the operation will be executed.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SSO::InstanceAccessControlAttributeConfiguration",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::InstanceAccessControlAttributeConfiguration").WithTerraformTypeName("awscc_sso_instance_access_control_attribute_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -219,7 +208,7 @@ func instanceAccessControlAttributeConfigurationDataSource(ctx context.Context) 
 		"value":        "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

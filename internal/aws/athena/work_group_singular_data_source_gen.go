@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,493 +19,447 @@ func init() {
 // workGroupDataSource returns the Terraform awscc_athena_work_group data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Athena::WorkGroup resource.
 func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date and time the workgroup was created.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time the workgroup was created.",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date and time the workgroup was created.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The workgroup description.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The workgroup description.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The workgroup description.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The workGroup name.",
-			//	  "pattern": "[a-zA-Z0-9._-]{1,128}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The workGroup name.",
+		//	  "pattern": "[a-zA-Z0-9._-]{1,128}",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The workGroup name.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"recursive_delete_option": {
-			// Property: RecursiveDeleteOption
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RecursiveDeleteOption
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
+		//	  "type": "boolean"
+		//	}
+		"recursive_delete_option": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "The option to delete the workgroup and its contents even if the workgroup contains any named queries.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The state of the workgroup: ENABLED or DISABLED.",
-			//	  "enum": [
-			//	    "ENABLED",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the workgroup: ENABLED or DISABLED.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The state of the workgroup: ENABLED or DISABLED.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "One or more tags, separated by commas, that you want to attach to the workgroup as you create it",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "One or more tags, separated by commas, that you want to attach to the workgroup as you create it",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "One or more tags, separated by commas, that you want to attach to the workgroup as you create it",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"work_group_configuration": {
-			// Property: WorkGroupConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The workgroup configuration",
-			//	  "properties": {
-			//	    "BytesScannedCutoffPerQuery": {
-			//	      "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
-			//	      "format": "int64",
-			//	      "minimum": 10000000,
-			//	      "type": "integer"
-			//	    },
-			//	    "EnforceWorkGroupConfiguration": {
-			//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-			//	      "type": "boolean"
-			//	    },
-			//	    "EngineVersion": {
-			//	      "additionalProperties": false,
-			//	      "description": "The Athena engine version for running queries.",
-			//	      "properties": {
-			//	        "EffectiveEngineVersion": {
-			//	          "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-			//	          "type": "string"
-			//	        },
-			//	        "SelectedEngineVersion": {
-			//	          "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "PublishCloudWatchMetricsEnabled": {
-			//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "RequesterPaysEnabled": {
-			//	      "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-			//	      "type": "boolean"
-			//	    },
-			//	    "ResultConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
-			//	      "properties": {
-			//	        "EncryptionConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
-			//	          "properties": {
-			//	            "EncryptionOption": {
-			//	              "description": "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-			//	              "enum": [
-			//	                "SSE_S3",
-			//	                "SSE_KMS",
-			//	                "CSE_KMS"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "KmsKey": {
-			//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "EncryptionOption"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "OutputLocation": {
-			//	          "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: WorkGroupConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The workgroup configuration",
+		//	  "properties": {
+		//	    "BytesScannedCutoffPerQuery": {
+		//	      "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+		//	      "format": "int64",
+		//	      "minimum": 10000000,
+		//	      "type": "integer"
+		//	    },
+		//	    "EnforceWorkGroupConfiguration": {
+		//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
+		//	      "type": "boolean"
+		//	    },
+		//	    "EngineVersion": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Athena engine version for running queries.",
+		//	      "properties": {
+		//	        "EffectiveEngineVersion": {
+		//	          "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
+		//	          "type": "string"
+		//	        },
+		//	        "SelectedEngineVersion": {
+		//	          "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "PublishCloudWatchMetricsEnabled": {
+		//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "RequesterPaysEnabled": {
+		//	      "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ResultConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
+		//	      "properties": {
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
+		//	          "properties": {
+		//	            "EncryptionOption": {
+		//	              "description": "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
+		//	              "enum": [
+		//	                "SSE_S3",
+		//	                "SSE_KMS",
+		//	                "CSE_KMS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "KmsKey": {
+		//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "EncryptionOption"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "OutputLocation": {
+		//	          "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"work_group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BytesScannedCutoffPerQuery
+				"bytes_scanned_cutoff_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnforceWorkGroupConfiguration
+				"enforce_work_group_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EngineVersion
+				"engine_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EffectiveEngineVersion
+						"effective_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelectedEngineVersion
+						"selected_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Athena engine version for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublishCloudWatchMetricsEnabled
+				"publish_cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RequesterPaysEnabled
+				"requester_pays_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResultConfiguration
+				"result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionOption
+								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutputLocation
+						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The workgroup configuration",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bytes_scanned_cutoff_per_query": {
-						// Property: BytesScannedCutoffPerQuery
-						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"enforce_work_group_configuration": {
-						// Property: EnforceWorkGroupConfiguration
-						Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"engine_version": {
-						// Property: EngineVersion
-						Description: "The Athena engine version for running queries.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"effective_engine_version": {
-									// Property: EffectiveEngineVersion
-									Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-									Type:        types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: WorkGroupConfigurationUpdates
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The workgroup configuration update object",
+		//	  "properties": {
+		//	    "BytesScannedCutoffPerQuery": {
+		//	      "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+		//	      "format": "int64",
+		//	      "minimum": 10000000,
+		//	      "type": "integer"
+		//	    },
+		//	    "EnforceWorkGroupConfiguration": {
+		//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
+		//	      "type": "boolean"
+		//	    },
+		//	    "EngineVersion": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Athena engine version for running queries.",
+		//	      "properties": {
+		//	        "EffectiveEngineVersion": {
+		//	          "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
+		//	          "type": "string"
+		//	        },
+		//	        "SelectedEngineVersion": {
+		//	          "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "PublishCloudWatchMetricsEnabled": {
+		//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "RemoveBytesScannedCutoffPerQuery": {
+		//	      "description": "Indicates that the data usage control limit per query is removed.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "RequesterPaysEnabled": {
+		//	      "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ResultConfigurationUpdates": {
+		//	      "additionalProperties": false,
+		//	      "description": "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
+		//	      "properties": {
+		//	        "EncryptionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
+		//	          "properties": {
+		//	            "EncryptionOption": {
+		//	              "description": "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
+		//	              "enum": [
+		//	                "SSE_S3",
+		//	                "SSE_KMS",
+		//	                "CSE_KMS"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "KmsKey": {
+		//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "EncryptionOption"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "OutputLocation": {
+		//	          "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
+		//	          "type": "string"
+		//	        },
+		//	        "RemoveEncryptionConfiguration": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RemoveOutputLocation": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"work_group_configuration_updates": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BytesScannedCutoffPerQuery
+				"bytes_scanned_cutoff_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EnforceWorkGroupConfiguration
+				"enforce_work_group_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: EngineVersion
+				"engine_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EffectiveEngineVersion
+						"effective_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SelectedEngineVersion
+						"selected_engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Athena engine version for running queries.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PublishCloudWatchMetricsEnabled
+				"publish_cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RemoveBytesScannedCutoffPerQuery
+				"remove_bytes_scanned_cutoff_per_query": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates that the data usage control limit per query is removed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RequesterPaysEnabled
+				"requester_pays_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResultConfigurationUpdates
+				"result_configuration_updates": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EncryptionConfiguration
+						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EncryptionOption
+								"encryption_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
 									Computed:    true,
-								},
-								"selected_engine_version": {
-									// Property: SelectedEngineVersion
-									Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-									Type:        types.StringType,
+								}, /*END ATTRIBUTE*/
+								// Property: KmsKey
+								"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
 									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"publish_cloudwatch_metrics_enabled": {
-						// Property: PublishCloudWatchMetricsEnabled
-						Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"requester_pays_enabled": {
-						// Property: RequesterPaysEnabled
-						Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"result_configuration": {
-						// Property: ResultConfiguration
-						Description: "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"encryption_configuration": {
-									// Property: EncryptionConfiguration
-									Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"encryption_option": {
-												// Property: EncryptionOption
-												Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"kms_key": {
-												// Property: KmsKey
-												Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"output_location": {
-									// Property: OutputLocation
-									Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"work_group_configuration_updates": {
-			// Property: WorkGroupConfigurationUpdates
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The workgroup configuration update object",
-			//	  "properties": {
-			//	    "BytesScannedCutoffPerQuery": {
-			//	      "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
-			//	      "format": "int64",
-			//	      "minimum": 10000000,
-			//	      "type": "integer"
-			//	    },
-			//	    "EnforceWorkGroupConfiguration": {
-			//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-			//	      "type": "boolean"
-			//	    },
-			//	    "EngineVersion": {
-			//	      "additionalProperties": false,
-			//	      "description": "The Athena engine version for running queries.",
-			//	      "properties": {
-			//	        "EffectiveEngineVersion": {
-			//	          "description": "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-			//	          "type": "string"
-			//	        },
-			//	        "SelectedEngineVersion": {
-			//	          "description": "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "PublishCloudWatchMetricsEnabled": {
-			//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "RemoveBytesScannedCutoffPerQuery": {
-			//	      "description": "Indicates that the data usage control limit per query is removed.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "RequesterPaysEnabled": {
-			//	      "description": "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-			//	      "type": "boolean"
-			//	    },
-			//	    "ResultConfigurationUpdates": {
-			//	      "additionalProperties": false,
-			//	      "description": "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
-			//	      "properties": {
-			//	        "EncryptionConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
-			//	          "properties": {
-			//	            "EncryptionOption": {
-			//	              "description": "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-			//	              "enum": [
-			//	                "SSE_S3",
-			//	                "SSE_KMS",
-			//	                "CSE_KMS"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "KmsKey": {
-			//	              "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "EncryptionOption"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "OutputLocation": {
-			//	          "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-			//	          "type": "string"
-			//	        },
-			//	        "RemoveEncryptionConfiguration": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "RemoveOutputLocation": {
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OutputLocation
+						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RemoveEncryptionConfiguration
+						"remove_encryption_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RemoveOutputLocation
+						"remove_output_location": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The workgroup configuration update object",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bytes_scanned_cutoff_per_query": {
-						// Property: BytesScannedCutoffPerQuery
-						Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"enforce_work_group_configuration": {
-						// Property: EnforceWorkGroupConfiguration
-						Description: "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"engine_version": {
-						// Property: EngineVersion
-						Description: "The Athena engine version for running queries.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"effective_engine_version": {
-									// Property: EffectiveEngineVersion
-									Description: "Read only. The engine version on which the query runs. If the user requests a valid engine version other than Auto, the effective engine version is the same as the engine version that the user requested. If the user requests Auto, the effective engine version is chosen by Athena. When a request to update the engine version is made by a CreateWorkGroup or UpdateWorkGroup operation, the EffectiveEngineVersion field is ignored.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"selected_engine_version": {
-									// Property: SelectedEngineVersion
-									Description: "The engine version requested by the user. Possible values are determined by the output of ListEngineVersions, including Auto. The default is Auto.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"publish_cloudwatch_metrics_enabled": {
-						// Property: PublishCloudWatchMetricsEnabled
-						Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"remove_bytes_scanned_cutoff_per_query": {
-						// Property: RemoveBytesScannedCutoffPerQuery
-						Description: "Indicates that the data usage control limit per query is removed.",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"requester_pays_enabled": {
-						// Property: RequesterPaysEnabled
-						Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"result_configuration_updates": {
-						// Property: ResultConfigurationUpdates
-						Description: "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"encryption_configuration": {
-									// Property: EncryptionConfiguration
-									Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"encryption_option": {
-												// Property: EncryptionOption
-												Description: "Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"kms_key": {
-												// Property: KmsKey
-												Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"output_location": {
-									// Property: OutputLocation
-									Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"remove_encryption_configuration": {
-									// Property: RemoveEncryptionConfiguration
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"remove_output_location": {
-									// Property: RemoveOutputLocation
-									Type:     types.BoolType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Athena::WorkGroup",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::WorkGroup").WithTerraformTypeName("awscc_athena_work_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -538,7 +492,7 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"work_group_configuration_updates":      "WorkGroupConfigurationUpdates",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

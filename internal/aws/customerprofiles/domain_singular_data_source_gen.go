@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,151 +19,141 @@ func init() {
 // domainDataSource returns the Terraform awscc_customerprofiles_domain data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CustomerProfiles::Domain resource.
 func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"created_at": {
-			// Property: CreatedAt
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time of this integration got created",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time of this integration got created",
+		//	  "type": "string"
+		//	}
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time of this integration got created",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"dead_letter_queue_url": {
-			// Property: DeadLetterQueueUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The URL of the SQS dead letter queue",
-			//	  "maxLength": 255,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DeadLetterQueueUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL of the SQS dead letter queue",
+		//	  "maxLength": 255,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"dead_letter_queue_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the SQS dead letter queue",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"default_encryption_key": {
-			// Property: DefaultEncryptionKey
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The default encryption key",
-			//	  "maxLength": 255,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultEncryptionKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The default encryption key",
+		//	  "maxLength": 255,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"default_encryption_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The default encryption key",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"default_expiration_days": {
-			// Property: DefaultExpirationDays
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The default number of days until the data within the domain expires.",
-			//	  "maximum": 1098,
-			//	  "minimum": 1,
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultExpirationDays
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The default number of days until the data within the domain expires.",
+		//	  "maximum": 1098,
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"default_expiration_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The default number of days until the data within the domain expires.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"domain_name": {
-			// Property: DomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique name of the domain.",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9_-]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique name of the domain.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9_-]+$",
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique name of the domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"last_updated_at": {
-			// Property: LastUpdatedAt
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time of this integration got last updated at",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LastUpdatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time of this integration got last updated at",
+		//	  "type": "string"
+		//	}
+		"last_updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time of this integration got last updated at",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The tags (keys and values) associated with the domain",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags (keys and values) associated with the domain",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "The tags (keys and values) associated with the domain",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CustomerProfiles::Domain",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CustomerProfiles::Domain").WithTerraformTypeName("awscc_customerprofiles_domain")
 	opts = opts.WithTerraformSchema(schema)
@@ -179,7 +169,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                   "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

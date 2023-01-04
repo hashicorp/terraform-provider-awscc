@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,199 +19,186 @@ func init() {
 // componentDataSource returns the Terraform awscc_imagebuilder_component data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ImageBuilder::Component resource.
 func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the component.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the component.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"change_description": {
-			// Property: ChangeDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The change description of the component.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ChangeDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The change description of the component.",
+		//	  "type": "string"
+		//	}
+		"change_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The change description of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"data": {
-			// Property: Data
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The data of the component.",
-			//	  "maxLength": 16000,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Data
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The data of the component.",
+		//	  "maxLength": 16000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"data": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The data of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the component.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the component.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"encrypted": {
-			// Property: Encrypted
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The encryption status of the component.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Encrypted
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The encryption status of the component.",
+		//	  "type": "boolean"
+		//	}
+		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "The encryption status of the component.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"kms_key_id": {
-			// Property: KmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The KMS key identifier used to encrypt the component.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The KMS key identifier used to encrypt the component.",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The KMS key identifier used to encrypt the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the component.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the component.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"platform": {
-			// Property: Platform
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The platform of the component.",
-			//	  "enum": [
-			//	    "Windows",
-			//	    "Linux"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Platform
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The platform of the component.",
+		//	  "enum": [
+		//	    "Windows",
+		//	    "Linux"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"platform": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The platform of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"supported_os_versions": {
-			// Property: SupportedOsVersions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The operating system (OS) version supported by the component.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SupportedOsVersions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The operating system (OS) version supported by the component.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"supported_os_versions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The operating system (OS) version supported by the component.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The tags associated with the component.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The tags associated with the component.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The tags associated with the component.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of the component denotes whether the component is used to build the image or only to test it. ",
-			//	  "enum": [
-			//	    "BUILD",
-			//	    "TEST"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the component denotes whether the component is used to build the image or only to test it. ",
+		//	  "enum": [
+		//	    "BUILD",
+		//	    "TEST"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of the component denotes whether the component is used to build the image or only to test it. ",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"uri": {
-			// Property: Uri
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The uri of the component.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Uri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The uri of the component.",
+		//	  "type": "string"
+		//	}
+		"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The uri of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"version": {
-			// Property: Version
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of the component.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Version
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the component.",
+		//	  "type": "string"
+		//	}
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version of the component.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ImageBuilder::Component",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ImageBuilder::Component").WithTerraformTypeName("awscc_imagebuilder_component")
 	opts = opts.WithTerraformSchema(schema)
@@ -231,7 +218,7 @@ func componentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version":               "Version",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

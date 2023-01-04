@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,104 +19,96 @@ func init() {
 // namedQueryDataSource returns the Terraform awscc_athena_named_query data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Athena::NamedQuery resource.
 func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"database": {
-			// Property: Database
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The database to which the query belongs.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Database
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The database to which the query belongs.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"database": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The database to which the query belongs.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The query description.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The query description.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The query description.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The query name.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The query name.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The query name.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"named_query_id": {
-			// Property: NamedQueryId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique ID of the query.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NamedQueryId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique ID of the query.",
+		//	  "type": "string"
+		//	}
+		"named_query_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique ID of the query.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"query_string": {
-			// Property: QueryString
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The contents of the query with all query statements.",
-			//	  "maxLength": 262144,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: QueryString
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The contents of the query with all query statements.",
+		//	  "maxLength": 262144,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The contents of the query with all query statements.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"work_group": {
-			// Property: WorkGroup
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the workgroup that contains the named query.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: WorkGroup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the workgroup that contains the named query.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the workgroup that contains the named query.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Athena::NamedQuery",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::NamedQuery").WithTerraformTypeName("awscc_athena_named_query")
 	opts = opts.WithTerraformSchema(schema)
@@ -129,7 +121,7 @@ func namedQueryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"work_group":     "WorkGroup",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

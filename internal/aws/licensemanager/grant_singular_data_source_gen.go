@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,123 +19,115 @@ func init() {
 // grantDataSource returns the Terraform awscc_licensemanager_grant data source.
 // This Terraform data source corresponds to the CloudFormation AWS::LicenseManager::Grant resource.
 func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"allowed_operations": {
-			// Property: AllowedOperations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"grant_arn": {
-			// Property: GrantArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Arn of the grant.",
-			//	  "maxLength": 2048,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllowedOperations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"allowed_operations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: GrantArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Arn of the grant.",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"grant_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Arn of the grant.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"grant_name": {
-			// Property: GrantName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for the created Grant.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GrantName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for the created Grant.",
+		//	  "type": "string"
+		//	}
+		"grant_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name for the created Grant.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"home_region": {
-			// Property: HomeRegion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Home region for the created grant.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: HomeRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Home region for the created grant.",
+		//	  "type": "string"
+		//	}
+		"home_region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Home region for the created grant.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"license_arn": {
-			// Property: LicenseArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "License Arn for the grant.",
-			//	  "maxLength": 2048,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LicenseArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "License Arn for the grant.",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"license_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "License Arn for the grant.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"principals": {
-			// Property: Principals
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "maxLength": 2048,
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: Principals
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "maxLength": 2048,
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"principals": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"version": {
-			// Property: Version
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of the grant.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Version
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the grant.",
+		//	  "type": "string"
+		//	}
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version of the grant.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::LicenseManager::Grant",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::Grant").WithTerraformTypeName("awscc_licensemanager_grant")
 	opts = opts.WithTerraformSchema(schema)
@@ -150,7 +142,7 @@ func grantDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version":            "Version",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

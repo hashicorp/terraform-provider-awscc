@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,78 +19,72 @@ func init() {
 // keySigningKeyDataSource returns the Terraform awscc_route53_key_signing_key data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Route53::KeySigningKey resource.
 func keySigningKeyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"hosted_zone_id": {
-			// Property: HostedZoneId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique string (ID) used to identify a hosted zone.",
-			//	  "pattern": "^[A-Z0-9]{1,32}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: HostedZoneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique string (ID) used to identify a hosted zone.",
+		//	  "pattern": "^[A-Z0-9]{1,32}$",
+		//	  "type": "string"
+		//	}
+		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique string (ID) used to identify a hosted zone.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"key_management_service_arn": {
-			// Property: KeyManagementServiceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: KeyManagementServiceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"key_management_service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon resource name (ARN) for a customer managed key (CMK) in AWS Key Management Service (KMS). The KeyManagementServiceArn must be unique for each key signing key (KSK) in a single hosted zone.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
-			//	  "pattern": "^[a-zA-Z0-9_]{3,128}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
+		//	  "pattern": "^[a-zA-Z0-9_]{3,128}$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An alphanumeric string used to identify a key signing key (KSK). Name must be unique for each key signing key in the same hosted zone.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
-			//	  "enum": [
-			//	    "ACTIVE",
-			//	    "INACTIVE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "INACTIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A string specifying the initial status of the key signing key (KSK). You can set the value to ACTIVE or INACTIVE.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Route53::KeySigningKey",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::KeySigningKey").WithTerraformTypeName("awscc_route53_key_signing_key")
 	opts = opts.WithTerraformSchema(schema)
@@ -101,7 +95,7 @@ func keySigningKeyDataSource(ctx context.Context) (datasource.DataSource, error)
 		"status":                     "Status",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

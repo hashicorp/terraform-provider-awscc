@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,122 +19,113 @@ func init() {
 // loadBalancerTlsCertificateDataSource returns the Terraform awscc_lightsail_load_balancer_tls_certificate data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Lightsail::LoadBalancerTlsCertificate resource.
 func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"certificate_alternative_names": {
-			// Property: CertificateAlternativeNames
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CertificateAlternativeNames
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"certificate_alternative_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"certificate_domain_name": {
-			// Property: CertificateDomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateDomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
+		//	  "type": "string"
+		//	}
+		"certificate_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"certificate_name": {
-			// Property: CertificateName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The SSL/TLS certificate name.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The SSL/TLS certificate name.",
+		//	  "type": "string"
+		//	}
+		"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The SSL/TLS certificate name.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"https_redirection_enabled": {
-			// Property: HttpsRedirectionEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: HttpsRedirectionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
+		//	  "type": "boolean"
+		//	}
+		"https_redirection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"is_attached": {
-			// Property: IsAttached
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IsAttached
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
+		//	  "type": "boolean"
+		//	}
+		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"load_balancer_name": {
-			// Property: LoadBalancerName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of your load balancer.",
-			//	  "pattern": "\\w[\\w\\-]*\\w",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LoadBalancerName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of your load balancer.",
+		//	  "pattern": "\\w[\\w\\-]*\\w",
+		//	  "type": "string"
+		//	}
+		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of your load balancer.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"load_balancer_tls_certificate_arn": {
-			// Property: LoadBalancerTlsCertificateArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: LoadBalancerTlsCertificateArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"load_balancer_tls_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The validation status of the SSL/TLS certificate.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The validation status of the SSL/TLS certificate.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The validation status of the SSL/TLS certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Lightsail::LoadBalancerTlsCertificate",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::LoadBalancerTlsCertificate").WithTerraformTypeName("awscc_lightsail_load_balancer_tls_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -149,7 +140,7 @@ func loadBalancerTlsCertificateDataSource(ctx context.Context) (datasource.DataS
 		"status":                            "Status",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

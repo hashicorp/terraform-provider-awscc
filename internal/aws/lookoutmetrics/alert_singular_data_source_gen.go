@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,199 +19,182 @@ func init() {
 // alertDataSource returns the Terraform awscc_lookoutmetrics_alert data source.
 // This Terraform data source corresponds to the CloudFormation AWS::LookoutMetrics::Alert resource.
 func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"action": {
-			// Property: Action
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The action to be taken by the alert when an anomaly is detected.",
-			//	  "properties": {
-			//	    "LambdaConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Configuration options for a Lambda alert action.",
-			//	      "properties": {
-			//	        "LambdaArn": {
-			//	          "description": "ARN of a Lambda to send alert notifications to.",
-			//	          "maxLength": 256,
-			//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	          "type": "string"
-			//	        },
-			//	        "RoleArn": {
-			//	          "description": "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
-			//	          "maxLength": 256,
-			//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "RoleArn",
-			//	        "LambdaArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SNSConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Configuration options for an SNS alert action.",
-			//	      "properties": {
-			//	        "RoleArn": {
-			//	          "description": "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
-			//	          "maxLength": 256,
-			//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	          "type": "string"
-			//	        },
-			//	        "SnsTopicArn": {
-			//	          "description": "ARN of an SNS topic to send alert notifications to.",
-			//	          "maxLength": 256,
-			//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "RoleArn",
-			//	        "SnsTopicArn"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Action
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The action to be taken by the alert when an anomaly is detected.",
+		//	  "properties": {
+		//	    "LambdaConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration options for a Lambda alert action.",
+		//	      "properties": {
+		//	        "LambdaArn": {
+		//	          "description": "ARN of a Lambda to send alert notifications to.",
+		//	          "maxLength": 256,
+		//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	          "type": "string"
+		//	        },
+		//	        "RoleArn": {
+		//	          "description": "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
+		//	          "maxLength": 256,
+		//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RoleArn",
+		//	        "LambdaArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SNSConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Configuration options for an SNS alert action.",
+		//	      "properties": {
+		//	        "RoleArn": {
+		//	          "description": "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
+		//	          "maxLength": 256,
+		//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	          "type": "string"
+		//	        },
+		//	        "SnsTopicArn": {
+		//	          "description": "ARN of an SNS topic to send alert notifications to.",
+		//	          "maxLength": 256,
+		//	          "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RoleArn",
+		//	        "SnsTopicArn"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LambdaConfiguration
+				"lambda_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of a Lambda to send alert notifications to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration options for a Lambda alert action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SNSConfiguration
+				"sns_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SnsTopicArn
+						"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "ARN of an SNS topic to send alert notifications to.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Configuration options for an SNS alert action.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The action to be taken by the alert when an anomaly is detected.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"lambda_configuration": {
-						// Property: LambdaConfiguration
-						Description: "Configuration options for a Lambda alert action.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"lambda_arn": {
-									// Property: LambdaArn
-									Description: "ARN of a Lambda to send alert notifications to.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"role_arn": {
-									// Property: RoleArn
-									Description: "ARN of an IAM role that LookoutMetrics should assume to access the Lambda function.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"sns_configuration": {
-						// Property: SNSConfiguration
-						Description: "Configuration options for an SNS alert action.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"role_arn": {
-									// Property: RoleArn
-									Description: "ARN of an IAM role that LookoutMetrics should assume to access the SNS topic.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"sns_topic_arn": {
-									// Property: SnsTopicArn
-									Description: "ARN of an SNS topic to send alert notifications to.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"alert_description": {
-			// Property: AlertDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description for the alert.",
-			//	  "maxLength": 256,
-			//	  "pattern": ".*\\S.*",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AlertDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description for the alert.",
+		//	  "maxLength": 256,
+		//	  "pattern": ".*\\S.*",
+		//	  "type": "string"
+		//	}
+		"alert_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description for the alert.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"alert_name": {
-			// Property: AlertName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the alert. If not provided, a name is generated automatically.",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AlertName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the alert. If not provided, a name is generated automatically.",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	  "type": "string"
+		//	}
+		"alert_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the alert. If not provided, a name is generated automatically.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"alert_sensitivity_threshold": {
-			// Property: AlertSensitivityThreshold
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
-			//	  "maximum": 100,
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AlertSensitivityThreshold
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
+		//	  "maximum": 100,
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"alert_sensitivity_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "A number between 0 and 100 (inclusive) that tunes the sensitivity of the alert.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"anomaly_detector_arn": {
-			// Property: AnomalyDetectorArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AnomalyDetectorArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	  "type": "string"
+		//	}
+		"anomaly_detector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon resource name (ARN) of the Anomaly Detector to alert.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARN assigned to the alert.",
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN assigned to the alert.",
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:([a-z\\d-]+):.*:.*:.*:.+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ARN assigned to the alert.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::LookoutMetrics::Alert",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LookoutMetrics::Alert").WithTerraformTypeName("awscc_lookoutmetrics_alert")
 	opts = opts.WithTerraformSchema(schema)
@@ -229,7 +212,7 @@ func alertDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sns_topic_arn":               "SnsTopicArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

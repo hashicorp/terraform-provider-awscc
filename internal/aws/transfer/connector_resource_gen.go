@@ -4,14 +4,18 @@ package transfer
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,403 +25,385 @@ func init() {
 // connectorResource returns the Terraform awscc_transfer_connector resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Transfer::Connector resource.
 func connectorResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"access_role": {
-			// Property: AccessRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the access role for the connector.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:.*role/.*",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccessRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the access role for the connector.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:.*role/.*",
+		//	  "type": "string"
+		//	}
+		"access_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the access role for the connector.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-				validate.StringMatch(regexp.MustCompile("arn:.*role/.*"), ""),
-			},
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
-			//	  "maxLength": 1600,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:.*",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:.*role/.*"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+		//	  "maxLength": 1600,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:.*",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"as_2_config": {
-			// Property: As2Config
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuration for an AS2 connector.",
-			//	  "properties": {
-			//	    "Compression": {
-			//	      "description": "Compression setting for this AS2 connector configuration.",
-			//	      "enum": [
-			//	        "ZLIB",
-			//	        "DISABLED"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "EncryptionAlgorithm": {
-			//	      "description": "Encryption algorithm for this AS2 connector configuration.",
-			//	      "enum": [
-			//	        "AES128_CBC",
-			//	        "AES192_CBC",
-			//	        "AES256_CBC",
-			//	        "NONE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "LocalProfileId": {
-			//	      "description": "A unique identifier for the local profile.",
-			//	      "maxLength": 19,
-			//	      "minLength": 19,
-			//	      "pattern": "^p-([0-9a-f]{17})$",
-			//	      "type": "string"
-			//	    },
-			//	    "MdnResponse": {
-			//	      "description": "MDN Response setting for this AS2 connector configuration.",
-			//	      "enum": [
-			//	        "SYNC",
-			//	        "NONE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "MdnSigningAlgorithm": {
-			//	      "description": "MDN Signing algorithm for this AS2 connector configuration.",
-			//	      "enum": [
-			//	        "SHA256",
-			//	        "SHA384",
-			//	        "SHA512",
-			//	        "SHA1",
-			//	        "NONE",
-			//	        "DEFAULT"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "MessageSubject": {
-			//	      "description": "The message subject for this AS2 connector configuration.",
-			//	      "maxLength": 1024,
-			//	      "minLength": 1,
-			//	      "pattern": "",
-			//	      "type": "string"
-			//	    },
-			//	    "PartnerProfileId": {
-			//	      "description": "A unique identifier for the partner profile.",
-			//	      "maxLength": 19,
-			//	      "minLength": 19,
-			//	      "pattern": "^p-([0-9a-f]{17})$",
-			//	      "type": "string"
-			//	    },
-			//	    "SigningAlgorithm": {
-			//	      "description": "Signing algorithm for this AS2 connector configuration.",
-			//	      "enum": [
-			//	        "SHA256",
-			//	        "SHA384",
-			//	        "SHA512",
-			//	        "SHA1",
-			//	        "NONE"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: As2Config
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for an AS2 connector.",
+		//	  "properties": {
+		//	    "Compression": {
+		//	      "description": "Compression setting for this AS2 connector configuration.",
+		//	      "enum": [
+		//	        "ZLIB",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "EncryptionAlgorithm": {
+		//	      "description": "Encryption algorithm for this AS2 connector configuration.",
+		//	      "enum": [
+		//	        "AES128_CBC",
+		//	        "AES192_CBC",
+		//	        "AES256_CBC",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LocalProfileId": {
+		//	      "description": "A unique identifier for the local profile.",
+		//	      "maxLength": 19,
+		//	      "minLength": 19,
+		//	      "pattern": "^p-([0-9a-f]{17})$",
+		//	      "type": "string"
+		//	    },
+		//	    "MdnResponse": {
+		//	      "description": "MDN Response setting for this AS2 connector configuration.",
+		//	      "enum": [
+		//	        "SYNC",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MdnSigningAlgorithm": {
+		//	      "description": "MDN Signing algorithm for this AS2 connector configuration.",
+		//	      "enum": [
+		//	        "SHA256",
+		//	        "SHA384",
+		//	        "SHA512",
+		//	        "SHA1",
+		//	        "NONE",
+		//	        "DEFAULT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "MessageSubject": {
+		//	      "description": "The message subject for this AS2 connector configuration.",
+		//	      "maxLength": 1024,
+		//	      "minLength": 1,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "PartnerProfileId": {
+		//	      "description": "A unique identifier for the partner profile.",
+		//	      "maxLength": 19,
+		//	      "minLength": 19,
+		//	      "pattern": "^p-([0-9a-f]{17})$",
+		//	      "type": "string"
+		//	    },
+		//	    "SigningAlgorithm": {
+		//	      "description": "Signing algorithm for this AS2 connector configuration.",
+		//	      "enum": [
+		//	        "SHA256",
+		//	        "SHA384",
+		//	        "SHA512",
+		//	        "SHA1",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"as_2_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Compression
+				"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Compression setting for this AS2 connector configuration.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ZLIB",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EncryptionAlgorithm
+				"encryption_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Encryption algorithm for this AS2 connector configuration.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AES128_CBC",
+							"AES192_CBC",
+							"AES256_CBC",
+							"NONE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LocalProfileId
+				"local_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for the local profile.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(19, 19),
+						stringvalidator.RegexMatches(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MdnResponse
+				"mdn_response": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "MDN Response setting for this AS2 connector configuration.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SYNC",
+							"NONE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MdnSigningAlgorithm
+				"mdn_signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "MDN Signing algorithm for this AS2 connector configuration.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SHA256",
+							"SHA384",
+							"SHA512",
+							"SHA1",
+							"NONE",
+							"DEFAULT",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MessageSubject
+				"message_subject": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The message subject for this AS2 connector configuration.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 1024),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PartnerProfileId
+				"partner_profile_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for the partner profile.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(19, 19),
+						stringvalidator.RegexMatches(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SigningAlgorithm
+				"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Signing algorithm for this AS2 connector configuration.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SHA256",
+							"SHA384",
+							"SHA512",
+							"SHA1",
+							"NONE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Configuration for an AS2 connector.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"compression": {
-						// Property: Compression
-						Description: "Compression setting for this AS2 connector configuration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"ZLIB",
-								"DISABLED",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"encryption_algorithm": {
-						// Property: EncryptionAlgorithm
-						Description: "Encryption algorithm for this AS2 connector configuration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"AES128_CBC",
-								"AES192_CBC",
-								"AES256_CBC",
-								"NONE",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"local_profile_id": {
-						// Property: LocalProfileId
-						Description: "A unique identifier for the local profile.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(19, 19),
-							validate.StringMatch(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"mdn_response": {
-						// Property: MdnResponse
-						Description: "MDN Response setting for this AS2 connector configuration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"SYNC",
-								"NONE",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"mdn_signing_algorithm": {
-						// Property: MdnSigningAlgorithm
-						Description: "MDN Signing algorithm for this AS2 connector configuration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"SHA256",
-								"SHA384",
-								"SHA512",
-								"SHA1",
-								"NONE",
-								"DEFAULT",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"message_subject": {
-						// Property: MessageSubject
-						Description: "The message subject for this AS2 connector configuration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 1024),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"partner_profile_id": {
-						// Property: PartnerProfileId
-						Description: "A unique identifier for the partner profile.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(19, 19),
-							validate.StringMatch(regexp.MustCompile("^p-([0-9a-f]{17})$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"signing_algorithm": {
-						// Property: SigningAlgorithm
-						Description: "Signing algorithm for this AS2 connector configuration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"SHA256",
-								"SHA384",
-								"SHA512",
-								"SHA1",
-								"NONE",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-		},
-		"connector_id": {
-			// Property: ConnectorId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the connector.",
-			//	  "maxLength": 19,
-			//	  "minLength": 19,
-			//	  "pattern": "^c-([0-9a-f]{17})$",
-			//	  "type": "string"
-			//	}
+			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the connector.",
+		//	  "maxLength": 19,
+		//	  "minLength": 19,
+		//	  "pattern": "^c-([0-9a-f]{17})$",
+		//	  "type": "string"
+		//	}
+		"connector_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the connector.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"logging_role": {
-			// Property: LoggingRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the logging role for the connector.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:.*role/.*",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LoggingRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the logging role for the connector.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:.*role/.*",
+		//	  "type": "string"
+		//	}
+		"logging_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the logging role for the connector.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-				validate.StringMatch(regexp.MustCompile("arn:.*role/.*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Creates a key-value pair for a specific resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The name assigned to the tag that you create.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "Contains one or more values that you assigned to the key name you create.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:.*role/.*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Creates a key-value pair for a specific resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The name assigned to the tag that you create.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "Contains one or more values that you assigned to the key name you create.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name assigned to the tag that you create.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Contains one or more values that you assigned to the key name you create.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"url": {
-			// Property: Url
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "URL for Connector",
-			//	  "maxLength": 255,
-			//	  "type": "string"
-			//	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Set{ /*START VALIDATORS*/
+				setvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Url
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "URL for Connector",
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "URL for Connector",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(255),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(255),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Transfer::Connector",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Transfer::Connector").WithTerraformTypeName("awscc_transfer_connector")
 	opts = opts.WithTerraformSchema(schema)
@@ -446,7 +432,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

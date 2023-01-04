@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,584 +19,522 @@ func init() {
 // inAppTemplateDataSource returns the Terraform awscc_pinpoint_in_app_template data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Pinpoint::InAppTemplate resource.
 func inAppTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"content": {
-			// Property: Content
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "BackgroundColor": {
-			//	        "type": "string"
-			//	      },
-			//	      "BodyConfig": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Alignment": {
-			//	            "enum": [
-			//	              "LEFT",
-			//	              "CENTER",
-			//	              "RIGHT"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Body": {
-			//	            "type": "string"
-			//	          },
-			//	          "TextColor": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "HeaderConfig": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Alignment": {
-			//	            "enum": [
-			//	              "LEFT",
-			//	              "CENTER",
-			//	              "RIGHT"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Header": {
-			//	            "type": "string"
-			//	          },
-			//	          "TextColor": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "ImageUrl": {
-			//	        "type": "string"
-			//	      },
-			//	      "PrimaryBtn": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Android": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "DefaultConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "BackgroundColor": {
-			//	                "type": "string"
-			//	              },
-			//	              "BorderRadius": {
-			//	                "type": "integer"
-			//	              },
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              },
-			//	              "Text": {
-			//	                "type": "string"
-			//	              },
-			//	              "TextColor": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "IOS": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Web": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "SecondaryBtn": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Android": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "DefaultConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "BackgroundColor": {
-			//	                "type": "string"
-			//	              },
-			//	              "BorderRadius": {
-			//	                "type": "integer"
-			//	              },
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              },
-			//	              "Text": {
-			//	                "type": "string"
-			//	              },
-			//	              "TextColor": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "IOS": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Web": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ButtonAction": {
-			//	                "enum": [
-			//	                  "LINK",
-			//	                  "DEEP_LINK",
-			//	                  "CLOSE"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Link": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"background_color": {
-						// Property: BackgroundColor
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Content
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BackgroundColor": {
+		//	        "type": "string"
+		//	      },
+		//	      "BodyConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Alignment": {
+		//	            "enum": [
+		//	              "LEFT",
+		//	              "CENTER",
+		//	              "RIGHT"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Body": {
+		//	            "type": "string"
+		//	          },
+		//	          "TextColor": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "HeaderConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Alignment": {
+		//	            "enum": [
+		//	              "LEFT",
+		//	              "CENTER",
+		//	              "RIGHT"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Header": {
+		//	            "type": "string"
+		//	          },
+		//	          "TextColor": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ImageUrl": {
+		//	        "type": "string"
+		//	      },
+		//	      "PrimaryBtn": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Android": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "DefaultConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "BackgroundColor": {
+		//	                "type": "string"
+		//	              },
+		//	              "BorderRadius": {
+		//	                "type": "integer"
+		//	              },
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              },
+		//	              "Text": {
+		//	                "type": "string"
+		//	              },
+		//	              "TextColor": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "IOS": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Web": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "SecondaryBtn": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Android": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "DefaultConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "BackgroundColor": {
+		//	                "type": "string"
+		//	              },
+		//	              "BorderRadius": {
+		//	                "type": "integer"
+		//	              },
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              },
+		//	              "Text": {
+		//	                "type": "string"
+		//	              },
+		//	              "TextColor": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "IOS": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Web": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ButtonAction": {
+		//	                "enum": [
+		//	                  "LINK",
+		//	                  "DEEP_LINK",
+		//	                  "CLOSE"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Link": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"content": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BackgroundColor
+					"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"body_config": {
-						// Property: BodyConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"alignment": {
-									// Property: Alignment
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"body": {
-									// Property: Body
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"text_color": {
+					}, /*END ATTRIBUTE*/
+					// Property: BodyConfig
+					"body_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Alignment
+							"alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Body
+							"body": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TextColor
+							"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: HeaderConfig
+					"header_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Alignment
+							"alignment": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Header
+							"header": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TextColor
+							"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ImageUrl
+					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: PrimaryBtn
+					"primary_btn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Android
+							"android": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultConfig
+							"default_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BackgroundColor
+									"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: BorderRadius
+									"border_radius": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Text
+									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: TextColor
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+									"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: IOS
+							"ios": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Web
+							"web": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"header_config": {
-						// Property: HeaderConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"alignment": {
-									// Property: Alignment
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"header": {
-									// Property: Header
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"text_color": {
+					}, /*END ATTRIBUTE*/
+					// Property: SecondaryBtn
+					"secondary_btn": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Android
+							"android": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultConfig
+							"default_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BackgroundColor
+									"background_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: BorderRadius
+									"border_radius": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Text
+									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: TextColor
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+									"text_color": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: IOS
+							"ios": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Web
+							"web": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ButtonAction
+									"button_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Link
+									"link": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"image_url": {
-						// Property: ImageUrl
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"primary_btn": {
-						// Property: PrimaryBtn
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"android": {
-									// Property: Android
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"default_config": {
-									// Property: DefaultConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"background_color": {
-												// Property: BackgroundColor
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"border_radius": {
-												// Property: BorderRadius
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"text": {
-												// Property: Text
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"text_color": {
-												// Property: TextColor
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"ios": {
-									// Property: IOS
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"web": {
-									// Property: Web
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"secondary_btn": {
-						// Property: SecondaryBtn
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"android": {
-									// Property: Android
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"default_config": {
-									// Property: DefaultConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"background_color": {
-												// Property: BackgroundColor
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"border_radius": {
-												// Property: BorderRadius
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"text": {
-												// Property: Text
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"text_color": {
-												// Property: TextColor
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"ios": {
-									// Property: IOS
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"web": {
-									// Property: Web
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"button_action": {
-												// Property: ButtonAction
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"link": {
-												// Property: Link
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"custom_config": {
-			// Property: CustomConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "object"
-			//	}
-			Type:     types.MapType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: CustomConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "object"
+		//	}
+		"custom_config": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Layout
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "BOTTOM_BANNER",
+		//	    "TOP_BANNER",
+		//	    "OVERLAYS",
+		//	    "MOBILE_FEED",
+		//	    "MIDDLE_BANNER",
+		//	    "CAROUSEL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"layout": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"layout": {
-			// Property: Layout
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "BOTTOM_BANNER",
-			//	    "TOP_BANNER",
-			//	    "OVERLAYS",
-			//	    "MOBILE_FEED",
-			//	    "MIDDLE_BANNER",
-			//	    "CAROUSEL"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "object"
+		//	}
+		"tags": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TemplateDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"template_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "object"
-			//	}
-			Type:     types.MapType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: TemplateName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"template_description": {
-			// Property: TemplateDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"template_name": {
-			// Property: TemplateName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Pinpoint::InAppTemplate",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pinpoint::InAppTemplate").WithTerraformTypeName("awscc_pinpoint_in_app_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -628,7 +566,7 @@ func inAppTemplateDataSource(ctx context.Context) (datasource.DataSource, error)
 		"web":                  "Web",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

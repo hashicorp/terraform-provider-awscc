@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,194 +19,181 @@ func init() {
 // assetDataSource returns the Terraform awscc_mediapackage_asset data source.
 // This Terraform data source corresponds to the CloudFormation AWS::MediaPackage::Asset resource.
 func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the Asset.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the Asset.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the Asset.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"created_at": {
-			// Property: CreatedAt
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time the Asset was initially submitted for Ingest.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time the Asset was initially submitted for Ingest.",
+		//	  "type": "string"
+		//	}
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time the Asset was initially submitted for Ingest.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"egress_endpoints": {
-			// Property: EgressEndpoints
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The list of egress endpoints available for the Asset.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "The endpoint URL used to access an Asset using one PackagingConfiguration.",
-			//	    "properties": {
-			//	      "PackagingConfigurationId": {
-			//	        "description": "The ID of the PackagingConfiguration being applied to the Asset.",
-			//	        "type": "string"
-			//	      },
-			//	      "Url": {
-			//	        "description": "The URL of the parent manifest for the repackaged Asset.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "PackagingConfigurationId",
-			//	      "Url"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The list of egress endpoints available for the Asset.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"packaging_configuration_id": {
-						// Property: PackagingConfigurationId
+		}, /*END ATTRIBUTE*/
+		// Property: EgressEndpoints
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of egress endpoints available for the Asset.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The endpoint URL used to access an Asset using one PackagingConfiguration.",
+		//	    "properties": {
+		//	      "PackagingConfigurationId": {
+		//	        "description": "The ID of the PackagingConfiguration being applied to the Asset.",
+		//	        "type": "string"
+		//	      },
+		//	      "Url": {
+		//	        "description": "The URL of the parent manifest for the repackaged Asset.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "PackagingConfigurationId",
+		//	      "Url"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"egress_endpoints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: PackagingConfigurationId
+					"packaging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID of the PackagingConfiguration being applied to the Asset.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"url": {
-						// Property: Url
+					}, /*END ATTRIBUTE*/
+					// Property: Url
+					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The URL of the parent manifest for the repackaged Asset.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique identifier for the Asset.",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of egress endpoints available for the Asset.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier for the Asset.",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier for the Asset.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"packaging_group_id": {
-			// Property: PackagingGroupId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the PackagingGroup for the Asset.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PackagingGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the PackagingGroup for the Asset.",
+		//	  "type": "string"
+		//	}
+		"packaging_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the PackagingGroup for the Asset.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"resource_id": {
-			// Property: ResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The resource ID to include in SPEKE key requests.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource ID to include in SPEKE key requests.",
+		//	  "type": "string"
+		//	}
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The resource ID to include in SPEKE key requests.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_arn": {
-			// Property: SourceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARN of the source object in S3.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN of the source object in S3.",
+		//	  "type": "string"
+		//	}
+		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ARN of the source object in S3.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_role_arn": {
-			// Property: SourceRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IAM role_arn used to access the source S3 bucket.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IAM role_arn used to access the source S3 bucket.",
+		//	  "type": "string"
+		//	}
+		"source_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IAM role_arn used to access the source S3 bucket.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A collection of tags associated with a resource",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A collection of tags associated with a resource",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A collection of tags associated with a resource",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::MediaPackage::Asset",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::Asset").WithTerraformTypeName("awscc_mediapackage_asset")
 	opts = opts.WithTerraformSchema(schema)
@@ -226,7 +213,7 @@ func assetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                      "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

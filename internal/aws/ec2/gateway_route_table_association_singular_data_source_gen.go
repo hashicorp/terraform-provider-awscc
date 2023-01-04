@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,58 +19,53 @@ func init() {
 // gatewayRouteTableAssociationDataSource returns the Terraform awscc_ec2_gateway_route_table_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::GatewayRouteTableAssociation resource.
 func gatewayRouteTableAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"association_id": {
-			// Property: AssociationId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The route table association ID.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssociationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The route table association ID.",
+		//	  "type": "string"
+		//	}
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The route table association ID.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"gateway_id": {
-			// Property: GatewayId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the gateway.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GatewayId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the gateway.",
+		//	  "type": "string"
+		//	}
+		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the gateway.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"route_table_id": {
-			// Property: RouteTableId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the route table.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RouteTableId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the route table.",
+		//	  "type": "string"
+		//	}
+		"route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the route table.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EC2::GatewayRouteTableAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::GatewayRouteTableAssociation").WithTerraformTypeName("awscc_ec2_gateway_route_table_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -80,7 +75,7 @@ func gatewayRouteTableAssociationDataSource(ctx context.Context) (datasource.Dat
 		"route_table_id": "RouteTableId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

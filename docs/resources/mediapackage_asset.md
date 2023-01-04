@@ -45,7 +45,7 @@ Required:
 <a id="nestedatt--egress_endpoints"></a>
 ### Nested Schema for `egress_endpoints`
 
-Required:
+Read-Only:
 
 - `packaging_configuration_id` (String) The ID of the PackagingConfiguration being applied to the Asset.
 - `url` (String) The URL of the parent manifest for the repackaged Asset.

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,380 +19,354 @@ func init() {
 // gameServerGroupDataSource returns the Terraform awscc_gamelift_game_server_group data source.
 // This Terraform data source corresponds to the CloudFormation AWS::GameLift::GameServerGroup resource.
 func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auto_scaling_group_arn": {
-			// Property: AutoScalingGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
-			//	  "maxLength": 256,
-			//	  "minLength": 0,
-			//	  "pattern": "[ -퟿-�𐀀-􏿿\r\n\t]*",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScalingGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
+		//	  "maxLength": 256,
+		//	  "minLength": 0,
+		//	  "pattern": "[ -퟿-�𐀀-􏿿\r\n\t]*",
+		//	  "type": "string"
+		//	}
+		"auto_scaling_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A generated unique ID for the EC2 Auto Scaling group that is associated with this game server group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"auto_scaling_policy": {
-			// Property: AutoScalingPolicy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
-			//	  "properties": {
-			//	    "EstimatedInstanceWarmup": {
-			//	      "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-			//	      "type": "number"
-			//	    },
-			//	    "TargetTrackingConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Settings for a target-based scaling policy applied to Auto Scaling group.",
-			//	      "properties": {
-			//	        "TargetValue": {
-			//	          "description": "Desired value to use with a game server group target-based scaling policy.",
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TargetValue"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "TargetTrackingConfiguration"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AutoScalingPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
+		//	  "properties": {
+		//	    "EstimatedInstanceWarmup": {
+		//	      "description": "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
+		//	      "type": "number"
+		//	    },
+		//	    "TargetTrackingConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Settings for a target-based scaling policy applied to Auto Scaling group.",
+		//	      "properties": {
+		//	        "TargetValue": {
+		//	          "description": "Desired value to use with a game server group target-based scaling policy.",
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TargetValue"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TargetTrackingConfiguration"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"auto_scaling_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EstimatedInstanceWarmup
+				"estimated_instance_warmup": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetTrackingConfiguration
+				"target_tracking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TargetValue
+						"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "Desired value to use with a game server group target-based scaling policy.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Settings for a target-based scaling policy applied to Auto Scaling group.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Configuration settings to define a scaling policy for the Auto Scaling group that is optimized for game hosting",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"estimated_instance_warmup": {
-						// Property: EstimatedInstanceWarmup
-						Description: "Length of time, in seconds, it takes for a new instance to start new game server processes and register with GameLift FleetIQ.",
-						Type:        types.Float64Type,
-						Computed:    true,
-					},
-					"target_tracking_configuration": {
-						// Property: TargetTrackingConfiguration
-						Description: "Settings for a target-based scaling policy applied to Auto Scaling group.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"target_value": {
-									// Property: TargetValue
-									Description: "Desired value to use with a game server group target-based scaling policy.",
-									Type:        types.Float64Type,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"balancing_strategy": {
-			// Property: BalancingStrategy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
-			//	  "enum": [
-			//	    "SPOT_ONLY",
-			//	    "SPOT_PREFERRED",
-			//	    "ON_DEMAND_ONLY"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: BalancingStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
+		//	  "enum": [
+		//	    "SPOT_ONLY",
+		//	    "SPOT_PREFERRED",
+		//	    "ON_DEMAND_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"balancing_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"delete_option": {
-			// Property: DeleteOption
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of delete to perform.",
-			//	  "enum": [
-			//	    "SAFE_DELETE",
-			//	    "FORCE_DELETE",
-			//	    "RETAIN"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DeleteOption
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of delete to perform.",
+		//	  "enum": [
+		//	    "SAFE_DELETE",
+		//	    "FORCE_DELETE",
+		//	    "RETAIN"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"delete_option": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of delete to perform.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"game_server_group_arn": {
-			// Property: GameServerGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A generated unique ID for the game server group.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GameServerGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A generated unique ID for the game server group.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:.*:gameservergroup\\/[a-zA-Z0-9-\\.]*",
+		//	  "type": "string"
+		//	}
+		"game_server_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A generated unique ID for the game server group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"game_server_group_name": {
-			// Property: GameServerGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An identifier for the new game server group.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z0-9-\\.]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GameServerGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An identifier for the new game server group.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9-\\.]+",
+		//	  "type": "string"
+		//	}
+		"game_server_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An identifier for the new game server group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"game_server_protection_policy": {
-			// Property: GameServerProtectionPolicy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A flag that indicates whether instances in the game server group are protected from early termination.",
-			//	  "enum": [
-			//	    "NO_PROTECTION",
-			//	    "FULL_PROTECTION"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GameServerProtectionPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A flag that indicates whether instances in the game server group are protected from early termination.",
+		//	  "enum": [
+		//	    "NO_PROTECTION",
+		//	    "FULL_PROTECTION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"game_server_protection_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A flag that indicates whether instances in the game server group are protected from early termination.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"instance_definitions": {
-			// Property: InstanceDefinitions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A set of EC2 instance types to use when creating instances in the group.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "An allowed instance type for your game server group.",
-			//	    "properties": {
-			//	      "InstanceType": {
-			//	        "description": "An EC2 instance type designation.",
-			//	        "type": "string"
-			//	      },
-			//	      "WeightedCapacity": {
-			//	        "description": "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "InstanceType"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 20,
-			//	  "minItems": 2,
-			//	  "type": "array"
-			//	}
-			Description: "A set of EC2 instance types to use when creating instances in the group.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"instance_type": {
-						// Property: InstanceType
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceDefinitions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A set of EC2 instance types to use when creating instances in the group.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "An allowed instance type for your game server group.",
+		//	    "properties": {
+		//	      "InstanceType": {
+		//	        "description": "An EC2 instance type designation.",
+		//	        "type": "string"
+		//	      },
+		//	      "WeightedCapacity": {
+		//	        "description": "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "InstanceType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 2,
+		//	  "type": "array"
+		//	}
+		"instance_definitions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: InstanceType
+					"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "An EC2 instance type designation.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"weighted_capacity": {
-						// Property: WeightedCapacity
+					}, /*END ATTRIBUTE*/
+					// Property: WeightedCapacity
+					"weighted_capacity": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"launch_template": {
-			// Property: LaunchTemplate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
-			//	  "properties": {
-			//	    "LaunchTemplateId": {
-			//	      "description": "A unique identifier for an existing EC2 launch template.",
-			//	      "type": "string"
-			//	    },
-			//	    "LaunchTemplateName": {
-			//	      "description": "A readable identifier for an existing EC2 launch template.",
-			//	      "type": "string"
-			//	    },
-			//	    "Version": {
-			//	      "description": "The version of the EC2 launch template to use.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A set of EC2 instance types to use when creating instances in the group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LaunchTemplate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
+		//	  "properties": {
+		//	    "LaunchTemplateId": {
+		//	      "description": "A unique identifier for an existing EC2 launch template.",
+		//	      "type": "string"
+		//	    },
+		//	    "LaunchTemplateName": {
+		//	      "description": "A readable identifier for an existing EC2 launch template.",
+		//	      "type": "string"
+		//	    },
+		//	    "Version": {
+		//	      "description": "The version of the EC2 launch template to use.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: LaunchTemplateId
+				"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique identifier for an existing EC2 launch template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LaunchTemplateName
+				"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A readable identifier for an existing EC2 launch template.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Version
+				"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The version of the EC2 launch template to use.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"launch_template_id": {
-						// Property: LaunchTemplateId
-						Description: "A unique identifier for an existing EC2 launch template.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"launch_template_name": {
-						// Property: LaunchTemplateName
-						Description: "A readable identifier for an existing EC2 launch template.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"version": {
-						// Property: Version
-						Description: "The version of the EC2 launch template to use.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"max_size": {
-			// Property: MaxSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
-			//	  "minimum": 1,
-			//	  "type": "number"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MaxSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum number of instances allowed in the EC2 Auto Scaling group.",
+		//	  "minimum": 1,
+		//	  "type": "number"
+		//	}
+		"max_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The maximum number of instances allowed in the EC2 Auto Scaling group.",
-			Type:        types.Float64Type,
 			Computed:    true,
-		},
-		"min_size": {
-			// Property: MinSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
-			//	  "minimum": 0,
-			//	  "type": "number"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MinSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The minimum number of instances allowed in the EC2 Auto Scaling group.",
+		//	  "minimum": 0,
+		//	  "type": "number"
+		//	}
+		"min_size": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The minimum number of instances allowed in the EC2 Auto Scaling group.",
-			Type:        types.Float64Type,
 			Computed:    true,
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:.*:role\\/[\\w+=,.@-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:.*:role\\/[\\w+=,.@-]+",
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of labels to assign to the new game server group resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key for a developer-defined key:value pair for tagging an AWS resource.",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for a developer-defined key:value pair for tagging an AWS resource.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
-			Description: "A list of labels to assign to the new game server group resource.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of labels to assign to the new game server group resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key for a developer-defined key:value pair for tagging an AWS resource.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for a developer-defined key:value pair for tagging an AWS resource.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key for a developer-defined key:value pair for tagging an AWS resource.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for a developer-defined key:value pair for tagging an AWS resource.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"vpc_subnets": {
-			// Property: VpcSubnets
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "maxLength": 24,
-			//	    "minLength": 15,
-			//	    "pattern": "^subnet-[0-9a-z]+$",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 20,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
-			Type:        types.ListType{ElemType: types.StringType},
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of labels to assign to the new game server group resource.",
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcSubnets
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 24,
+		//	    "minLength": 15,
+		//	    "pattern": "^subnet-[0-9a-z]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"vpc_subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A list of virtual private cloud (VPC) subnets to use with instances in the game server group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::GameLift::GameServerGroup",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::GameServerGroup").WithTerraformTypeName("awscc_gamelift_game_server_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -423,7 +397,7 @@ func gameServerGroupDataSource(ctx context.Context) (datasource.DataSource, erro
 		"weighted_capacity":             "WeightedCapacity",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

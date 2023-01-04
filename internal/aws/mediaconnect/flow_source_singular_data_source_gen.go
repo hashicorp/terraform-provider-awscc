@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,319 +19,292 @@ func init() {
 // flowSourceDataSource returns the Terraform awscc_mediaconnect_flow_source data source.
 // This Terraform data source corresponds to the CloudFormation AWS::MediaConnect::FlowSource resource.
 func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"decryption": {
-			// Property: Decryption
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The type of encryption that is used on the content ingested from this source.",
-			//	  "properties": {
-			//	    "Algorithm": {
-			//	      "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-			//	      "enum": [
-			//	        "aes128",
-			//	        "aes192",
-			//	        "aes256"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "ConstantInitializationVector": {
-			//	      "description": "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
-			//	      "type": "string"
-			//	    },
-			//	    "DeviceId": {
-			//	      "description": "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//	      "type": "string"
-			//	    },
-			//	    "KeyType": {
-			//	      "default": "static-key",
-			//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-			//	      "enum": [
-			//	        "speke",
-			//	        "static-key"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Region": {
-			//	      "description": "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//	      "type": "string"
-			//	    },
-			//	    "ResourceId": {
-			//	      "description": "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//	      "type": "string"
-			//	    },
-			//	    "RoleArn": {
-			//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-			//	      "type": "string"
-			//	    },
-			//	    "SecretArn": {
-			//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-			//	      "type": "string"
-			//	    },
-			//	    "Url": {
-			//	      "description": "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Algorithm",
-			//	    "RoleArn"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Decryption
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The type of encryption that is used on the content ingested from this source.",
+		//	  "properties": {
+		//	    "Algorithm": {
+		//	      "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+		//	      "enum": [
+		//	        "aes128",
+		//	        "aes192",
+		//	        "aes256"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ConstantInitializationVector": {
+		//	      "description": "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
+		//	      "type": "string"
+		//	    },
+		//	    "DeviceId": {
+		//	      "description": "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		//	      "type": "string"
+		//	    },
+		//	    "KeyType": {
+		//	      "default": "static-key",
+		//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+		//	      "enum": [
+		//	        "speke",
+		//	        "static-key"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Region": {
+		//	      "description": "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		//	      "type": "string"
+		//	    },
+		//	    "ResourceId": {
+		//	      "description": "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		//	      "type": "string"
+		//	    },
+		//	    "RoleArn": {
+		//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+		//	      "type": "string"
+		//	    },
+		//	    "Url": {
+		//	      "description": "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Algorithm",
+		//	    "RoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"decryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Algorithm
+				"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConstantInitializationVector
+				"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: DeviceId
+				"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KeyType
+				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Region
+				"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceId
+				"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Url
+				"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The type of encryption that is used on the content ingested from this source.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"algorithm": {
-						// Property: Algorithm
-						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"constant_initialization_vector": {
-						// Property: ConstantInitializationVector
-						Description: "A 128-bit, 16-byte hex value represented by a 32-character string, to be used with the key for encrypting content. This parameter is not valid for static key encryption.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"device_id": {
-						// Property: DeviceId
-						Description: "The value of one of the devices that you configured with your digital rights management (DRM) platform key provider. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"key_type": {
-						// Property: KeyType
-						Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"region": {
-						// Property: Region
-						Description: "The AWS Region that the API Gateway proxy endpoint was created in. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"resource_id": {
-						// Property: ResourceId
-						Description: "An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"role_arn": {
-						// Property: RoleArn
-						Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"secret_arn": {
-						// Property: SecretArn
-						Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"url": {
-						// Property: Url
-						Description: "The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"entitlement_arn": {
-			// Property: EntitlementArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EntitlementArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
+		//	  "type": "string"
+		//	}
+		"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"flow_arn": {
-			// Property: FlowArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the flow.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: FlowArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the flow.",
+		//	  "type": "string"
+		//	}
+		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the flow.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"ingest_ip": {
-			// Property: IngestIp
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IP address that the flow will be listening on for incoming content.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IngestIp
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP address that the flow will be listening on for incoming content.",
+		//	  "type": "string"
+		//	}
+		"ingest_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IP address that the flow will be listening on for incoming content.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"ingest_port": {
-			// Property: IngestPort
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The port that the flow will be listening on for incoming content.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IngestPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port that the flow will be listening on for incoming content.",
+		//	  "type": "integer"
+		//	}
+		"ingest_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The port that the flow will be listening on for incoming content.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"max_bitrate": {
-			// Property: MaxBitrate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MaxBitrate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
+		//	  "type": "integer"
+		//	}
+		"max_bitrate": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"max_latency": {
-			// Property: MaxLatency
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 2000,
-			//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MaxLatency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 2000,
+		//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+		//	  "type": "integer"
+		//	}
+		"max_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the source.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the source.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the source.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"protocol": {
-			// Property: Protocol
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The protocol that is used by the source.",
-			//	  "enum": [
-			//	    "zixi-push",
-			//	    "rtp-fec",
-			//	    "rtp",
-			//	    "rist"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Protocol
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The protocol that is used by the source.",
+		//	  "enum": [
+		//	    "zixi-push",
+		//	    "rtp-fec",
+		//	    "rtp",
+		//	    "rist"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The protocol that is used by the source.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_arn": {
-			// Property: SourceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the source.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the source.",
+		//	  "type": "string"
+		//	}
+		"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the source.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_ingest_port": {
-			// Property: SourceIngestPort
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceIngestPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port that the flow will be listening on for incoming content.(ReadOnly)",
+		//	  "type": "string"
+		//	}
+		"source_ingest_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"stream_id": {
-			// Property: StreamId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StreamId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+		//	  "type": "string"
+		//	}
+		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"vpc_interface_name": {
-			// Property: VpcInterfaceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the VPC Interface this Source is configured with.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcInterfaceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the VPC Interface this Source is configured with.",
+		//	  "type": "string"
+		//	}
+		"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the VPC Interface this Source is configured with.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"whitelist_cidr": {
-			// Property: WhitelistCidr
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: WhitelistCidr
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+		//	  "type": "string"
+		//	}
+		"whitelist_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::MediaConnect::FlowSource",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowSource").WithTerraformTypeName("awscc_mediaconnect_flow_source")
 	opts = opts.WithTerraformSchema(schema)
@@ -362,7 +335,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"whitelist_cidr":                 "WhitelistCidr",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,194 +19,177 @@ func init() {
 // originRequestPolicyDataSource returns the Terraform awscc_cloudfront_origin_request_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFront::OriginRequestPolicy resource.
 func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"origin_request_policy_config": {
-			// Property: OriginRequestPolicyConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Comment": {
-			//	      "type": "string"
-			//	    },
-			//	    "CookiesConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CookieBehavior": {
-			//	          "pattern": "^(none|whitelist|all)$",
-			//	          "type": "string"
-			//	        },
-			//	        "Cookies": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CookieBehavior"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "HeadersConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "HeaderBehavior": {
-			//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
-			//	          "type": "string"
-			//	        },
-			//	        "Headers": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "HeaderBehavior"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Name": {
-			//	      "type": "string"
-			//	    },
-			//	    "QueryStringsConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "QueryStringBehavior": {
-			//	          "pattern": "^(none|whitelist|all)$",
-			//	          "type": "string"
-			//	        },
-			//	        "QueryStrings": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "QueryStringBehavior"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name",
-			//	    "HeadersConfig",
-			//	    "CookiesConfig",
-			//	    "QueryStringsConfig"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"comment": {
-						// Property: Comment
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"cookies_config": {
-						// Property: CookiesConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cookie_behavior": {
-									// Property: CookieBehavior
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"cookies": {
-									// Property: Cookies
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"headers_config": {
-						// Property: HeadersConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"header_behavior": {
-									// Property: HeaderBehavior
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"headers": {
-									// Property: Headers
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"query_strings_config": {
-						// Property: QueryStringsConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"query_string_behavior": {
-									// Property: QueryStringBehavior
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"query_strings": {
-									// Property: QueryStrings
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: OriginRequestPolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Comment": {
+		//	      "type": "string"
+		//	    },
+		//	    "CookiesConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CookieBehavior": {
+		//	          "pattern": "^(none|whitelist|all)$",
+		//	          "type": "string"
+		//	        },
+		//	        "Cookies": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CookieBehavior"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "HeadersConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "HeaderBehavior": {
+		//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
+		//	          "type": "string"
+		//	        },
+		//	        "Headers": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "HeaderBehavior"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Name": {
+		//	      "type": "string"
+		//	    },
+		//	    "QueryStringsConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "QueryStringBehavior": {
+		//	          "pattern": "^(none|whitelist|all)$",
+		//	          "type": "string"
+		//	        },
+		//	        "QueryStrings": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "QueryStringBehavior"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name",
+		//	    "HeadersConfig",
+		//	    "CookiesConfig",
+		//	    "QueryStringsConfig"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"origin_request_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comment
+				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CookiesConfig
+				"cookies_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CookieBehavior
+						"cookie_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Cookies
+						"cookies": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HeadersConfig
+				"headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderBehavior
+						"header_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Headers
+						"headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: QueryStringsConfig
+				"query_strings_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: QueryStringBehavior
+						"query_string_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueryStrings
+						"query_strings": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFront::OriginRequestPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginRequestPolicy").WithTerraformTypeName("awscc_cloudfront_origin_request_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -227,7 +210,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		"query_strings_config":         "QueryStringsConfig",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

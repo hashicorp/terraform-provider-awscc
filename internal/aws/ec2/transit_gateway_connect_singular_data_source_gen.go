@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,151 +19,139 @@ func init() {
 // transitGatewayConnectDataSource returns the Terraform awscc_ec2_transit_gateway_connect data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::TransitGatewayConnect resource.
 func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The creation time.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The creation time.",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The creation time.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"options": {
-			// Property: Options
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The Connect attachment options.",
-			//	  "properties": {
-			//	    "Protocol": {
-			//	      "description": "The tunnel protocol.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Options
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Connect attachment options.",
+		//	  "properties": {
+		//	    "Protocol": {
+		//	      "description": "The tunnel protocol.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The tunnel protocol.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The Connect attachment options.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"protocol": {
-						// Property: Protocol
-						Description: "The tunnel protocol.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The state of the attachment.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the attachment.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The state of the attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The tags for the attachment.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The tags for the attachment.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tags for the attachment.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key of the tag. Constraints: Tag keys are case-sensitive and accept a maximum of 127 Unicode characters. May not begin with aws:.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value of the tag. Constraints: Tag values are case-sensitive and accept a maximum of 255 Unicode characters.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"transit_gateway_attachment_id": {
-			// Property: TransitGatewayAttachmentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Connect attachment.",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The tags for the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayAttachmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Connect attachment.",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Connect attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"transit_gateway_id": {
-			// Property: TransitGatewayId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the transit gateway.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the transit gateway.",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the transit gateway.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"transport_transit_gateway_attachment_id": {
-			// Property: TransportTransitGatewayAttachmentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the attachment from which the Connect attachment was created.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TransportTransitGatewayAttachmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the attachment from which the Connect attachment was created.",
+		//	  "type": "string"
+		//	}
+		"transport_transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the attachment from which the Connect attachment was created.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EC2::TransitGatewayConnect",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayConnect").WithTerraformTypeName("awscc_ec2_transit_gateway_connect")
 	opts = opts.WithTerraformSchema(schema)
@@ -180,7 +168,7 @@ func transitGatewayConnectDataSource(ctx context.Context) (datasource.DataSource
 		"value": "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

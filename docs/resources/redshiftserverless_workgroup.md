@@ -56,7 +56,7 @@ Required:
 <a id="nestedatt--workgroup"></a>
 ### Nested Schema for `workgroup`
 
-Optional:
+Read-Only:
 
 - `base_capacity` (Number)
 - `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--workgroup--config_parameters))
@@ -75,7 +75,7 @@ Optional:
 <a id="nestedatt--workgroup--config_parameters"></a>
 ### Nested Schema for `workgroup.config_parameters`
 
-Optional:
+Read-Only:
 
 - `parameter_key` (String)
 - `parameter_value` (String)
@@ -84,7 +84,7 @@ Optional:
 <a id="nestedatt--workgroup--endpoint"></a>
 ### Nested Schema for `workgroup.endpoint`
 
-Optional:
+Read-Only:
 
 - `address` (String)
 - `port` (Number)
@@ -93,7 +93,7 @@ Optional:
 <a id="nestedatt--workgroup--endpoint--vpc_endpoints"></a>
 ### Nested Schema for `workgroup.endpoint.vpc_endpoints`
 
-Optional:
+Read-Only:
 
 - `network_interfaces` (Attributes List) (see [below for nested schema](#nestedatt--workgroup--endpoint--vpc_endpoints--network_interfaces))
 - `vpc_endpoint_id` (String)
@@ -102,7 +102,7 @@ Optional:
 <a id="nestedatt--workgroup--endpoint--vpc_endpoints--network_interfaces"></a>
 ### Nested Schema for `workgroup.endpoint.vpc_endpoints.vpc_id`
 
-Optional:
+Read-Only:
 
 - `availability_zone` (String)
 - `network_interface_id` (String)

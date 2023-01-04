@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,265 +19,246 @@ func init() {
 // fleetMetricDataSource returns the Terraform awscc_iot_fleet_metric data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::FleetMetric resource.
 func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"aggregation_field": {
-			// Property: AggregationField
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The aggregation field to perform aggregation and metric emission",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AggregationField
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The aggregation field to perform aggregation and metric emission",
+		//	  "type": "string"
+		//	}
+		"aggregation_field": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The aggregation field to perform aggregation and metric emission",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"aggregation_type": {
-			// Property: AggregationType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Aggregation types supported by Fleet Indexing",
-			//	  "properties": {
-			//	    "Name": {
-			//	      "description": "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
-			//	      "type": "string"
-			//	    },
-			//	    "Values": {
-			//	      "description": "Fleet Indexing aggregation type values",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name",
-			//	    "Values"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AggregationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Aggregation types supported by Fleet Indexing",
+		//	  "properties": {
+		//	    "Name": {
+		//	      "description": "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
+		//	      "type": "string"
+		//	    },
+		//	    "Values": {
+		//	      "description": "Fleet Indexing aggregation type values",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name",
+		//	    "Values"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"aggregation_type": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Values
+				"values": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Fleet Indexing aggregation type values",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Aggregation types supported by Fleet Indexing",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
-						Description: "Fleet Indexing aggregation type names such as Statistics, Percentiles and Cardinality",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"values": {
-						// Property: Values
-						Description: "Fleet Indexing aggregation type values",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"creation_date": {
-			// Property: CreationDate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The creation date of a fleet metric",
-			//	  "type": "number"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CreationDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The creation date of a fleet metric",
+		//	  "type": "number"
+		//	}
+		"creation_date": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The creation date of a fleet metric",
-			Type:        types.Float64Type,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of a fleet metric",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of a fleet metric",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of a fleet metric",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"index_name": {
-			// Property: IndexName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The index name of a fleet metric",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IndexName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The index name of a fleet metric",
+		//	  "type": "string"
+		//	}
+		"index_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The index name of a fleet metric",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"last_modified_date": {
-			// Property: LastModifiedDate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The last modified date of a fleet metric",
-			//	  "type": "number"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The last modified date of a fleet metric",
+		//	  "type": "number"
+		//	}
+		"last_modified_date": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The last modified date of a fleet metric",
-			Type:        types.Float64Type,
 			Computed:    true,
-		},
-		"metric_arn": {
-			// Property: MetricArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Number (ARN) of a fleet metric metric",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MetricArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Number (ARN) of a fleet metric metric",
+		//	  "type": "string"
+		//	}
+		"metric_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Number (ARN) of a fleet metric metric",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"metric_name": {
-			// Property: MetricName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the fleet metric",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MetricName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the fleet metric",
+		//	  "type": "string"
+		//	}
+		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the fleet metric",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"period": {
-			// Property: Period
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The period of metric emission in seconds",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Period
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The period of metric emission in seconds",
+		//	  "type": "integer"
+		//	}
+		"period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The period of metric emission in seconds",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"query_string": {
-			// Property: QueryString
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Fleet Indexing query used by a fleet metric",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: QueryString
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Fleet Indexing query used by a fleet metric",
+		//	  "type": "string"
+		//	}
+		"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Fleet Indexing query used by a fleet metric",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"query_version": {
-			// Property: QueryVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of a Fleet Indexing query used by a fleet metric",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: QueryVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of a Fleet Indexing query used by a fleet metric",
+		//	  "type": "string"
+		//	}
+		"query_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version of a Fleet Indexing query used by a fleet metric",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The tag's key",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The tag's value",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this resource",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The tag's key",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The tag's value",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tag's key",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tag's value",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"unit": {
-			// Property: Unit
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unit of data points emitted by a fleet metric",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Unit
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unit of data points emitted by a fleet metric",
+		//	  "type": "string"
+		//	}
+		"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unit of data points emitted by a fleet metric",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"version": {
-			// Property: Version
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of a fleet metric",
-			//	  "type": "number"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Version
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of a fleet metric",
+		//	  "type": "number"
+		//	}
+		"version": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The version of a fleet metric",
-			Type:        types.Float64Type,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoT::FleetMetric",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::FleetMetric").WithTerraformTypeName("awscc_iot_fleet_metric")
 	opts = opts.WithTerraformSchema(schema)
@@ -302,7 +283,7 @@ func fleetMetricDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"version":            "Version",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

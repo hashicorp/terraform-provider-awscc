@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,84 +19,77 @@ func init() {
 // attributeGroupAssociationDataSource returns the Terraform awscc_servicecatalogappregistry_attribute_group_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation resource.
 func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"application": {
-			// Property: Application
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name or the Id of the Application.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "\\w+|[a-z0-9]{12}",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Application
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name or the Id of the Application.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "\\w+|[a-z0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"application": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or the Id of the Application.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"application_arn": {
-			// Property: ApplicationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ApplicationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
+		//	  "type": "string"
+		//	}
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"attribute_group": {
-			// Property: AttributeGroup
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name or the Id of the AttributeGroup.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "\\w+|[a-z0-9]{12}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AttributeGroup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name or the Id of the AttributeGroup.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "\\w+|[a-z0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"attribute_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or the Id of the AttributeGroup.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"attribute_group_arn": {
-			// Property: AttributeGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: AttributeGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
+		//	  "type": "string"
+		//	}
+		"attribute_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -108,7 +101,7 @@ func attributeGroupAssociationDataSource(ctx context.Context) (datasource.DataSo
 		"id":                  "Id",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

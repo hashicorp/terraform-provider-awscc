@@ -5,12 +5,21 @@ package inspectorv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,2371 +29,2279 @@ func init() {
 // filterResource returns the Terraform awscc_inspectorv2_filter resource.
 // This Terraform resource corresponds to the CloudFormation AWS::InspectorV2::Filter resource.
 func filterResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Findings filter ARN.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Findings filter ARN.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Findings filter ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Findings filter description.",
-			//	  "maxLength": 512,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Findings filter description.",
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Findings filter description.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 512),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"filter_action": {
-			// Property: FilterAction
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Findings filter action.",
-			//	  "enum": [
-			//	    "NONE",
-			//	    "SUPPRESS"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 512),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FilterAction
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Findings filter action.",
+		//	  "enum": [
+		//	    "NONE",
+		//	    "SUPPRESS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"filter_action": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Findings filter action.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"NONE",
 					"SUPPRESS",
-				}),
-			},
-		},
-		"filter_criteria": {
-			// Property: FilterCriteria
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Findings filter criteria.",
-			//	  "properties": {
-			//	    "AwsAccountId": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ComponentId": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ComponentType": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Ec2InstanceImageId": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Ec2InstanceSubnetId": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Ec2InstanceVpcId": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "EcrImageArchitecture": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "EcrImageHash": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "EcrImagePushedAt": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "EndInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          },
-			//	          "StartInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "EcrImageRegistry": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "EcrImageRepositoryName": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "EcrImageTags": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "FindingArn": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "FindingStatus": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "FindingType": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "FirstObservedAt": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "EndInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          },
-			//	          "StartInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "InspectorScore": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "LowerInclusive": {
-			//	            "type": "number"
-			//	          },
-			//	          "UpperInclusive": {
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "LastObservedAt": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "EndInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          },
-			//	          "StartInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "NetworkProtocol": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "PortRange": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "BeginInclusive": {
-			//	            "maximum": 65535,
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          },
-			//	          "EndInclusive": {
-			//	            "maximum": 65535,
-			//	            "minimum": 0,
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "RelatedVulnerabilities": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ResourceId": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ResourceTags": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Key": {
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 256,
-			//	            "minLength": 0,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ResourceType": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Severity": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Title": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "UpdatedAt": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "EndInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          },
-			//	          "StartInclusive": {
-			//	            "format": "int64",
-			//	            "type": "integer"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "VendorSeverity": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "VulnerabilityId": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "VulnerabilitySource": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Comparison": {
-			//	            "enum": [
-			//	              "EQUALS",
-			//	              "PREFIX",
-			//	              "NOT_EQUALS"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "maxLength": 1024,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Comparison",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "VulnerablePackages": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Architecture": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Comparison": {
-			//	                "enum": [
-			//	                  "EQUALS",
-			//	                  "PREFIX",
-			//	                  "NOT_EQUALS"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Comparison",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Epoch": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "LowerInclusive": {
-			//	                "type": "number"
-			//	              },
-			//	              "UpperInclusive": {
-			//	                "type": "number"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Name": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Comparison": {
-			//	                "enum": [
-			//	                  "EQUALS",
-			//	                  "PREFIX",
-			//	                  "NOT_EQUALS"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Comparison",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Release": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Comparison": {
-			//	                "enum": [
-			//	                  "EQUALS",
-			//	                  "PREFIX",
-			//	                  "NOT_EQUALS"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Comparison",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "SourceLayerHash": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Comparison": {
-			//	                "enum": [
-			//	                  "EQUALS",
-			//	                  "PREFIX",
-			//	                  "NOT_EQUALS"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Comparison",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "Version": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Comparison": {
-			//	                "enum": [
-			//	                  "EQUALS",
-			//	                  "PREFIX",
-			//	                  "NOT_EQUALS"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Comparison",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 10,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Findings filter criteria.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"aws_account_id": {
-						// Property: AwsAccountId
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FilterCriteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Findings filter criteria.",
+		//	  "properties": {
+		//	    "AwsAccountId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ComponentId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ComponentType": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Ec2InstanceImageId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Ec2InstanceSubnetId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Ec2InstanceVpcId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "EcrImageArchitecture": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "EcrImageHash": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "EcrImagePushedAt": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "EndInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          },
+		//	          "StartInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "EcrImageRegistry": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "EcrImageRepositoryName": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "EcrImageTags": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "FindingArn": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "FindingStatus": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "FindingType": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "FirstObservedAt": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "EndInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          },
+		//	          "StartInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "InspectorScore": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "LowerInclusive": {
+		//	            "type": "number"
+		//	          },
+		//	          "UpperInclusive": {
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "LastObservedAt": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "EndInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          },
+		//	          "StartInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "NetworkProtocol": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "PortRange": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "BeginInclusive": {
+		//	            "maximum": 65535,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          },
+		//	          "EndInclusive": {
+		//	            "maximum": 65535,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "RelatedVulnerabilities": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ResourceId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ResourceTags": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Key": {
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ResourceType": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Severity": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Title": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "UpdatedAt": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "EndInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          },
+		//	          "StartInclusive": {
+		//	            "format": "int64",
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "VendorSeverity": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "VulnerabilityId": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "VulnerabilitySource": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Comparison": {
+		//	            "enum": [
+		//	              "EQUALS",
+		//	              "PREFIX",
+		//	              "NOT_EQUALS"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "maxLength": 1024,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Comparison",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "VulnerablePackages": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Architecture": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Comparison": {
+		//	                "enum": [
+		//	                  "EQUALS",
+		//	                  "PREFIX",
+		//	                  "NOT_EQUALS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Comparison",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Epoch": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "LowerInclusive": {
+		//	                "type": "number"
+		//	              },
+		//	              "UpperInclusive": {
+		//	                "type": "number"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Name": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Comparison": {
+		//	                "enum": [
+		//	                  "EQUALS",
+		//	                  "PREFIX",
+		//	                  "NOT_EQUALS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Comparison",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Release": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Comparison": {
+		//	                "enum": [
+		//	                  "EQUALS",
+		//	                  "PREFIX",
+		//	                  "NOT_EQUALS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Comparison",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "SourceLayerHash": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Comparison": {
+		//	                "enum": [
+		//	                  "EQUALS",
+		//	                  "PREFIX",
+		//	                  "NOT_EQUALS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Comparison",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "Version": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Comparison": {
+		//	                "enum": [
+		//	                  "EQUALS",
+		//	                  "PREFIX",
+		//	                  "NOT_EQUALS"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Comparison",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"filter_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AwsAccountId
+				"aws_account_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentId
+				"component_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentType
+				"component_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2InstanceImageId
+				"ec_2_instance_image_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2InstanceSubnetId
+				"ec_2_instance_subnet_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2InstanceVpcId
+				"ec_2_instance_vpc_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageArchitecture
+				"ecr_image_architecture": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageHash
+				"ecr_image_hash": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImagePushedAt
+				"ecr_image_pushed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageRegistry
+				"ecr_image_registry": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageRepositoryName
+				"ecr_image_repository_name": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: EcrImageTags
+				"ecr_image_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FindingArn
+				"finding_arn": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FindingStatus
+				"finding_status": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FindingType
+				"finding_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FirstObservedAt
+				"first_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InspectorScore
+				"inspector_score": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: LowerInclusive
+							"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: UpperInclusive
+							"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+									float64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LastObservedAt
+				"last_observed_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NetworkProtocol
+				"network_protocol": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PortRange
+				"port_range": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BeginInclusive
+							"begin_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 65535),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 65535),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RelatedVulnerabilities
+				"related_vulnerabilities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceId
+				"resource_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceTags
+				"resource_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 128),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ResourceType
+				"resource_type": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Severity
+				"severity": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Title
+				"title": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UpdatedAt
+				"updated_at": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EndInclusive
+							"end_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StartInclusive
+							"start_inclusive": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VendorSeverity
+				"vendor_severity": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VulnerabilityId
+				"vulnerability_id": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VulnerabilitySource
+				"vulnerability_source": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Comparison
+							"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"EQUALS",
+										"PREFIX",
+										"NOT_EQUALS",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 1024),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: VulnerablePackages
+				"vulnerable_packages": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Architecture
+							"architecture": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"EQUALS",
+												"PREFIX",
+												"NOT_EQUALS",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"component_id": {
-						// Property: ComponentId
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"component_type": {
-						// Property: ComponentType
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ec_2_instance_image_id": {
-						// Property: Ec2InstanceImageId
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ec_2_instance_subnet_id": {
-						// Property: Ec2InstanceSubnetId
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ec_2_instance_vpc_id": {
-						// Property: Ec2InstanceVpcId
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ecr_image_architecture": {
-						// Property: EcrImageArchitecture
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ecr_image_hash": {
-						// Property: EcrImageHash
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ecr_image_pushed_at": {
-						// Property: EcrImagePushedAt
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"end_inclusive": {
-									// Property: EndInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"start_inclusive": {
-									// Property: StartInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ecr_image_registry": {
-						// Property: EcrImageRegistry
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ecr_image_repository_name": {
-						// Property: EcrImageRepositoryName
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ecr_image_tags": {
-						// Property: EcrImageTags
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"finding_arn": {
-						// Property: FindingArn
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"finding_status": {
-						// Property: FindingStatus
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"finding_type": {
-						// Property: FindingType
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"first_observed_at": {
-						// Property: FirstObservedAt
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"end_inclusive": {
-									// Property: EndInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"start_inclusive": {
-									// Property: StartInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"inspector_score": {
-						// Property: InspectorScore
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"lower_inclusive": {
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Epoch
+							"epoch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: LowerInclusive
-									Type:     types.Float64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"upper_inclusive": {
+									"lower_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: UpperInclusive
-									Type:     types.Float64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"last_observed_at": {
-						// Property: LastObservedAt
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"end_inclusive": {
-									// Property: EndInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"start_inclusive": {
-									// Property: StartInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"network_protocol": {
-						// Property: NetworkProtocol
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
+									"upper_inclusive": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+											float64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"EQUALS",
+												"PREFIX",
+												"NOT_EQUALS",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"port_range": {
-						// Property: PortRange
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"begin_inclusive": {
-									// Property: BeginInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 65535),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"end_inclusive": {
-									// Property: EndInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntBetween(0, 65535),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"related_vulnerabilities": {
-						// Property: RelatedVulnerabilities
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Release
+							"release": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"EQUALS",
+												"PREFIX",
+												"NOT_EQUALS",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"resource_id": {
-						// Property: ResourceId
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceLayerHash
+							"source_layer_hash": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"EQUALS",
+												"PREFIX",
+												"NOT_EQUALS",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"resource_tags": {
-						// Property: ResourceTags
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Version
+							"version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-										}),
-									},
-								},
-								"key": {
-									// Property: Key
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 128),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"value": {
+									"comparison": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"EQUALS",
+												"PREFIX",
+												"NOT_EQUALS",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
 									// Property: Value
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 256),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"resource_type": {
-						// Property: ResourceType
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"severity": {
-						// Property: Severity
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"title": {
-						// Property: Title
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"updated_at": {
-						// Property: UpdatedAt
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"end_inclusive": {
-									// Property: EndInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"start_inclusive": {
-									// Property: StartInclusive
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"vendor_severity": {
-						// Property: VendorSeverity
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"vulnerability_id": {
-						// Property: VulnerabilityId
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"vulnerability_source": {
-						// Property: VulnerabilitySource
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"comparison": {
-									// Property: Comparison
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"EQUALS",
-											"PREFIX",
-											"NOT_EQUALS",
-										}),
-									},
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"vulnerable_packages": {
-						// Property: VulnerablePackages
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"architecture": {
-									// Property: Architecture
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"comparison": {
-												// Property: Comparison
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"EQUALS",
-														"PREFIX",
-														"NOT_EQUALS",
-													}),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"epoch": {
-									// Property: Epoch
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"lower_inclusive": {
-												// Property: LowerInclusive
-												Type:     types.Float64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"upper_inclusive": {
-												// Property: UpperInclusive
-												Type:     types.Float64Type,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"name": {
-									// Property: Name
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"comparison": {
-												// Property: Comparison
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"EQUALS",
-														"PREFIX",
-														"NOT_EQUALS",
-													}),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"release": {
-									// Property: Release
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"comparison": {
-												// Property: Comparison
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"EQUALS",
-														"PREFIX",
-														"NOT_EQUALS",
-													}),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"source_layer_hash": {
-									// Property: SourceLayerHash
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"comparison": {
-												// Property: Comparison
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"EQUALS",
-														"PREFIX",
-														"NOT_EQUALS",
-													}),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"version": {
-									// Property: Version
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"comparison": {
-												// Property: Comparison
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"EQUALS",
-														"PREFIX",
-														"NOT_EQUALS",
-													}),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 10),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Findings filter name.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "Findings filter name.",
-			Type:        types.StringType,
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 10),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Findings filter criteria.",
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-			},
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Findings filter name.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Findings filter name.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Inspector Filter resource schema",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::InspectorV2::Filter").WithTerraformTypeName("awscc_inspectorv2_filter")
 	opts = opts.WithTerraformSchema(schema)
@@ -2445,7 +2362,7 @@ func filterResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

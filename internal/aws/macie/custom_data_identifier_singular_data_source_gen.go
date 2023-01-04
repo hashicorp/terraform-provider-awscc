@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,124 +19,116 @@ func init() {
 // customDataIdentifierDataSource returns the Terraform awscc_macie_custom_data_identifier data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Macie::CustomDataIdentifier resource.
 func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Custom data identifier ARN.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Custom data identifier ARN.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Custom data identifier ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Description of custom data identifier.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Description of custom data identifier.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of custom data identifier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Custom data identifier ID.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Custom data identifier ID.",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Custom data identifier ID.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"ignore_words": {
-			// Property: IgnoreWords
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Words to be ignored.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IgnoreWords
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Words to be ignored.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"ignore_words": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Words to be ignored.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"keywords": {
-			// Property: Keywords
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Keywords to be matched against.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Keywords
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Keywords to be matched against.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"keywords": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Keywords to be matched against.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"maximum_match_distance": {
-			// Property: MaximumMatchDistance
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Maximum match distance.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MaximumMatchDistance
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Maximum match distance.",
+		//	  "type": "integer"
+		//	}
+		"maximum_match_distance": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Maximum match distance.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of custom data identifier.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of custom data identifier.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of custom data identifier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"regex": {
-			// Property: Regex
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Regular expression for custom data identifier.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Regex
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Regular expression for custom data identifier.",
+		//	  "type": "string"
+		//	}
+		"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Regular expression for custom data identifier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Macie::CustomDataIdentifier",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::CustomDataIdentifier").WithTerraformTypeName("awscc_macie_custom_data_identifier")
 	opts = opts.WithTerraformSchema(schema)
@@ -151,7 +143,7 @@ func customDataIdentifierDataSource(ctx context.Context) (datasource.DataSource,
 		"regex":                  "Regex",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

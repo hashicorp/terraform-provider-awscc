@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,225 +19,209 @@ func init() {
 // gatewayDataSource returns the Terraform awscc_iotsitewise_gateway data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoTSiteWise::Gateway resource.
 func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"gateway_capability_summaries": {
-			// Property: GatewayCapabilitySummaries
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of gateway capability summaries that each contain a namespace and status.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Contains a summary of a gateway capability configuration.",
-			//	    "properties": {
-			//	      "CapabilityConfiguration": {
-			//	        "description": "The JSON document that defines the gateway capability's configuration.",
-			//	        "type": "string"
-			//	      },
-			//	      "CapabilityNamespace": {
-			//	        "description": "The namespace of the capability configuration.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "CapabilityNamespace"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "A list of gateway capability summaries that each contain a namespace and status.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"capability_configuration": {
-						// Property: CapabilityConfiguration
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: GatewayCapabilitySummaries
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of gateway capability summaries that each contain a namespace and status.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Contains a summary of a gateway capability configuration.",
+		//	    "properties": {
+		//	      "CapabilityConfiguration": {
+		//	        "description": "The JSON document that defines the gateway capability's configuration.",
+		//	        "type": "string"
+		//	      },
+		//	      "CapabilityNamespace": {
+		//	        "description": "The namespace of the capability configuration.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "CapabilityNamespace"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"gateway_capability_summaries": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CapabilityConfiguration
+					"capability_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The JSON document that defines the gateway capability's configuration.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"capability_namespace": {
-						// Property: CapabilityNamespace
+					}, /*END ATTRIBUTE*/
+					// Property: CapabilityNamespace
+					"capability_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The namespace of the capability configuration.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"gateway_id": {
-			// Property: GatewayId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the gateway device.",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of gateway capability summaries that each contain a namespace and status.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: GatewayId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the gateway device.",
+		//	  "type": "string"
+		//	}
+		"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the gateway device.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"gateway_name": {
-			// Property: GatewayName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique, friendly name for the gateway.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GatewayName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique, friendly name for the gateway.",
+		//	  "type": "string"
+		//	}
+		"gateway_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique, friendly name for the gateway.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"gateway_platform": {
-			// Property: GatewayPlatform
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The gateway's platform. You can only specify one platform in a gateway.",
-			//	  "oneOf": [
-			//	    {
-			//	      "required": [
-			//	        "Greengrass"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "GreengrassV2"
-			//	      ]
-			//	    }
-			//	  ],
-			//	  "properties": {
-			//	    "Greengrass": {
-			//	      "additionalProperties": false,
-			//	      "description": "A gateway that runs on AWS IoT Greengrass V1.",
-			//	      "properties": {
-			//	        "GroupArn": {
-			//	          "description": "The ARN of the Greengrass group.",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "GroupArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "GreengrassV2": {
-			//	      "additionalProperties": false,
-			//	      "description": "A gateway that runs on AWS IoT Greengrass V2.",
-			//	      "properties": {
-			//	        "CoreDeviceThingName": {
-			//	          "description": "The name of the CoreDevice in GreenGrass V2.",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CoreDeviceThingName"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GatewayPlatform
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The gateway's platform. You can only specify one platform in a gateway.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "Greengrass"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "GreengrassV2"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "Greengrass": {
+		//	      "additionalProperties": false,
+		//	      "description": "A gateway that runs on AWS IoT Greengrass V1.",
+		//	      "properties": {
+		//	        "GroupArn": {
+		//	          "description": "The ARN of the Greengrass group.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "GroupArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "GreengrassV2": {
+		//	      "additionalProperties": false,
+		//	      "description": "A gateway that runs on AWS IoT Greengrass V2.",
+		//	      "properties": {
+		//	        "CoreDeviceThingName": {
+		//	          "description": "The name of the CoreDevice in GreenGrass V2.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CoreDeviceThingName"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"gateway_platform": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Greengrass
+				"greengrass": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GroupArn
+						"group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the Greengrass group.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A gateway that runs on AWS IoT Greengrass V1.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GreengrassV2
+				"greengrass_v2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CoreDeviceThingName
+						"core_device_thing_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the CoreDevice in GreenGrass V2.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A gateway that runs on AWS IoT Greengrass V2.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The gateway's platform. You can only specify one platform in a gateway.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"greengrass": {
-						// Property: Greengrass
-						Description: "A gateway that runs on AWS IoT Greengrass V1.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"group_arn": {
-									// Property: GroupArn
-									Description: "The ARN of the Greengrass group.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key-value pairs that contain metadata for the gateway.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"greengrass_v2": {
-						// Property: GreengrassV2
-						Description: "A gateway that runs on AWS IoT Greengrass V2.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"core_device_thing_name": {
-									// Property: CoreDeviceThingName
-									Description: "The name of the CoreDevice in GreenGrass V2.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of key-value pairs that contain metadata for the gateway.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "To add or update tag, provide both key and value. To delete tag, provide only tag key to be deleted",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of key-value pairs that contain metadata for the gateway.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoTSiteWise::Gateway",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTSiteWise::Gateway").WithTerraformTypeName("awscc_iotsitewise_gateway")
 	opts = opts.WithTerraformSchema(schema)
@@ -257,7 +241,7 @@ func gatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                        "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

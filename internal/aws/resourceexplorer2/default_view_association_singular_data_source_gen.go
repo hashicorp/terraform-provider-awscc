@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,45 +19,41 @@ func init() {
 // defaultViewAssociationDataSource returns the Terraform awscc_resourceexplorer2_default_view_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ResourceExplorer2::DefaultViewAssociation resource.
 func defaultViewAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"associated_aws_principal": {
-			// Property: AssociatedAwsPrincipal
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS principal that the default view is associated with, used as the unique identifier for this resource.",
-			//	  "pattern": "^[0-9]{12}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssociatedAwsPrincipal
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS principal that the default view is associated with, used as the unique identifier for this resource.",
+		//	  "pattern": "^[0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"associated_aws_principal": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS principal that the default view is associated with, used as the unique identifier for this resource.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"view_arn": {
-			// Property: ViewArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ViewArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"view_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ResourceExplorer2::DefaultViewAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ResourceExplorer2::DefaultViewAssociation").WithTerraformTypeName("awscc_resourceexplorer2_default_view_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -66,7 +62,7 @@ func defaultViewAssociationDataSource(ctx context.Context) (datasource.DataSourc
 		"view_arn":                 "ViewArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

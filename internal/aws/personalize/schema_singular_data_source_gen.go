@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,80 +19,74 @@ func init() {
 // schemaDataSource returns the Terraform awscc_personalize_schema data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Personalize::Schema resource.
 func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"domain": {
-			// Property: Domain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The domain of a Domain dataset group.",
-			//	  "enum": [
-			//	    "ECOMMERCE",
-			//	    "VIDEO_ON_DEMAND"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Domain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The domain of a Domain dataset group.",
+		//	  "enum": [
+		//	    "ECOMMERCE",
+		//	    "VIDEO_ON_DEMAND"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The domain of a Domain dataset group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for the schema.",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for the schema.",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name for the schema.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"schema": {
-			// Property: Schema
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A schema in Avro JSON format.",
-			//	  "maxLength": 10000,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Schema
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A schema in Avro JSON format.",
+		//	  "maxLength": 10000,
+		//	  "type": "string"
+		//	}
+		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A schema in Avro JSON format.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"schema_arn": {
-			// Property: SchemaArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Arn for the schema.",
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SchemaArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Arn for the schema.",
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+		//	  "type": "string"
+		//	}
+		"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Arn for the schema.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Personalize::Schema",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Personalize::Schema").WithTerraformTypeName("awscc_personalize_schema")
 	opts = opts.WithTerraformSchema(schema)
@@ -103,7 +97,7 @@ func schemaDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schema_arn": "SchemaArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

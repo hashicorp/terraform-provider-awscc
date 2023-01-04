@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,3696 +19,3439 @@ func init() {
 // dataSourceDataSource returns the Terraform awscc_kendra_data_source data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Kendra::DataSource resource.
 func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"custom_document_enrichment_configuration": {
-			// Property: CustomDocumentEnrichmentConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "InlineConfigurations": {
-			//	      "description": "List of InlineCustomDocumentEnrichmentConfigurations",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Condition": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ConditionDocumentAttributeKey": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//	                "type": "string"
-			//	              },
-			//	              "ConditionOnValue": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DateValue": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "LongValue": {
-			//	                    "format": "int64",
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "StringListValue": {
-			//	                    "items": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "StringValue": {
-			//	                    "maxLength": 2048,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "Operator": {
-			//	                "enum": [
-			//	                  "GreaterThan",
-			//	                  "GreaterThanOrEquals",
-			//	                  "LessThan",
-			//	                  "LessThanOrEquals",
-			//	                  "Equals",
-			//	                  "NotEquals",
-			//	                  "Contains",
-			//	                  "NotContains",
-			//	                  "Exists",
-			//	                  "NotExists",
-			//	                  "BeginsWith"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "ConditionDocumentAttributeKey",
-			//	              "Operator"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "DocumentContentDeletion": {
-			//	            "type": "boolean"
-			//	          },
-			//	          "Target": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "TargetDocumentAttributeKey": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//	                "type": "string"
-			//	              },
-			//	              "TargetDocumentAttributeValue": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DateValue": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "LongValue": {
-			//	                    "format": "int64",
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "StringListValue": {
-			//	                    "items": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "StringValue": {
-			//	                    "maxLength": 2048,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "TargetDocumentAttributeValueDeletion": {
-			//	                "type": "boolean"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "TargetDocumentAttributeKey"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 100,
-			//	      "type": "array"
-			//	    },
-			//	    "PostExtractionHookConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InvocationCondition": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ConditionDocumentAttributeKey": {
-			//	              "maxLength": 200,
-			//	              "minLength": 1,
-			//	              "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//	              "type": "string"
-			//	            },
-			//	            "ConditionOnValue": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "DateValue": {
-			//	                  "type": "string"
-			//	                },
-			//	                "LongValue": {
-			//	                  "format": "int64",
-			//	                  "type": "integer"
-			//	                },
-			//	                "StringListValue": {
-			//	                  "items": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array"
-			//	                },
-			//	                "StringValue": {
-			//	                  "maxLength": 2048,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "Operator": {
-			//	              "enum": [
-			//	                "GreaterThan",
-			//	                "GreaterThanOrEquals",
-			//	                "LessThan",
-			//	                "LessThanOrEquals",
-			//	                "Equals",
-			//	                "NotEquals",
-			//	                "Contains",
-			//	                "NotContains",
-			//	                "Exists",
-			//	                "NotExists",
-			//	                "BeginsWith"
-			//	              ],
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ConditionDocumentAttributeKey",
-			//	            "Operator"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "LambdaArn": {
-			//	          "maxLength": 2048,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "S3Bucket": {
-			//	          "maxLength": 63,
-			//	          "minLength": 3,
-			//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "LambdaArn",
-			//	        "S3Bucket"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "PreExtractionHookConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InvocationCondition": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ConditionDocumentAttributeKey": {
-			//	              "maxLength": 200,
-			//	              "minLength": 1,
-			//	              "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
-			//	              "type": "string"
-			//	            },
-			//	            "ConditionOnValue": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "DateValue": {
-			//	                  "type": "string"
-			//	                },
-			//	                "LongValue": {
-			//	                  "format": "int64",
-			//	                  "type": "integer"
-			//	                },
-			//	                "StringListValue": {
-			//	                  "items": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array"
-			//	                },
-			//	                "StringValue": {
-			//	                  "maxLength": 2048,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "Operator": {
-			//	              "enum": [
-			//	                "GreaterThan",
-			//	                "GreaterThanOrEquals",
-			//	                "LessThan",
-			//	                "LessThanOrEquals",
-			//	                "Equals",
-			//	                "NotEquals",
-			//	                "Contains",
-			//	                "NotContains",
-			//	                "Exists",
-			//	                "NotExists",
-			//	                "BeginsWith"
-			//	              ],
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ConditionDocumentAttributeKey",
-			//	            "Operator"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "LambdaArn": {
-			//	          "maxLength": 2048,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "S3Bucket": {
-			//	          "maxLength": 63,
-			//	          "minLength": 3,
-			//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "LambdaArn",
-			//	        "S3Bucket"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "RoleArn": {
-			//	      "description": "Role ARN",
-			//	      "maxLength": 1284,
-			//	      "minLength": 1,
-			//	      "pattern": "",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"inline_configurations": {
-						// Property: InlineConfigurations
-						Description: "List of InlineCustomDocumentEnrichmentConfigurations",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"condition": {
-									// Property: Condition
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"condition_document_attribute_key": {
-												// Property: ConditionDocumentAttributeKey
-												Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CustomDocumentEnrichmentConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "InlineConfigurations": {
+		//	      "description": "List of InlineCustomDocumentEnrichmentConfigurations",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Condition": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ConditionDocumentAttributeKey": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+		//	                "type": "string"
+		//	              },
+		//	              "ConditionOnValue": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DateValue": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "LongValue": {
+		//	                    "format": "int64",
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "StringListValue": {
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "StringValue": {
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "Operator": {
+		//	                "enum": [
+		//	                  "GreaterThan",
+		//	                  "GreaterThanOrEquals",
+		//	                  "LessThan",
+		//	                  "LessThanOrEquals",
+		//	                  "Equals",
+		//	                  "NotEquals",
+		//	                  "Contains",
+		//	                  "NotContains",
+		//	                  "Exists",
+		//	                  "NotExists",
+		//	                  "BeginsWith"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ConditionDocumentAttributeKey",
+		//	              "Operator"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "DocumentContentDeletion": {
+		//	            "type": "boolean"
+		//	          },
+		//	          "Target": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "TargetDocumentAttributeKey": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+		//	                "type": "string"
+		//	              },
+		//	              "TargetDocumentAttributeValue": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DateValue": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "LongValue": {
+		//	                    "format": "int64",
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "StringListValue": {
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "StringValue": {
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "TargetDocumentAttributeValueDeletion": {
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TargetDocumentAttributeKey"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 100,
+		//	      "type": "array"
+		//	    },
+		//	    "PostExtractionHookConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InvocationCondition": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ConditionDocumentAttributeKey": {
+		//	              "maxLength": 200,
+		//	              "minLength": 1,
+		//	              "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+		//	              "type": "string"
+		//	            },
+		//	            "ConditionOnValue": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DateValue": {
+		//	                  "type": "string"
+		//	                },
+		//	                "LongValue": {
+		//	                  "format": "int64",
+		//	                  "type": "integer"
+		//	                },
+		//	                "StringListValue": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "StringValue": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Operator": {
+		//	              "enum": [
+		//	                "GreaterThan",
+		//	                "GreaterThanOrEquals",
+		//	                "LessThan",
+		//	                "LessThanOrEquals",
+		//	                "Equals",
+		//	                "NotEquals",
+		//	                "Contains",
+		//	                "NotContains",
+		//	                "Exists",
+		//	                "NotExists",
+		//	                "BeginsWith"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ConditionDocumentAttributeKey",
+		//	            "Operator"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "LambdaArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "S3Bucket": {
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "LambdaArn",
+		//	        "S3Bucket"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "PreExtractionHookConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InvocationCondition": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ConditionDocumentAttributeKey": {
+		//	              "maxLength": 200,
+		//	              "minLength": 1,
+		//	              "pattern": "[a-zA-Z0-9_][a-zA-Z0-9_-]*",
+		//	              "type": "string"
+		//	            },
+		//	            "ConditionOnValue": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DateValue": {
+		//	                  "type": "string"
+		//	                },
+		//	                "LongValue": {
+		//	                  "format": "int64",
+		//	                  "type": "integer"
+		//	                },
+		//	                "StringListValue": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "StringValue": {
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Operator": {
+		//	              "enum": [
+		//	                "GreaterThan",
+		//	                "GreaterThanOrEquals",
+		//	                "LessThan",
+		//	                "LessThanOrEquals",
+		//	                "Equals",
+		//	                "NotEquals",
+		//	                "Contains",
+		//	                "NotContains",
+		//	                "Exists",
+		//	                "NotExists",
+		//	                "BeginsWith"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ConditionDocumentAttributeKey",
+		//	            "Operator"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "LambdaArn": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "S3Bucket": {
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "LambdaArn",
+		//	        "S3Bucket"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RoleArn": {
+		//	      "description": "Role ARN",
+		//	      "maxLength": 1284,
+		//	      "minLength": 1,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"custom_document_enrichment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InlineConfigurations
+				"inline_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Condition
+							"condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ConditionDocumentAttributeKey
+									"condition_document_attribute_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ConditionOnValue
+									"condition_on_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DateValue
+											"date_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"condition_on_value": {
-												// Property: ConditionOnValue
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"date_value": {
-															// Property: DateValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"long_value": {
-															// Property: LongValue
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"string_list_value": {
-															// Property: StringListValue
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"string_value": {
-															// Property: StringValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
+											}, /*END ATTRIBUTE*/
+											// Property: LongValue
+											"long_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"operator": {
-												// Property: Operator
-												Type:     types.StringType,
+											}, /*END ATTRIBUTE*/
+											// Property: StringListValue
+											"string_list_value": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: StringValue
+											"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Operator
+									"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DocumentContentDeletion
+							"document_content_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Target
+							"target": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: TargetDocumentAttributeKey
+									"target_document_attribute_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TargetDocumentAttributeValue
+									"target_document_attribute_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DateValue
+											"date_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: LongValue
+											"long_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: StringListValue
+											"string_list_value": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: StringValue
+											"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: TargetDocumentAttributeValueDeletion
+									"target_document_attribute_value_deletion": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of InlineCustomDocumentEnrichmentConfigurations",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PostExtractionHookConfiguration
+				"post_extraction_hook_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InvocationCondition
+						"invocation_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ConditionDocumentAttributeKey
+								"condition_document_attribute_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"document_content_deletion": {
-									// Property: DocumentContentDeletion
-									Type:     types.BoolType,
+								}, /*END ATTRIBUTE*/
+								// Property: ConditionOnValue
+								"condition_on_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DateValue
+										"date_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: LongValue
+										"long_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: StringListValue
+										"string_list_value": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StringValue
+										"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"target": {
-									// Property: Target
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"target_document_attribute_key": {
-												// Property: TargetDocumentAttributeKey
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"target_document_attribute_value": {
-												// Property: TargetDocumentAttributeValue
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"date_value": {
-															// Property: DateValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"long_value": {
-															// Property: LongValue
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"string_list_value": {
-															// Property: StringListValue
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"string_value": {
-															// Property: StringValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"target_document_attribute_value_deletion": {
-												// Property: TargetDocumentAttributeValueDeletion
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Operator
+								"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"post_extraction_hook_configuration": {
-						// Property: PostExtractionHookConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"invocation_condition": {
-									// Property: InvocationCondition
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"condition_document_attribute_key": {
-												// Property: ConditionDocumentAttributeKey
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"condition_on_value": {
-												// Property: ConditionOnValue
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"date_value": {
-															// Property: DateValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"long_value": {
-															// Property: LongValue
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"string_list_value": {
-															// Property: StringListValue
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"string_value": {
-															// Property: StringValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"operator": {
-												// Property: Operator
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Bucket
+						"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreExtractionHookConfiguration
+				"pre_extraction_hook_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InvocationCondition
+						"invocation_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ConditionDocumentAttributeKey
+								"condition_document_attribute_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"lambda_arn": {
-									// Property: LambdaArn
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+								// Property: ConditionOnValue
+								"condition_on_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DateValue
+										"date_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: LongValue
+										"long_value": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: StringListValue
+										"string_list_value": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: StringValue
+										"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"s3_bucket": {
-									// Property: S3Bucket
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+								// Property: Operator
+								"operator": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"pre_extraction_hook_configuration": {
-						// Property: PreExtractionHookConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"invocation_condition": {
-									// Property: InvocationCondition
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"condition_document_attribute_key": {
-												// Property: ConditionDocumentAttributeKey
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"condition_on_value": {
-												// Property: ConditionOnValue
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"date_value": {
-															// Property: DateValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"long_value": {
-															// Property: LongValue
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"string_list_value": {
-															// Property: StringListValue
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"string_value": {
-															// Property: StringValue
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"operator": {
-												// Property: Operator
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"lambda_arn": {
-									// Property: LambdaArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"s3_bucket": {
-									// Property: S3Bucket
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"role_arn": {
-						// Property: RoleArn
-						Description: "Role ARN",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LambdaArn
+						"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Bucket
+						"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Role ARN",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"data_source_configuration": {
-			// Property: DataSourceConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "oneOf": [
-			//	    {
-			//	      "required": [
-			//	        "S3Configuration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "SharePointConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "SalesforceConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "OneDriveConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "ServiceNowConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "DatabaseConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "ConfluenceConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "GoogleDriveConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "WebCrawlerConfiguration"
-			//	      ]
-			//	    },
-			//	    {
-			//	      "required": [
-			//	        "WorkDocsConfiguration"
-			//	      ]
-			//	    }
-			//	  ],
-			//	  "properties": {
-			//	    "ConfluenceConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AttachmentConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AttachmentFieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "enum": [
-			//	                      "AUTHOR",
-			//	                      "CONTENT_TYPE",
-			//	                      "CREATED_DATE",
-			//	                      "DISPLAY_URL",
-			//	                      "FILE_SIZE",
-			//	                      "ITEM_TYPE",
-			//	                      "PARENT_ID",
-			//	                      "SPACE_KEY",
-			//	                      "SPACE_NAME",
-			//	                      "URL",
-			//	                      "VERSION"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 11,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            },
-			//	            "CrawlAttachments": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "BlogConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "BlogFieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "enum": [
-			//	                      "AUTHOR",
-			//	                      "DISPLAY_URL",
-			//	                      "ITEM_TYPE",
-			//	                      "LABELS",
-			//	                      "PUBLISH_DATE",
-			//	                      "SPACE_KEY",
-			//	                      "SPACE_NAME",
-			//	                      "URL",
-			//	                      "VERSION"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 9,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ExclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "InclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "PageConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "PageFieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "enum": [
-			//	                      "AUTHOR",
-			//	                      "CONTENT_STATUS",
-			//	                      "CREATED_DATE",
-			//	                      "DISPLAY_URL",
-			//	                      "ITEM_TYPE",
-			//	                      "LABELS",
-			//	                      "MODIFIED_DATE",
-			//	                      "PARENT_ID",
-			//	                      "SPACE_KEY",
-			//	                      "SPACE_NAME",
-			//	                      "URL",
-			//	                      "VERSION"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 12,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "SecretArn": {
-			//	          "maxLength": 1284,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "ServerUrl": {
-			//	          "maxLength": 2048,
-			//	          "minLength": 1,
-			//	          "pattern": "^(https?|ftp|file)://([^\\s]*)",
-			//	          "type": "string"
-			//	        },
-			//	        "SpaceConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "CrawlArchivedSpaces": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "CrawlPersonalSpaces": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "ExcludeSpaces": {
-			//	              "items": {
-			//	                "maxLength": 255,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            },
-			//	            "IncludeSpaces": {
-			//	              "items": {
-			//	                "maxLength": 255,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            },
-			//	            "SpaceFieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "enum": [
-			//	                      "DISPLAY_URL",
-			//	                      "ITEM_TYPE",
-			//	                      "SPACE_KEY",
-			//	                      "URL"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 4,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Version": {
-			//	          "enum": [
-			//	            "CLOUD",
-			//	            "SERVER"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "VpcConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "SecurityGroupIds": {
-			//	              "items": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\-0-9a-zA-Z]+",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 10,
-			//	              "type": "array"
-			//	            },
-			//	            "SubnetIds": {
-			//	              "items": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\-0-9a-zA-Z]+",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 6,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "SubnetIds",
-			//	            "SecurityGroupIds"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ServerUrl",
-			//	        "SecretArn",
-			//	        "Version"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "DatabaseConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AclConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AllowedGroupsColumnName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "AllowedGroupsColumnName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "ColumnConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ChangeDetectingColumns": {
-			//	              "items": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 5,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            },
-			//	            "DocumentDataColumnName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "DocumentIdColumnName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "DocumentTitleColumnName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "FieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "DocumentIdColumnName",
-			//	            "DocumentDataColumnName",
-			//	            "ChangeDetectingColumns"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "ConnectionConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "DatabaseHost": {
-			//	              "maxLength": 253,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "DatabaseName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "DatabasePort": {
-			//	              "maximum": 65535,
-			//	              "minimum": 1,
-			//	              "type": "integer"
-			//	            },
-			//	            "SecretArn": {
-			//	              "maxLength": 1284,
-			//	              "minLength": 1,
-			//	              "pattern": "",
-			//	              "type": "string"
-			//	            },
-			//	            "TableName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "DatabaseHost",
-			//	            "DatabasePort",
-			//	            "DatabaseName",
-			//	            "TableName",
-			//	            "SecretArn"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "DatabaseEngineType": {
-			//	          "enum": [
-			//	            "RDS_AURORA_MYSQL",
-			//	            "RDS_AURORA_POSTGRESQL",
-			//	            "RDS_MYSQL",
-			//	            "RDS_POSTGRESQL"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "SqlConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "QueryIdentifiersEnclosingOption": {
-			//	              "enum": [
-			//	                "DOUBLE_QUOTES",
-			//	                "NONE"
-			//	              ],
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "VpcConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "SecurityGroupIds": {
-			//	              "items": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\-0-9a-zA-Z]+",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 10,
-			//	              "type": "array"
-			//	            },
-			//	            "SubnetIds": {
-			//	              "items": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\-0-9a-zA-Z]+",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 6,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "SubnetIds",
-			//	            "SecurityGroupIds"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ConnectionConfiguration",
-			//	        "ColumnConfiguration",
-			//	        "DatabaseEngineType"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "GoogleDriveConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ExcludeMimeTypes": {
-			//	          "items": {
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 30,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "ExcludeSharedDrives": {
-			//	          "items": {
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "ExcludeUserAccounts": {
-			//	          "items": {
-			//	            "maxLength": 256,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "ExclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "FieldMappings": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataSourceFieldName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "DateFieldFormat": {
-			//	                "maxLength": 40,
-			//	                "minLength": 4,
-			//	                "type": "string"
-			//	              },
-			//	              "IndexFieldName": {
-			//	                "maxLength": 30,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataSourceFieldName",
-			//	              "IndexFieldName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "InclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "SecretArn": {
-			//	          "maxLength": 1284,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "SecretArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "OneDriveConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DisableLocalGroups": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "ExclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "FieldMappings": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataSourceFieldName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "DateFieldFormat": {
-			//	                "maxLength": 40,
-			//	                "minLength": 4,
-			//	                "type": "string"
-			//	              },
-			//	              "IndexFieldName": {
-			//	                "maxLength": 30,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataSourceFieldName",
-			//	              "IndexFieldName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "InclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "OneDriveUsers": {
-			//	          "additionalProperties": false,
-			//	          "oneOf": [
-			//	            {
-			//	              "required": [
-			//	                "OneDriveUserList"
-			//	              ]
-			//	            },
-			//	            {
-			//	              "required": [
-			//	                "OneDriveUserS3Path"
-			//	              ]
-			//	            }
-			//	          ],
-			//	          "properties": {
-			//	            "OneDriveUserList": {
-			//	              "items": {
-			//	                "maxLength": 256,
-			//	                "minLength": 1,
-			//	                "pattern": "",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            },
-			//	            "OneDriveUserS3Path": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Bucket": {
-			//	                  "maxLength": 63,
-			//	                  "minLength": 3,
-			//	                  "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//	                  "type": "string"
-			//	                },
-			//	                "Key": {
-			//	                  "maxLength": 1024,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Bucket",
-			//	                "Key"
-			//	              ],
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "SecretArn": {
-			//	          "maxLength": 1284,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "TenantDomain": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TenantDomain",
-			//	        "SecretArn",
-			//	        "OneDriveUsers"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "S3Configuration": {
-			//	      "additionalProperties": false,
-			//	      "description": "S3 data source configuration",
-			//	      "properties": {
-			//	        "AccessControlListConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "KeyPath": {
-			//	              "maxLength": 1024,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "BucketName": {
-			//	          "maxLength": 63,
-			//	          "minLength": 3,
-			//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//	          "type": "string"
-			//	        },
-			//	        "DocumentsMetadataConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "S3Prefix": {
-			//	              "maxLength": 1024,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ExclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "InclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "InclusionPrefixes": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "BucketName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SalesforceConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ChatterFeedConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "DocumentDataFieldName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "DocumentTitleFieldName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "FieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            },
-			//	            "IncludeFilterTypes": {
-			//	              "items": {
-			//	                "enum": [
-			//	                  "ACTIVE_USER",
-			//	                  "STANDARD_USER"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 2,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "DocumentDataFieldName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "CrawlAttachments": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "ExcludeAttachmentFilePatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "IncludeAttachmentFilePatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "KnowledgeArticleConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "CustomKnowledgeArticleTypeConfigurations": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DocumentDataFieldName": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DocumentTitleFieldName": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "FieldMappings": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "DataSourceFieldName": {
-			//	                          "maxLength": 100,
-			//	                          "minLength": 1,
-			//	                          "type": "string"
-			//	                        },
-			//	                        "DateFieldFormat": {
-			//	                          "maxLength": 40,
-			//	                          "minLength": 4,
-			//	                          "type": "string"
-			//	                        },
-			//	                        "IndexFieldName": {
-			//	                          "maxLength": 30,
-			//	                          "minLength": 1,
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "DataSourceFieldName",
-			//	                        "IndexFieldName"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "maxItems": 100,
-			//	                    "type": "array"
-			//	                  },
-			//	                  "Name": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Name",
-			//	                  "DocumentDataFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 10,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            },
-			//	            "IncludedStates": {
-			//	              "items": {
-			//	                "enum": [
-			//	                  "DRAFT",
-			//	                  "PUBLISHED",
-			//	                  "ARCHIVED"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 3,
-			//	              "minItems": 1,
-			//	              "type": "array"
-			//	            },
-			//	            "StandardKnowledgeArticleTypeConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "DocumentDataFieldName": {
-			//	                  "maxLength": 100,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                },
-			//	                "DocumentTitleFieldName": {
-			//	                  "maxLength": 100,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                },
-			//	                "FieldMappings": {
-			//	                  "items": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "DataSourceFieldName": {
-			//	                        "maxLength": 100,
-			//	                        "minLength": 1,
-			//	                        "type": "string"
-			//	                      },
-			//	                      "DateFieldFormat": {
-			//	                        "maxLength": 40,
-			//	                        "minLength": 4,
-			//	                        "type": "string"
-			//	                      },
-			//	                      "IndexFieldName": {
-			//	                        "maxLength": 30,
-			//	                        "minLength": 1,
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "DataSourceFieldName",
-			//	                      "IndexFieldName"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  },
-			//	                  "maxItems": 100,
-			//	                  "type": "array"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "DocumentDataFieldName"
-			//	              ],
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "IncludedStates"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "SecretArn": {
-			//	          "maxLength": 1284,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "ServerUrl": {
-			//	          "maxLength": 2048,
-			//	          "minLength": 1,
-			//	          "pattern": "^(https?|ftp|file)://([^\\s]*)",
-			//	          "type": "string"
-			//	        },
-			//	        "StandardObjectAttachmentConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "DocumentTitleFieldName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "FieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "StandardObjectConfigurations": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DocumentDataFieldName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "DocumentTitleFieldName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "FieldMappings": {
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "DataSourceFieldName": {
-			//	                      "maxLength": 100,
-			//	                      "minLength": 1,
-			//	                      "type": "string"
-			//	                    },
-			//	                    "DateFieldFormat": {
-			//	                      "maxLength": 40,
-			//	                      "minLength": 4,
-			//	                      "type": "string"
-			//	                    },
-			//	                    "IndexFieldName": {
-			//	                      "maxLength": 30,
-			//	                      "minLength": 1,
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "DataSourceFieldName",
-			//	                    "IndexFieldName"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "maxItems": 100,
-			//	                "type": "array"
-			//	              },
-			//	              "Name": {
-			//	                "enum": [
-			//	                  "ACCOUNT",
-			//	                  "CAMPAIGN",
-			//	                  "CASE",
-			//	                  "CONTACT",
-			//	                  "CONTRACT",
-			//	                  "DOCUMENT",
-			//	                  "GROUP",
-			//	                  "IDEA",
-			//	                  "LEAD",
-			//	                  "OPPORTUNITY",
-			//	                  "PARTNER",
-			//	                  "PRICEBOOK",
-			//	                  "PRODUCT",
-			//	                  "PROFILE",
-			//	                  "SOLUTION",
-			//	                  "TASK",
-			//	                  "USER"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Name",
-			//	              "DocumentDataFieldName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 17,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ServerUrl",
-			//	        "SecretArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ServiceNowConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AuthenticationType": {
-			//	          "enum": [
-			//	            "HTTP_BASIC",
-			//	            "OAUTH2"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "HostUrl": {
-			//	          "maxLength": 2048,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "KnowledgeArticleConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "CrawlAttachments": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "DocumentDataFieldName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "DocumentTitleFieldName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "ExcludeAttachmentFilePatterns": {
-			//	              "items": {
-			//	                "maxLength": 50,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            },
-			//	            "FieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            },
-			//	            "FilterQuery": {
-			//	              "maxLength": 2048,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "IncludeAttachmentFilePatterns": {
-			//	              "items": {
-			//	                "maxLength": 50,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "DocumentDataFieldName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "SecretArn": {
-			//	          "maxLength": 1284,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "ServiceCatalogConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "CrawlAttachments": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "DocumentDataFieldName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "DocumentTitleFieldName": {
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "ExcludeAttachmentFilePatterns": {
-			//	              "items": {
-			//	                "maxLength": 50,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            },
-			//	            "FieldMappings": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DataSourceFieldName": {
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DateFieldFormat": {
-			//	                    "maxLength": 40,
-			//	                    "minLength": 4,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "IndexFieldName": {
-			//	                    "maxLength": 30,
-			//	                    "minLength": 1,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSourceFieldName",
-			//	                  "IndexFieldName"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            },
-			//	            "IncludeAttachmentFilePatterns": {
-			//	              "items": {
-			//	                "maxLength": 50,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "DocumentDataFieldName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "ServiceNowBuildVersion": {
-			//	          "enum": [
-			//	            "LONDON",
-			//	            "OTHERS"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "HostUrl",
-			//	        "SecretArn",
-			//	        "ServiceNowBuildVersion"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SharePointConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "SharePoint configuration",
-			//	      "properties": {
-			//	        "CrawlAttachments": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "DisableLocalGroups": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "DocumentTitleFieldName": {
-			//	          "maxLength": 100,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "ExclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "FieldMappings": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataSourceFieldName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "DateFieldFormat": {
-			//	                "maxLength": 40,
-			//	                "minLength": 4,
-			//	                "type": "string"
-			//	              },
-			//	              "IndexFieldName": {
-			//	                "maxLength": 30,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataSourceFieldName",
-			//	              "IndexFieldName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "InclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "SecretArn": {
-			//	          "maxLength": 1284,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "SharePointVersion": {
-			//	          "enum": [
-			//	            "SHAREPOINT_ONLINE",
-			//	            "SHAREPOINT_2013",
-			//	            "SHAREPOINT_2016"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "SslCertificateS3Path": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Bucket": {
-			//	              "maxLength": 63,
-			//	              "minLength": 3,
-			//	              "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
-			//	              "type": "string"
-			//	            },
-			//	            "Key": {
-			//	              "maxLength": 1024,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Bucket",
-			//	            "Key"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Urls": {
-			//	          "items": {
-			//	            "maxLength": 2048,
-			//	            "minLength": 1,
-			//	            "pattern": "^(https?|ftp|file)://([^\\s]*)",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "UseChangeLog": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "VpcConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "SecurityGroupIds": {
-			//	              "items": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\-0-9a-zA-Z]+",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 10,
-			//	              "type": "array"
-			//	            },
-			//	            "SubnetIds": {
-			//	              "items": {
-			//	                "maxLength": 200,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\-0-9a-zA-Z]+",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 6,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "SubnetIds",
-			//	            "SecurityGroupIds"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Urls",
-			//	        "SecretArn",
-			//	        "SharePointVersion"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "WebCrawlerConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AuthenticationConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "BasicAuthentication": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Credentials": {
-			//	                    "maxLength": 1284,
-			//	                    "minLength": 1,
-			//	                    "pattern": "",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Host": {
-			//	                    "maxLength": 253,
-			//	                    "minLength": 1,
-			//	                    "pattern": "([^\\s]*)",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Port": {
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "integer"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Host",
-			//	                  "Port",
-			//	                  "Credentials"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 10,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "CrawlDepth": {
-			//	          "maximum": 10,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaxContentSizePerPageInMegaBytes": {
-			//	          "maximum": 50,
-			//	          "minimum": 0,
-			//	          "type": "number"
-			//	        },
-			//	        "MaxLinksPerPage": {
-			//	          "maximum": 1000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaxUrlsPerMinuteCrawlRate": {
-			//	          "maximum": 300,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "ProxyConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Credentials": {
-			//	              "maxLength": 1284,
-			//	              "minLength": 1,
-			//	              "pattern": "",
-			//	              "type": "string"
-			//	            },
-			//	            "Host": {
-			//	              "maxLength": 253,
-			//	              "minLength": 1,
-			//	              "pattern": "([^\\s]*)",
-			//	              "type": "string"
-			//	            },
-			//	            "Port": {
-			//	              "maximum": 65535,
-			//	              "minimum": 1,
-			//	              "type": "integer"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Host",
-			//	            "Port"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "UrlExclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "UrlInclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "Urls": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "SeedUrlConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "SeedUrls": {
-			//	                  "items": {
-			//	                    "maxLength": 2048,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^(https?)://([^\\s]*)",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "maxItems": 100,
-			//	                  "minItems": 0,
-			//	                  "type": "array"
-			//	                },
-			//	                "WebCrawlerMode": {
-			//	                  "enum": [
-			//	                    "HOST_ONLY",
-			//	                    "SUBDOMAINS",
-			//	                    "EVERYTHING"
-			//	                  ],
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "SeedUrls"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "SiteMapsConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "SiteMaps": {
-			//	                  "items": {
-			//	                    "maxLength": 2048,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^(https?):\\/\\/([^\\s]*)",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "maxItems": 3,
-			//	                  "minItems": 0,
-			//	                  "type": "array"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "SiteMaps"
-			//	              ],
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Urls"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "WorkDocsConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CrawlComments": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "ExclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "FieldMappings": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataSourceFieldName": {
-			//	                "maxLength": 100,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "DateFieldFormat": {
-			//	                "maxLength": 40,
-			//	                "minLength": 4,
-			//	                "type": "string"
-			//	              },
-			//	              "IndexFieldName": {
-			//	                "maxLength": 30,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataSourceFieldName",
-			//	              "IndexFieldName"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "InclusionPatterns": {
-			//	          "items": {
-			//	            "maxLength": 50,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "type": "array"
-			//	        },
-			//	        "OrganizationId": {
-			//	          "maxLength": 12,
-			//	          "minLength": 12,
-			//	          "pattern": "d-[0-9a-fA-F]{10}",
-			//	          "type": "string"
-			//	        },
-			//	        "UseChangeLog": {
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "OrganizationId"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"confluence_configuration": {
-						// Property: ConfluenceConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"attachment_configuration": {
-									// Property: AttachmentConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"attachment_field_mappings": {
-												// Property: AttachmentFieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DataSourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "S3Configuration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SharePointConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "SalesforceConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "OneDriveConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "ServiceNowConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "DatabaseConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "ConfluenceConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "GoogleDriveConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WebCrawlerConfiguration"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "WorkDocsConfiguration"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "ConfluenceConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AttachmentConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AttachmentFieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "enum": [
+		//	                      "AUTHOR",
+		//	                      "CONTENT_TYPE",
+		//	                      "CREATED_DATE",
+		//	                      "DISPLAY_URL",
+		//	                      "FILE_SIZE",
+		//	                      "ITEM_TYPE",
+		//	                      "PARENT_ID",
+		//	                      "SPACE_KEY",
+		//	                      "SPACE_NAME",
+		//	                      "URL",
+		//	                      "VERSION"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 11,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "CrawlAttachments": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "BlogConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BlogFieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "enum": [
+		//	                      "AUTHOR",
+		//	                      "DISPLAY_URL",
+		//	                      "ITEM_TYPE",
+		//	                      "LABELS",
+		//	                      "PUBLISH_DATE",
+		//	                      "SPACE_KEY",
+		//	                      "SPACE_NAME",
+		//	                      "URL",
+		//	                      "VERSION"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 9,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ExclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "InclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "PageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "PageFieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "enum": [
+		//	                      "AUTHOR",
+		//	                      "CONTENT_STATUS",
+		//	                      "CREATED_DATE",
+		//	                      "DISPLAY_URL",
+		//	                      "ITEM_TYPE",
+		//	                      "LABELS",
+		//	                      "MODIFIED_DATE",
+		//	                      "PARENT_ID",
+		//	                      "SPACE_KEY",
+		//	                      "SPACE_NAME",
+		//	                      "URL",
+		//	                      "VERSION"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 12,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SecretArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "ServerUrl": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^(https?|ftp|file)://([^\\s]*)",
+		//	          "type": "string"
+		//	        },
+		//	        "SpaceConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CrawlArchivedSpaces": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "CrawlPersonalSpaces": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "ExcludeSpaces": {
+		//	              "items": {
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "IncludeSpaces": {
+		//	              "items": {
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "SpaceFieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "enum": [
+		//	                      "DISPLAY_URL",
+		//	                      "ITEM_TYPE",
+		//	                      "SPACE_KEY",
+		//	                      "URL"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 4,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Version": {
+		//	          "enum": [
+		//	            "CLOUD",
+		//	            "SERVER"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "VpcConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SecurityGroupIds": {
+		//	              "items": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\-0-9a-zA-Z]+",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "type": "array"
+		//	            },
+		//	            "SubnetIds": {
+		//	              "items": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\-0-9a-zA-Z]+",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 6,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SubnetIds",
+		//	            "SecurityGroupIds"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerUrl",
+		//	        "SecretArn",
+		//	        "Version"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DatabaseConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AclConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AllowedGroupsColumnName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AllowedGroupsColumnName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ColumnConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ChangeDetectingColumns": {
+		//	              "items": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "DocumentDataColumnName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "DocumentIdColumnName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "DocumentTitleColumnName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "FieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DocumentIdColumnName",
+		//	            "DocumentDataColumnName",
+		//	            "ChangeDetectingColumns"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ConnectionConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DatabaseHost": {
+		//	              "maxLength": 253,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "DatabasePort": {
+		//	              "maximum": 65535,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "SecretArn": {
+		//	              "maxLength": 1284,
+		//	              "minLength": 1,
+		//	              "pattern": "",
+		//	              "type": "string"
+		//	            },
+		//	            "TableName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DatabaseHost",
+		//	            "DatabasePort",
+		//	            "DatabaseName",
+		//	            "TableName",
+		//	            "SecretArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "DatabaseEngineType": {
+		//	          "enum": [
+		//	            "RDS_AURORA_MYSQL",
+		//	            "RDS_AURORA_POSTGRESQL",
+		//	            "RDS_MYSQL",
+		//	            "RDS_POSTGRESQL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "SqlConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "QueryIdentifiersEnclosingOption": {
+		//	              "enum": [
+		//	                "DOUBLE_QUOTES",
+		//	                "NONE"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "VpcConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SecurityGroupIds": {
+		//	              "items": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\-0-9a-zA-Z]+",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "type": "array"
+		//	            },
+		//	            "SubnetIds": {
+		//	              "items": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\-0-9a-zA-Z]+",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 6,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SubnetIds",
+		//	            "SecurityGroupIds"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ConnectionConfiguration",
+		//	        "ColumnConfiguration",
+		//	        "DatabaseEngineType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "GoogleDriveConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ExcludeMimeTypes": {
+		//	          "items": {
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "ExcludeSharedDrives": {
+		//	          "items": {
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "ExcludeUserAccounts": {
+		//	          "items": {
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "ExclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "FieldMappings": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataSourceFieldName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "DateFieldFormat": {
+		//	                "maxLength": 40,
+		//	                "minLength": 4,
+		//	                "type": "string"
+		//	              },
+		//	              "IndexFieldName": {
+		//	                "maxLength": 30,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataSourceFieldName",
+		//	              "IndexFieldName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "InclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "SecretArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SecretArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "OneDriveConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DisableLocalGroups": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "FieldMappings": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataSourceFieldName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "DateFieldFormat": {
+		//	                "maxLength": 40,
+		//	                "minLength": 4,
+		//	                "type": "string"
+		//	              },
+		//	              "IndexFieldName": {
+		//	                "maxLength": 30,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataSourceFieldName",
+		//	              "IndexFieldName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "InclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "OneDriveUsers": {
+		//	          "additionalProperties": false,
+		//	          "oneOf": [
+		//	            {
+		//	              "required": [
+		//	                "OneDriveUserList"
+		//	              ]
+		//	            },
+		//	            {
+		//	              "required": [
+		//	                "OneDriveUserS3Path"
+		//	              ]
+		//	            }
+		//	          ],
+		//	          "properties": {
+		//	            "OneDriveUserList": {
+		//	              "items": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "OneDriveUserS3Path": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Bucket": {
+		//	                  "maxLength": 63,
+		//	                  "minLength": 3,
+		//	                  "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+		//	                  "type": "string"
+		//	                },
+		//	                "Key": {
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Bucket",
+		//	                "Key"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SecretArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "TenantDomain": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-z]{2,}$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TenantDomain",
+		//	        "SecretArn",
+		//	        "OneDriveUsers"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "S3Configuration": {
+		//	      "additionalProperties": false,
+		//	      "description": "S3 data source configuration",
+		//	      "properties": {
+		//	        "AccessControlListConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "KeyPath": {
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "BucketName": {
+		//	          "maxLength": 63,
+		//	          "minLength": 3,
+		//	          "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+		//	          "type": "string"
+		//	        },
+		//	        "DocumentsMetadataConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "S3Prefix": {
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ExclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "InclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "InclusionPrefixes": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BucketName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SalesforceConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ChatterFeedConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DocumentDataFieldName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "DocumentTitleFieldName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "FieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            },
+		//	            "IncludeFilterTypes": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "ACTIVE_USER",
+		//	                  "STANDARD_USER"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 2,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DocumentDataFieldName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "CrawlAttachments": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExcludeAttachmentFilePatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "IncludeAttachmentFilePatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "KnowledgeArticleConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CustomKnowledgeArticleTypeConfigurations": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DocumentDataFieldName": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DocumentTitleFieldName": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "FieldMappings": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "DataSourceFieldName": {
+		//	                          "maxLength": 100,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "DateFieldFormat": {
+		//	                          "maxLength": 40,
+		//	                          "minLength": 4,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "IndexFieldName": {
+		//	                          "maxLength": 30,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "DataSourceFieldName",
+		//	                        "IndexFieldName"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 100,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "Name": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Name",
+		//	                  "DocumentDataFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "IncludedStates": {
+		//	              "items": {
+		//	                "enum": [
+		//	                  "DRAFT",
+		//	                  "PUBLISHED",
+		//	                  "ARCHIVED"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 3,
+		//	              "minItems": 1,
+		//	              "type": "array"
+		//	            },
+		//	            "StandardKnowledgeArticleTypeConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DocumentDataFieldName": {
+		//	                  "maxLength": 100,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "DocumentTitleFieldName": {
+		//	                  "maxLength": 100,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "FieldMappings": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "DataSourceFieldName": {
+		//	                        "maxLength": 100,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "DateFieldFormat": {
+		//	                        "maxLength": 40,
+		//	                        "minLength": 4,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "IndexFieldName": {
+		//	                        "maxLength": 30,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "DataSourceFieldName",
+		//	                      "IndexFieldName"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "maxItems": 100,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DocumentDataFieldName"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "IncludedStates"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SecretArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "ServerUrl": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "^(https?|ftp|file)://([^\\s]*)",
+		//	          "type": "string"
+		//	        },
+		//	        "StandardObjectAttachmentConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DocumentTitleFieldName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "FieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "StandardObjectConfigurations": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DocumentDataFieldName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "DocumentTitleFieldName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "FieldMappings": {
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "DataSourceFieldName": {
+		//	                      "maxLength": 100,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "DateFieldFormat": {
+		//	                      "maxLength": 40,
+		//	                      "minLength": 4,
+		//	                      "type": "string"
+		//	                    },
+		//	                    "IndexFieldName": {
+		//	                      "maxLength": 30,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "DataSourceFieldName",
+		//	                    "IndexFieldName"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "maxItems": 100,
+		//	                "type": "array"
+		//	              },
+		//	              "Name": {
+		//	                "enum": [
+		//	                  "ACCOUNT",
+		//	                  "CAMPAIGN",
+		//	                  "CASE",
+		//	                  "CONTACT",
+		//	                  "CONTRACT",
+		//	                  "DOCUMENT",
+		//	                  "GROUP",
+		//	                  "IDEA",
+		//	                  "LEAD",
+		//	                  "OPPORTUNITY",
+		//	                  "PARTNER",
+		//	                  "PRICEBOOK",
+		//	                  "PRODUCT",
+		//	                  "PROFILE",
+		//	                  "SOLUTION",
+		//	                  "TASK",
+		//	                  "USER"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "DocumentDataFieldName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 17,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ServerUrl",
+		//	        "SecretArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ServiceNowConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AuthenticationType": {
+		//	          "enum": [
+		//	            "HTTP_BASIC",
+		//	            "OAUTH2"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "HostUrl": {
+		//	          "maxLength": 2048,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "KnowledgeArticleConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CrawlAttachments": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "DocumentDataFieldName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "DocumentTitleFieldName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "ExcludeAttachmentFilePatterns": {
+		//	              "items": {
+		//	                "maxLength": 50,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            },
+		//	            "FieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            },
+		//	            "FilterQuery": {
+		//	              "maxLength": 2048,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "IncludeAttachmentFilePatterns": {
+		//	              "items": {
+		//	                "maxLength": 50,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DocumentDataFieldName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SecretArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "ServiceCatalogConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CrawlAttachments": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "DocumentDataFieldName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "DocumentTitleFieldName": {
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "ExcludeAttachmentFilePatterns": {
+		//	              "items": {
+		//	                "maxLength": 50,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            },
+		//	            "FieldMappings": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DataSourceFieldName": {
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DateFieldFormat": {
+		//	                    "maxLength": 40,
+		//	                    "minLength": 4,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "IndexFieldName": {
+		//	                    "maxLength": 30,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSourceFieldName",
+		//	                  "IndexFieldName"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            },
+		//	            "IncludeAttachmentFilePatterns": {
+		//	              "items": {
+		//	                "maxLength": 50,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "DocumentDataFieldName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "ServiceNowBuildVersion": {
+		//	          "enum": [
+		//	            "LONDON",
+		//	            "OTHERS"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "HostUrl",
+		//	        "SecretArn",
+		//	        "ServiceNowBuildVersion"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SharePointConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "SharePoint configuration",
+		//	      "properties": {
+		//	        "CrawlAttachments": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "DisableLocalGroups": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "DocumentTitleFieldName": {
+		//	          "maxLength": 100,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ExclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "FieldMappings": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataSourceFieldName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "DateFieldFormat": {
+		//	                "maxLength": 40,
+		//	                "minLength": 4,
+		//	                "type": "string"
+		//	              },
+		//	              "IndexFieldName": {
+		//	                "maxLength": 30,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataSourceFieldName",
+		//	              "IndexFieldName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "InclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "SecretArn": {
+		//	          "maxLength": 1284,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "SharePointVersion": {
+		//	          "enum": [
+		//	            "SHAREPOINT_ONLINE",
+		//	            "SHAREPOINT_2013",
+		//	            "SHAREPOINT_2016"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "SslCertificateS3Path": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]",
+		//	              "type": "string"
+		//	            },
+		//	            "Key": {
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Bucket",
+		//	            "Key"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Urls": {
+		//	          "items": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "pattern": "^(https?|ftp|file)://([^\\s]*)",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "UseChangeLog": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "VpcConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SecurityGroupIds": {
+		//	              "items": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\-0-9a-zA-Z]+",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "type": "array"
+		//	            },
+		//	            "SubnetIds": {
+		//	              "items": {
+		//	                "maxLength": 200,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\-0-9a-zA-Z]+",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 6,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "SubnetIds",
+		//	            "SecurityGroupIds"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Urls",
+		//	        "SecretArn",
+		//	        "SharePointVersion"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "WebCrawlerConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AuthenticationConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BasicAuthentication": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Credentials": {
+		//	                    "maxLength": 1284,
+		//	                    "minLength": 1,
+		//	                    "pattern": "",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Host": {
+		//	                    "maxLength": 253,
+		//	                    "minLength": 1,
+		//	                    "pattern": "([^\\s]*)",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Host",
+		//	                  "Port",
+		//	                  "Credentials"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "CrawlDepth": {
+		//	          "maximum": 10,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxContentSizePerPageInMegaBytes": {
+		//	          "maximum": 50,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        },
+		//	        "MaxLinksPerPage": {
+		//	          "maximum": 1000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxUrlsPerMinuteCrawlRate": {
+		//	          "maximum": 300,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ProxyConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Credentials": {
+		//	              "maxLength": 1284,
+		//	              "minLength": 1,
+		//	              "pattern": "",
+		//	              "type": "string"
+		//	            },
+		//	            "Host": {
+		//	              "maxLength": 253,
+		//	              "minLength": 1,
+		//	              "pattern": "([^\\s]*)",
+		//	              "type": "string"
+		//	            },
+		//	            "Port": {
+		//	              "maximum": 65535,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Host",
+		//	            "Port"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "UrlExclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "UrlInclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "Urls": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SeedUrlConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SeedUrls": {
+		//	                  "items": {
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^(https?)://([^\\s]*)",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 100,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "WebCrawlerMode": {
+		//	                  "enum": [
+		//	                    "HOST_ONLY",
+		//	                    "SUBDOMAINS",
+		//	                    "EVERYTHING"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "SeedUrls"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "SiteMapsConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SiteMaps": {
+		//	                  "items": {
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^(https?):\\/\\/([^\\s]*)",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 3,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "SiteMaps"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Urls"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "WorkDocsConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CrawlComments": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "FieldMappings": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataSourceFieldName": {
+		//	                "maxLength": 100,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "DateFieldFormat": {
+		//	                "maxLength": 40,
+		//	                "minLength": 4,
+		//	                "type": "string"
+		//	              },
+		//	              "IndexFieldName": {
+		//	                "maxLength": 30,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataSourceFieldName",
+		//	              "IndexFieldName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "InclusionPatterns": {
+		//	          "items": {
+		//	            "maxLength": 50,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "type": "array"
+		//	        },
+		//	        "OrganizationId": {
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "pattern": "d-[0-9a-fA-F]{10}",
+		//	          "type": "string"
+		//	        },
+		//	        "UseChangeLog": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OrganizationId"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"data_source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConfluenceConfiguration
+				"confluence_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AttachmentConfiguration
+						"attachment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AttachmentFieldMappings
+								"attachment_field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CrawlAttachments
+								"crawl_attachments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BlogConfiguration
+						"blog_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BlogFieldMappings
+								"blog_field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExclusionPatterns
+						"exclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InclusionPatterns
+						"inclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PageConfiguration
+						"page_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: PageFieldMappings
+								"page_field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerUrl
+						"server_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SpaceConfiguration
+						"space_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CrawlArchivedSpaces
+								"crawl_archived_spaces": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: CrawlPersonalSpaces
+								"crawl_personal_spaces": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ExcludeSpaces
+								"exclude_spaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IncludeSpaces
+								"include_spaces": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SpaceFieldMappings
+								"space_field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Version
+						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcConfiguration
+						"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroupIds
+								"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SubnetIds
+								"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseConfiguration
+				"database_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AclConfiguration
+						"acl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AllowedGroupsColumnName
+								"allowed_groups_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ColumnConfiguration
+						"column_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ChangeDetectingColumns
+								"change_detecting_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentDataColumnName
+								"document_data_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentIdColumnName
+								"document_id_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentTitleColumnName
+								"document_title_column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FieldMappings
+								"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ConnectionConfiguration
+						"connection_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DatabaseHost
+								"database_host": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseName
+								"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DatabasePort
+								"database_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: SecretArn
+								"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TableName
+								"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseEngineType
+						"database_engine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SqlConfiguration
+						"sql_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: QueryIdentifiersEnclosingOption
+								"query_identifiers_enclosing_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcConfiguration
+						"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroupIds
+								"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SubnetIds
+								"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: GoogleDriveConfiguration
+				"google_drive_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ExcludeMimeTypes
+						"exclude_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludeSharedDrives
+						"exclude_shared_drives": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludeUserAccounts
+						"exclude_user_accounts": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExclusionPatterns
+						"exclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FieldMappings
+						"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataSourceFieldName
+									"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: DateFieldFormat
+									"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IndexFieldName
+									"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InclusionPatterns
+						"inclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OneDriveConfiguration
+				"one_drive_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DisableLocalGroups
+						"disable_local_groups": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExclusionPatterns
+						"exclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FieldMappings
+						"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataSourceFieldName
+									"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: DateFieldFormat
+									"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IndexFieldName
+									"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InclusionPatterns
+						"inclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OneDriveUsers
+						"one_drive_users": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OneDriveUserList
+								"one_drive_user_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OneDriveUserS3Path
+								"one_drive_user_s3_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Bucket
+										"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Key
+										"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TenantDomain
+						"tenant_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Configuration
+				"s3_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessControlListConfiguration
+						"access_control_list_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: KeyPath
+								"key_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DocumentsMetadataConfiguration
+						"documents_metadata_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3Prefix
+								"s3_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExclusionPatterns
+						"exclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InclusionPatterns
+						"inclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InclusionPrefixes
+						"inclusion_prefixes": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "S3 data source configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SalesforceConfiguration
+				"salesforce_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ChatterFeedConfiguration
+						"chatter_feed_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DocumentDataFieldName
+								"document_data_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentTitleFieldName
+								"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: FieldMappings
+								"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: IncludeFilterTypes
+								"include_filter_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CrawlAttachments
+						"crawl_attachments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExcludeAttachmentFilePatterns
+						"exclude_attachment_file_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: IncludeAttachmentFilePatterns
+						"include_attachment_file_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: KnowledgeArticleConfiguration
+						"knowledge_article_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CustomKnowledgeArticleTypeConfigurations
+								"custom_knowledge_article_type_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DocumentDataFieldName
+											"document_data_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DocumentTitleFieldName
+											"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: FieldMappings
+											"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: DataSourceFieldName
+														"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: DateFieldFormat
+														"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: IndexFieldName
+														"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-													},
-												),
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
 												Computed: true,
-											},
-											"crawl_attachments": {
-												// Property: CrawlAttachments
-												Type:     types.BoolType,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
-								},
-								"blog_configuration": {
-									// Property: BlogConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"blog_field_mappings": {
-												// Property: BlogFieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: IncludedStates
+								"included_states": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StandardKnowledgeArticleTypeConfiguration
+								"standard_knowledge_article_type_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DocumentDataFieldName
+										"document_data_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: DocumentTitleFieldName
+										"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FieldMappings
+										"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DataSourceFieldName
+													"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: DateFieldFormat
+													"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: IndexFieldName
+													"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"exclusion_patterns": {
-									// Property: ExclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerUrl
+						"server_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StandardObjectAttachmentConfiguration
+						"standard_object_attachment_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: DocumentTitleFieldName
+								"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"inclusion_patterns": {
-									// Property: InclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: FieldMappings
+								"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
-								},
-								"page_configuration": {
-									// Property: PageConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"page_field_mappings": {
-												// Property: PageFieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"secret_arn": {
-									// Property: SecretArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"server_url": {
-									// Property: ServerUrl
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"space_configuration": {
-									// Property: SpaceConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"crawl_archived_spaces": {
-												// Property: CrawlArchivedSpaces
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"crawl_personal_spaces": {
-												// Property: CrawlPersonalSpaces
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"exclude_spaces": {
-												// Property: ExcludeSpaces
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"include_spaces": {
-												// Property: IncludeSpaces
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"space_field_mappings": {
-												// Property: SpaceFieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"version": {
-									// Property: Version
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"vpc_configuration": {
-									// Property: VpcConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"security_group_ids": {
-												// Property: SecurityGroupIds
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"subnet_ids": {
-												// Property: SubnetIds
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"database_configuration": {
-						// Property: DatabaseConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"acl_configuration": {
-									// Property: AclConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"allowed_groups_column_name": {
-												// Property: AllowedGroupsColumnName
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"column_configuration": {
-									// Property: ColumnConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"change_detecting_columns": {
-												// Property: ChangeDetectingColumns
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"document_data_column_name": {
-												// Property: DocumentDataColumnName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"document_id_column_name": {
-												// Property: DocumentIdColumnName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"document_title_column_name": {
-												// Property: DocumentTitleColumnName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"field_mappings": {
-												// Property: FieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"connection_configuration": {
-									// Property: ConnectionConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"database_host": {
-												// Property: DatabaseHost
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"database_name": {
-												// Property: DatabaseName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"database_port": {
-												// Property: DatabasePort
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"secret_arn": {
-												// Property: SecretArn
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"table_name": {
-												// Property: TableName
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"database_engine_type": {
-									// Property: DatabaseEngineType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"sql_configuration": {
-									// Property: SqlConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"query_identifiers_enclosing_option": {
-												// Property: QueryIdentifiersEnclosingOption
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"vpc_configuration": {
-									// Property: VpcConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"security_group_ids": {
-												// Property: SecurityGroupIds
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"subnet_ids": {
-												// Property: SubnetIds
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"google_drive_configuration": {
-						// Property: GoogleDriveConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"exclude_mime_types": {
-									// Property: ExcludeMimeTypes
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"exclude_shared_drives": {
-									// Property: ExcludeSharedDrives
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"exclude_user_accounts": {
-									// Property: ExcludeUserAccounts
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"exclusion_patterns": {
-									// Property: ExclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"field_mappings": {
-									// Property: FieldMappings
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_source_field_name": {
-												// Property: DataSourceFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"date_field_format": {
-												// Property: DateFieldFormat
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"index_field_name": {
-												// Property: IndexFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"inclusion_patterns": {
-									// Property: InclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"secret_arn": {
-									// Property: SecretArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"one_drive_configuration": {
-						// Property: OneDriveConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"disable_local_groups": {
-									// Property: DisableLocalGroups
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"exclusion_patterns": {
-									// Property: ExclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"field_mappings": {
-									// Property: FieldMappings
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_source_field_name": {
-												// Property: DataSourceFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"date_field_format": {
-												// Property: DateFieldFormat
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"index_field_name": {
-												// Property: IndexFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"inclusion_patterns": {
-									// Property: InclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"one_drive_users": {
-									// Property: OneDriveUsers
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"one_drive_user_list": {
-												// Property: OneDriveUserList
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"one_drive_user_s3_path": {
-												// Property: OneDriveUserS3Path
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"bucket": {
-															// Property: Bucket
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"key": {
-															// Property: Key
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"secret_arn": {
-									// Property: SecretArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"tenant_domain": {
-									// Property: TenantDomain
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"s3_configuration": {
-						// Property: S3Configuration
-						Description: "S3 data source configuration",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"access_control_list_configuration": {
-									// Property: AccessControlListConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"key_path": {
-												// Property: KeyPath
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"bucket_name": {
-									// Property: BucketName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"documents_metadata_configuration": {
-									// Property: DocumentsMetadataConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"s3_prefix": {
-												// Property: S3Prefix
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"exclusion_patterns": {
-									// Property: ExclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"inclusion_patterns": {
-									// Property: InclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"inclusion_prefixes": {
-									// Property: InclusionPrefixes
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"salesforce_configuration": {
-						// Property: SalesforceConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"chatter_feed_configuration": {
-									// Property: ChatterFeedConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"document_data_field_name": {
-												// Property: DocumentDataFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"document_title_field_name": {
-												// Property: DocumentTitleFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"field_mappings": {
-												// Property: FieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"include_filter_types": {
-												// Property: IncludeFilterTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"crawl_attachments": {
-									// Property: CrawlAttachments
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"exclude_attachment_file_patterns": {
-									// Property: ExcludeAttachmentFilePatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"include_attachment_file_patterns": {
-									// Property: IncludeAttachmentFilePatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"knowledge_article_configuration": {
-									// Property: KnowledgeArticleConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"custom_knowledge_article_type_configurations": {
-												// Property: CustomKnowledgeArticleTypeConfigurations
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"document_data_field_name": {
-															// Property: DocumentDataFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"document_title_field_name": {
-															// Property: DocumentTitleFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"field_mappings": {
-															// Property: FieldMappings
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"data_source_field_name": {
-																		// Property: DataSourceFieldName
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"date_field_format": {
-																		// Property: DateFieldFormat
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"index_field_name": {
-																		// Property: IndexFieldName
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"name": {
-															// Property: Name
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"included_states": {
-												// Property: IncludedStates
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"standard_knowledge_article_type_configuration": {
-												// Property: StandardKnowledgeArticleTypeConfiguration
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"document_data_field_name": {
-															// Property: DocumentDataFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"document_title_field_name": {
-															// Property: DocumentTitleFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"field_mappings": {
-															// Property: FieldMappings
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"data_source_field_name": {
-																		// Property: DataSourceFieldName
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"date_field_format": {
-																		// Property: DateFieldFormat
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"index_field_name": {
-																		// Property: IndexFieldName
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"secret_arn": {
-									// Property: SecretArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"server_url": {
-									// Property: ServerUrl
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"standard_object_attachment_configuration": {
-									// Property: StandardObjectAttachmentConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"document_title_field_name": {
-												// Property: DocumentTitleFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"field_mappings": {
-												// Property: FieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"standard_object_configurations": {
-									// Property: StandardObjectConfigurations
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"document_data_field_name": {
-												// Property: DocumentDataFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"document_title_field_name": {
-												// Property: DocumentTitleFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"field_mappings": {
-												// Property: FieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"name": {
-												// Property: Name
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"service_now_configuration": {
-						// Property: ServiceNowConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"authentication_type": {
-									// Property: AuthenticationType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"host_url": {
-									// Property: HostUrl
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"knowledge_article_configuration": {
-									// Property: KnowledgeArticleConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"crawl_attachments": {
-												// Property: CrawlAttachments
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"document_data_field_name": {
-												// Property: DocumentDataFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"document_title_field_name": {
-												// Property: DocumentTitleFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"exclude_attachment_file_patterns": {
-												// Property: ExcludeAttachmentFilePatterns
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"field_mappings": {
-												// Property: FieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"filter_query": {
-												// Property: FilterQuery
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"include_attachment_file_patterns": {
-												// Property: IncludeAttachmentFilePatterns
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"secret_arn": {
-									// Property: SecretArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"service_catalog_configuration": {
-									// Property: ServiceCatalogConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"crawl_attachments": {
-												// Property: CrawlAttachments
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"document_data_field_name": {
-												// Property: DocumentDataFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"document_title_field_name": {
-												// Property: DocumentTitleFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"exclude_attachment_file_patterns": {
-												// Property: ExcludeAttachmentFilePatterns
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"field_mappings": {
-												// Property: FieldMappings
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"data_source_field_name": {
-															// Property: DataSourceFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"date_field_format": {
-															// Property: DateFieldFormat
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"index_field_name": {
-															// Property: IndexFieldName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"include_attachment_file_patterns": {
-												// Property: IncludeAttachmentFilePatterns
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"service_now_build_version": {
-									// Property: ServiceNowBuildVersion
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"share_point_configuration": {
-						// Property: SharePointConfiguration
-						Description: "SharePoint configuration",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"crawl_attachments": {
-									// Property: CrawlAttachments
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"disable_local_groups": {
-									// Property: DisableLocalGroups
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"document_title_field_name": {
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StandardObjectConfigurations
+						"standard_object_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DocumentDataFieldName
+									"document_data_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: DocumentTitleFieldName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"exclusion_patterns": {
-									// Property: ExclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"field_mappings": {
+									"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: FieldMappings
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_source_field_name": {
+									"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 												// Property: DataSourceFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"date_field_format": {
+												"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: DateFieldFormat
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"index_field_name": {
+												"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
 												// Property: IndexFieldName
-												Type:     types.StringType,
+												"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ServiceNowConfiguration
+				"service_now_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationType
+						"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: HostUrl
+						"host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: KnowledgeArticleConfiguration
+						"knowledge_article_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CrawlAttachments
+								"crawl_attachments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentDataFieldName
+								"document_data_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentTitleFieldName
+								"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ExcludeAttachmentFilePatterns
+								"exclude_attachment_file_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FieldMappings
+								"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"inclusion_patterns": {
-									// Property: InclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"secret_arn": {
-									// Property: SecretArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"share_point_version": {
-									// Property: SharePointVersion
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"ssl_certificate_s3_path": {
-									// Property: SslCertificateS3Path
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Type:     types.StringType,
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
-								},
-								"urls": {
-									// Property: Urls
-									Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: FilterQuery
+								"filter_query": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"use_change_log": {
-									// Property: UseChangeLog
-									Type:     types.BoolType,
+								}, /*END ATTRIBUTE*/
+								// Property: IncludeAttachmentFilePatterns
+								"include_attachment_file_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceCatalogConfiguration
+						"service_catalog_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CrawlAttachments
+								"crawl_attachments": schema.BoolAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"vpc_configuration": {
-									// Property: VpcConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"security_group_ids": {
-												// Property: SecurityGroupIds
-												Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentDataFieldName
+								"document_data_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: DocumentTitleFieldName
+								"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ExcludeAttachmentFilePatterns
+								"exclude_attachment_file_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FieldMappings
+								"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DataSourceFieldName
+											"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"subnet_ids": {
-												// Property: SubnetIds
-												Type:     types.ListType{ElemType: types.StringType},
+											}, /*END ATTRIBUTE*/
+											// Property: DateFieldFormat
+											"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"web_crawler_configuration": {
-						// Property: WebCrawlerConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"authentication_configuration": {
-									// Property: AuthenticationConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_authentication": {
-												// Property: BasicAuthentication
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"credentials": {
-															// Property: Credentials
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"host": {
-															// Property: Host
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"port": {
-															// Property: Port
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-													},
-												),
+											}, /*END ATTRIBUTE*/
+											// Property: IndexFieldName
+											"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
-								},
-								"crawl_depth": {
-									// Property: CrawlDepth
-									Type:     types.Int64Type,
+								}, /*END ATTRIBUTE*/
+								// Property: IncludeAttachmentFilePatterns
+								"include_attachment_file_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceNowBuildVersion
+						"service_now_build_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SharePointConfiguration
+				"share_point_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrawlAttachments
+						"crawl_attachments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DisableLocalGroups
+						"disable_local_groups": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DocumentTitleFieldName
+						"document_title_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExclusionPatterns
+						"exclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FieldMappings
+						"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataSourceFieldName
+									"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: DateFieldFormat
+									"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IndexFieldName
+									"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InclusionPatterns
+						"inclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretArn
+						"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SharePointVersion
+						"share_point_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslCertificateS3Path
+						"ssl_certificate_s3_path": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"max_content_size_per_page_in_mega_bytes": {
-									// Property: MaxContentSizePerPageInMegaBytes
-									Type:     types.Float64Type,
+								}, /*END ATTRIBUTE*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"max_links_per_page": {
-									// Property: MaxLinksPerPage
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"max_urls_per_minute_crawl_rate": {
-									// Property: MaxUrlsPerMinuteCrawlRate
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"proxy_configuration": {
-									// Property: ProxyConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"credentials": {
-												// Property: Credentials
-												Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Urls
+						"urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UseChangeLog
+						"use_change_log": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcConfiguration
+						"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroupIds
+								"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SubnetIds
+								"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "SharePoint configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: WebCrawlerConfiguration
+				"web_crawler_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AuthenticationConfiguration
+						"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuthentication
+								"basic_authentication": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Credentials
+											"credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"host": {
-												// Property: Host
-												Type:     types.StringType,
+											}, /*END ATTRIBUTE*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"port": {
-												// Property: Port
-												Type:     types.Int64Type,
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
-								},
-								"url_exclusion_patterns": {
-									// Property: UrlExclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CrawlDepth
+						"crawl_depth": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxContentSizePerPageInMegaBytes
+						"max_content_size_per_page_in_mega_bytes": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxLinksPerPage
+						"max_links_per_page": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxUrlsPerMinuteCrawlRate
+						"max_urls_per_minute_crawl_rate": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ProxyConfiguration
+						"proxy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Credentials
+								"credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"url_inclusion_patterns": {
-									// Property: UrlInclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: Host
+								"host": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"urls": {
-									// Property: Urls
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"seed_url_configuration": {
-												// Property: SeedUrlConfiguration
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"seed_urls": {
-															// Property: SeedUrls
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"web_crawler_mode": {
-															// Property: WebCrawlerMode
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"site_maps_configuration": {
-												// Property: SiteMapsConfiguration
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"site_maps": {
-															// Property: SiteMaps
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: Port
+								"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"work_docs_configuration": {
-						// Property: WorkDocsConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"crawl_comments": {
-									// Property: CrawlComments
-									Type:     types.BoolType,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: UrlExclusionPatterns
+						"url_exclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: UrlInclusionPatterns
+						"url_inclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Urls
+						"urls": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SeedUrlConfiguration
+								"seed_url_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SeedUrls
+										"seed_urls": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: WebCrawlerMode
+										"web_crawler_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"exclusion_patterns": {
-									// Property: ExclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: SiteMapsConfiguration
+								"site_maps_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SiteMaps
+										"site_maps": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"field_mappings": {
-									// Property: FieldMappings
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_source_field_name": {
-												// Property: DataSourceFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"date_field_format": {
-												// Property: DateFieldFormat
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"index_field_name": {
-												// Property: IndexFieldName
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"inclusion_patterns": {
-									// Property: InclusionPatterns
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"organization_id": {
-									// Property: OrganizationId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"use_change_log": {
-									// Property: UseChangeLog
-									Type:     types.BoolType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WorkDocsConfiguration
+				"work_docs_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CrawlComments
+						"crawl_comments": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExclusionPatterns
+						"exclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: FieldMappings
+						"field_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataSourceFieldName
+									"data_source_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: DateFieldFormat
+									"date_field_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IndexFieldName
+									"index_field_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: InclusionPatterns
+						"inclusion_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: OrganizationId
+						"organization_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: UseChangeLog
+						"use_change_log": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Description of data source",
-			//	  "maxLength": 1000,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Description of data source",
+		//	  "maxLength": 1000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of data source",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ID of data source",
-			//	  "maxLength": 100,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ID of data source",
+		//	  "maxLength": 100,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of data source",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"index_id": {
-			// Property: IndexId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ID of Index",
-			//	  "maxLength": 36,
-			//	  "minLength": 36,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IndexId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ID of Index",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "type": "string"
+		//	}
+		"index_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of Index",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of data source",
-			//	  "maxLength": 1000,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of data source",
+		//	  "maxLength": 1000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of data source",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Role ARN",
-			//	  "maxLength": 1284,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Role ARN",
+		//	  "maxLength": 1284,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Role ARN",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"schedule": {
-			// Property: Schedule
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Schedule",
-			//	  "maxLength": 1000,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Schedule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Schedule",
+		//	  "maxLength": 1000,
+		//	  "type": "string"
+		//	}
+		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Schedule",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Tags for labeling the data source",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A label for tagging Kendra resources",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "A string used to identify this tag",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "A string containing the value for the tag",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "type": "array"
-			//	}
-			Description: "Tags for labeling the data source",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Tags for labeling the data source",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A label for tagging Kendra resources",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "A string used to identify this tag",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "A string containing the value for the tag",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string used to identify this tag",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A string containing the value for the tag",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Data source type",
-			//	  "enum": [
-			//	    "S3",
-			//	    "SHAREPOINT",
-			//	    "SALESFORCE",
-			//	    "ONEDRIVE",
-			//	    "SERVICENOW",
-			//	    "DATABASE",
-			//	    "CUSTOM",
-			//	    "CONFLUENCE",
-			//	    "GOOGLEDRIVE",
-			//	    "WEBCRAWLER",
-			//	    "WORKDOCS"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "Data source type",
-			Type:        types.StringType,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for labeling the data source",
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Data source type",
+		//	  "enum": [
+		//	    "S3",
+		//	    "SHAREPOINT",
+		//	    "SALESFORCE",
+		//	    "ONEDRIVE",
+		//	    "SERVICENOW",
+		//	    "DATABASE",
+		//	    "CUSTOM",
+		//	    "CONFLUENCE",
+		//	    "GOOGLEDRIVE",
+		//	    "WEBCRAWLER",
+		//	    "WORKDOCS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Data source type",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Kendra::DataSource",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Kendra::DataSource").WithTerraformTypeName("awscc_kendra_data_source")
 	opts = opts.WithTerraformSchema(schema)
@@ -3852,7 +3595,7 @@ func dataSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"work_docs_configuration":                       "WorkDocsConfiguration",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

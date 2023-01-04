@@ -4,14 +4,17 @@ package personalize
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,278 +24,263 @@ func init() {
 // datasetResource returns the Terraform awscc_personalize_dataset resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Personalize::Dataset resource.
 func datasetResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"dataset_arn": {
-			// Property: DatasetArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the dataset",
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DatasetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the dataset",
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+		//	  "type": "string"
+		//	}
+		"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the dataset",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"dataset_group_arn": {
-			// Property: DatasetGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatasetGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+		//	  "type": "string"
+		//	}
+		"dataset_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the dataset group to add the dataset to",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(256),
-				validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"dataset_import_job": {
-			// Property: DatasetImportJob
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Initial DatasetImportJob for the created dataset",
-			//	  "properties": {
-			//	    "DataSource": {
-			//	      "additionalProperties": false,
-			//	      "description": "The Amazon S3 bucket that contains the training data to import.",
-			//	      "properties": {
-			//	        "DataLocation": {
-			//	          "description": "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
-			//	          "maxLength": 256,
-			//	          "pattern": "(s3|http|https)://.+",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "DatasetArn": {
-			//	      "description": "The ARN of the dataset that receives the imported data",
-			//	      "maxLength": 256,
-			//	      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//	      "type": "string"
-			//	    },
-			//	    "DatasetImportJobArn": {
-			//	      "description": "The ARN of the dataset import job",
-			//	      "maxLength": 256,
-			//	      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//	      "type": "string"
-			//	    },
-			//	    "JobName": {
-			//	      "description": "The name for the dataset import job.",
-			//	      "maxLength": 63,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	      "type": "string"
-			//	    },
-			//	    "RoleArn": {
-			//	      "description": "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
-			//	      "maxLength": 256,
-			//	      "pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatasetImportJob
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Initial DatasetImportJob for the created dataset",
+		//	  "properties": {
+		//	    "DataSource": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Amazon S3 bucket that contains the training data to import.",
+		//	      "properties": {
+		//	        "DataLocation": {
+		//	          "description": "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
+		//	          "maxLength": 256,
+		//	          "pattern": "(s3|http|https)://.+",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "DatasetArn": {
+		//	      "description": "The ARN of the dataset that receives the imported data",
+		//	      "maxLength": 256,
+		//	      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+		//	      "type": "string"
+		//	    },
+		//	    "DatasetImportJobArn": {
+		//	      "description": "The ARN of the dataset import job",
+		//	      "maxLength": 256,
+		//	      "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+		//	      "type": "string"
+		//	    },
+		//	    "JobName": {
+		//	      "description": "The name for the dataset import job.",
+		//	      "maxLength": 63,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	      "type": "string"
+		//	    },
+		//	    "RoleArn": {
+		//	      "description": "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
+		//	      "maxLength": 256,
+		//	      "pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dataset_import_job": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataSource
+				"data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DataLocation
+						"data_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthAtMost(256),
+								stringvalidator.RegexMatches(regexp.MustCompile("(s3|http|https)://.+"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Amazon S3 bucket that contains the training data to import.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DatasetArn
+				"dataset_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the dataset that receives the imported data",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(256),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DatasetImportJobArn
+				"dataset_import_job_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the dataset import job",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(256),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: JobName
+				"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name for the dataset import job.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 63),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(256),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Initial DatasetImportJob for the created dataset",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"data_source": {
-						// Property: DataSource
-						Description: "The Amazon S3 bucket that contains the training data to import.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"data_location": {
-									// Property: DataLocation
-									Description: "The path to the Amazon S3 bucket where the data that you want to upload to your dataset is stored.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(256),
-										validate.StringMatch(regexp.MustCompile("(s3|http|https)://.+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"dataset_arn": {
-						// Property: DatasetArn
-						Description: "The ARN of the dataset that receives the imported data",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-							validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"dataset_import_job_arn": {
-						// Property: DatasetImportJobArn
-						Description: "The ARN of the dataset import job",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-							validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"job_name": {
-						// Property: JobName
-						Description: "The name for the dataset import job.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 63),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"role_arn": {
-						// Property: RoleArn
-						Description: "The ARN of the IAM role that has permissions to read from the Amazon S3 data source.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-							validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"dataset_type": {
-			// Property: DatasetType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of dataset",
-			//	  "enum": [
-			//	    "Interactions",
-			//	    "Items",
-			//	    "Users"
-			//	  ],
-			//	  "maxLength": 256,
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatasetType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of dataset",
+		//	  "enum": [
+		//	    "Interactions",
+		//	    "Items",
+		//	    "Users"
+		//	  ],
+		//	  "maxLength": 256,
+		//	  "type": "string"
+		//	}
+		"dataset_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of dataset",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(256),
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.OneOf(
 					"Interactions",
 					"Items",
 					"Users",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name for the dataset",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name for the dataset",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]*",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name for the dataset",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 63),
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"schema_arn": {
-			// Property: SchemaArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
-			//	  "maxLength": 256,
-			//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9\\-_]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SchemaArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
+		//	  "maxLength": 256,
+		//	  "pattern": "arn:([a-z\\d-]+):personalize:.*:.*:.+",
+		//	  "type": "string"
+		//	}
+		"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the schema to associate with the dataset. The schema defines the dataset fields.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(256),
-				validate.StringMatch(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:([a-z\\d-]+):personalize:.*:.*:.+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::Personalize::Dataset.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Personalize::Dataset").WithTerraformTypeName("awscc_personalize_dataset")
 	opts = opts.WithTerraformSchema(schema)
@@ -315,7 +303,7 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,77 +19,69 @@ func init() {
 // monitoringSubscriptionDataSource returns the Terraform awscc_cloudfront_monitoring_subscription data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFront::MonitoringSubscription resource.
 func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"distribution_id": {
-			// Property: DistributionId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DistributionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"distribution_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"monitoring_subscription": {
-			// Property: MonitoringSubscription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "RealtimeMetricsSubscriptionConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "RealtimeMetricsSubscriptionStatus": {
-			//	          "enum": [
-			//	            "Enabled",
-			//	            "Disabled"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "RealtimeMetricsSubscriptionStatus"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"realtime_metrics_subscription_config": {
-						// Property: RealtimeMetricsSubscriptionConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"realtime_metrics_subscription_status": {
-									// Property: RealtimeMetricsSubscriptionStatus
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: MonitoringSubscription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "RealtimeMetricsSubscriptionConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RealtimeMetricsSubscriptionStatus": {
+		//	          "enum": [
+		//	            "Enabled",
+		//	            "Disabled"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RealtimeMetricsSubscriptionStatus"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"monitoring_subscription": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RealtimeMetricsSubscriptionConfig
+				"realtime_metrics_subscription_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RealtimeMetricsSubscriptionStatus
+						"realtime_metrics_subscription_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFront::MonitoringSubscription",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::MonitoringSubscription").WithTerraformTypeName("awscc_cloudfront_monitoring_subscription")
 	opts = opts.WithTerraformSchema(schema)
@@ -100,7 +92,7 @@ func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSourc
 		"realtime_metrics_subscription_status": "RealtimeMetricsSubscriptionStatus",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

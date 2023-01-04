@@ -6,13 +6,20 @@ import (
 	"context"
 	{{if .ImportRegexp }}"regexp"{{- end}}
 
-	{{if .ImportFrameworkAttr }}"github.com/hashicorp/terraform-plugin-framework/attr"{{- end}}
+	{{- range .FrameworkValidatorsPackages }}
+	"github.com/hashicorp/terraform-plugin-framework-validators/{{ . }}"
+	{{- end}}
+	{{if .ImportFrameworkValidator }}"github.com/hashicorp/terraform-plugin-framework/schema/validator"{{- end}}
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	{{if gt (len .FrameworkPlanModifierPackages) 0 }}"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"{{- end}}
+	{{- range .FrameworkPlanModifierPackages }}
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/{{ . }}"
+	{{- end}}
+	{{if .ImportFrameworkTypes }}"github.com/hashicorp/terraform-plugin-framework/types"{{- end}}
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	{{ if .ImportValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
+	{{if .ImportInternalValidate }}"github.com/hashicorp/terraform-provider-awscc/internal/validate"{{- end }}
 )
 
 func init() {
@@ -25,23 +32,22 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 	attributes := {{ .RootPropertiesSchema }}
 
 {{ if .SyntheticIDAttribute }}
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 {{- end }}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: {{ .SchemaDescription | printf "%q" }},
 		Version:     {{ .SchemaVersion }},
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
@@ -65,11 +71,8 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (resource.Resource, error) 
 {{ if .HasUpdateMethod }}
 	opts = opts.WithUpdateTimeoutInMinutes({{ .UpdateTimeoutInMinutes }})
 {{- end }}
-{{ if .RequiredAttributesValidator }}
-	opts = opts.WithRequiredAttributesValidators({{ .RequiredAttributesValidator }})
-{{- end }}
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

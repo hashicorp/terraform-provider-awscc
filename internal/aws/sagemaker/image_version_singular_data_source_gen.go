@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,110 +19,102 @@ func init() {
 // imageVersionDataSource returns the Terraform awscc_sagemaker_image_version data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SageMaker::ImageVersion resource.
 func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"base_image": {
-			// Property: BaseImage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The registry path of the container image on which this image version is based.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": ".+",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: BaseImage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The registry path of the container image on which this image version is based.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": ".+",
+		//	  "type": "string"
+		//	}
+		"base_image": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The registry path of the container image on which this image version is based.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"container_image": {
-			// Property: ContainerImage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The registry path of the container image that contains this image version.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": ".+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ContainerImage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The registry path of the container image that contains this image version.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": ".+",
+		//	  "type": "string"
+		//	}
+		"container_image": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The registry path of the container image that contains this image version.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"image_arn": {
-			// Property: ImageArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the parent image.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ImageArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the parent image.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	  "type": "string"
+		//	}
+		"image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the parent image.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"image_name": {
-			// Property: ImageName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the image this version belongs to.",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ImageName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the image this version belongs to.",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^[A-Za-z0-9]([-.]?[A-Za-z0-9])*$",
+		//	  "type": "string"
+		//	}
+		"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the image this version belongs to.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"image_version_arn": {
-			// Property: ImageVersionArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the image version.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-z0-9]([-.]?[a-z0-9])*\\/[0-9]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ImageVersionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the image version.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-z0-9]([-.]?[a-z0-9])*\\/[0-9]+$",
+		//	  "type": "string"
+		//	}
+		"image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the image version.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"version": {
-			// Property: Version
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version number of the image version.",
-			//	  "minimum": 1,
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Version
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of the image version.",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"version": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The version number of the image version.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SageMaker::ImageVersion",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ImageVersion").WithTerraformTypeName("awscc_sagemaker_image_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -135,7 +127,7 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"version":           "Version",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

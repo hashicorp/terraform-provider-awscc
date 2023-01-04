@@ -5,12 +5,15 @@ package route53resolver
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,152 +23,145 @@ func init() {
 // resolverQueryLoggingConfigAssociationResource returns the Terraform awscc_route53resolver_resolver_query_logging_config_association resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation resource.
 func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Rfc3339TimeString",
-			//	  "maxLength": 40,
-			//	  "minLength": 20,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Rfc3339TimeString",
+		//	  "maxLength": 40,
+		//	  "minLength": 20,
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Rfc3339TimeString",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"error": {
-			// Property: Error
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ResolverQueryLogConfigAssociationError",
-			//	  "enum": [
-			//	    "NONE",
-			//	    "DESTINATION_NOT_FOUND",
-			//	    "ACCESS_DENIED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Error
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ResolverQueryLogConfigAssociationError",
+		//	  "enum": [
+		//	    "NONE",
+		//	    "DESTINATION_NOT_FOUND",
+		//	    "ACCESS_DENIED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"error": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResolverQueryLogConfigAssociationError",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"error_message": {
-			// Property: ErrorMessage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ResolverQueryLogConfigAssociationErrorMessage",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ErrorMessage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ResolverQueryLogConfigAssociationErrorMessage",
+		//	  "type": "string"
+		//	}
+		"error_message": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResolverQueryLogConfigAssociationErrorMessage",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Id",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Id",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"resolver_query_log_config_id": {
-			// Property: ResolverQueryLogConfigId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ResolverQueryLogConfigId",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResolverQueryLogConfigId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ResolverQueryLogConfigId",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"resolver_query_log_config_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResolverQueryLogConfigId",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"resource_id": {
-			// Property: ResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ResourceId",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ResourceId",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResourceId",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 64),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ResolverQueryLogConfigAssociationStatus",
-			//	  "enum": [
-			//	    "CREATING",
-			//	    "ACTIVE",
-			//	    "ACTION_NEEDED",
-			//	    "DELETING",
-			//	    "FAILED",
-			//	    "OVERRIDDEN"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ResolverQueryLogConfigAssociationStatus",
+		//	  "enum": [
+		//	    "CREATING",
+		//	    "ACTIVE",
+		//	    "ACTION_NEEDED",
+		//	    "DELETING",
+		//	    "FAILED",
+		//	    "OVERRIDDEN"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ResolverQueryLogConfigAssociationStatus",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverQueryLoggingConfigAssociation").WithTerraformTypeName("awscc_route53resolver_resolver_query_logging_config_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -184,7 +180,7 @@ func resolverQueryLoggingConfigAssociationResource(ctx context.Context) (resourc
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

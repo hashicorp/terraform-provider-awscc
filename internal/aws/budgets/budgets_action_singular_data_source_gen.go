@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,351 +19,325 @@ func init() {
 // budgetsActionDataSource returns the Terraform awscc_budgets_budgets_action data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Budgets::BudgetsAction resource.
 func budgetsActionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"action_id": {
-			// Property: ActionId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ActionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"action_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"action_threshold": {
-			// Property: ActionThreshold
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Type": {
-			//	      "enum": [
-			//	        "PERCENTAGE",
-			//	        "ABSOLUTE_VALUE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Value": {
-			//	      "type": "number"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Value",
-			//	    "Type"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ActionThreshold
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Type": {
+		//	      "enum": [
+		//	        "PERCENTAGE",
+		//	        "ABSOLUTE_VALUE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Value": {
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Value",
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"action_threshold": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ActionType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "APPLY_IAM_POLICY",
+		//	    "APPLY_SCP_POLICY",
+		//	    "RUN_SSM_DOCUMENTS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"action_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ApprovalModel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "AUTOMATIC",
+		//	    "MANUAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"approval_model": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: BudgetName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"budget_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Definition
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "IamActionDefinition": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Groups": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "PolicyArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "Roles": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Users": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PolicyArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ScpActionDefinition": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PolicyId": {
+		//	          "type": "string"
+		//	        },
+		//	        "TargetIds": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PolicyId",
+		//	        "TargetIds"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SsmActionDefinition": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InstanceIds": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 100,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Region": {
+		//	          "type": "string"
+		//	        },
+		//	        "Subtype": {
+		//	          "enum": [
+		//	            "STOP_EC2_INSTANCES",
+		//	            "STOP_RDS_INSTANCES"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Subtype",
+		//	        "Region",
+		//	        "InstanceIds"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IamActionDefinition
+				"iam_action_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Groups
+						"groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PolicyArn
+						"policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Roles
+						"roles": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Users
+						"users": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScpActionDefinition
+				"scp_action_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PolicyId
+						"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TargetIds
+						"target_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SsmActionDefinition
+				"ssm_action_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InstanceIds
+						"instance_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Region
+						"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Subtype
+						"subtype": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ExecutionRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: NotificationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ACTUAL",
+		//	    "FORECASTED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"notification_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Subscribers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Address": {
+		//	        "type": "string"
+		//	      },
+		//	      "Type": {
+		//	        "enum": [
+		//	          "SNS",
+		//	          "EMAIL"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Type",
+		//	      "Address"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 11,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"subscribers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Address
+					"address": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.Float64Type,
+					}, /*END ATTRIBUTE*/
+					// Property: Type
+					"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"action_type": {
-			// Property: ActionType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "APPLY_IAM_POLICY",
-			//	    "APPLY_SCP_POLICY",
-			//	    "RUN_SSM_DOCUMENTS"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"approval_model": {
-			// Property: ApprovalModel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "AUTOMATIC",
-			//	    "MANUAL"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"budget_name": {
-			// Property: BudgetName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"definition": {
-			// Property: Definition
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "IamActionDefinition": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Groups": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "PolicyArn": {
-			//	          "type": "string"
-			//	        },
-			//	        "Roles": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "Users": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "PolicyArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ScpActionDefinition": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "PolicyId": {
-			//	          "type": "string"
-			//	        },
-			//	        "TargetIds": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "PolicyId",
-			//	        "TargetIds"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SsmActionDefinition": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InstanceIds": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 100,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "Region": {
-			//	          "type": "string"
-			//	        },
-			//	        "Subtype": {
-			//	          "enum": [
-			//	            "STOP_EC2_INSTANCES",
-			//	            "STOP_RDS_INSTANCES"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Subtype",
-			//	        "Region",
-			//	        "InstanceIds"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"iam_action_definition": {
-						// Property: IamActionDefinition
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"groups": {
-									// Property: Groups
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"policy_arn": {
-									// Property: PolicyArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"roles": {
-									// Property: Roles
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"users": {
-									// Property: Users
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"scp_action_definition": {
-						// Property: ScpActionDefinition
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"policy_id": {
-									// Property: PolicyId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"target_ids": {
-									// Property: TargetIds
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"ssm_action_definition": {
-						// Property: SsmActionDefinition
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"instance_ids": {
-									// Property: InstanceIds
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"region": {
-									// Property: Region
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"subtype": {
-									// Property: Subtype
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"execution_role_arn": {
-			// Property: ExecutionRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"notification_type": {
-			// Property: NotificationType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "ACTUAL",
-			//	    "FORECASTED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"subscribers": {
-			// Property: Subscribers
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Address": {
-			//	        "type": "string"
-			//	      },
-			//	      "Type": {
-			//	        "enum": [
-			//	          "SNS",
-			//	          "EMAIL"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Type",
-			//	      "Address"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 11,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"address": {
-						// Property: Address
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Budgets::BudgetsAction",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Budgets::BudgetsAction").WithTerraformTypeName("awscc_budgets_budgets_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -394,7 +368,7 @@ func budgetsActionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"value":                 "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

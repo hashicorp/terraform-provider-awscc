@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,63 +19,58 @@ func init() {
 // resourcePolicyDataSource returns the Terraform awscc_xray_resource_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::XRay::ResourcePolicy resource.
 func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"bypass_policy_lockout_check": {
-			// Property: BypassPolicyLockoutCheck
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A flag to indicate whether to bypass the resource policy lockout safety check",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: BypassPolicyLockoutCheck
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A flag to indicate whether to bypass the resource policy lockout safety check",
+		//	  "type": "boolean"
+		//	}
+		"bypass_policy_lockout_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A flag to indicate whether to bypass the resource policy lockout safety check",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"policy_document": {
-			// Property: PolicyDocument
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The resource policy document, which can be up to 5kb in size.",
-			//	  "maxLength": 5120,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource policy document, which can be up to 5kb in size.",
+		//	  "maxLength": 5120,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The resource policy document, which can be up to 5kb in size.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy_name": {
-			// Property: PolicyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the resource policy. Must be unique within a specific AWS account.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[\\w+=,.@-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the resource policy. Must be unique within a specific AWS account.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[\\w+=,.@-]+",
+		//	  "type": "string"
+		//	}
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the resource policy. Must be unique within a specific AWS account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::XRay::ResourcePolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::XRay::ResourcePolicy").WithTerraformTypeName("awscc_xray_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -85,7 +80,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"policy_name":                 "PolicyName",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

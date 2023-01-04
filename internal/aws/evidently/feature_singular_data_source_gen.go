@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,289 +19,272 @@ func init() {
 // featureDataSource returns the Terraform awscc_evidently_feature data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Evidently::Feature resource.
 func featureDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 2048,
-			//	  "minLength": 0,
-			//	  "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/feature/[-a-zA-Z0-9._]*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 0,
+		//	  "pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*/feature/[-a-zA-Z0-9._]*",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"default_variation": {
-			// Property: DefaultVariation
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 127,
-			//	  "minLength": 1,
-			//	  "pattern": "[-a-zA-Z0-9._]*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultVariation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 127,
+		//	  "minLength": 1,
+		//	  "pattern": "[-a-zA-Z0-9._]*",
+		//	  "type": "string"
+		//	}
+		"default_variation": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 160,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 160,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"entity_overrides": {
-			// Property: EntityOverrides
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "EntityId": {
-			//	        "type": "string"
-			//	      },
-			//	      "Variation": {
-			//	        "maxLength": 127,
-			//	        "minLength": 1,
-			//	        "pattern": "[-a-zA-Z0-9._]*",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 20,
-			//	  "minItems": 0,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"entity_id": {
-						// Property: EntityId
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: EntityOverrides
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "EntityId": {
+		//	        "type": "string"
+		//	      },
+		//	      "Variation": {
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "pattern": "[-a-zA-Z0-9._]*",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"entity_overrides": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EntityId
+					"entity_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"variation": {
-						// Property: Variation
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Variation
+					"variation": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"evaluation_strategy": {
-			// Property: EvaluationStrategy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "ALL_RULES",
-			//	    "DEFAULT_VARIATION"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ALL_RULES",
+		//	    "DEFAULT_VARIATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"evaluation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 127,
-			//	  "minLength": 1,
-			//	  "pattern": "[-a-zA-Z0-9._]*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 127,
+		//	  "minLength": 1,
+		//	  "pattern": "[-a-zA-Z0-9._]*",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"project": {
-			// Property: Project
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 2048,
-			//	  "minLength": 0,
-			//	  "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Project
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "minLength": 0,
+		//	  "pattern": "([-a-zA-Z0-9._]*)|(arn:[^:]*:[^:]*:[^:]*:[^:]*:project/[-a-zA-Z0-9._]*)",
+		//	  "type": "string"
+		//	}
+		"project": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Variations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "oneOf": [
+		//	      {
+		//	        "required": [
+		//	          "VariationName",
+		//	          "StringValue"
+		//	        ]
+		//	      },
+		//	      {
+		//	        "required": [
+		//	          "VariationName",
+		//	          "BooleanValue"
+		//	        ]
+		//	      },
+		//	      {
+		//	        "required": [
+		//	          "VariationName",
+		//	          "LongValue"
+		//	        ]
+		//	      },
+		//	      {
+		//	        "required": [
+		//	          "VariationName",
+		//	          "DoubleValue"
+		//	        ]
+		//	      }
+		//	    ],
+		//	    "properties": {
+		//	      "BooleanValue": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "DoubleValue": {
+		//	        "type": "number"
+		//	      },
+		//	      "LongValue": {
+		//	        "type": "number"
+		//	      },
+		//	      "StringValue": {
+		//	        "maxLength": 512,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      },
+		//	      "VariationName": {
+		//	        "maxLength": 127,
+		//	        "minLength": 1,
+		//	        "pattern": "[-a-zA-Z0-9._]*",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BooleanValue
+					"boolean_value": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DoubleValue
+					"double_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: LongValue
+					"long_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: StringValue
+					"string_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: VariationName
+					"variation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"variations": {
-			// Property: Variations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "oneOf": [
-			//	      {
-			//	        "required": [
-			//	          "VariationName",
-			//	          "StringValue"
-			//	        ]
-			//	      },
-			//	      {
-			//	        "required": [
-			//	          "VariationName",
-			//	          "BooleanValue"
-			//	        ]
-			//	      },
-			//	      {
-			//	        "required": [
-			//	          "VariationName",
-			//	          "LongValue"
-			//	        ]
-			//	      },
-			//	      {
-			//	        "required": [
-			//	          "VariationName",
-			//	          "DoubleValue"
-			//	        ]
-			//	      }
-			//	    ],
-			//	    "properties": {
-			//	      "BooleanValue": {
-			//	        "type": "boolean"
-			//	      },
-			//	      "DoubleValue": {
-			//	        "type": "number"
-			//	      },
-			//	      "LongValue": {
-			//	        "type": "number"
-			//	      },
-			//	      "StringValue": {
-			//	        "maxLength": 512,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      },
-			//	      "VariationName": {
-			//	        "maxLength": 127,
-			//	        "minLength": 1,
-			//	        "pattern": "[-a-zA-Z0-9._]*",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 5,
-			//	  "minItems": 1,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"boolean_value": {
-						// Property: BooleanValue
-						Type:     types.BoolType,
-						Computed: true,
-					},
-					"double_value": {
-						// Property: DoubleValue
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"long_value": {
-						// Property: LongValue
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"string_value": {
-						// Property: StringValue
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"variation_name": {
-						// Property: VariationName
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Evidently::Feature",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Evidently::Feature").WithTerraformTypeName("awscc_evidently_feature")
 	opts = opts.WithTerraformSchema(schema)
@@ -326,7 +309,7 @@ func featureDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"variations":          "Variations",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

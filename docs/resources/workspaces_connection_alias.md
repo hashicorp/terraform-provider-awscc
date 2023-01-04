@@ -42,7 +42,7 @@ Required:
 <a id="nestedatt--associations"></a>
 ### Nested Schema for `associations`
 
-Optional:
+Read-Only:
 
 - `associated_account_id` (String)
 - `association_status` (String)

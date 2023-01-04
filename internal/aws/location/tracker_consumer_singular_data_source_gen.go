@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,47 +19,43 @@ func init() {
 // trackerConsumerDataSource returns the Terraform awscc_location_tracker_consumer data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Location::TrackerConsumer resource.
 func trackerConsumerDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"consumer_arn": {
-			// Property: ConsumerArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConsumerArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "pattern": "^arn(:[a-z0-9]+([.-][a-z0-9]+)*){2}(:([a-z0-9]+([.-][a-z0-9]+)*)?){2}:([^/].*)?$",
+		//	  "type": "string"
+		//	}
+		"consumer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tracker_name": {
-			// Property: TrackerName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 100,
-			//	  "minLength": 1,
-			//	  "pattern": "^[-._\\w]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: TrackerName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 100,
+		//	  "minLength": 1,
+		//	  "pattern": "^[-._\\w]+$",
+		//	  "type": "string"
+		//	}
+		"tracker_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Location::TrackerConsumer",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Location::TrackerConsumer").WithTerraformTypeName("awscc_location_tracker_consumer")
 	opts = opts.WithTerraformSchema(schema)
@@ -68,7 +64,7 @@ func trackerConsumerDataSource(ctx context.Context) (datasource.DataSource, erro
 		"tracker_name": "TrackerName",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -5,12 +5,20 @@ package mediapackage
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,487 +28,463 @@ func init() {
 // originEndpointResource returns the Terraform awscc_mediapackage_origin_endpoint resource.
 // This Terraform resource corresponds to the CloudFormation AWS::MediaPackage::OriginEndpoint resource.
 func originEndpointResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) assigned to the OriginEndpoint.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) assigned to the OriginEndpoint.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) assigned to the OriginEndpoint.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorization": {
-			// Property: Authorization
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "CDN Authorization credentials",
-			//	  "properties": {
-			//	    "CdnIdentifierSecret": {
-			//	      "description": "The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.",
-			//	      "type": "string"
-			//	    },
-			//	    "SecretsRoleArn": {
-			//	      "description": "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "SecretsRoleArn",
-			//	    "CdnIdentifierSecret"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Authorization
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "CDN Authorization credentials",
+		//	  "properties": {
+		//	    "CdnIdentifierSecret": {
+		//	      "description": "The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretsRoleArn": {
+		//	      "description": "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecretsRoleArn",
+		//	    "CdnIdentifierSecret"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"authorization": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CdnIdentifierSecret
+				"cdn_identifier_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretsRoleArn
+				"secrets_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "CDN Authorization credentials",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"cdn_identifier_secret": {
-						// Property: CdnIdentifierSecret
-						Description: "The Amazon Resource Name (ARN) for the secret in Secrets Manager that your Content Distribution Network (CDN) uses for authorization to access your endpoint.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-					"secrets_role_arn": {
-						// Property: SecretsRoleArn
-						Description: "The Amazon Resource Name (ARN) for the IAM role that allows MediaPackage to communicate with AWS Secrets Manager.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"channel_id": {
-			// Property: ChannelId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Channel the OriginEndpoint is associated with.",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Channel the OriginEndpoint is associated with.",
+		//	  "type": "string"
+		//	}
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Channel the OriginEndpoint is associated with.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"cmaf_package": {
-			// Property: CmafPackage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A Common Media Application Format (CMAF) packaging configuration.",
-			//	  "properties": {
-			//	    "Encryption": {
-			//	      "additionalProperties": false,
-			//	      "description": "A Common Media Application Format (CMAF) encryption configuration.",
-			//	      "properties": {
-			//	        "ConstantInitializationVector": {
-			//	          "description": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
-			//	          "maxLength": 32,
-			//	          "minLength": 32,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "EncryptionMethod": {
-			//	          "description": "The encryption method used",
-			//	          "enum": [
-			//	            "SAMPLE_AES",
-			//	            "AES_CTR"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "KeyRotationIntervalSeconds": {
-			//	          "description": "Time (in seconds) between each encryption key rotation.",
-			//	          "type": "integer"
-			//	        },
-			//	        "SpekeKeyProvider": {
-			//	          "additionalProperties": false,
-			//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			//	          "properties": {
-			//	            "CertificateArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "EncryptionContractConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-			//	              "properties": {
-			//	                "PresetSpeke20Audio": {
-			//	                  "description": "A collection of audio encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-AUDIO-1",
-			//	                    "PRESET-AUDIO-2",
-			//	                    "PRESET-AUDIO-3",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "PresetSpeke20Video": {
-			//	                  "description": "A collection of video encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-VIDEO-1",
-			//	                    "PRESET-VIDEO-2",
-			//	                    "PRESET-VIDEO-3",
-			//	                    "PRESET-VIDEO-4",
-			//	                    "PRESET-VIDEO-5",
-			//	                    "PRESET-VIDEO-6",
-			//	                    "PRESET-VIDEO-7",
-			//	                    "PRESET-VIDEO-8",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "PresetSpeke20Audio",
-			//	                "PresetSpeke20Video"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "ResourceId": {
-			//	              "description": "The resource ID to include in key requests.",
-			//	              "type": "string"
-			//	            },
-			//	            "RoleArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "SystemIds": {
-			//	              "description": "The system IDs to include in key requests.",
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Url": {
-			//	              "description": "The URL of the external key provider service.",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ResourceId",
-			//	            "SystemIds",
-			//	            "Url",
-			//	            "RoleArn"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "SpekeKeyProvider"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "HlsManifests": {
-			//	      "description": "A list of HLS manifest configurations",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "A HTTP Live Streaming (HLS) manifest configuration.",
-			//	        "properties": {
-			//	          "AdMarkers": {
-			//	            "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
-			//	            "enum": [
-			//	              "NONE",
-			//	              "SCTE35_ENHANCED",
-			//	              "PASSTHROUGH",
-			//	              "DATERANGE"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "AdTriggers": {
-			//	            "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-			//	            "items": {
-			//	              "enum": [
-			//	                "SPLICE_INSERT",
-			//	                "BREAK",
-			//	                "PROVIDER_ADVERTISEMENT",
-			//	                "DISTRIBUTOR_ADVERTISEMENT",
-			//	                "PROVIDER_PLACEMENT_OPPORTUNITY",
-			//	                "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-			//	                "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-			//	                "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array"
-			//	          },
-			//	          "AdsOnDeliveryRestrictions": {
-			//	            "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-			//	            "enum": [
-			//	              "NONE",
-			//	              "RESTRICTED",
-			//	              "UNRESTRICTED",
-			//	              "BOTH"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Id": {
-			//	            "description": "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
-			//	            "type": "string"
-			//	          },
-			//	          "IncludeIframeOnlyStream": {
-			//	            "description": "When enabled, an I-Frame only stream will be included in the output.",
-			//	            "type": "boolean"
-			//	          },
-			//	          "ManifestName": {
-			//	            "description": "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
-			//	            "type": "string"
-			//	          },
-			//	          "PlaylistType": {
-			//	            "description": "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
-			//	            "enum": [
-			//	              "NONE",
-			//	              "EVENT",
-			//	              "VOD"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "PlaylistWindowSeconds": {
-			//	            "description": "Time window (in seconds) contained in each parent manifest.",
-			//	            "type": "integer"
-			//	          },
-			//	          "ProgramDateTimeIntervalSeconds": {
-			//	            "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-			//	            "type": "integer"
-			//	          },
-			//	          "Url": {
-			//	            "description": "The URL of the packaged OriginEndpoint for consumption.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Id"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SegmentDurationSeconds": {
-			//	      "description": "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
-			//	      "type": "integer"
-			//	    },
-			//	    "SegmentPrefix": {
-			//	      "description": "An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.",
-			//	      "type": "string"
-			//	    },
-			//	    "StreamSelection": {
-			//	      "additionalProperties": false,
-			//	      "description": "A StreamSelection configuration.",
-			//	      "properties": {
-			//	        "MaxVideoBitsPerSecond": {
-			//	          "description": "The maximum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "MinVideoBitsPerSecond": {
-			//	          "description": "The minimum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "StreamOrder": {
-			//	          "description": "A directive that determines the order of streams in the output.",
-			//	          "enum": [
-			//	            "ORIGINAL",
-			//	            "VIDEO_BITRATE_ASCENDING",
-			//	            "VIDEO_BITRATE_DESCENDING"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "A Common Media Application Format (CMAF) packaging configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"encryption": {
-						// Property: Encryption
-						Description: "A Common Media Application Format (CMAF) encryption configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constant_initialization_vector": {
-									// Property: ConstantInitializationVector
-									Description: "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
-									Type:        types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CmafPackage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A Common Media Application Format (CMAF) packaging configuration.",
+		//	  "properties": {
+		//	    "Encryption": {
+		//	      "additionalProperties": false,
+		//	      "description": "A Common Media Application Format (CMAF) encryption configuration.",
+		//	      "properties": {
+		//	        "ConstantInitializationVector": {
+		//	          "description": "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+		//	          "maxLength": 32,
+		//	          "minLength": 32,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptionMethod": {
+		//	          "description": "The encryption method used",
+		//	          "enum": [
+		//	            "SAMPLE_AES",
+		//	            "AES_CTR"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "KeyRotationIntervalSeconds": {
+		//	          "description": "Time (in seconds) between each encryption key rotation.",
+		//	          "type": "integer"
+		//	        },
+		//	        "SpekeKeyProvider": {
+		//	          "additionalProperties": false,
+		//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "EncryptionContractConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+		//	              "properties": {
+		//	                "PresetSpeke20Audio": {
+		//	                  "description": "A collection of audio encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-AUDIO-1",
+		//	                    "PRESET-AUDIO-2",
+		//	                    "PRESET-AUDIO-3",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "PresetSpeke20Video": {
+		//	                  "description": "A collection of video encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-VIDEO-1",
+		//	                    "PRESET-VIDEO-2",
+		//	                    "PRESET-VIDEO-3",
+		//	                    "PRESET-VIDEO-4",
+		//	                    "PRESET-VIDEO-5",
+		//	                    "PRESET-VIDEO-6",
+		//	                    "PRESET-VIDEO-7",
+		//	                    "PRESET-VIDEO-8",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "PresetSpeke20Audio",
+		//	                "PresetSpeke20Video"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ResourceId": {
+		//	              "description": "The resource ID to include in key requests.",
+		//	              "type": "string"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "SystemIds": {
+		//	              "description": "The system IDs to include in key requests.",
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Url": {
+		//	              "description": "The URL of the external key provider service.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResourceId",
+		//	            "SystemIds",
+		//	            "Url",
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SpekeKeyProvider"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "HlsManifests": {
+		//	      "description": "A list of HLS manifest configurations",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A HTTP Live Streaming (HLS) manifest configuration.",
+		//	        "properties": {
+		//	          "AdMarkers": {
+		//	            "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
+		//	            "enum": [
+		//	              "NONE",
+		//	              "SCTE35_ENHANCED",
+		//	              "PASSTHROUGH",
+		//	              "DATERANGE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "AdTriggers": {
+		//	            "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
+		//	            "items": {
+		//	              "enum": [
+		//	                "SPLICE_INSERT",
+		//	                "BREAK",
+		//	                "PROVIDER_ADVERTISEMENT",
+		//	                "DISTRIBUTOR_ADVERTISEMENT",
+		//	                "PROVIDER_PLACEMENT_OPPORTUNITY",
+		//	                "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+		//	                "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+		//	                "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array"
+		//	          },
+		//	          "AdsOnDeliveryRestrictions": {
+		//	            "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
+		//	            "enum": [
+		//	              "NONE",
+		//	              "RESTRICTED",
+		//	              "UNRESTRICTED",
+		//	              "BOTH"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Id": {
+		//	            "description": "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
+		//	            "type": "string"
+		//	          },
+		//	          "IncludeIframeOnlyStream": {
+		//	            "description": "When enabled, an I-Frame only stream will be included in the output.",
+		//	            "type": "boolean"
+		//	          },
+		//	          "ManifestName": {
+		//	            "description": "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
+		//	            "type": "string"
+		//	          },
+		//	          "PlaylistType": {
+		//	            "description": "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
+		//	            "enum": [
+		//	              "NONE",
+		//	              "EVENT",
+		//	              "VOD"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "PlaylistWindowSeconds": {
+		//	            "description": "Time window (in seconds) contained in each parent manifest.",
+		//	            "type": "integer"
+		//	          },
+		//	          "ProgramDateTimeIntervalSeconds": {
+		//	            "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+		//	            "type": "integer"
+		//	          },
+		//	          "Url": {
+		//	            "description": "The URL of the packaged OriginEndpoint for consumption.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Id"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SegmentDurationSeconds": {
+		//	      "description": "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
+		//	      "type": "integer"
+		//	    },
+		//	    "SegmentPrefix": {
+		//	      "description": "An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.",
+		//	      "type": "string"
+		//	    },
+		//	    "StreamSelection": {
+		//	      "additionalProperties": false,
+		//	      "description": "A StreamSelection configuration.",
+		//	      "properties": {
+		//	        "MaxVideoBitsPerSecond": {
+		//	          "description": "The maximum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "MinVideoBitsPerSecond": {
+		//	          "description": "The minimum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "StreamOrder": {
+		//	          "description": "A directive that determines the order of streams in the output.",
+		//	          "enum": [
+		//	            "ORIGINAL",
+		//	            "VIDEO_BITRATE_ASCENDING",
+		//	            "VIDEO_BITRATE_DESCENDING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"cmaf_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConstantInitializationVector
+						"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "An optional 128-bit, 16-byte hex value represented by a 32-character string, used in conjunction with the key for encrypting blocks. If you don't specify a value, then MediaPackage creates the constant initialization vector (IV).",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(32, 32),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionMethod
+						"encryption_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The encryption method used",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"SAMPLE_AES",
+									"AES_CTR",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KeyRotationIntervalSeconds
+						"key_rotation_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Time (in seconds) between each encryption key rotation.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertificateArn
+								"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(32, 32),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"encryption_method": {
-									// Property: EncryptionMethod
-									Description: "The encryption method used",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"SAMPLE_AES",
-											"AES_CTR",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"key_rotation_interval_seconds": {
-									// Property: KeyRotationIntervalSeconds
-									Description: "Time (in seconds) between each encryption key rotation.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"speke_key_provider": {
-									// Property: SpekeKeyProvider
-									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"certificate_arn": {
-												// Property: CertificateArn
-												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"encryption_contract_configuration": {
-												// Property: EncryptionContractConfiguration
-												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"preset_speke_20_audio": {
-															// Property: PresetSpeke20Audio
-															Description: "A collection of audio encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-AUDIO-1",
-																	"PRESET-AUDIO-2",
-																	"PRESET-AUDIO-3",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-														"preset_speke_20_video": {
-															// Property: PresetSpeke20Video
-															Description: "A collection of video encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-VIDEO-1",
-																	"PRESET-VIDEO-2",
-																	"PRESET-VIDEO-3",
-																	"PRESET-VIDEO-4",
-																	"PRESET-VIDEO-5",
-																	"PRESET-VIDEO-6",
-																	"PRESET-VIDEO-7",
-																	"PRESET-VIDEO-8",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-													},
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-AUDIO-1",
+													"PRESET-AUDIO-2",
+													"PRESET-AUDIO-3",
+													"SHARED",
+													"UNENCRYPTED",
 												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resource_id": {
-												// Property: ResourceId
-												Description: "The resource ID to include in key requests.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"system_ids": {
-												// Property: SystemIds
-												Description: "The system IDs to include in key requests.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Required:    true,
-											},
-											"url": {
-												// Property: Url
-												Description: "The URL of the external key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-										},
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-VIDEO-1",
+													"PRESET-VIDEO-2",
+													"PRESET-VIDEO-3",
+													"PRESET-VIDEO-4",
+													"PRESET-VIDEO-5",
+													"PRESET-VIDEO-6",
+													"PRESET-VIDEO-7",
+													"PRESET-VIDEO-8",
+													"SHARED",
+													"UNENCRYPTED",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceId
+								"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The resource ID to include in key requests.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A Common Media Application Format (CMAF) encryption configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HlsManifests
+				"hls_manifests": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AdMarkers
+							"ad_markers": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"NONE",
+										"SCTE35_ENHANCED",
+										"PASSTHROUGH",
+										"DATERANGE",
 									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"hls_manifests": {
-						// Property: HlsManifests
-						Description: "A list of HLS manifest configurations",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"ad_markers": {
-									// Property: AdMarkers
-									Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"NONE",
-											"SCTE35_ENHANCED",
-											"PASSTHROUGH",
-											"DATERANGE",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"ad_triggers": {
-									// Property: AdTriggers
-									Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-									Type:        types.ListType{ElemType: types.StringType},
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayForEach(validate.StringInSlice([]string{
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: AdTriggers
+							"ad_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.ValueStringsAre(
+										stringvalidator.OneOf(
 											"SPLICE_INSERT",
 											"BREAK",
 											"PROVIDER_ADVERTISEMENT",
@@ -509,1037 +493,993 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 											"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
 											"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
 											"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-										})),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"ads_on_delivery_restrictions": {
-									// Property: AdsOnDeliveryRestrictions
-									Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-									Type:        types.StringType,
+										),
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									listplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: AdsOnDeliveryRestrictions
+							"ads_on_delivery_restrictions": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"NONE",
+										"RESTRICTED",
+										"UNRESTRICTED",
+										"BOTH",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: IncludeIframeOnlyStream
+							"include_iframe_only_stream": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "When enabled, an I-Frame only stream will be included in the output.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ManifestName
+							"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PlaylistType
+							"playlist_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"NONE",
+										"EVENT",
+										"VOD",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: PlaylistWindowSeconds
+							"playlist_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Time window (in seconds) contained in each parent manifest.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ProgramDateTimeIntervalSeconds
+							"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Url
+							"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The URL of the packaged OriginEndpoint for consumption.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of HLS manifest configurations",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentPrefix
+				"segment_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StreamSelection
+				"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxVideoBitsPerSecond
+						"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinVideoBitsPerSecond
+						"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StreamOrder
+						"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A directive that determines the order of streams in the output.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ORIGINAL",
+									"VIDEO_BITRATE_ASCENDING",
+									"VIDEO_BITRATE_DESCENDING",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A StreamSelection configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Common Media Application Format (CMAF) packaging configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DashPackage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
+		//	  "properties": {
+		//	    "AdTriggers": {
+		//	      "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
+		//	      "items": {
+		//	        "enum": [
+		//	          "SPLICE_INSERT",
+		//	          "BREAK",
+		//	          "PROVIDER_ADVERTISEMENT",
+		//	          "DISTRIBUTOR_ADVERTISEMENT",
+		//	          "PROVIDER_PLACEMENT_OPPORTUNITY",
+		//	          "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+		//	          "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+		//	          "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "AdsOnDeliveryRestrictions": {
+		//	      "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "RESTRICTED",
+		//	        "UNRESTRICTED",
+		//	        "BOTH"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Encryption": {
+		//	      "additionalProperties": false,
+		//	      "description": "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
+		//	      "properties": {
+		//	        "KeyRotationIntervalSeconds": {
+		//	          "description": "Time (in seconds) between each encryption key rotation.",
+		//	          "type": "integer"
+		//	        },
+		//	        "SpekeKeyProvider": {
+		//	          "additionalProperties": false,
+		//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "EncryptionContractConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+		//	              "properties": {
+		//	                "PresetSpeke20Audio": {
+		//	                  "description": "A collection of audio encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-AUDIO-1",
+		//	                    "PRESET-AUDIO-2",
+		//	                    "PRESET-AUDIO-3",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "PresetSpeke20Video": {
+		//	                  "description": "A collection of video encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-VIDEO-1",
+		//	                    "PRESET-VIDEO-2",
+		//	                    "PRESET-VIDEO-3",
+		//	                    "PRESET-VIDEO-4",
+		//	                    "PRESET-VIDEO-5",
+		//	                    "PRESET-VIDEO-6",
+		//	                    "PRESET-VIDEO-7",
+		//	                    "PRESET-VIDEO-8",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "PresetSpeke20Audio",
+		//	                "PresetSpeke20Video"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ResourceId": {
+		//	              "description": "The resource ID to include in key requests.",
+		//	              "type": "string"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "SystemIds": {
+		//	              "description": "The system IDs to include in key requests.",
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Url": {
+		//	              "description": "The URL of the external key provider service.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResourceId",
+		//	            "SystemIds",
+		//	            "Url",
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SpekeKeyProvider"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "IncludeIframeOnlyStream": {
+		//	      "description": "When enabled, an I-Frame only stream will be included in the output.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "ManifestLayout": {
+		//	      "description": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
+		//	      "enum": [
+		//	        "FULL",
+		//	        "COMPACT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ManifestWindowSeconds": {
+		//	      "description": "Time window (in seconds) contained in each manifest.",
+		//	      "type": "integer"
+		//	    },
+		//	    "MinBufferTimeSeconds": {
+		//	      "description": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
+		//	      "type": "integer"
+		//	    },
+		//	    "MinUpdatePeriodSeconds": {
+		//	      "description": "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
+		//	      "type": "integer"
+		//	    },
+		//	    "PeriodTriggers": {
+		//	      "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
+		//	      "items": {
+		//	        "enum": [
+		//	          "ADS"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "Profile": {
+		//	      "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "HBBTV_1_5",
+		//	        "HYBRIDCAST",
+		//	        "DVB_DASH_2014"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SegmentDurationSeconds": {
+		//	      "description": "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
+		//	      "type": "integer"
+		//	    },
+		//	    "SegmentTemplateFormat": {
+		//	      "description": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
+		//	      "enum": [
+		//	        "NUMBER_WITH_TIMELINE",
+		//	        "TIME_WITH_TIMELINE",
+		//	        "NUMBER_WITH_DURATION"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "StreamSelection": {
+		//	      "additionalProperties": false,
+		//	      "description": "A StreamSelection configuration.",
+		//	      "properties": {
+		//	        "MaxVideoBitsPerSecond": {
+		//	          "description": "The maximum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "MinVideoBitsPerSecond": {
+		//	          "description": "The minimum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "StreamOrder": {
+		//	          "description": "A directive that determines the order of streams in the output.",
+		//	          "enum": [
+		//	            "ORIGINAL",
+		//	            "VIDEO_BITRATE_ASCENDING",
+		//	            "VIDEO_BITRATE_DESCENDING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SuggestedPresentationDelaySeconds": {
+		//	      "description": "Duration (in seconds) to delay live content before presentation.",
+		//	      "type": "integer"
+		//	    },
+		//	    "UtcTiming": {
+		//	      "description": "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
+		//	      "enum": [
+		//	        "HTTP-XSDATE",
+		//	        "HTTP-ISO",
+		//	        "HTTP-HEAD",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "UtcTimingUri": {
+		//	      "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dash_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdTriggers
+				"ad_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"SPLICE_INSERT",
+								"BREAK",
+								"PROVIDER_ADVERTISEMENT",
+								"DISTRIBUTOR_ADVERTISEMENT",
+								"PROVIDER_PLACEMENT_OPPORTUNITY",
+								"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+								"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+								"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AdsOnDeliveryRestrictions
+				"ads_on_delivery_restrictions": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NONE",
+							"RESTRICTED",
+							"UNRESTRICTED",
+							"BOTH",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KeyRotationIntervalSeconds
+						"key_rotation_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Time (in seconds) between each encryption key rotation.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertificateArn
+								"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"NONE",
-											"RESTRICTED",
-											"UNRESTRICTED",
-											"BOTH",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"id": {
-									// Property: Id
-									Description: "The ID of the manifest. The ID must be unique within the OriginEndpoint and it cannot be changed after it is created.",
-									Type:        types.StringType,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-AUDIO-1",
+													"PRESET-AUDIO-2",
+													"PRESET-AUDIO-3",
+													"SHARED",
+													"UNENCRYPTED",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-VIDEO-1",
+													"PRESET-VIDEO-2",
+													"PRESET-VIDEO-3",
+													"PRESET-VIDEO-4",
+													"PRESET-VIDEO-5",
+													"PRESET-VIDEO-6",
+													"PRESET-VIDEO-7",
+													"PRESET-VIDEO-8",
+													"SHARED",
+													"UNENCRYPTED",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceId
+								"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The resource ID to include in key requests.",
 									Required:    true,
-								},
-								"include_iframe_only_stream": {
-									// Property: IncludeIframeOnlyStream
-									Description: "When enabled, an I-Frame only stream will be included in the output.",
-									Type:        types.BoolType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"manifest_name": {
-									// Property: ManifestName
-									Description: "An optional short string appended to the end of the OriginEndpoint URL. If not specified, defaults to the manifestName for the OriginEndpoint.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"playlist_type": {
-									// Property: PlaylistType
-									Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"NONE",
-											"EVENT",
-											"VOD",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"playlist_window_seconds": {
-									// Property: PlaylistWindowSeconds
-									Description: "Time window (in seconds) contained in each parent manifest.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"program_date_time_interval_seconds": {
-									// Property: ProgramDateTimeIntervalSeconds
-									Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"url": {
-									// Property: Url
-									Description: "The URL of the packaged OriginEndpoint for consumption.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeIframeOnlyStream
+				"include_iframe_only_stream": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, an I-Frame only stream will be included in the output.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManifestLayout
+				"manifest_layout": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"FULL",
+							"COMPACT",
 						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"segment_duration_seconds": {
-						// Property: SegmentDurationSeconds
-						Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"segment_prefix": {
-						// Property: SegmentPrefix
-						Description: "An optional custom string that is prepended to the name of each segment. If not specified, it defaults to the ChannelId.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"stream_selection": {
-						// Property: StreamSelection
-						Description: "A StreamSelection configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"max_video_bits_per_second": {
-									// Property: MaxVideoBitsPerSecond
-									Description: "The maximum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"min_video_bits_per_second": {
-									// Property: MinVideoBitsPerSecond
-									Description: "The minimum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"stream_order": {
-									// Property: StreamOrder
-									Description: "A directive that determines the order of streams in the output.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ORIGINAL",
-											"VIDEO_BITRATE_ASCENDING",
-											"VIDEO_BITRATE_DESCENDING",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"dash_package": {
-			// Property: DashPackage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
-			//	  "properties": {
-			//	    "AdTriggers": {
-			//	      "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-			//	      "items": {
-			//	        "enum": [
-			//	          "SPLICE_INSERT",
-			//	          "BREAK",
-			//	          "PROVIDER_ADVERTISEMENT",
-			//	          "DISTRIBUTOR_ADVERTISEMENT",
-			//	          "PROVIDER_PLACEMENT_OPPORTUNITY",
-			//	          "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-			//	          "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-			//	          "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "AdsOnDeliveryRestrictions": {
-			//	      "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "RESTRICTED",
-			//	        "UNRESTRICTED",
-			//	        "BOTH"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Encryption": {
-			//	      "additionalProperties": false,
-			//	      "description": "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-			//	      "properties": {
-			//	        "KeyRotationIntervalSeconds": {
-			//	          "description": "Time (in seconds) between each encryption key rotation.",
-			//	          "type": "integer"
-			//	        },
-			//	        "SpekeKeyProvider": {
-			//	          "additionalProperties": false,
-			//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			//	          "properties": {
-			//	            "CertificateArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "EncryptionContractConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-			//	              "properties": {
-			//	                "PresetSpeke20Audio": {
-			//	                  "description": "A collection of audio encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-AUDIO-1",
-			//	                    "PRESET-AUDIO-2",
-			//	                    "PRESET-AUDIO-3",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "PresetSpeke20Video": {
-			//	                  "description": "A collection of video encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-VIDEO-1",
-			//	                    "PRESET-VIDEO-2",
-			//	                    "PRESET-VIDEO-3",
-			//	                    "PRESET-VIDEO-4",
-			//	                    "PRESET-VIDEO-5",
-			//	                    "PRESET-VIDEO-6",
-			//	                    "PRESET-VIDEO-7",
-			//	                    "PRESET-VIDEO-8",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "PresetSpeke20Audio",
-			//	                "PresetSpeke20Video"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "ResourceId": {
-			//	              "description": "The resource ID to include in key requests.",
-			//	              "type": "string"
-			//	            },
-			//	            "RoleArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "SystemIds": {
-			//	              "description": "The system IDs to include in key requests.",
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Url": {
-			//	              "description": "The URL of the external key provider service.",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ResourceId",
-			//	            "SystemIds",
-			//	            "Url",
-			//	            "RoleArn"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "SpekeKeyProvider"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "IncludeIframeOnlyStream": {
-			//	      "description": "When enabled, an I-Frame only stream will be included in the output.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "ManifestLayout": {
-			//	      "description": "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
-			//	      "enum": [
-			//	        "FULL",
-			//	        "COMPACT"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "ManifestWindowSeconds": {
-			//	      "description": "Time window (in seconds) contained in each manifest.",
-			//	      "type": "integer"
-			//	    },
-			//	    "MinBufferTimeSeconds": {
-			//	      "description": "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
-			//	      "type": "integer"
-			//	    },
-			//	    "MinUpdatePeriodSeconds": {
-			//	      "description": "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
-			//	      "type": "integer"
-			//	    },
-			//	    "PeriodTriggers": {
-			//	      "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
-			//	      "items": {
-			//	        "enum": [
-			//	          "ADS"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "Profile": {
-			//	      "description": "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "HBBTV_1_5",
-			//	        "HYBRIDCAST",
-			//	        "DVB_DASH_2014"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "SegmentDurationSeconds": {
-			//	      "description": "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
-			//	      "type": "integer"
-			//	    },
-			//	    "SegmentTemplateFormat": {
-			//	      "description": "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
-			//	      "enum": [
-			//	        "NUMBER_WITH_TIMELINE",
-			//	        "TIME_WITH_TIMELINE",
-			//	        "NUMBER_WITH_DURATION"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "StreamSelection": {
-			//	      "additionalProperties": false,
-			//	      "description": "A StreamSelection configuration.",
-			//	      "properties": {
-			//	        "MaxVideoBitsPerSecond": {
-			//	          "description": "The maximum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "MinVideoBitsPerSecond": {
-			//	          "description": "The minimum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "StreamOrder": {
-			//	          "description": "A directive that determines the order of streams in the output.",
-			//	          "enum": [
-			//	            "ORIGINAL",
-			//	            "VIDEO_BITRATE_ASCENDING",
-			//	            "VIDEO_BITRATE_DESCENDING"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "SuggestedPresentationDelaySeconds": {
-			//	      "description": "Duration (in seconds) to delay live content before presentation.",
-			//	      "type": "integer"
-			//	    },
-			//	    "UtcTiming": {
-			//	      "description": "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
-			//	      "enum": [
-			//	        "HTTP-XSDATE",
-			//	        "HTTP-ISO",
-			//	        "HTTP-HEAD",
-			//	        "NONE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "UtcTimingUri": {
-			//	      "description": "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"ad_triggers": {
-						// Property: AdTriggers
-						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringInSlice([]string{
-								"SPLICE_INSERT",
-								"BREAK",
-								"PROVIDER_ADVERTISEMENT",
-								"DISTRIBUTOR_ADVERTISEMENT",
-								"PROVIDER_PLACEMENT_OPPORTUNITY",
-								"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-								"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-								"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-							})),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ads_on_delivery_restrictions": {
-						// Property: AdsOnDeliveryRestrictions
-						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"NONE",
-								"RESTRICTED",
-								"UNRESTRICTED",
-								"BOTH",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"encryption": {
-						// Property: Encryption
-						Description: "A Dynamic Adaptive Streaming over HTTP (DASH) encryption configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key_rotation_interval_seconds": {
-									// Property: KeyRotationIntervalSeconds
-									Description: "Time (in seconds) between each encryption key rotation.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"speke_key_provider": {
-									// Property: SpekeKeyProvider
-									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"certificate_arn": {
-												// Property: CertificateArn
-												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"encryption_contract_configuration": {
-												// Property: EncryptionContractConfiguration
-												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"preset_speke_20_audio": {
-															// Property: PresetSpeke20Audio
-															Description: "A collection of audio encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-AUDIO-1",
-																	"PRESET-AUDIO-2",
-																	"PRESET-AUDIO-3",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-														"preset_speke_20_video": {
-															// Property: PresetSpeke20Video
-															Description: "A collection of video encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-VIDEO-1",
-																	"PRESET-VIDEO-2",
-																	"PRESET-VIDEO-3",
-																	"PRESET-VIDEO-4",
-																	"PRESET-VIDEO-5",
-																	"PRESET-VIDEO-6",
-																	"PRESET-VIDEO-7",
-																	"PRESET-VIDEO-8",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resource_id": {
-												// Property: ResourceId
-												Description: "The resource ID to include in key requests.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"system_ids": {
-												// Property: SystemIds
-												Description: "The system IDs to include in key requests.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Required:    true,
-											},
-											"url": {
-												// Property: Url
-												Description: "The URL of the external key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"include_iframe_only_stream": {
-						// Property: IncludeIframeOnlyStream
-						Description: "When enabled, an I-Frame only stream will be included in the output.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"manifest_layout": {
-						// Property: ManifestLayout
-						Description: "Determines the position of some tags in the Media Presentation Description (MPD).  When set to FULL, elements like SegmentTemplate and ContentProtection are included in each Representation.  When set to COMPACT, duplicate elements are combined and presented at the AdaptationSet level.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"FULL",
-								"COMPACT",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"manifest_window_seconds": {
-						// Property: ManifestWindowSeconds
-						Description: "Time window (in seconds) contained in each manifest.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"min_buffer_time_seconds": {
-						// Property: MinBufferTimeSeconds
-						Description: "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"min_update_period_seconds": {
-						// Property: MinUpdatePeriodSeconds
-						Description: "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"period_triggers": {
-						// Property: PeriodTriggers
-						Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringInSlice([]string{
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManifestWindowSeconds
+				"manifest_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Time window (in seconds) contained in each manifest.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MinBufferTimeSeconds
+				"min_buffer_time_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Minimum duration (in seconds) that a player will buffer media before starting the presentation.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MinUpdatePeriodSeconds
+				"min_update_period_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Minimum duration (in seconds) between potential changes to the Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD).",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PeriodTriggers
+				"period_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Channel source contains SCTE-35 ad markers.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
 								"ADS",
-							})),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"profile": {
-						// Property: Profile
-						Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"NONE",
-								"HBBTV_1_5",
-								"HYBRIDCAST",
-								"DVB_DASH_2014",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"segment_duration_seconds": {
-						// Property: SegmentDurationSeconds
-						Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"segment_template_format": {
-						// Property: SegmentTemplateFormat
-						Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"NUMBER_WITH_TIMELINE",
-								"TIME_WITH_TIMELINE",
-								"NUMBER_WITH_DURATION",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"stream_selection": {
-						// Property: StreamSelection
-						Description: "A StreamSelection configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"max_video_bits_per_second": {
-									// Property: MaxVideoBitsPerSecond
-									Description: "The maximum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"min_video_bits_per_second": {
-									// Property: MinVideoBitsPerSecond
-									Description: "The minimum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"stream_order": {
-									// Property: StreamOrder
-									Description: "A directive that determines the order of streams in the output.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ORIGINAL",
-											"VIDEO_BITRATE_ASCENDING",
-											"VIDEO_BITRATE_DESCENDING",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
+							),
 						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"suggested_presentation_delay_seconds": {
-						// Property: SuggestedPresentationDelaySeconds
-						Description: "Duration (in seconds) to delay live content before presentation.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"utc_timing": {
-						// Property: UtcTiming
-						Description: "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"HTTP-XSDATE",
-								"HTTP-ISO",
-								"HTTP-HEAD",
-								"NONE",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"utc_timing_uri": {
-						// Property: UtcTimingUri
-						Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A short text description of the OriginEndpoint.",
-			//	  "type": "string"
-			//	}
-			Description: "A short text description of the OriginEndpoint.",
-			Type:        types.StringType,
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Profile
+				"profile": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Dynamic Adaptive Streaming over HTTP (DASH) profile type.  When set to \"HBBTV_1_5\", HbbTV 1.5 compliant output is enabled.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NONE",
+							"HBBTV_1_5",
+							"HYBRIDCAST",
+							"DVB_DASH_2014",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) of each segment. Actual segments will be rounded to the nearest multiple of the source segment duration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentTemplateFormat
+				"segment_template_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Determines the type of SegmentTemplate included in the Media Presentation Description (MPD).  When set to NUMBER_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Number$ media URLs.  When set to TIME_WITH_TIMELINE, a full timeline is presented in each SegmentTemplate, with $Time$ media URLs. When set to NUMBER_WITH_DURATION, only a duration is included in each SegmentTemplate, with $Number$ media URLs.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NUMBER_WITH_TIMELINE",
+							"TIME_WITH_TIMELINE",
+							"NUMBER_WITH_DURATION",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StreamSelection
+				"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxVideoBitsPerSecond
+						"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinVideoBitsPerSecond
+						"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StreamOrder
+						"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A directive that determines the order of streams in the output.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ORIGINAL",
+									"VIDEO_BITRATE_ASCENDING",
+									"VIDEO_BITRATE_DESCENDING",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A StreamSelection configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SuggestedPresentationDelaySeconds
+				"suggested_presentation_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) to delay live content before presentation.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UtcTiming
+				"utc_timing": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Determines the type of UTCTiming included in the Media Presentation Description (MPD)",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"HTTP-XSDATE",
+							"HTTP-ISO",
+							"HTTP-HEAD",
+							"NONE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UtcTimingUri
+				"utc_timing_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the value attribute of the UTCTiming field when utcTiming is set to HTTP-ISO, HTTP-HEAD or HTTP-XSDATE",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Dynamic Adaptive Streaming over HTTP (DASH) packaging configuration.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"hls_package": {
-			// Property: HlsPackage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An HTTP Live Streaming (HLS) packaging configuration.",
-			//	  "properties": {
-			//	    "AdMarkers": {
-			//	      "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "SCTE35_ENHANCED",
-			//	        "PASSTHROUGH",
-			//	        "DATERANGE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "AdTriggers": {
-			//	      "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-			//	      "items": {
-			//	        "enum": [
-			//	          "SPLICE_INSERT",
-			//	          "BREAK",
-			//	          "PROVIDER_ADVERTISEMENT",
-			//	          "DISTRIBUTOR_ADVERTISEMENT",
-			//	          "PROVIDER_PLACEMENT_OPPORTUNITY",
-			//	          "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
-			//	          "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
-			//	          "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "AdsOnDeliveryRestrictions": {
-			//	      "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "RESTRICTED",
-			//	        "UNRESTRICTED",
-			//	        "BOTH"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Encryption": {
-			//	      "additionalProperties": false,
-			//	      "description": "An HTTP Live Streaming (HLS) encryption configuration.",
-			//	      "properties": {
-			//	        "ConstantInitializationVector": {
-			//	          "description": "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
-			//	          "type": "string"
-			//	        },
-			//	        "EncryptionMethod": {
-			//	          "description": "The encryption method to use.",
-			//	          "enum": [
-			//	            "AES_128",
-			//	            "SAMPLE_AES"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "KeyRotationIntervalSeconds": {
-			//	          "description": "Interval (in seconds) between each encryption key rotation.",
-			//	          "type": "integer"
-			//	        },
-			//	        "RepeatExtXKey": {
-			//	          "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-			//	          "type": "boolean"
-			//	        },
-			//	        "SpekeKeyProvider": {
-			//	          "additionalProperties": false,
-			//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			//	          "properties": {
-			//	            "CertificateArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "EncryptionContractConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-			//	              "properties": {
-			//	                "PresetSpeke20Audio": {
-			//	                  "description": "A collection of audio encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-AUDIO-1",
-			//	                    "PRESET-AUDIO-2",
-			//	                    "PRESET-AUDIO-3",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "PresetSpeke20Video": {
-			//	                  "description": "A collection of video encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-VIDEO-1",
-			//	                    "PRESET-VIDEO-2",
-			//	                    "PRESET-VIDEO-3",
-			//	                    "PRESET-VIDEO-4",
-			//	                    "PRESET-VIDEO-5",
-			//	                    "PRESET-VIDEO-6",
-			//	                    "PRESET-VIDEO-7",
-			//	                    "PRESET-VIDEO-8",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "PresetSpeke20Audio",
-			//	                "PresetSpeke20Video"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "ResourceId": {
-			//	              "description": "The resource ID to include in key requests.",
-			//	              "type": "string"
-			//	            },
-			//	            "RoleArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "SystemIds": {
-			//	              "description": "The system IDs to include in key requests.",
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Url": {
-			//	              "description": "The URL of the external key provider service.",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ResourceId",
-			//	            "SystemIds",
-			//	            "Url",
-			//	            "RoleArn"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "SpekeKeyProvider"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "IncludeDvbSubtitles": {
-			//	      "description": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "IncludeIframeOnlyStream": {
-			//	      "description": "When enabled, an I-Frame only stream will be included in the output.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "PlaylistType": {
-			//	      "description": "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "EVENT",
-			//	        "VOD"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "PlaylistWindowSeconds": {
-			//	      "description": "Time window (in seconds) contained in each parent manifest.",
-			//	      "type": "integer"
-			//	    },
-			//	    "ProgramDateTimeIntervalSeconds": {
-			//	      "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-			//	      "type": "integer"
-			//	    },
-			//	    "SegmentDurationSeconds": {
-			//	      "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-			//	      "type": "integer"
-			//	    },
-			//	    "StreamSelection": {
-			//	      "additionalProperties": false,
-			//	      "description": "A StreamSelection configuration.",
-			//	      "properties": {
-			//	        "MaxVideoBitsPerSecond": {
-			//	          "description": "The maximum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "MinVideoBitsPerSecond": {
-			//	          "description": "The minimum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "StreamOrder": {
-			//	          "description": "A directive that determines the order of streams in the output.",
-			//	          "enum": [
-			//	            "ORIGINAL",
-			//	            "VIDEO_BITRATE_ASCENDING",
-			//	            "VIDEO_BITRATE_DESCENDING"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "UseAudioRenditionGroup": {
-			//	      "description": "When enabled, audio streams will be placed in rendition groups in the output.",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "An HTTP Live Streaming (HLS) packaging configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"ad_markers": {
-						// Property: AdMarkers
-						Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"NONE",
-								"SCTE35_ENHANCED",
-								"PASSTHROUGH",
-								"DATERANGE",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ad_triggers": {
-						// Property: AdTriggers
-						Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringInSlice([]string{
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A short text description of the OriginEndpoint.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A short text description of the OriginEndpoint.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HlsPackage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An HTTP Live Streaming (HLS) packaging configuration.",
+		//	  "properties": {
+		//	    "AdMarkers": {
+		//	      "description": "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "SCTE35_ENHANCED",
+		//	        "PASSTHROUGH",
+		//	        "DATERANGE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "AdTriggers": {
+		//	      "description": "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
+		//	      "items": {
+		//	        "enum": [
+		//	          "SPLICE_INSERT",
+		//	          "BREAK",
+		//	          "PROVIDER_ADVERTISEMENT",
+		//	          "DISTRIBUTOR_ADVERTISEMENT",
+		//	          "PROVIDER_PLACEMENT_OPPORTUNITY",
+		//	          "DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
+		//	          "PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
+		//	          "DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "AdsOnDeliveryRestrictions": {
+		//	      "description": "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "RESTRICTED",
+		//	        "UNRESTRICTED",
+		//	        "BOTH"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Encryption": {
+		//	      "additionalProperties": false,
+		//	      "description": "An HTTP Live Streaming (HLS) encryption configuration.",
+		//	      "properties": {
+		//	        "ConstantInitializationVector": {
+		//	          "description": "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
+		//	          "type": "string"
+		//	        },
+		//	        "EncryptionMethod": {
+		//	          "description": "The encryption method to use.",
+		//	          "enum": [
+		//	            "AES_128",
+		//	            "SAMPLE_AES"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "KeyRotationIntervalSeconds": {
+		//	          "description": "Interval (in seconds) between each encryption key rotation.",
+		//	          "type": "integer"
+		//	        },
+		//	        "RepeatExtXKey": {
+		//	          "description": "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
+		//	          "type": "boolean"
+		//	        },
+		//	        "SpekeKeyProvider": {
+		//	          "additionalProperties": false,
+		//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "EncryptionContractConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+		//	              "properties": {
+		//	                "PresetSpeke20Audio": {
+		//	                  "description": "A collection of audio encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-AUDIO-1",
+		//	                    "PRESET-AUDIO-2",
+		//	                    "PRESET-AUDIO-3",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "PresetSpeke20Video": {
+		//	                  "description": "A collection of video encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-VIDEO-1",
+		//	                    "PRESET-VIDEO-2",
+		//	                    "PRESET-VIDEO-3",
+		//	                    "PRESET-VIDEO-4",
+		//	                    "PRESET-VIDEO-5",
+		//	                    "PRESET-VIDEO-6",
+		//	                    "PRESET-VIDEO-7",
+		//	                    "PRESET-VIDEO-8",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "PresetSpeke20Audio",
+		//	                "PresetSpeke20Video"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ResourceId": {
+		//	              "description": "The resource ID to include in key requests.",
+		//	              "type": "string"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "SystemIds": {
+		//	              "description": "The system IDs to include in key requests.",
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Url": {
+		//	              "description": "The URL of the external key provider service.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResourceId",
+		//	            "SystemIds",
+		//	            "Url",
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SpekeKeyProvider"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "IncludeDvbSubtitles": {
+		//	      "description": "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "IncludeIframeOnlyStream": {
+		//	      "description": "When enabled, an I-Frame only stream will be included in the output.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "PlaylistType": {
+		//	      "description": "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "EVENT",
+		//	        "VOD"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PlaylistWindowSeconds": {
+		//	      "description": "Time window (in seconds) contained in each parent manifest.",
+		//	      "type": "integer"
+		//	    },
+		//	    "ProgramDateTimeIntervalSeconds": {
+		//	      "description": "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+		//	      "type": "integer"
+		//	    },
+		//	    "SegmentDurationSeconds": {
+		//	      "description": "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+		//	      "type": "integer"
+		//	    },
+		//	    "StreamSelection": {
+		//	      "additionalProperties": false,
+		//	      "description": "A StreamSelection configuration.",
+		//	      "properties": {
+		//	        "MaxVideoBitsPerSecond": {
+		//	          "description": "The maximum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "MinVideoBitsPerSecond": {
+		//	          "description": "The minimum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "StreamOrder": {
+		//	          "description": "A directive that determines the order of streams in the output.",
+		//	          "enum": [
+		//	            "ORIGINAL",
+		//	            "VIDEO_BITRATE_ASCENDING",
+		//	            "VIDEO_BITRATE_DESCENDING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "UseAudioRenditionGroup": {
+		//	      "description": "When enabled, audio streams will be placed in rendition groups in the output.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"hls_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdMarkers
+				"ad_markers": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This setting controls how ad markers are included in the packaged OriginEndpoint. \"NONE\" will omit all SCTE-35 ad markers from the output. \"PASSTHROUGH\" causes the manifest to contain a copy of the SCTE-35 ad markers (comments) taken directly from the input HTTP Live Streaming (HLS) manifest. \"SCTE35_ENHANCED\" generates ad markers and blackout tags based on SCTE-35 messages in the input source. \"DATERANGE\" inserts EXT-X-DATERANGE tags to signal ad and program transition events in HLS and CMAF manifests. For this option, you must set a programDateTimeIntervalSeconds value that is greater than 0.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NONE",
+							"SCTE35_ENHANCED",
+							"PASSTHROUGH",
+							"DATERANGE",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AdTriggers
+				"ad_triggers": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of SCTE-35 message types that are treated as ad markers in the output.  If empty, no ad markers are output.  Specify multiple items to create ad markers for all of the included message types.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
 								"SPLICE_INSERT",
 								"BREAK",
 								"PROVIDER_ADVERTISEMENT",
@@ -1548,814 +1488,757 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 								"DISTRIBUTOR_PLACEMENT_OPPORTUNITY",
 								"PROVIDER_OVERLAY_PLACEMENT_OPPORTUNITY",
 								"DISTRIBUTOR_OVERLAY_PLACEMENT_OPPORTUNITY",
-							})),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ads_on_delivery_restrictions": {
-						// Property: AdsOnDeliveryRestrictions
-						Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"NONE",
-								"RESTRICTED",
-								"UNRESTRICTED",
-								"BOTH",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"encryption": {
-						// Property: Encryption
-						Description: "An HTTP Live Streaming (HLS) encryption configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constant_initialization_vector": {
-									// Property: ConstantInitializationVector
-									Description: "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
-									Type:        types.StringType,
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AdsOnDeliveryRestrictions
+				"ads_on_delivery_restrictions": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This setting allows the delivery restriction flags on SCTE-35 segmentation descriptors to determine whether a message signals an ad.  Choosing \"NONE\" means no SCTE-35 messages become ads.  Choosing \"RESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that contain delivery restrictions will be treated as ads.  Choosing \"UNRESTRICTED\" means SCTE-35 messages of the types specified in AdTriggers that do not contain delivery restrictions will be treated as ads.  Choosing \"BOTH\" means all SCTE-35 messages of the types specified in AdTriggers will be treated as ads.  Note that Splice Insert messages do not have these flags and are always treated as ads if specified in AdTriggers.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NONE",
+							"RESTRICTED",
+							"UNRESTRICTED",
+							"BOTH",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConstantInitializationVector
+						"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A constant initialization vector for encryption (optional). When not specified the initialization vector will be periodically rotated.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EncryptionMethod
+						"encryption_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The encryption method to use.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"AES_128",
+									"SAMPLE_AES",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KeyRotationIntervalSeconds
+						"key_rotation_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Interval (in seconds) between each encryption key rotation.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RepeatExtXKey
+						"repeat_ext_x_key": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertificateArn
+								"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"encryption_method": {
-									// Property: EncryptionMethod
-									Description: "The encryption method to use.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"AES_128",
-											"SAMPLE_AES",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"key_rotation_interval_seconds": {
-									// Property: KeyRotationIntervalSeconds
-									Description: "Interval (in seconds) between each encryption key rotation.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"repeat_ext_x_key": {
-									// Property: RepeatExtXKey
-									Description: "When enabled, the EXT-X-KEY tag will be repeated in output manifests.",
-									Type:        types.BoolType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"speke_key_provider": {
-									// Property: SpekeKeyProvider
-									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"certificate_arn": {
-												// Property: CertificateArn
-												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"encryption_contract_configuration": {
-												// Property: EncryptionContractConfiguration
-												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"preset_speke_20_audio": {
-															// Property: PresetSpeke20Audio
-															Description: "A collection of audio encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-AUDIO-1",
-																	"PRESET-AUDIO-2",
-																	"PRESET-AUDIO-3",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-														"preset_speke_20_video": {
-															// Property: PresetSpeke20Video
-															Description: "A collection of video encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-VIDEO-1",
-																	"PRESET-VIDEO-2",
-																	"PRESET-VIDEO-3",
-																	"PRESET-VIDEO-4",
-																	"PRESET-VIDEO-5",
-																	"PRESET-VIDEO-6",
-																	"PRESET-VIDEO-7",
-																	"PRESET-VIDEO-8",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-													},
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-AUDIO-1",
+													"PRESET-AUDIO-2",
+													"PRESET-AUDIO-3",
+													"SHARED",
+													"UNENCRYPTED",
 												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resource_id": {
-												// Property: ResourceId
-												Description: "The resource ID to include in key requests.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"system_ids": {
-												// Property: SystemIds
-												Description: "The system IDs to include in key requests.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Required:    true,
-											},
-											"url": {
-												// Property: Url
-												Description: "The URL of the external key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-										},
-									),
-									Required: true,
-								},
-							},
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-VIDEO-1",
+													"PRESET-VIDEO-2",
+													"PRESET-VIDEO-3",
+													"PRESET-VIDEO-4",
+													"PRESET-VIDEO-5",
+													"PRESET-VIDEO-6",
+													"PRESET-VIDEO-7",
+													"PRESET-VIDEO-8",
+													"SHARED",
+													"UNENCRYPTED",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceId
+								"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The resource ID to include in key requests.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "An HTTP Live Streaming (HLS) encryption configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeDvbSubtitles
+				"include_dvb_subtitles": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeIframeOnlyStream
+				"include_iframe_only_stream": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, an I-Frame only stream will be included in the output.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PlaylistType
+				"playlist_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NONE",
+							"EVENT",
+							"VOD",
 						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"include_dvb_subtitles": {
-						// Property: IncludeDvbSubtitles
-						Description: "When enabled, MediaPackage passes through digital video broadcasting (DVB) subtitles into the output.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"include_iframe_only_stream": {
-						// Property: IncludeIframeOnlyStream
-						Description: "When enabled, an I-Frame only stream will be included in the output.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"playlist_type": {
-						// Property: PlaylistType
-						Description: "The HTTP Live Streaming (HLS) playlist type. When either \"EVENT\" or \"VOD\" is specified, a corresponding EXT-X-PLAYLIST-TYPE entry will be included in the media playlist.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"NONE",
-								"EVENT",
-								"VOD",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"playlist_window_seconds": {
-						// Property: PlaylistWindowSeconds
-						Description: "Time window (in seconds) contained in each parent manifest.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"program_date_time_interval_seconds": {
-						// Property: ProgramDateTimeIntervalSeconds
-						Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"segment_duration_seconds": {
-						// Property: SegmentDurationSeconds
-						Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"stream_selection": {
-						// Property: StreamSelection
-						Description: "A StreamSelection configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"max_video_bits_per_second": {
-									// Property: MaxVideoBitsPerSecond
-									Description: "The maximum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"min_video_bits_per_second": {
-									// Property: MinVideoBitsPerSecond
-									Description: "The minimum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"stream_order": {
-									// Property: StreamOrder
-									Description: "A directive that determines the order of streams in the output.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ORIGINAL",
-											"VIDEO_BITRATE_ASCENDING",
-											"VIDEO_BITRATE_DESCENDING",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"use_audio_rendition_group": {
-						// Property: UseAudioRenditionGroup
-						Description: "When enabled, audio streams will be placed in rendition groups in the output.",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the OriginEndpoint.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PlaylistWindowSeconds
+				"playlist_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Time window (in seconds) contained in each parent manifest.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProgramDateTimeIntervalSeconds
+				"program_date_time_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The interval (in seconds) between each EXT-X-PROGRAM-DATE-TIME tag inserted into manifests. Additionally, when an interval is specified ID3Timed Metadata messages will be generated every 5 seconds using the ingest time of the content. If the interval is not specified, or set to 0, then no EXT-X-PROGRAM-DATE-TIME tags will be inserted into manifests and no ID3Timed Metadata messages will be generated. Note that irrespective of this parameter, if any ID3 Timed Metadata is found in HTTP Live Streaming (HLS) input, it will be passed through to HLS output.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Duration (in seconds) of each fragment. Actual fragments will be rounded to the nearest multiple of the source fragment duration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StreamSelection
+				"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxVideoBitsPerSecond
+						"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinVideoBitsPerSecond
+						"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StreamOrder
+						"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A directive that determines the order of streams in the output.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ORIGINAL",
+									"VIDEO_BITRATE_ASCENDING",
+									"VIDEO_BITRATE_DESCENDING",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A StreamSelection configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UseAudioRenditionGroup
+				"use_audio_rendition_group": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, audio streams will be placed in rendition groups in the output.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "An HTTP Live Streaming (HLS) packaging configuration.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the OriginEndpoint.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the OriginEndpoint.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"manifest_name": {
-			// Property: ManifestName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A short string appended to the end of the OriginEndpoint URL.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ManifestName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A short string appended to the end of the OriginEndpoint URL.",
+		//	  "type": "string"
+		//	}
+		"manifest_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A short string appended to the end of the OriginEndpoint URL.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"mss_package": {
-			// Property: MssPackage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A Microsoft Smooth Streaming (MSS) packaging configuration.",
-			//	  "properties": {
-			//	    "Encryption": {
-			//	      "additionalProperties": false,
-			//	      "description": "A Microsoft Smooth Streaming (MSS) encryption configuration.",
-			//	      "properties": {
-			//	        "SpekeKeyProvider": {
-			//	          "additionalProperties": false,
-			//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-			//	          "properties": {
-			//	            "CertificateArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "EncryptionContractConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-			//	              "properties": {
-			//	                "PresetSpeke20Audio": {
-			//	                  "description": "A collection of audio encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-AUDIO-1",
-			//	                    "PRESET-AUDIO-2",
-			//	                    "PRESET-AUDIO-3",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "PresetSpeke20Video": {
-			//	                  "description": "A collection of video encryption presets.",
-			//	                  "enum": [
-			//	                    "PRESET-VIDEO-1",
-			//	                    "PRESET-VIDEO-2",
-			//	                    "PRESET-VIDEO-3",
-			//	                    "PRESET-VIDEO-4",
-			//	                    "PRESET-VIDEO-5",
-			//	                    "PRESET-VIDEO-6",
-			//	                    "PRESET-VIDEO-7",
-			//	                    "PRESET-VIDEO-8",
-			//	                    "SHARED",
-			//	                    "UNENCRYPTED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "PresetSpeke20Audio",
-			//	                "PresetSpeke20Video"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "ResourceId": {
-			//	              "description": "The resource ID to include in key requests.",
-			//	              "type": "string"
-			//	            },
-			//	            "RoleArn": {
-			//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-			//	              "type": "string"
-			//	            },
-			//	            "SystemIds": {
-			//	              "description": "The system IDs to include in key requests.",
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Url": {
-			//	              "description": "The URL of the external key provider service.",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ResourceId",
-			//	            "SystemIds",
-			//	            "Url",
-			//	            "RoleArn"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "SpekeKeyProvider"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ManifestWindowSeconds": {
-			//	      "description": "The time window (in seconds) contained in each manifest.",
-			//	      "type": "integer"
-			//	    },
-			//	    "SegmentDurationSeconds": {
-			//	      "description": "The duration (in seconds) of each segment.",
-			//	      "type": "integer"
-			//	    },
-			//	    "StreamSelection": {
-			//	      "additionalProperties": false,
-			//	      "description": "A StreamSelection configuration.",
-			//	      "properties": {
-			//	        "MaxVideoBitsPerSecond": {
-			//	          "description": "The maximum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "MinVideoBitsPerSecond": {
-			//	          "description": "The minimum video bitrate (bps) to include in output.",
-			//	          "type": "integer"
-			//	        },
-			//	        "StreamOrder": {
-			//	          "description": "A directive that determines the order of streams in the output.",
-			//	          "enum": [
-			//	            "ORIGINAL",
-			//	            "VIDEO_BITRATE_ASCENDING",
-			//	            "VIDEO_BITRATE_DESCENDING"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "A Microsoft Smooth Streaming (MSS) packaging configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"encryption": {
-						// Property: Encryption
-						Description: "A Microsoft Smooth Streaming (MSS) encryption configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"speke_key_provider": {
-									// Property: SpekeKeyProvider
-									Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"certificate_arn": {
-												// Property: CertificateArn
-												Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"encryption_contract_configuration": {
-												// Property: EncryptionContractConfiguration
-												Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"preset_speke_20_audio": {
-															// Property: PresetSpeke20Audio
-															Description: "A collection of audio encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-AUDIO-1",
-																	"PRESET-AUDIO-2",
-																	"PRESET-AUDIO-3",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-														"preset_speke_20_video": {
-															// Property: PresetSpeke20Video
-															Description: "A collection of video encryption presets.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PRESET-VIDEO-1",
-																	"PRESET-VIDEO-2",
-																	"PRESET-VIDEO-3",
-																	"PRESET-VIDEO-4",
-																	"PRESET-VIDEO-5",
-																	"PRESET-VIDEO-6",
-																	"PRESET-VIDEO-7",
-																	"PRESET-VIDEO-8",
-																	"SHARED",
-																	"UNENCRYPTED",
-																}),
-															},
-														},
-													},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MssPackage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A Microsoft Smooth Streaming (MSS) packaging configuration.",
+		//	  "properties": {
+		//	    "Encryption": {
+		//	      "additionalProperties": false,
+		//	      "description": "A Microsoft Smooth Streaming (MSS) encryption configuration.",
+		//	      "properties": {
+		//	        "SpekeKeyProvider": {
+		//	          "additionalProperties": false,
+		//	          "description": "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+		//	          "properties": {
+		//	            "CertificateArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "EncryptionContractConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
+		//	              "properties": {
+		//	                "PresetSpeke20Audio": {
+		//	                  "description": "A collection of audio encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-AUDIO-1",
+		//	                    "PRESET-AUDIO-2",
+		//	                    "PRESET-AUDIO-3",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "PresetSpeke20Video": {
+		//	                  "description": "A collection of video encryption presets.",
+		//	                  "enum": [
+		//	                    "PRESET-VIDEO-1",
+		//	                    "PRESET-VIDEO-2",
+		//	                    "PRESET-VIDEO-3",
+		//	                    "PRESET-VIDEO-4",
+		//	                    "PRESET-VIDEO-5",
+		//	                    "PRESET-VIDEO-6",
+		//	                    "PRESET-VIDEO-7",
+		//	                    "PRESET-VIDEO-8",
+		//	                    "SHARED",
+		//	                    "UNENCRYPTED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "PresetSpeke20Audio",
+		//	                "PresetSpeke20Video"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ResourceId": {
+		//	              "description": "The resource ID to include in key requests.",
+		//	              "type": "string"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+		//	              "type": "string"
+		//	            },
+		//	            "SystemIds": {
+		//	              "description": "The system IDs to include in key requests.",
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Url": {
+		//	              "description": "The URL of the external key provider service.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ResourceId",
+		//	            "SystemIds",
+		//	            "Url",
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "SpekeKeyProvider"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ManifestWindowSeconds": {
+		//	      "description": "The time window (in seconds) contained in each manifest.",
+		//	      "type": "integer"
+		//	    },
+		//	    "SegmentDurationSeconds": {
+		//	      "description": "The duration (in seconds) of each segment.",
+		//	      "type": "integer"
+		//	    },
+		//	    "StreamSelection": {
+		//	      "additionalProperties": false,
+		//	      "description": "A StreamSelection configuration.",
+		//	      "properties": {
+		//	        "MaxVideoBitsPerSecond": {
+		//	          "description": "The maximum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "MinVideoBitsPerSecond": {
+		//	          "description": "The minimum video bitrate (bps) to include in output.",
+		//	          "type": "integer"
+		//	        },
+		//	        "StreamOrder": {
+		//	          "description": "A directive that determines the order of streams in the output.",
+		//	          "enum": [
+		//	            "ORIGINAL",
+		//	            "VIDEO_BITRATE_ASCENDING",
+		//	            "VIDEO_BITRATE_DESCENDING"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"mss_package": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Encryption
+				"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SpekeKeyProvider
+						"speke_key_provider": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CertificateArn
+								"certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of a Certificate Manager certificate that MediaPackage will use for enforcing secure end-to-end data transfer with the key provider service.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: EncryptionContractConfiguration
+								"encryption_contract_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: PresetSpeke20Audio
+										"preset_speke_20_audio": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of audio encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-AUDIO-1",
+													"PRESET-AUDIO-2",
+													"PRESET-AUDIO-3",
+													"SHARED",
+													"UNENCRYPTED",
 												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resource_id": {
-												// Property: ResourceId
-												Description: "The resource ID to include in key requests.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-											"system_ids": {
-												// Property: SystemIds
-												Description: "The system IDs to include in key requests.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Required:    true,
-											},
-											"url": {
-												// Property: Url
-												Description: "The URL of the external key provider service.",
-												Type:        types.StringType,
-												Required:    true,
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"manifest_window_seconds": {
-						// Property: ManifestWindowSeconds
-						Description: "The time window (in seconds) contained in each manifest.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"segment_duration_seconds": {
-						// Property: SegmentDurationSeconds
-						Description: "The duration (in seconds) of each segment.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"stream_selection": {
-						// Property: StreamSelection
-						Description: "A StreamSelection configuration.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"max_video_bits_per_second": {
-									// Property: MaxVideoBitsPerSecond
-									Description: "The maximum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: PresetSpeke20Video
+										"preset_speke_20_video": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A collection of video encryption presets.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PRESET-VIDEO-1",
+													"PRESET-VIDEO-2",
+													"PRESET-VIDEO-3",
+													"PRESET-VIDEO-4",
+													"PRESET-VIDEO-5",
+													"PRESET-VIDEO-6",
+													"PRESET-VIDEO-7",
+													"PRESET-VIDEO-8",
+													"SHARED",
+													"UNENCRYPTED",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The configuration to use for encrypting one or more content tracks separately for endpoints that use SPEKE 2.0.",
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"min_video_bits_per_second": {
-									// Property: MinVideoBitsPerSecond
-									Description: "The minimum video bitrate (bps) to include in output.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"stream_order": {
-									// Property: StreamOrder
-									Description: "A directive that determines the order of streams in the output.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ORIGINAL",
-											"VIDEO_BITRATE_ASCENDING",
-											"VIDEO_BITRATE_DESCENDING",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"origination": {
-			// Property: Origination
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination",
-			//	  "enum": [
-			//	    "ALLOW",
-			//	    "DENY"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination",
-			Type:        types.StringType,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceId
+								"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The resource ID to include in key requests.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "An Amazon Resource Name (ARN) of an IAM role that AWS Elemental MediaPackage will assume when accessing the key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SystemIds
+								"system_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "The system IDs to include in key requests.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Url
+								"url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The URL of the external key provider service.",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "A configuration for accessing an external Secure Packager and Encoder Key Exchange (SPEKE) service that will provide encryption keys.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A Microsoft Smooth Streaming (MSS) encryption configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ManifestWindowSeconds
+				"manifest_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time window (in seconds) contained in each manifest.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentDurationSeconds
+				"segment_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The duration (in seconds) of each segment.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: StreamSelection
+				"stream_selection": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxVideoBitsPerSecond
+						"max_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The maximum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinVideoBitsPerSecond
+						"min_video_bits_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "The minimum video bitrate (bps) to include in output.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StreamOrder
+						"stream_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A directive that determines the order of streams in the output.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ORIGINAL",
+									"VIDEO_BITRATE_ASCENDING",
+									"VIDEO_BITRATE_DESCENDING",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "A StreamSelection configuration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Microsoft Smooth Streaming (MSS) packaging configuration.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Origination
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination",
+		//	  "enum": [
+		//	    "ALLOW",
+		//	    "DENY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"origination": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Control whether origination of video is allowed for this OriginEndpoint. If set to ALLOW, the OriginEndpoint may by requested, pursuant to any other form of access control. If set to DENY, the OriginEndpoint may not be requested. This can be helpful for Live to VOD harvesting, or for temporarily disabling origination",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"ALLOW",
 					"DENY",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"startover_window_seconds": {
-			// Property: StartoverWindowSeconds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Maximum duration (seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.",
-			//	  "type": "integer"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StartoverWindowSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Maximum duration (seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.",
+		//	  "type": "integer"
+		//	}
+		"startover_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Maximum duration (seconds) of content to retain for startover playback. If not specified, startover playback will be disabled for the OriginEndpoint.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A collection of tags associated with a resource",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A collection of tags associated with a resource",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A collection of tags associated with a resource",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"time_delay_seconds": {
-			// Property: TimeDelaySeconds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Amount of delay (seconds) to enforce on the playback of live content. If not specified, there will be no time delay in effect for the OriginEndpoint.",
-			//	  "type": "integer"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TimeDelaySeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amount of delay (seconds) to enforce on the playback of live content. If not specified, there will be no time delay in effect for the OriginEndpoint.",
+		//	  "type": "integer"
+		//	}
+		"time_delay_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Amount of delay (seconds) to enforce on the playback of live content. If not specified, there will be no time delay in effect for the OriginEndpoint.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"url": {
-			// Property: Url
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The URL of the packaged OriginEndpoint for consumption.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Url
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL of the packaged OriginEndpoint for consumption.",
+		//	  "type": "string"
+		//	}
+		"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the packaged OriginEndpoint for consumption.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"whitelist": {
-			// Property: Whitelist
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Whitelist
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"whitelist": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of source IP CIDR blocks that will be allowed to access the OriginEndpoint.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaPackage::OriginEndpoint",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaPackage::OriginEndpoint").WithTerraformTypeName("awscc_mediapackage_origin_endpoint")
 	opts = opts.WithTerraformSchema(schema)
@@ -2426,7 +2309,7 @@ func originEndpointResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

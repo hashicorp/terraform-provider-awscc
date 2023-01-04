@@ -5,12 +5,20 @@ package wafv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,518 +28,495 @@ func init() {
 // loggingConfigurationResource returns the Terraform awscc_wafv2_logging_configuration resource.
 // This Terraform resource corresponds to the CloudFormation AWS::WAFv2::LoggingConfiguration resource.
 func loggingConfigurationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"log_destination_configs": {
-			// Property: LogDestinationConfigs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: LogDestinationConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"log_destination_configs": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The Amazon Resource Names (ARNs) of the logging destinations that you want to associate with the web ACL.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
-		},
-		"logging_filter": {
-			// Property: LoggingFilter
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
-			//	  "properties": {
-			//	    "DefaultBehavior": {
-			//	      "description": "Default handling for logs that don't match any of the specified filtering conditions.",
-			//	      "enum": [
-			//	        "KEEP",
-			//	        "DROP"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Filters": {
-			//	      "description": "The filters that you want to apply to the logs.",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Behavior": {
-			//	            "description": "How to handle logs that satisfy the filter's conditions and requirement. ",
-			//	            "enum": [
-			//	              "KEEP",
-			//	              "DROP"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "Conditions": {
-			//	            "description": "Match conditions for the filter.",
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "ActionCondition": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A single action condition.",
-			//	                  "properties": {
-			//	                    "Action": {
-			//	                      "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-			//	                      "enum": [
-			//	                        "ALLOW",
-			//	                        "BLOCK",
-			//	                        "COUNT",
-			//	                        "CAPTCHA",
-			//	                        "CHALLENGE",
-			//	                        "EXCLUDED_AS_COUNT"
-			//	                      ],
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Action"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "LabelNameCondition": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A single label name condition.",
-			//	                  "properties": {
-			//	                    "LabelName": {
-			//	                      "description": "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "LabelName"
-			//	                  ],
-			//	                  "type": "object"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "minItems": 1,
-			//	            "type": "array"
-			//	          },
-			//	          "Requirement": {
-			//	            "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-			//	            "enum": [
-			//	              "MEETS_ALL",
-			//	              "MEETS_ANY"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Behavior",
-			//	          "Conditions",
-			//	          "Requirement"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "DefaultBehavior",
-			//	    "Filters"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LoggingFilter
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
+		//	  "properties": {
+		//	    "DefaultBehavior": {
+		//	      "description": "Default handling for logs that don't match any of the specified filtering conditions.",
+		//	      "enum": [
+		//	        "KEEP",
+		//	        "DROP"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Filters": {
+		//	      "description": "The filters that you want to apply to the logs.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Behavior": {
+		//	            "description": "How to handle logs that satisfy the filter's conditions and requirement. ",
+		//	            "enum": [
+		//	              "KEEP",
+		//	              "DROP"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Conditions": {
+		//	            "description": "Match conditions for the filter.",
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ActionCondition": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A single action condition.",
+		//	                  "properties": {
+		//	                    "Action": {
+		//	                      "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
+		//	                      "enum": [
+		//	                        "ALLOW",
+		//	                        "BLOCK",
+		//	                        "COUNT",
+		//	                        "CAPTCHA",
+		//	                        "CHALLENGE",
+		//	                        "EXCLUDED_AS_COUNT"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Action"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "LabelNameCondition": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A single label name condition.",
+		//	                  "properties": {
+		//	                    "LabelName": {
+		//	                      "description": "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "LabelName"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "minItems": 1,
+		//	            "type": "array"
+		//	          },
+		//	          "Requirement": {
+		//	            "description": "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
+		//	            "enum": [
+		//	              "MEETS_ALL",
+		//	              "MEETS_ANY"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Behavior",
+		//	          "Conditions",
+		//	          "Requirement"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DefaultBehavior",
+		//	    "Filters"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"logging_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DefaultBehavior
+				"default_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Default handling for logs that don't match any of the specified filtering conditions.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"KEEP",
+							"DROP",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Filters
+				"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Behavior
+							"behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "How to handle logs that satisfy the filter's conditions and requirement. ",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"KEEP",
+										"DROP",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Conditions
+							"conditions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ActionCondition
+										"action_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Action
+												"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
+													Required:    true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.OneOf(
+															"ALLOW",
+															"BLOCK",
+															"COUNT",
+															"CAPTCHA",
+															"CHALLENGE",
+															"EXCLUDED_AS_COUNT",
+														),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A single action condition.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: LabelNameCondition
+										"label_name_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: LabelName
+												"label_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
+													Required:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A single label name condition.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Description: "Match conditions for the filter.",
+								Required:    true,
+								Validators: []validator.List{ /*START VALIDATORS*/
+									listvalidator.SizeAtLeast(1),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Requirement
+							"requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"MEETS_ALL",
+										"MEETS_ANY",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The filters that you want to apply to the logs.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Filtering that specifies which web requests are kept in the logs and which are dropped. You can filter on the rule action and on the web request labels that were applied by matching rules during web ACL evaluation.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"default_behavior": {
-						// Property: DefaultBehavior
-						Description: "Default handling for logs that don't match any of the specified filtering conditions.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"KEEP",
-								"DROP",
-							}),
-						},
-					},
-					"filters": {
-						// Property: Filters
-						Description: "The filters that you want to apply to the logs.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"behavior": {
-									// Property: Behavior
-									Description: "How to handle logs that satisfy the filter's conditions and requirement. ",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"KEEP",
-											"DROP",
-										}),
-									},
-								},
-								"conditions": {
-									// Property: Conditions
-									Description: "Match conditions for the filter.",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"action_condition": {
-												// Property: ActionCondition
-												Description: "A single action condition.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"action": {
-															// Property: Action
-															Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"ALLOW",
-																	"BLOCK",
-																	"COUNT",
-																	"CAPTCHA",
-																	"CHALLENGE",
-																	"EXCLUDED_AS_COUNT",
-																}),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"label_name_condition": {
-												// Property: LabelNameCondition
-												Description: "A single label name condition.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"label_name": {
-															// Property: LabelName
-															Description: "The label name that a log record must contain in order to meet the condition. This must be a fully qualified label name. Fully qualified labels have a prefix, optional namespaces, and label name. The prefix identifies the rule group or web ACL context of the rule that added the label. ",
-															Type:        types.StringType,
-															Required:    true,
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenAtLeast(1),
-									},
-								},
-								"requirement": {
-									// Property: Requirement
-									Description: "Logic to apply to the filtering conditions. You can specify that, in order to satisfy the filter, a log must match all conditions or must match at least one condition.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"MEETS_ALL",
-											"MEETS_ANY",
-										}),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"managed_by_firewall_manager": {
-			// Property: ManagedByFirewallManager
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
-			//	  "type": "boolean"
-			//	}
-			Description: "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
-			Type:        types.BoolType,
+			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"redacted_fields": {
-			// Property: RedactedFields
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "JsonBody": {
-			//	        "additionalProperties": false,
-			//	        "description": "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
-			//	        "properties": {
-			//	          "InvalidFallbackBehavior": {
-			//	            "description": "What AWS WAF should do if it fails to completely parse the JSON body.",
-			//	            "enum": [
-			//	              "MATCH",
-			//	              "NO_MATCH",
-			//	              "EVALUATE_AS_STRING"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "MatchPattern": {
-			//	            "additionalProperties": false,
-			//	            "description": "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
-			//	            "properties": {
-			//	              "All": {
-			//	                "description": "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
-			//	                "type": "object"
-			//	              },
-			//	              "IncludedPaths": {
-			//	                "description": "Match only the specified include paths. See also MatchScope in JsonBody.",
-			//	                "items": {
-			//	                  "pattern": "",
-			//	                  "type": "string"
-			//	                },
-			//	                "minItems": 1,
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "MatchScope": {
-			//	            "description": "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
-			//	            "enum": [
-			//	              "ALL",
-			//	              "KEY",
-			//	              "VALUE"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "MatchPattern",
-			//	          "MatchScope"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Method": {
-			//	        "description": "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
-			//	        "type": "object"
-			//	      },
-			//	      "QueryString": {
-			//	        "description": "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
-			//	        "type": "object"
-			//	      },
-			//	      "SingleHeader": {
-			//	        "additionalProperties": false,
-			//	        "description": "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
-			//	        "properties": {
-			//	          "Name": {
-			//	            "description": "The name of the query header to inspect.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Name"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "UriPath": {
-			//	        "description": "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"json_body": {
-						// Property: JsonBody
-						Description: "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"invalid_fallback_behavior": {
-									// Property: InvalidFallbackBehavior
-									Description: "What AWS WAF should do if it fails to completely parse the JSON body.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"MATCH",
-											"NO_MATCH",
-											"EVALUATE_AS_STRING",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"match_pattern": {
-									// Property: MatchPattern
-									Description: "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"all": {
-												// Property: All
-												Description: "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
-												Type:        types.MapType{ElemType: types.StringType},
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"included_paths": {
-												// Property: IncludedPaths
-												Description: "Match only the specified include paths. See also MatchScope in JsonBody.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayLenAtLeast(1),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ManagedByFirewallManager
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
+		//	  "type": "boolean"
+		//	}
+		"managed_by_firewall_manager": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the logging configuration was created by AWS Firewall Manager, as part of an AWS WAF policy configuration. If true, only Firewall Manager can modify or delete the configuration.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RedactedFields
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "JsonBody": {
+		//	        "additionalProperties": false,
+		//	        "description": "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
+		//	        "properties": {
+		//	          "InvalidFallbackBehavior": {
+		//	            "description": "What AWS WAF should do if it fails to completely parse the JSON body.",
+		//	            "enum": [
+		//	              "MATCH",
+		//	              "NO_MATCH",
+		//	              "EVALUATE_AS_STRING"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "MatchPattern": {
+		//	            "additionalProperties": false,
+		//	            "description": "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
+		//	            "properties": {
+		//	              "All": {
+		//	                "description": "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
+		//	                "type": "object"
+		//	              },
+		//	              "IncludedPaths": {
+		//	                "description": "Match only the specified include paths. See also MatchScope in JsonBody.",
+		//	                "items": {
+		//	                  "pattern": "",
+		//	                  "type": "string"
+		//	                },
+		//	                "minItems": 1,
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "MatchScope": {
+		//	            "description": "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
+		//	            "enum": [
+		//	              "ALL",
+		//	              "KEY",
+		//	              "VALUE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "MatchPattern",
+		//	          "MatchScope"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Method": {
+		//	        "description": "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
+		//	        "type": "object"
+		//	      },
+		//	      "QueryString": {
+		//	        "description": "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
+		//	        "type": "object"
+		//	      },
+		//	      "SingleHeader": {
+		//	        "additionalProperties": false,
+		//	        "description": "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
+		//	        "properties": {
+		//	          "Name": {
+		//	            "description": "The name of the query header to inspect.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "UriPath": {
+		//	        "description": "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"redacted_fields": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: JsonBody
+					"json_body": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: InvalidFallbackBehavior
+							"invalid_fallback_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "What AWS WAF should do if it fails to completely parse the JSON body.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"MATCH",
+										"NO_MATCH",
+										"EVALUATE_AS_STRING",
 									),
-									Required: true,
-								},
-								"match_scope": {
-									// Property: MatchScope
-									Description: "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ALL",
-											"KEY",
-											"VALUE",
-										}),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"method": {
-						// Property: Method
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MatchPattern
+							"match_pattern": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: All
+									"all": schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+											mapplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: IncludedPaths
+									"included_paths": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Description: "Match only the specified include paths. See also MatchScope in JsonBody.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.SizeAtLeast(1),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The patterns to look for in the JSON body. AWS WAF inspects the results of these pattern matches against the rule inspection criteria. ",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: MatchScope
+							"match_scope": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The parts of the JSON to match against using the MatchPattern. If you specify All, AWS WAF matches against keys and values. ",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"ALL",
+										"KEY",
+										"VALUE",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Inspect the request body as JSON. The request body immediately follows the request headers. This is the part of a request that contains any additional data that you want to send to your web server as the HTTP request body, such as data from a form. ",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Method
+					"method": schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
-						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"query_string": {
-						// Property: QueryString
+						PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+							mapplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: QueryString
+					"query_string": schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
-						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"single_header": {
-						// Property: SingleHeader
+						PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+							mapplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SingleHeader
+					"single_header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the query header to inspect.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "Inspect a single header. Provide the name of the header to inspect, for example, User-Agent or Referer. This setting isn't case sensitive.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Description: "The name of the query header to inspect.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"uri_path": {
-						// Property: UriPath
-						Description: "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
-						Type:        types.MapType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"resource_arn": {
-			// Property: ResourceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
-			//	  "type": "string"
-			//	}
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: UriPath
+					"uri_path": schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+							mapplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The parts of the request that you want to keep out of the logs. For example, if you redact the HEADER field, the HEADER field in the firehose will be xxx.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
+		//	  "type": "string"
+		//	}
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the web ACL that you want to associate with LogDestinationConfigs.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "A WAFv2 Logging Configuration Resource Provider",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::WAFv2::LoggingConfiguration").WithTerraformTypeName("awscc_wafv2_logging_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -568,7 +553,7 @@ func loggingConfigurationResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

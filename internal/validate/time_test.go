@@ -4,11 +4,10 @@ import (
 	"context"
 	"testing"
 
-	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	"github.com/hashicorp/terraform-plugin-go/tftypes"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -16,35 +15,24 @@ func TestIsRFC3339TimeValidator(t *testing.T) {
 	t.Parallel()
 
 	type testCase struct {
-		val         tftypes.Value
-		f           func(context.Context, tftypes.Value) (attr.Value, error)
+		val         types.String
 		expectError bool
 	}
 	tests := map[string]testCase{
-		"not a string": {
-			val:         tftypes.NewValue(tftypes.Bool, true),
-			f:           types.BoolType.ValueFromTerraform,
-			expectError: true,
-		},
 		"unknown string": {
-			val: tftypes.NewValue(tftypes.String, tftypes.UnknownValue),
-			f:   types.StringType.ValueFromTerraform,
+			val: basetypes.NewStringUnknown(),
 		},
 		"null string": {
-			val: tftypes.NewValue(tftypes.String, nil),
-			f:   types.StringType.ValueFromTerraform,
+			val: basetypes.NewStringNull(),
 		},
 		"valid date string": {
-			val: tftypes.NewValue(tftypes.String, "2018-03-01T00:00:00Z"),
-			f:   types.StringType.ValueFromTerraform,
+			val: basetypes.NewStringValue("2018-03-01T00:00:00Z"),
 		},
 		"valid date-time string": {
-			val: tftypes.NewValue(tftypes.String, "2018-03-01T00:00:00Z"),
-			f:   types.StringType.ValueFromTerraform,
+			val: basetypes.NewStringValue("2018-03-01T00:00:00Z"),
 		},
 		"invalid string": {
-			val:         tftypes.NewValue(tftypes.String, "not ok"),
-			f:           types.StringType.ValueFromTerraform,
+			val:         basetypes.NewStringValue("not ok"),
 			expectError: true,
 		},
 	}
@@ -53,18 +41,13 @@ func TestIsRFC3339TimeValidator(t *testing.T) {
 		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
-			val, err := test.f(ctx, test.val)
 
-			if err != nil {
-				t.Fatalf("got unexpected error: %s", err)
+			request := validator.StringRequest{
+				ConfigValue: test.val,
+				Path:        path.Root("test"),
 			}
-
-			request := tfsdk.ValidateAttributeRequest{
-				AttributePath:   path.Root("test"),
-				AttributeConfig: val,
-			}
-			response := tfsdk.ValidateAttributeResponse{}
-			IsRFC3339Time().Validate(ctx, request, &response)
+			response := validator.StringResponse{}
+			IsRFC3339Time().ValidateString(ctx, request, &response)
 
 			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")

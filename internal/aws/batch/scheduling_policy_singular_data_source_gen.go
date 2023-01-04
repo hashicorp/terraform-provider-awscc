@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,142 +19,132 @@ func init() {
 // schedulingPolicyDataSource returns the Terraform awscc_batch_scheduling_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Batch::SchedulingPolicy resource.
 func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARN of the Scheduling Policy.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN of the Scheduling Policy.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ARN of the Scheduling Policy.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"fairshare_policy": {
-			// Property: FairsharePolicy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Fair Share Policy for the Job Queue.",
-			//	  "properties": {
-			//	    "ComputeReservation": {
-			//	      "maximum": 99,
-			//	      "minimum": 0,
-			//	      "type": "number"
-			//	    },
-			//	    "ShareDecaySeconds": {
-			//	      "maximum": 604800,
-			//	      "minimum": 0,
-			//	      "type": "number"
-			//	    },
-			//	    "ShareDistribution": {
-			//	      "description": "List of Share Attributes",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ShareIdentifier": {
-			//	            "type": "string"
-			//	          },
-			//	          "WeightFactor": {
-			//	            "maximum": 1000,
-			//	            "minimum": 0,
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: FairsharePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Fair Share Policy for the Job Queue.",
+		//	  "properties": {
+		//	    "ComputeReservation": {
+		//	      "maximum": 99,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "ShareDecaySeconds": {
+		//	      "maximum": 604800,
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "ShareDistribution": {
+		//	      "description": "List of Share Attributes",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ShareIdentifier": {
+		//	            "type": "string"
+		//	          },
+		//	          "WeightFactor": {
+		//	            "maximum": 1000,
+		//	            "minimum": 0,
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"fairshare_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComputeReservation
+				"compute_reservation": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDecaySeconds
+				"share_decay_seconds": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ShareDistribution
+				"share_distribution": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ShareIdentifier
+							"share_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: WeightFactor
+							"weight_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "List of Share Attributes",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Fair Share Policy for the Job Queue.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"compute_reservation": {
-						// Property: ComputeReservation
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"share_decay_seconds": {
-						// Property: ShareDecaySeconds
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"share_distribution": {
-						// Property: ShareDistribution
-						Description: "List of Share Attributes",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"share_identifier": {
-									// Property: ShareIdentifier
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"weight_factor": {
-									// Property: WeightFactor
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of Scheduling Policy.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
-			Description: "Name of Scheduling Policy.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A key-value pair to associate with a resource.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of Scheduling Policy.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name of Scheduling Policy.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair to associate with a resource.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A key-value pair to associate with a resource.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Batch::SchedulingPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::SchedulingPolicy").WithTerraformTypeName("awscc_batch_scheduling_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -170,7 +160,7 @@ func schedulingPolicyDataSource(ctx context.Context) (datasource.DataSource, err
 		"weight_factor":       "WeightFactor",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,12 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,99 +22,93 @@ func init() {
 // staticIpResource returns the Terraform awscc_lightsail_static_ip resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Lightsail::StaticIp resource.
 func staticIpResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"attached_to": {
-			// Property: AttachedTo
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The instance where the static IP is attached.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AttachedTo
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The instance where the static IP is attached.",
+		//	  "type": "string"
+		//	}
+		"attached_to": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The instance where the static IP is attached.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"ip_address": {
-			// Property: IpAddress
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The static IP address.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IpAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The static IP address.",
+		//	  "type": "string"
+		//	}
+		"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The static IP address.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"is_attached": {
-			// Property: IsAttached
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A Boolean value indicating whether the static IP is attached.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IsAttached
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A Boolean value indicating whether the static IP is attached.",
+		//	  "type": "boolean"
+		//	}
+		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A Boolean value indicating whether the static IP is attached.",
-			Type:        types.BoolType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"static_ip_arn": {
-			// Property: StaticIpArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StaticIpArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"static_ip_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"static_ip_name": {
-			// Property: StaticIpName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the static IP address.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StaticIpName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the static IP address.",
+		//	  "type": "string"
+		//	}
+		"static_ip_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the static IP address.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Lightsail::StaticIp",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::StaticIp").WithTerraformTypeName("awscc_lightsail_static_ip")
 	opts = opts.WithTerraformSchema(schema)
@@ -128,7 +125,7 @@ func staticIpResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

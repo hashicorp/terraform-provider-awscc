@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,84 +19,78 @@ func init() {
 // multiRegionAccessPointPolicyDataSource returns the Terraform awscc_s3_multi_region_access_point_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::S3::MultiRegionAccessPointPolicy resource.
 func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"mrap_name": {
-			// Property: MrapName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the Multi Region Access Point to apply policy",
-			//	  "maxLength": 50,
-			//	  "minLength": 3,
-			//	  "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: MrapName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Multi Region Access Point to apply policy",
+		//	  "maxLength": 50,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$",
+		//	  "type": "string"
+		//	}
+		"mrap_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Multi Region Access Point to apply policy",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy": {
-			// Property: Policy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Policy document to apply to a Multi Region Access Point",
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Policy document to apply to a Multi Region Access Point",
+		//	  "type": "object"
+		//	}
+		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Policy document to apply to a Multi Region Access Point",
-			Type:        types.MapType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"policy_status": {
-			// Property: PolicyStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The Policy Status associated with this Multi Region Access Point",
-			//	  "properties": {
-			//	    "IsPublic": {
-			//	      "description": "Specifies whether the policy is public or not.",
-			//	      "enum": [
-			//	        "true",
-			//	        "false"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "IsPublic"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Policy Status associated with this Multi Region Access Point",
+		//	  "properties": {
+		//	    "IsPublic": {
+		//	      "description": "Specifies whether the policy is public or not.",
+		//	      "enum": [
+		//	        "true",
+		//	        "false"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "IsPublic"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"policy_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: IsPublic
+				"is_public": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether the policy is public or not.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The Policy Status associated with this Multi Region Access Point",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"is_public": {
-						// Property: IsPublic
-						Description: "Specifies whether the policy is public or not.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::S3::MultiRegionAccessPointPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::MultiRegionAccessPointPolicy").WithTerraformTypeName("awscc_s3_multi_region_access_point_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -107,7 +101,7 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		"policy_status": "PolicyStatus",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

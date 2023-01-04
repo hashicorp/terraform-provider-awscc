@@ -4,14 +4,17 @@ package lex
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,165 +24,157 @@ func init() {
 // botVersionResource returns the Terraform awscc_lex_bot_version resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Lex::BotVersion resource.
 func botVersionResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"bot_id": {
-			// Property: BotId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique ID of resource",
-			//	  "maxLength": 10,
-			//	  "minLength": 10,
-			//	  "pattern": "^[0-9a-zA-Z]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: BotId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique ID of resource",
+		//	  "maxLength": 10,
+		//	  "minLength": 10,
+		//	  "pattern": "^[0-9a-zA-Z]+$",
+		//	  "type": "string"
+		//	}
+		"bot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of resource",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(10, 10),
-				validate.StringMatch(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"bot_version": {
-			// Property: BotVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of a bot.",
-			//	  "maxLength": 5,
-			//	  "minLength": 1,
-			//	  "pattern": "^(DRAFT|[0-9]+)$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(10, 10),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9a-zA-Z]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BotVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of a bot.",
+		//	  "maxLength": 5,
+		//	  "minLength": 1,
+		//	  "pattern": "^(DRAFT|[0-9]+)$",
+		//	  "type": "string"
+		//	}
+		"bot_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version of a bot.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"bot_version_locale_specification": {
-			// Property: BotVersionLocaleSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "BotVersionLocaleDetails": {
-			//	        "additionalProperties": false,
-			//	        "description": "The version of a bot used for a bot locale.",
-			//	        "properties": {
-			//	          "SourceBotVersion": {
-			//	            "description": "The version of a bot.",
-			//	            "maxLength": 5,
-			//	            "minLength": 1,
-			//	            "pattern": "^(DRAFT|[0-9]+)$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "SourceBotVersion"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "LocaleId": {
-			//	        "description": "The identifier of the language and locale that the bot will be used in.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "LocaleId",
-			//	      "BotVersionLocaleDetails"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bot_version_locale_details": {
-						// Property: BotVersionLocaleDetails
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BotVersionLocaleSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BotVersionLocaleDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "The version of a bot used for a bot locale.",
+		//	        "properties": {
+		//	          "SourceBotVersion": {
+		//	            "description": "The version of a bot.",
+		//	            "maxLength": 5,
+		//	            "minLength": 1,
+		//	            "pattern": "^(DRAFT|[0-9]+)$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "SourceBotVersion"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "LocaleId": {
+		//	        "description": "The identifier of the language and locale that the bot will be used in.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "LocaleId",
+		//	      "BotVersionLocaleDetails"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"bot_version_locale_specification": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BotVersionLocaleDetails
+					"bot_version_locale_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: SourceBotVersion
+							"source_bot_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The version of a bot.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 5),
+									stringvalidator.RegexMatches(regexp.MustCompile("^(DRAFT|[0-9]+)$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "The version of a bot used for a bot locale.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"source_bot_version": {
-									// Property: SourceBotVersion
-									Description: "The version of a bot.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 5),
-										validate.StringMatch(regexp.MustCompile("^(DRAFT|[0-9]+)$"), ""),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-					"locale_id": {
-						// Property: LocaleId
-						Description: "The identifier of the language and locale that the bot will be used in.",
-						Type:        types.StringType,
 						Required:    true,
-					},
-				},
-			),
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(1),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-			},
+					}, /*END ATTRIBUTE*/
+					// Property: LocaleId
+					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The identifier of the language and locale that the bot will be used in.",
+						Required:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies the locales that Amazon Lex adds to this version. You can choose the Draft version or any other previously published version for each locale.",
+			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
 			// BotVersionLocaleSpecification is a write-only property.
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description of the version. Use the description to help identify the version in lists.",
-			//	  "maxLength": 200,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description of the version. Use the description to help identify the version in lists.",
+		//	  "maxLength": 200,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the version. Use the description to help identify the version in lists.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(200),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "A version is a numbered snapshot of your work that you can publish for use in different parts of your workflow, such as development, beta deployment, and production.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lex::BotVersion").WithTerraformTypeName("awscc_lex_bot_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -201,7 +196,7 @@ func botVersionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

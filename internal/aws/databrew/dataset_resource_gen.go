@@ -4,14 +4,20 @@ package databrew
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,1104 +27,1020 @@ func init() {
 // datasetResource returns the Terraform awscc_databrew_dataset resource.
 // This Terraform resource corresponds to the CloudFormation AWS::DataBrew::Dataset resource.
 func datasetResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"format": {
-			// Property: Format
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Dataset format",
-			//	  "enum": [
-			//	    "CSV",
-			//	    "JSON",
-			//	    "PARQUET",
-			//	    "EXCEL",
-			//	    "ORC"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Format
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Dataset format",
+		//	  "enum": [
+		//	    "CSV",
+		//	    "JSON",
+		//	    "PARQUET",
+		//	    "EXCEL",
+		//	    "ORC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"format": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Dataset format",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"CSV",
 					"JSON",
 					"PARQUET",
 					"EXCEL",
 					"ORC",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"format_options": {
-			// Property: FormatOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Format options for dataset",
-			//	  "properties": {
-			//	    "Csv": {
-			//	      "additionalProperties": false,
-			//	      "description": "Csv options",
-			//	      "properties": {
-			//	        "Delimiter": {
-			//	          "maxLength": 1,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "HeaderRow": {
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Excel": {
-			//	      "additionalProperties": false,
-			//	      "oneOf": [
-			//	        {
-			//	          "required": [
-			//	            "SheetNames"
-			//	          ]
-			//	        },
-			//	        {
-			//	          "required": [
-			//	            "SheetIndexes"
-			//	          ]
-			//	        }
-			//	      ],
-			//	      "properties": {
-			//	        "HeaderRow": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "SheetIndexes": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "type": "integer"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "SheetNames": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Json": {
-			//	      "additionalProperties": false,
-			//	      "description": "Json options",
-			//	      "properties": {
-			//	        "MultiLine": {
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FormatOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Format options for dataset",
+		//	  "properties": {
+		//	    "Csv": {
+		//	      "additionalProperties": false,
+		//	      "description": "Csv options",
+		//	      "properties": {
+		//	        "Delimiter": {
+		//	          "maxLength": 1,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "HeaderRow": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Excel": {
+		//	      "additionalProperties": false,
+		//	      "oneOf": [
+		//	        {
+		//	          "required": [
+		//	            "SheetNames"
+		//	          ]
+		//	        },
+		//	        {
+		//	          "required": [
+		//	            "SheetIndexes"
+		//	          ]
+		//	        }
+		//	      ],
+		//	      "properties": {
+		//	        "HeaderRow": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "SheetIndexes": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "type": "integer"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "SheetNames": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Json": {
+		//	      "additionalProperties": false,
+		//	      "description": "Json options",
+		//	      "properties": {
+		//	        "MultiLine": {
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"format_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Csv
+				"csv": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Delimiter
+						"delimiter": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: HeaderRow
+						"header_row": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Csv options",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Excel
+				"excel": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderRow
+						"header_row": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SheetIndexes
+						"sheet_indexes": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.Int64Type,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SheetNames
+						"sheet_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(1, 1),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Json
+				"json": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MultiLine
+						"multi_line": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Json options",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Format options for dataset",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"csv": {
-						// Property: Csv
-						Description: "Csv options",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"delimiter": {
-									// Property: Delimiter
-									Type:     types.StringType,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Input
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Input",
+		//	  "properties": {
+		//	    "DataCatalogInputDefinition": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CatalogId": {
+		//	          "description": "Catalog id",
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "description": "Database name",
+		//	          "type": "string"
+		//	        },
+		//	        "TableName": {
+		//	          "description": "Table name",
+		//	          "type": "string"
+		//	        },
+		//	        "TempDirectory": {
+		//	          "additionalProperties": false,
+		//	          "description": "Input location",
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "type": "string"
+		//	            },
+		//	            "Key": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Bucket"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "DatabaseInputDefinition": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DatabaseTableName": {
+		//	          "description": "Database table name",
+		//	          "type": "string"
+		//	        },
+		//	        "GlueConnectionName": {
+		//	          "description": "Glue connection name",
+		//	          "type": "string"
+		//	        },
+		//	        "QueryString": {
+		//	          "description": "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
+		//	          "type": "string"
+		//	        },
+		//	        "TempDirectory": {
+		//	          "additionalProperties": false,
+		//	          "description": "Input location",
+		//	          "properties": {
+		//	            "Bucket": {
+		//	              "type": "string"
+		//	            },
+		//	            "Key": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Bucket"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "GlueConnectionName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Metadata": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SourceArn": {
+		//	          "description": "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "S3InputDefinition": {
+		//	      "additionalProperties": false,
+		//	      "description": "Input location",
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "type": "string"
+		//	        },
+		//	        "Key": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DataCatalogInputDefinition
+				"data_catalog_input_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogId
+						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Catalog id",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Database name",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TableName
+						"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Table name",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TempDirectory
+						"temp_directory": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"header_row": {
-									// Property: HeaderRow
-									Type:     types.BoolType,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Input location",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseInputDefinition
+				"database_input_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DatabaseTableName
+						"database_table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Database table name",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: GlueConnectionName
+						"glue_connection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Glue connection name",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueryString
+						"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: TempDirectory
+						"temp_directory": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Bucket
+								"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Key
+								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"excel": {
-						// Property: Excel
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"header_row": {
-									// Property: HeaderRow
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"sheet_indexes": {
-									// Property: SheetIndexes
-									Type:     types.ListType{ElemType: types.Int64Type},
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(1, 1),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"sheet_names": {
-									// Property: SheetNames
-									Type:     types.ListType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.ArrayLenBetween(1, 1),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.RequiredAttributes(
-								validate.OneOfRequired(
-									validate.Required(
-										"sheet_names",
-									),
-									validate.Required(
-										"sheet_indexes",
-									),
-								),
-							),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"json": {
-						// Property: Json
-						Description: "Json options",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"multi_line": {
-									// Property: MultiLine
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"input": {
-			// Property: Input
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Input",
-			//	  "properties": {
-			//	    "DataCatalogInputDefinition": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CatalogId": {
-			//	          "description": "Catalog id",
-			//	          "type": "string"
-			//	        },
-			//	        "DatabaseName": {
-			//	          "description": "Database name",
-			//	          "type": "string"
-			//	        },
-			//	        "TableName": {
-			//	          "description": "Table name",
-			//	          "type": "string"
-			//	        },
-			//	        "TempDirectory": {
-			//	          "additionalProperties": false,
-			//	          "description": "Input location",
-			//	          "properties": {
-			//	            "Bucket": {
-			//	              "type": "string"
-			//	            },
-			//	            "Key": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Bucket"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "DatabaseInputDefinition": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DatabaseTableName": {
-			//	          "description": "Database table name",
-			//	          "type": "string"
-			//	        },
-			//	        "GlueConnectionName": {
-			//	          "description": "Glue connection name",
-			//	          "type": "string"
-			//	        },
-			//	        "QueryString": {
-			//	          "description": "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
-			//	          "type": "string"
-			//	        },
-			//	        "TempDirectory": {
-			//	          "additionalProperties": false,
-			//	          "description": "Input location",
-			//	          "properties": {
-			//	            "Bucket": {
-			//	              "type": "string"
-			//	            },
-			//	            "Key": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Bucket"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "GlueConnectionName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Metadata": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "SourceArn": {
-			//	          "description": "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "S3InputDefinition": {
-			//	      "additionalProperties": false,
-			//	      "description": "Input location",
-			//	      "properties": {
-			//	        "Bucket": {
-			//	          "type": "string"
-			//	        },
-			//	        "Key": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Bucket"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Input location",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Metadata
+				"metadata": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SourceArn
+						"source_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: S3InputDefinition
+				"s3_input_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Key
+						"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Input location",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Input",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"data_catalog_input_definition": {
-						// Property: DataCatalogInputDefinition
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"catalog_id": {
-									// Property: CatalogId
-									Description: "Catalog id",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"database_name": {
-									// Property: DatabaseName
-									Description: "Database name",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"table_name": {
-									// Property: TableName
-									Description: "Table name",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"temp_directory": {
-									// Property: TempDirectory
-									Description: "Input location",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Type:     types.StringType,
-												Required: true,
-											},
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"database_input_definition": {
-						// Property: DatabaseInputDefinition
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database_table_name": {
-									// Property: DatabaseTableName
-									Description: "Database table name",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"glue_connection_name": {
-									// Property: GlueConnectionName
-									Description: "Glue connection name",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"query_string": {
-									// Property: QueryString
-									Description: "Custom SQL to run against the provided AWS Glue connection. This SQL will be used as the input for DataBrew projects and jobs.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"temp_directory": {
-									// Property: TempDirectory
-									Description: "Input location",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket": {
-												// Property: Bucket
-												Type:     types.StringType,
-												Required: true,
-											},
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"metadata": {
-						// Property: Metadata
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"source_arn": {
-									// Property: SourceArn
-									Description: "Arn of the source of the dataset. For e.g.: AppFlow Flow ARN.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"s3_input_definition": {
-						// Property: S3InputDefinition
-						Description: "Input location",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bucket": {
-									// Property: Bucket
-									Type:     types.StringType,
-									Required: true,
-								},
-								"key": {
-									// Property: Key
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Dataset name",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Description: "Dataset name",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"path_options": {
-			// Property: PathOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "PathOptions",
-			//	  "properties": {
-			//	    "FilesLimit": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "MaxFiles": {
-			//	          "description": "Maximum number of files",
-			//	          "type": "integer"
-			//	        },
-			//	        "Order": {
-			//	          "description": "Order",
-			//	          "enum": [
-			//	            "ASCENDING",
-			//	            "DESCENDING"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "OrderedBy": {
-			//	          "description": "Ordered by",
-			//	          "enum": [
-			//	            "LAST_MODIFIED_DATE"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "MaxFiles"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "LastModifiedDateCondition": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Expression": {
-			//	          "description": "Filtering expression for a parameter",
-			//	          "maxLength": 1024,
-			//	          "minLength": 4,
-			//	          "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
-			//	          "type": "string"
-			//	        },
-			//	        "ValuesMap": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "description": "A key-value pair to associate expression variable names with their values",
-			//	            "properties": {
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              },
-			//	              "ValueReference": {
-			//	                "description": "Variable name",
-			//	                "maxLength": 128,
-			//	                "minLength": 2,
-			//	                "pattern": "^:[A-Za-z0-9_]+$",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "ValueReference",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Expression",
-			//	        "ValuesMap"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Parameters": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "A key-value pair to associate dataset parameter name with its definition.",
-			//	        "properties": {
-			//	          "DatasetParameter": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "CreateColumn": {
-			//	                "description": "Add the value of this parameter as a column in a dataset.",
-			//	                "type": "boolean"
-			//	              },
-			//	              "DatetimeOptions": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Format": {
-			//	                    "description": "Date/time format of a date parameter",
-			//	                    "maxLength": 100,
-			//	                    "minLength": 2,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "LocaleCode": {
-			//	                    "description": "Locale code for a date parameter",
-			//	                    "maxLength": 100,
-			//	                    "minLength": 2,
-			//	                    "pattern": "^[A-Za-z0-9_\\.#@\\-]+$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "TimezoneOffset": {
-			//	                    "description": "Timezone offset",
-			//	                    "maxLength": 6,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Format"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Filter": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Expression": {
-			//	                    "description": "Filtering expression for a parameter",
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 4,
-			//	                    "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "ValuesMap": {
-			//	                    "insertionOrder": true,
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "A key-value pair to associate expression variable names with their values",
-			//	                      "properties": {
-			//	                        "Value": {
-			//	                          "maxLength": 1024,
-			//	                          "minLength": 0,
-			//	                          "type": "string"
-			//	                        },
-			//	                        "ValueReference": {
-			//	                          "description": "Variable name",
-			//	                          "maxLength": 128,
-			//	                          "minLength": 2,
-			//	                          "pattern": "^:[A-Za-z0-9_]+$",
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "ValueReference",
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Expression",
-			//	                  "ValuesMap"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Name": {
-			//	                "description": "Parameter name",
-			//	                "maxLength": 255,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "description": "Parameter type",
-			//	                "enum": [
-			//	                  "String",
-			//	                  "Number",
-			//	                  "Datetime"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Name",
-			//	              "Type"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "PathParameterName": {
-			//	            "description": "Parameter name",
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "PathParameterName",
-			//	          "DatasetParameter"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "PathOptions",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"files_limit": {
-						// Property: FilesLimit
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"max_files": {
-									// Property: MaxFiles
-									Description: "Maximum number of files",
-									Type:        types.Int64Type,
-									Required:    true,
-								},
-								"order": {
-									// Property: Order
-									Description: "Order",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ASCENDING",
-											"DESCENDING",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"ordered_by": {
-									// Property: OrderedBy
-									Description: "Ordered by",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"LAST_MODIFIED_DATE",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"last_modified_date_condition": {
-						// Property: LastModifiedDateCondition
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"expression": {
-									// Property: Expression
-									Description: "Filtering expression for a parameter",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(4, 1024),
-										validate.StringMatch(regexp.MustCompile("^[><0-9A-Za-z_.,:)(!= ]+$"), ""),
-									},
-								},
-								"values_map": {
-									// Property: ValuesMap
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(0, 1024),
-												},
-											},
-											"value_reference": {
-												// Property: ValueReference
-												Description: "Variable name",
-												Type:        types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Dataset name",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Dataset name",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PathOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "PathOptions",
+		//	  "properties": {
+		//	    "FilesLimit": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MaxFiles": {
+		//	          "description": "Maximum number of files",
+		//	          "type": "integer"
+		//	        },
+		//	        "Order": {
+		//	          "description": "Order",
+		//	          "enum": [
+		//	            "ASCENDING",
+		//	            "DESCENDING"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "OrderedBy": {
+		//	          "description": "Ordered by",
+		//	          "enum": [
+		//	            "LAST_MODIFIED_DATE"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxFiles"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "LastModifiedDateCondition": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Expression": {
+		//	          "description": "Filtering expression for a parameter",
+		//	          "maxLength": 1024,
+		//	          "minLength": 4,
+		//	          "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "ValuesMap": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A key-value pair to associate expression variable names with their values",
+		//	            "properties": {
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "ValueReference": {
+		//	                "description": "Variable name",
+		//	                "maxLength": 128,
+		//	                "minLength": 2,
+		//	                "pattern": "^:[A-Za-z0-9_]+$",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "ValueReference",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Expression",
+		//	        "ValuesMap"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Parameters": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A key-value pair to associate dataset parameter name with its definition.",
+		//	        "properties": {
+		//	          "DatasetParameter": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "CreateColumn": {
+		//	                "description": "Add the value of this parameter as a column in a dataset.",
+		//	                "type": "boolean"
+		//	              },
+		//	              "DatetimeOptions": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Format": {
+		//	                    "description": "Date/time format of a date parameter",
+		//	                    "maxLength": 100,
+		//	                    "minLength": 2,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "LocaleCode": {
+		//	                    "description": "Locale code for a date parameter",
+		//	                    "maxLength": 100,
+		//	                    "minLength": 2,
+		//	                    "pattern": "^[A-Za-z0-9_\\.#@\\-]+$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "TimezoneOffset": {
+		//	                    "description": "Timezone offset",
+		//	                    "maxLength": 6,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Format"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Filter": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Expression": {
+		//	                    "description": "Filtering expression for a parameter",
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 4,
+		//	                    "pattern": "^[\u003e\u003c0-9A-Za-z_.,:)(!= ]+$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ValuesMap": {
+		//	                    "insertionOrder": true,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "A key-value pair to associate expression variable names with their values",
+		//	                      "properties": {
+		//	                        "Value": {
+		//	                          "maxLength": 1024,
+		//	                          "minLength": 0,
+		//	                          "type": "string"
+		//	                        },
+		//	                        "ValueReference": {
+		//	                          "description": "Variable name",
+		//	                          "maxLength": 128,
+		//	                          "minLength": 2,
+		//	                          "pattern": "^:[A-Za-z0-9_]+$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "ValueReference",
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Expression",
+		//	                  "ValuesMap"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Name": {
+		//	                "description": "Parameter name",
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "description": "Parameter type",
+		//	                "enum": [
+		//	                  "String",
+		//	                  "Number",
+		//	                  "Datetime"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "Type"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PathParameterName": {
+		//	            "description": "Parameter name",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PathParameterName",
+		//	          "DatasetParameter"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"path_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FilesLimit
+				"files_limit": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxFiles
+						"max_files": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Description: "Maximum number of files",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Order
+						"order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Order",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ASCENDING",
+									"DESCENDING",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OrderedBy
+						"ordered_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Ordered by",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"LAST_MODIFIED_DATE",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LastModifiedDateCondition
+				"last_modified_date_condition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Expression
+						"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Filtering expression for a parameter",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(4, 1024),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[><0-9A-Za-z_.,:)(!= ]+$"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ValuesMap
+						"values_map": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(0, 1024),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ValueReference
+									"value_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Variable name",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(2, 128),
+											stringvalidator.RegexMatches(regexp.MustCompile("^:[A-Za-z0-9_]+$"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Parameters
+				"parameters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DatasetParameter
+							"dataset_parameter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CreateColumn
+									"create_column": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Add the value of this parameter as a column in a dataset.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatetimeOptions
+									"datetime_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Format
+											"format": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Date/time format of a date parameter",
 												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(2, 128),
-													validate.StringMatch(regexp.MustCompile("^:[A-Za-z0-9_]+$"), ""),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"parameters": {
-						// Property: Parameters
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"dataset_parameter": {
-									// Property: DatasetParameter
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"create_column": {
-												// Property: CreateColumn
-												Description: "Add the value of this parameter as a column in a dataset.",
-												Type:        types.BoolType,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(2, 100),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: LocaleCode
+											"locale_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Locale code for a date parameter",
 												Optional:    true,
 												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"datetime_options": {
-												// Property: DatetimeOptions
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"format": {
-															// Property: Format
-															Description: "Date/time format of a date parameter",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(2, 100),
-															},
-														},
-														"locale_code": {
-															// Property: LocaleCode
-															Description: "Locale code for a date parameter",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(2, 100),
-																validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9_\\.#@\\-]+$"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"timezone_offset": {
-															// Property: TimezoneOffset
-															Description: "Timezone offset",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 6),
-																validate.StringMatch(regexp.MustCompile("^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"filter": {
-												// Property: Filter
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"expression": {
-															// Property: Expression
-															Description: "Filtering expression for a parameter",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(4, 1024),
-																validate.StringMatch(regexp.MustCompile("^[><0-9A-Za-z_.,:)(!= ]+$"), ""),
-															},
-														},
-														"values_map": {
-															// Property: ValuesMap
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(0, 1024),
-																		},
-																	},
-																	"value_reference": {
-																		// Property: ValueReference
-																		Description: "Variable name",
-																		Type:        types.StringType,
-																		Required:    true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(2, 128),
-																			validate.StringMatch(regexp.MustCompile("^:[A-Za-z0-9_]+$"), ""),
-																		},
-																	},
-																},
-															),
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(2, 100),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9_\\.#@\\-]+$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: TimezoneOffset
+											"timezone_offset": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Timezone offset",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 6),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(Z|[-+](\\d|\\d{2}|\\d{2}:?\\d{2}))$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Filter
+									"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Expression
+											"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Filtering expression for a parameter",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(4, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[><0-9A-Za-z_.,:)(!= ]+$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ValuesMap
+											"values_map": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"name": {
-												// Property: Name
-												Description: "Parameter name",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 255),
-												},
-											},
-											"type": {
-												// Property: Type
-												Description: "Parameter type",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"String",
-														"Number",
-														"Datetime",
-													}),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-								"path_parameter_name": {
-									// Property: PathParameterName
-									Description: "Parameter name",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(0, 1024),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+														// Property: ValueReference
+														"value_reference": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "Variable name",
+															Required:    true,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(2, 128),
+																stringvalidator.RegexMatches(regexp.MustCompile("^:[A-Za-z0-9_]+$"), ""),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Parameter name",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 255),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Parameter type",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"String",
+												"Number",
+												"Datetime",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PathParameterName
+							"path_parameter_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Parameter name",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 255),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "PathOptions",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::DataBrew::Dataset.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataBrew::Dataset").WithTerraformTypeName("awscc_databrew_dataset")
 	opts = opts.WithTerraformSchema(schema)
@@ -1176,7 +1098,7 @@ func datasetResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

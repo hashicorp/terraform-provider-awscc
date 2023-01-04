@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,113 +19,104 @@ func init() {
 // costCategoryDataSource returns the Terraform awscc_ce_cost_category data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CE::CostCategory resource.
 func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Cost category ARN",
-			//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Cost category ARN",
+		//	  "pattern": "^arn:aws[-a-z0-9]*:[a-z0-9]+:[-a-z0-9]*:[0-9]{12}:[-a-zA-Z0-9/:_]+$",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Cost category ARN",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"default_value": {
-			// Property: DefaultValue
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The default value for the cost category",
-			//	  "maxLength": 50,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultValue
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The default value for the cost category",
+		//	  "maxLength": 50,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The default value for the cost category",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"effective_start": {
-			// Property: EffectiveStart
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ISO 8601 date time with offset format",
-			//	  "maxLength": 25,
-			//	  "minLength": 20,
-			//	  "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(([+-]\\d\\d:\\d\\d)|Z)$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EffectiveStart
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ISO 8601 date time with offset format",
+		//	  "maxLength": 25,
+		//	  "minLength": 20,
+		//	  "pattern": "^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(([+-]\\d\\d:\\d\\d)|Z)$",
+		//	  "type": "string"
+		//	}
+		"effective_start": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ISO 8601 date time with offset format",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 50,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 50,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"rule_version": {
-			// Property: RuleVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "CostCategoryExpression.v1"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: RuleVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "CostCategoryExpression.v1"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"rule_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"rules": {
-			// Property: Rules
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "JSON array format of Expression in Billing and Cost Management API",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Rules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "JSON array format of Expression in Billing and Cost Management API",
+		//	  "type": "string"
+		//	}
+		"rules": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "JSON array format of Expression in Billing and Cost Management API",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"split_charge_rules": {
-			// Property: SplitChargeRules
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SplitChargeRules
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
+		//	  "type": "string"
+		//	}
+		"split_charge_rules": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Json array format of CostCategorySplitChargeRule in Billing and Cost Management API",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CE::CostCategory",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CE::CostCategory").WithTerraformTypeName("awscc_ce_cost_category")
 	opts = opts.WithTerraformSchema(schema)
@@ -139,7 +130,7 @@ func costCategoryDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"split_charge_rules": "SplitChargeRules",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

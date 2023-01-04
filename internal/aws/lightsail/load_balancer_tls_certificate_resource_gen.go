@@ -4,14 +4,18 @@ package lightsail
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,156 +25,148 @@ func init() {
 // loadBalancerTlsCertificateResource returns the Terraform awscc_lightsail_load_balancer_tls_certificate resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Lightsail::LoadBalancerTlsCertificate resource.
 func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"certificate_alternative_names": {
-			// Property: CertificateAlternativeNames
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CertificateAlternativeNames
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"certificate_alternative_names": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "An array of strings listing alternative domains and subdomains for your SSL/TLS certificate.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"certificate_domain_name": {
-			// Property: CertificateDomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateDomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
+		//	  "type": "string"
+		//	}
+		"certificate_domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The domain name (e.g., example.com ) for your SSL/TLS certificate.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"certificate_name": {
-			// Property: CertificateName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The SSL/TLS certificate name.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The SSL/TLS certificate name.",
+		//	  "type": "string"
+		//	}
+		"certificate_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The SSL/TLS certificate name.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"https_redirection_enabled": {
-			// Property: HttpsRedirectionEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HttpsRedirectionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
+		//	  "type": "boolean"
+		//	}
+		"https_redirection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A Boolean value that indicates whether HTTPS redirection is enabled for the load balancer.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"is_attached": {
-			// Property: IsAttached
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IsAttached
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
+		//	  "type": "boolean"
+		//	}
+		"is_attached": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "When true, the SSL/TLS certificate is attached to the Lightsail load balancer.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"load_balancer_name": {
-			// Property: LoadBalancerName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of your load balancer.",
-			//	  "pattern": "\\w[\\w\\-]*\\w",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LoadBalancerName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of your load balancer.",
+		//	  "pattern": "\\w[\\w\\-]*\\w",
+		//	  "type": "string"
+		//	}
+		"load_balancer_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of your load balancer.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"load_balancer_tls_certificate_arn": {
-			// Property: LoadBalancerTlsCertificateArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LoadBalancerTlsCertificateArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"load_balancer_tls_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The validation status of the SSL/TLS certificate.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The validation status of the SSL/TLS certificate.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The validation status of the SSL/TLS certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Lightsail::LoadBalancerTlsCertificate",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::LoadBalancerTlsCertificate").WithTerraformTypeName("awscc_lightsail_load_balancer_tls_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -190,7 +186,7 @@ func loadBalancerTlsCertificateResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

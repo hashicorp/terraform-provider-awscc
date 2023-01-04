@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,109 +19,101 @@ func init() {
 // publisherDataSource returns the Terraform awscc_cloudformation_publisher data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFormation::Publisher resource.
 func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"accept_terms_and_conditions": {
-			// Property: AcceptTermsAndConditions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AcceptTermsAndConditions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
+		//	  "type": "boolean"
+		//	}
+		"accept_terms_and_conditions": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"connection_arn": {
-			// Property: ConnectionArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
-			//	  "pattern": "arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
+		//	  "pattern": "arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+",
+		//	  "type": "string"
+		//	}
+		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"identity_provider": {
-			// Property: IdentityProvider
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of account used as the identity provider when registering this publisher with CloudFormation.",
-			//	  "enum": [
-			//	    "AWS_Marketplace",
-			//	    "GitHub",
-			//	    "Bitbucket"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityProvider
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of account used as the identity provider when registering this publisher with CloudFormation.",
+		//	  "enum": [
+		//	    "AWS_Marketplace",
+		//	    "GitHub",
+		//	    "Bitbucket"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"identity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of account used as the identity provider when registering this publisher with CloudFormation.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"publisher_id": {
-			// Property: PublisherId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
-			//	  "maxLength": 40,
-			//	  "minLength": 1,
-			//	  "pattern": "[0-9a-zA-Z]{40}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PublisherId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
+		//	  "maxLength": 40,
+		//	  "minLength": 1,
+		//	  "pattern": "[0-9a-zA-Z]{40}",
+		//	  "type": "string"
+		//	}
+		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"publisher_profile": {
-			// Property: PublisherProfile
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The URL to the publisher's profile with the identity provider.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "(http:|https:)+[^s]+[w]",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PublisherProfile
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL to the publisher's profile with the identity provider.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "(http:|https:)+[^s]+[w]",
+		//	  "type": "string"
+		//	}
+		"publisher_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL to the publisher's profile with the identity provider.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"publisher_status": {
-			// Property: PublisherStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether the publisher is verified.",
-			//	  "enum": [
-			//	    "VERIFIED",
-			//	    "UNVERIFIED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PublisherStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the publisher is verified.",
+		//	  "enum": [
+		//	    "VERIFIED",
+		//	    "UNVERIFIED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"publisher_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether the publisher is verified.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFormation::Publisher",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::Publisher").WithTerraformTypeName("awscc_cloudformation_publisher")
 	opts = opts.WithTerraformSchema(schema)
@@ -134,7 +126,7 @@ func publisherDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"publisher_status":            "PublisherStatus",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

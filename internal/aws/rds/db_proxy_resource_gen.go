@@ -4,14 +4,20 @@ package rds
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,409 +27,392 @@ func init() {
 // dBProxyResource returns the Terraform awscc_rds_db_proxy resource.
 // This Terraform resource corresponds to the CloudFormation AWS::RDS::DBProxy resource.
 func dBProxyResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auth": {
-			// Property: Auth
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The authorization mechanism that the proxy uses.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "AuthScheme": {
-			//	        "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
-			//	        "enum": [
-			//	          "SECRETS"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "Description": {
-			//	        "description": "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
-			//	        "type": "string"
-			//	      },
-			//	      "IAMAuth": {
-			//	        "description": "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
-			//	        "enum": [
-			//	          "DISABLED",
-			//	          "REQUIRED",
-			//	          "ENABLED"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "SecretArn": {
-			//	        "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
-			//	        "type": "string"
-			//	      },
-			//	      "UserName": {
-			//	        "description": "The name of the database user to which the proxy connects.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "The authorization mechanism that the proxy uses.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"auth_scheme": {
-						// Property: AuthScheme
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Auth
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The authorization mechanism that the proxy uses.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AuthScheme": {
+		//	        "description": "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
+		//	        "enum": [
+		//	          "SECRETS"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
+		//	        "type": "string"
+		//	      },
+		//	      "IAMAuth": {
+		//	        "description": "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
+		//	        "enum": [
+		//	          "DISABLED",
+		//	          "REQUIRED",
+		//	          "ENABLED"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "SecretArn": {
+		//	        "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
+		//	        "type": "string"
+		//	      },
+		//	      "UserName": {
+		//	        "description": "The name of the database user to which the proxy connects.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"auth": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AuthScheme
+					"auth_scheme": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"SECRETS",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"description": {
-						// Property: Description
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"iam_auth": {
-						// Property: IAMAuth
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: IAMAuth
+					"iam_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Whether to require or disallow Amazon Web Services Identity and Access Management (IAM) authentication for connections to the proxy. The ENABLED value is valid only for proxies with RDS for Microsoft SQL Server.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"DISABLED",
 								"REQUIRED",
 								"ENABLED",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"secret_arn": {
-						// Property: SecretArn
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SecretArn
+					"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"user_name": {
-						// Property: UserName
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: UserName
+					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the database user to which the proxy connects.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(1),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-			},
-		},
-		"db_proxy_arn": {
-			// Property: DBProxyArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for the proxy.",
-			//	  "type": "string"
-			//	}
-			Description: "The Amazon Resource Name (ARN) for the proxy.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"db_proxy_name": {
-			// Property: DBProxyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
-			//	  "maxLength": 64,
-			//	  "pattern": "[0-z]*",
-			//	  "type": "string"
-			//	}
-			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
-			Type:        types.StringType,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The authorization mechanism that the proxy uses.",
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(64),
-				validate.StringMatch(regexp.MustCompile("[0-z]*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"debug_logging": {
-			// Property: DebugLogging
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether the proxy includes detailed information about SQL statements in its logs.",
-			//	  "type": "boolean"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBProxyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the proxy.",
+		//	  "type": "string"
+		//	}
+		"db_proxy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) for the proxy.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBProxyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
+		//	  "maxLength": 64,
+		//	  "pattern": "[0-z]*",
+		//	  "type": "string"
+		//	}
+		"db_proxy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier for the proxy. This name must be unique for all proxies owned by your AWS account in the specified AWS Region.",
+			Required:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(64),
+				stringvalidator.RegexMatches(regexp.MustCompile("[0-z]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DebugLogging
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the proxy includes detailed information about SQL statements in its logs.",
+		//	  "type": "boolean"
+		//	}
+		"debug_logging": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether the proxy includes detailed information about SQL statements in its logs.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"endpoint": {
-			// Property: Endpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
+		//	  "type": "string"
+		//	}
+		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The endpoint that you can use to connect to the proxy. You include the endpoint value in the connection string for a database client application.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"engine_family": {
-			// Property: EngineFamily
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The kinds of databases that the proxy can connect to.",
-			//	  "enum": [
-			//	    "MYSQL",
-			//	    "POSTGRESQL",
-			//	    "SQLSERVER"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EngineFamily
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The kinds of databases that the proxy can connect to.",
+		//	  "enum": [
+		//	    "MYSQL",
+		//	    "POSTGRESQL",
+		//	    "SQLSERVER"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"engine_family": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The kinds of databases that the proxy can connect to.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"MYSQL",
 					"POSTGRESQL",
 					"SQLSERVER",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"idle_client_timeout": {
-			// Property: IdleClientTimeout
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
-			//	  "type": "integer"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdleClientTimeout
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
+		//	  "type": "integer"
+		//	}
+		"idle_client_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of seconds that a connection to the proxy can be inactive before the proxy disconnects it.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"require_tls": {
-			// Property: RequireTLS
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RequireTLS
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
+		//	  "type": "boolean"
+		//	}
+		"require_tls": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A Boolean parameter that specifies whether Transport Layer Security (TLS) encryption is required for connections to the proxy.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the IAM role that the proxy uses to access secrets in AWS Secrets Manager.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 128,
-			//	        "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 128,
+		//	        "pattern": "(\\w|\\d|\\s|\\\\|-|\\.:=+-)*",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(128),
+							stringvalidator.RegexMatches(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(128),
+							stringvalidator.RegexMatches(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An optional set of key-value pairs to associate arbitrary data of your choosing with the proxy.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(128),
-							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(128),
-							validate.StringMatch(regexp.MustCompile("(\\w|\\d|\\s|\\\\|-|\\.:=+-)*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"vpc_id": {
-			// Property: VpcId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "VPC ID to associate with the new DB proxy.",
-			//	  "type": "string"
-			//	}
-			Description: "VPC ID to associate with the new DB proxy.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"vpc_security_group_ids": {
-			// Property: VpcSecurityGroupIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "VPC security group IDs to associate with the new proxy.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
-			Description: "VPC security group IDs to associate with the new proxy.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(1),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"vpc_subnet_ids": {
-			// Property: VpcSubnetIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "VPC subnet IDs to associate with the new proxy.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "minItems": 2,
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "VPC ID to associate with the new DB proxy.",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "VPC ID to associate with the new DB proxy.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpcSecurityGroupIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "VPC security group IDs to associate with the new proxy.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "VPC security group IDs to associate with the new proxy.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpcSubnetIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "VPC subnet IDs to associate with the new proxy.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "minItems": 2,
+		//	  "type": "array"
+		//	}
+		"vpc_subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "VPC subnet IDs to associate with the new proxy.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(2),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(2),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::RDS::DBProxy",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxy").WithTerraformTypeName("awscc_rds_db_proxy")
 	opts = opts.WithTerraformSchema(schema)
@@ -455,7 +444,7 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

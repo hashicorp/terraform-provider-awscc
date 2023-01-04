@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,82 +19,75 @@ func init() {
 // certificateAuthorityActivationDataSource returns the Terraform awscc_acmpca_certificate_authority_activation data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthorityActivation resource.
 func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"certificate": {
-			// Property: Certificate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Certificate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
+		//	  "type": "string"
+		//	}
+		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"certificate_authority_arn": {
-			// Property: CertificateAuthorityArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Arn of the Certificate Authority.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateAuthorityArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Arn of the Certificate Authority.",
+		//	  "type": "string"
+		//	}
+		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Arn of the Certificate Authority.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"certificate_chain": {
-			// Property: CertificateChain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Certificate chain for the Certificate Authority certificate.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateChain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Certificate chain for the Certificate Authority certificate.",
+		//	  "type": "string"
+		//	}
+		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate chain for the Certificate Authority certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"complete_certificate_chain": {
-			// Property: CompleteCertificateChain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The complete certificate chain, including the Certificate Authority certificate.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CompleteCertificateChain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The complete certificate chain, including the Certificate Authority certificate.",
+		//	  "type": "string"
+		//	}
+		"complete_certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The complete certificate chain, including the Certificate Authority certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the Certificate Authority.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the Certificate Authority.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the Certificate Authority.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ACMPCA::CertificateAuthorityActivation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthorityActivation").WithTerraformTypeName("awscc_acmpca_certificate_authority_activation")
 	opts = opts.WithTerraformSchema(schema)
@@ -106,7 +99,7 @@ func certificateAuthorityActivationDataSource(ctx context.Context) (datasource.D
 		"status":                     "Status",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

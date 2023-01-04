@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,81 +19,75 @@ func init() {
 // sessionDataSource returns the Terraform awscc_macie_session data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Macie::Session resource.
 func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"aws_account_id": {
-			// Property: AwsAccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AWS account ID of customer",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AwsAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AWS account ID of customer",
+		//	  "type": "string"
+		//	}
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AWS account ID of customer",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"finding_publishing_frequency": {
-			// Property: FindingPublishingFrequency
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "SIX_HOURS",
-			//	  "description": "A enumeration value that specifies how frequently finding updates are published.",
-			//	  "enum": [
-			//	    "FIFTEEN_MINUTES",
-			//	    "ONE_HOUR",
-			//	    "SIX_HOURS"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: FindingPublishingFrequency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "SIX_HOURS",
+		//	  "description": "A enumeration value that specifies how frequently finding updates are published.",
+		//	  "enum": [
+		//	    "FIFTEEN_MINUTES",
+		//	    "ONE_HOUR",
+		//	    "SIX_HOURS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"finding_publishing_frequency": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A enumeration value that specifies how frequently finding updates are published.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"service_role": {
-			// Property: ServiceRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Service role used by Macie",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Service role used by Macie",
+		//	  "type": "string"
+		//	}
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Service role used by Macie",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "ENABLED",
-			//	  "description": "A enumeration value that specifies the status of the Macie Session.",
-			//	  "enum": [
-			//	    "ENABLED",
-			//	    "PAUSED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "ENABLED",
+		//	  "description": "A enumeration value that specifies the status of the Macie Session.",
+		//	  "enum": [
+		//	    "ENABLED",
+		//	    "PAUSED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A enumeration value that specifies the status of the Macie Session.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Macie::Session",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::Session").WithTerraformTypeName("awscc_macie_session")
 	opts = opts.WithTerraformSchema(schema)
@@ -104,7 +98,7 @@ func sessionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status":                       "Status",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

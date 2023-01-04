@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,113 +19,104 @@ func init() {
 // apiDestinationDataSource returns the Terraform awscc_events_api_destination data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Events::ApiDestination resource.
 func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The arn of the api destination.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The arn of the api destination.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The arn of the api destination.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"connection_arn": {
-			// Property: ConnectionArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The arn of the connection.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The arn of the connection.",
+		//	  "type": "string"
+		//	}
+		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The arn of the connection.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 512,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 512,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"http_method": {
-			// Property: HttpMethod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "GET",
-			//	    "HEAD",
-			//	    "POST",
-			//	    "OPTIONS",
-			//	    "PUT",
-			//	    "DELETE",
-			//	    "PATCH"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: HttpMethod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "GET",
+		//	    "HEAD",
+		//	    "POST",
+		//	    "OPTIONS",
+		//	    "PUT",
+		//	    "DELETE",
+		//	    "PATCH"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"invocation_endpoint": {
-			// Property: InvocationEndpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Url endpoint to invoke.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InvocationEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Url endpoint to invoke.",
+		//	  "type": "string"
+		//	}
+		"invocation_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Url endpoint to invoke.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"invocation_rate_limit_per_second": {
-			// Property: InvocationRateLimitPerSecond
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "minimum": 1,
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+		}, /*END ATTRIBUTE*/
+		// Property: InvocationRateLimitPerSecond
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"invocation_rate_limit_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of the apiDestination.",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of the apiDestination.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the apiDestination.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Events::ApiDestination",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Events::ApiDestination").WithTerraformTypeName("awscc_events_api_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -139,7 +130,7 @@ func apiDestinationDataSource(ctx context.Context) (datasource.DataSource, error
 		"name":                             "Name",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

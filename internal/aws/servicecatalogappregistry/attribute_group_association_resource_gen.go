@@ -4,14 +4,16 @@ package servicecatalogappregistry
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,95 +23,90 @@ func init() {
 // attributeGroupAssociationResource returns the Terraform awscc_servicecatalogappregistry_attribute_group_association resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation resource.
 func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"application": {
-			// Property: Application
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name or the Id of the Application.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "\\w+|[a-z0-9]{12}",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Application
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name or the Id of the Application.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "\\w+|[a-z0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"application": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or the Id of the Application.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-				validate.StringMatch(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
-			},
-		},
-		"application_arn": {
-			// Property: ApplicationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ApplicationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+",
+		//	  "type": "string"
+		//	}
+		"application_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"attribute_group": {
-			// Property: AttributeGroup
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name or the Id of the AttributeGroup.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "\\w+|[a-z0-9]{12}",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AttributeGroup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name or the Id of the AttributeGroup.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "\\w+|[a-z0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"attribute_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or the Id of the AttributeGroup.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-				validate.StringMatch(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
-			},
-		},
-		"attribute_group_arn": {
-			// Property: AttributeGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AttributeGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+",
+		//	  "type": "string"
+		//	}
+		"attribute_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -126,7 +123,7 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

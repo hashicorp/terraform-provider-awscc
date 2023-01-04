@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,52 +19,48 @@ func init() {
 // resourcePolicyDataSource returns the Terraform awscc_logs_resource_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Logs::ResourcePolicy resource.
 func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"policy_document": {
-			// Property: PolicyDocument
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The policy document",
-			//	  "maxLength": 5120,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: PolicyDocument
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The policy document",
+		//	  "maxLength": 5120,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The policy document",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy_name": {
-			// Property: PolicyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for resource policy",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for resource policy",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
+		//	  "type": "string"
+		//	}
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for resource policy",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Logs::ResourcePolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::ResourcePolicy").WithTerraformTypeName("awscc_logs_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -73,7 +69,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"policy_name":     "PolicyName",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

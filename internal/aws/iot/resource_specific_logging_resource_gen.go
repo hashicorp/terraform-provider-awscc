@@ -4,14 +4,16 @@ package iot
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,122 +23,117 @@ func init() {
 // resourceSpecificLoggingResource returns the Terraform awscc_iot_resource_specific_logging resource.
 // This Terraform resource corresponds to the CloudFormation AWS::IoT::ResourceSpecificLogging resource.
 func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"log_level": {
-			// Property: LogLevel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			//	  "enum": [
-			//	    "ERROR",
-			//	    "WARN",
-			//	    "INFO",
-			//	    "DEBUG",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: LogLevel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
+		//	  "enum": [
+		//	    "ERROR",
+		//	    "WARN",
+		//	    "INFO",
+		//	    "DEBUG",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"ERROR",
 					"WARN",
 					"INFO",
 					"DEBUG",
 					"DISABLED",
-				}),
-			},
-		},
-		"target_id": {
-			// Property: TargetId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
-			//	  "maxLength": 140,
-			//	  "minLength": 13,
-			//	  "pattern": "[a-zA-Z0-9.:_-]+",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TargetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
+		//	  "maxLength": 140,
+		//	  "minLength": 13,
+		//	  "pattern": "[a-zA-Z0-9.:_-]+",
+		//	  "type": "string"
+		//	}
+		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"target_name": {
-			// Property: TargetName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The target name.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z0-9.:_-]+",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TargetName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The target name.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9.:_-]+",
+		//	  "type": "string"
+		//	}
+		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The target name.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-				validate.StringMatch(regexp.MustCompile("[a-zA-Z0-9.:_-]+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"target_type": {
-			// Property: TargetType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
-			//	  "enum": [
-			//	    "THING_GROUP",
-			//	    "CLIENT_ID",
-			//	    "SOURCE_IP",
-			//	    "PRINCIPAL_ID"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.:_-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TargetType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
+		//	  "enum": [
+		//	    "THING_GROUP",
+		//	    "CLIENT_ID",
+		//	    "SOURCE_IP",
+		//	    "PRINCIPAL_ID"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"THING_GROUP",
 					"CLIENT_ID",
 					"SOURCE_IP",
 					"PRINCIPAL_ID",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource-specific logging allows you to specify a logging level for a specific thing group.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ResourceSpecificLogging").WithTerraformTypeName("awscc_iot_resource_specific_logging")
 	opts = opts.WithTerraformSchema(schema)
@@ -152,7 +149,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,138 +19,127 @@ func init() {
 // groupDataSource returns the Terraform awscc_xray_group data source.
 // This Terraform data source corresponds to the CloudFormation AWS::XRay::Group resource.
 func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"filter_expression": {
-			// Property: FilterExpression
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The filter expression defining criteria by which to group traces.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: FilterExpression
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The filter expression defining criteria by which to group traces.",
+		//	  "type": "string"
+		//	}
+		"filter_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The filter expression defining criteria by which to group traces.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"group_arn": {
-			// Property: GroupARN
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the group that was generated on creation.",
-			//	  "maxLength": 400,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GroupARN
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the group that was generated on creation.",
+		//	  "maxLength": 400,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the group that was generated on creation.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"group_name": {
-			// Property: GroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The case-sensitive name of the new group. Names must be unique.",
-			//	  "maxLength": 32,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The case-sensitive name of the new group. Names must be unique.",
+		//	  "maxLength": 32,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The case-sensitive name of the new group. Names must be unique.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"insights_configuration": {
-			// Property: InsightsConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "InsightsEnabled": {
-			//	      "description": "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
-			//	      "type": "boolean"
-			//	    },
-			//	    "NotificationsEnabled": {
-			//	      "description": "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"insights_enabled": {
-						// Property: InsightsEnabled
-						Description: "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"notifications_enabled": {
-						// Property: NotificationsEnabled
-						Description: "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: InsightsConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "InsightsEnabled": {
+		//	      "description": "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "NotificationsEnabled": {
+		//	      "description": "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"insights_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: InsightsEnabled
+				"insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set the InsightsEnabled value to true to enable insights or false to disable insights.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: NotificationsEnabled
+				"notifications_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Set the NotificationsEnabled value to true to enable insights notifications. Notifications can only be enabled on a group with InsightsEnabled set to true.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::XRay::Group",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::XRay::Group").WithTerraformTypeName("awscc_xray_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -166,7 +155,7 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                  "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

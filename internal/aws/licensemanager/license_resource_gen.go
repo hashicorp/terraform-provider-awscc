@@ -5,10 +5,19 @@ package licensemanager
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
@@ -20,464 +29,429 @@ func init() {
 // licenseResource returns the Terraform awscc_licensemanager_license resource.
 // This Terraform resource corresponds to the CloudFormation AWS::LicenseManager::License resource.
 func licenseResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"beneficiary": {
-			// Property: Beneficiary
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Beneficiary of the license.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Beneficiary
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Beneficiary of the license.",
+		//	  "type": "string"
+		//	}
+		"beneficiary": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Beneficiary of the license.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"consumption_configuration": {
-			// Property: ConsumptionConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "BorrowConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AllowEarlyCheckIn": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "MaxTimeToLiveInMinutes": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "MaxTimeToLiveInMinutes",
-			//	        "AllowEarlyCheckIn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ProvisionalConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "MaxTimeToLiveInMinutes": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "MaxTimeToLiveInMinutes"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "RenewType": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"borrow_configuration": {
-						// Property: BorrowConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allow_early_check_in": {
-									// Property: AllowEarlyCheckIn
-									Type:     types.BoolType,
-									Required: true,
-								},
-								"max_time_to_live_in_minutes": {
-									// Property: MaxTimeToLiveInMinutes
-									Type:     types.Int64Type,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"provisional_configuration": {
-						// Property: ProvisionalConfiguration
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"max_time_to_live_in_minutes": {
-									// Property: MaxTimeToLiveInMinutes
-									Type:     types.Int64Type,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"renew_type": {
-						// Property: RenewType
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConsumptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BorrowConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AllowEarlyCheckIn": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "MaxTimeToLiveInMinutes": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxTimeToLiveInMinutes",
+		//	        "AllowEarlyCheckIn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ProvisionalConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MaxTimeToLiveInMinutes": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MaxTimeToLiveInMinutes"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RenewType": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"consumption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BorrowConfiguration
+				"borrow_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowEarlyCheckIn
+						"allow_early_check_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxTimeToLiveInMinutes
+						"max_time_to_live_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProvisionalConfiguration
+				"provisional_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxTimeToLiveInMinutes
+						"max_time_to_live_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RenewType
+				"renew_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Required: true,
-		},
-		"entitlements": {
-			// Property: Entitlements
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "AllowCheckIn": {
-			//	        "type": "boolean"
-			//	      },
-			//	      "MaxCount": {
-			//	        "type": "integer"
-			//	      },
-			//	      "Name": {
-			//	        "type": "string"
-			//	      },
-			//	      "Overage": {
-			//	        "type": "boolean"
-			//	      },
-			//	      "Unit": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Name",
-			//	      "Unit"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"allow_check_in": {
-						// Property: AllowCheckIn
-						Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: Entitlements
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "AllowCheckIn": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "MaxCount": {
+		//	        "type": "integer"
+		//	      },
+		//	      "Name": {
+		//	        "type": "string"
+		//	      },
+		//	      "Overage": {
+		//	        "type": "boolean"
+		//	      },
+		//	      "Unit": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name",
+		//	      "Unit"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"entitlements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: AllowCheckIn
+					"allow_check_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"max_count": {
-						// Property: MaxCount
-						Type:     types.Int64Type,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: MaxCount
+					"max_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-					},
-					"overage": {
-						// Property: Overage
-						Type:     types.BoolType,
+					}, /*END ATTRIBUTE*/
+					// Property: Overage
+					"overage": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"unit": {
-						// Property: Unit
-						Type:     types.StringType,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Unit
+					"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-		},
-		"home_region": {
-			// Property: HomeRegion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Home region for the created license.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HomeRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Home region for the created license.",
+		//	  "type": "string"
+		//	}
+		"home_region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Home region for the created license.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"issuer": {
-			// Property: Issuer
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Name": {
-			//	      "type": "string"
-			//	    },
-			//	    "SignKey": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
-						Required: true,
-					},
-					"sign_key": {
-						// Property: SignKey
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: Issuer
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Name": {
+		//	      "type": "string"
+		//	    },
+		//	    "SignKey": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"issuer": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SignKey
+				"sign_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Required: true,
-		},
-		"license_arn": {
-			// Property: LicenseArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Amazon Resource Name is a unique name for each resource.",
-			//	  "maxLength": 2048,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LicenseArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name is a unique name for each resource.",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"license_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name is a unique name for each resource.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"license_metadata": {
-			// Property: LicenseMetadata
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Name": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Name",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LicenseMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Name": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"license_metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"license_name": {
-			// Property: LicenseName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for the created license.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LicenseName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for the created license.",
+		//	  "type": "string"
+		//	}
+		"license_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name for the created license.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"product_name": {
-			// Property: ProductName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Product name for the created license.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ProductName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Product name for the created license.",
+		//	  "type": "string"
+		//	}
+		"product_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Product name for the created license.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"product_sku": {
-			// Property: ProductSKU
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ProductSKU of the license.",
-			//	  "maxLength": 1024,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ProductSKU
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ProductSKU of the license.",
+		//	  "maxLength": 1024,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"product_sku": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ProductSKU of the license.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1024),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1024),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Status is a write-only property.
-		},
-		"validity": {
-			// Property: Validity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Begin": {
-			//	      "description": "Validity begin date for the license.",
-			//	      "format": "date-time",
-			//	      "type": "string"
-			//	    },
-			//	    "End": {
-			//	      "description": "Validity begin date for the license.",
-			//	      "format": "date-time",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Begin",
-			//	    "End"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"begin": {
-						// Property: Begin
-						Description: "Validity begin date for the license.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IsRFC3339Time(),
-						},
-					},
-					"end": {
-						// Property: End
-						Description: "Validity begin date for the license.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IsRFC3339Time(),
-						},
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: Validity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Begin": {
+		//	      "description": "Validity begin date for the license.",
+		//	      "format": "date-time",
+		//	      "type": "string"
+		//	    },
+		//	    "End": {
+		//	      "description": "Validity begin date for the license.",
+		//	      "format": "date-time",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Begin",
+		//	    "End"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"validity": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Begin
+				"begin": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Validity begin date for the license.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						validate.IsRFC3339Time(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: End
+				"end": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Validity begin date for the license.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						validate.IsRFC3339Time(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Required: true,
-		},
-		"version": {
-			// Property: Version
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of the license.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Version
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the license.",
+		//	  "type": "string"
+		//	}
+		"version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version of the license.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::LicenseManager::License",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LicenseManager::License").WithTerraformTypeName("awscc_licensemanager_license")
 	opts = opts.WithTerraformSchema(schema)
@@ -519,7 +493,7 @@ func licenseResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

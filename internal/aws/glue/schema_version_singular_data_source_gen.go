@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,102 +19,93 @@ func init() {
 // schemaVersionDataSource returns the Terraform awscc_glue_schema_version data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Glue::SchemaVersion resource.
 func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"schema": {
-			// Property: Schema
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Identifier for the schema where the schema version will be created.",
-			//	  "properties": {
-			//	    "RegistryName": {
-			//	      "description": "Name of the registry to identify where the Schema is located.",
-			//	      "maxLength": 255,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "SchemaArn": {
-			//	      "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
-			//	      "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
-			//	      "type": "string"
-			//	    },
-			//	    "SchemaName": {
-			//	      "description": "Name of the schema. This parameter requires RegistryName to be provided.",
-			//	      "maxLength": 255,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Schema
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Identifier for the schema where the schema version will be created.",
+		//	  "properties": {
+		//	    "RegistryName": {
+		//	      "description": "Name of the registry to identify where the Schema is located.",
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "SchemaArn": {
+		//	      "description": "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
+		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
+		//	      "type": "string"
+		//	    },
+		//	    "SchemaName": {
+		//	      "description": "Name of the schema. This parameter requires RegistryName to be provided.",
+		//	      "maxLength": 255,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RegistryName
+				"registry_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Name of the registry to identify where the Schema is located.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SchemaArn
+				"schema_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SchemaName
+				"schema_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Name of the schema. This parameter requires RegistryName to be provided.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Identifier for the schema where the schema version will be created.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"registry_name": {
-						// Property: RegistryName
-						Description: "Name of the registry to identify where the Schema is located.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"schema_arn": {
-						// Property: SchemaArn
-						Description: "Amazon Resource Name for the Schema. This attribute can be used to uniquely represent the Schema.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"schema_name": {
-						// Property: SchemaName
-						Description: "Name of the schema. This parameter requires RegistryName to be provided.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"schema_definition": {
-			// Property: SchemaDefinition
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Complete definition of the schema in plain-text.",
-			//	  "maxLength": 170000,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SchemaDefinition
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Complete definition of the schema in plain-text.",
+		//	  "maxLength": 170000,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"schema_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Complete definition of the schema in plain-text.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"version_id": {
-			// Property: VersionId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Represents the version ID associated with the schema version.",
-			//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VersionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Represents the version ID associated with the schema version.",
+		//	  "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Represents the version ID associated with the schema version.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Glue::SchemaVersion",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Glue::SchemaVersion").WithTerraformTypeName("awscc_glue_schema_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -127,7 +118,7 @@ func schemaVersionDataSource(ctx context.Context) (datasource.DataSource, error)
 		"version_id":        "VersionId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,338 +19,313 @@ func init() {
 // environmentDataSource returns the Terraform awscc_finspace_environment data source.
 // This Terraform data source corresponds to the CloudFormation AWS::FinSpace::Environment resource.
 func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"aws_account_id": {
-			// Property: AwsAccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AWS account ID associated with the Environment",
-			//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AwsAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AWS account ID associated with the Environment",
+		//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
+		//	  "type": "string"
+		//	}
+		"aws_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AWS account ID associated with the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"data_bundles": {
-			// Property: DataBundles
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARNs of FinSpace Data Bundles to install",
-			//	  "items": {
-			//	    "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DataBundles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARNs of FinSpace Data Bundles to install",
+		//	  "items": {
+		//	    "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d*:data-bundle/[0-9A-Za-z_-]{1,128}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"data_bundles": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "ARNs of FinSpace Data Bundles to install",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"dedicated_service_account_id": {
-			// Property: DedicatedServiceAccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ID for FinSpace created account used to store Environment artifacts",
-			//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DedicatedServiceAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ID for FinSpace created account used to store Environment artifacts",
+		//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
+		//	  "type": "string"
+		//	}
+		"dedicated_service_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID for FinSpace created account used to store Environment artifacts",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Description of the Environment",
-			//	  "pattern": "^[a-zA-Z0-9. ]{1,1000}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Description of the Environment",
+		//	  "pattern": "^[a-zA-Z0-9. ]{1,1000}$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"environment_arn": {
-			// Property: EnvironmentArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARN of the Environment",
-			//	  "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN of the Environment",
+		//	  "pattern": "^arn:aws:finspace:[A-Za-z0-9_/.-]{0,63}:\\d+:environment/[0-9A-Za-z_-]{1,128}$",
+		//	  "type": "string"
+		//	}
+		"environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ARN of the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"environment_id": {
-			// Property: EnvironmentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique identifier for representing FinSpace Environment",
-			//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique identifier for representing FinSpace Environment",
+		//	  "pattern": "^[a-zA-Z0-9]{1,26}$",
+		//	  "type": "string"
+		//	}
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier for representing FinSpace Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"environment_url": {
-			// Property: EnvironmentUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "URL used to login to the Environment",
-			//	  "pattern": "^[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "URL used to login to the Environment",
+		//	  "pattern": "^[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
+		//	  "type": "string"
+		//	}
+		"environment_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "URL used to login to the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"federation_mode": {
-			// Property: FederationMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Federation mode used with the Environment",
-			//	  "enum": [
-			//	    "LOCAL",
-			//	    "FEDERATED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: FederationMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Federation mode used with the Environment",
+		//	  "enum": [
+		//	    "LOCAL",
+		//	    "FEDERATED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"federation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Federation mode used with the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"federation_parameters": {
-			// Property: FederationParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Additional parameters to identify Federation mode",
-			//	  "properties": {
-			//	    "ApplicationCallBackURL": {
-			//	      "description": "SAML metadata URL to link with the Environment",
-			//	      "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
-			//	      "type": "string"
-			//	    },
-			//	    "AttributeMap": {
-			//	      "description": "Attribute map for SAML configuration",
-			//	      "type": "object"
-			//	    },
-			//	    "FederationProviderName": {
-			//	      "description": "Federation provider name to link with the Environment",
-			//	      "maxLength": 32,
-			//	      "minLength": 1,
-			//	      "pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+",
-			//	      "type": "string"
-			//	    },
-			//	    "FederationURN": {
-			//	      "description": "SAML metadata URL to link with the Environment",
-			//	      "pattern": "",
-			//	      "type": "string"
-			//	    },
-			//	    "SamlMetadataDocument": {
-			//	      "description": "SAML metadata document to link the federation provider to the Environment",
-			//	      "maxLength": 10000000,
-			//	      "minLength": 1000,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "SamlMetadataURL": {
-			//	      "description": "SAML metadata URL to link with the Environment",
-			//	      "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: FederationParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Additional parameters to identify Federation mode",
+		//	  "properties": {
+		//	    "ApplicationCallBackURL": {
+		//	      "description": "SAML metadata URL to link with the Environment",
+		//	      "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
+		//	      "type": "string"
+		//	    },
+		//	    "AttributeMap": {
+		//	      "description": "Attribute map for SAML configuration",
+		//	      "type": "object"
+		//	    },
+		//	    "FederationProviderName": {
+		//	      "description": "Federation provider name to link with the Environment",
+		//	      "maxLength": 32,
+		//	      "minLength": 1,
+		//	      "pattern": "[^_\\p{Z}][\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}][^_\\p{Z}]+",
+		//	      "type": "string"
+		//	    },
+		//	    "FederationURN": {
+		//	      "description": "SAML metadata URL to link with the Environment",
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "SamlMetadataDocument": {
+		//	      "description": "SAML metadata document to link the federation provider to the Environment",
+		//	      "maxLength": 10000000,
+		//	      "minLength": 1000,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "SamlMetadataURL": {
+		//	      "description": "SAML metadata URL to link with the Environment",
+		//	      "pattern": "^https?://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]{1,1000}",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"federation_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplicationCallBackURL
+				"application_call_back_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata URL to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: AttributeMap
+				"attribute_map": schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Attribute map for SAML configuration",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FederationProviderName
+				"federation_provider_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Federation provider name to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FederationURN
+				"federation_urn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata URL to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamlMetadataDocument
+				"saml_metadata_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata document to link the federation provider to the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SamlMetadataURL
+				"saml_metadata_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "SAML metadata URL to link with the Environment",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Additional parameters to identify Federation mode",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"application_call_back_url": {
-						// Property: ApplicationCallBackURL
-						Description: "SAML metadata URL to link with the Environment",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"attribute_map": {
-						// Property: AttributeMap
-						Description: "Attribute map for SAML configuration",
-						Type:        types.MapType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"federation_provider_name": {
-						// Property: FederationProviderName
-						Description: "Federation provider name to link with the Environment",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"federation_urn": {
-						// Property: FederationURN
-						Description: "SAML metadata URL to link with the Environment",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"saml_metadata_document": {
-						// Property: SamlMetadataDocument
-						Description: "SAML metadata document to link the federation provider to the Environment",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"saml_metadata_url": {
-						// Property: SamlMetadataURL
-						Description: "SAML metadata URL to link with the Environment",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"kms_key_id": {
-			// Property: KmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "KMS key used to encrypt customer data within FinSpace Environment infrastructure",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of the Environment",
-			//	  "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of the Environment",
+		//	  "pattern": "^[a-zA-Z0-9]+[a-zA-Z0-9-]*[a-zA-Z0-9]{1,255}$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"sage_maker_studio_domain_url": {
-			// Property: SageMakerStudioDomainUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "SageMaker Studio Domain URL associated with the Environment",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SageMakerStudioDomainUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "SageMaker Studio Domain URL associated with the Environment",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"sage_maker_studio_domain_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "SageMaker Studio Domain URL associated with the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "State of the Environment",
-			//	  "enum": [
-			//	    "CREATE_REQUESTED",
-			//	    "CREATING",
-			//	    "CREATED",
-			//	    "DELETE_REQUESTED",
-			//	    "DELETING",
-			//	    "DELETED",
-			//	    "FAILED_CREATION",
-			//	    "FAILED_DELETION",
-			//	    "RETRY_DELETION",
-			//	    "SUSPENDED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "State of the Environment",
+		//	  "enum": [
+		//	    "CREATE_REQUESTED",
+		//	    "CREATING",
+		//	    "CREATED",
+		//	    "DELETE_REQUESTED",
+		//	    "DELETING",
+		//	    "DELETED",
+		//	    "FAILED_CREATION",
+		//	    "FAILED_DELETION",
+		//	    "RETRY_DELETION",
+		//	    "SUSPENDED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "State of the Environment",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"superuser_parameters": {
-			// Property: SuperuserParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Parameters of the first Superuser for the FinSpace Environment",
-			//	  "properties": {
-			//	    "EmailAddress": {
-			//	      "description": "Email address",
-			//	      "maxLength": 128,
-			//	      "minLength": 1,
-			//	      "pattern": "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+",
-			//	      "type": "string"
-			//	    },
-			//	    "FirstName": {
-			//	      "description": "First name",
-			//	      "maxLength": 50,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9]{1,50}$",
-			//	      "type": "string"
-			//	    },
-			//	    "LastName": {
-			//	      "description": "Last name",
-			//	      "maxLength": 50,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9]{1,50}$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SuperuserParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Parameters of the first Superuser for the FinSpace Environment",
+		//	  "properties": {
+		//	    "EmailAddress": {
+		//	      "description": "Email address",
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "pattern": "[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+[.]+[A-Za-z]+",
+		//	      "type": "string"
+		//	    },
+		//	    "FirstName": {
+		//	      "description": "First name",
+		//	      "maxLength": 50,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9]{1,50}$",
+		//	      "type": "string"
+		//	    },
+		//	    "LastName": {
+		//	      "description": "Last name",
+		//	      "maxLength": 50,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9]{1,50}$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"superuser_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EmailAddress
+				"email_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Email address",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FirstName
+				"first_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "First name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LastName
+				"last_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Last name",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Parameters of the first Superuser for the FinSpace Environment",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"email_address": {
-						// Property: EmailAddress
-						Description: "Email address",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"first_name": {
-						// Property: FirstName
-						Description: "First name",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"last_name": {
-						// Property: LastName
-						Description: "Last name",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::FinSpace::Environment",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::FinSpace::Environment").WithTerraformTypeName("awscc_finspace_environment")
 	opts = opts.WithTerraformSchema(schema)
@@ -380,7 +355,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"superuser_parameters":         "SuperuserParameters",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

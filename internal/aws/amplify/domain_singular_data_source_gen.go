@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,176 +19,164 @@ func init() {
 // domainDataSource returns the Terraform awscc_amplify_domain data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Amplify::Domain resource.
 func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"app_id": {
-			// Property: AppId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 20,
-			//	  "minLength": 1,
-			//	  "pattern": "d[a-z0-9]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AppId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 20,
+		//	  "minLength": 1,
+		//	  "pattern": "d[a-z0-9]+",
+		//	  "type": "string"
+		//	}
+		"app_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "pattern": "(?s).*",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "pattern": "(?s).*",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"auto_sub_domain_creation_patterns": {
-			// Property: AutoSubDomainCreationPatterns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "maxLength": 2048,
-			//	    "minLength": 1,
-			//	    "pattern": "(?s).+",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: AutoSubDomainCreationPatterns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "maxLength": 2048,
+		//	    "minLength": 1,
+		//	    "pattern": "(?s).+",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"auto_sub_domain_creation_patterns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoSubDomainIAMRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
+		//	  "type": "string"
+		//	}
+		"auto_sub_domain_iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"auto_sub_domain_iam_role": {
-			// Property: AutoSubDomainIAMRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "pattern": "^$|^arn:.+:iam::\\d{12}:role.+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateRecord
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "type": "string"
+		//	}
+		"certificate_record": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"certificate_record": {
-			// Property: CertificateRecord
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"domain_name": {
-			// Property: DomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"domain_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"domain_status": {
-			// Property: DomainStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: EnableAutoSubDomain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"enable_auto_sub_domain": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"enable_auto_sub_domain": {
-			// Property: EnableAutoSubDomain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: StatusReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1000,
+		//	  "type": "string"
+		//	}
+		"status_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"status_reason": {
-			// Property: StatusReason
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1000,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"sub_domain_settings": {
-			// Property: SubDomainSettings
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "BranchName": {
-			//	        "maxLength": 255,
-			//	        "minLength": 1,
-			//	        "pattern": "(?s).+",
-			//	        "type": "string"
-			//	      },
-			//	      "Prefix": {
-			//	        "maxLength": 255,
-			//	        "pattern": "(?s).*",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Prefix",
-			//	      "BranchName"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 255,
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"branch_name": {
-						// Property: BranchName
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: SubDomainSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "BranchName": {
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "pattern": "(?s).+",
+		//	        "type": "string"
+		//	      },
+		//	      "Prefix": {
+		//	        "maxLength": 255,
+		//	        "pattern": "(?s).*",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Prefix",
+		//	      "BranchName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 255,
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"sub_domain_settings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: BranchName
+					"branch_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"prefix": {
-						// Property: Prefix
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Prefix
+					"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Amplify::Domain",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Amplify::Domain").WithTerraformTypeName("awscc_amplify_domain")
 	opts = opts.WithTerraformSchema(schema)
@@ -207,7 +195,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"sub_domain_settings":               "SubDomainSettings",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

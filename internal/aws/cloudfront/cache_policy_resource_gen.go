@@ -4,14 +4,19 @@ package cloudfront
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,296 +26,274 @@ func init() {
 // cachePolicyResource returns the Terraform awscc_cloudfront_cache_policy resource.
 // This Terraform resource corresponds to the CloudFormation AWS::CloudFront::CachePolicy resource.
 func cachePolicyResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"cache_policy_config": {
-			// Property: CachePolicyConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Comment": {
-			//	      "type": "string"
-			//	    },
-			//	    "DefaultTTL": {
-			//	      "minimum": 0,
-			//	      "type": "number"
-			//	    },
-			//	    "MaxTTL": {
-			//	      "minimum": 0,
-			//	      "type": "number"
-			//	    },
-			//	    "MinTTL": {
-			//	      "minimum": 0,
-			//	      "type": "number"
-			//	    },
-			//	    "Name": {
-			//	      "type": "string"
-			//	    },
-			//	    "ParametersInCacheKeyAndForwardedToOrigin": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CookiesConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "CookieBehavior": {
-			//	              "pattern": "^(none|whitelist|allExcept|all)$",
-			//	              "type": "string"
-			//	            },
-			//	            "Cookies": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "CookieBehavior"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "EnableAcceptEncodingBrotli": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "EnableAcceptEncodingGzip": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "HeadersConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "HeaderBehavior": {
-			//	              "pattern": "^(none|whitelist)$",
-			//	              "type": "string"
-			//	            },
-			//	            "Headers": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "HeaderBehavior"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "QueryStringsConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "QueryStringBehavior": {
-			//	              "pattern": "^(none|whitelist|allExcept|all)$",
-			//	              "type": "string"
-			//	            },
-			//	            "QueryStrings": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "QueryStringBehavior"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "EnableAcceptEncodingGzip",
-			//	        "HeadersConfig",
-			//	        "CookiesConfig",
-			//	        "QueryStringsConfig"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name",
-			//	    "MinTTL",
-			//	    "MaxTTL",
-			//	    "DefaultTTL",
-			//	    "ParametersInCacheKeyAndForwardedToOrigin"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"comment": {
-						// Property: Comment
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"default_ttl": {
-						// Property: DefaultTTL
-						Type:     types.Float64Type,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.FloatAtLeast(0.000000),
-						},
-					},
-					"max_ttl": {
-						// Property: MaxTTL
-						Type:     types.Float64Type,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.FloatAtLeast(0.000000),
-						},
-					},
-					"min_ttl": {
-						// Property: MinTTL
-						Type:     types.Float64Type,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.FloatAtLeast(0.000000),
-						},
-					},
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
-						Required: true,
-					},
-					"parameters_in_cache_key_and_forwarded_to_origin": {
-						// Property: ParametersInCacheKeyAndForwardedToOrigin
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cookies_config": {
-									// Property: CookiesConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"cookie_behavior": {
-												// Property: CookieBehavior
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("^(none|whitelist|allExcept|all)$"), ""),
-												},
-											},
-											"cookies": {
-												// Property: Cookies
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CachePolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Comment": {
+		//	      "type": "string"
+		//	    },
+		//	    "DefaultTTL": {
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "MaxTTL": {
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "MinTTL": {
+		//	      "minimum": 0,
+		//	      "type": "number"
+		//	    },
+		//	    "Name": {
+		//	      "type": "string"
+		//	    },
+		//	    "ParametersInCacheKeyAndForwardedToOrigin": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CookiesConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CookieBehavior": {
+		//	              "pattern": "^(none|whitelist|allExcept|all)$",
+		//	              "type": "string"
+		//	            },
+		//	            "Cookies": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "CookieBehavior"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "EnableAcceptEncodingBrotli": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "EnableAcceptEncodingGzip": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "HeadersConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "HeaderBehavior": {
+		//	              "pattern": "^(none|whitelist)$",
+		//	              "type": "string"
+		//	            },
+		//	            "Headers": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "HeaderBehavior"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "QueryStringsConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "QueryStringBehavior": {
+		//	              "pattern": "^(none|whitelist|allExcept|all)$",
+		//	              "type": "string"
+		//	            },
+		//	            "QueryStrings": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "QueryStringBehavior"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EnableAcceptEncodingGzip",
+		//	        "HeadersConfig",
+		//	        "CookiesConfig",
+		//	        "QueryStringsConfig"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name",
+		//	    "MinTTL",
+		//	    "MaxTTL",
+		//	    "DefaultTTL",
+		//	    "ParametersInCacheKeyAndForwardedToOrigin"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"cache_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Comment
+				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultTTL
+				"default_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.AtLeast(0.000000),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MaxTTL
+				"max_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.AtLeast(0.000000),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: MinTTL
+				"min_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.AtLeast(0.000000),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ParametersInCacheKeyAndForwardedToOrigin
+				"parameters_in_cache_key_and_forwarded_to_origin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CookiesConfig
+						"cookies_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CookieBehavior
+								"cookie_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
-								},
-								"enable_accept_encoding_brotli": {
-									// Property: EnableAcceptEncodingBrotli
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"enable_accept_encoding_gzip": {
-									// Property: EnableAcceptEncodingGzip
-									Type:     types.BoolType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|allExcept|all)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Cookies
+								"cookies": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableAcceptEncodingBrotli
+						"enable_accept_encoding_brotli": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EnableAcceptEncodingGzip
+						"enable_accept_encoding_gzip": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: HeadersConfig
+						"headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: HeaderBehavior
+								"header_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
-								},
-								"headers_config": {
-									// Property: HeadersConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"header_behavior": {
-												// Property: HeaderBehavior
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("^(none|whitelist)$"), ""),
-												},
-											},
-											"headers": {
-												// Property: Headers
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Headers
+								"headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueryStringsConfig
+						"query_strings_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: QueryStringBehavior
+								"query_string_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
-								},
-								"query_strings_config": {
-									// Property: QueryStringsConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"query_string_behavior": {
-												// Property: QueryStringBehavior
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringMatch(regexp.MustCompile("^(none|whitelist|allExcept|all)$"), ""),
-												},
-											},
-											"query_strings": {
-												// Property: QueryStrings
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Required: true,
-					},
-				},
-			),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|allExcept|all)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: QueryStrings
+								"query_strings": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Required: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::CachePolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CachePolicy").WithTerraformTypeName("awscc_cloudfront_cache_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -342,7 +325,7 @@ func cachePolicyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,2458 +19,2256 @@ func init() {
 // pipeDataSource returns the Terraform awscc_pipes_pipe data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Pipes::Pipe resource.
 func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"current_state": {
-			// Property: CurrentState
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "RUNNING",
-			//	    "STOPPED",
-			//	    "CREATING",
-			//	    "UPDATING",
-			//	    "DELETING",
-			//	    "STARTING",
-			//	    "STOPPING",
-			//	    "CREATE_FAILED",
-			//	    "UPDATE_FAILED",
-			//	    "START_FAILED",
-			//	    "STOP_FAILED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CurrentState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "RUNNING",
+		//	    "STOPPED",
+		//	    "CREATING",
+		//	    "UPDATING",
+		//	    "DELETING",
+		//	    "STARTING",
+		//	    "STOPPING",
+		//	    "CREATE_FAILED",
+		//	    "UPDATE_FAILED",
+		//	    "START_FAILED",
+		//	    "STOP_FAILED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"current_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 512,
-			//	  "minLength": 0,
-			//	  "pattern": "^.*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 512,
+		//	  "minLength": 0,
+		//	  "pattern": "^.*$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"desired_state": {
-			// Property: DesiredState
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "RUNNING",
-			//	    "STOPPED"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DesiredState
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "RUNNING",
+		//	    "STOPPED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"desired_state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"enrichment": {
-			// Property: Enrichment
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Enrichment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"enrichment": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"enrichment_parameters": {
-			// Property: EnrichmentParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "HttpParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "HeaderParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PathParameterValues": {
-			//	          "items": {
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "QueryStringParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "InputTemplate": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"http_parameters": {
-						// Property: HttpParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"header_parameters": {
-									// Property: HeaderParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"path_parameter_values": {
-									// Property: PathParameterValues
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"query_string_parameters": {
-									// Property: QueryStringParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"input_template": {
-						// Property: InputTemplate
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: EnrichmentParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "HttpParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "HeaderParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PathParameterValues": {
+		//	          "items": {
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "QueryStringParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "InputTemplate": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"enrichment_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HttpParameters
+				"http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderParameters
+						"header_parameters": // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PathParameterValues
+						"path_parameter_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueryStringParameters
+						"query_string_parameters": // Pattern: ""
+						schema.MapAttribute{       /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InputTemplate
+				"input_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "pattern": "^[\\.\\-_A-Za-z0-9]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[\\.\\-_A-Za-z0-9]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"source": {
-			// Property: Source
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Source
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"source_parameters": {
-			// Property: SourceParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "ActiveMQBrokerParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "BasicAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "QueueName": {
-			//	          "maxLength": 1000,
-			//	          "minLength": 1,
-			//	          "pattern": "^[\\s\\S]*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Credentials",
-			//	        "QueueName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "DynamoDBStreamParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 1000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "DeadLetterConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Arn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRecordAgeInSeconds": {
-			//	          "maximum": 604800,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRetryAttempts": {
-			//	          "maximum": 10000,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "OnPartialBatchItemFailure": {
-			//	          "enum": [
-			//	            "AUTOMATIC_BISECT"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "ParallelizationFactor": {
-			//	          "maximum": 10,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "StartingPosition"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "FilterCriteria": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Filters": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Pattern": {
-			//	                "maxLength": 4096,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 5,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "KinesisStreamParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "DeadLetterConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Arn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRecordAgeInSeconds": {
-			//	          "maximum": 604800,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumRetryAttempts": {
-			//	          "maximum": 10000,
-			//	          "minimum": -1,
-			//	          "type": "integer"
-			//	        },
-			//	        "OnPartialBatchItemFailure": {
-			//	          "enum": [
-			//	            "AUTOMATIC_BISECT"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "ParallelizationFactor": {
-			//	          "maximum": 10,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST",
-			//	            "AT_TIMESTAMP"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "StartingPositionTimestamp": {
-			//	          "format": "date-time",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "StartingPosition"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ManagedStreamingKafkaParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "ConsumerGroupID": {
-			//	          "maxLength": 200,
-			//	          "minLength": 1,
-			//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
-			//	          "type": "string"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "ClientCertificateTlsAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "SaslScram512Auth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "TopicName": {
-			//	          "maxLength": 249,
-			//	          "minLength": 1,
-			//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TopicName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "RabbitMQBrokerParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "BasicAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "QueueName": {
-			//	          "maxLength": 1000,
-			//	          "minLength": 1,
-			//	          "pattern": "^[\\s\\S]*$",
-			//	          "type": "string"
-			//	        },
-			//	        "VirtualHost": {
-			//	          "maxLength": 200,
-			//	          "minLength": 1,
-			//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Credentials",
-			//	        "QueueName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SelfManagedKafkaParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AdditionalBootstrapServers": {
-			//	          "items": {
-			//	            "maxLength": 300,
-			//	            "minLength": 1,
-			//	            "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}$",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 2,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "ConsumerGroupID": {
-			//	          "maxLength": 200,
-			//	          "minLength": 1,
-			//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
-			//	          "type": "string"
-			//	        },
-			//	        "Credentials": {
-			//	          "properties": {
-			//	            "BasicAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientCertificateTlsAuth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "SaslScram256Auth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "SaslScram512Auth": {
-			//	              "description": "Optional SecretManager ARN which stores the database credentials",
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        },
-			//	        "ServerRootCaCertificate": {
-			//	          "description": "Optional SecretManager ARN which stores the database credentials",
-			//	          "maxLength": 1600,
-			//	          "minLength": 1,
-			//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	          "type": "string"
-			//	        },
-			//	        "StartingPosition": {
-			//	          "enum": [
-			//	            "TRIM_HORIZON",
-			//	            "LATEST"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "TopicName": {
-			//	          "maxLength": 249,
-			//	          "minLength": 1,
-			//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
-			//	          "type": "string"
-			//	        },
-			//	        "Vpc": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "SecurityGroup": {
-			//	              "description": "List of SecurityGroupId.",
-			//	              "items": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "^sg-[0-9a-zA-Z]*$",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 5,
-			//	              "minItems": 0,
-			//	              "type": "array"
-			//	            },
-			//	            "Subnets": {
-			//	              "description": "List of SubnetId.",
-			//	              "items": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "^subnet-[0-9a-z]*$",
-			//	                "type": "string"
-			//	              },
-			//	              "maxItems": 16,
-			//	              "minItems": 0,
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TopicName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SqsQueueParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "BatchSize": {
-			//	          "maximum": 10000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "MaximumBatchingWindowInSeconds": {
-			//	          "maximum": 300,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"active_mq_broker_parameters": {
-						// Property: ActiveMQBrokerParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth": {
-												// Property: BasicAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"queue_name": {
-									// Property: QueueName
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"dynamo_db_stream_parameters": {
-						// Property: DynamoDBStreamParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"dead_letter_config": {
-									// Property: DeadLetterConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"arn": {
-												// Property: Arn
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"maximum_record_age_in_seconds": {
-									// Property: MaximumRecordAgeInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"maximum_retry_attempts": {
-									// Property: MaximumRetryAttempts
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"on_partial_batch_item_failure": {
-									// Property: OnPartialBatchItemFailure
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"parallelization_factor": {
-									// Property: ParallelizationFactor
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"filter_criteria": {
-						// Property: FilterCriteria
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"filters": {
-									// Property: Filters
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"pattern": {
-												// Property: Pattern
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"kinesis_stream_parameters": {
-						// Property: KinesisStreamParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"dead_letter_config": {
-									// Property: DeadLetterConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"arn": {
-												// Property: Arn
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"maximum_record_age_in_seconds": {
-									// Property: MaximumRecordAgeInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"maximum_retry_attempts": {
-									// Property: MaximumRetryAttempts
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"on_partial_batch_item_failure": {
-									// Property: OnPartialBatchItemFailure
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"parallelization_factor": {
-									// Property: ParallelizationFactor
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"starting_position_timestamp": {
-									// Property: StartingPositionTimestamp
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"managed_streaming_kafka_parameters": {
-						// Property: ManagedStreamingKafkaParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"consumer_group_id": {
-									// Property: ConsumerGroupID
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"client_certificate_tls_auth": {
-												// Property: ClientCertificateTlsAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sasl_scram_512_auth": {
-												// Property: SaslScram512Auth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"topic_name": {
-									// Property: TopicName
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"rabbit_mq_broker_parameters": {
-						// Property: RabbitMQBrokerParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth": {
-												// Property: BasicAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"queue_name": {
-									// Property: QueueName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"virtual_host": {
-									// Property: VirtualHost
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"self_managed_kafka_parameters": {
-						// Property: SelfManagedKafkaParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"additional_bootstrap_servers": {
-									// Property: AdditionalBootstrapServers
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"consumer_group_id": {
-									// Property: ConsumerGroupID
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"credentials": {
-									// Property: Credentials
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth": {
-												// Property: BasicAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"client_certificate_tls_auth": {
-												// Property: ClientCertificateTlsAuth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sasl_scram_256_auth": {
-												// Property: SaslScram256Auth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"sasl_scram_512_auth": {
-												// Property: SaslScram512Auth
-												Description: "Optional SecretManager ARN which stores the database credentials",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"server_root_ca_certificate": {
-									// Property: ServerRootCaCertificate
+		}, /*END ATTRIBUTE*/
+		// Property: SourceParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ActiveMQBrokerParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "BasicAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "QueueName": {
+		//	          "maxLength": 1000,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\s\\S]*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Credentials",
+		//	        "QueueName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DynamoDBStreamParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 1000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "DeadLetterConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Arn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRecordAgeInSeconds": {
+		//	          "maximum": 604800,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRetryAttempts": {
+		//	          "maximum": 10000,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "OnPartialBatchItemFailure": {
+		//	          "enum": [
+		//	            "AUTOMATIC_BISECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ParallelizationFactor": {
+		//	          "maximum": 10,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "StartingPosition"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "FilterCriteria": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Filters": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Pattern": {
+		//	                "maxLength": 4096,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "KinesisStreamParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "DeadLetterConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Arn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRecordAgeInSeconds": {
+		//	          "maximum": 604800,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumRetryAttempts": {
+		//	          "maximum": 10000,
+		//	          "minimum": -1,
+		//	          "type": "integer"
+		//	        },
+		//	        "OnPartialBatchItemFailure": {
+		//	          "enum": [
+		//	            "AUTOMATIC_BISECT"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ParallelizationFactor": {
+		//	          "maximum": 10,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST",
+		//	            "AT_TIMESTAMP"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "StartingPositionTimestamp": {
+		//	          "format": "date-time",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "StartingPosition"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ManagedStreamingKafkaParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ConsumerGroupID": {
+		//	          "maxLength": 200,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "ClientCertificateTlsAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SaslScram512Auth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TopicName": {
+		//	          "maxLength": 249,
+		//	          "minLength": 1,
+		//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TopicName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "RabbitMQBrokerParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "BasicAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "QueueName": {
+		//	          "maxLength": 1000,
+		//	          "minLength": 1,
+		//	          "pattern": "^[\\s\\S]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "VirtualHost": {
+		//	          "maxLength": 200,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Credentials",
+		//	        "QueueName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SelfManagedKafkaParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AdditionalBootstrapServers": {
+		//	          "items": {
+		//	            "maxLength": 300,
+		//	            "minLength": 1,
+		//	            "pattern": "^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\\-]*[A-Za-z0-9]):[0-9]{1,5}$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 2,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "ConsumerGroupID": {
+		//	          "maxLength": 200,
+		//	          "minLength": 1,
+		//	          "pattern": "^[a-zA-Z0-9-\\/*:_+=.@-]*$",
+		//	          "type": "string"
+		//	        },
+		//	        "Credentials": {
+		//	          "properties": {
+		//	            "BasicAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientCertificateTlsAuth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SaslScram256Auth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "SaslScram512Auth": {
+		//	              "description": "Optional SecretManager ARN which stores the database credentials",
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        },
+		//	        "ServerRootCaCertificate": {
+		//	          "description": "Optional SecretManager ARN which stores the database credentials",
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "type": "string"
+		//	        },
+		//	        "StartingPosition": {
+		//	          "enum": [
+		//	            "TRIM_HORIZON",
+		//	            "LATEST"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TopicName": {
+		//	          "maxLength": 249,
+		//	          "minLength": 1,
+		//	          "pattern": "^[^.]([a-zA-Z0-9\\-_.]+)$",
+		//	          "type": "string"
+		//	        },
+		//	        "Vpc": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SecurityGroup": {
+		//	              "description": "List of SecurityGroupId.",
+		//	              "items": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "^sg-[0-9a-zA-Z]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "minItems": 0,
+		//	              "type": "array"
+		//	            },
+		//	            "Subnets": {
+		//	              "description": "List of SubnetId.",
+		//	              "items": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "^subnet-[0-9a-z]*$",
+		//	                "type": "string"
+		//	              },
+		//	              "maxItems": 16,
+		//	              "minItems": 0,
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TopicName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SqsQueueParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BatchSize": {
+		//	          "maximum": 10000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "MaximumBatchingWindowInSeconds": {
+		//	          "maximum": 300,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"source_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActiveMQBrokerParameters
+				"active_mq_broker_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuth
+								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"starting_position": {
-									// Property: StartingPosition
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueueName
+						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DynamoDBStreamParameters
+				"dynamo_db_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeadLetterConfig
+						"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"topic_name": {
-									// Property: TopicName
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRecordAgeInSeconds
+						"maximum_record_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRetryAttempts
+						"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OnPartialBatchItemFailure
+						"on_partial_batch_item_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ParallelizationFactor
+						"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FilterCriteria
+				"filter_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Filters
+						"filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Pattern
+									"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KinesisStreamParameters
+				"kinesis_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DeadLetterConfig
+						"dead_letter_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Arn
+								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"vpc": {
-									// Property: Vpc
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"security_group": {
-												// Property: SecurityGroup
-												Description: "List of SecurityGroupId.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Computed:    true,
-											},
-											"subnets": {
-												// Property: Subnets
-												Description: "List of SubnetId.",
-												Type:        types.ListType{ElemType: types.StringType},
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"sqs_queue_parameters": {
-						// Property: SqsQueueParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"batch_size": {
-									// Property: BatchSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"maximum_batching_window_in_seconds": {
-									// Property: MaximumBatchingWindowInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"state_reason": {
-			// Property: StateReason
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 512,
-			//	  "minLength": 0,
-			//	  "pattern": "^.*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "minLength": 0,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			//
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"target": {
-			// Property: Target
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-		"target_parameters": {
-			// Property: TargetParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "BatchJobParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ArrayProperties": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Size": {
-			//	              "default": 0,
-			//	              "maximum": 10000,
-			//	              "minimum": 2,
-			//	              "type": "integer"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ContainerOverrides": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Command": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Environment": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Name": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "InstanceType": {
-			//	              "type": "string"
-			//	            },
-			//	            "ResourceRequirements": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Type": {
-			//	                    "enum": [
-			//	                      "GPU",
-			//	                      "MEMORY",
-			//	                      "VCPU"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Type",
-			//	                  "Value"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "DependsOn": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "JobId": {
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "enum": [
-			//	                  "N_TO_N",
-			//	                  "SEQUENTIAL"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 20,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "JobDefinition": {
-			//	          "type": "string"
-			//	        },
-			//	        "JobName": {
-			//	          "type": "string"
-			//	        },
-			//	        "Parameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "RetryStrategy": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Attempts": {
-			//	              "default": 0,
-			//	              "maximum": 10,
-			//	              "minimum": 1,
-			//	              "type": "integer"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "JobDefinition",
-			//	        "JobName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "CloudWatchLogsParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "LogStreamName": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Timestamp": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "EcsTaskParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CapacityProviderStrategy": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Base": {
-			//	                "default": 0,
-			//	                "maximum": 100000,
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              },
-			//	              "CapacityProvider": {
-			//	                "maxLength": 255,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "Weight": {
-			//	                "default": 0,
-			//	                "maximum": 1000,
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "CapacityProvider"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 6,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "EnableECSManagedTags": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "EnableExecuteCommand": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "Group": {
-			//	          "type": "string"
-			//	        },
-			//	        "LaunchType": {
-			//	          "enum": [
-			//	            "EC2",
-			//	            "FARGATE",
-			//	            "EXTERNAL"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "NetworkConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "AwsvpcConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "AssignPublicIp": {
-			//	                  "enum": [
-			//	                    "ENABLED",
-			//	                    "DISABLED"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "SecurityGroups": {
-			//	                  "items": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^sg-[0-9a-zA-Z]*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "maxItems": 5,
-			//	                  "minItems": 0,
-			//	                  "type": "array"
-			//	                },
-			//	                "Subnets": {
-			//	                  "items": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^subnet-[0-9a-z]*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "maxItems": 16,
-			//	                  "minItems": 0,
-			//	                  "type": "array"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Subnets"
-			//	              ],
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Overrides": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ContainerOverrides": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Command": {
-			//	                    "items": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "Cpu": {
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "Environment": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Name": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "EnvironmentFiles": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Type": {
-			//	                          "enum": [
-			//	                            "s3"
-			//	                          ],
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Type",
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "Memory": {
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "MemoryReservation": {
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "Name": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "ResourceRequirements": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Type": {
-			//	                          "enum": [
-			//	                            "GPU",
-			//	                            "InferenceAccelerator"
-			//	                          ],
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Type",
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Cpu": {
-			//	              "type": "string"
-			//	            },
-			//	            "EphemeralStorage": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "SizeInGiB": {
-			//	                  "default": 0,
-			//	                  "maximum": 200,
-			//	                  "minimum": 21,
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "SizeInGiB"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "ExecutionRoleArn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "InferenceAcceleratorOverrides": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "DeviceName": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DeviceType": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Memory": {
-			//	              "type": "string"
-			//	            },
-			//	            "TaskRoleArn": {
-			//	              "maxLength": 1600,
-			//	              "minLength": 1,
-			//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PlacementConstraints": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Expression": {
-			//	                "maxLength": 2000,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "enum": [
-			//	                  "distinctInstance",
-			//	                  "memberOf"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 10,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "PlacementStrategy": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Field": {
-			//	                "maxLength": 255,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "enum": [
-			//	                  "random",
-			//	                  "spread",
-			//	                  "binpack"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 5,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "PlatformVersion": {
-			//	          "type": "string"
-			//	        },
-			//	        "PropagateTags": {
-			//	          "enum": [
-			//	            "TASK_DEFINITION"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "ReferenceId": {
-			//	          "maxLength": 1024,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "Tags": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Key": {
-			//	                "maxLength": 128,
-			//	                "minLength": 1,
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 256,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Key",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array"
-			//	        },
-			//	        "TaskCount": {
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "TaskDefinitionArn": {
-			//	          "maxLength": 1600,
-			//	          "minLength": 1,
-			//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TaskDefinitionArn"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "EventBridgeEventBusParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DetailType": {
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "EndpointId": {
-			//	          "maxLength": 50,
-			//	          "minLength": 1,
-			//	          "pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
-			//	          "type": "string"
-			//	        },
-			//	        "Resources": {
-			//	          "items": {
-			//	            "maxLength": 1600,
-			//	            "minLength": 1,
-			//	            "pattern": "^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 10,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "Source": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        },
-			//	        "Time": {
-			//	          "maxLength": 256,
-			//	          "minLength": 1,
-			//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "HttpParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "HeaderParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PathParameterValues": {
-			//	          "items": {
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        },
-			//	        "QueryStringParameters": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "maxLength": 512,
-			//	              "minLength": 0,
-			//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "InputTemplate": {
-			//	      "type": "string"
-			//	    },
-			//	    "KinesisStreamParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "PartitionKey": {
-			//	          "maxLength": 256,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "PartitionKey"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "LambdaFunctionParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InvocationType": {
-			//	          "enum": [
-			//	            "REQUEST_RESPONSE",
-			//	            "FIRE_AND_FORGET"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "RedshiftDataParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Database": {
-			//	          "description": "Redshift Database",
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "DbUser": {
-			//	          "description": "Database user name",
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "SecretManagerArn": {
-			//	          "description": "Optional SecretManager ARN which stores the database credentials",
-			//	          "maxLength": 1600,
-			//	          "minLength": 1,
-			//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
-			//	          "type": "string"
-			//	        },
-			//	        "Sqls": {
-			//	          "description": "A list of SQLs.",
-			//	          "items": {
-			//	            "description": "A single Redshift SQL",
-			//	            "maxLength": 100000,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "StatementName": {
-			//	          "description": "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
-			//	          "maxLength": 500,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "WithEvent": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Database",
-			//	        "Sqls"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "SageMakerPipelineParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "PipelineParameterList": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Name": {
-			//	                "maxLength": 256,
-			//	                "minLength": 1,
-			//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "maxLength": 1024,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Name",
-			//	              "Value"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 200,
-			//	          "minItems": 0,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "SqsQueueParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "MessageDeduplicationId": {
-			//	          "maxLength": 100,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "MessageGroupId": {
-			//	          "maxLength": 100,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "StepFunctionStateMachineParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InvocationType": {
-			//	          "enum": [
-			//	            "REQUEST_RESPONSE",
-			//	            "FIRE_AND_FORGET"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"batch_job_parameters": {
-						// Property: BatchJobParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"array_properties": {
-									// Property: ArrayProperties
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"size": {
-												// Property: Size
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"container_overrides": {
-									// Property: ContainerOverrides
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"command": {
-												// Property: Command
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"environment": {
-												// Property: Environment
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"name": {
-															// Property: Name
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"instance_type": {
-												// Property: InstanceType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"resource_requirements": {
-												// Property: ResourceRequirements
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"type": {
-															// Property: Type
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"depends_on": {
-									// Property: DependsOn
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"job_id": {
-												// Property: JobId
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"type": {
-												// Property: Type
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"job_definition": {
-									// Property: JobDefinition
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"job_name": {
-									// Property: JobName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"parameters": {
-									// Property: Parameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"retry_strategy": {
-									// Property: RetryStrategy
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"attempts": {
-												// Property: Attempts
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"cloudwatch_logs_parameters": {
-						// Property: CloudWatchLogsParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"log_stream_name": {
-									// Property: LogStreamName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"timestamp": {
-									// Property: Timestamp
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"ecs_task_parameters": {
-						// Property: EcsTaskParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"capacity_provider_strategy": {
-									// Property: CapacityProviderStrategy
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"base": {
-												// Property: Base
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"capacity_provider": {
-												// Property: CapacityProvider
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"weight": {
-												// Property: Weight
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"enable_ecs_managed_tags": {
-									// Property: EnableECSManagedTags
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"enable_execute_command": {
-									// Property: EnableExecuteCommand
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"group": {
-									// Property: Group
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"launch_type": {
-									// Property: LaunchType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"network_configuration": {
-									// Property: NetworkConfiguration
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"awsvpc_configuration": {
-												// Property: AwsvpcConfiguration
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"assign_public_ip": {
-															// Property: AssignPublicIp
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"security_groups": {
-															// Property: SecurityGroups
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"subnets": {
-															// Property: Subnets
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"overrides": {
-									// Property: Overrides
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"container_overrides": {
-												// Property: ContainerOverrides
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"command": {
-															// Property: Command
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-														"cpu": {
-															// Property: Cpu
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"environment": {
-															// Property: Environment
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"environment_files": {
-															// Property: EnvironmentFiles
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"type": {
-																		// Property: Type
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"memory": {
-															// Property: Memory
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"memory_reservation": {
-															// Property: MemoryReservation
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"name": {
-															// Property: Name
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"resource_requirements": {
-															// Property: ResourceRequirements
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"type": {
-																		// Property: Type
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"cpu": {
-												// Property: Cpu
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"ephemeral_storage": {
-												// Property: EphemeralStorage
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"size_in_gi_b": {
-															// Property: SizeInGiB
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"execution_role_arn": {
-												// Property: ExecutionRoleArn
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"inference_accelerator_overrides": {
-												// Property: InferenceAcceleratorOverrides
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"device_name": {
-															// Property: DeviceName
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"device_type": {
-															// Property: DeviceType
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"memory": {
-												// Property: Memory
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"task_role_arn": {
-												// Property: TaskRoleArn
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"placement_constraints": {
-									// Property: PlacementConstraints
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"expression": {
-												// Property: Expression
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"type": {
-												// Property: Type
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"placement_strategy": {
-									// Property: PlacementStrategy
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"field": {
-												// Property: Field
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"type": {
-												// Property: Type
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"platform_version": {
-									// Property: PlatformVersion
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"propagate_tags": {
-									// Property: PropagateTags
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"reference_id": {
-									// Property: ReferenceId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"tags": {
-									// Property: Tags
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"key": {
-												// Property: Key
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"task_count": {
-									// Property: TaskCount
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"task_definition_arn": {
-									// Property: TaskDefinitionArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"event_bridge_event_bus_parameters": {
-						// Property: EventBridgeEventBusParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"detail_type": {
-									// Property: DetailType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"endpoint_id": {
-									// Property: EndpointId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"resources": {
-									// Property: Resources
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"source": {
-									// Property: Source
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"time": {
-									// Property: Time
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"http_parameters": {
-						// Property: HttpParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"header_parameters": {
-									// Property: HeaderParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"path_parameter_values": {
-									// Property: PathParameterValues
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"query_string_parameters": {
-									// Property: QueryStringParameters
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"input_template": {
-						// Property: InputTemplate
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"kinesis_stream_parameters": {
-						// Property: KinesisStreamParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"partition_key": {
-									// Property: PartitionKey
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"lambda_function_parameters": {
-						// Property: LambdaFunctionParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"invocation_type": {
-									// Property: InvocationType
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"redshift_data_parameters": {
-						// Property: RedshiftDataParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"database": {
-									// Property: Database
-									Description: "Redshift Database",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"db_user": {
-									// Property: DbUser
-									Description: "Database user name",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"secret_manager_arn": {
-									// Property: SecretManagerArn
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRecordAgeInSeconds
+						"maximum_record_age_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumRetryAttempts
+						"maximum_retry_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OnPartialBatchItemFailure
+						"on_partial_batch_item_failure": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ParallelizationFactor
+						"parallelization_factor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPositionTimestamp
+						"starting_position_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedStreamingKafkaParameters
+				"managed_streaming_kafka_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ConsumerGroupID
+						"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ClientCertificateTlsAuth
+								"client_certificate_tls_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Optional SecretManager ARN which stores the database credentials",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"sqls": {
-									// Property: Sqls
-									Description: "A list of SQLs.",
-									Type:        types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: SaslScram512Auth
+								"sasl_scram_512_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
 									Computed:    true,
-								},
-								"statement_name": {
-									// Property: StatementName
-									Description: "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
-									Type:        types.StringType,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TopicName
+						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RabbitMQBrokerParameters
+				"rabbit_mq_broker_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuth
+								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
 									Computed:    true,
-								},
-								"with_event": {
-									// Property: WithEvent
-									Type:     types.BoolType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"sage_maker_pipeline_parameters": {
-						// Property: SageMakerPipelineParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"pipeline_parameter_list": {
-									// Property: PipelineParameterList
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"name": {
-												// Property: Name
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"sqs_queue_parameters": {
-						// Property: SqsQueueParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"message_deduplication_id": {
-									// Property: MessageDeduplicationId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"message_group_id": {
-									// Property: MessageGroupId
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"step_function_state_machine_parameters": {
-						// Property: StepFunctionStateMachineParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"invocation_type": {
-									// Property: InvocationType
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueueName
+						"queue_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: VirtualHost
+						"virtual_host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SelfManagedKafkaParameters
+				"self_managed_kafka_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AdditionalBootstrapServers
+						"additional_bootstrap_servers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ConsumerGroupID
+						"consumer_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Credentials
+						"credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuth
+								"basic_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCertificateTlsAuth
+								"client_certificate_tls_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SaslScram256Auth
+								"sasl_scram_256_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SaslScram512Auth
+								"sasl_scram_512_auth": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Optional SecretManager ARN which stores the database credentials",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ServerRootCaCertificate
+						"server_root_ca_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Optional SecretManager ARN which stores the database credentials",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StartingPosition
+						"starting_position": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TopicName
+						"topic_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Vpc
+						"vpc": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SecurityGroup
+								"security_group": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of SecurityGroupId.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Subnets
+								"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "List of SubnetId.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SqsQueueParameters
+				"sqs_queue_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BatchSize
+						"batch_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumBatchingWindowInSeconds
+						"maximum_batching_window_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: StateReason
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 512,
+		//	  "minLength": 0,
+		//	  "pattern": "^.*$",
+		//	  "type": "string"
+		//	}
+		"state_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Target
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"target": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: TargetParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BatchJobParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ArrayProperties": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Size": {
+		//	              "default": 0,
+		//	              "maximum": 10000,
+		//	              "minimum": 2,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ContainerOverrides": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Command": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Environment": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "InstanceType": {
+		//	              "type": "string"
+		//	            },
+		//	            "ResourceRequirements": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Type": {
+		//	                    "enum": [
+		//	                      "GPU",
+		//	                      "MEMORY",
+		//	                      "VCPU"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Type",
+		//	                  "Value"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "DependsOn": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "JobId": {
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "N_TO_N",
+		//	                  "SEQUENTIAL"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 20,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "JobDefinition": {
+		//	          "type": "string"
+		//	        },
+		//	        "JobName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Parameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "RetryStrategy": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Attempts": {
+		//	              "default": 0,
+		//	              "maximum": 10,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "JobDefinition",
+		//	        "JobName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "CloudWatchLogsParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "LogStreamName": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Timestamp": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "EcsTaskParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CapacityProviderStrategy": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Base": {
+		//	                "default": 0,
+		//	                "maximum": 100000,
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              },
+		//	              "CapacityProvider": {
+		//	                "maxLength": 255,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "Weight": {
+		//	                "default": 0,
+		//	                "maximum": 1000,
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "CapacityProvider"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 6,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "EnableECSManagedTags": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "EnableExecuteCommand": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "Group": {
+		//	          "type": "string"
+		//	        },
+		//	        "LaunchType": {
+		//	          "enum": [
+		//	            "EC2",
+		//	            "FARGATE",
+		//	            "EXTERNAL"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "NetworkConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "AwsvpcConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "AssignPublicIp": {
+		//	                  "enum": [
+		//	                    "ENABLED",
+		//	                    "DISABLED"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "SecurityGroups": {
+		//	                  "items": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^sg-[0-9a-zA-Z]*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 5,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                },
+		//	                "Subnets": {
+		//	                  "items": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^subnet-[0-9a-z]*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "maxItems": 16,
+		//	                  "minItems": 0,
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Subnets"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Overrides": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ContainerOverrides": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Command": {
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "Cpu": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Environment": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Name": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "EnvironmentFiles": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Type": {
+		//	                          "enum": [
+		//	                            "s3"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type",
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "Memory": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "MemoryReservation": {
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "Name": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ResourceRequirements": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Type": {
+		//	                          "enum": [
+		//	                            "GPU",
+		//	                            "InferenceAccelerator"
+		//	                          ],
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Type",
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Cpu": {
+		//	              "type": "string"
+		//	            },
+		//	            "EphemeralStorage": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "SizeInGiB": {
+		//	                  "default": 0,
+		//	                  "maximum": 200,
+		//	                  "minimum": 21,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "SizeInGiB"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ExecutionRoleArn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "InferenceAcceleratorOverrides": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "DeviceName": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DeviceType": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Memory": {
+		//	              "type": "string"
+		//	            },
+		//	            "TaskRoleArn": {
+		//	              "maxLength": 1600,
+		//	              "minLength": 1,
+		//	              "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PlacementConstraints": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Expression": {
+		//	                "maxLength": 2000,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "distinctInstance",
+		//	                  "memberOf"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "PlacementStrategy": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Field": {
+		//	                "maxLength": 255,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "random",
+		//	                  "spread",
+		//	                  "binpack"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "PlatformVersion": {
+		//	          "type": "string"
+		//	        },
+		//	        "PropagateTags": {
+		//	          "enum": [
+		//	            "TASK_DEFINITION"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "ReferenceId": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "Tags": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Key": {
+		//	                "maxLength": 128,
+		//	                "minLength": 1,
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 256,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Key",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "TaskCount": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "TaskDefinitionArn": {
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-]+):([a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TaskDefinitionArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "EventBridgeEventBusParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DetailType": {
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "EndpointId": {
+		//	          "maxLength": 50,
+		//	          "minLength": 1,
+		//	          "pattern": "^[A-Za-z0-9\\-]+[\\.][A-Za-z0-9\\-]+$",
+		//	          "type": "string"
+		//	        },
+		//	        "Resources": {
+		//	          "items": {
+		//	            "maxLength": 1600,
+		//	            "minLength": 1,
+		//	            "pattern": "^arn:aws([a-z]|\\-)*:(.*)|^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 10,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "Source": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        },
+		//	        "Time": {
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "pattern": "^\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "HttpParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "HeaderParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[ \\t]*[\\x20-\\x7E]+([ \\t]+[\\x20-\\x7E]+)*[ \\t]*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PathParameterValues": {
+		//	          "items": {
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        },
+		//	        "QueryStringParameters": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "maxLength": 512,
+		//	              "minLength": 0,
+		//	              "pattern": "^[^\\x00-\\x09\\x0B\\x0C\\x0E-\\x1F\\x7F]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "InputTemplate": {
+		//	      "type": "string"
+		//	    },
+		//	    "KinesisStreamParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PartitionKey": {
+		//	          "maxLength": 256,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PartitionKey"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "LambdaFunctionParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InvocationType": {
+		//	          "enum": [
+		//	            "REQUEST_RESPONSE",
+		//	            "FIRE_AND_FORGET"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RedshiftDataParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Database": {
+		//	          "description": "Redshift Database",
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "DbUser": {
+		//	          "description": "Database user name",
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "SecretManagerArn": {
+		//	          "description": "Optional SecretManager ARN which stores the database credentials",
+		//	          "maxLength": 1600,
+		//	          "minLength": 1,
+		//	          "pattern": "^(^arn:aws([a-z]|\\-)*:secretsmanager:[a-z0-9-.]+:.*)|(\\$(\\.[\\w_-]+(\\[(\\d+|\\*)\\])*)*)$",
+		//	          "type": "string"
+		//	        },
+		//	        "Sqls": {
+		//	          "description": "A list of SQLs.",
+		//	          "items": {
+		//	            "description": "A single Redshift SQL",
+		//	            "maxLength": 100000,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "StatementName": {
+		//	          "description": "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
+		//	          "maxLength": 500,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "WithEvent": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Database",
+		//	        "Sqls"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "SageMakerPipelineParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PipelineParameterList": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Name": {
+		//	                "maxLength": 256,
+		//	                "minLength": 1,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "maxLength": 1024,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Name",
+		//	              "Value"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 200,
+		//	          "minItems": 0,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SqsQueueParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "MessageDeduplicationId": {
+		//	          "maxLength": 100,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "MessageGroupId": {
+		//	          "maxLength": 100,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "StepFunctionStateMachineParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InvocationType": {
+		//	          "enum": [
+		//	            "REQUEST_RESPONSE",
+		//	            "FIRE_AND_FORGET"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"target_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BatchJobParameters
+				"batch_job_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ArrayProperties
+						"array_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Size
+								"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ContainerOverrides
+						"container_overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Command
+								"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Environment
+								"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ResourceRequirements
+								"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Type
+											"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DependsOn
+						"depends_on": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: JobId
+									"job_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: JobDefinition
+						"job_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: JobName
+						"job_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Parameters
+						"parameters":        // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RetryStrategy
+						"retry_strategy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Attempts
+								"attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CloudWatchLogsParameters
+				"cloudwatch_logs_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LogStreamName
+						"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Timestamp
+						"timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EcsTaskParameters
+				"ecs_task_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CapacityProviderStrategy
+						"capacity_provider_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Base
+									"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: CapacityProvider
+									"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Weight
+									"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableECSManagedTags
+						"enable_ecs_managed_tags": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EnableExecuteCommand
+						"enable_execute_command": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Group
+						"group": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LaunchType
+						"launch_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NetworkConfiguration
+						"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AwsvpcConfiguration
+								"awsvpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AssignPublicIp
+										"assign_public_ip": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: SecurityGroups
+										"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Subnets
+										"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Overrides
+						"overrides": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerOverrides
+								"container_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Command
+											"command": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Cpu
+											"cpu": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Environment
+											"environment": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Name
+														"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: EnvironmentFiles
+											"environment_files": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Memory
+											"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: MemoryReservation
+											"memory_reservation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: ResourceRequirements
+											"resource_requirements": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Type
+														"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Cpu
+								"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: EphemeralStorage
+								"ephemeral_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: SizeInGiB
+										"size_in_gi_b": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: ExecutionRoleArn
+								"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: InferenceAcceleratorOverrides
+								"inference_accelerator_overrides": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: DeviceName
+											"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: DeviceType
+											"device_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Memory
+								"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: TaskRoleArn
+								"task_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PlacementConstraints
+						"placement_constraints": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Expression
+									"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PlacementStrategy
+						"placement_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Field
+									"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PlatformVersion
+						"platform_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PropagateTags
+						"propagate_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ReferenceId
+						"reference_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Tags
+						"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Key
+									"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TaskCount
+						"task_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TaskDefinitionArn
+						"task_definition_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: EventBridgeEventBusParameters
+				"event_bridge_event_bus_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DetailType
+						"detail_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: EndpointId
+						"endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Resources
+						"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Source
+						"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Time
+						"time": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpParameters
+				"http_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HeaderParameters
+						"header_parameters": // Pattern: ""
+						schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PathParameterValues
+						"path_parameter_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: QueryStringParameters
+						"query_string_parameters": // Pattern: ""
+						schema.MapAttribute{       /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InputTemplate
+				"input_template": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KinesisStreamParameters
+				"kinesis_stream_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PartitionKey
+						"partition_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaFunctionParameters
+				"lambda_function_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InvocationType
+						"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RedshiftDataParameters
+				"redshift_data_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Database
+						"database": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Redshift Database",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DbUser
+						"db_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Database user name",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SecretManagerArn
+						"secret_manager_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Optional SecretManager ARN which stores the database credentials",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Sqls
+						"sqls": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "A list of SQLs.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: StatementName
+						"statement_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "A name for Redshift DataAPI statement which can be used as filter of ListStatement.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: WithEvent
+						"with_event": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SageMakerPipelineParameters
+				"sage_maker_pipeline_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PipelineParameterList
+						"pipeline_parameter_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SqsQueueParameters
+				"sqs_queue_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MessageDeduplicationId
+						"message_deduplication_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MessageGroupId
+						"message_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StepFunctionStateMachineParameters
+				"step_function_state_machine_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InvocationType
+						"invocation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Pipes::Pipe",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pipes::Pipe").WithTerraformTypeName("awscc_pipes_pipe")
 	opts = opts.WithTerraformSchema(schema)
@@ -2606,7 +2404,7 @@ func pipeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"with_event":                             "WithEvent",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

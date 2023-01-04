@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,107 +19,98 @@ func init() {
 // certificateDataSource returns the Terraform awscc_iot_certificate data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoT::Certificate resource.
 func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"ca_certificate_pem": {
-			// Property: CACertificatePem
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 65536,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CACertificatePem
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 65536,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"ca_certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"certificate_mode": {
-			// Property: CertificateMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "DEFAULT",
-			//	    "SNI_ONLY"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "DEFAULT",
+		//	    "SNI_ONLY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"certificate_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"certificate_pem": {
-			// Property: CertificatePem
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 65536,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificatePem
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 65536,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"certificate_pem": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"certificate_signing_request": {
-			// Property: CertificateSigningRequest
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateSigningRequest
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"certificate_signing_request": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "ACTIVE",
-			//	    "INACTIVE",
-			//	    "REVOKED",
-			//	    "PENDING_TRANSFER",
-			//	    "PENDING_ACTIVATION"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "INACTIVE",
+		//	    "REVOKED",
+		//	    "PENDING_TRANSFER",
+		//	    "PENDING_ACTIVATION"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoT::Certificate",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::Certificate").WithTerraformTypeName("awscc_iot_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -133,7 +124,7 @@ func certificateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"status":                      "Status",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

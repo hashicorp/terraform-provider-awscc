@@ -10,11 +10,14 @@ import (
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/diag"
 	"github.com/hashicorp/terraform-plugin-framework/provider"
+	"github.com/hashicorp/terraform-plugin-framework/provider/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
@@ -60,255 +63,194 @@ func (p *ccProvider) ProviderData() any {
 	return p.providerData
 }
 
-func (p *ccProvider) GetSchema(ctx context.Context) (tfsdk.Schema, diag.Diagnostics) {
-	return tfsdk.Schema{
-		Version: 1,
-		Attributes: map[string]tfsdk.Attribute{
-			"access_key": {
-				Type:        types.StringType,
+func (p *ccProvider) Metadata(ctx context.Context, request provider.MetadataRequest, response *provider.MetadataResponse) {
+	response.TypeName = "awscc"
+	response.Version = Version
+}
+
+func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest, response *provider.SchemaResponse) {
+	response.Schema = schema.Schema{
+		Attributes: map[string]schema.Attribute{
+			"access_key": schema.StringAttribute{
 				Description: "This is the AWS access key. It must be provided, but it can also be sourced from the `AWS_ACCESS_KEY_ID` environment variable, or via a shared credentials file if `profile` is specified.",
 				Optional:    true,
 			},
-
-			"http_proxy": {
-				Type:        types.StringType,
-				Description: "The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.",
-				Optional:    true,
-			},
-
-			"insecure": {
-				Type:        types.BoolType,
-				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If not set, defaults to `false`.",
-				Optional:    true,
-			},
-
-			"max_retries": {
-				Type:        types.Int64Type,
-				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
-				Optional:    true,
-			},
-
-			"profile": {
-				Type:        types.StringType,
-				Description: "This is the AWS profile name as set in the shared credentials file.",
-				Optional:    true,
-			},
-
-			"region": {
-				Type:        types.StringType,
-				Description: "This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, via a shared config file, or from the EC2 Instance Metadata Service if used.",
-				Optional:    true,
-			},
-
-			"role_arn": {
-				Type:        types.StringType,
-				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
-				Optional:    true,
-				Validators: []tfsdk.AttributeValidator{
-					validate.ARN(),
+			"assume_role": schema.SingleNestedAttribute{
+				Attributes: map[string]schema.Attribute{
+					"duration": schema.StringAttribute{
+						CustomType: cctypes.DurationType,
+						Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
+							cctypes.DurationType.Description() +
+							fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
+						Optional: true,
+					},
+					"external_id": schema.StringAttribute{
+						Description: "External identifier to use when assuming the role.",
+						Optional:    true,
+					},
+					"policy": schema.StringAttribute{
+						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
+						Optional:    true,
+						Validators: []validator.String{
+							stringvalidator.LengthAtMost(2048),
+							validate.StringIsJsonObject(),
+						},
+					},
+					"policy_arns": schema.ListAttribute{
+						ElementType: types.StringType,
+						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
+						Optional:    true,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(validate.IAMPolicyARN()),
+						},
+					},
+					"role_arn": schema.StringAttribute{
+						Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
+						Required:    true,
+						Validators: []validator.String{
+							validate.ARN(),
+						},
+					},
+					"session_name": schema.StringAttribute{
+						Description: "Session name to use when assuming the role.",
+						Optional:    true,
+					},
+					"tags": schema.MapAttribute{
+						ElementType: types.StringType,
+						Description: "Map of assume role session tags.",
+						Optional:    true,
+					},
+					"transitive_tag_keys": schema.SetAttribute{
+						ElementType: types.StringType,
+						Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
+						Optional:    true,
+					},
 				},
-			},
-
-			"secret_key": {
-				Type:        types.StringType,
-				Description: "This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.",
-				Optional:    true,
-			},
-
-			"shared_config_files": {
-				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared config files. If not set, defaults to `~/.aws/config`.",
-				Optional:    true,
-			},
-
-			"shared_credentials_files": {
-				Type:        types.ListType{ElemType: types.StringType},
-				Description: "List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.",
-				Optional:    true,
-			},
-
-			"skip_medatadata_api_check": {
-				Type:        types.BoolType,
-				Description: "Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.",
-				Optional:    true,
-			},
-
-			"token": {
-				Type:        types.StringType,
-				Description: "Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.",
-				Optional:    true,
-			},
-
-			"user_agent": {
-				Attributes: tfsdk.ListNestedAttributes(
-					map[string]tfsdk.Attribute{
-						"product_name": {
-							Type:        types.StringType,
-							Description: "Product name. At least one of `product_name` or `comment` must be set.",
-							Required:    true,
-						},
-						"product_version": {
-							Type:        types.StringType,
-							Description: "Product version. Optional, and should only be set when `product_name` is set.",
-							Optional:    true,
-						},
-						"comment": {
-							Type:        types.StringType,
-							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
-							Optional:    true,
-						},
-					},
-				),
-				Description: "Product details to append to User-Agent string in all AWS API calls.",
-				Optional:    true,
-			},
-
-			"assume_role": {
-				Attributes: tfsdk.SingleNestedAttributes(
-					map[string]tfsdk.Attribute{
-						"role_arn": {
-							Type:        types.StringType,
-							Description: "Amazon Resource Name (ARN) of the IAM Role to assume.",
-							Required:    true,
-							Validators: []tfsdk.AttributeValidator{
-								validate.ARN(),
-							},
-						},
-
-						"duration": {
-							Type: cctypes.DurationType,
-							Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
-								cctypes.DurationType.Description() +
-								fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
-							Optional: true,
-						},
-
-						"external_id": {
-							Type:        types.StringType,
-							Description: "External identifier to use when assuming the role.",
-							Optional:    true,
-						},
-
-						"policy": {
-							Type:        types.StringType,
-							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
-							Optional:    true,
-							Validators: []tfsdk.AttributeValidator{
-								validate.StringLenAtMost(2048),
-								validate.StringIsJsonObject(),
-							},
-						},
-
-						"policy_arns": {
-							Type:        types.ListType{ElemType: types.StringType},
-							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
-							Optional:    true,
-							Validators: []tfsdk.AttributeValidator{
-								validate.ArrayForEach(
-									validate.IAMPolicyARN(),
-								),
-							},
-						},
-
-						"session_name": {
-							Type:        types.StringType,
-							Description: "Session name to use when assuming the role.",
-							Optional:    true,
-						},
-
-						"tags": {
-							Description: "Map of assume role session tags.",
-							Type:        types.MapType{ElemType: types.StringType},
-							Optional:    true,
-						},
-
-						"transitive_tag_keys": {
-							Description: "Set of assume role session tag keys to pass to any subsequent sessions.",
-							Type:        types.SetType{ElemType: types.StringType},
-							Optional:    true,
-						},
-					},
-				),
 				Optional:    true,
 				Description: "An `assume_role` block (documented below). Only one `assume_role` block may be in the configuration.",
 			},
-
-			"assume_role_with_web_identity": {
-				Attributes: tfsdk.SingleNestedAttributes(
-					map[string]tfsdk.Attribute{
-						"role_arn": {
-							Type:        types.StringType,
-							Description: "Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.",
+			"assume_role_with_web_identity": schema.SingleNestedAttribute{
+				Attributes: map[string]schema.Attribute{
+					"duration": schema.StringAttribute{
+						CustomType: cctypes.DurationType,
+						Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
+							cctypes.DurationType.Description() +
+							fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
+						Optional: true,
+					},
+					"policy": schema.StringAttribute{
+						Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
+						Optional:    true,
+						Validators: []validator.String{
+							stringvalidator.LengthAtMost(2048),
+							validate.StringIsJsonObject(),
+						},
+					},
+					"policy_arns": schema.ListAttribute{
+						ElementType: types.StringType,
+						Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
+						Optional:    true,
+						Validators: []validator.List{
+							listvalidator.ValueStringsAre(validate.IAMPolicyARN()),
+						},
+					},
+					"role_arn": schema.StringAttribute{
+						Description: "Amazon Resource Name (ARN) of the IAM Role to assume. Can also be set with the environment variable `AWS_ROLE_ARN`.",
+						Required:    true,
+						Validators: []validator.String{
+							validate.ARN(),
+						},
+					},
+					"session_name": schema.StringAttribute{
+						Description: "Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.",
+						Optional:    true,
+					},
+					"web_identity_token": schema.StringAttribute{
+						Description: "The value of a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of `web_identity_token` or `web_identity_token_file` is required.",
+						Optional:    true,
+						Validators: []validator.String{
+							stringvalidator.LengthBetween(4, 20000),
+						},
+					},
+					"web_identity_token_file": schema.StringAttribute{
+						Description: "File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. Can also be set with the  environment variable`AWS_WEB_IDENTITY_TOKEN_FILE`. One of `web_identity_token_file` or `web_identity_token` is required.",
+						Optional:    true,
+					},
+				},
+				Optional:    true,
+				Description: "An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration.",
+			},
+			"http_proxy": schema.StringAttribute{
+				Description: "The address of an HTTP proxy to use when accessing the AWS API. Can also be configured using the `HTTP_PROXY` or `HTTPS_PROXY` environment variables.",
+				Optional:    true,
+			},
+			"insecure": schema.BoolAttribute{
+				Description: "Explicitly allow the provider to perform \"insecure\" SSL requests. If not set, defaults to `false`.",
+				Optional:    true,
+			},
+			"max_retries": schema.Int64Attribute{
+				Description: fmt.Sprintf("The maximum number of times an AWS API request is retried on failure. If not set, defaults to %d.", defaultMaxRetries),
+				Optional:    true,
+			},
+			"profile": schema.StringAttribute{
+				Description: "This is the AWS profile name as set in the shared credentials file.",
+				Optional:    true,
+			},
+			"region": schema.StringAttribute{
+				Description: "This is the AWS region. It must be provided, but it can also be sourced from the `AWS_DEFAULT_REGION` environment variables, via a shared config file, or from the EC2 Instance Metadata Service if used.",
+				Optional:    true,
+			},
+			"role_arn": schema.StringAttribute{
+				Description: "Amazon Resource Name of the AWS CloudFormation service role that is used on your behalf to perform operations.",
+				Optional:    true,
+				Validators: []validator.String{
+					validate.ARN(),
+				},
+			},
+			"secret_key": schema.StringAttribute{
+				Description: "This is the AWS secret key. It must be provided, but it can also be sourced from the `AWS_SECRET_ACCESS_KEY` environment variable, or via a shared credentials file if `profile` is specified.",
+				Optional:    true,
+			},
+			"shared_config_files": schema.ListAttribute{
+				ElementType: types.StringType,
+				Description: "List of paths to shared config files. If not set, defaults to `~/.aws/config`.",
+				Optional:    true,
+			},
+			"shared_credentials_files": schema.ListAttribute{
+				ElementType: types.StringType,
+				Description: "List of paths to shared credentials files. If not set, defaults to `~/.aws/credentials`.",
+				Optional:    true,
+			},
+			"skip_medatadata_api_check": schema.BoolAttribute{
+				Description: "Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.",
+				Optional:    true,
+			},
+			"token": schema.StringAttribute{
+				Description: "Session token for validating temporary credentials. Typically provided after successful identity federation or Multi-Factor Authentication (MFA) login. With MFA login, this is the session token provided afterward, not the 6 digit MFA code used to get temporary credentials.  It can also be sourced from the `AWS_SESSION_TOKEN` environment variable.",
+				Optional:    true,
+			},
+			"user_agent": schema.ListNestedAttribute{
+				NestedObject: schema.NestedAttributeObject{
+					Attributes: map[string]schema.Attribute{
+						"comment": schema.StringAttribute{
+							Description: "User-Agent comment. At least one of `comment` or `product_name` must be set.",
+							Optional:    true,
+						},
+						"product_name": schema.StringAttribute{
+							Description: "Product name. At least one of `product_name` or `comment` must be set.",
 							Required:    true,
-							Validators: []tfsdk.AttributeValidator{
-								validate.ARN(),
-							},
 						},
-
-						"duration": {
-							Type: cctypes.DurationType,
-							Description: "Duration of the assume role session. You can provide a value from 15 minutes up to the maximum session duration setting for the role. " +
-								cctypes.DurationType.Description() +
-								fmt.Sprintf(" Default value is %s", defaultAssumeRoleDuration),
-							Optional: true,
-						},
-
-						"policy": {
-							Type:        types.StringType,
-							Description: "IAM policy in JSON format to use as a session policy. The effective permissions for the session will be the intersection between this polcy and the role's policies.",
-							Optional:    true,
-							Validators: []tfsdk.AttributeValidator{
-								validate.StringLenAtMost(2048),
-								validate.StringIsJsonObject(),
-							},
-						},
-
-						"policy_arns": {
-							Type:        types.ListType{ElemType: types.StringType},
-							Description: "Amazon Resource Names (ARNs) of IAM Policies to use as managed session policies. The effective permissions for the session will be the intersection between these polcy and the role's policies.",
-							Optional:    true,
-							Validators: []tfsdk.AttributeValidator{
-								validate.ArrayForEach(
-									validate.IAMPolicyARN(),
-								),
-							},
-						},
-
-						"session_name": {
-							Type:        types.StringType,
-							Description: "Session name to use when assuming the role. Can also be set with the environment variable `AWS_ROLE_SESSION_NAME`.",
-							Optional:    true,
-						},
-
-						"web_identity_token": {
-							Type:        types.StringType,
-							Description: "The value of a web identity token from an OpenID Connect (OIDC) or OAuth provider. One of `web_identity_token` or `web_identity_token_file` is required.",
-							Optional:    true,
-							Validators: []tfsdk.AttributeValidator{
-								validate.StringLenBetween(4, 20000),
-							},
-						},
-
-						"web_identity_token_file": {
-							Type:        types.StringType,
-							Description: "File containing a web identity token from an OpenID Connect (OIDC) or OAuth provider. Can also be set with the  environment variable`AWS_WEB_IDENTITY_TOKEN_FILE`. One of `web_identity_token_file` or `web_identity_token` is required.",
+						"product_version": schema.StringAttribute{
+							Description: "Product version. Optional, and should only be set when `product_name` is set.",
 							Optional:    true,
 						},
 					},
-				),
-				Optional:    true,
-				Description: "An `assume_role_with_web_identity` block (documented below). Only one `assume_role_with_web_identity` block may be in the configuration.",
-				Validators: []tfsdk.AttributeValidator{
-					validate.RequiredAttributes(
-						validate.OneOfRequired(
-							validate.Required("web_identity_token"),
-							validate.Required("web_identity_token_file"),
-						),
-					),
 				},
+				Description: "Product details to append to User-Agent string in all AWS API calls.",
+				Optional:    true,
 			},
 		},
-	}, nil
+	}
 }
 
 type config struct {
@@ -350,7 +292,7 @@ type assumeRoleData struct {
 func (a assumeRoleData) Config() *awsbase.AssumeRole {
 	assumeRole := &awsbase.AssumeRole{
 		RoleARN:     a.RoleARN.ValueString(),
-		Duration:    a.Duration.Value,
+		Duration:    a.Duration.ValueDuration(),
 		ExternalID:  a.ExternalID.ValueString(),
 		Policy:      a.Policy.ValueString(),
 		SessionName: a.SessionName.ValueString(),
@@ -393,7 +335,7 @@ type assumeRoleWithWebIdentityData struct {
 func (a assumeRoleWithWebIdentityData) Config() *awsbase.AssumeRoleWithWebIdentity {
 	assumeRole := &awsbase.AssumeRoleWithWebIdentity{
 		RoleARN:              a.RoleARN.ValueString(),
-		Duration:             a.Duration.Value,
+		Duration:             a.Duration.ValueDuration(),
 		Policy:               a.Policy.ValueString(),
 		SessionName:          a.SessionName.ValueString(),
 		WebIdentityToken:     a.WebIdentityToken.ValueString(),

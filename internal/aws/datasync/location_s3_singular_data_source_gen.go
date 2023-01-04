@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,188 +19,176 @@ func init() {
 // locationS3DataSource returns the Terraform awscc_datasync_location_s3 data source.
 // This Terraform data source corresponds to the CloudFormation AWS::DataSync::LocationS3 resource.
 func locationS3DataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"location_arn": {
-			// Property: LocationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
-			//	  "maxLength": 128,
-			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: LocationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
+		//	  "maxLength": 128,
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "type": "string"
+		//	}
+		"location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket location.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"location_uri": {
-			// Property: LocationUri
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The URL of the S3 location that was described.",
-			//	  "maxLength": 4356,
-			//	  "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-/]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LocationUri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL of the S3 location that was described.",
+		//	  "maxLength": 4356,
+		//	  "pattern": "^(efs|nfs|s3|smb|fsxw)://[a-zA-Z0-9.\\-/]+$",
+		//	  "type": "string"
+		//	}
+		"location_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL of the S3 location that was described.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"s3_bucket_arn": {
-			// Property: S3BucketArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
-			//	  "maxLength": 156,
-			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: S3BucketArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
+		//	  "maxLength": 156,
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$",
+		//	  "type": "string"
+		//	}
+		"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"s3_config": {
-			// Property: S3Config
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The Amazon Resource Name (ARN) of the AWS IAM role that is used to access an Amazon S3 bucket.",
-			//	  "properties": {
-			//	    "BucketAccessRoleArn": {
-			//	      "description": "The ARN of the IAM role of the Amazon S3 bucket.",
-			//	      "maxLength": 2048,
-			//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "BucketAccessRoleArn"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: S3Config
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Amazon Resource Name (ARN) of the AWS IAM role that is used to access an Amazon S3 bucket.",
+		//	  "properties": {
+		//	    "BucketAccessRoleArn": {
+		//	      "description": "The ARN of the IAM role of the Amazon S3 bucket.",
+		//	      "maxLength": 2048,
+		//	      "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):iam::[0-9]{12}:role/.*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BucketAccessRoleArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"s3_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketAccessRoleArn
+				"bucket_access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the IAM role of the Amazon S3 bucket.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The Amazon Resource Name (ARN) of the AWS IAM role that is used to access an Amazon S3 bucket.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bucket_access_role_arn": {
-						// Property: BucketAccessRoleArn
-						Description: "The ARN of the IAM role of the Amazon S3 bucket.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"s3_storage_class": {
-			// Property: S3StorageClass
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "STANDARD",
-			//	  "description": "The Amazon S3 storage class you want to store your files in when this location is used as a task destination.",
-			//	  "enum": [
-			//	    "STANDARD",
-			//	    "STANDARD_IA",
-			//	    "ONEZONE_IA",
-			//	    "INTELLIGENT_TIERING",
-			//	    "GLACIER",
-			//	    "GLACIER_INSTANT_RETRIEVAL",
-			//	    "DEEP_ARCHIVE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: S3StorageClass
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "STANDARD",
+		//	  "description": "The Amazon S3 storage class you want to store your files in when this location is used as a task destination.",
+		//	  "enum": [
+		//	    "STANDARD",
+		//	    "STANDARD_IA",
+		//	    "ONEZONE_IA",
+		//	    "INTELLIGENT_TIERING",
+		//	    "GLACIER",
+		//	    "GLACIER_INSTANT_RETRIEVAL",
+		//	    "DEEP_ARCHIVE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"s3_storage_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon S3 storage class you want to store your files in when this location is used as a task destination.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"subdirectory": {
-			// Property: Subdirectory
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Subdirectory
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "^[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}\\p{C}]*$",
+		//	  "type": "string"
+		//	}
+		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A subdirectory in the Amazon S3 bucket. This subdirectory in Amazon S3 is used to read data from the S3 source location or write data to the S3 destination.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key for an AWS resource tag.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for an AWS resource tag.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key for an AWS resource tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for an AWS resource tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key for an AWS resource tag.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for an AWS resource tag.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::DataSync::LocationS3",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationS3").WithTerraformTypeName("awscc_datasync_location_s3")
 	opts = opts.WithTerraformSchema(schema)
@@ -217,7 +205,7 @@ func locationS3DataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                  "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

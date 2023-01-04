@@ -4,14 +4,21 @@ package s3outposts
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,558 +28,498 @@ func init() {
 // bucketResource returns the Terraform awscc_s3outposts_bucket resource.
 // This Terraform resource corresponds to the CloudFormation AWS::S3Outposts::Bucket resource.
 func bucketResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the specified bucket.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "^arn:[^:]+:s3-outposts:[a-zA-Z0-9\\-]+:\\d{12}:outpost\\/[^:]+\\/bucket\\/[^:]+$",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the specified bucket.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"bucket_name": {
-			// Property: BucketName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the bucket.",
-			//	  "maxLength": 63,
-			//	  "minLength": 3,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BucketName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the bucket.",
+		//	  "maxLength": 63,
+		//	  "minLength": 3,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the bucket.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(3, 63),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"lifecycle_configuration": {
-			// Property: LifecycleConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
-			//	  "properties": {
-			//	    "Rules": {
-			//	      "description": "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "anyOf": [
-			//	          {
-			//	            "required": [
-			//	              "Status",
-			//	              "AbortIncompleteMultipartUpload"
-			//	            ]
-			//	          },
-			//	          {
-			//	            "required": [
-			//	              "Status",
-			//	              "ExpirationDate"
-			//	            ]
-			//	          },
-			//	          {
-			//	            "required": [
-			//	              "Status",
-			//	              "ExpirationInDays"
-			//	            ]
-			//	          }
-			//	        ],
-			//	        "description": "Specifies lifecycle rules for an Amazon S3Outposts bucket. You must specify at least one of the following: AbortIncompleteMultipartUpload, ExpirationDate, ExpirationInDays.",
-			//	        "properties": {
-			//	          "AbortIncompleteMultipartUpload": {
-			//	            "additionalProperties": false,
-			//	            "description": "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
-			//	            "properties": {
-			//	              "DaysAfterInitiation": {
-			//	                "description": "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DaysAfterInitiation"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "ExpirationDate": {
-			//	            "description": "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-			//	            "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
-			//	            "type": "string"
-			//	          },
-			//	          "ExpirationInDays": {
-			//	            "description": "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
-			//	            "minimum": 1,
-			//	            "type": "integer"
-			//	          },
-			//	          "Filter": {
-			//	            "additionalProperties": false,
-			//	            "description": "The container for the filter of the lifecycle rule.",
-			//	            "oneOf": [
-			//	              {
-			//	                "required": [
-			//	                  "Prefix"
-			//	                ]
-			//	              },
-			//	              {
-			//	                "required": [
-			//	                  "Tag"
-			//	                ]
-			//	              },
-			//	              {
-			//	                "required": [
-			//	                  "AndOperator"
-			//	                ]
-			//	              }
-			//	            ],
-			//	            "properties": {
-			//	              "AndOperator": {
-			//	                "description": "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
-			//	                "properties": {
-			//	                  "Prefix": {
-			//	                    "description": "Prefix identifies one or more objects to which the rule applies.",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Tags": {
-			//	                    "description": "All of these tags must exist in the object's tag set in order for the rule to apply.",
-			//	                    "insertionOrder": false,
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
-			//	                      "properties": {
-			//	                        "Key": {
-			//	                          "maxLength": 1024,
-			//	                          "minLength": 1,
-			//	                          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "maxLength": 1024,
-			//	                          "minLength": 1,
-			//	                          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Key",
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "minItems": 1,
-			//	                    "type": "array",
-			//	                    "uniqueItems": true
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "Prefix": {
-			//	                "description": "Object key prefix that identifies one or more objects to which this rule applies.",
-			//	                "type": "string"
-			//	              },
-			//	              "Tag": {
-			//	                "additionalProperties": false,
-			//	                "description": "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
-			//	                "properties": {
-			//	                  "Key": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Key",
-			//	                  "Value"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Id": {
-			//	            "description": "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
-			//	            "maxLength": 255,
-			//	            "type": "string"
-			//	          },
-			//	          "Status": {
-			//	            "enum": [
-			//	              "Enabled",
-			//	              "Disabled"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Rules"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"rules": {
-						// Property: Rules
-						Description: "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
-						Attributes: tfsdk.SetNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"abort_incomplete_multipart_upload": {
-									// Property: AbortIncompleteMultipartUpload
-									Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"days_after_initiation": {
-												// Property: DaysAfterInitiation
-												Description: "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
-												Type:        types.Int64Type,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntAtLeast(0),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"expiration_date": {
-									// Property: ExpirationDate
-									Description: "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"expiration_in_days": {
-									// Property: ExpirationInDays
-									Description: "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntAtLeast(1),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"filter": {
-									// Property: Filter
-									Description: "The container for the filter of the lifecycle rule.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"and_operator": {
-												// Property: AndOperator
-												Description: "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"prefix": {
-															// Property: Prefix
-															Description: "Prefix identifies one or more objects to which the rule applies.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"tags": {
-															// Property: Tags
-															Description: "All of these tags must exist in the object's tag set in order for the rule to apply.",
-															Attributes: tfsdk.SetNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"key": {
-																		// Property: Key
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 1024),
-																			validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																		Validators: []tfsdk.AttributeValidator{
-																			validate.StringLenBetween(1, 1024),
-																			validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
-																		},
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayLenAtLeast(1),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"prefix": {
-												// Property: Prefix
-												Description: "Object key prefix that identifies one or more objects to which this rule applies.",
-												Type:        types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 63),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LifecycleConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
+		//	  "properties": {
+		//	    "Rules": {
+		//	      "description": "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "anyOf": [
+		//	          {
+		//	            "required": [
+		//	              "Status",
+		//	              "AbortIncompleteMultipartUpload"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "Status",
+		//	              "ExpirationDate"
+		//	            ]
+		//	          },
+		//	          {
+		//	            "required": [
+		//	              "Status",
+		//	              "ExpirationInDays"
+		//	            ]
+		//	          }
+		//	        ],
+		//	        "description": "Specifies lifecycle rules for an Amazon S3Outposts bucket. You must specify at least one of the following: AbortIncompleteMultipartUpload, ExpirationDate, ExpirationInDays.",
+		//	        "properties": {
+		//	          "AbortIncompleteMultipartUpload": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
+		//	            "properties": {
+		//	              "DaysAfterInitiation": {
+		//	                "description": "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DaysAfterInitiation"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "ExpirationDate": {
+		//	            "description": "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+		//	            "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$",
+		//	            "type": "string"
+		//	          },
+		//	          "ExpirationInDays": {
+		//	            "description": "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
+		//	            "minimum": 1,
+		//	            "type": "integer"
+		//	          },
+		//	          "Filter": {
+		//	            "additionalProperties": false,
+		//	            "description": "The container for the filter of the lifecycle rule.",
+		//	            "oneOf": [
+		//	              {
+		//	                "required": [
+		//	                  "Prefix"
+		//	                ]
+		//	              },
+		//	              {
+		//	                "required": [
+		//	                  "Tag"
+		//	                ]
+		//	              },
+		//	              {
+		//	                "required": [
+		//	                  "AndOperator"
+		//	                ]
+		//	              }
+		//	            ],
+		//	            "properties": {
+		//	              "AndOperator": {
+		//	                "description": "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
+		//	                "properties": {
+		//	                  "Prefix": {
+		//	                    "description": "Prefix identifies one or more objects to which the rule applies.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Tags": {
+		//	                    "description": "All of these tags must exist in the object's tag set in order for the rule to apply.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
+		//	                      "properties": {
+		//	                        "Key": {
+		//	                          "maxLength": 1024,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "maxLength": 1024,
+		//	                          "minLength": 1,
+		//	                          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Key",
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "minItems": 1,
+		//	                    "type": "array",
+		//	                    "uniqueItems": true
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "Prefix": {
+		//	                "description": "Object key prefix that identifies one or more objects to which this rule applies.",
+		//	                "type": "string"
+		//	              },
+		//	              "Tag": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
+		//	                "properties": {
+		//	                  "Key": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Key",
+		//	                  "Value"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Id": {
+		//	            "description": "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
+		//	            "maxLength": 255,
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "enum": [
+		//	              "Enabled",
+		//	              "Disabled"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Rules"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"lifecycle_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Rules
+				"rules": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AbortIncompleteMultipartUpload
+							"abort_incomplete_multipart_upload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DaysAfterInitiation
+									"days_after_initiation": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "Specifies the number of days after which Amazon S3Outposts aborts an incomplete multipart upload.",
+										Required:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.AtLeast(0),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies a lifecycle rule that stops incomplete multipart uploads to an Amazon S3Outposts bucket.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationDate
+							"expiration_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates when objects are deleted from Amazon S3Outposts. The date value must be in ISO 8601 format. The time is always midnight UTC.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ExpirationInDays
+							"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the number of days after creation when objects are deleted from Amazon S3Outposts.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.AtLeast(1),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Filter
+							"filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AndOperator
+									"and_operator": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Prefix
+											"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Prefix identifies one or more objects to which the rule applies.",
 												Optional:    true,
 												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"tag": {
-												// Property: Tag
-												Description: "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"key": {
-															// Property: Key
-															Type:     types.StringType,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Tags
+											"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Key
+														"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 1024),
-																validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
-															},
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 1024),
+																stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 1024),
-																validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
+															Validators: []validator.String{ /*START VALIDATORS*/
+																stringvalidator.LengthBetween(1, 1024),
+																stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+															}, /*END VALIDATORS*/
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "All of these tags must exist in the object's tag set in order for the rule to apply.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.Set{ /*START VALIDATORS*/
+													setvalidator.SizeAtLeast(1),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+													setplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The container for the AND condition for the lifecycle rule. A combination of Prefix and 1 or more Tags OR a minimum of 2 or more tags.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Prefix
+									"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Object key prefix that identifies one or more objects to which this rule applies.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Tag
+									"tag": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies a tag used to identify a subset of objects for an Amazon S3Outposts bucket.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "The container for the filter of the lifecycle rule.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(255),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"Enabled",
+										"Disabled",
 									),
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.RequiredAttributes(
-											validate.OneOfRequired(
-												validate.Required(
-													"prefix",
-												),
-												validate.Required(
-													"tag",
-												),
-												validate.Required(
-													"and_operator",
-												),
-											),
-										),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"id": {
-									// Property: Id
-									Description: "Unique identifier for the lifecycle rule. The value can't be longer than 255 characters.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(255),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"status": {
-									// Property: Status
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"Enabled",
-											"Disabled",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.RequiredAttributes(
-								validate.AnyOfRequired(
-									validate.Required(
-										"status",
-										"abort_incomplete_multipart_upload",
-									),
-									validate.Required(
-										"status",
-										"expiration_date",
-									),
-									validate.Required(
-										"status",
-										"expiration_in_days",
-									),
-								),
-							),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"outpost_id": {
-			// Property: OutpostId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The id of the customer outpost on which the bucket resides.",
-			//	  "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
-			//	  "type": "string"
-			//	}
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of lifecycle rules for individual objects in an Amazon S3Outposts bucket.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Rules that define how Amazon S3Outposts manages objects during their lifetime.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OutpostId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The id of the customer outpost on which the bucket resides.",
+		//	  "pattern": "^(op-[a-f0-9]{17}|\\d{12}|ec2)$",
+		//	  "type": "string"
+		//	}
+		"outpost_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The id of the customer outpost on which the bucket resides.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^(op-[a-f0-9]{17}|\\d{12}|ec2)$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 1024,
-			//	        "minLength": 1,
-			//	        "pattern": "",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 1024,
-			//	        "minLength": 1,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^(op-[a-f0-9]{17}|\\d{12}|ec2)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 1024,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 1024),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 1024),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An arbitrary set of tags (key-value pairs) for this S3Outposts bucket.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 1024),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 1024),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:=+\\/\\-@%]*)$"), ""),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type Definition for AWS::S3Outposts::Bucket",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3Outposts::Bucket").WithTerraformTypeName("awscc_s3outposts_bucket")
 	opts = opts.WithTerraformSchema(schema)
@@ -602,7 +549,7 @@ func bucketResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

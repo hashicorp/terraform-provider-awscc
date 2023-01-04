@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,78 +19,72 @@ func init() {
 // studioSessionMappingDataSource returns the Terraform awscc_emr_studio_session_mapping data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EMR::StudioSessionMapping resource.
 func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"identity_name": {
-			// Property: IdentityName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: IdentityName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
+		//	  "type": "string"
+		//	}
+		"identity_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the user or group. For more information, see UserName and DisplayName in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId must be specified.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"identity_type": {
-			// Property: IdentityType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether the identity to map to the Studio is a user or a group.",
-			//	  "enum": [
-			//	    "USER",
-			//	    "GROUP"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the identity to map to the Studio is a user or a group.",
+		//	  "enum": [
+		//	    "USER",
+		//	    "GROUP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"identity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the identity to map to the Studio is a user or a group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"session_policy_arn": {
-			// Property: SessionPolicyArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			//	  "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SessionPolicyArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
+		//	  "pattern": "^arn:aws(-(cn|us-gov))?:iam::([0-9]{12})?:policy\\/[^.]+$",
+		//	  "type": "string"
+		//	}
+		"session_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for the session policy that will be applied to the user or group. Session policies refine Studio user permissions without the need to use multiple IAM user roles.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"studio_id": {
-			// Property: StudioId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
-			//	  "maxLength": 256,
-			//	  "minLength": 4,
-			//	  "pattern": "^es-[0-9A-Z]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StudioId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
+		//	  "maxLength": 256,
+		//	  "minLength": 4,
+		//	  "pattern": "^es-[0-9A-Z]+",
+		//	  "type": "string"
+		//	}
+		"studio_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon EMR Studio to which the user or group will be mapped.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EMR::StudioSessionMapping",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EMR::StudioSessionMapping").WithTerraformTypeName("awscc_emr_studio_session_mapping")
 	opts = opts.WithTerraformSchema(schema)
@@ -101,7 +95,7 @@ func studioSessionMappingDataSource(ctx context.Context) (datasource.DataSource,
 		"studio_id":          "StudioId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

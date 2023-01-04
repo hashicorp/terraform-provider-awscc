@@ -4,14 +4,23 @@ package rds
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,1354 +30,1282 @@ func init() {
 // dBInstanceResource returns the Terraform awscc_rds_db_instance resource.
 // This Terraform resource corresponds to the CloudFormation AWS::RDS::DBInstance resource.
 func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"allocated_storage": {
-			// Property: AllocatedStorage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The amount of storage (in gigabytes) to be initially allocated for the database instance.",
-			//	  "pattern": "^[0-9]*$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllocatedStorage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The amount of storage (in gigabytes) to be initially allocated for the database instance.",
+		//	  "pattern": "^[0-9]*$",
+		//	  "type": "string"
+		//	}
+		"allocated_storage": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The amount of storage (in gigabytes) to be initially allocated for the database instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[0-9]*$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"allow_major_version_upgrade": {
-			// Property: AllowMajorVersionUpgrade
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.",
-			//	  "type": "boolean"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AllowMajorVersionUpgrade
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.",
+		//	  "type": "boolean"
+		//	}
+		"allow_major_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether major version upgrades are allowed. Changing this parameter doesn't result in an outage and the change is asynchronously applied as soon as possible.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"associated_roles": {
-			// Property: AssociatedRoles
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS Identity and Access Management (IAM) roles associated with the DB instance.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "FeatureName": {
-			//	        "description": "The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB instance grant permission for the DB instance to access other AWS services on your behalf.",
-			//	        "type": "string"
-			//	      },
-			//	      "RoleArn": {
-			//	        "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "FeatureName",
-			//	      "RoleArn"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The AWS Identity and Access Management (IAM) roles associated with the DB instance.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"feature_name": {
-						// Property: FeatureName
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AssociatedRoles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Identity and Access Management (IAM) roles associated with the DB instance.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "FeatureName": {
+		//	        "description": "The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB instance grant permission for the DB instance to access other AWS services on your behalf.",
+		//	        "type": "string"
+		//	      },
+		//	      "RoleArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "FeatureName",
+		//	      "RoleArn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"associated_roles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FeatureName
+					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. IAM roles that are associated with a DB instance grant permission for the DB instance to access other AWS services on your behalf.",
-						Type:        types.StringType,
 						Required:    true,
-					},
-					"role_arn": {
-						// Property: RoleArn
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.",
-						Type:        types.StringType,
 						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"auto_minor_version_upgrade": {
-			// Property: AutoMinorVersionUpgrade
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.",
-			//	  "type": "boolean"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The AWS Identity and Access Management (IAM) roles associated with the DB instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AutoMinorVersionUpgrade
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.",
+		//	  "type": "boolean"
+		//	}
+		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether minor engine upgrades are applied automatically to the DB instance during the maintenance window. By default, minor engine upgrades are applied automatically.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"availability_zone": {
-			// Property: AvailabilityZone
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones.",
+		//	  "type": "string"
+		//	}
+		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"backup_retention_period": {
-			// Property: BackupRetentionPeriod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 1,
-			//	  "description": "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.",
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BackupRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 1,
+		//	  "description": "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(0),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64Value(1)),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"ca_certificate_identifier": {
-			// Property: CACertificateIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the CA certificate for this DB instance.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(0),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				generic.Int64DefaultValue(1),
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CACertificateIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the CA certificate for this DB instance.",
+		//	  "type": "string"
+		//	}
+		"ca_certificate_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the CA certificate for this DB instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"character_set_name": {
-			// Property: CharacterSetName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "For supported engines, indicates that the DB instance should be associated with the specified character set.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CharacterSetName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "For supported engines, indicates that the DB instance should be associated with the specified character set.",
+		//	  "type": "string"
+		//	}
+		"character_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "For supported engines, indicates that the DB instance should be associated with the specified character set.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"copy_tags_to_snapshot": {
-			// Property: CopyTagsToSnapshot
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CopyTagsToSnapshot
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.",
+		//	  "type": "boolean"
+		//	}
+		"copy_tags_to_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"custom_iam_instance_profile": {
-			// Property: CustomIAMInstanceProfile
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. The instance profile must meet the following requirements:\n * The profile must exist in your account.\n * The profile must have an IAM role that Amazon EC2 has permissions to assume.\n * The instance profile name and the associated IAM role name must start with the prefix AWSRDSCustom .\nFor the list of permissions required for the IAM role, see Configure IAM and your VPC in the Amazon RDS User Guide .\n\nThis setting is required for RDS Custom.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomIAMInstanceProfile
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. The instance profile must meet the following requirements:\n * The profile must exist in your account.\n * The profile must have an IAM role that Amazon EC2 has permissions to assume.\n * The instance profile name and the associated IAM role name must start with the prefix AWSRDSCustom .\nFor the list of permissions required for the IAM role, see Configure IAM and your VPC in the Amazon RDS User Guide .\n\nThis setting is required for RDS Custom.",
+		//	  "type": "string"
+		//	}
+		"custom_iam_instance_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. The instance profile must meet the following requirements:\n * The profile must exist in your account.\n * The profile must have an IAM role that Amazon EC2 has permissions to assume.\n * The instance profile name and the associated IAM role name must start with the prefix AWSRDSCustom .\nFor the list of permissions required for the IAM role, see Configure IAM and your VPC in the Amazon RDS User Guide .\n\nThis setting is required for RDS Custom.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"db_cluster_identifier": {
-			// Property: DBClusterIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the DB cluster that the instance will belong to.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the DB cluster that the instance will belong to.",
+		//	  "type": "string"
+		//	}
+		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the DB cluster that the instance will belong to.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"db_cluster_snapshot_identifier": {
-			// Property: DBClusterSnapshotIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .\n\nConstraints:\n * Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n * Can't be specified when DBSnapshotIdentifier is specified.\n * Must be specified when DBSnapshotIdentifier isn't specified.\n * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.\n * Can't be the identifier of an Aurora DB cluster snapshot.\n * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBClusterSnapshotIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .\n\nConstraints:\n * Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n * Can't be specified when DBSnapshotIdentifier is specified.\n * Must be specified when DBSnapshotIdentifier isn't specified.\n * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.\n * Can't be the identifier of an Aurora DB cluster snapshot.\n * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.",
+		//	  "type": "string"
+		//	}
+		"db_cluster_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier for the RDS for MySQL Multi-AZ DB cluster snapshot to restore from. For more information on Multi-AZ DB clusters, see Multi-AZ deployments with two readable standby DB instances in the Amazon RDS User Guide .\n\nConstraints:\n * Must match the identifier of an existing Multi-AZ DB cluster snapshot.\n * Can't be specified when DBSnapshotIdentifier is specified.\n * Must be specified when DBSnapshotIdentifier isn't specified.\n * If you are restoring from a shared manual Multi-AZ DB cluster snapshot, the DBClusterSnapshotIdentifier must be the ARN of the shared snapshot.\n * Can't be the identifier of an Aurora DB cluster snapshot.\n * Can't be the identifier of an RDS for PostgreSQL Multi-AZ DB cluster snapshot.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"db_instance_arn": {
-			// Property: DBInstanceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for the DB instance.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBInstanceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the DB instance.",
+		//	  "type": "string"
+		//	}
+		"db_instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for the DB instance.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"db_instance_class": {
-			// Property: DBInstanceClass
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBInstanceClass
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines.",
+		//	  "type": "string"
+		//	}
+		"db_instance_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The compute and memory capacity of the DB instance, for example, db.m4.large. Not all DB instance classes are available in all AWS Regions, or for all database engines.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"db_instance_identifier": {
-			// Property: DBInstanceIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance.",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBInstanceIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance.",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
+		//	  "type": "string"
+		//	}
+		"db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the DB instance. If you specify a name, AWS CloudFormation converts it to lowercase. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the DB instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 63),
-				validate.StringMatch(regexp.MustCompile("^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"db_name": {
-			// Property: DBName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The meaning of this parameter differs according to the database engine you use.",
-			//	  "pattern": "^$|^[_a-zA-Z][a-zA-Z0-9_]{0,63}$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 63),
+				stringvalidator.RegexMatches(regexp.MustCompile("^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The meaning of this parameter differs according to the database engine you use.",
+		//	  "pattern": "^$|^[_a-zA-Z][a-zA-Z0-9_]{0,63}$",
+		//	  "type": "string"
+		//	}
+		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The meaning of this parameter differs according to the database engine you use.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^$|^[_a-zA-Z][a-zA-Z0-9_]{0,63}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"db_parameter_group_name": {
-			// Property: DBParameterGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup resource created in the template.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^$|^[_a-zA-Z][a-zA-Z0-9_]{0,63}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBParameterGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup resource created in the template.",
+		//	  "type": "string"
+		//	}
+		"db_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of an existing DB parameter group or a reference to an AWS::RDS::DBParameterGroup resource created in the template.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"db_security_groups": {
-			// Property: DBSecurityGroups
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBSecurityGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"db_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"db_snapshot_identifier": {
-			// Property: DBSnapshotIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DBSnapshotIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.",
+		//	  "type": "string"
+		//	}
+		"db_snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// DBSnapshotIdentifier is a write-only property.
-		},
-		"db_subnet_group_name": {
-			// Property: DBSubnetGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBSubnetGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.",
+		//	  "type": "string"
+		//	}
+		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"dbi_resource_id": {
-			// Property: DbiResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DbiResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.",
+		//	  "type": "string"
+		//	}
+		"dbi_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"delete_automated_backups": {
-			// Property: DeleteAutomatedBackups
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeleteAutomatedBackups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.",
+		//	  "type": "boolean"
+		//	}
+		"delete_automated_backups": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"deletion_protection": {
-			// Property: DeletionProtection
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.",
+		//	  "type": "boolean"
+		//	}
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"domain": {
-			// Property: Domain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Active Directory directory ID to create the DB instance in. Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Domain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Active Directory directory ID to create the DB instance in. Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.",
+		//	  "type": "string"
+		//	}
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Active Directory directory ID to create the DB instance in. Currently, only MySQL, Microsoft SQL Server, Oracle, and PostgreSQL DB instances can be created in an Active Directory Domain.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"domain_iam_role_name": {
-			// Property: DomainIAMRoleName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DomainIAMRoleName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
+		//	  "type": "string"
+		//	}
+		"domain_iam_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"enable_cloudwatch_logs_exports": {
-			// Property: EnableCloudwatchLogsExports
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnableCloudwatchLogsExports
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"enable_cloudwatch_logs_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"enable_iam_database_authentication": {
-			// Property: EnableIAMDatabaseAuthentication
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnableIAMDatabaseAuthentication
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.",
+		//	  "type": "boolean"
+		//	}
+		"enable_iam_database_authentication": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"enable_performance_insights": {
-			// Property: EnablePerformanceInsights
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to enable Performance Insights for the DB instance.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnablePerformanceInsights
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to enable Performance Insights for the DB instance.",
+		//	  "type": "boolean"
+		//	}
+		"enable_performance_insights": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to enable Performance Insights for the DB instance.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"endpoint": {
-			// Property: Endpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Specifies the connection endpoint.",
-			//	  "properties": {
-			//	    "Address": {
-			//	      "description": "Specifies the DNS address of the DB instance.",
-			//	      "type": "string"
-			//	    },
-			//	    "HostedZoneId": {
-			//	      "description": "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
-			//	      "type": "string"
-			//	    },
-			//	    "Port": {
-			//	      "description": "Specifies the port that the database engine is listening on.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the connection endpoint.",
+		//	  "properties": {
+		//	    "Address": {
+		//	      "description": "Specifies the DNS address of the DB instance.",
+		//	      "type": "string"
+		//	    },
+		//	    "HostedZoneId": {
+		//	      "description": "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "description": "Specifies the port that the database engine is listening on.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the DNS address of the DB instance.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HostedZoneId
+				"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies the port that the database engine is listening on.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Specifies the connection endpoint.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"address": {
-						// Property: Address
-						Description: "Specifies the DNS address of the DB instance.",
-						Type:        types.StringType,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"hosted_zone_id": {
-						// Property: HostedZoneId
-						Description: "Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.",
-						Type:        types.StringType,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"port": {
-						// Property: Port
-						Description: "Specifies the port that the database engine is listening on.",
-						Type:        types.StringType,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"engine": {
-			// Property: Engine
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the database engine that you want to use for this DB instance.",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the database engine that you want to use for this DB instance.",
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the database engine that you want to use for this DB instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"engine_version": {
-			// Property: EngineVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version number of the database engine to use.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EngineVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of the database engine to use.",
+		//	  "type": "string"
+		//	}
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version number of the database engine to use.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"iops": {
-			// Property: Iops
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of I/O operations per second (IOPS) that the database provisions.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Iops
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of I/O operations per second (IOPS) that the database provisions.",
+		//	  "type": "integer"
+		//	}
+		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of I/O operations per second (IOPS) that the database provisions.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"kms_key_id": {
-			// Property: KmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the AWS Key Management Service (AWS KMS) master key that's used to encrypt the DB instance.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AWS Key Management Service (AWS KMS) master key that's used to encrypt the DB instance.",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) master key that's used to encrypt the DB instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"license_model": {
-			// Property: LicenseModel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "License model information for this DB instance.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LicenseModel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "License model information for this DB instance.",
+		//	  "type": "string"
+		//	}
+		"license_model": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "License model information for this DB instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"master_user_password": {
-			// Property: MasterUserPassword
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The password for the master user.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUserPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The password for the master user.",
+		//	  "type": "string"
+		//	}
+		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password for the master user.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// MasterUserPassword is a write-only property.
-		},
-		"master_username": {
-			// Property: MasterUsername
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The master user name for the DB instance.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,127}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUsername
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The master user name for the DB instance.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z][a-zA-Z0-9_]{0,127}$",
+		//	  "type": "string"
+		//	}
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The master user name for the DB instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]{0,127}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"max_allocated_storage": {
-			// Property: MaxAllocatedStorage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.",
-			//	  "type": "integer"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z][a-zA-Z0-9_]{0,127}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MaxAllocatedStorage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.",
+		//	  "type": "integer"
+		//	}
+		"max_allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"monitoring_interval": {
-			// Property: MonitoringInterval
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 0,
-			//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MonitoringInterval
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 0,
+		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
+		//	  "type": "integer"
+		//	}
+		"monitoring_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64Value(0)),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"monitoring_role_arn": {
-			// Property: MonitoringRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to Amazon CloudWatch Logs.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				generic.Int64DefaultValue(0),
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MonitoringRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to Amazon CloudWatch Logs.",
+		//	  "type": "string"
+		//	}
+		"monitoring_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN for the IAM role that permits RDS to send enhanced monitoring metrics to Amazon CloudWatch Logs.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"multi_az": {
-			// Property: MultiAZ
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether the database instance is a multiple Availability Zone deployment.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MultiAZ
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the database instance is a multiple Availability Zone deployment.",
+		//	  "type": "boolean"
+		//	}
+		"multi_az": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the database instance is a multiple Availability Zone deployment.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"nchar_character_set_name": {
-			// Property: NcharCharacterSetName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the NCHAR character set for the Oracle DB instance. This parameter doesn't apply to RDS Custom.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NcharCharacterSetName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the NCHAR character set for the Oracle DB instance. This parameter doesn't apply to RDS Custom.",
+		//	  "type": "string"
+		//	}
+		"nchar_character_set_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the NCHAR character set for the Oracle DB instance. This parameter doesn't apply to RDS Custom.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"network_type": {
-			// Property: NetworkType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The network type of the DB cluster.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB cluster.",
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The network type of the DB cluster.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"option_group_name": {
-			// Property: OptionGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates that the DB instance should be associated with the specified option group.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OptionGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates that the DB instance should be associated with the specified option group.",
+		//	  "type": "string"
+		//	}
+		"option_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates that the DB instance should be associated with the specified option group.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"performance_insights_kms_key_id": {
-			// Property: PerformanceInsightsKMSKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PerformanceInsightsKMSKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.",
+		//	  "type": "string"
+		//	}
+		"performance_insights_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS KMS key identifier for encryption of Performance Insights data. The KMS key ID is the Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias for the KMS encryption key.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"performance_insights_retention_period": {
-			// Property: PerformanceInsightsRetentionPeriod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years).",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PerformanceInsightsRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years).",
+		//	  "type": "integer"
+		//	}
+		"performance_insights_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The amount of time, in days, to retain Performance Insights data. Valid values are 7 or 731 (2 years).",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"port": {
-			// Property: Port
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The port number on which the database accepts connections.",
-			//	  "pattern": "^\\d*$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Port
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port number on which the database accepts connections.",
+		//	  "pattern": "^\\d*$",
+		//	  "type": "string"
+		//	}
+		"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The port number on which the database accepts connections.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^\\d*$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\d*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// Port is a write-only property.
-		},
-		"preferred_backup_window": {
-			// Property: PreferredBackupWindow
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PreferredBackupWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter.",
+		//	  "type": "string"
+		//	}
+		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The daily time range during which automated backups are created if automated backups are enabled, using the BackupRetentionPeriod parameter.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"preferred_maintenance_window": {
-			// Property: PreferredMaintenanceWindow
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "he weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PreferredMaintenanceWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "he weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
+		//	  "type": "string"
+		//	}
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "he weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"processor_features": {
-			// Property: ProcessorFeatures
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Name": {
-			//	        "description": "The name of the processor feature. Valid names are coreCount and threadsPerCore.",
-			//	        "enum": [
-			//	          "coreCount",
-			//	          "threadsPerCore"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value of a processor feature name.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ProcessorFeatures
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Name": {
+		//	        "description": "The name of the processor feature. Valid names are coreCount and threadsPerCore.",
+		//	        "enum": [
+		//	          "coreCount",
+		//	          "threadsPerCore"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value of a processor feature name.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"processor_features": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the processor feature. Valid names are coreCount and threadsPerCore.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"coreCount",
 								"threadsPerCore",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"value": {
-						// Property: Value
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value of a processor feature name.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"promotion_tier": {
-			// Property: PromotionTier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 1,
-			//	  "description": "A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance.",
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The number of CPU cores and the number of threads per core for the DB instance class of the DB instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PromotionTier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 1,
+		//	  "description": "A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"promotion_tier": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "A value that specifies the order in which an Aurora Replica is promoted to the primary instance after a failure of the existing primary instance.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(0),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				DefaultValue(types.Int64Value(1)),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"publicly_accessible": {
-			// Property: PubliclyAccessible
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address.",
-			//	  "type": "boolean"
-			//	}
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(0),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				generic.Int64DefaultValue(1),
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PubliclyAccessible
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address.",
+		//	  "type": "boolean"
+		//	}
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"replica_mode": {
-			// Property: ReplicaMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The open mode of an Oracle read replica. The default is open-read-only.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicaMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The open mode of an Oracle read replica. The default is open-read-only.",
+		//	  "type": "string"
+		//	}
+		"replica_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The open mode of an Oracle read replica. The default is open-read-only.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"restore_time": {
-			// Property: RestoreTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date and time to restore from.",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RestoreTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time to restore from.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"restore_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date and time to restore from.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
+			Validators: []validator.String{ /*START VALIDATORS*/
 				validate.IsRFC3339Time(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// RestoreTime is a write-only property.
-		},
-		"source_db_instance_automated_backups_arn": {
-			// Property: SourceDBInstanceAutomatedBackupsArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the replicated automated backups from which to restore.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceDBInstanceAutomatedBackupsArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the replicated automated backups from which to restore.",
+		//	  "type": "string"
+		//	}
+		"source_db_instance_automated_backups_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the replicated automated backups from which to restore.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// SourceDBInstanceAutomatedBackupsArn is a write-only property.
-		},
-		"source_db_instance_identifier": {
-			// Property: SourceDBInstanceIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If you want to create a Read Replica DB instance, specify the ID of the source DB instance. Each DB instance can have a limited number of Read Replicas.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceDBInstanceIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you want to create a Read Replica DB instance, specify the ID of the source DB instance. Each DB instance can have a limited number of Read Replicas.",
+		//	  "type": "string"
+		//	}
+		"source_db_instance_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If you want to create a Read Replica DB instance, specify the ID of the source DB instance. Each DB instance can have a limited number of Read Replicas.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// SourceDBInstanceIdentifier is a write-only property.
-		},
-		"source_dbi_resource_id": {
-			// Property: SourceDbiResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The resource ID of the source DB instance from which to restore.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceDbiResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The resource ID of the source DB instance from which to restore.",
+		//	  "type": "string"
+		//	}
+		"source_dbi_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The resource ID of the source DB instance from which to restore.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// SourceDbiResourceId is a write-only property.
-		},
-		"source_region": {
-			// Property: SourceRegion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the region that contains the source DB instance for the Read Replica.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the region that contains the source DB instance for the Read Replica.",
+		//	  "type": "string"
+		//	}
+		"source_region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the region that contains the source DB instance for the Read Replica.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// SourceRegion is a write-only property.
-		},
-		"storage_encrypted": {
-			// Property: StorageEncrypted
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StorageEncrypted
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.",
+		//	  "type": "boolean"
+		//	}
+		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether the DB instance is encrypted. By default, it isn't encrypted.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"storage_throughput": {
-			// Property: StorageThroughput
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the storage throughput for the DB instance.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StorageThroughput
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the storage throughput for the DB instance.",
+		//	  "type": "integer"
+		//	}
+		"storage_throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the storage throughput for the DB instance.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"storage_type": {
-			// Property: StorageType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the storage type to be associated with the DB instance.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StorageType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the storage type to be associated with the DB instance.",
+		//	  "type": "string"
+		//	}
+		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the storage type to be associated with the DB instance.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Tags to assign to the DB instance.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Description: "Tags to assign to the DB instance.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Tags to assign to the DB instance.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tde_credential_arn": {
-			// Property: TdeCredentialArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN from the key store with which to associate the instance for TDE encryption.",
-			//	  "type": "string"
-			//	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags to assign to the DB instance.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TdeCredentialArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN from the key store with which to associate the instance for TDE encryption.",
+		//	  "type": "string"
+		//	}
+		"tde_credential_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN from the key store with which to associate the instance for TDE encryption.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tde_credential_password": {
-			// Property: TdeCredentialPassword
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The password for the given ARN from the key store in order to access the device.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TdeCredentialPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The password for the given ARN from the key store in order to access the device.",
+		//	  "type": "string"
+		//	}
+		"tde_credential_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password for the given ARN from the key store in order to access the device.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// TdeCredentialPassword is a write-only property.
-		},
-		"timezone": {
-			// Property: Timezone
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time zone of the DB instance. The time zone parameter is currently supported only by Microsoft SQL Server.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Timezone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time zone of the DB instance. The time zone parameter is currently supported only by Microsoft SQL Server.",
+		//	  "type": "string"
+		//	}
+		"timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time zone of the DB instance. The time zone parameter is currently supported only by Microsoft SQL Server.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"use_default_processor_features": {
-			// Property: UseDefaultProcessorFeatures
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether the DB instance class of the DB instance uses its default processor features.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UseDefaultProcessorFeatures
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB instance class of the DB instance uses its default processor features.",
+		//	  "type": "boolean"
+		//	}
+		"use_default_processor_features": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether the DB instance class of the DB instance uses its default processor features.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"use_latest_restorable_time": {
-			// Property: UseLatestRestorableTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UseLatestRestorableTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.",
+		//	  "type": "boolean"
+		//	}
+		"use_latest_restorable_time": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether the DB instance is restored from the latest backup time. By default, the DB instance isn't restored from the latest backup time.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// UseLatestRestorableTime is a write-only property.
-		},
-		"vpc_security_groups": {
-			// Property: VPCSecurityGroups
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VPCSecurityGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"vpc_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of the VPC security group IDs to assign to the DB instance. The list can include both the physical IDs of existing VPC security groups and references to AWS::EC2::SecurityGroup resources created in the template.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::RDS::DBInstance resource creates an Amazon RDS DB instance.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBInstance").WithTerraformTypeName("awscc_rds_db_instance")
 	opts = opts.WithTerraformSchema(schema)
@@ -1466,7 +1403,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

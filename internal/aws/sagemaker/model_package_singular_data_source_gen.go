@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,3423 +19,3181 @@ func init() {
 // modelPackageDataSource returns the Terraform awscc_sagemaker_model_package data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SageMaker::ModelPackage resource.
 func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"additional_inference_specification_definition": {
-			// Property: AdditionalInferenceSpecificationDefinition
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			//	  "properties": {
-			//	    "Containers": {
-			//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Describes the Docker container for the model package.",
-			//	        "properties": {
-			//	          "ContainerHostname": {
-			//	            "description": "The DNS host name for the Docker container.",
-			//	            "maxLength": 63,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	            "type": "string"
-			//	          },
-			//	          "Environment": {
-			//	            "additionalProperties": false,
-			//	            "description": "Sets the environment variables in the Docker container",
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              },
-			//	              "[\\S\\s]*": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Framework": {
-			//	            "description": "The machine learning framework of the model package container image.",
-			//	            "type": "string"
-			//	          },
-			//	          "FrameworkVersion": {
-			//	            "description": "The framework version of the Model Package Container Image.",
-			//	            "maxLength": 10,
-			//	            "minLength": 3,
-			//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	            "type": "string"
-			//	          },
-			//	          "Image": {
-			//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "pattern": "[\\S]{1,255}",
-			//	            "type": "string"
-			//	          },
-			//	          "ImageDigest": {
-			//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	            "maxLength": 72,
-			//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelDataUrl": {
-			//	            "description": "A structure with Model Input details.",
-			//	            "maxLength": 1024,
-			//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelInput": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataInputConfig": {
-			//	                "description": "The input configuration object for the model.",
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\S\\s]+",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataInputConfig"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "NearestModelName": {
-			//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	            "type": "string"
-			//	          },
-			//	          "ProductId": {
-			//	            "description": "The AWS Marketplace product ID of the model package.",
-			//	            "maxLength": 256,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Image"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 15,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Description": {
-			//	      "description": "A description of the additional Inference specification.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "Name": {
-			//	      "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-			//	      "maxLength": 63,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	      "type": "string"
-			//	    },
-			//	    "SupportedContentTypes": {
-			//	      "description": "The supported MIME types for the input data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME type for the input data.",
-			//	        "maxLength": 256,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedRealtimeInferenceInstanceTypes": {
-			//	      "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance type that is used to generate inferences in real-time",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedResponseMIMETypes": {
-			//	      "description": "The supported MIME types for the output data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "maxLength": 1024,
-			//	        "pattern": "^[-\\w]+\\/.+$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedTransformInstanceTypes": {
-			//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "type": "string"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Containers",
-			//	    "Name"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdditionalInferenceSpecificationDefinition
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
+		//	  "properties": {
+		//	    "Containers": {
+		//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Describes the Docker container for the model package.",
+		//	        "properties": {
+		//	          "ContainerHostname": {
+		//	            "description": "The DNS host name for the Docker container.",
+		//	            "maxLength": 63,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	            "type": "string"
+		//	          },
+		//	          "Environment": {
+		//	            "additionalProperties": false,
+		//	            "description": "Sets the environment variables in the Docker container",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              },
+		//	              "[\\S\\s]*": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Framework": {
+		//	            "description": "The machine learning framework of the model package container image.",
+		//	            "type": "string"
+		//	          },
+		//	          "FrameworkVersion": {
+		//	            "description": "The framework version of the Model Package Container Image.",
+		//	            "maxLength": 10,
+		//	            "minLength": 3,
+		//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Image": {
+		//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "[\\S]{1,255}",
+		//	            "type": "string"
+		//	          },
+		//	          "ImageDigest": {
+		//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	            "maxLength": 72,
+		//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelDataUrl": {
+		//	            "description": "A structure with Model Input details.",
+		//	            "maxLength": 1024,
+		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelInput": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataInputConfig": {
+		//	                "description": "The input configuration object for the model.",
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\S\\s]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataInputConfig"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "NearestModelName": {
+		//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	            "type": "string"
+		//	          },
+		//	          "ProductId": {
+		//	            "description": "The AWS Marketplace product ID of the model package.",
+		//	            "maxLength": 256,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Image"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 15,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Description": {
+		//	      "description": "A description of the additional Inference specification.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+		//	      "maxLength": 63,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	      "type": "string"
+		//	    },
+		//	    "SupportedContentTypes": {
+		//	      "description": "The supported MIME types for the input data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME type for the input data.",
+		//	        "maxLength": 256,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedRealtimeInferenceInstanceTypes": {
+		//	      "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance type that is used to generate inferences in real-time",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedResponseMIMETypes": {
+		//	      "description": "The supported MIME types for the output data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "maxLength": 1024,
+		//	        "pattern": "^[-\\w]+\\/.+$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedTransformInstanceTypes": {
+		//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "type": "string"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Containers",
+		//	    "Name"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"additional_inference_specification_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Containers
+				"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContainerHostname
+							"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The DNS host name for the Docker container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Environment
+							"environment":       // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								// Pattern "[\\S\\s]*" ignored.
+								Description: "Sets the environment variables in the Docker container",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Framework
+							"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The machine learning framework of the model package container image.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: FrameworkVersion
+							"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The framework version of the Model Package Container Image.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Image
+							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ImageDigest
+							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataUrl
+							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A structure with Model Input details.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ModelInput
+							"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataInputConfig
+									"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The input configuration object for the model.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: NearestModelName
+							"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProductId
+							"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS Marketplace product ID of the model package.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the additional Inference specification.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedContentTypes
+				"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the input data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedRealtimeInferenceInstanceTypes
+				"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types that are used to generate inferences in real-time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedResponseMIMETypes
+				"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the output data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedTransformInstanceTypes
+				"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AdditionalInferenceSpecifications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of additional Inference Specification objects.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
+		//	    "properties": {
+		//	      "Containers": {
+		//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Describes the Docker container for the model package.",
+		//	          "properties": {
+		//	            "ContainerHostname": {
+		//	              "description": "The DNS host name for the Docker container.",
+		//	              "maxLength": 63,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	              "type": "string"
+		//	            },
+		//	            "Environment": {
+		//	              "additionalProperties": false,
+		//	              "description": "Sets the environment variables in the Docker container",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                },
+		//	                "[\\S\\s]*": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Framework": {
+		//	              "description": "The machine learning framework of the model package container image.",
+		//	              "type": "string"
+		//	            },
+		//	            "FrameworkVersion": {
+		//	              "description": "The framework version of the Model Package Container Image.",
+		//	              "maxLength": 10,
+		//	              "minLength": 3,
+		//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	              "type": "string"
+		//	            },
+		//	            "Image": {
+		//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "[\\S]{1,255}",
+		//	              "type": "string"
+		//	            },
+		//	            "ImageDigest": {
+		//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelDataUrl": {
+		//	              "description": "A structure with Model Input details.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelInput": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DataInputConfig": {
+		//	                  "description": "The input configuration object for the model.",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "pattern": "[\\S\\s]+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DataInputConfig"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "NearestModelName": {
+		//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	              "type": "string"
+		//	            },
+		//	            "ProductId": {
+		//	              "description": "The AWS Marketplace product ID of the model package.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Image"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 15,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description of the additional Inference specification.",
+		//	        "maxLength": 1024,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+		//	        "maxLength": 63,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	        "type": "string"
+		//	      },
+		//	      "SupportedContentTypes": {
+		//	        "description": "The supported MIME types for the input data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME type for the input data.",
+		//	          "maxLength": 256,
+		//	          "pattern": ".*",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedRealtimeInferenceInstanceTypes": {
+		//	        "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance type that is used to generate inferences in real-time",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedResponseMIMETypes": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME types for the output data.",
+		//	          "maxLength": 1024,
+		//	          "pattern": "^[-\\w]+\\/.+$",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedTransformInstanceTypes": {
+		//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	          "type": "string"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Containers",
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 15,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"additional_inference_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Containers
+					"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerHostname
+								"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: Environment
+								"environment":       // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
 									// Pattern "[\\S\\s]*" ignored.
-									Computed: true,
-								},
-								"framework": {
-									// Property: Framework
+									Description: "Sets the environment variables in the Docker container",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Framework
+								"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
+								}, /*END ATTRIBUTE*/
+								// Property: FrameworkVersion
+								"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"image": {
-									// Property: Image
+								}, /*END ATTRIBUTE*/
+								// Property: Image
+								"image": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"image_digest": {
-									// Property: ImageDigest
+								}, /*END ATTRIBUTE*/
+								// Property: ImageDigest
+								"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
+								}, /*END ATTRIBUTE*/
+								// Property: ModelDataUrl
+								"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: ModelInput
+								"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DataInputConfig
+										"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The input configuration object for the model.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
+								}, /*END ATTRIBUTE*/
+								// Property: NearestModelName
+								"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"product_id": {
-									// Property: ProductId
+								}, /*END ATTRIBUTE*/
+								// Property: ProductId
+								"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"description": {
-						// Property: Description
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A description of the additional Inference specification.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"name": {
-						// Property: Name
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedContentTypes
+					"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedRealtimeInferenceInstanceTypes
+					"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedResponseMIMETypes
+					"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedTransformInstanceTypes
+					"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"additional_inference_specifications": {
-			// Property: AdditionalInferenceSpecifications
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of additional Inference Specification objects.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			//	    "properties": {
-			//	      "Containers": {
-			//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Describes the Docker container for the model package.",
-			//	          "properties": {
-			//	            "ContainerHostname": {
-			//	              "description": "The DNS host name for the Docker container.",
-			//	              "maxLength": 63,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	              "type": "string"
-			//	            },
-			//	            "Environment": {
-			//	              "additionalProperties": false,
-			//	              "description": "Sets the environment variables in the Docker container",
-			//	              "patternProperties": {
-			//	                "": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                },
-			//	                "[\\S\\s]*": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "Framework": {
-			//	              "description": "The machine learning framework of the model package container image.",
-			//	              "type": "string"
-			//	            },
-			//	            "FrameworkVersion": {
-			//	              "description": "The framework version of the Model Package Container Image.",
-			//	              "maxLength": 10,
-			//	              "minLength": 3,
-			//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	              "type": "string"
-			//	            },
-			//	            "Image": {
-			//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "pattern": "[\\S]{1,255}",
-			//	              "type": "string"
-			//	            },
-			//	            "ImageDigest": {
-			//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelDataUrl": {
-			//	              "description": "A structure with Model Input details.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelInput": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "DataInputConfig": {
-			//	                  "description": "The input configuration object for the model.",
-			//	                  "maxLength": 1024,
-			//	                  "minLength": 1,
-			//	                  "pattern": "[\\S\\s]+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "DataInputConfig"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "NearestModelName": {
-			//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	              "type": "string"
-			//	            },
-			//	            "ProductId": {
-			//	              "description": "The AWS Marketplace product ID of the model package.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Image"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 15,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      },
-			//	      "Description": {
-			//	        "description": "A description of the additional Inference specification.",
-			//	        "maxLength": 1024,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-			//	        "maxLength": 63,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	        "type": "string"
-			//	      },
-			//	      "SupportedContentTypes": {
-			//	        "description": "The supported MIME types for the input data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME type for the input data.",
-			//	          "maxLength": 256,
-			//	          "pattern": ".*",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedRealtimeInferenceInstanceTypes": {
-			//	        "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance type that is used to generate inferences in real-time",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedResponseMIMETypes": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME types for the output data.",
-			//	          "maxLength": 1024,
-			//	          "pattern": "^[-\\w]+\\/.+$",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedTransformInstanceTypes": {
-			//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	          "type": "string"
-			//	        },
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Containers",
-			//	      "Name"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 15,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An array of additional Inference Specification objects.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AdditionalInferenceSpecificationsToAdd
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of additional Inference Specification objects.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
+		//	    "properties": {
+		//	      "Containers": {
+		//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Describes the Docker container for the model package.",
+		//	          "properties": {
+		//	            "ContainerHostname": {
+		//	              "description": "The DNS host name for the Docker container.",
+		//	              "maxLength": 63,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	              "type": "string"
+		//	            },
+		//	            "Environment": {
+		//	              "additionalProperties": false,
+		//	              "description": "Sets the environment variables in the Docker container",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                },
+		//	                "[\\S\\s]*": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Framework": {
+		//	              "description": "The machine learning framework of the model package container image.",
+		//	              "type": "string"
+		//	            },
+		//	            "FrameworkVersion": {
+		//	              "description": "The framework version of the Model Package Container Image.",
+		//	              "maxLength": 10,
+		//	              "minLength": 3,
+		//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	              "type": "string"
+		//	            },
+		//	            "Image": {
+		//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "[\\S]{1,255}",
+		//	              "type": "string"
+		//	            },
+		//	            "ImageDigest": {
+		//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelDataUrl": {
+		//	              "description": "A structure with Model Input details.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelInput": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DataInputConfig": {
+		//	                  "description": "The input configuration object for the model.",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "pattern": "[\\S\\s]+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DataInputConfig"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "NearestModelName": {
+		//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	              "type": "string"
+		//	            },
+		//	            "ProductId": {
+		//	              "description": "The AWS Marketplace product ID of the model package.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Image"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 15,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description of the additional Inference specification.",
+		//	        "maxLength": 1024,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+		//	        "maxLength": 63,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	        "type": "string"
+		//	      },
+		//	      "SupportedContentTypes": {
+		//	        "description": "The supported MIME types for the input data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME type for the input data.",
+		//	          "maxLength": 256,
+		//	          "pattern": ".*",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedRealtimeInferenceInstanceTypes": {
+		//	        "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance type that is used to generate inferences in real-time",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedResponseMIMETypes": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME types for the output data.",
+		//	          "maxLength": 1024,
+		//	          "pattern": "^[-\\w]+\\/.+$",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedTransformInstanceTypes": {
+		//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	          "type": "string"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Containers",
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 15,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"additional_inference_specifications_to_add": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Containers
+					"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerHostname
+								"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: Environment
+								"environment":       // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
 									// Pattern "[\\S\\s]*" ignored.
-									Computed: true,
-								},
-								"framework": {
-									// Property: Framework
+									Description: "Sets the environment variables in the Docker container",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Framework
+								"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
+								}, /*END ATTRIBUTE*/
+								// Property: FrameworkVersion
+								"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"image": {
-									// Property: Image
+								}, /*END ATTRIBUTE*/
+								// Property: Image
+								"image": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"image_digest": {
-									// Property: ImageDigest
+								}, /*END ATTRIBUTE*/
+								// Property: ImageDigest
+								"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
+								}, /*END ATTRIBUTE*/
+								// Property: ModelDataUrl
+								"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
+								}, /*END ATTRIBUTE*/
+								// Property: ModelInput
+								"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DataInputConfig
+										"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The input configuration object for the model.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
+								}, /*END ATTRIBUTE*/
+								// Property: NearestModelName
+								"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"product_id": {
-									// Property: ProductId
+								}, /*END ATTRIBUTE*/
+								// Property: ProductId
+								"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"description": {
-						// Property: Description
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A description of the additional Inference specification.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"name": {
-						// Property: Name
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedContentTypes
+					"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedRealtimeInferenceInstanceTypes
+					"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedResponseMIMETypes
+					"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedTransformInstanceTypes
+					"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"additional_inference_specifications_to_add": {
-			// Property: AdditionalInferenceSpecificationsToAdd
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of additional Inference Specification objects.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			//	    "properties": {
-			//	      "Containers": {
-			//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Describes the Docker container for the model package.",
-			//	          "properties": {
-			//	            "ContainerHostname": {
-			//	              "description": "The DNS host name for the Docker container.",
-			//	              "maxLength": 63,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	              "type": "string"
-			//	            },
-			//	            "Environment": {
-			//	              "additionalProperties": false,
-			//	              "description": "Sets the environment variables in the Docker container",
-			//	              "patternProperties": {
-			//	                "": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                },
-			//	                "[\\S\\s]*": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "Framework": {
-			//	              "description": "The machine learning framework of the model package container image.",
-			//	              "type": "string"
-			//	            },
-			//	            "FrameworkVersion": {
-			//	              "description": "The framework version of the Model Package Container Image.",
-			//	              "maxLength": 10,
-			//	              "minLength": 3,
-			//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	              "type": "string"
-			//	            },
-			//	            "Image": {
-			//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "pattern": "[\\S]{1,255}",
-			//	              "type": "string"
-			//	            },
-			//	            "ImageDigest": {
-			//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelDataUrl": {
-			//	              "description": "A structure with Model Input details.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelInput": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "DataInputConfig": {
-			//	                  "description": "The input configuration object for the model.",
-			//	                  "maxLength": 1024,
-			//	                  "minLength": 1,
-			//	                  "pattern": "[\\S\\s]+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "DataInputConfig"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "NearestModelName": {
-			//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	              "type": "string"
-			//	            },
-			//	            "ProductId": {
-			//	              "description": "The AWS Marketplace product ID of the model package.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Image"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 15,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      },
-			//	      "Description": {
-			//	        "description": "A description of the additional Inference specification.",
-			//	        "maxLength": 1024,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-			//	        "maxLength": 63,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	        "type": "string"
-			//	      },
-			//	      "SupportedContentTypes": {
-			//	        "description": "The supported MIME types for the input data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME type for the input data.",
-			//	          "maxLength": 256,
-			//	          "pattern": ".*",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedRealtimeInferenceInstanceTypes": {
-			//	        "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance type that is used to generate inferences in real-time",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedResponseMIMETypes": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME types for the output data.",
-			//	          "maxLength": 1024,
-			//	          "pattern": "^[-\\w]+\\/.+$",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedTransformInstanceTypes": {
-			//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	          "type": "string"
-			//	        },
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Containers",
-			//	      "Name"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 15,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An array of additional Inference Specification objects.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
-									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
-									// Pattern "[\\S\\s]*" ignored.
-									Computed: true,
-								},
-								"framework": {
-									// Property: Framework
-									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
-									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"image": {
-									// Property: Image
-									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"image_digest": {
-									// Property: ImageDigest
-									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
-									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
-									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"product_id": {
-									// Property: ProductId
-									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"description": {
-						// Property: Description
-						Description: "A description of the additional Inference specification.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"name": {
-						// Property: Name
-						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
-						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
-						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
-						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
-						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"approval_description": {
-			// Property: ApprovalDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description provided for the model approval.",
-			//	  "maxLength": 1024,
-			//	  "pattern": ".*",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ApprovalDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description provided for the model approval.",
+		//	  "maxLength": 1024,
+		//	  "pattern": ".*",
+		//	  "type": "string"
+		//	}
+		"approval_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description provided for the model approval.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"certify_for_marketplace": {
-			// Property: CertifyForMarketplace
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to certify the model package for listing on AWS Marketplace.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CertifyForMarketplace
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to certify the model package for listing on AWS Marketplace.",
+		//	  "type": "boolean"
+		//	}
+		"certify_for_marketplace": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to certify the model package for listing on AWS Marketplace.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"client_token": {
-			// Property: ClientToken
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique token that guarantees that the call to this API is idempotent.",
-			//	  "maxLength": 36,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ClientToken
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique token that guarantees that the call to this API is idempotent.",
+		//	  "maxLength": 36,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique token that guarantees that the call to this API is idempotent.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"created_by": {
-			// Property: CreatedBy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			//	  "properties": {
-			//	    "DomainId": {
-			//	      "description": "The domain associated with the user.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileArn": {
-			//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileName": {
-			//	      "description": "The name of the user's profile.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedBy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
+		//	  "properties": {
+		//	    "DomainId": {
+		//	      "description": "The domain associated with the user.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileName": {
+		//	      "description": "The name of the user's profile.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"created_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DomainId
+				"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The domain associated with the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileArn
+				"user_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the user's profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileName
+				"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the user's profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"domain_id": {
-						// Property: DomainId
-						Description: "The domain associated with the user.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"user_profile_arn": {
-						// Property: UserProfileArn
-						Description: "The Amazon Resource Name (ARN) of the user's profile.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"user_profile_name": {
-						// Property: UserProfileName
-						Description: "The name of the user's profile.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time at which the model package was created.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time at which the model package was created.",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time at which the model package was created.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"customer_metadata_properties": {
-			// Property: CustomerMetadataProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The metadata properties associated with the model package versions.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 128,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}": {
-			//	      "maxLength": 256,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "The metadata properties associated with the model package versions.",
-			// Pattern: ""
-			Type: types.MapType{ElemType: types.StringType},
+		}, /*END ATTRIBUTE*/
+		// Property: CustomerMetadataProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The metadata properties associated with the model package versions.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}": {
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"customer_metadata_properties": // Pattern: ""
+		schema.MapAttribute{            /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			// Pattern "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}" ignored.
-			Computed: true,
-		},
-		"domain": {
-			// Property: Domain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The machine learning domain of the model package you specified.",
-			//	  "type": "string"
-			//	}
+			Description: "The metadata properties associated with the model package versions.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Domain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The machine learning domain of the model package you specified.",
+		//	  "type": "string"
+		//	}
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The machine learning domain of the model package you specified.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"drift_check_baselines": {
-			// Property: DriftCheckBaselines
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
-			//	  "properties": {
-			//	    "Bias": {
-			//	      "additionalProperties": false,
-			//	      "description": "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
-			//	      "properties": {
-			//	        "ConfigFile": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a File Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the file source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the file source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the file source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "PostTrainingConstraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "PreTrainingConstraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Explainability": {
-			//	      "additionalProperties": false,
-			//	      "description": "Contains explainability metrics for a model.",
-			//	      "properties": {
-			//	        "ConfigFile": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a File Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the file source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the file source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the file source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelDataQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DriftCheckBaselines
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
+		//	  "properties": {
+		//	    "Bias": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
+		//	      "properties": {
+		//	        "ConfigFile": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a File Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the file source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the file source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the file source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PostTrainingConstraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PreTrainingConstraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Explainability": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains explainability metrics for a model.",
+		//	      "properties": {
+		//	        "ConfigFile": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a File Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the file source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the file source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the file source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelDataQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"drift_check_baselines": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bias
+				"bias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConfigFile
+						"config_file": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the file source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the file source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the file source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a File Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PostTrainingConstraints
+						"post_training_constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PreTrainingConstraints
+						"pre_training_constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Explainability
+				"explainability": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConfigFile
+						"config_file": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the file source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the file source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the file source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a File Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains explainability metrics for a model.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelDataQuality
+				"model_data_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelQuality
+				"model_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bias": {
-						// Property: Bias
-						Description: "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"config_file": {
-									// Property: ConfigFile
-									Description: "Represents a File Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the file source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the file source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the file source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"post_training_constraints": {
-									// Property: PostTrainingConstraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"pre_training_constraints": {
-									// Property: PreTrainingConstraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"explainability": {
-						// Property: Explainability
-						Description: "Contains explainability metrics for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"config_file": {
-									// Property: ConfigFile
-									Description: "Represents a File Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the file source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the file source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the file source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"model_data_quality": {
-						// Property: ModelDataQuality
-						Description: "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"model_quality": {
-						// Property: ModelQuality
-						Description: "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"environment": {
-			// Property: Environment
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Sets the environment variables in the Docker container",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 1024,
-			//	      "type": "string"
-			//	    },
-			//	    "[\\S\\s]*": {
-			//	      "maxLength": 1024,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Sets the environment variables in the Docker container",
-			// Pattern: ""
-			Type: types.MapType{ElemType: types.StringType},
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Environment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Sets the environment variables in the Docker container",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 1024,
+		//	      "type": "string"
+		//	    },
+		//	    "[\\S\\s]*": {
+		//	      "maxLength": 1024,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"environment":       // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			// Pattern "[\\S\\s]*" ignored.
-			Computed: true,
-		},
-		"inference_specification": {
-			// Property: InferenceSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Details about inference jobs that can be run with models based on this model package.",
-			//	  "properties": {
-			//	    "Containers": {
-			//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Describes the Docker container for the model package.",
-			//	        "properties": {
-			//	          "ContainerHostname": {
-			//	            "description": "The DNS host name for the Docker container.",
-			//	            "maxLength": 63,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	            "type": "string"
-			//	          },
-			//	          "Environment": {
-			//	            "additionalProperties": false,
-			//	            "description": "Sets the environment variables in the Docker container",
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              },
-			//	              "[\\S\\s]*": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Framework": {
-			//	            "description": "The machine learning framework of the model package container image.",
-			//	            "type": "string"
-			//	          },
-			//	          "FrameworkVersion": {
-			//	            "description": "The framework version of the Model Package Container Image.",
-			//	            "maxLength": 10,
-			//	            "minLength": 3,
-			//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	            "type": "string"
-			//	          },
-			//	          "Image": {
-			//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "pattern": "[\\S]{1,255}",
-			//	            "type": "string"
-			//	          },
-			//	          "ImageDigest": {
-			//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	            "maxLength": 72,
-			//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelDataUrl": {
-			//	            "description": "A structure with Model Input details.",
-			//	            "maxLength": 1024,
-			//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelInput": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataInputConfig": {
-			//	                "description": "The input configuration object for the model.",
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\S\\s]+",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataInputConfig"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "NearestModelName": {
-			//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	            "type": "string"
-			//	          },
-			//	          "ProductId": {
-			//	            "description": "The AWS Marketplace product ID of the model package.",
-			//	            "maxLength": 256,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Image"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 15,
-			//	      "minItems": 1,
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "SupportedContentTypes": {
-			//	      "description": "The supported MIME types for the input data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME type for the input data.",
-			//	        "maxLength": 256,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedRealtimeInferenceInstanceTypes": {
-			//	      "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance type that is used to generate inferences in real-time",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedResponseMIMETypes": {
-			//	      "description": "The supported MIME types for the output data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "maxLength": 1024,
-			//	        "pattern": "^[-\\w]+\\/.+$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedTransformInstanceTypes": {
-			//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "type": "string"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Containers",
-			//	    "SupportedContentTypes",
-			//	    "SupportedResponseMIMETypes"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Description: "Sets the environment variables in the Docker container",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: InferenceSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Details about inference jobs that can be run with models based on this model package.",
+		//	  "properties": {
+		//	    "Containers": {
+		//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Describes the Docker container for the model package.",
+		//	        "properties": {
+		//	          "ContainerHostname": {
+		//	            "description": "The DNS host name for the Docker container.",
+		//	            "maxLength": 63,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	            "type": "string"
+		//	          },
+		//	          "Environment": {
+		//	            "additionalProperties": false,
+		//	            "description": "Sets the environment variables in the Docker container",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              },
+		//	              "[\\S\\s]*": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Framework": {
+		//	            "description": "The machine learning framework of the model package container image.",
+		//	            "type": "string"
+		//	          },
+		//	          "FrameworkVersion": {
+		//	            "description": "The framework version of the Model Package Container Image.",
+		//	            "maxLength": 10,
+		//	            "minLength": 3,
+		//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Image": {
+		//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "[\\S]{1,255}",
+		//	            "type": "string"
+		//	          },
+		//	          "ImageDigest": {
+		//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	            "maxLength": 72,
+		//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelDataUrl": {
+		//	            "description": "A structure with Model Input details.",
+		//	            "maxLength": 1024,
+		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelInput": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataInputConfig": {
+		//	                "description": "The input configuration object for the model.",
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\S\\s]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataInputConfig"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "NearestModelName": {
+		//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	            "type": "string"
+		//	          },
+		//	          "ProductId": {
+		//	            "description": "The AWS Marketplace product ID of the model package.",
+		//	            "maxLength": 256,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Image"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 15,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "SupportedContentTypes": {
+		//	      "description": "The supported MIME types for the input data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME type for the input data.",
+		//	        "maxLength": 256,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedRealtimeInferenceInstanceTypes": {
+		//	      "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance type that is used to generate inferences in real-time",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedResponseMIMETypes": {
+		//	      "description": "The supported MIME types for the output data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "maxLength": 1024,
+		//	        "pattern": "^[-\\w]+\\/.+$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedTransformInstanceTypes": {
+		//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "type": "string"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Containers",
+		//	    "SupportedContentTypes",
+		//	    "SupportedResponseMIMETypes"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"inference_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Containers
+				"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContainerHostname
+							"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The DNS host name for the Docker container.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Environment
+							"environment":       // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								// Pattern "[\\S\\s]*" ignored.
+								Description: "Sets the environment variables in the Docker container",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Framework
+							"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The machine learning framework of the model package container image.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: FrameworkVersion
+							"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The framework version of the Model Package Container Image.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Image
+							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ImageDigest
+							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataUrl
+							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A structure with Model Input details.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ModelInput
+							"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataInputConfig
+									"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The input configuration object for the model.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: NearestModelName
+							"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ProductId
+							"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS Marketplace product ID of the model package.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedContentTypes
+				"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the input data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedRealtimeInferenceInstanceTypes
+				"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types that are used to generate inferences in real-time",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedResponseMIMETypes
+				"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the output data.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedTransformInstanceTypes
+				"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Details about inference jobs that can be run with models based on this model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
-									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
-									// Pattern "[\\S\\s]*" ignored.
-									Computed: true,
-								},
-								"framework": {
-									// Property: Framework
-									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
-									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"image": {
-									// Property: Image
-									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"image_digest": {
-									// Property: ImageDigest
-									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
-									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
-									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"product_id": {
-									// Property: ProductId
-									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
-						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
-						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
-						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
-						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"last_modified_by": {
-			// Property: LastModifiedBy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			//	  "properties": {
-			//	    "DomainId": {
-			//	      "description": "The domain associated with the user.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileArn": {
-			//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileName": {
-			//	      "description": "The name of the user's profile.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedBy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
+		//	  "properties": {
+		//	    "DomainId": {
+		//	      "description": "The domain associated with the user.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileName": {
+		//	      "description": "The name of the user's profile.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"last_modified_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DomainId
+				"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The domain associated with the user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileArn
+				"user_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the user's profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileName
+				"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the user's profile.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"domain_id": {
-						// Property: DomainId
-						Description: "The domain associated with the user.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"user_profile_arn": {
-						// Property: UserProfileArn
-						Description: "The Amazon Resource Name (ARN) of the user's profile.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"user_profile_name": {
-						// Property: UserProfileName
-						Description: "The name of the user's profile.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time at which the model package was last modified.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time at which the model package was last modified.",
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time at which the model package was last modified.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"metadata_properties": {
-			// Property: MetadataProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Metadata properties of the tracking entity, trial, or trial component.",
-			//	  "properties": {
-			//	    "CommitId": {
-			//	      "description": "The commit ID.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "GeneratedBy": {
-			//	      "description": "The entity this entity was generated by.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "ProjectId": {
-			//	      "description": "The project ID metadata.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "Repository": {
-			//	      "description": "The repository metadata.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MetadataProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Metadata properties of the tracking entity, trial, or trial component.",
+		//	  "properties": {
+		//	    "CommitId": {
+		//	      "description": "The commit ID.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "GeneratedBy": {
+		//	      "description": "The entity this entity was generated by.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "ProjectId": {
+		//	      "description": "The project ID metadata.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "Repository": {
+		//	      "description": "The repository metadata.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metadata_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CommitId
+				"commit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The commit ID.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GeneratedBy
+				"generated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The entity this entity was generated by.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProjectId
+				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The project ID metadata.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Repository
+				"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The repository metadata.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Metadata properties of the tracking entity, trial, or trial component.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"commit_id": {
-						// Property: CommitId
-						Description: "The commit ID.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"generated_by": {
-						// Property: GeneratedBy
-						Description: "The entity this entity was generated by.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"project_id": {
-						// Property: ProjectId
-						Description: "The project ID metadata.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"repository": {
-						// Property: Repository
-						Description: "The repository metadata.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"model_approval_status": {
-			// Property: ModelApprovalStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The approval status of the model package.",
-			//	  "enum": [
-			//	    "Approved",
-			//	    "Rejected",
-			//	    "PendingManualApproval"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ModelApprovalStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The approval status of the model package.",
+		//	  "enum": [
+		//	    "Approved",
+		//	    "Rejected",
+		//	    "PendingManualApproval"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"model_approval_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The approval status of the model package.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"model_metrics": {
-			// Property: ModelMetrics
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A structure that contains model metrics reports.",
-			//	  "properties": {
-			//	    "Bias": {
-			//	      "additionalProperties": false,
-			//	      "description": "Contains bias metrics for a model.",
-			//	      "properties": {
-			//	        "PostTrainingReport": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "PreTrainingReport": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Report": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Explainability": {
-			//	      "additionalProperties": false,
-			//	      "description": "Contains explainability metrics for a model.",
-			//	      "properties": {
-			//	        "Report": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelDataQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Metrics that measure the quality of the input data for a model.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Metrics that measure the quality of a model.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ModelMetrics
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A structure that contains model metrics reports.",
+		//	  "properties": {
+		//	    "Bias": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains bias metrics for a model.",
+		//	      "properties": {
+		//	        "PostTrainingReport": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PreTrainingReport": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Report": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Explainability": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains explainability metrics for a model.",
+		//	      "properties": {
+		//	        "Report": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelDataQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Metrics that measure the quality of the input data for a model.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Metrics that measure the quality of a model.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"model_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bias
+				"bias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PostTrainingReport
+						"post_training_report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PreTrainingReport
+						"pre_training_report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Report
+						"report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains bias metrics for a model.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Explainability
+				"explainability": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Report
+						"report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains explainability metrics for a model.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelDataQuality
+				"model_data_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Metrics that measure the quality of the input data for a model.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ModelQuality
+				"model_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Metrics that measure the quality of a model.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A structure that contains model metrics reports.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bias": {
-						// Property: Bias
-						Description: "Contains bias metrics for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"post_training_report": {
-									// Property: PostTrainingReport
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"pre_training_report": {
-									// Property: PreTrainingReport
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"report": {
-									// Property: Report
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"explainability": {
-						// Property: Explainability
-						Description: "Contains explainability metrics for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"report": {
-									// Property: Report
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"model_data_quality": {
-						// Property: ModelDataQuality
-						Description: "Metrics that measure the quality of the input data for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"model_quality": {
-						// Property: ModelQuality
-						Description: "Metrics that measure the quality of a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"model_package_arn": {
-			// Property: ModelPackageArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the model package group.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the model package group.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"model_package_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"model_package_description": {
-			// Property: ModelPackageDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the model package.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the model package.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
+		//	  "type": "string"
+		//	}
+		"model_package_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the model package.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"model_package_group_name": {
-			// Property: ModelPackageGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the model package group.",
-			//	  "maxLength": 170,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the model package group.",
+		//	  "maxLength": 170,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"model_package_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the model package group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"model_package_name": {
-			// Property: ModelPackageName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name or arn of the model package.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name or arn of the model package.",
+		//	  "type": "string"
+		//	}
+		"model_package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or arn of the model package.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"model_package_status": {
-			// Property: ModelPackageStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The current status of the model package.",
-			//	  "enum": [
-			//	    "Pending",
-			//	    "Deleting",
-			//	    "InProgress",
-			//	    "Completed",
-			//	    "Failed"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current status of the model package.",
+		//	  "enum": [
+		//	    "Pending",
+		//	    "Deleting",
+		//	    "InProgress",
+		//	    "Completed",
+		//	    "Failed"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"model_package_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The current status of the model package.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"model_package_status_details": {
-			// Property: ModelPackageStatusDetails
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Details about the current status of the model package.",
-			//	  "properties": {
-			//	    "ImageScanStatuses": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Represents the overall status of a model package.",
-			//	        "properties": {
-			//	          "FailureReason": {
-			//	            "description": "If the overall status is Failed, the reason for the failure.",
-			//	            "type": "string"
-			//	          },
-			//	          "Name": {
-			//	            "description": "The name of the model package for which the overall status is being reported.",
-			//	            "maxLength": 63,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Status": {
-			//	            "description": "The current status.",
-			//	            "enum": [
-			//	              "NotStarted",
-			//	              "Failed",
-			//	              "InProgress",
-			//	              "Completed"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Name",
-			//	          "Status"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "ValidationStatuses": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Represents the overall status of a model package.",
-			//	        "properties": {
-			//	          "FailureReason": {
-			//	            "description": "If the overall status is Failed, the reason for the failure.",
-			//	            "type": "string"
-			//	          },
-			//	          "Name": {
-			//	            "description": "The name of the model package for which the overall status is being reported.",
-			//	            "maxLength": 63,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Status": {
-			//	            "description": "The current status.",
-			//	            "enum": [
-			//	              "NotStarted",
-			//	              "Failed",
-			//	              "InProgress",
-			//	              "Completed"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Name",
-			//	          "Status"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ValidationStatuses"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageStatusDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Details about the current status of the model package.",
+		//	  "properties": {
+		//	    "ImageScanStatuses": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Represents the overall status of a model package.",
+		//	        "properties": {
+		//	          "FailureReason": {
+		//	            "description": "If the overall status is Failed, the reason for the failure.",
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the model package for which the overall status is being reported.",
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "The current status.",
+		//	            "enum": [
+		//	              "NotStarted",
+		//	              "Failed",
+		//	              "InProgress",
+		//	              "Completed"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ValidationStatuses": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Represents the overall status of a model package.",
+		//	        "properties": {
+		//	          "FailureReason": {
+		//	            "description": "If the overall status is Failed, the reason for the failure.",
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the model package for which the overall status is being reported.",
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "The current status.",
+		//	            "enum": [
+		//	              "NotStarted",
+		//	              "Failed",
+		//	              "InProgress",
+		//	              "Completed"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ValidationStatuses"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"model_package_status_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageScanStatuses
+				"image_scan_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FailureReason
+							"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "If the overall status is Failed, the reason for the failure.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the model package for which the overall status is being reported.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The current status.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ValidationStatuses
+				"validation_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FailureReason
+							"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "If the overall status is Failed, the reason for the failure.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the model package for which the overall status is being reported.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The current status.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Details about the current status of the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"image_scan_statuses": {
-						// Property: ImageScanStatuses
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"failure_reason": {
-									// Property: FailureReason
-									Description: "If the overall status is Failed, the reason for the failure.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"name": {
-									// Property: Name
-									Description: "The name of the model package for which the overall status is being reported.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"status": {
-									// Property: Status
-									Description: "The current status.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"validation_statuses": {
-						// Property: ValidationStatuses
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"failure_reason": {
-									// Property: FailureReason
-									Description: "If the overall status is Failed, the reason for the failure.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"name": {
-									// Property: Name
-									Description: "The name of the model package for which the overall status is being reported.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"status": {
-									// Property: Status
-									Description: "The current status.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"model_package_status_item": {
-			// Property: ModelPackageStatusItem
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Represents the overall status of a model package.",
-			//	  "properties": {
-			//	    "FailureReason": {
-			//	      "description": "If the overall status is Failed, the reason for the failure.",
-			//	      "type": "string"
-			//	    },
-			//	    "Name": {
-			//	      "description": "The name of the model package for which the overall status is being reported.",
-			//	      "maxLength": 63,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	      "type": "string"
-			//	    },
-			//	    "Status": {
-			//	      "description": "The current status.",
-			//	      "enum": [
-			//	        "NotStarted",
-			//	        "Failed",
-			//	        "InProgress",
-			//	        "Completed"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name",
-			//	    "Status"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageStatusItem
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the overall status of a model package.",
+		//	  "properties": {
+		//	    "FailureReason": {
+		//	      "description": "If the overall status is Failed, the reason for the failure.",
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "description": "The name of the model package for which the overall status is being reported.",
+		//	      "maxLength": 63,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "description": "The current status.",
+		//	      "enum": [
+		//	        "NotStarted",
+		//	        "Failed",
+		//	        "InProgress",
+		//	        "Completed"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name",
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"model_package_status_item": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureReason
+				"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "If the overall status is Failed, the reason for the failure.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the model package for which the overall status is being reported.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The current status.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Represents the overall status of a model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"failure_reason": {
-						// Property: FailureReason
-						Description: "If the overall status is Failed, the reason for the failure.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"name": {
-						// Property: Name
-						Description: "The name of the model package for which the overall status is being reported.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"status": {
-						// Property: Status
-						Description: "The current status.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"model_package_version": {
-			// Property: ModelPackageVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of the model package.",
-			//	  "minimum": 1,
-			//	  "type": "integer"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the model package.",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"model_package_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The version of the model package.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"sample_payload_url": {
-			// Property: SamplePayloadUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SamplePayloadUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	  "type": "string"
+		//	}
+		"sample_payload_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_algorithm_specification": {
-			// Property: SourceAlgorithmSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Details about the algorithm that was used to create the model package.",
-			//	  "insertionOrder": true,
-			//	  "properties": {
-			//	    "SourceAlgorithms": {
-			//	      "description": "A list of algorithms that were used to create a model package.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
-			//	        "properties": {
-			//	          "AlgorithmName": {
-			//	            "description": "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
-			//	            "maxLength": 170,
-			//	            "minLength": 1,
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelDataUrl": {
-			//	            "description": "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
-			//	            "maxLength": 1024,
-			//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "AlgorithmName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 1,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "SourceAlgorithms"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceAlgorithmSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Details about the algorithm that was used to create the model package.",
+		//	  "insertionOrder": true,
+		//	  "properties": {
+		//	    "SourceAlgorithms": {
+		//	      "description": "A list of algorithms that were used to create a model package.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
+		//	        "properties": {
+		//	          "AlgorithmName": {
+		//	            "description": "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
+		//	            "maxLength": 170,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelDataUrl": {
+		//	            "description": "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
+		//	            "maxLength": 1024,
+		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AlgorithmName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SourceAlgorithms"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_algorithm_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceAlgorithms
+				"source_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AlgorithmName
+							"algorithm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataUrl
+							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of algorithms that were used to create a model package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Details about the algorithm that was used to create the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"source_algorithms": {
-						// Property: SourceAlgorithms
-						Description: "A list of algorithms that were used to create a model package.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"algorithm_name": {
-									// Property: AlgorithmName
-									Description: "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
-									Description: "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 256,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array"
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"value": {
-						// Property: Value
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"task": {
-			// Property: Task
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The machine learning task your model package accomplishes.",
-			//	  "type": "string"
-			//	}
-			Description: "The machine learning task your model package accomplishes.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"validation_specification": {
-			// Property: ValidationSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
-			//	  "insertionOrder": true,
-			//	  "properties": {
-			//	    "ValidationProfiles": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Contains data, such as the inputs and targeted instance types that are used in the process of validating the model package.",
-			//	        "properties": {
-			//	          "ProfileName": {
-			//	            "description": "The name of the profile for the model package.",
-			//	            "maxLength": 63,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	            "type": "string"
-			//	          },
-			//	          "TransformJobDefinition": {
-			//	            "additionalProperties": false,
-			//	            "description": "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
-			//	            "properties": {
-			//	              "BatchStrategy": {
-			//	                "description": "A string that determines the number of records included in a single mini-batch.",
-			//	                "enum": [
-			//	                  "MultiRecord",
-			//	                  "SingleRecord"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Environment": {
-			//	                "additionalProperties": false,
-			//	                "description": "Sets the environment variables in the Docker container",
-			//	                "patternProperties": {
-			//	                  "": {
-			//	                    "maxLength": 1024,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "[\\S\\s]*": {
-			//	                    "maxLength": 1024,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "MaxConcurrentTransforms": {
-			//	                "description": "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              },
-			//	              "MaxPayloadInMB": {
-			//	                "description": "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              },
-			//	              "TransformInput": {
-			//	                "additionalProperties": false,
-			//	                "description": "Describes the input source of a transform job and the way the transform job consumes it.",
-			//	                "properties": {
-			//	                  "CompressionType": {
-			//	                    "description": "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
-			//	                    "enum": [
-			//	                      "None",
-			//	                      "Gzip"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "ContentType": {
-			//	                    "description": "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
-			//	                    "maxLength": 256,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DataSource": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Describes the input source of a transform job and the way the transform job consumes it.",
-			//	                    "properties": {
-			//	                      "S3DataSource": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "Describes the S3 data source.",
-			//	                        "properties": {
-			//	                          "S3DataType": {
-			//	                            "description": "The S3 Data Source Type",
-			//	                            "enum": [
-			//	                              "ManifestFile",
-			//	                              "S3Prefix",
-			//	                              "AugmentedManifestFile"
-			//	                            ],
-			//	                            "type": "string"
-			//	                          },
-			//	                          "S3Uri": {
-			//	                            "description": "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
-			//	                            "maxLength": 1024,
-			//	                            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	                            "type": "string"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "S3DataType",
-			//	                          "S3Uri"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "S3DataSource"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  },
-			//	                  "SplitType": {
-			//	                    "description": "The method to use to split the transform job's data files into smaller batches. ",
-			//	                    "enum": [
-			//	                      "None",
-			//	                      "TFRecord",
-			//	                      "Line",
-			//	                      "RecordIO"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSource"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "TransformOutput": {
-			//	                "additionalProperties": false,
-			//	                "description": "Describes the results of a transform job.",
-			//	                "properties": {
-			//	                  "Accept": {
-			//	                    "description": "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
-			//	                    "maxLength": 256,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "AssembleWith": {
-			//	                    "description": "Defines how to assemble the results of the transform job as a single S3 object.",
-			//	                    "enum": [
-			//	                      "None",
-			//	                      "Line"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "KmsKeyId": {
-			//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-			//	                    "maxLength": 2048,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "S3OutputPath": {
-			//	                    "description": "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
-			//	                    "maxLength": 1024,
-			//	                    "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "S3OutputPath"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "TransformResources": {
-			//	                "additionalProperties": false,
-			//	                "description": "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
-			//	                "properties": {
-			//	                  "InstanceCount": {
-			//	                    "description": "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
-			//	                    "minimum": 1,
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "InstanceType": {
-			//	                    "description": "The ML compute instance type for the transform job.",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "VolumeKmsKeyId": {
-			//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
-			//	                    "maxLength": 2048,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "InstanceCount",
-			//	                  "InstanceType"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "TransformResources",
-			//	              "TransformOutput",
-			//	              "TransformInput"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "TransformJobDefinition",
-			//	          "ProfileName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 1,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ValidationRole": {
-			//	      "description": "The IAM roles to be used for the validation of the model package.",
-			//	      "maxLength": 2048,
-			//	      "minLength": 20,
-			//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ValidationProfiles",
-			//	    "ValidationRole"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"validation_profiles": {
-						// Property: ValidationProfiles
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"profile_name": {
-									// Property: ProfileName
-									Description: "The name of the profile for the model package.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"transform_job_definition": {
-									// Property: TransformJobDefinition
-									Description: "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"batch_strategy": {
-												// Property: BatchStrategy
-												Description: "A string that determines the number of records included in a single mini-batch.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"environment": {
-												// Property: Environment
-												Description: "Sets the environment variables in the Docker container",
-												// Pattern: ""
-												Type: types.MapType{ElemType: types.StringType},
-												// Pattern "[\\S\\s]*" ignored.
-												Computed: true,
-											},
-											"max_concurrent_transforms": {
-												// Property: MaxConcurrentTransforms
-												Description: "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
-												Type:        types.Int64Type,
-												Computed:    true,
-											},
-											"max_payload_in_mb": {
-												// Property: MaxPayloadInMB
-												Description: "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
-												Type:        types.Int64Type,
-												Computed:    true,
-											},
-											"transform_input": {
-												// Property: TransformInput
-												Description: "Describes the input source of a transform job and the way the transform job consumes it.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"compression_type": {
-															// Property: CompressionType
-															Description: "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"content_type": {
-															// Property: ContentType
-															Description: "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"data_source": {
-															// Property: DataSource
-															Description: "Describes the input source of a transform job and the way the transform job consumes it.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"s3_data_source": {
-																		// Property: S3DataSource
-																		Description: "Describes the S3 data source.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"s3_data_type": {
-																					// Property: S3DataType
-																					Description: "The S3 Data Source Type",
-																					Type:        types.StringType,
-																					Computed:    true,
-																				},
-																				"s3_uri": {
-																					// Property: S3Uri
-																					Description: "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
-																					Type:        types.StringType,
-																					Computed:    true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"split_type": {
-															// Property: SplitType
-															Description: "The method to use to split the transform job's data files into smaller batches. ",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"transform_output": {
-												// Property: TransformOutput
-												Description: "Describes the results of a transform job.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"accept": {
-															// Property: Accept
-															Description: "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"assemble_with": {
-															// Property: AssembleWith
-															Description: "Defines how to assemble the results of the transform job as a single S3 object.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"kms_key_id": {
-															// Property: KmsKeyId
-															Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"s3_output_path": {
-															// Property: S3OutputPath
-															Description: "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"transform_resources": {
-												// Property: TransformResources
-												Description: "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"instance_count": {
-															// Property: InstanceCount
-															Description: "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
-															Type:        types.Int64Type,
-															Computed:    true,
-														},
-														"instance_type": {
-															// Property: InstanceType
-															Description: "The ML compute instance type for the transform job.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"volume_kms_key_id": {
-															// Property: VolumeKmsKeyId
-															Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"validation_role": {
-						// Property: ValidationRole
-						Description: "The IAM roles to be used for the validation of the model package.",
-						Type:        types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Task
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The machine learning task your model package accomplishes.",
+		//	  "type": "string"
+		//	}
+		"task": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The machine learning task your model package accomplishes.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ValidationSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
+		//	  "insertionOrder": true,
+		//	  "properties": {
+		//	    "ValidationProfiles": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Contains data, such as the inputs and targeted instance types that are used in the process of validating the model package.",
+		//	        "properties": {
+		//	          "ProfileName": {
+		//	            "description": "The name of the profile for the model package.",
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	            "type": "string"
+		//	          },
+		//	          "TransformJobDefinition": {
+		//	            "additionalProperties": false,
+		//	            "description": "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
+		//	            "properties": {
+		//	              "BatchStrategy": {
+		//	                "description": "A string that determines the number of records included in a single mini-batch.",
+		//	                "enum": [
+		//	                  "MultiRecord",
+		//	                  "SingleRecord"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Environment": {
+		//	                "additionalProperties": false,
+		//	                "description": "Sets the environment variables in the Docker container",
+		//	                "patternProperties": {
+		//	                  "": {
+		//	                    "maxLength": 1024,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "[\\S\\s]*": {
+		//	                    "maxLength": 1024,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "MaxConcurrentTransforms": {
+		//	                "description": "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              },
+		//	              "MaxPayloadInMB": {
+		//	                "description": "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              },
+		//	              "TransformInput": {
+		//	                "additionalProperties": false,
+		//	                "description": "Describes the input source of a transform job and the way the transform job consumes it.",
+		//	                "properties": {
+		//	                  "CompressionType": {
+		//	                    "description": "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
+		//	                    "enum": [
+		//	                      "None",
+		//	                      "Gzip"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ContentType": {
+		//	                    "description": "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
+		//	                    "maxLength": 256,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DataSource": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Describes the input source of a transform job and the way the transform job consumes it.",
+		//	                    "properties": {
+		//	                      "S3DataSource": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Describes the S3 data source.",
+		//	                        "properties": {
+		//	                          "S3DataType": {
+		//	                            "description": "The S3 Data Source Type",
+		//	                            "enum": [
+		//	                              "ManifestFile",
+		//	                              "S3Prefix",
+		//	                              "AugmentedManifestFile"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          },
+		//	                          "S3Uri": {
+		//	                            "description": "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
+		//	                            "maxLength": 1024,
+		//	                            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "S3DataType",
+		//	                          "S3Uri"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "S3DataSource"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SplitType": {
+		//	                    "description": "The method to use to split the transform job's data files into smaller batches. ",
+		//	                    "enum": [
+		//	                      "None",
+		//	                      "TFRecord",
+		//	                      "Line",
+		//	                      "RecordIO"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSource"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "TransformOutput": {
+		//	                "additionalProperties": false,
+		//	                "description": "Describes the results of a transform job.",
+		//	                "properties": {
+		//	                  "Accept": {
+		//	                    "description": "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
+		//	                    "maxLength": 256,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "AssembleWith": {
+		//	                    "description": "Defines how to assemble the results of the transform job as a single S3 object.",
+		//	                    "enum": [
+		//	                      "None",
+		//	                      "Line"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "KmsKeyId": {
+		//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+		//	                    "maxLength": 2048,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "S3OutputPath": {
+		//	                    "description": "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
+		//	                    "maxLength": 1024,
+		//	                    "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "S3OutputPath"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "TransformResources": {
+		//	                "additionalProperties": false,
+		//	                "description": "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
+		//	                "properties": {
+		//	                  "InstanceCount": {
+		//	                    "description": "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
+		//	                    "minimum": 1,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "InstanceType": {
+		//	                    "description": "The ML compute instance type for the transform job.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "VolumeKmsKeyId": {
+		//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
+		//	                    "maxLength": 2048,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "InstanceCount",
+		//	                  "InstanceType"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TransformResources",
+		//	              "TransformOutput",
+		//	              "TransformInput"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TransformJobDefinition",
+		//	          "ProfileName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ValidationRole": {
+		//	      "description": "The IAM roles to be used for the validation of the model package.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ValidationProfiles",
+		//	    "ValidationRole"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"validation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ValidationProfiles
+				"validation_profiles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ProfileName
+							"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the profile for the model package.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TransformJobDefinition
+							"transform_job_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BatchStrategy
+									"batch_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A string that determines the number of records included in a single mini-batch.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Environment
+									"environment":       // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										// Pattern "[\\S\\s]*" ignored.
+										Description: "Sets the environment variables in the Docker container",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MaxConcurrentTransforms
+									"max_concurrent_transforms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: MaxPayloadInMB
+									"max_payload_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransformInput
+									"transform_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CompressionType
+											"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: ContentType
+											"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: DataSource
+											"data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: S3DataSource
+													"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: S3DataType
+															"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The S3 Data Source Type",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: S3Uri
+															"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Describes the S3 data source.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Describes the input source of a transform job and the way the transform job consumes it.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SplitType
+											"split_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The method to use to split the transform job's data files into smaller batches. ",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the input source of a transform job and the way the transform job consumes it.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransformOutput
+									"transform_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Accept
+											"accept": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: AssembleWith
+											"assemble_with": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Defines how to assemble the results of the transform job as a single S3 object.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: KmsKeyId
+											"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: S3OutputPath
+											"s3_output_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the results of a transform job.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransformResources
+									"transform_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: InstanceCount
+											"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: InstanceType
+											"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ML compute instance type for the transform job.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: VolumeKmsKeyId
+											"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ValidationRole
+				"validation_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IAM roles to be used for the validation of the model package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SageMaker::ModelPackage",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackage").WithTerraformTypeName("awscc_sagemaker_model_package")
 	opts = opts.WithTerraformSchema(schema)
@@ -3542,7 +3300,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"volume_kms_key_id":                           "VolumeKmsKeyId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

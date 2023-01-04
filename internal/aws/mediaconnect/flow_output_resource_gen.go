@@ -5,12 +5,18 @@ package mediaconnect
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,271 +26,256 @@ func init() {
 // flowOutputResource returns the Terraform awscc_mediaconnect_flow_output resource.
 // This Terraform resource corresponds to the CloudFormation AWS::MediaConnect::FlowOutput resource.
 func flowOutputResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"cidr_allow_list": {
-			// Property: CidrAllowList
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CidrAllowList
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"cidr_allow_list": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The range of IP addresses that should be allowed to initiate output requests to this flow. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description of the output.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description of the output.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the output.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"destination": {
-			// Property: Destination
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The address where you want to send the output.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Destination
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The address where you want to send the output.",
+		//	  "type": "string"
+		//	}
+		"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The address where you want to send the output.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"encryption": {
-			// Property: Encryption
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-			//	  "properties": {
-			//	    "Algorithm": {
-			//	      "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-			//	      "enum": [
-			//	        "aes128",
-			//	        "aes192",
-			//	        "aes256"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "KeyType": {
-			//	      "default": "static-key",
-			//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-			//	      "enum": [
-			//	        "static-key",
-			//	        "srt-password"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "RoleArn": {
-			//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-			//	      "type": "string"
-			//	    },
-			//	    "SecretArn": {
-			//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "RoleArn",
-			//	    "SecretArn"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Encryption
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+		//	  "properties": {
+		//	    "Algorithm": {
+		//	      "description": "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+		//	      "enum": [
+		//	        "aes128",
+		//	        "aes192",
+		//	        "aes256"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "KeyType": {
+		//	      "default": "static-key",
+		//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+		//	      "enum": [
+		//	        "static-key",
+		//	        "srt-password"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RoleArn": {
+		//	      "description": "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RoleArn",
+		//	    "SecretArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Algorithm
+				"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"aes128",
+							"aes192",
+							"aes256",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KeyType
+				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"static-key",
+							"srt-password",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						generic.StringDefaultValue("static-key"),
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RoleArn
+				"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The type of key used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"algorithm": {
-						// Property: Algorithm
-						Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"aes128",
-								"aes192",
-								"aes256",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"key_type": {
-						// Property: KeyType
-						Description: "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"static-key",
-								"srt-password",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.StringValue("static-key")),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"role_arn": {
-						// Property: RoleArn
-						Description: "The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).",
-						Type:        types.StringType,
-						Required:    true,
-					},
-					"secret_arn": {
-						// Property: SecretArn
-						Description: " The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"flow_arn": {
-			// Property: FlowArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FlowArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
+		//	  "type": "string"
+		//	}
+		"flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN), a unique identifier for any AWS resource, of the flow.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"max_latency": {
-			// Property: MaxLatency
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MaxLatency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
+		//	  "type": "integer"
+		//	}
+		"max_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"min_latency": {
-			// Property: MinLatency
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The minimum latency in milliseconds.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MinLatency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The minimum latency in milliseconds.",
+		//	  "type": "integer"
+		//	}
+		"min_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The minimum latency in milliseconds.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the output. This value must be unique within the current flow.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the output. This value must be unique within the current flow.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the output. This value must be unique within the current flow.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"output_arn": {
-			// Property: OutputArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the output.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OutputArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the output.",
+		//	  "type": "string"
+		//	}
+		"output_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the output.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"port": {
-			// Property: Port
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The port to use when content is distributed to this output.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Port
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port to use when content is distributed to this output.",
+		//	  "type": "integer"
+		//	}
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The port to use when content is distributed to this output.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"protocol": {
-			// Property: Protocol
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The protocol that is used by the source or output.",
-			//	  "enum": [
-			//	    "zixi-push",
-			//	    "rtp-fec",
-			//	    "rtp",
-			//	    "zixi-pull",
-			//	    "rist",
-			//	    "fujitsu-qos",
-			//	    "srt-listener",
-			//	    "srt-caller"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Protocol
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The protocol that is used by the source or output.",
+		//	  "enum": [
+		//	    "zixi-push",
+		//	    "rtp-fec",
+		//	    "rtp",
+		//	    "zixi-pull",
+		//	    "rist",
+		//	    "fujitsu-qos",
+		//	    "srt-listener",
+		//	    "srt-caller"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The protocol that is used by the source or output.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"zixi-push",
 					"rtp-fec",
 					"rtp",
@@ -293,111 +284,104 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 					"fujitsu-qos",
 					"srt-listener",
 					"srt-caller",
-				}),
-			},
-		},
-		"remote_id": {
-			// Property: RemoteId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The remote ID for the Zixi-pull stream.",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RemoteId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The remote ID for the Zixi-pull stream.",
+		//	  "type": "string"
+		//	}
+		"remote_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The remote ID for the Zixi-pull stream.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"smoothing_latency": {
-			// Property: SmoothingLatency
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SmoothingLatency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
+		//	  "type": "integer"
+		//	}
+		"smoothing_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The smoothing latency in milliseconds for RIST, RTP, and RTP-FEC streams.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"stream_id": {
-			// Property: StreamId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StreamId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
+		//	  "type": "string"
+		//	}
+		"stream_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"vpc_interface_attachment": {
-			// Property: VpcInterfaceAttachment
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The name of the VPC interface attachment to use for this output.",
-			//	  "properties": {
-			//	    "VpcInterfaceName": {
-			//	      "description": "The name of the VPC interface to use for this output.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: VpcInterfaceAttachment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The name of the VPC interface attachment to use for this output.",
+		//	  "properties": {
+		//	    "VpcInterfaceName": {
+		//	      "description": "The name of the VPC interface to use for this output.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vpc_interface_attachment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: VpcInterfaceName
+				"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the VPC interface to use for this output.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The name of the VPC interface attachment to use for this output.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"vpc_interface_name": {
-						// Property: VpcInterfaceName
-						Description: "The name of the VPC interface to use for this output.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::MediaConnect::FlowOutput",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::MediaConnect::FlowOutput").WithTerraformTypeName("awscc_mediaconnect_flow_output")
 	opts = opts.WithTerraformSchema(schema)
@@ -429,7 +413,7 @@ func flowOutputResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

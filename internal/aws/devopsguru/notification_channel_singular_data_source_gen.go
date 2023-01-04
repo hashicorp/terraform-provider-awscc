@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,144 +19,134 @@ func init() {
 // notificationChannelDataSource returns the Terraform awscc_devopsguru_notification_channel data source.
 // This Terraform data source corresponds to the CloudFormation AWS::DevOpsGuru::NotificationChannel resource.
 func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"config": {
-			// Property: Config
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Information about notification channels you have configured with DevOps Guru.",
-			//	  "properties": {
-			//	    "Filters": {
-			//	      "additionalProperties": false,
-			//	      "description": "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
-			//	      "properties": {
-			//	        "MessageTypes": {
-			//	          "description": "DevOps Guru message types to filter for",
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "description": "DevOps Guru NotificationMessageType Enum",
-			//	            "enum": [
-			//	              "NEW_INSIGHT",
-			//	              "CLOSED_INSIGHT",
-			//	              "NEW_ASSOCIATION",
-			//	              "SEVERITY_UPGRADED",
-			//	              "NEW_RECOMMENDATION"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 5,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        },
-			//	        "Severities": {
-			//	          "description": "DevOps Guru insight severities to filter for",
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "description": "DevOps Guru Insight Severity Enum",
-			//	            "enum": [
-			//	              "LOW",
-			//	              "MEDIUM",
-			//	              "HIGH"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "maxItems": 3,
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Sns": {
-			//	      "additionalProperties": false,
-			//	      "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-			//	      "properties": {
-			//	        "TopicArn": {
-			//	          "maxLength": 1024,
-			//	          "minLength": 36,
-			//	          "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Config
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Information about notification channels you have configured with DevOps Guru.",
+		//	  "properties": {
+		//	    "Filters": {
+		//	      "additionalProperties": false,
+		//	      "description": "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
+		//	      "properties": {
+		//	        "MessageTypes": {
+		//	          "description": "DevOps Guru message types to filter for",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "DevOps Guru NotificationMessageType Enum",
+		//	            "enum": [
+		//	              "NEW_INSIGHT",
+		//	              "CLOSED_INSIGHT",
+		//	              "NEW_ASSOCIATION",
+		//	              "SEVERITY_UPGRADED",
+		//	              "NEW_RECOMMENDATION"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 5,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        },
+		//	        "Severities": {
+		//	          "description": "DevOps Guru insight severities to filter for",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "description": "DevOps Guru Insight Severity Enum",
+		//	            "enum": [
+		//	              "LOW",
+		//	              "MEDIUM",
+		//	              "HIGH"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "maxItems": 3,
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Sns": {
+		//	      "additionalProperties": false,
+		//	      "description": "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
+		//	      "properties": {
+		//	        "TopicArn": {
+		//	          "maxLength": 1024,
+		//	          "minLength": 36,
+		//	          "pattern": "^arn:aws[a-z0-9-]*:sns:[a-z0-9-]+:\\d{12}:[^:]+$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Filters
+				"filters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MessageTypes
+						"message_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "DevOps Guru message types to filter for",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Severities
+						"severities": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "DevOps Guru insight severities to filter for",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Sns
+				"sns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TopicArn
+						"topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Information about notification channels you have configured with DevOps Guru.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"filters": {
-						// Property: Filters
-						Description: "Information about filters of a notification channel configured in DevOpsGuru to filter for insights.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"message_types": {
-									// Property: MessageTypes
-									Description: "DevOps Guru message types to filter for",
-									Type:        types.ListType{ElemType: types.StringType},
-									Computed:    true,
-								},
-								"severities": {
-									// Property: Severities
-									Description: "DevOps Guru insight severities to filter for",
-									Type:        types.ListType{ElemType: types.StringType},
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"sns": {
-						// Property: Sns
-						Description: "Information about a notification channel configured in DevOps Guru to send notifications when insights are created.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"topic_arn": {
-									// Property: TopicArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of a notification channel.",
-			//	  "maxLength": 36,
-			//	  "minLength": 36,
-			//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
-			//	  "type": "string"
-			//	}
-			Description: "The ID of a notification channel.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of a notification channel.",
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of a notification channel.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::DevOpsGuru::NotificationChannel",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DevOpsGuru::NotificationChannel").WithTerraformTypeName("awscc_devopsguru_notification_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -170,7 +160,7 @@ func notificationChannelDataSource(ctx context.Context) (datasource.DataSource, 
 		"topic_arn":     "TopicArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

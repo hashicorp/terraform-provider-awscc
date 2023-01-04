@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,442 +19,403 @@ func init() {
 // computeEnvironmentDataSource returns the Terraform awscc_batch_compute_environment data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Batch::ComputeEnvironment resource.
 func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"compute_environment_arn": {
-			// Property: ComputeEnvironmentArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ComputeEnvironmentArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"compute_environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"compute_environment_name": {
-			// Property: ComputeEnvironmentName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ComputeEnvironmentName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"compute_environment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"compute_resources": {
-			// Property: ComputeResources
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "AllocationStrategy": {
-			//	      "type": "string"
-			//	    },
-			//	    "BidPercentage": {
-			//	      "type": "integer"
-			//	    },
-			//	    "DesiredvCpus": {
-			//	      "type": "integer"
-			//	    },
-			//	    "Ec2Configuration": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ImageIdOverride": {
-			//	            "type": "string"
-			//	          },
-			//	          "ImageKubernetesVersion": {
-			//	            "type": "string"
-			//	          },
-			//	          "ImageType": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "ImageType"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "Ec2KeyPair": {
-			//	      "type": "string"
-			//	    },
-			//	    "ImageId": {
-			//	      "type": "string"
-			//	    },
-			//	    "InstanceRole": {
-			//	      "type": "string"
-			//	    },
-			//	    "InstanceTypes": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "LaunchTemplate": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "LaunchTemplateId": {
-			//	          "type": "string"
-			//	        },
-			//	        "LaunchTemplateName": {
-			//	          "type": "string"
-			//	        },
-			//	        "Version": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "MaxvCpus": {
-			//	      "type": "integer"
-			//	    },
-			//	    "MinvCpus": {
-			//	      "type": "integer"
-			//	    },
-			//	    "PlacementGroup": {
-			//	      "type": "string"
-			//	    },
-			//	    "SecurityGroupIds": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "SpotIamFleetRole": {
-			//	      "type": "string"
-			//	    },
-			//	    "Subnets": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "Tags": {
-			//	      "additionalProperties": false,
-			//	      "description": "A key-value pair to associate with a resource.",
-			//	      "patternProperties": {
-			//	        "": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Type": {
-			//	      "type": "string"
-			//	    },
-			//	    "UpdateToLatestImageVersion": {
-			//	      "default": false,
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Subnets",
-			//	    "Type",
-			//	    "MaxvCpus"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"allocation_strategy": {
-						// Property: AllocationStrategy
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"bid_percentage": {
-						// Property: BidPercentage
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"desiredv_cpus": {
-						// Property: DesiredvCpus
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"ec_2_configuration": {
-						// Property: Ec2Configuration
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"image_id_override": {
-									// Property: ImageIdOverride
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"image_kubernetes_version": {
-									// Property: ImageKubernetesVersion
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"image_type": {
-									// Property: ImageType
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"ec_2_key_pair": {
-						// Property: Ec2KeyPair
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"image_id": {
-						// Property: ImageId
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"instance_role": {
-						// Property: InstanceRole
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"instance_types": {
-						// Property: InstanceTypes
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"launch_template": {
-						// Property: LaunchTemplate
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"launch_template_id": {
-									// Property: LaunchTemplateId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"launch_template_name": {
-									// Property: LaunchTemplateName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"version": {
-									// Property: Version
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"maxv_cpus": {
-						// Property: MaxvCpus
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"minv_cpus": {
-						// Property: MinvCpus
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"placement_group": {
-						// Property: PlacementGroup
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"security_group_ids": {
-						// Property: SecurityGroupIds
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"spot_iam_fleet_role": {
-						// Property: SpotIamFleetRole
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"subnets": {
-						// Property: Subnets
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"tags": {
-						// Property: Tags
-						Description: "A key-value pair to associate with a resource.",
-						// Pattern: ""
-						Type:     types.MapType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"update_to_latest_image_version": {
-						// Property: UpdateToLatestImageVersion
-						Type:     types.BoolType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: ComputeResources
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AllocationStrategy": {
+		//	      "type": "string"
+		//	    },
+		//	    "BidPercentage": {
+		//	      "type": "integer"
+		//	    },
+		//	    "DesiredvCpus": {
+		//	      "type": "integer"
+		//	    },
+		//	    "Ec2Configuration": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ImageIdOverride": {
+		//	            "type": "string"
+		//	          },
+		//	          "ImageKubernetesVersion": {
+		//	            "type": "string"
+		//	          },
+		//	          "ImageType": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ImageType"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "Ec2KeyPair": {
+		//	      "type": "string"
+		//	    },
+		//	    "ImageId": {
+		//	      "type": "string"
+		//	    },
+		//	    "InstanceRole": {
+		//	      "type": "string"
+		//	    },
+		//	    "InstanceTypes": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "LaunchTemplate": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "LaunchTemplateId": {
+		//	          "type": "string"
+		//	        },
+		//	        "LaunchTemplateName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Version": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "MaxvCpus": {
+		//	      "type": "integer"
+		//	    },
+		//	    "MinvCpus": {
+		//	      "type": "integer"
+		//	    },
+		//	    "PlacementGroup": {
+		//	      "type": "string"
+		//	    },
+		//	    "SecurityGroupIds": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "SpotIamFleetRole": {
+		//	      "type": "string"
+		//	    },
+		//	    "Subnets": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "Tags": {
+		//	      "additionalProperties": false,
+		//	      "description": "A key-value pair to associate with a resource.",
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateToLatestImageVersion": {
+		//	      "default": false,
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Subnets",
+		//	    "Type",
+		//	    "MaxvCpus"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"compute_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AllocationStrategy
+				"allocation_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: BidPercentage
+				"bid_percentage": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DesiredvCpus
+				"desiredv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2Configuration
+				"ec_2_configuration": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ImageIdOverride
+							"image_id_override": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ImageKubernetesVersion
+							"image_kubernetes_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ImageType
+							"image_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Ec2KeyPair
+				"ec_2_key_pair": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageId
+				"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceRole
+				"instance_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceTypes
+				"instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LaunchTemplate
+				"launch_template": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: LaunchTemplateId
+						"launch_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LaunchTemplateName
+						"launch_template_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Version
+						"version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxvCpus
+				"maxv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinvCpus
+				"minv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PlacementGroup
+				"placement_group": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SpotIamFleetRole
+				"spot_iam_fleet_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Subnets
+				"subnets": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags":              // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A key-value pair to associate with a resource.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateToLatestImageVersion
+				"update_to_latest_image_version": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"eks_configuration": {
-			// Property: EksConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "EksClusterArn": {
-			//	      "default": false,
-			//	      "type": "string"
-			//	    },
-			//	    "KubernetesNamespace": {
-			//	      "default": false,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "EksClusterArn",
-			//	    "KubernetesNamespace"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"eks_cluster_arn": {
-						// Property: EksClusterArn
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"kubernetes_namespace": {
-						// Property: KubernetesNamespace
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: EksConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "EksClusterArn": {
+		//	      "default": false,
+		//	      "type": "string"
+		//	    },
+		//	    "KubernetesNamespace": {
+		//	      "default": false,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EksClusterArn",
+		//	    "KubernetesNamespace"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"eks_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EksClusterArn
+				"eks_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: KubernetesNamespace
+				"kubernetes_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"replace_compute_environment": {
-			// Property: ReplaceComputeEnvironment
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": true,
-			//	  "type": "boolean"
-			//	}
-			Type:     types.BoolType,
+		}, /*END ATTRIBUTE*/
+		// Property: ReplaceComputeEnvironment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": true,
+		//	  "type": "boolean"
+		//	}
+		"replace_compute_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"service_role": {
-			// Property: ServiceRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"service_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A key-value pair to associate with a resource.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair to associate with a resource.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A key-value pair to associate with a resource.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: UnmanagedvCpus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"unmanagedv_cpus": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"unmanagedv_cpus": {
-			// Property: UnmanagedvCpus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+		}, /*END ATTRIBUTE*/
+		// Property: UpdatePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "JobExecutionTimeoutMinutes": {
+		//	      "default": 30,
+		//	      "type": "integer"
+		//	    },
+		//	    "TerminateJobsOnUpdate": {
+		//	      "default": false,
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: JobExecutionTimeoutMinutes
+				"job_execution_timeout_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TerminateJobsOnUpdate
+				"terminate_jobs_on_update": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"update_policy": {
-			// Property: UpdatePolicy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "JobExecutionTimeoutMinutes": {
-			//	      "default": 30,
-			//	      "type": "integer"
-			//	    },
-			//	    "TerminateJobsOnUpdate": {
-			//	      "default": false,
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"job_execution_timeout_minutes": {
-						// Property: JobExecutionTimeoutMinutes
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"terminate_jobs_on_update": {
-						// Property: TerminateJobsOnUpdate
-						Type:     types.BoolType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Batch::ComputeEnvironment",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Batch::ComputeEnvironment").WithTerraformTypeName("awscc_batch_compute_environment")
 	opts = opts.WithTerraformSchema(schema)
@@ -498,7 +459,7 @@ func computeEnvironmentDataSource(ctx context.Context) (datasource.DataSource, e
 		"version":                        "Version",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

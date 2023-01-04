@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,97 +19,87 @@ func init() {
 // originAccessControlDataSource returns the Terraform awscc_cloudfront_origin_access_control data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFront::OriginAccessControl resource.
 func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"origin_access_control_config": {
-			// Property: OriginAccessControlConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Description": {
-			//	      "type": "string"
-			//	    },
-			//	    "Name": {
-			//	      "type": "string"
-			//	    },
-			//	    "OriginAccessControlOriginType": {
-			//	      "pattern": "^(s3)$",
-			//	      "type": "string"
-			//	    },
-			//	    "SigningBehavior": {
-			//	      "pattern": "^(never|no-override|always)$",
-			//	      "type": "string"
-			//	    },
-			//	    "SigningProtocol": {
-			//	      "pattern": "^(sigv4)$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name",
-			//	    "SigningProtocol",
-			//	    "SigningBehavior",
-			//	    "OriginAccessControlOriginType"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"description": {
-						// Property: Description
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"origin_access_control_origin_type": {
-						// Property: OriginAccessControlOriginType
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"signing_behavior": {
-						// Property: SigningBehavior
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"signing_protocol": {
-						// Property: SigningProtocol
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: OriginAccessControlConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Description": {
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "type": "string"
+		//	    },
+		//	    "OriginAccessControlOriginType": {
+		//	      "pattern": "^(s3)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SigningBehavior": {
+		//	      "pattern": "^(never|no-override|always)$",
+		//	      "type": "string"
+		//	    },
+		//	    "SigningProtocol": {
+		//	      "pattern": "^(sigv4)$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name",
+		//	    "SigningProtocol",
+		//	    "SigningBehavior",
+		//	    "OriginAccessControlOriginType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"origin_access_control_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OriginAccessControlOriginType
+				"origin_access_control_origin_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SigningBehavior
+				"signing_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SigningProtocol
+				"signing_protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFront::OriginAccessControl",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginAccessControl").WithTerraformTypeName("awscc_cloudfront_origin_access_control")
 	opts = opts.WithTerraformSchema(schema)
@@ -123,7 +113,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		"signing_protocol":                  "SigningProtocol",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

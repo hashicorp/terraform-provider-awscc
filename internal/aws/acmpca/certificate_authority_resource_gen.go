@@ -6,9 +6,15 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,1206 +25,1115 @@ func init() {
 // certificateAuthorityResource returns the Terraform awscc_acmpca_certificate_authority resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthority resource.
 func certificateAuthorityResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the certificate authority.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the certificate authority.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the certificate authority.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"certificate_signing_request": {
-			// Property: CertificateSigningRequest
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateSigningRequest
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
+		//	  "type": "string"
+		//	}
+		"certificate_signing_request": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The base64 PEM-encoded certificate signing request (CSR) for your certificate authority certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"csr_extensions": {
-			// Property: CsrExtensions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
-			//	  "properties": {
-			//	    "KeyUsage": {
-			//	      "additionalProperties": false,
-			//	      "description": "Structure that contains X.509 KeyUsage information.",
-			//	      "properties": {
-			//	        "CRLSign": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "DataEncipherment": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "DecipherOnly": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "DigitalSignature": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "EncipherOnly": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "KeyAgreement": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "KeyCertSign": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "KeyEncipherment": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "NonRepudiation": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "SubjectInformationAccess": {
-			//	      "description": "Array of X.509 AccessDescription.",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Structure that contains X.509 AccessDescription information.",
-			//	        "properties": {
-			//	          "AccessLocation": {
-			//	            "additionalProperties": false,
-			//	            "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
-			//	            "properties": {
-			//	              "DirectoryName": {
-			//	                "additionalProperties": false,
-			//	                "description": "Structure that contains X.500 distinguished name information for your CA.",
-			//	                "properties": {
-			//	                  "CommonName": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Country": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "CustomAttributes": {
-			//	                    "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Structure that contains X.500 attribute type and value.",
-			//	                      "properties": {
-			//	                        "ObjectIdentifier": {
-			//	                          "description": "String that contains X.509 ObjectIdentifier information.",
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Value": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "ObjectIdentifier",
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array"
-			//	                  },
-			//	                  "DistinguishedNameQualifier": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "GenerationQualifier": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "GivenName": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Initials": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Locality": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Organization": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "OrganizationalUnit": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Pseudonym": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "SerialNumber": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "State": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Surname": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Title": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "DnsName": {
-			//	                "description": "String that contains X.509 DnsName information.",
-			//	                "type": "string"
-			//	              },
-			//	              "EdiPartyName": {
-			//	                "additionalProperties": false,
-			//	                "description": "Structure that contains X.509 EdiPartyName information.",
-			//	                "properties": {
-			//	                  "NameAssigner": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "PartyName": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "PartyName",
-			//	                  "NameAssigner"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "IpAddress": {
-			//	                "description": "String that contains X.509 IpAddress information.",
-			//	                "type": "string"
-			//	              },
-			//	              "OtherName": {
-			//	                "additionalProperties": false,
-			//	                "description": "Structure that contains X.509 OtherName information.",
-			//	                "properties": {
-			//	                  "TypeId": {
-			//	                    "description": "String that contains X.509 ObjectIdentifier information.",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "TypeId",
-			//	                  "Value"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "RegisteredId": {
-			//	                "description": "String that contains X.509 ObjectIdentifier information.",
-			//	                "type": "string"
-			//	              },
-			//	              "Rfc822Name": {
-			//	                "description": "String that contains X.509 Rfc822Name information.",
-			//	                "type": "string"
-			//	              },
-			//	              "UniformResourceIdentifier": {
-			//	                "description": "String that contains X.509 UniformResourceIdentifier information.",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "AccessMethod": {
-			//	            "additionalProperties": false,
-			//	            "description": "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
-			//	            "properties": {
-			//	              "AccessMethodType": {
-			//	                "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-			//	                "type": "string"
-			//	              },
-			//	              "CustomObjectIdentifier": {
-			//	                "description": "String that contains X.509 ObjectIdentifier information.",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "AccessMethod",
-			//	          "AccessLocation"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key_usage": {
-						// Property: KeyUsage
-						Description: "Structure that contains X.509 KeyUsage information.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"crl_sign": {
-									// Property: CRLSign
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"data_encipherment": {
-									// Property: DataEncipherment
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"decipher_only": {
-									// Property: DecipherOnly
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"digital_signature": {
-									// Property: DigitalSignature
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"encipher_only": {
-									// Property: EncipherOnly
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"key_agreement": {
-									// Property: KeyAgreement
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"key_cert_sign": {
-									// Property: KeyCertSign
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"key_encipherment": {
-									// Property: KeyEncipherment
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-								"non_repudiation": {
-									// Property: NonRepudiation
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										DefaultValue(types.BoolValue(false)),
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"subject_information_access": {
-						// Property: SubjectInformationAccess
-						Description: "Array of X.509 AccessDescription.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"access_location": {
-									// Property: AccessLocation
-									Description: "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"directory_name": {
-												// Property: DirectoryName
-												Description: "Structure that contains X.500 distinguished name information for your CA.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"common_name": {
-															// Property: CommonName
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"country": {
-															// Property: Country
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"custom_attributes": {
-															// Property: CustomAttributes
-															Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"object_identifier": {
-																		// Property: ObjectIdentifier
-																		Description: "String that contains X.509 ObjectIdentifier information.",
-																		Type:        types.StringType,
-																		Required:    true,
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Required: true,
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"distinguished_name_qualifier": {
-															// Property: DistinguishedNameQualifier
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"generation_qualifier": {
-															// Property: GenerationQualifier
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"given_name": {
-															// Property: GivenName
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"initials": {
-															// Property: Initials
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"locality": {
-															// Property: Locality
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"organization": {
-															// Property: Organization
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"organizational_unit": {
-															// Property: OrganizationalUnit
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"pseudonym": {
-															// Property: Pseudonym
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"serial_number": {
-															// Property: SerialNumber
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"state": {
-															// Property: State
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"surname": {
-															// Property: Surname
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"title": {
-															// Property: Title
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CsrExtensions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
+		//	  "properties": {
+		//	    "KeyUsage": {
+		//	      "additionalProperties": false,
+		//	      "description": "Structure that contains X.509 KeyUsage information.",
+		//	      "properties": {
+		//	        "CRLSign": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "DataEncipherment": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "DecipherOnly": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "DigitalSignature": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "EncipherOnly": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "KeyAgreement": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "KeyCertSign": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "KeyEncipherment": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "NonRepudiation": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SubjectInformationAccess": {
+		//	      "description": "Array of X.509 AccessDescription.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Structure that contains X.509 AccessDescription information.",
+		//	        "properties": {
+		//	          "AccessLocation": {
+		//	            "additionalProperties": false,
+		//	            "description": "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
+		//	            "properties": {
+		//	              "DirectoryName": {
+		//	                "additionalProperties": false,
+		//	                "description": "Structure that contains X.500 distinguished name information for your CA.",
+		//	                "properties": {
+		//	                  "CommonName": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Country": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "CustomAttributes": {
+		//	                    "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Structure that contains X.500 attribute type and value.",
+		//	                      "properties": {
+		//	                        "ObjectIdentifier": {
+		//	                          "description": "String that contains X.509 ObjectIdentifier information.",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Value": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "ObjectIdentifier",
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array"
+		//	                  },
+		//	                  "DistinguishedNameQualifier": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "GenerationQualifier": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "GivenName": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Initials": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Locality": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Organization": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "OrganizationalUnit": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Pseudonym": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SerialNumber": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "State": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Surname": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Title": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "DnsName": {
+		//	                "description": "String that contains X.509 DnsName information.",
+		//	                "type": "string"
+		//	              },
+		//	              "EdiPartyName": {
+		//	                "additionalProperties": false,
+		//	                "description": "Structure that contains X.509 EdiPartyName information.",
+		//	                "properties": {
+		//	                  "NameAssigner": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "PartyName": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "PartyName",
+		//	                  "NameAssigner"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "IpAddress": {
+		//	                "description": "String that contains X.509 IpAddress information.",
+		//	                "type": "string"
+		//	              },
+		//	              "OtherName": {
+		//	                "additionalProperties": false,
+		//	                "description": "Structure that contains X.509 OtherName information.",
+		//	                "properties": {
+		//	                  "TypeId": {
+		//	                    "description": "String that contains X.509 ObjectIdentifier information.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "TypeId",
+		//	                  "Value"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "RegisteredId": {
+		//	                "description": "String that contains X.509 ObjectIdentifier information.",
+		//	                "type": "string"
+		//	              },
+		//	              "Rfc822Name": {
+		//	                "description": "String that contains X.509 Rfc822Name information.",
+		//	                "type": "string"
+		//	              },
+		//	              "UniformResourceIdentifier": {
+		//	                "description": "String that contains X.509 UniformResourceIdentifier information.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "AccessMethod": {
+		//	            "additionalProperties": false,
+		//	            "description": "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
+		//	            "properties": {
+		//	              "AccessMethodType": {
+		//	                "description": "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
+		//	                "type": "string"
+		//	              },
+		//	              "CustomObjectIdentifier": {
+		//	                "description": "String that contains X.509 ObjectIdentifier information.",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AccessMethod",
+		//	          "AccessLocation"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"csr_extensions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KeyUsage
+				"key_usage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CRLSign
+						"crl_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DataEncipherment
+						"data_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DecipherOnly
+						"decipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DigitalSignature
+						"digital_signature": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: EncipherOnly
+						"encipher_only": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KeyAgreement
+						"key_agreement": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KeyCertSign
+						"key_cert_sign": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KeyEncipherment
+						"key_encipherment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: NonRepudiation
+						"non_repudiation": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								generic.BoolDefaultValue(false),
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Structure that contains X.509 KeyUsage information.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SubjectInformationAccess
+				"subject_information_access": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AccessLocation
+							"access_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DirectoryName
+									"directory_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CommonName
+											"common_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"dns_name": {
-												// Property: DnsName
-												Description: "String that contains X.509 DnsName information.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"edi_party_name": {
-												// Property: EdiPartyName
-												Description: "Structure that contains X.509 EdiPartyName information.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"name_assigner": {
-															// Property: NameAssigner
-															Type:     types.StringType,
-															Required: true,
-														},
-														"party_name": {
-															// Property: PartyName
-															Type:     types.StringType,
-															Required: true,
-														},
-													},
-												),
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Country
+											"country": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"ip_address": {
-												// Property: IpAddress
-												Description: "String that contains X.509 IpAddress information.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"other_name": {
-												// Property: OtherName
-												Description: "Structure that contains X.509 OtherName information.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"type_id": {
-															// Property: TypeId
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: CustomAttributes
+											"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: ObjectIdentifier
+														"object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "String that contains X.509 ObjectIdentifier information.",
-															Type:        types.StringType,
 															Required:    true,
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Required: true,
-														},
-													},
-												),
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
+												Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+												Optional:    true,
+												Computed:    true,
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DistinguishedNameQualifier
+											"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Optional: true,
 												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"registered_id": {
-												// Property: RegisteredId
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: GenerationQualifier
+											"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: GivenName
+											"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Initials
+											"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Locality
+											"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Organization
+											"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: OrganizationalUnit
+											"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Pseudonym
+											"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SerialNumber
+											"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: State
+											"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Surname
+											"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Title
+											"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Structure that contains X.500 distinguished name information for your CA.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DnsName
+									"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 DnsName information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: EdiPartyName
+									"edi_party_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: NameAssigner
+											"name_assigner": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+											// Property: PartyName
+											"party_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Structure that contains X.509 EdiPartyName information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: IpAddress
+									"ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 IpAddress information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: OtherName
+									"other_name": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: TypeId
+											"type_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "String that contains X.509 ObjectIdentifier information.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"rfc_822_name": {
-												// Property: Rfc822Name
-												Description: "String that contains X.509 Rfc822Name information.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"uniform_resource_identifier": {
-												// Property: UniformResourceIdentifier
-												Description: "String that contains X.509 UniformResourceIdentifier information.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-								"access_method": {
-									// Property: AccessMethod
-									Description: "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_method_type": {
-												// Property: AccessMethodType
-												Description: "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"custom_object_identifier": {
-												// Property: CustomObjectIdentifier
-												Description: "String that contains X.509 ObjectIdentifier information.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"key_algorithm": {
-			// Property: KeyAlgorithm
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
-			//	  "type": "string"
-			//	}
+												Required:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Structure that contains X.509 OtherName information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: RegisteredId
+									"registered_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 ObjectIdentifier information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Rfc822Name
+									"rfc_822_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 Rfc822Name information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: UniformResourceIdentifier
+									"uniform_resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 UniformResourceIdentifier information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Structure that contains X.509 GeneralName information. Assign one and ONLY one field.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AccessMethod
+							"access_method": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AccessMethodType
+									"access_method_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "Pre-defined enum string for X.509 AccessMethod ObjectIdentifiers.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: CustomObjectIdentifier
+									"custom_object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "String that contains X.509 ObjectIdentifier information.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Structure that contains X.509 AccessMethod information. Assign one and ONLY one field.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Array of X.509 AccessDescription.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Structure that contains CSR pass through extension information used by the CreateCertificateAuthority action.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KeyAlgorithm
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
+		//	  "type": "string"
+		//	}
+		"key_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Public key algorithm and size, in bits, of the key pair that your CA creates when it issues a certificate.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"key_storage_security_standard": {
-			// Property: KeyStorageSecurityStandard
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KeyStorageSecurityStandard
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
+		//	  "type": "string"
+		//	}
+		"key_storage_security_standard": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "KeyStorageSecurityStadard defines a cryptographic key management compliance standard used for handling CA keys.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"revocation_configuration": {
-			// Property: RevocationConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
-			//	  "properties": {
-			//	    "CrlConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
-			//	      "properties": {
-			//	        "CustomCname": {
-			//	          "type": "string"
-			//	        },
-			//	        "Enabled": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "ExpirationInDays": {
-			//	          "type": "integer"
-			//	        },
-			//	        "S3BucketName": {
-			//	          "type": "string"
-			//	        },
-			//	        "S3ObjectAcl": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "OcspConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
-			//	      "properties": {
-			//	        "Enabled": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "OcspCustomCname": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RevocationConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
+		//	  "properties": {
+		//	    "CrlConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
+		//	      "properties": {
+		//	        "CustomCname": {
+		//	          "type": "string"
+		//	        },
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "ExpirationInDays": {
+		//	          "type": "integer"
+		//	        },
+		//	        "S3BucketName": {
+		//	          "type": "string"
+		//	        },
+		//	        "S3ObjectAcl": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "OcspConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
+		//	      "properties": {
+		//	        "Enabled": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "OcspCustomCname": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"revocation_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrlConfiguration
+				"crl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomCname
+						"custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ExpirationInDays
+						"expiration_in_days": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3BucketName
+						"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: S3ObjectAcl
+						"s3_object_acl": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OcspConfiguration
+				"ocsp_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Enabled
+						"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+								boolplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: OcspCustomCname
+						"ocsp_custom_cname": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Certificate revocation information used by the CreateCertificateAuthority and UpdateCertificateAuthority actions.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"crl_configuration": {
-						// Property: CrlConfiguration
-						Description: "Your certificate authority can create and maintain a certificate revocation list (CRL). A CRL contains information about certificates that have been revoked.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"custom_cname": {
-									// Property: CustomCname
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"enabled": {
-									// Property: Enabled
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"expiration_in_days": {
-									// Property: ExpirationInDays
-									Type:     types.Int64Type,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"s3_bucket_name": {
-									// Property: S3BucketName
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"s3_object_acl": {
-									// Property: S3ObjectAcl
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ocsp_configuration": {
-						// Property: OcspConfiguration
-						Description: "Helps to configure online certificate status protocol (OCSP) responder for your certificate authority",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"enabled": {
-									// Property: Enabled
-									Type:     types.BoolType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"ocsp_custom_cname": {
-									// Property: OcspCustomCname
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"signing_algorithm": {
-			// Property: SigningAlgorithm
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Algorithm your CA uses to sign certificate requests.",
-			//	  "type": "string"
-			//	}
-			Description: "Algorithm your CA uses to sign certificate requests.",
-			Type:        types.StringType,
-			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"subject": {
-			// Property: Subject
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Structure that contains X.500 distinguished name information for your CA.",
-			//	  "properties": {
-			//	    "CommonName": {
-			//	      "type": "string"
-			//	    },
-			//	    "Country": {
-			//	      "type": "string"
-			//	    },
-			//	    "CustomAttributes": {
-			//	      "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Structure that contains X.500 attribute type and value.",
-			//	        "properties": {
-			//	          "ObjectIdentifier": {
-			//	            "description": "String that contains X.509 ObjectIdentifier information.",
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "ObjectIdentifier",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "DistinguishedNameQualifier": {
-			//	      "type": "string"
-			//	    },
-			//	    "GenerationQualifier": {
-			//	      "type": "string"
-			//	    },
-			//	    "GivenName": {
-			//	      "type": "string"
-			//	    },
-			//	    "Initials": {
-			//	      "type": "string"
-			//	    },
-			//	    "Locality": {
-			//	      "type": "string"
-			//	    },
-			//	    "Organization": {
-			//	      "type": "string"
-			//	    },
-			//	    "OrganizationalUnit": {
-			//	      "type": "string"
-			//	    },
-			//	    "Pseudonym": {
-			//	      "type": "string"
-			//	    },
-			//	    "SerialNumber": {
-			//	      "type": "string"
-			//	    },
-			//	    "State": {
-			//	      "type": "string"
-			//	    },
-			//	    "Surname": {
-			//	      "type": "string"
-			//	    },
-			//	    "Title": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Structure that contains X.500 distinguished name information for your CA.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"common_name": {
-						// Property: CommonName
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"country": {
-						// Property: Country
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"custom_attributes": {
-						// Property: CustomAttributes
-						Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"object_identifier": {
-									// Property: ObjectIdentifier
-									Description: "String that contains X.509 ObjectIdentifier information.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"value": {
-									// Property: Value
-									Type:     types.StringType,
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"distinguished_name_qualifier": {
-						// Property: DistinguishedNameQualifier
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"generation_qualifier": {
-						// Property: GenerationQualifier
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"given_name": {
-						// Property: GivenName
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"initials": {
-						// Property: Initials
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"locality": {
-						// Property: Locality
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"organization": {
-						// Property: Organization
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"organizational_unit": {
-						// Property: OrganizationalUnit
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"pseudonym": {
-						// Property: Pseudonym
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"serial_number": {
-						// Property: SerialNumber
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"state": {
-						// Property: State
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"surname": {
-						// Property: Surname
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"title": {
-						// Property: Title
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-			// Subject is a write-only property.
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of the certificate authority.",
-			//	  "type": "string"
-			//	}
-			Description: "The type of the certificate authority.",
-			Type:        types.StringType,
-			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"usage_mode": {
-			// Property: UsageMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Usage mode of the ceritificate authority.",
-			//	  "type": "string"
-			//	}
-			Description: "Usage mode of the ceritificate authority.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SigningAlgorithm
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Algorithm your CA uses to sign certificate requests.",
+		//	  "type": "string"
+		//	}
+		"signing_algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Algorithm your CA uses to sign certificate requests.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Subject
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Structure that contains X.500 distinguished name information for your CA.",
+		//	  "properties": {
+		//	    "CommonName": {
+		//	      "type": "string"
+		//	    },
+		//	    "Country": {
+		//	      "type": "string"
+		//	    },
+		//	    "CustomAttributes": {
+		//	      "description": "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Structure that contains X.500 attribute type and value.",
+		//	        "properties": {
+		//	          "ObjectIdentifier": {
+		//	            "description": "String that contains X.509 ObjectIdentifier information.",
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ObjectIdentifier",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "DistinguishedNameQualifier": {
+		//	      "type": "string"
+		//	    },
+		//	    "GenerationQualifier": {
+		//	      "type": "string"
+		//	    },
+		//	    "GivenName": {
+		//	      "type": "string"
+		//	    },
+		//	    "Initials": {
+		//	      "type": "string"
+		//	    },
+		//	    "Locality": {
+		//	      "type": "string"
+		//	    },
+		//	    "Organization": {
+		//	      "type": "string"
+		//	    },
+		//	    "OrganizationalUnit": {
+		//	      "type": "string"
+		//	    },
+		//	    "Pseudonym": {
+		//	      "type": "string"
+		//	    },
+		//	    "SerialNumber": {
+		//	      "type": "string"
+		//	    },
+		//	    "State": {
+		//	      "type": "string"
+		//	    },
+		//	    "Surname": {
+		//	      "type": "string"
+		//	    },
+		//	    "Title": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"subject": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CommonName
+				"common_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Country
+				"country": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CustomAttributes
+				"custom_attributes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ObjectIdentifier
+							"object_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "String that contains X.509 ObjectIdentifier information.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "Array of X.500 attribute type and value. CustomAttributes cannot be used along with pre-defined attributes.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DistinguishedNameQualifier
+				"distinguished_name_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: GenerationQualifier
+				"generation_qualifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: GivenName
+				"given_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Initials
+				"initials": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Locality
+				"locality": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Organization
+				"organization": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: OrganizationalUnit
+				"organizational_unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Pseudonym
+				"pseudonym": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SerialNumber
+				"serial_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: State
+				"state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Surname
+				"surname": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Title
+				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Structure that contains X.500 distinguished name information for your CA.",
+			Required:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// Subject is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of the certificate authority.",
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The type of the certificate authority.",
+			Required:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UsageMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Usage mode of the ceritificate authority.",
+		//	  "type": "string"
+		//	}
+		"usage_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Usage mode of the ceritificate authority.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Private certificate authority.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthority").WithTerraformTypeName("awscc_acmpca_certificate_authority")
 	opts = opts.WithTerraformSchema(schema)
@@ -1296,7 +1211,7 @@ func certificateAuthorityResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

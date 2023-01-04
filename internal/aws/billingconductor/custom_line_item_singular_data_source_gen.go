@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,312 +19,286 @@ func init() {
 // customLineItemDataSource returns the Terraform awscc_billingconductor_custom_line_item data source.
 // This Terraform data source corresponds to the CloudFormation AWS::BillingConductor::CustomLineItem resource.
 func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARN",
-			//	  "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN",
+		//	  "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:customlineitem/)?[a-zA-Z0-9]{10}",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ARN",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"association_size": {
-			// Property: AssociationSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Number of source values associated to this custom line item",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AssociationSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Number of source values associated to this custom line item",
+		//	  "type": "integer"
+		//	}
+		"association_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Number of source values associated to this custom line item",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"billing_group_arn": {
-			// Property: BillingGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Billing Group ARN",
-			//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: BillingGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Billing Group ARN",
+		//	  "pattern": "arn:aws(-cn)?:billingconductor::[0-9]{12}:billinggroup/?[0-9]{12}",
+		//	  "type": "string"
+		//	}
+		"billing_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Billing Group ARN",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"billing_period_range": {
-			// Property: BillingPeriodRange
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "ExclusiveEndBillingPeriod": {
-			//	      "pattern": "\\d{4}-(0?[1-9]|1[012])",
-			//	      "type": "string"
-			//	    },
-			//	    "InclusiveStartBillingPeriod": {
-			//	      "pattern": "\\d{4}-(0?[1-9]|1[012])",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"exclusive_end_billing_period": {
-						// Property: ExclusiveEndBillingPeriod
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"inclusive_start_billing_period": {
-						// Property: InclusiveStartBillingPeriod
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: BillingPeriodRange
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ExclusiveEndBillingPeriod": {
+		//	      "pattern": "\\d{4}-(0?[1-9]|1[012])",
+		//	      "type": "string"
+		//	    },
+		//	    "InclusiveStartBillingPeriod": {
+		//	      "pattern": "\\d{4}-(0?[1-9]|1[012])",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"billing_period_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExclusiveEndBillingPeriod
+				"exclusive_end_billing_period": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: InclusiveStartBillingPeriod
+				"inclusive_start_billing_period": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Creation timestamp in UNIX epoch time format",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Creation timestamp in UNIX epoch time format",
+		//	  "type": "integer"
+		//	}
+		"creation_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Creation timestamp in UNIX epoch time format",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"currency_code": {
-			// Property: CurrencyCode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "USD",
-			//	    "CNY"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: CurrencyCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "USD",
+		//	    "CNY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"currency_code": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"custom_line_item_charge_details": {
-			// Property: CustomLineItemChargeDetails
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Flat": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ChargeValue": {
-			//	          "maximum": 1000000,
-			//	          "minimum": 0,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ChargeValue"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Percentage": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ChildAssociatedResources": {
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:(customlineitem|billinggroup)/)?[a-zA-Z0-9]{10,12}",
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": true
-			//	        },
-			//	        "PercentageValue": {
-			//	          "maximum": 10000,
-			//	          "minimum": 0,
-			//	          "type": "number"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "PercentageValue"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Type": {
-			//	      "enum": [
-			//	        "FEE",
-			//	        "CREDIT"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"flat": {
-						// Property: Flat
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"charge_value": {
-									// Property: ChargeValue
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"percentage": {
-						// Property: Percentage
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"child_associated_resources": {
-									// Property: ChildAssociatedResources
-									Type:     types.SetType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"percentage_value": {
-									// Property: PercentageValue
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"type": {
-						// Property: Type
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: CustomLineItemChargeDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Flat": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ChargeValue": {
+		//	          "maximum": 1000000,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ChargeValue"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Percentage": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ChildAssociatedResources": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "pattern": "(arn:aws(-cn)?:billingconductor::[0-9]{12}:(customlineitem|billinggroup)/)?[a-zA-Z0-9]{10,12}",
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "PercentageValue": {
+		//	          "maximum": 10000,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PercentageValue"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Type": {
+		//	      "enum": [
+		//	        "FEE",
+		//	        "CREDIT"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"custom_line_item_charge_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Flat
+				"flat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ChargeValue
+						"charge_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Percentage
+				"percentage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ChildAssociatedResources
+						"child_associated_resources": schema.SetAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: PercentageValue
+						"percentage_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 255,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 255,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Latest modified timestamp in UNIX epoch time format",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Latest modified timestamp in UNIX epoch time format",
+		//	  "type": "integer"
+		//	}
+		"last_modified_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Latest modified timestamp in UNIX epoch time format",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9_\\+=\\.\\-@]+",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"product_code": {
-			// Property: ProductCode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 29,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ProductCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 29,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"product_code": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::BillingConductor::CustomLineItem",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::BillingConductor::CustomLineItem").WithTerraformTypeName("awscc_billingconductor_custom_line_item")
 	opts = opts.WithTerraformSchema(schema)
@@ -353,7 +327,7 @@ func customLineItemDataSource(ctx context.Context) (datasource.DataSource, error
 		"value":                           "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

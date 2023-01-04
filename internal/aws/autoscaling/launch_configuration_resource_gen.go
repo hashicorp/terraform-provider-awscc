@@ -5,12 +5,20 @@ package autoscaling
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,583 +28,550 @@ func init() {
 // launchConfigurationResource returns the Terraform awscc_autoscaling_launch_configuration resource.
 // This Terraform resource corresponds to the CloudFormation AWS::AutoScaling::LaunchConfiguration resource.
 func launchConfigurationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"associate_public_ip_address": {
-			// Property: AssociatePublicIpAddress
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssociatePublicIpAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
+		//	  "type": "boolean"
+		//	}
+		"associate_public_ip_address": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "For Auto Scaling groups that are running in a virtual private cloud (VPC), specifies whether to assign a public IP address to the group's instances.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"block_device_mappings": {
-			// Property: BlockDeviceMappings
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "BlockDeviceMapping is a property of AWS::AutoScaling::LaunchConfiguration that describes a block device mapping for an Auto Scaling group.",
-			//	    "properties": {
-			//	      "DeviceName": {
-			//	        "description": "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
-			//	        "type": "string"
-			//	      },
-			//	      "Ebs": {
-			//	        "additionalProperties": false,
-			//	        "description": "Parameters used to automatically set up EBS volumes when an instance is launched.",
-			//	        "properties": {
-			//	          "DeleteOnTermination": {
-			//	            "description": "Indicates whether the volume is deleted on instance termination. ",
-			//	            "type": "boolean"
-			//	          },
-			//	          "Encrypted": {
-			//	            "description": "Specifies whether the volume should be encrypted. ",
-			//	            "type": "boolean"
-			//	          },
-			//	          "Iops": {
-			//	            "description": "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
-			//	            "type": "integer"
-			//	          },
-			//	          "SnapshotId": {
-			//	            "description": "The snapshot ID of the volume to use.",
-			//	            "type": "string"
-			//	          },
-			//	          "Throughput": {
-			//	            "description": "The throughput (MiBps) to provision for a gp3 volume.",
-			//	            "type": "integer"
-			//	          },
-			//	          "VolumeSize": {
-			//	            "description": "The volume size, in GiBs.",
-			//	            "type": "integer"
-			//	          },
-			//	          "VolumeType": {
-			//	            "description": "The volume type.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "NoDevice": {
-			//	        "description": "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
-			//	        "type": "boolean"
-			//	      },
-			//	      "VirtualName": {
-			//	        "description": "The name of the virtual device.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "DeviceName"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"device_name": {
-						// Property: DeviceName
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: BlockDeviceMappings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "BlockDeviceMapping is a property of AWS::AutoScaling::LaunchConfiguration that describes a block device mapping for an Auto Scaling group.",
+		//	    "properties": {
+		//	      "DeviceName": {
+		//	        "description": "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
+		//	        "type": "string"
+		//	      },
+		//	      "Ebs": {
+		//	        "additionalProperties": false,
+		//	        "description": "Parameters used to automatically set up EBS volumes when an instance is launched.",
+		//	        "properties": {
+		//	          "DeleteOnTermination": {
+		//	            "description": "Indicates whether the volume is deleted on instance termination. ",
+		//	            "type": "boolean"
+		//	          },
+		//	          "Encrypted": {
+		//	            "description": "Specifies whether the volume should be encrypted. ",
+		//	            "type": "boolean"
+		//	          },
+		//	          "Iops": {
+		//	            "description": "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
+		//	            "type": "integer"
+		//	          },
+		//	          "SnapshotId": {
+		//	            "description": "The snapshot ID of the volume to use.",
+		//	            "type": "string"
+		//	          },
+		//	          "Throughput": {
+		//	            "description": "The throughput (MiBps) to provision for a gp3 volume.",
+		//	            "type": "integer"
+		//	          },
+		//	          "VolumeSize": {
+		//	            "description": "The volume size, in GiBs.",
+		//	            "type": "integer"
+		//	          },
+		//	          "VolumeType": {
+		//	            "description": "The volume type.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "NoDevice": {
+		//	        "description": "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
+		//	        "type": "boolean"
+		//	      },
+		//	      "VirtualName": {
+		//	        "description": "The name of the virtual device.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "DeviceName"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"block_device_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DeviceName
+					"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The device name exposed to the EC2 instance (for example, /dev/sdh or xvdh). ",
-						Type:        types.StringType,
 						Required:    true,
-					},
-					"ebs": {
-						// Property: Ebs
+					}, /*END ATTRIBUTE*/
+					// Property: Ebs
+					"ebs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DeleteOnTermination
+							"delete_on_termination": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates whether the volume is deleted on instance termination. ",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Encrypted
+							"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies whether the volume should be encrypted. ",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+									boolplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Iops
+							"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SnapshotId
+							"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The snapshot ID of the volume to use.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Throughput
+							"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The throughput (MiBps) to provision for a gp3 volume.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeSize
+							"volume_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Description: "The volume size, in GiBs.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: VolumeType
+							"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The volume type.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "Parameters used to automatically set up EBS volumes when an instance is launched.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"delete_on_termination": {
-									// Property: DeleteOnTermination
-									Description: "Indicates whether the volume is deleted on instance termination. ",
-									Type:        types.BoolType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"encrypted": {
-									// Property: Encrypted
-									Description: "Specifies whether the volume should be encrypted. ",
-									Type:        types.BoolType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"iops": {
-									// Property: Iops
-									Description: "The number of input/output (I/O) operations per second (IOPS) to provision for the volume. ",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"snapshot_id": {
-									// Property: SnapshotId
-									Description: "The snapshot ID of the volume to use.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"throughput": {
-									// Property: Throughput
-									Description: "The throughput (MiBps) to provision for a gp3 volume.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"volume_size": {
-									// Property: VolumeSize
-									Description: "The volume size, in GiBs.",
-									Type:        types.Int64Type,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"volume_type": {
-									// Property: VolumeType
-									Description: "The volume type.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"no_device": {
-						// Property: NoDevice
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: NoDevice
+					"no_device": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Description: "Setting this value to true suppresses the specified device included in the block device mapping of the AMI.",
-						Type:        types.BoolType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"virtual_name": {
-						// Property: VirtualName
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: VirtualName
+					"virtual_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the virtual device.",
-						Type:        types.StringType,
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"classic_link_vpc_id": {
-			// Property: ClassicLinkVPCId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
-			//	  "type": "string"
-			//	}
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Specifies how block devices are exposed to the instance. You can specify virtual devices and EBS volumes.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+				setplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClassicLinkVPCId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
+		//	  "type": "string"
+		//	}
+		"classic_link_vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of a ClassicLink-enabled VPC to link your EC2-Classic instances to.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"classic_link_vpc_security_groups": {
-			// Property: ClassicLinkVPCSecurityGroups
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClassicLinkVPCSecurityGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"classic_link_vpc_security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The IDs of one or more security groups for the VPC that you specified in the ClassicLinkVPCId property.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"ebs_optimized": {
-			// Property: EbsOptimized
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EbsOptimized
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
+		//	  "type": "boolean"
+		//	}
+		"ebs_optimized": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the launch configuration is optimized for EBS I/O (true) or not (false).",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"iam_instance_profile": {
-			// Property: IamInstanceProfile
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IamInstanceProfile
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
+		//	  "type": "string"
+		//	}
+		"iam_instance_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the name or the Amazon Resource Name (ARN) of the instance profile associated with the IAM role for the instance. The instance profile contains the IAM role.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"image_id": {
-			// Property: ImageId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ImageId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
+		//	  "type": "string"
+		//	}
+		"image_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the unique ID of the Amazon Machine Image (AMI) that was assigned during registration.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"instance_id": {
-			// Property: InstanceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
+		//	  "type": "string"
+		//	}
+		"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Amazon EC2 instance you want to use to create the launch configuration.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// InstanceId is a write-only property.
-		},
-		"instance_monitoring": {
-			// Property: InstanceMonitoring
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceMonitoring
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
+		//	  "type": "boolean"
+		//	}
+		"instance_monitoring": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Controls whether instances in this group are launched with detailed (true) or basic (false) monitoring.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"instance_type": {
-			// Property: InstanceType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the instance type of the EC2 instance.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the instance type of the EC2 instance.",
+		//	  "type": "string"
+		//	}
+		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the instance type of the EC2 instance.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"kernel_id": {
-			// Property: KernelId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the ID of the kernel associated with the EC2 AMI.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KernelId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the ID of the kernel associated with the EC2 AMI.",
+		//	  "type": "string"
+		//	}
+		"kernel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the ID of the kernel associated with the EC2 AMI.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"key_name": {
-			// Property: KeyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides the name of the EC2 key pair.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KeyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides the name of the EC2 key pair.",
+		//	  "type": "string"
+		//	}
+		"key_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the name of the EC2 key pair.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"launch_configuration_name": {
-			// Property: LaunchConfigurationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the launch configuration. This name must be unique per Region per account.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LaunchConfigurationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the launch configuration. This name must be unique per Region per account.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"launch_configuration_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the launch configuration. This name must be unique per Region per account.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"metadata_options": {
-			// Property: MetadataOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The metadata options for the instances.",
-			//	  "properties": {
-			//	    "HttpEndpoint": {
-			//	      "description": "This parameter enables or disables the HTTP metadata endpoint on your instances.",
-			//	      "type": "string"
-			//	    },
-			//	    "HttpPutResponseHopLimit": {
-			//	      "description": "The desired HTTP PUT response hop limit for instance metadata requests.",
-			//	      "type": "integer"
-			//	    },
-			//	    "HttpTokens": {
-			//	      "description": "The state of token usage for your instance metadata requests.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MetadataOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The metadata options for the instances.",
+		//	  "properties": {
+		//	    "HttpEndpoint": {
+		//	      "description": "This parameter enables or disables the HTTP metadata endpoint on your instances.",
+		//	      "type": "string"
+		//	    },
+		//	    "HttpPutResponseHopLimit": {
+		//	      "description": "The desired HTTP PUT response hop limit for instance metadata requests.",
+		//	      "type": "integer"
+		//	    },
+		//	    "HttpTokens": {
+		//	      "description": "The state of token usage for your instance metadata requests.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metadata_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HttpEndpoint
+				"http_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This parameter enables or disables the HTTP metadata endpoint on your instances.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HttpPutResponseHopLimit
+				"http_put_response_hop_limit": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The desired HTTP PUT response hop limit for instance metadata requests.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: HttpTokens
+				"http_tokens": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The state of token usage for your instance metadata requests.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The metadata options for the instances.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"http_endpoint": {
-						// Property: HttpEndpoint
-						Description: "This parameter enables or disables the HTTP metadata endpoint on your instances.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"http_put_response_hop_limit": {
-						// Property: HttpPutResponseHopLimit
-						Description: "The desired HTTP PUT response hop limit for instance metadata requests.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"http_tokens": {
-						// Property: HttpTokens
-						Description: "The state of token usage for your instance metadata requests.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"placement_tenancy": {
-			// Property: PlacementTenancy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The tenancy of the instance, either default or dedicated.",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PlacementTenancy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The tenancy of the instance, either default or dedicated.",
+		//	  "type": "string"
+		//	}
+		"placement_tenancy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The tenancy of the instance, either default or dedicated.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"ram_disk_id": {
-			// Property: RamDiskId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the RAM disk to select.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RamDiskId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the RAM disk to select.",
+		//	  "type": "string"
+		//	}
+		"ram_disk_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the RAM disk to select.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"security_groups": {
-			// Property: SecurityGroups
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroups
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list that contains the security groups to assign to the instances in the Auto Scaling group.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"spot_price": {
-			// Property: SpotPrice
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SpotPrice
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
+		//	  "type": "string"
+		//	}
+		"spot_price": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The maximum hourly price you are willing to pay for any Spot Instances launched to fulfill the request.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"user_data": {
-			// Property: UserData
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Base64-encoded user data to make available to the launched EC2 instances.",
-			//	  "maxLength": 21847,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UserData
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Base64-encoded user data to make available to the launched EC2 instances.",
+		//	  "maxLength": 21847,
+		//	  "type": "string"
+		//	}
+		"user_data": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Base64-encoded user data to make available to the launched EC2 instances.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(21847),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(21847),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::AutoScaling::LaunchConfiguration resource specifies the launch configuration that can be used by an Auto Scaling group to configure Amazon EC2 instances.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::LaunchConfiguration").WithTerraformTypeName("awscc_autoscaling_launch_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -644,7 +619,7 @@ func launchConfigurationResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

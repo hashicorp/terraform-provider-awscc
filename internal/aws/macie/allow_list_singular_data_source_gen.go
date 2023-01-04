@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,202 +19,186 @@ func init() {
 // allowListDataSource returns the Terraform awscc_macie_allow_list data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Macie::AllowList resource.
 func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AllowList ARN.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AllowList ARN.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AllowList ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"criteria": {
-			// Property: Criteria
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AllowList criteria.",
-			//	  "properties": {
-			//	    "Regex": {
-			//	      "description": "The S3 object key for the AllowList.",
-			//	      "type": "string"
-			//	    },
-			//	    "S3WordsList": {
-			//	      "additionalProperties": false,
-			//	      "description": "The S3 location for the AllowList.",
-			//	      "properties": {
-			//	        "BucketName": {
-			//	          "type": "string"
-			//	        },
-			//	        "ObjectKey": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "BucketName",
-			//	        "ObjectKey"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Criteria
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AllowList criteria.",
+		//	  "properties": {
+		//	    "Regex": {
+		//	      "description": "The S3 object key for the AllowList.",
+		//	      "type": "string"
+		//	    },
+		//	    "S3WordsList": {
+		//	      "additionalProperties": false,
+		//	      "description": "The S3 location for the AllowList.",
+		//	      "properties": {
+		//	        "BucketName": {
+		//	          "type": "string"
+		//	        },
+		//	        "ObjectKey": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BucketName",
+		//	        "ObjectKey"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Regex
+				"regex": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The S3 object key for the AllowList.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3WordsList
+				"s3_words_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ObjectKey
+						"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The S3 location for the AllowList.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "AllowList criteria.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"regex": {
-						// Property: Regex
-						Description: "The S3 object key for the AllowList.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"s3_words_list": {
-						// Property: S3WordsList
-						Description: "The S3 location for the AllowList.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bucket_name": {
-									// Property: BucketName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"object_key": {
-									// Property: ObjectKey
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Description of AllowList.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Description of AllowList.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Description of AllowList.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AllowList ID.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AllowList ID.",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AllowList ID.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of AllowList.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of AllowList.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of AllowList.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AllowList status.",
-			//	  "enum": [
-			//	    "OK",
-			//	    "S3_OBJECT_NOT_FOUND",
-			//	    "S3_USER_ACCESS_DENIED",
-			//	    "S3_OBJECT_ACCESS_DENIED",
-			//	    "S3_THROTTLED",
-			//	    "S3_OBJECT_OVERSIZE",
-			//	    "S3_OBJECT_EMPTY",
-			//	    "UNKNOWN_ERROR"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AllowList status.",
+		//	  "enum": [
+		//	    "OK",
+		//	    "S3_OBJECT_NOT_FOUND",
+		//	    "S3_USER_ACCESS_DENIED",
+		//	    "S3_OBJECT_ACCESS_DENIED",
+		//	    "S3_THROTTLED",
+		//	    "S3_OBJECT_OVERSIZE",
+		//	    "S3_OBJECT_EMPTY",
+		//	    "UNKNOWN_ERROR"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AllowList status.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A collection of tags associated with a resource",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The tag's key.",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The tag's value.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "A collection of tags associated with a resource",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A collection of tags associated with a resource",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The tag's key.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The tag's value.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tag's key.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The tag's value.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A collection of tags associated with a resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Macie::AllowList",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::AllowList").WithTerraformTypeName("awscc_macie_allow_list")
 	opts = opts.WithTerraformSchema(schema)
@@ -234,7 +218,7 @@ func allowListDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":         "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,82 +19,75 @@ func init() {
 // modelDataSource returns the Terraform awscc_apigateway_model data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ApiGateway::Model resource.
 func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"content_type": {
-			// Property: ContentType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The content type for the model.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ContentType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The content type for the model.",
+		//	  "type": "string"
+		//	}
+		"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The content type for the model.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description that identifies this model.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description that identifies this model.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description that identifies this model.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A name for the model. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the model name.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"rest_api_id": {
-			// Property: RestApiId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of a REST API with which to associate this model.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of a REST API with which to associate this model.",
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of a REST API with which to associate this model.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"schema": {
-			// Property: Schema
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Schema
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.",
+		//	  "type": "string"
+		//	}
+		"schema": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The schema to use to transform data to one or more output formats. Specify null ({}) if you don't want to specify a schema.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ApiGateway::Model",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Model").WithTerraformTypeName("awscc_apigateway_model")
 	opts = opts.WithTerraformSchema(schema)
@@ -106,7 +99,7 @@ func modelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"schema":       "Schema",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,13 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,194 +23,183 @@ func init() {
 // authorizerResource returns the Terraform awscc_apigateway_authorizer resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ApiGateway::Authorizer resource.
 func authorizerResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auth_type": {
-			// Property: AuthType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Optional customer-defined field, used in OpenAPI imports and exports without functional impact.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AuthType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Optional customer-defined field, used in OpenAPI imports and exports without functional impact.",
+		//	  "type": "string"
+		//	}
+		"auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Optional customer-defined field, used in OpenAPI imports and exports without functional impact.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorizer_credentials": {
-			// Property: AuthorizerCredentials
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizerCredentials
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.",
+		//	  "type": "string"
+		//	}
+		"authorizer_credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the required credentials as an IAM role for API Gateway to invoke the authorizer.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorizer_id": {
-			// Property: AuthorizerId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorizer_result_ttl_in_seconds": {
-			// Property: AuthorizerResultTtlInSeconds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The TTL in seconds of cached authorizer results.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizerResultTtlInSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The TTL in seconds of cached authorizer results.",
+		//	  "type": "integer"
+		//	}
+		"authorizer_result_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The TTL in seconds of cached authorizer results.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorizer_uri": {
-			// Property: AuthorizerUri
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the authorizer's Uniform Resource Identifier (URI).",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizerUri
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the authorizer's Uniform Resource Identifier (URI).",
+		//	  "type": "string"
+		//	}
+		"authorizer_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the authorizer's Uniform Resource Identifier (URI).",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"identity_source": {
-			// Property: IdentitySource
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identity source for which authorization is requested.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdentitySource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identity source for which authorization is requested.",
+		//	  "type": "string"
+		//	}
+		"identity_source": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identity source for which authorization is requested.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"identity_validation_expression": {
-			// Property: IdentityValidationExpression
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A validation expression for the incoming identity token.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityValidationExpression
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A validation expression for the incoming identity token.",
+		//	  "type": "string"
+		//	}
+		"identity_validation_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A validation expression for the incoming identity token.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the authorizer.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the authorizer.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the authorizer.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"provider_ar_ns": {
-			// Property: ProviderARNs
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ProviderARNs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"provider_ar_ns": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"rest_api_id": {
-			// Property: RestApiId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the API.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the API.",
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the API.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The authorizer type.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The authorizer type.",
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The authorizer type.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Represents an authorization layer for methods. If enabled on a method, API Gateway will activate the authorizer when a client calls the method.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Authorizer").WithTerraformTypeName("awscc_apigateway_authorizer")
 	opts = opts.WithTerraformSchema(schema)
@@ -229,7 +222,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,271 +19,245 @@ func init() {
 // configurationSetDataSource returns the Terraform awscc_ses_configuration_set data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SES::ConfigurationSet resource.
 func configurationSetDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"delivery_options": {
-			// Property: DeliveryOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
-			//	  "properties": {
-			//	    "SendingPoolName": {
-			//	      "description": "The name of the dedicated IP pool to associate with the configuration set.",
-			//	      "type": "string"
-			//	    },
-			//	    "TlsPolicy": {
-			//	      "description": "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
-			//	      "pattern": "REQUIRE|OPTIONAL",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DeliveryOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
+		//	  "properties": {
+		//	    "SendingPoolName": {
+		//	      "description": "The name of the dedicated IP pool to associate with the configuration set.",
+		//	      "type": "string"
+		//	    },
+		//	    "TlsPolicy": {
+		//	      "description": "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
+		//	      "pattern": "REQUIRE|OPTIONAL",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"delivery_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SendingPoolName
+				"sending_pool_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the dedicated IP pool to associate with the configuration set.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TlsPolicy
+				"tls_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An object that defines the dedicated IP pool that is used to send emails that you send using the configuration set.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"sending_pool_name": {
-						// Property: SendingPoolName
-						Description: "The name of the dedicated IP pool to associate with the configuration set.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"tls_policy": {
-						// Property: TlsPolicy
-						Description: "Specifies whether messages that use the configuration set are required to use Transport Layer Security (TLS). If the value is Require , messages are only delivered if a TLS connection can be established. If the value is Optional , messages can be delivered in plain text if a TLS connection can't be established.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the configuration set.",
-			//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
-			//	  "type": "string"
-			//	}
-			Description: "The name of the configuration set.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"reputation_options": {
-			// Property: ReputationOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
-			//	  "properties": {
-			//	    "ReputationMetricsEnabled": {
-			//	      "description": "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
-			//	      "pattern": "true|false",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the configuration set.",
+		//	  "pattern": "^[a-zA-Z0-9_-]{1,64}$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the configuration set.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReputationOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
+		//	  "properties": {
+		//	    "ReputationMetricsEnabled": {
+		//	      "description": "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
+		//	      "pattern": "true|false",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"reputation_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReputationMetricsEnabled
+				"reputation_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An object that defines whether or not Amazon SES collects reputation metrics for the emails that you send that use the configuration set.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"reputation_metrics_enabled": {
-						// Property: ReputationMetricsEnabled
-						Description: "If true , tracking of reputation metrics is enabled for the configuration set. If false , tracking of reputation metrics is disabled for the configuration set.",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"sending_options": {
-			// Property: SendingOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
-			//	  "properties": {
-			//	    "SendingEnabled": {
-			//	      "pattern": "true|false",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SendingOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
+		//	  "properties": {
+		//	    "SendingEnabled": {
+		//	      "pattern": "true|false",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sending_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SendingEnabled
+				"sending_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An object that defines whether or not Amazon SES can send email that you send using the configuration set.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"sending_enabled": {
-						// Property: SendingEnabled
-						Type:     types.BoolType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"suppression_options": {
-			// Property: SuppressionOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An object that contains information about the suppression list preferences for your account.",
-			//	  "properties": {
-			//	    "SuppressedReasons": {
-			//	      "description": "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "description": "The reason that the address was added to the suppression list for your account",
-			//	        "pattern": "BOUNCE|COMPLAINT",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SuppressionOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that contains information about the suppression list preferences for your account.",
+		//	  "properties": {
+		//	    "SuppressedReasons": {
+		//	      "description": "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The reason that the address was added to the suppression list for your account",
+		//	        "pattern": "BOUNCE|COMPLAINT",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"suppression_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SuppressedReasons
+				"suppressed_reasons": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An object that contains information about the suppression list preferences for your account.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"suppressed_reasons": {
-						// Property: SuppressedReasons
-						Description: "A list that contains the reasons that email addresses are automatically added to the suppression list for your account.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"tracking_options": {
-			// Property: TrackingOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An object that defines the open and click tracking options for emails that you send using the configuration set.",
-			//	  "properties": {
-			//	    "CustomRedirectDomain": {
-			//	      "description": "The domain to use for tracking open and click events.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TrackingOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that defines the open and click tracking options for emails that you send using the configuration set.",
+		//	  "properties": {
+		//	    "CustomRedirectDomain": {
+		//	      "description": "The domain to use for tracking open and click events.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tracking_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomRedirectDomain
+				"custom_redirect_domain": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The domain to use for tracking open and click events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An object that defines the open and click tracking options for emails that you send using the configuration set.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"custom_redirect_domain": {
-						// Property: CustomRedirectDomain
-						Description: "The domain to use for tracking open and click events.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"vdm_options": {
-			// Property: VdmOptions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set.",
-			//	  "properties": {
-			//	    "DashboardOptions": {
-			//	      "additionalProperties": false,
-			//	      "description": "Preferences regarding the Dashboard feature.",
-			//	      "properties": {
-			//	        "EngagementMetrics": {
-			//	          "description": "Whether emails sent with this configuration set have engagement tracking enabled.",
-			//	          "pattern": "ENABLED|DISABLED",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "EngagementMetrics"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "GuardianOptions": {
-			//	      "additionalProperties": false,
-			//	      "description": "Preferences regarding the Guardian feature.",
-			//	      "properties": {
-			//	        "OptimizedSharedDelivery": {
-			//	          "description": "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
-			//	          "pattern": "ENABLED|DISABLED",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "OptimizedSharedDelivery"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VdmOptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set.",
+		//	  "properties": {
+		//	    "DashboardOptions": {
+		//	      "additionalProperties": false,
+		//	      "description": "Preferences regarding the Dashboard feature.",
+		//	      "properties": {
+		//	        "EngagementMetrics": {
+		//	          "description": "Whether emails sent with this configuration set have engagement tracking enabled.",
+		//	          "pattern": "ENABLED|DISABLED",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EngagementMetrics"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "GuardianOptions": {
+		//	      "additionalProperties": false,
+		//	      "description": "Preferences regarding the Guardian feature.",
+		//	      "properties": {
+		//	        "OptimizedSharedDelivery": {
+		//	          "description": "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
+		//	          "pattern": "ENABLED|DISABLED",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "OptimizedSharedDelivery"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"vdm_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DashboardOptions
+				"dashboard_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EngagementMetrics
+						"engagement_metrics": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether emails sent with this configuration set have engagement tracking enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Preferences regarding the Dashboard feature.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GuardianOptions
+				"guardian_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: OptimizedSharedDelivery
+						"optimized_shared_delivery": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Preferences regarding the Guardian feature.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "An object that contains Virtual Deliverability Manager (VDM) settings for this configuration set.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"dashboard_options": {
-						// Property: DashboardOptions
-						Description: "Preferences regarding the Dashboard feature.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"engagement_metrics": {
-									// Property: EngagementMetrics
-									Description: "Whether emails sent with this configuration set have engagement tracking enabled.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"guardian_options": {
-						// Property: GuardianOptions
-						Description: "Preferences regarding the Guardian feature.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"optimized_shared_delivery": {
-									// Property: OptimizedSharedDelivery
-									Description: "Whether emails sent with this configuration set have optimized delivery algorithm enabled.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SES::ConfigurationSet",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSet").WithTerraformTypeName("awscc_ses_configuration_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -307,7 +281,7 @@ func configurationSetDataSource(ctx context.Context) (datasource.DataSource, err
 		"vdm_options":                "VdmOptions",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

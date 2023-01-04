@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,905 +19,835 @@ func init() {
 // dBClusterDataSource returns the Terraform awscc_rds_db_cluster data source.
 // This Terraform data source corresponds to the CloudFormation AWS::RDS::DBCluster resource.
 func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"allocated_storage": {
-			// Property: AllocatedStorage
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.",
-			//	  "type": "integer"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AllocatedStorage
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.",
+		//	  "type": "integer"
+		//	}
+		"allocated_storage": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The amount of storage in gibibytes (GiB) to allocate to each DB instance in the Multi-AZ DB cluster.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"associated_roles": {
-			// Property: AssociatedRoles
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.",
-			//	    "properties": {
-			//	      "FeatureName": {
-			//	        "description": "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon RDS API Reference.",
-			//	        "type": "string"
-			//	      },
-			//	      "RoleArn": {
-			//	        "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "RoleArn"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"feature_name": {
-						// Property: FeatureName
+		}, /*END ATTRIBUTE*/
+		// Property: AssociatedRoles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Describes an AWS Identity and Access Management (IAM) role that is associated with a DB cluster.",
+		//	    "properties": {
+		//	      "FeatureName": {
+		//	        "description": "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon RDS API Reference.",
+		//	        "type": "string"
+		//	      },
+		//	      "RoleArn": {
+		//	        "description": "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "RoleArn"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"associated_roles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FeatureName
+					"feature_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon RDS API Reference.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"role_arn": {
-						// Property: RoleArn
+					}, /*END ATTRIBUTE*/
+					// Property: RoleArn
+					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"auto_minor_version_upgrade": {
-			// Property: AutoMinorVersionUpgrade
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.",
-			//	  "type": "boolean"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Provides a list of the AWS Identity and Access Management (IAM) roles that are associated with the DB cluster. IAM roles that are associated with a DB cluster grant permission for the DB cluster to access other AWS services on your behalf.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: AutoMinorVersionUpgrade
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.",
+		//	  "type": "boolean"
+		//	}
+		"auto_minor_version_upgrade": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether minor engine upgrades are applied automatically to the DB cluster during the maintenance window. By default, minor engine upgrades are applied automatically.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"availability_zones": {
-			// Property: AvailabilityZones
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AvailabilityZones
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of Availability Zones (AZs) where instances in the DB cluster can be created. For information on AWS Regions and Availability Zones, see Choosing the Regions and Availability Zones in the Amazon Aurora User Guide.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"backtrack_window": {
-			// Property: BacktrackWindow
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 0,
-			//	  "description": "The target backtrack window, in seconds. To disable backtracking, set this value to 0.",
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: BacktrackWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 0,
+		//	  "description": "The target backtrack window, in seconds. To disable backtracking, set this value to 0.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"backtrack_window": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The target backtrack window, in seconds. To disable backtracking, set this value to 0.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"backup_retention_period": {
-			// Property: BackupRetentionPeriod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 1,
-			//	  "description": "The number of days for which automated backups are retained.",
-			//	  "minimum": 1,
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: BackupRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 1,
+		//	  "description": "The number of days for which automated backups are retained.",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"backup_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of days for which automated backups are retained.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"copy_tags_to_snapshot": {
-			// Property: CopyTagsToSnapshot
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CopyTagsToSnapshot
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.",
+		//	  "type": "boolean"
+		//	}
+		"copy_tags_to_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default is not to copy them.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"db_cluster_arn": {
-			// Property: DBClusterArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for the DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBClusterArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the DB cluster.",
+		//	  "type": "string"
+		//	}
+		"db_cluster_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for the DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"db_cluster_identifier": {
-			// Property: DBClusterIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The DB cluster identifier. This parameter is stored as a lowercase string.",
-			//	  "maxLength": 63,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DB cluster identifier. This parameter is stored as a lowercase string.",
+		//	  "maxLength": 63,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
+		//	  "type": "string"
+		//	}
+		"db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The DB cluster identifier. This parameter is stored as a lowercase string.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"db_cluster_instance_class": {
-			// Property: DBClusterInstanceClass
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBClusterInstanceClass
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.",
+		//	  "type": "string"
+		//	}
+		"db_cluster_instance_class": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The compute and memory capacity of each DB instance in the Multi-AZ DB cluster, for example db.m6g.xlarge.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"db_cluster_parameter_group_name": {
-			// Property: DBClusterParameterGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "default.aurora5.6",
-			//	  "description": "The name of the DB cluster parameter group to associate with this DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBClusterParameterGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "default.aurora5.6",
+		//	  "description": "The name of the DB cluster parameter group to associate with this DB cluster.",
+		//	  "type": "string"
+		//	}
+		"db_cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the DB cluster parameter group to associate with this DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"db_cluster_resource_id": {
-			// Property: DBClusterResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS Region-unique, immutable identifier for the DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBClusterResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Region-unique, immutable identifier for the DB cluster.",
+		//	  "type": "string"
+		//	}
+		"db_cluster_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS Region-unique, immutable identifier for the DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"db_instance_parameter_group_name": {
-			// Property: DBInstanceParameterGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the DB parameter group to apply to all instances of the DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBInstanceParameterGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the DB parameter group to apply to all instances of the DB cluster.",
+		//	  "type": "string"
+		//	}
+		"db_instance_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the DB parameter group to apply to all instances of the DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"db_subnet_group_name": {
-			// Property: DBSubnetGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A DB subnet group that you want to associate with this DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBSubnetGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A DB subnet group that you want to associate with this DB cluster.",
+		//	  "type": "string"
+		//	}
+		"db_subnet_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A DB subnet group that you want to associate with this DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"db_system_id": {
-			// Property: DBSystemId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Reserved for future use.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DBSystemId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Reserved for future use.",
+		//	  "type": "string"
+		//	}
+		"db_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Reserved for future use.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"database_name": {
-			// Property: DatabaseName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DatabaseName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide.",
+		//	  "type": "string"
+		//	}
+		"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of your database. If you don't provide a name, then Amazon RDS won't create a database in this DB cluster. For naming constraints, see Naming Constraints in the Amazon RDS User Guide.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"deletion_protection": {
-			// Property: DeletionProtection
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtection
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.",
+		//	  "type": "boolean"
+		//	}
+		"deletion_protection": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"domain": {
-			// Property: Domain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Active Directory directory ID to create the DB cluster in.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Domain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Active Directory directory ID to create the DB cluster in.",
+		//	  "type": "string"
+		//	}
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Active Directory directory ID to create the DB cluster in.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"domain_iam_role_name": {
-			// Property: DomainIAMRoleName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DomainIAMRoleName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
+		//	  "type": "string"
+		//	}
+		"domain_iam_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specify the name of the IAM role to be used when making API calls to the Directory Service.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"enable_cloudwatch_logs_exports": {
-			// Property: EnableCloudwatchLogsExports
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EnableCloudwatchLogsExports
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"enable_cloudwatch_logs_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The list of log types that need to be enabled for exporting to CloudWatch Logs. The values in the list depend on the DB engine being used. For more information, see Publishing Database Logs to Amazon CloudWatch Logs in the Amazon Aurora User Guide.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"enable_http_endpoint": {
-			// Property: EnableHttpEndpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EnableHttpEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
+		//	  "type": "boolean"
+		//	}
+		"enable_http_endpoint": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to enable the HTTP endpoint for an Aurora Serverless DB cluster. By default, the HTTP endpoint is disabled.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"enable_iam_database_authentication": {
-			// Property: EnableIAMDatabaseAuthentication
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EnableIAMDatabaseAuthentication
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.",
+		//	  "type": "boolean"
+		//	}
+		"enable_iam_database_authentication": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to enable mapping of AWS Identity and Access Management (IAM) accounts to database accounts. By default, mapping is disabled.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"endpoint": {
-			// Property: Endpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Address": {
-			//	      "description": "The connection endpoint for the DB cluster.",
-			//	      "type": "string"
-			//	    },
-			//	    "Port": {
-			//	      "description": "The port number that will accept connections on this DB cluster.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"address": {
-						// Property: Address
-						Description: "The connection endpoint for the DB cluster.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"port": {
-						// Property: Port
-						Description: "The port number that will accept connections on this DB cluster.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: Endpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Address": {
+		//	      "description": "The connection endpoint for the DB cluster.",
+		//	      "type": "string"
+		//	    },
+		//	    "Port": {
+		//	      "description": "The port number that will accept connections on this DB cluster.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The connection endpoint for the DB cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Port
+				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The port number that will accept connections on this DB cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"engine": {
-			// Property: Engine
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql",
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the database engine to be used for this DB cluster. Valid Values: aurora (for MySQL 5.6-compatible Aurora), aurora-mysql (for MySQL 5.7-compatible Aurora), and aurora-postgresql",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"engine_mode": {
-			// Property: EngineMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EngineMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.",
+		//	  "type": "string"
+		//	}
+		"engine_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The DB engine mode of the DB cluster, either provisioned, serverless, parallelquery, global, or multimaster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"engine_version": {
-			// Property: EngineVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version number of the database engine to use.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EngineVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version number of the database engine to use.",
+		//	  "type": "string"
+		//	}
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version number of the database engine to use.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"global_cluster_identifier": {
-			// Property: GlobalClusterIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If you are configuring an Aurora global database cluster and want your Aurora DB cluster to be a secondary member in the global database cluster, specify the global cluster ID of the global database cluster. To define the primary database cluster of the global cluster, use the AWS::RDS::GlobalCluster resource.\n\nIf you aren't configuring a global database cluster, don't specify this property.",
-			//	  "maxLength": 63,
-			//	  "minLength": 0,
-			//	  "pattern": "^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GlobalClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you are configuring an Aurora global database cluster and want your Aurora DB cluster to be a secondary member in the global database cluster, specify the global cluster ID of the global database cluster. To define the primary database cluster of the global cluster, use the AWS::RDS::GlobalCluster resource.\n\nIf you aren't configuring a global database cluster, don't specify this property.",
+		//	  "maxLength": 63,
+		//	  "minLength": 0,
+		//	  "pattern": "^$|^[a-zA-Z]{1}(?:-?[a-zA-Z0-9]){0,62}$",
+		//	  "type": "string"
+		//	}
+		"global_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If you are configuring an Aurora global database cluster and want your Aurora DB cluster to be a secondary member in the global database cluster, specify the global cluster ID of the global database cluster. To define the primary database cluster of the global cluster, use the AWS::RDS::GlobalCluster resource.\n\nIf you aren't configuring a global database cluster, don't specify this property.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"iops": {
-			// Property: Iops
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Iops
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster.",
+		//	  "type": "integer"
+		//	}
+		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"kms_key_id": {
-			// Property: KmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"master_user_password": {
-			// Property: MasterUserPassword
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The master password for the DB instance.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUserPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The master password for the DB instance.",
+		//	  "type": "string"
+		//	}
+		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The master password for the DB instance.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"master_username": {
-			// Property: MasterUsername
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the master user for the DB cluster. You must specify MasterUsername, unless you specify SnapshotIdentifier. In that case, don't specify MasterUsername.",
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9_]*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUsername
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the master user for the DB cluster. You must specify MasterUsername, unless you specify SnapshotIdentifier. In that case, don't specify MasterUsername.",
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z]{1}[a-zA-Z0-9_]*$",
+		//	  "type": "string"
+		//	}
+		"master_username": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the master user for the DB cluster. You must specify MasterUsername, unless you specify SnapshotIdentifier. In that case, don't specify MasterUsername.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"monitoring_interval": {
-			// Property: MonitoringInterval
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": 0,
-			//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MonitoringInterval
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 0,
+		//	  "description": "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
+		//	  "type": "integer"
+		//	}
+		"monitoring_interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"monitoring_role_arn": {
-			// Property: MonitoringRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MonitoringRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs.",
+		//	  "type": "string"
+		//	}
+		"monitoring_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"network_type": {
-			// Property: NetworkType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The network type of the DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The network type of the DB cluster.",
+		//	  "type": "string"
+		//	}
+		"network_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The network type of the DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"performance_insights_enabled": {
-			// Property: PerformanceInsightsEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to turn on Performance Insights for the DB cluster.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PerformanceInsightsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to turn on Performance Insights for the DB cluster.",
+		//	  "type": "boolean"
+		//	}
+		"performance_insights_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to turn on Performance Insights for the DB cluster.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"performance_insights_kms_key_id": {
-			// Property: PerformanceInsightsKmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Web Services KMS key identifier for encryption of Performance Insights data.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PerformanceInsightsKmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Web Services KMS key identifier for encryption of Performance Insights data.",
+		//	  "type": "string"
+		//	}
+		"performance_insights_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Web Services KMS key identifier for encryption of Performance Insights data.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"performance_insights_retention_period": {
-			// Property: PerformanceInsightsRetentionPeriod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The amount of time, in days, to retain Performance Insights data.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PerformanceInsightsRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The amount of time, in days, to retain Performance Insights data.",
+		//	  "type": "integer"
+		//	}
+		"performance_insights_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The amount of time, in days, to retain Performance Insights data.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"port": {
-			// Property: Port
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The port number on which the instances in the DB cluster accept connections. Default: 3306 if engine is set as aurora or 5432 if set to aurora-postgresql.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Port
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port number on which the instances in the DB cluster accept connections. Default: 3306 if engine is set as aurora or 5432 if set to aurora-postgresql.",
+		//	  "type": "integer"
+		//	}
+		"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The port number on which the instances in the DB cluster accept connections. Default: 3306 if engine is set as aurora or 5432 if set to aurora-postgresql.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"preferred_backup_window": {
-			// Property: PreferredBackupWindow
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PreferredBackupWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide.",
+		//	  "type": "string"
+		//	}
+		"preferred_backup_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The daily time range during which automated backups are created if automated backups are enabled using the BackupRetentionPeriod parameter. The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"preferred_maintenance_window": {
-			// Property: PreferredMaintenanceWindow
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PreferredMaintenanceWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide.",
+		//	  "type": "string"
+		//	}
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC). The default is a 30-minute window selected at random from an 8-hour block of time for each AWS Region, occurring on a random day of the week. To see the time blocks available, see Adjusting the Preferred DB Cluster Maintenance Window in the Amazon Aurora User Guide.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"publicly_accessible": {
-			// Property: PubliclyAccessible
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether the DB cluster is publicly accessible.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PubliclyAccessible
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB cluster is publicly accessible.",
+		//	  "type": "boolean"
+		//	}
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether the DB cluster is publicly accessible.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"read_endpoint": {
-			// Property: ReadEndpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Address": {
-			//	      "description": "The reader endpoint for the DB cluster.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"address": {
-						// Property: Address
-						Description: "The reader endpoint for the DB cluster.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: ReadEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Address": {
+		//	      "description": "The reader endpoint for the DB cluster.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"read_endpoint": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Address
+				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The reader endpoint for the DB cluster.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"replication_source_identifier": {
-			// Property: ReplicationSourceIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicationSourceIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.",
+		//	  "type": "string"
+		//	}
+		"replication_source_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"restore_type": {
-			// Property: RestoreType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "full-copy",
-			//	  "description": "The type of restore to be performed. You can specify one of the following values:\nfull-copy - The new DB cluster is restored as a full copy of the source DB cluster.\ncopy-on-write - The new DB cluster is restored as a clone of the source DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RestoreType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "full-copy",
+		//	  "description": "The type of restore to be performed. You can specify one of the following values:\nfull-copy - The new DB cluster is restored as a full copy of the source DB cluster.\ncopy-on-write - The new DB cluster is restored as a clone of the source DB cluster.",
+		//	  "type": "string"
+		//	}
+		"restore_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of restore to be performed. You can specify one of the following values:\nfull-copy - The new DB cluster is restored as a full copy of the source DB cluster.\ncopy-on-write - The new DB cluster is restored as a clone of the source DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"scaling_configuration": {
-			// Property: ScalingConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The ScalingConfiguration property type specifies the scaling configuration of an Aurora Serverless DB cluster.",
-			//	  "properties": {
-			//	    "AutoPause": {
-			//	      "description": "A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).",
-			//	      "type": "boolean"
-			//	    },
-			//	    "MaxCapacity": {
-			//	      "description": "The maximum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe maximum capacity must be greater than or equal to the minimum capacity.",
-			//	      "type": "integer"
-			//	    },
-			//	    "MinCapacity": {
-			//	      "description": "The minimum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe minimum capacity must be less than or equal to the maximum capacity.",
-			//	      "type": "integer"
-			//	    },
-			//	    "SecondsBeforeTimeout": {
-			//	      "description": "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.\nThe default is 300.",
-			//	      "type": "integer"
-			//	    },
-			//	    "SecondsUntilAutoPause": {
-			//	      "description": "The time, in seconds, before an Aurora DB cluster in serverless mode is paused.",
-			//	      "type": "integer"
-			//	    },
-			//	    "TimeoutAction": {
-			//	      "description": "The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.\nForceApplyCapacityChange sets the capacity to the specified value as soon as possible.\nRollbackCapacityChange, the default, ignores the capacity change if a scaling point isn't found in the timeout period.\n\nFor more information, see Autoscaling for Aurora Serverless v1 in the Amazon Aurora User Guide.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ScalingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The ScalingConfiguration property type specifies the scaling configuration of an Aurora Serverless DB cluster.",
+		//	  "properties": {
+		//	    "AutoPause": {
+		//	      "description": "A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).",
+		//	      "type": "boolean"
+		//	    },
+		//	    "MaxCapacity": {
+		//	      "description": "The maximum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe maximum capacity must be greater than or equal to the minimum capacity.",
+		//	      "type": "integer"
+		//	    },
+		//	    "MinCapacity": {
+		//	      "description": "The minimum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe minimum capacity must be less than or equal to the maximum capacity.",
+		//	      "type": "integer"
+		//	    },
+		//	    "SecondsBeforeTimeout": {
+		//	      "description": "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.\nThe default is 300.",
+		//	      "type": "integer"
+		//	    },
+		//	    "SecondsUntilAutoPause": {
+		//	      "description": "The time, in seconds, before an Aurora DB cluster in serverless mode is paused.",
+		//	      "type": "integer"
+		//	    },
+		//	    "TimeoutAction": {
+		//	      "description": "The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.\nForceApplyCapacityChange sets the capacity to the specified value as soon as possible.\nRollbackCapacityChange, the default, ignores the capacity change if a scaling point isn't found in the timeout period.\n\nFor more information, see Autoscaling for Aurora Serverless v1 in the Amazon Aurora User Guide.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoPause
+				"auto_pause": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe maximum capacity must be greater than or equal to the minimum capacity.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinCapacity
+				"min_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe minimum capacity must be less than or equal to the maximum capacity.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecondsBeforeTimeout
+				"seconds_before_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.\nThe default is 300.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecondsUntilAutoPause
+				"seconds_until_auto_pause": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The time, in seconds, before an Aurora DB cluster in serverless mode is paused.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutAction
+				"timeout_action": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.\nForceApplyCapacityChange sets the capacity to the specified value as soon as possible.\nRollbackCapacityChange, the default, ignores the capacity change if a scaling point isn't found in the timeout period.\n\nFor more information, see Autoscaling for Aurora Serverless v1 in the Amazon Aurora User Guide.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The ScalingConfiguration property type specifies the scaling configuration of an Aurora Serverless DB cluster.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"auto_pause": {
-						// Property: AutoPause
-						Description: "A value that indicates whether to allow or disallow automatic pause for an Aurora DB cluster in serverless DB engine mode. A DB cluster can be paused only when it's idle (it has no connections).",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-					"max_capacity": {
-						// Property: MaxCapacity
-						Description: "The maximum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe maximum capacity must be greater than or equal to the minimum capacity.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"min_capacity": {
-						// Property: MinCapacity
-						Description: "The minimum capacity for an Aurora DB cluster in serverless DB engine mode.\nFor Aurora MySQL, valid capacity values are 1, 2, 4, 8, 16, 32, 64, 128, and 256.\nFor Aurora PostgreSQL, valid capacity values are 2, 4, 8, 16, 32, 64, 192, and 384.\nThe minimum capacity must be less than or equal to the maximum capacity.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"seconds_before_timeout": {
-						// Property: SecondsBeforeTimeout
-						Description: "The amount of time, in seconds, that Aurora Serverless v1 tries to find a scaling point to perform seamless scaling before enforcing the timeout action.\nThe default is 300.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"seconds_until_auto_pause": {
-						// Property: SecondsUntilAutoPause
-						Description: "The time, in seconds, before an Aurora DB cluster in serverless mode is paused.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"timeout_action": {
-						// Property: TimeoutAction
-						Description: "The action to take when the timeout is reached, either ForceApplyCapacityChange or RollbackCapacityChange.\nForceApplyCapacityChange sets the capacity to the specified value as soon as possible.\nRollbackCapacityChange, the default, ignores the capacity change if a scaling point isn't found in the timeout period.\n\nFor more information, see Autoscaling for Aurora Serverless v1 in the Amazon Aurora User Guide.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"serverless_v2_scaling_configuration": {
-			// Property: ServerlessV2ScalingConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Contains the scaling configuration of an Aurora Serverless v2 DB cluster.",
-			//	  "properties": {
-			//	    "MaxCapacity": {
-			//	      "description": "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
-			//	      "maximum": 128,
-			//	      "minimum": 0.5,
-			//	      "type": "number"
-			//	    },
-			//	    "MinCapacity": {
-			//	      "description": "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
-			//	      "maximum": 128,
-			//	      "minimum": 0.5,
-			//	      "type": "number"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ServerlessV2ScalingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains the scaling configuration of an Aurora Serverless v2 DB cluster.",
+		//	  "properties": {
+		//	    "MaxCapacity": {
+		//	      "description": "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
+		//	      "maximum": 128,
+		//	      "minimum": 0.5,
+		//	      "type": "number"
+		//	    },
+		//	    "MinCapacity": {
+		//	      "description": "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
+		//	      "maximum": 128,
+		//	      "minimum": 0.5,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"serverless_v2_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinCapacity
+				"min_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Contains the scaling configuration of an Aurora Serverless v2 DB cluster.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"max_capacity": {
-						// Property: MaxCapacity
-						Description: "The maximum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 40, 40.5, 41, and so on. The largest value that you can use is 128.",
-						Type:        types.Float64Type,
-						Computed:    true,
-					},
-					"min_capacity": {
-						// Property: MinCapacity
-						Description: "The minimum number of Aurora capacity units (ACUs) for a DB instance in an Aurora Serverless v2 cluster. You can specify ACU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value that you can use is 0.5.",
-						Type:        types.Float64Type,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"snapshot_identifier": {
-			// Property: SnapshotIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier for the DB snapshot or DB cluster snapshot to restore from.\nYou can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.\nAfter you restore a DB cluster with a SnapshotIdentifier property, you must specify the same SnapshotIdentifier property for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the SnapshotIdentifier property, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the specified SnapshotIdentifier property, and the original DB cluster is deleted.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier for the DB snapshot or DB cluster snapshot to restore from.\nYou can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.\nAfter you restore a DB cluster with a SnapshotIdentifier property, you must specify the same SnapshotIdentifier property for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the SnapshotIdentifier property, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the specified SnapshotIdentifier property, and the original DB cluster is deleted.",
+		//	  "type": "string"
+		//	}
+		"snapshot_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier for the DB snapshot or DB cluster snapshot to restore from.\nYou can use either the name or the Amazon Resource Name (ARN) to specify a DB cluster snapshot. However, you can use only the ARN to specify a DB snapshot.\nAfter you restore a DB cluster with a SnapshotIdentifier property, you must specify the same SnapshotIdentifier property for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed. However, if you don't specify the SnapshotIdentifier property, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the specified SnapshotIdentifier property, and the original DB cluster is deleted.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_db_cluster_identifier": {
-			// Property: SourceDBClusterIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the source DB cluster from which to restore.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceDBClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the source DB cluster from which to restore.",
+		//	  "type": "string"
+		//	}
+		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the source DB cluster from which to restore.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_region": {
-			// Property: SourceRegion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, us-east-1.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceRegion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, us-east-1.",
+		//	  "type": "string"
+		//	}
+		"source_region": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS Region which contains the source DB cluster when replicating a DB cluster. For example, us-east-1.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"storage_encrypted": {
-			// Property: StorageEncrypted
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether the DB instance is encrypted.\nIf you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StorageEncrypted
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the DB instance is encrypted.\nIf you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance.",
+		//	  "type": "boolean"
+		//	}
+		"storage_encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the DB instance is encrypted.\nIf you specify the DBClusterIdentifier, SnapshotIdentifier, or SourceDBInstanceIdentifier property, don't specify this property. The value is inherited from the cluster, snapshot, or source DB instance.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"storage_type": {
-			// Property: StorageType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies the storage type to be associated with the DB cluster.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StorageType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies the storage type to be associated with the DB cluster.",
+		//	  "type": "string"
+		//	}
+		"storage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies the storage type to be associated with the DB cluster.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"use_latest_restorable_time": {
-			// Property: UseLatestRestorableTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time.",
-			//	  "type": "boolean"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: UseLatestRestorableTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time.",
+		//	  "type": "boolean"
+		//	}
+		"use_latest_restorable_time": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether to restore the DB cluster to the latest restorable backup time. By default, the DB cluster is not restored to the latest restorable backup time.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"vpc_security_group_ids": {
-			// Property: VpcSecurityGroupIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of EC2 VPC security groups to associate with this DB cluster.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcSecurityGroupIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of EC2 VPC security groups to associate with this DB cluster.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"vpc_security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of EC2 VPC security groups to associate with this DB cluster.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::RDS::DBCluster",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBCluster").WithTerraformTypeName("awscc_rds_db_cluster")
 	opts = opts.WithTerraformSchema(schema)
@@ -989,7 +919,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_security_group_ids":                "VpcSecurityGroupIds",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

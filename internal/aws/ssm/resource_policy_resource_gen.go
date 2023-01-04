@@ -6,9 +6,11 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,82 +21,77 @@ func init() {
 // resourcePolicyResource returns the Terraform awscc_ssm_resource_policy resource.
 // This Terraform resource corresponds to the CloudFormation AWS::SSM::ResourcePolicy resource.
 func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"policy": {
-			// Property: Policy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Actual policy statement.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Actual policy statement.",
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Actual policy statement.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"policy_hash": {
-			// Property: PolicyHash
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A snapshot identifier for the policy over time.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyHash
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A snapshot identifier for the policy over time.",
+		//	  "type": "string"
+		//	}
+		"policy_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A snapshot identifier for the policy over time.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"policy_id": {
-			// Property: PolicyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An unique identifier within the policies of a resource. ",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An unique identifier within the policies of a resource. ",
+		//	  "type": "string"
+		//	}
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An unique identifier within the policies of a resource. ",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"resource_arn": {
-			// Property: ResourceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Arn of OpsItemGroup etc.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Arn of OpsItemGroup etc.",
+		//	  "type": "string"
+		//	}
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Arn of OpsItemGroup etc.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::SSM::ResourcePolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourcePolicy").WithTerraformTypeName("awscc_ssm_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -110,7 +107,7 @@ func resourcePolicyResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

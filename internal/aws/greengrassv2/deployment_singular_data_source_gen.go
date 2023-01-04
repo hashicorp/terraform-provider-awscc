@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,524 +19,473 @@ func init() {
 // deploymentDataSource returns the Terraform awscc_greengrassv2_deployment data source.
 // This Terraform data source corresponds to the CloudFormation AWS::GreengrassV2::Deployment resource.
 func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"components": {
-			// Property: Components
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ComponentVersion": {
-			//	          "maxLength": 64,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "ConfigurationUpdate": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Merge": {
-			//	              "maxLength": 10485760,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "Reset": {
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "maxLength": 256,
-			//	                "minLength": 0,
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "RunWith": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "PosixUser": {
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "SystemResourceLimits": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Cpus": {
-			//	                  "minimum": 0,
-			//	                  "type": "number"
-			//	                },
-			//	                "Memory": {
-			//	                  "format": "int64",
-			//	                  "maximum": 9223372036854771712,
-			//	                  "minimum": 0,
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "WindowsUser": {
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			//
-			// Pattern: ""
-			Attributes: tfsdk.MapNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"component_version": {
-						// Property: ComponentVersion
-						Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Components
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ComponentVersion": {
+		//	          "maxLength": 64,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "ConfigurationUpdate": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Merge": {
+		//	              "maxLength": 10485760,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Reset": {
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "maxLength": 256,
+		//	                "minLength": 0,
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "RunWith": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "PosixUser": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "SystemResourceLimits": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Cpus": {
+		//	                  "minimum": 0,
+		//	                  "type": "number"
+		//	                },
+		//	                "Memory": {
+		//	                  "format": "int64",
+		//	                  "maximum": 9223372036854771712,
+		//	                  "minimum": 0,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "WindowsUser": {
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"components":              // Pattern: ""
+		schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ComponentVersion
+					"component_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"configuration_update": {
-						// Property: ConfigurationUpdate
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"merge": {
-									// Property: Merge
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"reset": {
-									// Property: Reset
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
+					}, /*END ATTRIBUTE*/
+					// Property: ConfigurationUpdate
+					"configuration_update": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Merge
+							"merge": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Reset
+							"reset": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-					"run_with": {
-						// Property: RunWith
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"posix_user": {
-									// Property: PosixUser
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"system_resource_limits": {
-									// Property: SystemResourceLimits
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"cpus": {
-												// Property: Cpus
-												Type:     types.Float64Type,
-												Computed: true,
-											},
-											"memory": {
-												// Property: Memory
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"windows_user": {
-									// Property: WindowsUser
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+					}, /*END ATTRIBUTE*/
+					// Property: RunWith
+					"run_with": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PosixUser
+							"posix_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SystemResourceLimits
+							"system_resource_limits": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Cpus
+									"cpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Memory
+									"memory": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: WindowsUser
+							"windows_user": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"deployment_id": {
-			// Property: DeploymentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": ".+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DeploymentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": ".+",
+		//	  "type": "string"
+		//	}
+		"deployment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"deployment_name": {
-			// Property: DeploymentName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DeploymentName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"deployment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"deployment_policies": {
-			// Property: DeploymentPolicies
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "ComponentUpdatePolicy": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Action": {
-			//	          "enum": [
-			//	            "NOTIFY_COMPONENTS",
-			//	            "SKIP_NOTIFY_COMPONENTS"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "TimeoutInSeconds": {
-			//	          "maximum": 2147483647,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ConfigurationValidationPolicy": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "TimeoutInSeconds": {
-			//	          "maximum": 2147483647,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "FailureHandlingPolicy": {
-			//	      "enum": [
-			//	        "ROLLBACK",
-			//	        "DO_NOTHING"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"component_update_policy": {
-						// Property: ComponentUpdatePolicy
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"action": {
+		}, /*END ATTRIBUTE*/
+		// Property: DeploymentPolicies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ComponentUpdatePolicy": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Action": {
+		//	          "enum": [
+		//	            "NOTIFY_COMPONENTS",
+		//	            "SKIP_NOTIFY_COMPONENTS"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "TimeoutInSeconds": {
+		//	          "maximum": 2147483647,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ConfigurationValidationPolicy": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "TimeoutInSeconds": {
+		//	          "maximum": 2147483647,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "FailureHandlingPolicy": {
+		//	      "enum": [
+		//	        "ROLLBACK",
+		//	        "DO_NOTHING"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"deployment_policies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentUpdatePolicy
+				"component_update_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Action
+						"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TimeoutInSeconds
+						"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConfigurationValidationPolicy
+				"configuration_validation_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: TimeoutInSeconds
+						"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: FailureHandlingPolicy
+				"failure_handling_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: IotJobConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AbortConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CriteriaList": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Action": {
+		//	                "enum": [
+		//	                  "CANCEL"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "FailureType": {
+		//	                "enum": [
+		//	                  "FAILED",
+		//	                  "REJECTED",
+		//	                  "TIMED_OUT",
+		//	                  "ALL"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "MinNumberOfExecutedThings": {
+		//	                "maximum": 2147483647,
+		//	                "minimum": 1,
+		//	                "type": "integer"
+		//	              },
+		//	              "ThresholdPercentage": {
+		//	                "maximum": 100,
+		//	                "minimum": 0,
+		//	                "type": "number"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "FailureType",
+		//	              "Action",
+		//	              "ThresholdPercentage",
+		//	              "MinNumberOfExecutedThings"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "minItems": 1,
+		//	          "type": "array"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CriteriaList"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "JobExecutionsRolloutConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "ExponentialRate": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "BaseRatePerMinute": {
+		//	              "maximum": 1000,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "IncrementFactor": {
+		//	              "maximum": 5,
+		//	              "minimum": 1,
+		//	              "type": "number"
+		//	            },
+		//	            "RateIncreaseCriteria": {
+		//	              "properties": {
+		//	                "NumberOfNotifiedThings": {
+		//	                  "maximum": 2147483647,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                },
+		//	                "NumberOfSucceededThings": {
+		//	                  "maximum": 2147483647,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BaseRatePerMinute",
+		//	            "IncrementFactor",
+		//	            "RateIncreaseCriteria"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "MaximumPerMinute": {
+		//	          "maximum": 1000,
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "TimeoutConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "InProgressTimeoutInMinutes": {
+		//	          "maximum": 2147483647,
+		//	          "minimum": 0,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"iot_job_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AbortConfig
+				"abort_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CriteriaList
+						"criteria_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Action
-									Type:     types.StringType,
+									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: FailureType
+									"failure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: MinNumberOfExecutedThings
+									"min_number_of_executed_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ThresholdPercentage
+									"threshold_percentage": schema.Float64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: JobExecutionsRolloutConfig
+				"job_executions_rollout_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ExponentialRate
+						"exponential_rate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BaseRatePerMinute
+								"base_rate_per_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"timeout_in_seconds": {
-									// Property: TimeoutInSeconds
-									Type:     types.Int64Type,
+								}, /*END ATTRIBUTE*/
+								// Property: IncrementFactor
+								"increment_factor": schema.Float64Attribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"configuration_validation_policy": {
-						// Property: ConfigurationValidationPolicy
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"timeout_in_seconds": {
-									// Property: TimeoutInSeconds
-									Type:     types.Int64Type,
+								}, /*END ATTRIBUTE*/
+								// Property: RateIncreaseCriteria
+								"rate_increase_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: NumberOfNotifiedThings
+										"number_of_notified_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: NumberOfSucceededThings
+										"number_of_succeeded_things": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"failure_handling_policy": {
-						// Property: FailureHandlingPolicy
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaximumPerMinute
+						"maximum_per_minute": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutConfig
+				"timeout_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: InProgressTimeoutInMinutes
+						"in_progress_timeout_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"iot_job_configuration": {
-			// Property: IotJobConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "AbortConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CriteriaList": {
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Action": {
-			//	                "enum": [
-			//	                  "CANCEL"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "FailureType": {
-			//	                "enum": [
-			//	                  "FAILED",
-			//	                  "REJECTED",
-			//	                  "TIMED_OUT",
-			//	                  "ALL"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "MinNumberOfExecutedThings": {
-			//	                "maximum": 2147483647,
-			//	                "minimum": 1,
-			//	                "type": "integer"
-			//	              },
-			//	              "ThresholdPercentage": {
-			//	                "maximum": 100,
-			//	                "minimum": 0,
-			//	                "type": "number"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "FailureType",
-			//	              "Action",
-			//	              "ThresholdPercentage",
-			//	              "MinNumberOfExecutedThings"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "minItems": 1,
-			//	          "type": "array"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CriteriaList"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "JobExecutionsRolloutConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "ExponentialRate": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "BaseRatePerMinute": {
-			//	              "maximum": 1000,
-			//	              "minimum": 1,
-			//	              "type": "integer"
-			//	            },
-			//	            "IncrementFactor": {
-			//	              "maximum": 5,
-			//	              "minimum": 1,
-			//	              "type": "number"
-			//	            },
-			//	            "RateIncreaseCriteria": {
-			//	              "properties": {
-			//	                "NumberOfNotifiedThings": {
-			//	                  "maximum": 2147483647,
-			//	                  "minimum": 1,
-			//	                  "type": "integer"
-			//	                },
-			//	                "NumberOfSucceededThings": {
-			//	                  "maximum": 2147483647,
-			//	                  "minimum": 1,
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "BaseRatePerMinute",
-			//	            "IncrementFactor",
-			//	            "RateIncreaseCriteria"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "MaximumPerMinute": {
-			//	          "maximum": 1000,
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "TimeoutConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "InProgressTimeoutInMinutes": {
-			//	          "maximum": 2147483647,
-			//	          "minimum": 0,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"abort_config": {
-						// Property: AbortConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"criteria_list": {
-									// Property: CriteriaList
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"action": {
-												// Property: Action
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"failure_type": {
-												// Property: FailureType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"min_number_of_executed_things": {
-												// Property: MinNumberOfExecutedThings
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"threshold_percentage": {
-												// Property: ThresholdPercentage
-												Type:     types.Float64Type,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"job_executions_rollout_config": {
-						// Property: JobExecutionsRolloutConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"exponential_rate": {
-									// Property: ExponentialRate
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"base_rate_per_minute": {
-												// Property: BaseRatePerMinute
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"increment_factor": {
-												// Property: IncrementFactor
-												Type:     types.Float64Type,
-												Computed: true,
-											},
-											"rate_increase_criteria": {
-												// Property: RateIncreaseCriteria
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"number_of_notified_things": {
-															// Property: NumberOfNotifiedThings
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"number_of_succeeded_things": {
-															// Property: NumberOfSucceededThings
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"maximum_per_minute": {
-									// Property: MaximumPerMinute
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"timeout_config": {
-						// Property: TimeoutConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"in_progress_timeout_in_minutes": {
-									// Property: InProgressTimeoutInMinutes
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TargetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "arn:[^:]*:iot:[^:]*:[0-9]+:(thing|thinggroup)/.+",
+		//	  "type": "string"
+		//	}
+		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			//
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"target_arn": {
-			// Property: TargetArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "pattern": "arn:[^:]*:iot:[^:]*:[0-9]+:(thing|thinggroup)/.+",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::GreengrassV2::Deployment",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::Deployment").WithTerraformTypeName("awscc_greengrassv2_deployment")
 	opts = opts.WithTerraformSchema(schema)
@@ -580,7 +529,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"windows_user":                    "WindowsUser",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

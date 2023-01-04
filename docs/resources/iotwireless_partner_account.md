@@ -59,7 +59,7 @@ Optional:
 <a id="nestedatt--sidewalk_response"></a>
 ### Nested Schema for `sidewalk_response`
 
-Optional:
+Read-Only:
 
 - `amazon_id` (String)
 - `arn` (String)

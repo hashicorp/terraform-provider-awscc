@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,56 +19,51 @@ func init() {
 // subnetNetworkAclAssociationDataSource returns the Terraform awscc_ec2_subnet_network_acl_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::SubnetNetworkAclAssociation resource.
 func subnetNetworkAclAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"association_id": {
-			// Property: AssociationId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssociationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"network_acl_id": {
-			// Property: NetworkAclId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the network ACL",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkAclId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the network ACL",
+		//	  "type": "string"
+		//	}
+		"network_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the network ACL",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"subnet_id": {
-			// Property: SubnetId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the subnet",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the subnet",
+		//	  "type": "string"
+		//	}
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the subnet",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EC2::SubnetNetworkAclAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::SubnetNetworkAclAssociation").WithTerraformTypeName("awscc_ec2_subnet_network_acl_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -78,7 +73,7 @@ func subnetNetworkAclAssociationDataSource(ctx context.Context) (datasource.Data
 		"subnet_id":      "SubnetId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

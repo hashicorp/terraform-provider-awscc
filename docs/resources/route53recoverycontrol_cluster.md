@@ -39,7 +39,7 @@ Required:
 <a id="nestedatt--cluster_endpoints"></a>
 ### Nested Schema for `cluster_endpoints`
 
-Optional:
+Read-Only:
 
 - `endpoint` (String)
 - `region` (String)

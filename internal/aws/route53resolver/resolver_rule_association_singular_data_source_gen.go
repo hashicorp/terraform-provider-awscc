@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,70 +19,64 @@ func init() {
 // resolverRuleAssociationDataSource returns the Terraform awscc_route53resolver_resolver_rule_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Route53Resolver::ResolverRuleAssociation resource.
 func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of an association between a Resolver rule and a VPC.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of an association between a Resolver rule and a VPC.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of an association between a Resolver rule and a VPC.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"resolver_rule_association_id": {
-			// Property: ResolverRuleAssociationId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Primary Identifier for Resolver Rule Association",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ResolverRuleAssociationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Primary Identifier for Resolver Rule Association",
+		//	  "type": "string"
+		//	}
+		"resolver_rule_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Primary Identifier for Resolver Rule Association",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"resolver_rule_id": {
-			// Property: ResolverRuleId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ResolverRuleId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
+		//	  "type": "string"
+		//	}
+		"resolver_rule_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"vpc_id": {
-			// Property: VPCId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the VPC that you associated the Resolver rule with.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VPCId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the VPC that you associated the Resolver rule with.",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the VPC that you associated the Resolver rule with.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Route53Resolver::ResolverRuleAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverRuleAssociation").WithTerraformTypeName("awscc_route53resolver_resolver_rule_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -93,7 +87,7 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		"vpc_id":                       "VPCId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

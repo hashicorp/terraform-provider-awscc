@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,355 +19,329 @@ func init() {
 // vpcAttachmentDataSource returns the Terraform awscc_networkmanager_vpc_attachment data source.
 // This Terraform data source corresponds to the CloudFormation AWS::NetworkManager::VpcAttachment resource.
 func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"attachment_id": {
-			// Property: AttachmentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Id of the attachment.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AttachmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Id of the attachment.",
+		//	  "type": "string"
+		//	}
+		"attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Id of the attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"attachment_policy_rule_number": {
-			// Property: AttachmentPolicyRuleNumber
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The policy rule number associated with the attachment.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AttachmentPolicyRuleNumber
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The policy rule number associated with the attachment.",
+		//	  "type": "integer"
+		//	}
+		"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The policy rule number associated with the attachment.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"attachment_type": {
-			// Property: AttachmentType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Attachment type.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AttachmentType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Attachment type.",
+		//	  "type": "string"
+		//	}
+		"attachment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Attachment type.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"core_network_arn": {
-			// Property: CoreNetworkArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of a core network for the VPC attachment.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CoreNetworkArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of a core network for the VPC attachment.",
+		//	  "type": "string"
+		//	}
+		"core_network_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of a core network for the VPC attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"core_network_id": {
-			// Property: CoreNetworkId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of a core network for the VPC attachment.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CoreNetworkId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of a core network for the VPC attachment.",
+		//	  "type": "string"
+		//	}
+		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of a core network for the VPC attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"created_at": {
-			// Property: CreatedAt
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Creation time of the attachment.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Creation time of the attachment.",
+		//	  "type": "string"
+		//	}
+		"created_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Creation time of the attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"edge_location": {
-			// Property: EdgeLocation
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Region where the edge is located.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EdgeLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Region where the edge is located.",
+		//	  "type": "string"
+		//	}
+		"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Region where the edge is located.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"options": {
-			// Property: Options
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Vpc options of the attachment.",
-			//	  "properties": {
-			//	    "Ipv6Support": {
-			//	      "default": false,
-			//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Options
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Vpc options of the attachment.",
+		//	  "properties": {
+		//	    "Ipv6Support": {
+		//	      "default": false,
+		//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Ipv6Support
+				"ipv_6_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Vpc options of the attachment.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"ipv_6_support": {
-						// Property: Ipv6Support
-						Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"owner_account_id": {
-			// Property: OwnerAccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Owner account of the attachment.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: OwnerAccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Owner account of the attachment.",
+		//	  "type": "string"
+		//	}
+		"owner_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Owner account of the attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"proposed_segment_change": {
-			// Property: ProposedSegmentChange
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The attachment to move from one segment to another.",
-			//	  "properties": {
-			//	    "AttachmentPolicyRuleNumber": {
-			//	      "description": "The rule number in the policy document that applies to this change.",
-			//	      "type": "integer"
-			//	    },
-			//	    "SegmentName": {
-			//	      "description": "The name of the segment to change.",
-			//	      "type": "string"
-			//	    },
-			//	    "Tags": {
-			//	      "description": "The key-value tags that changed for the segment.",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "A key-value pair to associate with a resource.",
-			//	        "insertionOrder": false,
-			//	        "properties": {
-			//	          "Key": {
-			//	            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	            "type": "string"
-			//	          },
-			//	          "Value": {
-			//	            "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Key",
-			//	          "Value"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ProposedSegmentChange
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The attachment to move from one segment to another.",
+		//	  "properties": {
+		//	    "AttachmentPolicyRuleNumber": {
+		//	      "description": "The rule number in the policy document that applies to this change.",
+		//	      "type": "integer"
+		//	    },
+		//	    "SegmentName": {
+		//	      "description": "The name of the segment to change.",
+		//	      "type": "string"
+		//	    },
+		//	    "Tags": {
+		//	      "description": "The key-value tags that changed for the segment.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A key-value pair to associate with a resource.",
+		//	        "insertionOrder": false,
+		//	        "properties": {
+		//	          "Key": {
+		//	            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Key",
+		//	          "Value"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"proposed_segment_change": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AttachmentPolicyRuleNumber
+				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The rule number in the policy document that applies to this change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SegmentName
+				"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the segment to change.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Tags
+				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The key-value tags that changed for the segment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The attachment to move from one segment to another.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"attachment_policy_rule_number": {
-						// Property: AttachmentPolicyRuleNumber
-						Description: "The rule number in the policy document that applies to this change.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"segment_name": {
-						// Property: SegmentName
-						Description: "The name of the segment to change.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"tags": {
-						// Property: Tags
-						Description: "The key-value tags that changed for the segment.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"key": {
-									// Property: Key
-									Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"value": {
-									// Property: Value
-									Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"resource_arn": {
-			// Property: ResourceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the Resource.",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the Resource.",
+		//	  "type": "string"
+		//	}
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the Resource.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"segment_name": {
-			// Property: SegmentName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the segment attachment..",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SegmentName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the segment attachment..",
+		//	  "type": "string"
+		//	}
+		"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the segment attachment..",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "State of the attachment.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "State of the attachment.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "State of the attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"subnet_arns": {
-			// Property: SubnetArns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Subnet Arn list",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Subnet Arn list",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"subnet_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Subnet Arn list",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Tags for the attachment.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "insertionOrder": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "Tags for the attachment.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Tags for the attachment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "insertionOrder": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"updated_at": {
-			// Property: UpdatedAt
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Last update time of the attachment.",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Tags for the attachment.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: UpdatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Last update time of the attachment.",
+		//	  "type": "string"
+		//	}
+		"updated_at": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Last update time of the attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"vpc_arn": {
-			// Property: VpcArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the VPC.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the VPC.",
+		//	  "type": "string"
+		//	}
+		"vpc_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the VPC.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::NetworkManager::VpcAttachment",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::VpcAttachment").WithTerraformTypeName("awscc_networkmanager_vpc_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -394,7 +368,7 @@ func vpcAttachmentDataSource(ctx context.Context) (datasource.DataSource, error)
 		"vpc_arn":                       "VpcArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

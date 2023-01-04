@@ -5,12 +5,19 @@ package cloudfront
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,257 +27,238 @@ func init() {
 // continuousDeploymentPolicyResource returns the Terraform awscc_cloudfront_continuous_deployment_policy resource.
 // This Terraform resource corresponds to the CloudFormation AWS::CloudFront::ContinuousDeploymentPolicy resource.
 func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"continuous_deployment_policy_config": {
-			// Property: ContinuousDeploymentPolicyConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Enabled": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "StagingDistributionDnsNames": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "TrafficConfig": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "SingleHeaderConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Header": {
-			//	              "maxLength": 256,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "maxLength": 1783,
-			//	              "minLength": 1,
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Header",
-			//	            "Value"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "SingleWeightConfig": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "SessionStickinessConfig": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "IdleTTL": {
-			//	                  "maximum": 3600,
-			//	                  "minimum": 300,
-			//	                  "type": "integer"
-			//	                },
-			//	                "MaximumTTL": {
-			//	                  "maximum": 3600,
-			//	                  "minimum": 300,
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "IdleTTL",
-			//	                "MaximumTTL"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Weight": {
-			//	              "maximum": 1,
-			//	              "minimum": 0,
-			//	              "type": "number"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Weight"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Type": {
-			//	          "enum": [
-			//	            "SingleWeight",
-			//	            "SingleHeader"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Type"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Enabled",
-			//	    "StagingDistributionDnsNames"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"enabled": {
-						// Property: Enabled
-						Type:     types.BoolType,
-						Required: true,
-					},
-					"staging_distribution_dns_names": {
-						// Property: StagingDistributionDnsNames
-						Type:     types.ListType{ElemType: types.StringType},
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-							validate.UniqueItems(),
-						},
-					},
-					"traffic_config": {
-						// Property: TrafficConfig
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"single_header_config": {
-									// Property: SingleHeaderConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"header": {
-												// Property: Header
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 256),
-												},
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1783),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"single_weight_config": {
-									// Property: SingleWeightConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"session_stickiness_config": {
-												// Property: SessionStickinessConfig
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"idle_ttl": {
-															// Property: IdleTTL
-															Type:     types.Int64Type,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.IntBetween(300, 3600),
-															},
-														},
-														"maximum_ttl": {
-															// Property: MaximumTTL
-															Type:     types.Int64Type,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.IntBetween(300, 3600),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"weight": {
-												// Property: Weight
-												Type:     types.Float64Type,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.FloatBetween(0.000000, 1.000000),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"type": {
-									// Property: Type
-									Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ContinuousDeploymentPolicyConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Enabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "StagingDistributionDnsNames": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "TrafficConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "SingleHeaderConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Header": {
+		//	              "maxLength": 256,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "maxLength": 1783,
+		//	              "minLength": 1,
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Header",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SingleWeightConfig": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "SessionStickinessConfig": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "IdleTTL": {
+		//	                  "maximum": 3600,
+		//	                  "minimum": 300,
+		//	                  "type": "integer"
+		//	                },
+		//	                "MaximumTTL": {
+		//	                  "maximum": 3600,
+		//	                  "minimum": 300,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "IdleTTL",
+		//	                "MaximumTTL"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Weight": {
+		//	              "maximum": 1,
+		//	              "minimum": 0,
+		//	              "type": "number"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Weight"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Type": {
+		//	          "enum": [
+		//	            "SingleWeight",
+		//	            "SingleHeader"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Type"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled",
+		//	    "StagingDistributionDnsNames"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"continuous_deployment_policy_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StagingDistributionDnsNames
+				"staging_distribution_dns_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TrafficConfig
+				"traffic_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: SingleHeaderConfig
+						"single_header_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Header
+								"header": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"SingleWeight",
-											"SingleHeader",
-										}),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 256),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 1783),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SingleWeightConfig
+						"single_weight_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: SessionStickinessConfig
+								"session_stickiness_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: IdleTTL
+										"idle_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(300, 3600),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: MaximumTTL
+										"maximum_ttl": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.Int64{ /*START VALIDATORS*/
+												int64validator.Between(300, 3600),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Weight
+								"weight": schema.Float64Attribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.Float64{ /*START VALIDATORS*/
+										float64validator.Between(0.000000, 1.000000),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Type
+						"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"SingleWeight",
+									"SingleHeader",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Required: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::CloudFront::ContinuousDeploymentPolicy",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ContinuousDeploymentPolicy").WithTerraformTypeName("awscc_cloudfront_continuous_deployment_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -297,7 +285,7 @@ func continuousDeploymentPolicyResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

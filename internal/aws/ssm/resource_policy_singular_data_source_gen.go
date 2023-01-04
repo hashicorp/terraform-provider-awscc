@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,70 +19,64 @@ func init() {
 // resourcePolicyDataSource returns the Terraform awscc_ssm_resource_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SSM::ResourcePolicy resource.
 func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"policy": {
-			// Property: Policy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Actual policy statement.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Policy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Actual policy statement.",
+		//	  "type": "string"
+		//	}
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Actual policy statement.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy_hash": {
-			// Property: PolicyHash
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A snapshot identifier for the policy over time.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyHash
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A snapshot identifier for the policy over time.",
+		//	  "type": "string"
+		//	}
+		"policy_hash": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A snapshot identifier for the policy over time.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"policy_id": {
-			// Property: PolicyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An unique identifier within the policies of a resource. ",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An unique identifier within the policies of a resource. ",
+		//	  "type": "string"
+		//	}
+		"policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An unique identifier within the policies of a resource. ",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"resource_arn": {
-			// Property: ResourceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Arn of OpsItemGroup etc.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Arn of OpsItemGroup etc.",
+		//	  "type": "string"
+		//	}
+		"resource_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Arn of OpsItemGroup etc.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SSM::ResourcePolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSM::ResourcePolicy").WithTerraformTypeName("awscc_ssm_resource_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -93,7 +87,7 @@ func resourcePolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"resource_arn": "ResourceArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

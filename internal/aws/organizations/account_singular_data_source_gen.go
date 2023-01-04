@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,212 +19,200 @@ func init() {
 // accountDataSource returns the Terraform awscc_organizations_account data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Organizations::Account resource.
 func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"account_id": {
-			// Property: AccountId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If the account was created successfully, the unique identifier (ID) of the new account.",
-			//	  "maxLength": 12,
-			//	  "pattern": "^\\d{12}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AccountId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If the account was created successfully, the unique identifier (ID) of the new account.",
+		//	  "maxLength": 12,
+		//	  "pattern": "^\\d{12}$",
+		//	  "type": "string"
+		//	}
+		"account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If the account was created successfully, the unique identifier (ID) of the new account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"account_name": {
-			// Property: AccountName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The friendly name of the member account.",
-			//	  "maxLength": 50,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AccountName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The friendly name of the member account.",
+		//	  "maxLength": 50,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The friendly name of the member account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the account.",
-			//	  "pattern": "^arn:aws.*:organizations::\\d{12}:account\\/o-[a-z0-9]{10,32}\\/\\d{12}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the account.",
+		//	  "pattern": "^arn:aws.*:organizations::\\d{12}:account\\/o-[a-z0-9]{10,32}\\/\\d{12}",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"email": {
-			// Property: Email
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The email address of the owner to assign to the new member account.",
-			//	  "maxLength": 64,
-			//	  "minLength": 6,
-			//	  "pattern": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Email
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The email address of the owner to assign to the new member account.",
+		//	  "maxLength": 64,
+		//	  "minLength": 6,
+		//	  "pattern": "[^\\s@]+@[^\\s@]+\\.[^\\s@]+",
+		//	  "type": "string"
+		//	}
+		"email": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The email address of the owner to assign to the new member account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"joined_method": {
-			// Property: JoinedMethod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The method by which the account joined the organization.",
-			//	  "enum": [
-			//	    "INVITED",
-			//	    "CREATED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: JoinedMethod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The method by which the account joined the organization.",
+		//	  "enum": [
+		//	    "INVITED",
+		//	    "CREATED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"joined_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The method by which the account joined the organization.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"joined_timestamp": {
-			// Property: JoinedTimestamp
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date the account became a part of the organization.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: JoinedTimestamp
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date the account became a part of the organization.",
+		//	  "type": "string"
+		//	}
+		"joined_timestamp": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date the account became a part of the organization.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"parent_ids": {
-			// Property: ParentIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ParentIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^(r-[0-9a-z]{4,32})|(ou-[0-9a-z]{4,32}-[a-z0-9]{8,32})$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"parent_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "List of parent nodes for the member account. Currently only one parent at a time is supported. Default is root.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"role_name": {
-			// Property: RoleName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "OrganizationAccountAccessRole",
-			//	  "description": "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "pattern": "[\\w+=,.@-]{1,64}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RoleName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "OrganizationAccountAccessRole",
+		//	  "description": "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "[\\w+=,.@-]{1,64}",
+		//	  "type": "string"
+		//	}
+		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of an IAM role that AWS Organizations automatically preconfigures in the new member account. Default name is OrganizationAccountAccessRole if not specified.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the account in the organization.",
-			//	  "enum": [
-			//	    "ACTIVE",
-			//	    "SUSPENDED",
-			//	    "PENDING_CLOSURE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the account in the organization.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "SUSPENDED",
+		//	    "PENDING_CLOSURE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the account in the organization.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A custom key-value pair associated with a resource within your organization.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key identifier, or name, of the tag.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "[\\s\\S]*",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "pattern": "[\\s\\S]*",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A custom key-value pair associated with a resource within your organization.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key identifier, or name, of the tag.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "[\\s\\S]*",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "[\\s\\S]*",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key identifier, or name, of the tag.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags that you want to attach to the newly created account. For each tag in the list, you must specify both a tag key and a value.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Organizations::Account",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Organizations::Account").WithTerraformTypeName("awscc_organizations_account")
 	opts = opts.WithTerraformSchema(schema)
@@ -243,7 +231,7 @@ func accountDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":            "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

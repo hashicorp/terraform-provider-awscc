@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,305 +19,285 @@ func init() {
 // permissionSetDataSource returns the Terraform awscc_sso_permission_set data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SSO::PermissionSet resource.
 func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"customer_managed_policy_references": {
-			// Property: CustomerManagedPolicyReferences
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": [],
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Name": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "[\\w+=,.@-]+",
-			//	        "type": "string"
-			//	      },
-			//	      "Path": {
-			//	        "maxLength": 512,
-			//	        "minLength": 1,
-			//	        "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Name"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 20,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"name": {
-						// Property: Name
-						Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CustomerManagedPolicyReferences
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": [],
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Name": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "[\\w+=,.@-]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Path": {
+		//	        "maxLength": 512,
+		//	        "minLength": 1,
+		//	        "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "type": "array"
+		//	}
+		"customer_managed_policy_references": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"path": {
-						// Property: Path
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Path
+					"path": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The permission set description.",
-			//	  "maxLength": 700,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The permission set description.",
+		//	  "maxLength": 700,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The permission set description.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"inline_policy": {
-			// Property: InlinePolicy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The inline policy to put in permission set.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InlinePolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The inline policy to put in permission set.",
+		//	  "type": "string"
+		//	}
+		"inline_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The inline policy to put in permission set.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"instance_arn": {
-			// Property: InstanceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The sso instance arn that the permission set is owned.",
-			//	  "maxLength": 1224,
-			//	  "minLength": 10,
-			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The sso instance arn that the permission set is owned.",
+		//	  "maxLength": 1224,
+		//	  "minLength": 10,
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+		//	  "type": "string"
+		//	}
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The sso instance arn that the permission set is owned.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"managed_policies": {
-			// Property: ManagedPolicies
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": [],
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "description": "The managed policy to attach.",
-			//	    "maxLength": 2048,
-			//	    "minLength": 20,
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 20,
-			//	  "type": "array"
-			//	}
-			Type:     types.ListType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name you want to assign to this permission set.",
-			//	  "maxLength": 32,
-			//	  "minLength": 1,
-			//	  "pattern": "[\\w+=,.@-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ManagedPolicies
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": [],
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "The managed policy to attach.",
+		//	    "maxLength": 2048,
+		//	    "minLength": 20,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 20,
+		//	  "type": "array"
+		//	}
+		"managed_policies": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name you want to assign to this permission set.",
+		//	  "maxLength": 32,
+		//	  "minLength": 1,
+		//	  "pattern": "[\\w+=,.@-]+",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name you want to assign to this permission set.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"permission_set_arn": {
-			// Property: PermissionSetArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The permission set that the policy will be attached to",
-			//	  "maxLength": 1224,
-			//	  "minLength": 10,
-			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PermissionSetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The permission set that the policy will be attached to",
+		//	  "maxLength": 1224,
+		//	  "minLength": 10,
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
+		//	  "type": "string"
+		//	}
+		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The permission set that the policy will be attached to",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"permissions_boundary": {
-			// Property: PermissionsBoundary
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "CustomerManagedPolicyReference": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Name": {
-			//	          "maxLength": 128,
-			//	          "minLength": 1,
-			//	          "pattern": "[\\w+=,.@-]+",
-			//	          "type": "string"
-			//	        },
-			//	        "Path": {
-			//	          "maxLength": 512,
-			//	          "minLength": 1,
-			//	          "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Name"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ManagedPolicyArn": {
-			//	      "description": "The managed policy to attach.",
-			//	      "maxLength": 2048,
-			//	      "minLength": 20,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"customer_managed_policy_reference": {
-						// Property: CustomerManagedPolicyReference
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"name": {
-									// Property: Name
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"path": {
-									// Property: Path
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"managed_policy_arn": {
-						// Property: ManagedPolicyArn
-						Description: "The managed policy to attach.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
+		}, /*END ATTRIBUTE*/
+		// Property: PermissionsBoundary
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "CustomerManagedPolicyReference": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Name": {
+		//	          "maxLength": 128,
+		//	          "minLength": 1,
+		//	          "pattern": "[\\w+=,.@-]+",
+		//	          "type": "string"
+		//	        },
+		//	        "Path": {
+		//	          "maxLength": 512,
+		//	          "minLength": 1,
+		//	          "pattern": "((/[A-Za-z0-9\\.,\\+@=_-]+)*)/",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Name"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ManagedPolicyArn": {
+		//	      "description": "The managed policy to attach.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"permissions_boundary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomerManagedPolicyReference
+				"customer_managed_policy_reference": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Path
+						"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ManagedPolicyArn
+				"managed_policy_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The managed policy to attach.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"relay_state_type": {
-			// Property: RelayStateType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
-			//	  "maxLength": 240,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z0-9\u0026amp;$@#\\/%?=~\\-_'\u0026quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RelayStateType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The relay state URL that redirect links to any service in the AWS Management Console.",
+		//	  "maxLength": 240,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9\u0026amp;$@#\\/%?=~\\-_'\u0026quot;|!:,.;*+\\[\\]\\ \\(\\)\\{\\}]+",
+		//	  "type": "string"
+		//	}
+		"relay_state_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The relay state URL that redirect links to any service in the AWS Management Console.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"session_duration": {
-			// Property: SessionDuration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The length of time that a user can be signed in to an AWS account.",
-			//	  "maxLength": 100,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SessionDuration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The length of time that a user can be signed in to an AWS account.",
+		//	  "maxLength": 100,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"session_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The length of time that a user can be signed in to an AWS account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "The metadata that you apply to the permission set to help you categorize and organize them.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "[\\w+=,.@-]+",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "pattern": "[\\w+=,.@-]+",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "The metadata that you apply to the permission set to help you categorize and organize them.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "[\\w+=,.@-]+",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "pattern": "[\\w+=,.@-]+",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SSO::PermissionSet",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::PermissionSet").WithTerraformTypeName("awscc_sso_permission_set")
 	opts = opts.WithTerraformSchema(schema)
@@ -340,7 +320,7 @@ func permissionSetDataSource(ctx context.Context) (datasource.DataSource, error)
 		"value":                              "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

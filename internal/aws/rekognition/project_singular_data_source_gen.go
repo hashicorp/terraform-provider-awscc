@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,49 +19,45 @@ func init() {
 // projectDataSource returns the Terraform awscc_rekognition_project data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Rekognition::Project resource.
 func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 2048,
-			//	  "pattern": "(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project/[a-zA-Z0-9_.\\-]{1,255}/[0-9]+$)",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 2048,
+		//	  "pattern": "(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project/[a-zA-Z0-9_.\\-]{1,255}/[0-9]+$)",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"project_name": {
-			// Property: ProjectName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the project",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ProjectName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the project",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z0-9][a-zA-Z0-9_\\-]*",
+		//	  "type": "string"
+		//	}
+		"project_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the project",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Rekognition::Project",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Rekognition::Project").WithTerraformTypeName("awscc_rekognition_project")
 	opts = opts.WithTerraformSchema(schema)
@@ -70,7 +66,7 @@ func projectDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"project_name": "ProjectName",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

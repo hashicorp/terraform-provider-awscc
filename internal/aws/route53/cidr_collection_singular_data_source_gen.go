@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,115 +19,109 @@ func init() {
 // cidrCollectionDataSource returns the Terraform awscc_route53_cidr_collection data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Route53::CidrCollection resource.
 func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon resource name (ARN) to uniquely identify the AWS resource.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "UUID of the CIDR collection.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "UUID of the CIDR collection.",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "UUID of the CIDR collection.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"locations": {
-			// Property: Locations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A complex type that contains information about the list of CIDR locations.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "CidrList": {
-			//	        "description": "A list of CIDR blocks.",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "LocationName": {
-			//	        "description": "The name of the location that is associated with the CIDR collection.",
-			//	        "maxLength": 16,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "LocationName",
-			//	      "CidrList"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "A complex type that contains information about the list of CIDR locations.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"cidr_list": {
-						// Property: CidrList
+		}, /*END ATTRIBUTE*/
+		// Property: Locations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A complex type that contains information about the list of CIDR locations.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "CidrList": {
+		//	        "description": "A list of CIDR blocks.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "LocationName": {
+		//	        "description": "The name of the location that is associated with the CIDR collection.",
+		//	        "maxLength": 16,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "LocationName",
+		//	      "CidrList"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"locations": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CidrList
+					"cidr_list": schema.SetAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of CIDR blocks.",
-						Type:        types.SetType{ElemType: types.StringType},
 						Computed:    true,
-					},
-					"location_name": {
-						// Property: LocationName
+					}, /*END ATTRIBUTE*/
+					// Property: LocationName
+					"location_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the location that is associated with the CIDR collection.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique name for the CIDR collection.",
-			//	  "maxLength": 64,
-			//	  "minLength": 1,
-			//	  "pattern": "^[0-9A-Za-z_\\-]+$",
-			//	  "type": "string"
-			//	}
-			Description: "A unique name for the CIDR collection.",
-			Type:        types.StringType,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A complex type that contains information about the list of CIDR locations.",
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique name for the CIDR collection.",
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9A-Za-z_\\-]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A unique name for the CIDR collection.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Route53::CidrCollection",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::CidrCollection").WithTerraformTypeName("awscc_route53_cidr_collection")
 	opts = opts.WithTerraformSchema(schema)
@@ -140,7 +134,7 @@ func cidrCollectionDataSource(ctx context.Context) (datasource.DataSource, error
 		"name":          "Name",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,94 +19,86 @@ func init() {
 // localGatewayRouteDataSource returns the Terraform awscc_ec2_local_gateway_route data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::LocalGatewayRoute resource.
 func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"destination_cidr_block": {
-			// Property: DestinationCidrBlock
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The CIDR block used for destination matches.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DestinationCidrBlock
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The CIDR block used for destination matches.",
+		//	  "type": "string"
+		//	}
+		"destination_cidr_block": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The CIDR block used for destination matches.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"local_gateway_route_table_id": {
-			// Property: LocalGatewayRouteTableId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the local gateway route table.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LocalGatewayRouteTableId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the local gateway route table.",
+		//	  "type": "string"
+		//	}
+		"local_gateway_route_table_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the local gateway route table.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"local_gateway_virtual_interface_group_id": {
-			// Property: LocalGatewayVirtualInterfaceGroupId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the virtual interface group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LocalGatewayVirtualInterfaceGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the virtual interface group.",
+		//	  "type": "string"
+		//	}
+		"local_gateway_virtual_interface_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the virtual interface group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"network_interface_id": {
-			// Property: NetworkInterfaceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the network interface.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkInterfaceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the network interface.",
+		//	  "type": "string"
+		//	}
+		"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the network interface.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The state of the route.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the route.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The state of the route.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The route type.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The route type.",
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The route type.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EC2::LocalGatewayRoute",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::LocalGatewayRoute").WithTerraformTypeName("awscc_ec2_local_gateway_route")
 	opts = opts.WithTerraformSchema(schema)
@@ -119,7 +111,7 @@ func localGatewayRouteDataSource(ctx context.Context) (datasource.DataSource, er
 		"type":                                     "Type",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

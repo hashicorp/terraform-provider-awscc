@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"math/big"
 
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
@@ -17,7 +16,7 @@ type toCloudControl struct {
 }
 
 // AsRaw returns the raw map[string]interface{} representing Cloud Control DesiredState from a Terraform Value.
-func (t toCloudControl) AsRaw(ctx context.Context, schema *tfsdk.Schema, val tftypes.Value) (map[string]interface{}, error) {
+func (t toCloudControl) AsRaw(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value) (map[string]interface{}, error) {
 	v, err := t.rawFromValue(ctx, schema, nil, val)
 
 	if err != nil {
@@ -36,7 +35,7 @@ func (t toCloudControl) AsRaw(ctx context.Context, schema *tfsdk.Schema, val tft
 }
 
 // AsString returns the string representing Cloud Control DesiredState from a Terraform Value.
-func (t toCloudControl) AsString(ctx context.Context, schema *tfsdk.Schema, val tftypes.Value) (string, error) {
+func (t toCloudControl) AsString(ctx context.Context, schema typeAtTerraformPather, val tftypes.Value) (string, error) {
 	v, err := t.AsRaw(ctx, schema, val)
 
 	if err != nil {
@@ -54,7 +53,7 @@ func (t toCloudControl) AsString(ctx context.Context, schema *tfsdk.Schema, val 
 
 // rawFromValue returns the raw value (suitable for JSON marshaling) of the specified Terraform value.
 // Terraform attribute names are mapped to Cloud Control property names.
-func (t toCloudControl) rawFromValue(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) {
+func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, val tftypes.Value) (interface{}, error) {
 	if val.IsNull() || !val.IsKnown() {
 		return nil, nil
 	}
@@ -171,12 +170,12 @@ type toTerraform struct {
 }
 
 // FromRaw returns the Terraform Value for the specified Cloud Control Properties (raw map[string]interface{}).
-func (t toTerraform) FromRaw(ctx context.Context, schema *tfsdk.Schema, resourceModel map[string]interface{}) (tftypes.Value, error) {
+func (t toTerraform) FromRaw(ctx context.Context, schema typeAtTerraformPather, resourceModel map[string]interface{}) (tftypes.Value, error) {
 	return t.valueFromRaw(ctx, schema, nil, resourceModel)
 }
 
 // FromString returns the Terraform Value for the specified Cloud Control Properties (string).
-func (t toTerraform) FromString(ctx context.Context, schema *tfsdk.Schema, resourceModel string) (tftypes.Value, error) {
+func (t toTerraform) FromString(ctx context.Context, schema typeAtTerraformPather, resourceModel string) (tftypes.Value, error) {
 	var v interface{}
 
 	if err := json.Unmarshal([]byte(resourceModel), &v); err != nil {
@@ -190,7 +189,7 @@ func (t toTerraform) FromString(ctx context.Context, schema *tfsdk.Schema, resou
 	return tftypes.Value{}, fmt.Errorf("unexpected raw type: %T", v)
 }
 
-func (t toTerraform) valueFromRaw(ctx context.Context, schema *tfsdk.Schema, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
+func (t toTerraform) valueFromRaw(ctx context.Context, schema typeAtTerraformPather, path *tftypes.AttributePath, v interface{}) (tftypes.Value, error) {
 	attrType, err := schema.TypeAtTerraformPath(ctx, path)
 
 	if err != nil {

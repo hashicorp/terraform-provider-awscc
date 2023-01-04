@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,115 +19,109 @@ func init() {
 // clusterCapacityProviderAssociationsDataSource returns the Terraform awscc_ecs_cluster_capacity_provider_associations data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ECS::ClusterCapacityProviderAssociations resource.
 func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"capacity_providers": {
-			// Property: CapacityProviders
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of capacity providers to associate with the cluster",
-			//	  "items": {
-			//	    "anyOf": [
-			//	      {},
-			//	      {}
-			//	    ],
-			//	    "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CapacityProviders
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of capacity providers to associate with the cluster",
+		//	  "items": {
+		//	    "anyOf": [
+		//	      {},
+		//	      {}
+		//	    ],
+		//	    "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"capacity_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "List of capacity providers to associate with the cluster",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"cluster": {
-			// Property: Cluster
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the cluster",
-			//	  "maxLength": 2048,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Cluster
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the cluster",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"cluster": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the cluster",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"default_capacity_provider_strategy": {
-			// Property: DefaultCapacityProviderStrategy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of capacity providers to associate with the cluster",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Base": {
-			//	        "maximum": 100000,
-			//	        "minimum": 0,
-			//	        "type": "integer"
-			//	      },
-			//	      "CapacityProvider": {
-			//	        "anyOf": [
-			//	          {},
-			//	          {}
-			//	        ],
-			//	        "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-			//	        "type": "string"
-			//	      },
-			//	      "Weight": {
-			//	        "maximum": 1000,
-			//	        "minimum": 0,
-			//	        "type": "integer"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "CapacityProvider"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "List of capacity providers to associate with the cluster",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"base": {
-						// Property: Base
-						Type:     types.Int64Type,
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultCapacityProviderStrategy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of capacity providers to associate with the cluster",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Base": {
+		//	        "maximum": 100000,
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      },
+		//	      "CapacityProvider": {
+		//	        "anyOf": [
+		//	          {},
+		//	          {}
+		//	        ],
+		//	        "description": "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
+		//	        "type": "string"
+		//	      },
+		//	      "Weight": {
+		//	        "maximum": 1000,
+		//	        "minimum": 0,
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "CapacityProvider"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"default_capacity_provider_strategy": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Base
+					"base": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"capacity_provider": {
-						// Property: CapacityProvider
+					}, /*END ATTRIBUTE*/
+					// Property: CapacityProvider
+					"capacity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"weight": {
-						// Property: Weight
-						Type:     types.Int64Type,
+					}, /*END ATTRIBUTE*/
+					// Property: Weight
+					"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of capacity providers to associate with the cluster",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ECS::ClusterCapacityProviderAssociations",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ECS::ClusterCapacityProviderAssociations").WithTerraformTypeName("awscc_ecs_cluster_capacity_provider_associations")
 	opts = opts.WithTerraformSchema(schema)
@@ -140,7 +134,7 @@ func clusterCapacityProviderAssociationsDataSource(ctx context.Context) (datasou
 		"weight":                             "Weight",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,295 +19,273 @@ func init() {
 // tagAssociationDataSource returns the Terraform awscc_lakeformation_tag_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::LakeFormation::TagAssociation resource.
 func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"lf_tags": {
-			// Property: LFTags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of Lake Formation Tags to associate with the Lake Formation Resource",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "CatalogId": {
-			//	        "maxLength": 12,
-			//	        "minLength": 12,
-			//	        "type": "string"
-			//	      },
-			//	      "TagKey": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "TagValues": {
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "maxLength": 256,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "maxItems": 50,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "CatalogId",
-			//	      "TagKey",
-			//	      "TagValues"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: LFTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of Lake Formation Tags to associate with the Lake Formation Resource",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "CatalogId": {
+		//	        "maxLength": 12,
+		//	        "minLength": 12,
+		//	        "type": "string"
+		//	      },
+		//	      "TagKey": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "TagValues": {
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "maxLength": 256,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 50,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "CatalogId",
+		//	      "TagKey",
+		//	      "TagValues"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"lf_tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CatalogId
+					"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagKey
+					"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TagValues
+					"tag_values": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "List of Lake Formation Tags to associate with the Lake Formation Resource",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"catalog_id": {
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Resource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Resource to tag with the Lake Formation Tags",
+		//	  "properties": {
+		//	    "Catalog": {
+		//	      "additionalProperties": false,
+		//	      "type": "object"
+		//	    },
+		//	    "Database": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CatalogId": {
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "type": "string"
+		//	        },
+		//	        "Name": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CatalogId",
+		//	        "Name"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Table": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CatalogId": {
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "type": "string"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Name": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "TableWildcard": {
+		//	          "additionalProperties": false,
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CatalogId",
+		//	        "DatabaseName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TableWithColumns": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "CatalogId": {
+		//	          "maxLength": 12,
+		//	          "minLength": 12,
+		//	          "type": "string"
+		//	        },
+		//	        "ColumnNames": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "DatabaseName": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Name": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CatalogId",
+		//	        "DatabaseName",
+		//	        "Name",
+		//	        "ColumnNames"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"resource": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Catalog
+				"catalog": schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Database
+				"database": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: CatalogId
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"tag_key": {
-						// Property: TagKey
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"tag_values": {
-						// Property: TagValues
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"resource": {
-			// Property: Resource
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Resource to tag with the Lake Formation Tags",
-			//	  "properties": {
-			//	    "Catalog": {
-			//	      "additionalProperties": false,
-			//	      "type": "object"
-			//	    },
-			//	    "Database": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CatalogId": {
-			//	          "maxLength": 12,
-			//	          "minLength": 12,
-			//	          "type": "string"
-			//	        },
-			//	        "Name": {
-			//	          "maxLength": 255,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CatalogId",
-			//	        "Name"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Table": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CatalogId": {
-			//	          "maxLength": 12,
-			//	          "minLength": 12,
-			//	          "type": "string"
-			//	        },
-			//	        "DatabaseName": {
-			//	          "maxLength": 255,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Name": {
-			//	          "maxLength": 255,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "TableWildcard": {
-			//	          "additionalProperties": false,
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CatalogId",
-			//	        "DatabaseName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "TableWithColumns": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "CatalogId": {
-			//	          "maxLength": 12,
-			//	          "minLength": 12,
-			//	          "type": "string"
-			//	        },
-			//	        "ColumnNames": {
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array"
-			//	        },
-			//	        "DatabaseName": {
-			//	          "maxLength": 255,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        },
-			//	        "Name": {
-			//	          "maxLength": 255,
-			//	          "minLength": 1,
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CatalogId",
-			//	        "DatabaseName",
-			//	        "Name",
-			//	        "ColumnNames"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Table
+				"table": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogId
+						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TableWildcard
+						"table_wildcard": schema.MapAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TableWithColumns
+				"table_with_columns": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CatalogId
+						"catalog_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ColumnNames
+						"column_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DatabaseName
+						"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Name
+						"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Resource to tag with the Lake Formation Tags",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"catalog": {
-						// Property: Catalog
-						Type:     types.MapType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"database": {
-						// Property: Database
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"catalog_id": {
-									// Property: CatalogId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"name": {
-									// Property: Name
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"table": {
-						// Property: Table
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"catalog_id": {
-									// Property: CatalogId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"database_name": {
-									// Property: DatabaseName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"name": {
-									// Property: Name
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"table_wildcard": {
-									// Property: TableWildcard
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"table_with_columns": {
-						// Property: TableWithColumns
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"catalog_id": {
-									// Property: CatalogId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"column_names": {
-									// Property: ColumnNames
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"database_name": {
-									// Property: DatabaseName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"name": {
-									// Property: Name
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"resource_identifier": {
-			// Property: ResourceIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
+		//	  "type": "string"
+		//	}
+		"resource_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique string identifying the resource. Used as primary identifier, which ideally should be a string",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags_identifier": {
-			// Property: TagsIdentifier
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TagsIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
+		//	  "type": "string"
+		//	}
+		"tags_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique string identifying the resource's tags. Used as primary identifier, which ideally should be a string",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::LakeFormation::TagAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::LakeFormation::TagAssociation").WithTerraformTypeName("awscc_lakeformation_tag_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -329,7 +307,7 @@ func tagAssociationDataSource(ctx context.Context) (datasource.DataSource, error
 		"tags_identifier":     "TagsIdentifier",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

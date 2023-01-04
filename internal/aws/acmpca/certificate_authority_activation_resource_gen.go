@@ -6,9 +6,11 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,101 +21,95 @@ func init() {
 // certificateAuthorityActivationResource returns the Terraform awscc_acmpca_certificate_authority_activation resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ACMPCA::CertificateAuthorityActivation resource.
 func certificateAuthorityActivationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"certificate": {
-			// Property: Certificate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Certificate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Certificate Authority certificate that will be installed in the Certificate Authority.",
+		//	  "type": "string"
+		//	}
+		"certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate Authority certificate that will be installed in the Certificate Authority.",
-			Type:        types.StringType,
 			Required:    true,
 			// Certificate is a write-only property.
-		},
-		"certificate_authority_arn": {
-			// Property: CertificateAuthorityArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Arn of the Certificate Authority.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateAuthorityArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Arn of the Certificate Authority.",
+		//	  "type": "string"
+		//	}
+		"certificate_authority_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Arn of the Certificate Authority.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"certificate_chain": {
-			// Property: CertificateChain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Certificate chain for the Certificate Authority certificate.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateChain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Certificate chain for the Certificate Authority certificate.",
+		//	  "type": "string"
+		//	}
+		"certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Certificate chain for the Certificate Authority certificate.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// CertificateChain is a write-only property.
-		},
-		"complete_certificate_chain": {
-			// Property: CompleteCertificateChain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The complete certificate chain, including the Certificate Authority certificate.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CompleteCertificateChain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The complete certificate chain, including the Certificate Authority certificate.",
+		//	  "type": "string"
+		//	}
+		"complete_certificate_chain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The complete certificate chain, including the Certificate Authority certificate.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the Certificate Authority.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the Certificate Authority.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the Certificate Authority.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Used to install the certificate authority certificate and update the certificate authority status.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ACMPCA::CertificateAuthorityActivation").WithTerraformTypeName("awscc_acmpca_certificate_authority_activation")
 	opts = opts.WithTerraformSchema(schema)
@@ -134,7 +130,7 @@ func certificateAuthorityActivationResource(ctx context.Context) (resource.Resou
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,12 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,167 +22,157 @@ func init() {
 // scheduledActionResource returns the Terraform awscc_autoscaling_scheduled_action resource.
 // This Terraform resource corresponds to the CloudFormation AWS::AutoScaling::ScheduledAction resource.
 func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auto_scaling_group_name": {
-			// Property: AutoScalingGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the Auto Scaling group.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScalingGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Auto Scaling group.",
+		//	  "type": "string"
+		//	}
+		"auto_scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Auto Scaling group.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"desired_capacity": {
-			// Property: DesiredCapacity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DesiredCapacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
+		//	  "type": "integer"
+		//	}
+		"desired_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The desired capacity is the initial capacity of the Auto Scaling group after the scheduled action runs and the capacity it attempts to maintain.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"end_time": {
-			// Property: EndTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EndTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+		//	  "type": "string"
+		//	}
+		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The latest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"max_size": {
-			// Property: MaxSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The minimum size of the Auto Scaling group.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MaxSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The minimum size of the Auto Scaling group.",
+		//	  "type": "integer"
+		//	}
+		"max_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The minimum size of the Auto Scaling group.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"min_size": {
-			// Property: MinSize
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The minimum size of the Auto Scaling group.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MinSize
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The minimum size of the Auto Scaling group.",
+		//	  "type": "integer"
+		//	}
+		"min_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The minimum size of the Auto Scaling group.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"recurrence": {
-			// Property: Recurrence
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Recurrence
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
+		//	  "type": "string"
+		//	}
+		"recurrence": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The recurring schedule for the action, in Unix cron syntax format. When StartTime and EndTime are specified with Recurrence , they form the boundaries of when the recurring action starts and stops.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"scheduled_action_name": {
-			// Property: ScheduledActionName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Auto-generated unique identifier",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ScheduledActionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Auto-generated unique identifier",
+		//	  "type": "string"
+		//	}
+		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Auto-generated unique identifier",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"start_time": {
-			// Property: StartTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StartTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
+		//	  "type": "string"
+		//	}
+		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"time_zone": {
-			// Property: TimeZone
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time zone for the cron expression.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TimeZone
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time zone for the cron expression.",
+		//	  "type": "string"
+		//	}
+		"time_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time zone for the cron expression.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::AutoScaling::ScheduledAction resource specifies an Amazon EC2 Auto Scaling scheduled action so that the Auto Scaling group can change the number of instances available for your application in response to predictable load changes.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::ScheduledAction").WithTerraformTypeName("awscc_autoscaling_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -200,7 +193,7 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

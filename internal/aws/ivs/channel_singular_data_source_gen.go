@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,188 +19,176 @@ func init() {
 // channelDataSource returns the Terraform awscc_ivs_channel data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IVS::Channel resource.
 func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws:ivs:[a-z0-9-]+:[0-9]+:channel/[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Channel ARN is automatically generated on creation and assigned as the unique identifier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"authorized": {
-			// Property: Authorized
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": false,
-			//	  "description": "Whether the channel is authorized.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Authorized
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Whether the channel is authorized.",
+		//	  "type": "boolean"
+		//	}
+		"authorized": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether the channel is authorized.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"ingest_endpoint": {
-			// Property: IngestEndpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IngestEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
+		//	  "type": "string"
+		//	}
+		"ingest_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"latency_mode": {
-			// Property: LatencyMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "LOW",
-			//	  "description": "Channel latency mode.",
-			//	  "enum": [
-			//	    "NORMAL",
-			//	    "LOW"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LatencyMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "LOW",
+		//	  "description": "Channel latency mode.",
+		//	  "enum": [
+		//	    "NORMAL",
+		//	    "LOW"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"latency_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Channel latency mode.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "-",
-			//	  "description": "Channel",
-			//	  "maxLength": 128,
-			//	  "minLength": 0,
-			//	  "pattern": "^[a-zA-Z0-9-_]*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "-",
+		//	  "description": "Channel",
+		//	  "maxLength": 128,
+		//	  "minLength": 0,
+		//	  "pattern": "^[a-zA-Z0-9-_]*$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Channel",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"playback_url": {
-			// Property: PlaybackUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Channel Playback URL.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PlaybackUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Channel Playback URL.",
+		//	  "type": "string"
+		//	}
+		"playback_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Channel Playback URL.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"recording_configuration_arn": {
-			// Property: RecordingConfigurationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "",
-			//	  "description": "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: \"\" (recording is disabled).",
-			//	  "maxLength": 128,
-			//	  "minLength": 0,
-			//	  "pattern": "^$|arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RecordingConfigurationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "",
+		//	  "description": "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: \"\" (recording is disabled).",
+		//	  "maxLength": 128,
+		//	  "minLength": 0,
+		//	  "pattern": "^$|arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"recording_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: \"\" (recording is disabled).",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of key-value pairs that contain metadata for the asset model.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of key-value pairs that contain metadata for the asset model.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "default": "STANDARD",
-			//	  "description": "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
-			//	  "enum": [
-			//	    "STANDARD",
-			//	    "BASIC"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "STANDARD",
+		//	  "description": "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
+		//	  "enum": [
+		//	    "STANDARD",
+		//	    "BASIC"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IVS::Channel",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::Channel").WithTerraformTypeName("awscc_ivs_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -218,7 +206,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                       "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

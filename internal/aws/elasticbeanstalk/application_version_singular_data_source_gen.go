@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,98 +19,89 @@ func init() {
 // applicationVersionDataSource returns the Terraform awscc_elasticbeanstalk_application_version data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ElasticBeanstalk::ApplicationVersion resource.
 func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"application_name": {
-			// Property: ApplicationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the Elastic Beanstalk application that is associated with this application version. ",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApplicationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Elastic Beanstalk application that is associated with this application version. ",
+		//	  "type": "string"
+		//	}
+		"application_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Elastic Beanstalk application that is associated with this application version. ",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description of this application version.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description of this application version.",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of this application version.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"source_bundle": {
-			// Property: SourceBundle
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
-			//	  "properties": {
-			//	    "S3Bucket": {
-			//	      "description": "The Amazon S3 bucket where the data is located.",
-			//	      "type": "string"
-			//	    },
-			//	    "S3Key": {
-			//	      "description": "The Amazon S3 key where the data is located.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "S3Bucket",
-			//	    "S3Key"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceBundle
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
+		//	  "properties": {
+		//	    "S3Bucket": {
+		//	      "description": "The Amazon S3 bucket where the data is located.",
+		//	      "type": "string"
+		//	    },
+		//	    "S3Key": {
+		//	      "description": "The Amazon S3 key where the data is located.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3Bucket",
+		//	    "S3Key"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_bundle": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 bucket where the data is located.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Key
+				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 key where the data is located.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The Amazon S3 bucket and key that identify the location of the source bundle for this version. ",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"s3_bucket": {
-						// Property: S3Bucket
-						Description: "The Amazon S3 bucket where the data is located.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"s3_key": {
-						// Property: S3Key
-						Description: "The Amazon S3 key where the data is located.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ElasticBeanstalk::ApplicationVersion",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElasticBeanstalk::ApplicationVersion").WithTerraformTypeName("awscc_elasticbeanstalk_application_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -123,7 +114,7 @@ func applicationVersionDataSource(ctx context.Context) (datasource.DataSource, e
 		"source_bundle":    "SourceBundle",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

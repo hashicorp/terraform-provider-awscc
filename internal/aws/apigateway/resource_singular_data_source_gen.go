@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,70 +19,64 @@ func init() {
 // resourceDataSource returns the Terraform awscc_apigateway_resource data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ApiGateway::Resource resource.
 func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"parent_id": {
-			// Property: ParentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The parent resource's identifier.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ParentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The parent resource's identifier.",
+		//	  "type": "string"
+		//	}
+		"parent_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The parent resource's identifier.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"path_part": {
-			// Property: PathPart
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The last path segment for this resource.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PathPart
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The last path segment for this resource.",
+		//	  "type": "string"
+		//	}
+		"path_part": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The last path segment for this resource.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"resource_id": {
-			// Property: ResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique primary identifier for a Resource",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique primary identifier for a Resource",
+		//	  "type": "string"
+		//	}
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique primary identifier for a Resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"rest_api_id": {
-			// Property: RestApiId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the RestApi resource in which you want to create this resource..",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the RestApi resource in which you want to create this resource..",
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the RestApi resource in which you want to create this resource..",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ApiGateway::Resource",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Resource").WithTerraformTypeName("awscc_apigateway_resource")
 	opts = opts.WithTerraformSchema(schema)
@@ -93,7 +87,7 @@ func resourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rest_api_id": "RestApiId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

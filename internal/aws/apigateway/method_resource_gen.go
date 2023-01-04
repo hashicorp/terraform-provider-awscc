@@ -5,12 +5,22 @@ package apigateway
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,710 +30,685 @@ func init() {
 // methodResource returns the Terraform awscc_apigateway_method resource.
 // This Terraform resource corresponds to the CloudFormation AWS::ApiGateway::Method resource.
 func methodResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"api_key_required": {
-			// Property: ApiKeyRequired
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether the method requires clients to submit a valid API key.",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ApiKeyRequired
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the method requires clients to submit a valid API key.",
+		//	  "type": "boolean"
+		//	}
+		"api_key_required": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the method requires clients to submit a valid API key.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorization_scopes": {
-			// Property: AuthorizationScopes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of authorization scopes configured on the method.",
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizationScopes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of authorization scopes configured on the method.",
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"authorization_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of authorization scopes configured on the method.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorization_type": {
-			// Property: AuthorizationType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The method's authorization type.",
-			//	  "enum": [
-			//	    "NONE",
-			//	    "AWS_IAM",
-			//	    "CUSTOM",
-			//	    "COGNITO_USER_POOLS"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The method's authorization type.",
+		//	  "enum": [
+		//	    "NONE",
+		//	    "AWS_IAM",
+		//	    "CUSTOM",
+		//	    "COGNITO_USER_POOLS"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"authorization_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The method's authorization type.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"NONE",
 					"AWS_IAM",
 					"CUSTOM",
 					"COGNITO_USER_POOLS",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"authorizer_id": {
-			// Property: AuthorizerId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the authorizer to use on this method.",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AuthorizerId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the authorizer to use on this method.",
+		//	  "type": "string"
+		//	}
+		"authorizer_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the authorizer to use on this method.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"http_method": {
-			// Property: HttpMethod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The backend system that the method calls when it receives a request.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HttpMethod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The backend system that the method calls when it receives a request.",
+		//	  "type": "string"
+		//	}
+		"http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The backend system that the method calls when it receives a request.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"integration": {
-			// Property: Integration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The backend system that the method calls when it receives a request.",
-			//	  "properties": {
-			//	    "CacheKeyParameters": {
-			//	      "description": "A list of request parameters whose values API Gateway caches.",
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "CacheNamespace": {
-			//	      "description": "An API-specific tag group of related cached parameters.",
-			//	      "type": "string"
-			//	    },
-			//	    "ConnectionId": {
-			//	      "description": "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
-			//	      "type": "string"
-			//	    },
-			//	    "ConnectionType": {
-			//	      "description": "The type of the network connection to the integration endpoint.",
-			//	      "enum": [
-			//	        "INTERNET",
-			//	        "VPC_LINK"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "ContentHandling": {
-			//	      "description": "Specifies how to handle request payload content type conversions.",
-			//	      "enum": [
-			//	        "CONVERT_TO_BINARY",
-			//	        "CONVERT_TO_TEXT"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Credentials": {
-			//	      "description": "The credentials that are required for the integration.",
-			//	      "type": "string"
-			//	    },
-			//	    "IntegrationHttpMethod": {
-			//	      "description": "The integration's HTTP method type.",
-			//	      "type": "string"
-			//	    },
-			//	    "IntegrationResponses": {
-			//	      "description": "The response that API Gateway provides after a method's backend completes processing a request.",
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ContentHandling": {
-			//	            "description": "Specifies how to handle request payload content type conversions.",
-			//	            "enum": [
-			//	              "CONVERT_TO_BINARY",
-			//	              "CONVERT_TO_TEXT"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "ResponseParameters": {
-			//	            "additionalProperties": false,
-			//	            "description": "The response parameters from the backend response that API Gateway sends to the method response.",
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "ResponseTemplates": {
-			//	            "additionalProperties": false,
-			//	            "description": "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "SelectionPattern": {
-			//	            "description": "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
-			//	            "type": "string"
-			//	          },
-			//	          "StatusCode": {
-			//	            "description": "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "StatusCode"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "PassthroughBehavior": {
-			//	      "description": "Indicates when API Gateway passes requests to the targeted backend.",
-			//	      "enum": [
-			//	        "WHEN_NO_MATCH",
-			//	        "WHEN_NO_TEMPLATES",
-			//	        "NEVER"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "RequestParameters": {
-			//	      "additionalProperties": false,
-			//	      "description": "The request parameters that API Gateway sends with the backend request.",
-			//	      "patternProperties": {
-			//	        "": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "RequestTemplates": {
-			//	      "additionalProperties": false,
-			//	      "description": "A map of Apache Velocity templates that are applied on the request payload.",
-			//	      "patternProperties": {
-			//	        "": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "TimeoutInMillis": {
-			//	      "description": "Custom timeout between 50 and 29,000 milliseconds.",
-			//	      "maximum": 29000,
-			//	      "minimum": 50,
-			//	      "type": "integer"
-			//	    },
-			//	    "Type": {
-			//	      "description": "The type of backend that your method is running.",
-			//	      "enum": [
-			//	        "AWS",
-			//	        "AWS_PROXY",
-			//	        "HTTP",
-			//	        "HTTP_PROXY",
-			//	        "MOCK"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Uri": {
-			//	      "description": "The Uniform Resource Identifier (URI) for the integration.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Type"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "The backend system that the method calls when it receives a request.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"cache_key_parameters": {
-						// Property: CacheKeyParameters
-						Description: "A list of request parameters whose values API Gateway caches.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"cache_namespace": {
-						// Property: CacheNamespace
-						Description: "An API-specific tag group of related cached parameters.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"connection_id": {
-						// Property: ConnectionId
-						Description: "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"connection_type": {
-						// Property: ConnectionType
-						Description: "The type of the network connection to the integration endpoint.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"INTERNET",
-								"VPC_LINK",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"content_handling": {
-						// Property: ContentHandling
-						Description: "Specifies how to handle request payload content type conversions.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"CONVERT_TO_BINARY",
-								"CONVERT_TO_TEXT",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"credentials": {
-						// Property: Credentials
-						Description: "The credentials that are required for the integration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"integration_http_method": {
-						// Property: IntegrationHttpMethod
-						Description: "The integration's HTTP method type.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"integration_responses": {
-						// Property: IntegrationResponses
-						Description: "The response that API Gateway provides after a method's backend completes processing a request.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"content_handling": {
-									// Property: ContentHandling
-									Description: "Specifies how to handle request payload content type conversions.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"CONVERT_TO_BINARY",
-											"CONVERT_TO_TEXT",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"response_parameters": {
-									// Property: ResponseParameters
-									Description: "The response parameters from the backend response that API Gateway sends to the method response.",
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"response_templates": {
-									// Property: ResponseTemplates
-									Description: "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"selection_pattern": {
-									// Property: SelectionPattern
-									Description: "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"status_code": {
-									// Property: StatusCode
-									Description: "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
-									Type:        types.StringType,
-									Required:    true,
-								},
-							},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Integration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The backend system that the method calls when it receives a request.",
+		//	  "properties": {
+		//	    "CacheKeyParameters": {
+		//	      "description": "A list of request parameters whose values API Gateway caches.",
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "CacheNamespace": {
+		//	      "description": "An API-specific tag group of related cached parameters.",
+		//	      "type": "string"
+		//	    },
+		//	    "ConnectionId": {
+		//	      "description": "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
+		//	      "type": "string"
+		//	    },
+		//	    "ConnectionType": {
+		//	      "description": "The type of the network connection to the integration endpoint.",
+		//	      "enum": [
+		//	        "INTERNET",
+		//	        "VPC_LINK"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ContentHandling": {
+		//	      "description": "Specifies how to handle request payload content type conversions.",
+		//	      "enum": [
+		//	        "CONVERT_TO_BINARY",
+		//	        "CONVERT_TO_TEXT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Credentials": {
+		//	      "description": "The credentials that are required for the integration.",
+		//	      "type": "string"
+		//	    },
+		//	    "IntegrationHttpMethod": {
+		//	      "description": "The integration's HTTP method type.",
+		//	      "type": "string"
+		//	    },
+		//	    "IntegrationResponses": {
+		//	      "description": "The response that API Gateway provides after a method's backend completes processing a request.",
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ContentHandling": {
+		//	            "description": "Specifies how to handle request payload content type conversions.",
+		//	            "enum": [
+		//	              "CONVERT_TO_BINARY",
+		//	              "CONVERT_TO_TEXT"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "ResponseParameters": {
+		//	            "additionalProperties": false,
+		//	            "description": "The response parameters from the backend response that API Gateway sends to the method response.",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "ResponseTemplates": {
+		//	            "additionalProperties": false,
+		//	            "description": "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "SelectionPattern": {
+		//	            "description": "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
+		//	            "type": "string"
+		//	          },
+		//	          "StatusCode": {
+		//	            "description": "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "StatusCode"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "PassthroughBehavior": {
+		//	      "description": "Indicates when API Gateway passes requests to the targeted backend.",
+		//	      "enum": [
+		//	        "WHEN_NO_MATCH",
+		//	        "WHEN_NO_TEMPLATES",
+		//	        "NEVER"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "RequestParameters": {
+		//	      "additionalProperties": false,
+		//	      "description": "The request parameters that API Gateway sends with the backend request.",
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RequestTemplates": {
+		//	      "additionalProperties": false,
+		//	      "description": "A map of Apache Velocity templates that are applied on the request payload.",
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "TimeoutInMillis": {
+		//	      "description": "Custom timeout between 50 and 29,000 milliseconds.",
+		//	      "maximum": 29000,
+		//	      "minimum": 50,
+		//	      "type": "integer"
+		//	    },
+		//	    "Type": {
+		//	      "description": "The type of backend that your method is running.",
+		//	      "enum": [
+		//	        "AWS",
+		//	        "AWS_PROXY",
+		//	        "HTTP",
+		//	        "HTTP_PROXY",
+		//	        "MOCK"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Uri": {
+		//	      "description": "The Uniform Resource Identifier (URI) for the integration.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"integration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CacheKeyParameters
+				"cache_key_parameters": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of request parameters whose values API Gateway caches.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CacheNamespace
+				"cache_namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An API-specific tag group of related cached parameters.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionId
+				"connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ID of the VpcLink used for the integration when connectionType=VPC_LINK, otherwise undefined.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectionType
+				"connection_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of the network connection to the integration endpoint.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"INTERNET",
+							"VPC_LINK",
 						),
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.UniqueItems(),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"passthrough_behavior": {
-						// Property: PassthroughBehavior
-						Description: "Indicates when API Gateway passes requests to the targeted backend.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"WHEN_NO_MATCH",
-								"WHEN_NO_TEMPLATES",
-								"NEVER",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"request_parameters": {
-						// Property: RequestParameters
-						Description: "The request parameters that API Gateway sends with the backend request.",
-						// Pattern: ""
-						Type:     types.MapType{ElemType: types.StringType},
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"request_templates": {
-						// Property: RequestTemplates
-						Description: "A map of Apache Velocity templates that are applied on the request payload.",
-						// Pattern: ""
-						Type:     types.MapType{ElemType: types.StringType},
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"timeout_in_millis": {
-						// Property: TimeoutInMillis
-						Description: "Custom timeout between 50 and 29,000 milliseconds.",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(50, 29000),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"type": {
-						// Property: Type
-						Description: "The type of backend that your method is running.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"AWS",
-								"AWS_PROXY",
-								"HTTP",
-								"HTTP_PROXY",
-								"MOCK",
-							}),
-						},
-					},
-					"uri": {
-						// Property: Uri
-						Description: "The Uniform Resource Identifier (URI) for the integration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"method_responses": {
-			// Property: MethodResponses
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The responses that can be sent to the client who calls the method.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "ResponseModels": {
-			//	        "additionalProperties": false,
-			//	        "description": "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.",
-			//	        "patternProperties": {
-			//	          "": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "ResponseParameters": {
-			//	        "additionalProperties": false,
-			//	        "description": "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.",
-			//	        "patternProperties": {
-			//	          "": {
-			//	            "type": "boolean"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "StatusCode": {
-			//	        "description": "The method response's status code, which you map to an IntegrationResponse.",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "StatusCode"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "The responses that can be sent to the client who calls the method.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"response_models": {
-						// Property: ResponseModels
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ContentHandling
+				"content_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Specifies how to handle request payload content type conversions.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"CONVERT_TO_BINARY",
+							"CONVERT_TO_TEXT",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Credentials
+				"credentials": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The credentials that are required for the integration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IntegrationHttpMethod
+				"integration_http_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The integration's HTTP method type.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IntegrationResponses
+				"integration_responses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContentHandling
+							"content_handling": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies how to handle request payload content type conversions.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"CONVERT_TO_BINARY",
+										"CONVERT_TO_TEXT",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResponseParameters
+							"response_parameters": // Pattern: ""
+							schema.MapAttribute{   /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The response parameters from the backend response that API Gateway sends to the method response.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+									mapplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResponseTemplates
+							"response_templates": // Pattern: ""
+							schema.MapAttribute{  /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Description: "The templates that are used to transform the integration response body. Specify templates as key-value pairs (string-to-string mappings), with a content type as the key and a template as the value.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+									mapplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SelectionPattern
+							"selection_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A regular expression that specifies which error strings or status codes from the backend map to the integration response.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: StatusCode
+							"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The status code that API Gateway uses to map the integration response to a MethodResponse status code.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The response that API Gateway provides after a method's backend completes processing a request.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PassthroughBehavior
+				"passthrough_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates when API Gateway passes requests to the targeted backend.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"WHEN_NO_MATCH",
+							"WHEN_NO_TEMPLATES",
+							"NEVER",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RequestParameters
+				"request_parameters": // Pattern: ""
+				schema.MapAttribute{  /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The request parameters that API Gateway sends with the backend request.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+						mapplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RequestTemplates
+				"request_templates": // Pattern: ""
+				schema.MapAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A map of Apache Velocity templates that are applied on the request payload.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+						mapplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutInMillis
+				"timeout_in_millis": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Custom timeout between 50 and 29,000 milliseconds.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(50, 29000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of backend that your method is running.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AWS",
+							"AWS_PROXY",
+							"HTTP",
+							"HTTP_PROXY",
+							"MOCK",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Uri
+				"uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Uniform Resource Identifier (URI) for the integration.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The backend system that the method calls when it receives a request.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MethodResponses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The responses that can be sent to the client who calls the method.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ResponseModels": {
+		//	        "additionalProperties": false,
+		//	        "description": "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.",
+		//	        "patternProperties": {
+		//	          "": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ResponseParameters": {
+		//	        "additionalProperties": false,
+		//	        "description": "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.",
+		//	        "patternProperties": {
+		//	          "": {
+		//	            "type": "boolean"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "StatusCode": {
+		//	        "description": "The method response's status code, which you map to an IntegrationResponse.",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "StatusCode"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"method_responses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ResponseModels
+					"response_models":   // Pattern: ""
+					schema.MapAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The resources used for the response's content type. Specify response models as key-value pairs (string-to-string maps), with a content type as the key and a Model resource name as the value.",
-						// Pattern: ""
-						Type:     types.MapType{ElemType: types.StringType},
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"response_parameters": {
-						// Property: ResponseParameters
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+							mapplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ResponseParameters
+					"response_parameters": // Pattern: ""
+					schema.MapAttribute{   /*START ATTRIBUTE*/
+						ElementType: types.BoolType,
 						Description: "Response parameters that API Gateway sends to the client that called a method. Specify response parameters as key-value pairs (string-to-Boolean maps), with a destination as the key and a Boolean as the value.",
-						// Pattern: ""
-						Type:     types.MapType{ElemType: types.BoolType},
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"status_code": {
-						// Property: StatusCode
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+							mapplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StatusCode
+					"status_code": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The method response's status code, which you map to an IntegrationResponse.",
-						Type:        types.StringType,
 						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"operation_name": {
-			// Property: OperationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A friendly operation name for the method.",
-			//	  "type": "string"
-			//	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The responses that can be sent to the client who calls the method.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OperationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A friendly operation name for the method.",
+		//	  "type": "string"
+		//	}
+		"operation_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A friendly operation name for the method.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"request_models": {
-			// Property: RequestModels
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RequestModels
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"request_models":    // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The resources that are used for the request's content type. Specify request models as key-value pairs (string-to-string mapping), with a content type as the key and a Model resource name as the value.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"request_parameters": {
-			// Property: RequestParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.BoolType},
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"request_validator_id": {
-			// Property: RequestValidatorId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the associated request validator.",
-			//	  "type": "string"
-			//	}
-			Description: "The ID of the associated request validator.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"resource_id": {
-			// Property: ResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of an API Gateway resource.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RequestParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"request_parameters": // Pattern: ""
+		schema.MapAttribute{  /*START ATTRIBUTE*/
+			ElementType: types.BoolType,
+			Description: "The request parameters that API Gateway accepts. Specify request parameters as key-value pairs (string-to-Boolean mapping), with a source as the key and a Boolean as the value.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RequestValidatorId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the associated request validator.",
+		//	  "type": "string"
+		//	}
+		"request_validator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the associated request validator.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of an API Gateway resource.",
+		//	  "type": "string"
+		//	}
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of an API Gateway resource.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"rest_api_id": {
-			// Property: RestApiId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the RestApi resource in which API Gateway creates the method.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the RestApi resource in which API Gateway creates the method.",
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the RestApi resource in which API Gateway creates the method.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::ApiGateway::Method",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::Method").WithTerraformTypeName("awscc_apigateway_method")
 	opts = opts.WithTerraformSchema(schema)
@@ -766,7 +751,7 @@ func methodResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

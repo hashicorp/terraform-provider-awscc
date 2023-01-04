@@ -48,7 +48,7 @@ Required:
 <a id="nestedatt--edges"></a>
 ### Nested Schema for `edges`
 
-Optional:
+Read-Only:
 
 - `asn` (Number) The ASN of a core network edge.
 - `edge_location` (String) The Region where a core network edge is located.
@@ -58,7 +58,7 @@ Optional:
 <a id="nestedatt--segments"></a>
 ### Nested Schema for `segments`
 
-Optional:
+Read-Only:
 
 - `edge_locations` (List of String)
 - `name` (String) Name of segment

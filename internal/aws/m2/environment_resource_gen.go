@@ -4,14 +4,22 @@ package m2
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,464 +29,446 @@ func init() {
 // environmentResource returns the Terraform awscc_m2_environment resource.
 // This Terraform resource corresponds to the CloudFormation AWS::M2::Environment resource.
 func environmentResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the environment.",
-			//	  "maxLength": 500,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the environment.",
+		//	  "maxLength": 500,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the environment.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 500),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"engine_type": {
-			// Property: EngineType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The target platform for the environment.",
-			//	  "enum": [
-			//	    "microfocus",
-			//	    "bluage"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 500),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EngineType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The target platform for the environment.",
+		//	  "enum": [
+		//	    "microfocus",
+		//	    "bluage"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"engine_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The target platform for the environment.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"microfocus",
 					"bluage",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"engine_version": {
-			// Property: EngineVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of the runtime engine for the environment.",
-			//	  "pattern": "^\\S{1,10}$",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EngineVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the runtime engine for the environment.",
+		//	  "pattern": "^\\S{1,10}$",
+		//	  "type": "string"
+		//	}
+		"engine_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The version of the runtime engine for the environment.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^\\S{1,10}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"environment_arn": {
-			// Property: EnvironmentArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the runtime environment.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,10}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the runtime environment.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"environment_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the runtime environment.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"environment_id": {
-			// Property: EnvironmentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique identifier of the environment.",
-			//	  "pattern": "^\\S{1,80}$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EnvironmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifier of the environment.",
+		//	  "pattern": "^\\S{1,80}$",
+		//	  "type": "string"
+		//	}
+		"environment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique identifier of the environment.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"high_availability_config": {
-			// Property: HighAvailabilityConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Defines the details of a high availability configuration.",
-			//	  "properties": {
-			//	    "DesiredCapacity": {
-			//	      "maximum": 100,
-			//	      "minimum": 1,
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "DesiredCapacity"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HighAvailabilityConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Defines the details of a high availability configuration.",
+		//	  "properties": {
+		//	    "DesiredCapacity": {
+		//	      "maximum": 100,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "DesiredCapacity"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"high_availability_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DesiredCapacity
+				"desired_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Required: true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 100),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Defines the details of a high availability configuration.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"desired_capacity": {
-						// Property: DesiredCapacity
-						Type:     types.Int64Type,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(1, 100),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"instance_type": {
-			// Property: InstanceType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of instance underlying the environment.",
-			//	  "pattern": "^\\S{1,20}$",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of instance underlying the environment.",
+		//	  "pattern": "^\\S{1,20}$",
+		//	  "type": "string"
+		//	}
+		"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of instance underlying the environment.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^\\S{1,20}$"), ""),
-			},
-		},
-		"kms_key_id": {
-			// Property: KmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.",
-			//	  "maxLength": 2048,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,20}$"), ""),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.",
+		//	  "maxLength": 2048,
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID or the Amazon Resource Name (ARN) of the customer managed KMS Key used for encrypting environment-related resources.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(2048),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the environment.",
-			//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(2048),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the environment.",
+		//	  "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the environment.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"preferred_maintenance_window": {
-			// Property: PreferredMaintenanceWindow
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
-			//	  "pattern": "^\\S{1,50}$",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PreferredMaintenanceWindow
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
+		//	  "pattern": "^\\S{1,50}$",
+		//	  "type": "string"
+		//	}
+		"preferred_maintenance_window": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Configures a desired maintenance window for the environment. If you do not provide a value, a random system-generated value will be assigned.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^\\S{1,50}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"publicly_accessible": {
-			// Property: PubliclyAccessible
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether the environment is publicly accessible.",
-			//	  "type": "boolean"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,50}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PubliclyAccessible
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether the environment is publicly accessible.",
+		//	  "type": "boolean"
+		//	}
+		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether the environment is publicly accessible.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"security_group_ids": {
-			// Property: SecurityGroupIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The list of security groups for the VPC associated with this environment.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^\\S{1,50}$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroupIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of security groups for the VPC associated with this environment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^\\S{1,50}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The list of security groups for the VPC associated with this environment.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^\\S{1,50}$"), "")),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"storage_configurations": {
-			// Property: StorageConfigurations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The storage configurations defined for the runtime environment.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "description": "Defines the storage configuration for an environment.",
-			//	    "properties": {
-			//	      "Efs": {
-			//	        "additionalProperties": false,
-			//	        "description": "Defines the storage configuration for an Amazon EFS file system.",
-			//	        "properties": {
-			//	          "FileSystemId": {
-			//	            "description": "The file system identifier.",
-			//	            "pattern": "^\\S{1,200}$",
-			//	            "type": "string"
-			//	          },
-			//	          "MountPoint": {
-			//	            "description": "The mount point for the file system.",
-			//	            "pattern": "^\\S{1,200}$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "FileSystemId",
-			//	          "MountPoint"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Fsx": {
-			//	        "additionalProperties": false,
-			//	        "description": "Defines the storage configuration for an Amazon FSx file system.",
-			//	        "properties": {
-			//	          "FileSystemId": {
-			//	            "description": "The file system identifier.",
-			//	            "pattern": "^\\S{1,200}$",
-			//	            "type": "string"
-			//	          },
-			//	          "MountPoint": {
-			//	            "description": "The mount point for the file system.",
-			//	            "pattern": "^\\S{1,200}$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "FileSystemId",
-			//	          "MountPoint"
-			//	        ],
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The storage configurations defined for the runtime environment.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"efs": {
-						// Property: Efs
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,50}$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StorageConfigurations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The storage configurations defined for the runtime environment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "description": "Defines the storage configuration for an environment.",
+		//	    "properties": {
+		//	      "Efs": {
+		//	        "additionalProperties": false,
+		//	        "description": "Defines the storage configuration for an Amazon EFS file system.",
+		//	        "properties": {
+		//	          "FileSystemId": {
+		//	            "description": "The file system identifier.",
+		//	            "pattern": "^\\S{1,200}$",
+		//	            "type": "string"
+		//	          },
+		//	          "MountPoint": {
+		//	            "description": "The mount point for the file system.",
+		//	            "pattern": "^\\S{1,200}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "FileSystemId",
+		//	          "MountPoint"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Fsx": {
+		//	        "additionalProperties": false,
+		//	        "description": "Defines the storage configuration for an Amazon FSx file system.",
+		//	        "properties": {
+		//	          "FileSystemId": {
+		//	            "description": "The file system identifier.",
+		//	            "pattern": "^\\S{1,200}$",
+		//	            "type": "string"
+		//	          },
+		//	          "MountPoint": {
+		//	            "description": "The mount point for the file system.",
+		//	            "pattern": "^\\S{1,200}$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "FileSystemId",
+		//	          "MountPoint"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"storage_configurations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Efs
+					"efs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FileSystemId
+							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The file system identifier.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,200}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MountPoint
+							"mount_point": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The mount point for the file system.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,200}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "Defines the storage configuration for an Amazon EFS file system.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"file_system_id": {
-									// Property: FileSystemId
-									Description: "The file system identifier.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("^\\S{1,200}$"), ""),
-									},
-								},
-								"mount_point": {
-									// Property: MountPoint
-									Description: "The mount point for the file system.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("^\\S{1,200}$"), ""),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"fsx": {
-						// Property: Fsx
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Fsx
+					"fsx": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FileSystemId
+							"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The file system identifier.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,200}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: MountPoint
+							"mount_point": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The mount point for the file system.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,200}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "Defines the storage configuration for an Amazon FSx file system.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"file_system_id": {
-									// Property: FileSystemId
-									Description: "The file system identifier.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("^\\S{1,200}$"), ""),
-									},
-								},
-								"mount_point": {
-									// Property: MountPoint
-									Description: "The mount point for the file system.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("^\\S{1,200}$"), ""),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"subnet_ids": {
-			// Property: SubnetIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique identifiers of the subnets assigned to this runtime environment.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^\\S{1,50}$",
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Description: "The unique identifiers of the subnets assigned to this runtime environment.",
-			Type:        types.ListType{ElemType: types.StringType},
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The storage configurations defined for the runtime environment.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^\\S{1,50}$"), "")),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Tags associated to this environment.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "minLength": 0,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique identifiers of the subnets assigned to this runtime environment.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^\\S{1,50}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "The unique identifiers of the subnets assigned to this runtime environment.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.RegexMatches(regexp.MustCompile("^\\S{1,50}$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Tags associated to this environment.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "Tags associated to this environment.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Represents a runtime environment that can run migrated mainframe applications.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::M2::Environment").WithTerraformTypeName("awscc_m2_environment")
 	opts = opts.WithTerraformSchema(schema)
@@ -510,7 +500,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

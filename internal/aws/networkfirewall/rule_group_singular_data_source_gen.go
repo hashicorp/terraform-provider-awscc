@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,984 +19,932 @@ func init() {
 // ruleGroupDataSource returns the Terraform awscc_networkfirewall_rule_group data source.
 // This Terraform data source corresponds to the CloudFormation AWS::NetworkFirewall::RuleGroup resource.
 func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"capacity": {
-			// Property: Capacity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Capacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 512,
-			//	  "minLength": 1,
-			//	  "pattern": "^.*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "pattern": "^.*$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"rule_group": {
-			// Property: RuleGroup
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "RuleVariables": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "IPSets": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Definition": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array",
-			//	                  "uniqueItems": false
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PortSets": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Definition": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array",
-			//	                  "uniqueItems": false
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "RulesSource": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "RulesSourceList": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "GeneratedRulesType": {
-			//	              "enum": [
-			//	                "ALLOWLIST",
-			//	                "DENYLIST"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "TargetTypes": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "enum": [
-			//	                  "TLS_SNI",
-			//	                  "HTTP_HOST"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            },
-			//	            "Targets": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Targets",
-			//	            "TargetTypes",
-			//	            "GeneratedRulesType"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "RulesString": {
-			//	          "maxLength": 1000000,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "StatefulRules": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Action": {
-			//	                "enum": [
-			//	                  "PASS",
-			//	                  "DROP",
-			//	                  "ALERT"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Header": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Destination": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DestinationPort": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Direction": {
-			//	                    "enum": [
-			//	                      "FORWARD",
-			//	                      "ANY"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Protocol": {
-			//	                    "enum": [
-			//	                      "IP",
-			//	                      "TCP",
-			//	                      "UDP",
-			//	                      "ICMP",
-			//	                      "HTTP",
-			//	                      "FTP",
-			//	                      "TLS",
-			//	                      "SMB",
-			//	                      "DNS",
-			//	                      "DCERPC",
-			//	                      "SSH",
-			//	                      "SMTP",
-			//	                      "IMAP",
-			//	                      "MSN",
-			//	                      "KRB5",
-			//	                      "IKEV2",
-			//	                      "TFTP",
-			//	                      "NTP",
-			//	                      "DHCP"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Source": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "SourcePort": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Protocol",
-			//	                  "Source",
-			//	                  "SourcePort",
-			//	                  "Direction",
-			//	                  "Destination",
-			//	                  "DestinationPort"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "RuleOptions": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Keyword": {
-			//	                      "maxLength": 128,
-			//	                      "minLength": 1,
-			//	                      "pattern": "^.*$",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Settings": {
-			//	                      "insertionOrder": true,
-			//	                      "items": {
-			//	                        "maxLength": 8192,
-			//	                        "minLength": 1,
-			//	                        "pattern": "^.*$",
-			//	                        "type": "string"
-			//	                      },
-			//	                      "type": "array",
-			//	                      "uniqueItems": false
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Keyword"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": false
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Action",
-			//	              "Header",
-			//	              "RuleOptions"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "StatelessRulesAndCustomActions": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "CustomActions": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "ActionDefinition": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "PublishMetricAction": {
-			//	                        "additionalProperties": false,
-			//	                        "properties": {
-			//	                          "Dimensions": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "Value": {
-			//	                                  "maxLength": 128,
-			//	                                  "minLength": 1,
-			//	                                  "pattern": "^[a-zA-Z0-9-_ ]+$",
-			//	                                  "type": "string"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "Value"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "Dimensions"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "ActionName": {
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^[a-zA-Z0-9]+$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "ActionName",
-			//	                  "ActionDefinition"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            },
-			//	            "StatelessRules": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Priority": {
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "RuleDefinition": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Actions": {
-			//	                        "insertionOrder": true,
-			//	                        "items": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "type": "array",
-			//	                        "uniqueItems": false
-			//	                      },
-			//	                      "MatchAttributes": {
-			//	                        "additionalProperties": false,
-			//	                        "properties": {
-			//	                          "DestinationPorts": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "FromPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                },
-			//	                                "ToPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "FromPort",
-			//	                                "ToPort"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "Destinations": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "AddressDefinition": {
-			//	                                  "maxLength": 255,
-			//	                                  "minLength": 1,
-			//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
-			//	                                  "type": "string"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "AddressDefinition"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "Protocols": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "maximum": 255,
-			//	                              "minimum": 0,
-			//	                              "type": "integer"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "SourcePorts": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "FromPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                },
-			//	                                "ToPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "FromPort",
-			//	                                "ToPort"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "Sources": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "AddressDefinition": {
-			//	                                  "maxLength": 255,
-			//	                                  "minLength": 1,
-			//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
-			//	                                  "type": "string"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "AddressDefinition"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "TCPFlags": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "Flags": {
-			//	                                  "insertionOrder": true,
-			//	                                  "items": {
-			//	                                    "enum": [
-			//	                                      "FIN",
-			//	                                      "SYN",
-			//	                                      "RST",
-			//	                                      "PSH",
-			//	                                      "ACK",
-			//	                                      "URG",
-			//	                                      "ECE",
-			//	                                      "CWR"
-			//	                                    ],
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "type": "array",
-			//	                                  "uniqueItems": false
-			//	                                },
-			//	                                "Masks": {
-			//	                                  "insertionOrder": true,
-			//	                                  "items": {
-			//	                                    "enum": [
-			//	                                      "FIN",
-			//	                                      "SYN",
-			//	                                      "RST",
-			//	                                      "PSH",
-			//	                                      "ACK",
-			//	                                      "URG",
-			//	                                      "ECE",
-			//	                                      "CWR"
-			//	                                    ],
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "type": "array",
-			//	                                  "uniqueItems": false
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "Flags"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          }
-			//	                        },
-			//	                        "type": "object"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "MatchAttributes",
-			//	                      "Actions"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "RuleDefinition",
-			//	                  "Priority"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "StatelessRules"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "StatefulRuleOptions": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "RuleOrder": {
-			//	          "enum": [
-			//	            "DEFAULT_ACTION_ORDER",
-			//	            "STRICT_ORDER"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "RulesSource"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"rule_variables": {
-						// Property: RuleVariables
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"ip_sets": {
-									// Property: IPSets
-									// Pattern: ""
-									Attributes: tfsdk.MapNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"definition": {
-												// Property: Definition
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "RuleVariables": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IPSets": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Definition": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PortSets": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Definition": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RulesSource": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RulesSourceList": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GeneratedRulesType": {
+		//	              "enum": [
+		//	                "ALLOWLIST",
+		//	                "DENYLIST"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "TargetTypes": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "enum": [
+		//	                  "TLS_SNI",
+		//	                  "HTTP_HOST"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "Targets": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Targets",
+		//	            "TargetTypes",
+		//	            "GeneratedRulesType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RulesString": {
+		//	          "maxLength": 1000000,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "StatefulRules": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Action": {
+		//	                "enum": [
+		//	                  "PASS",
+		//	                  "DROP",
+		//	                  "ALERT"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Header": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Destination": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DestinationPort": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Direction": {
+		//	                    "enum": [
+		//	                      "FORWARD",
+		//	                      "ANY"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Protocol": {
+		//	                    "enum": [
+		//	                      "IP",
+		//	                      "TCP",
+		//	                      "UDP",
+		//	                      "ICMP",
+		//	                      "HTTP",
+		//	                      "FTP",
+		//	                      "TLS",
+		//	                      "SMB",
+		//	                      "DNS",
+		//	                      "DCERPC",
+		//	                      "SSH",
+		//	                      "SMTP",
+		//	                      "IMAP",
+		//	                      "MSN",
+		//	                      "KRB5",
+		//	                      "IKEV2",
+		//	                      "TFTP",
+		//	                      "NTP",
+		//	                      "DHCP"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Source": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SourcePort": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Protocol",
+		//	                  "Source",
+		//	                  "SourcePort",
+		//	                  "Direction",
+		//	                  "Destination",
+		//	                  "DestinationPort"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "RuleOptions": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Keyword": {
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^.*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Settings": {
+		//	                      "insertionOrder": true,
+		//	                      "items": {
+		//	                        "maxLength": 8192,
+		//	                        "minLength": 1,
+		//	                        "pattern": "^.*$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": false
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Keyword"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Action",
+		//	              "Header",
+		//	              "RuleOptions"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "StatelessRulesAndCustomActions": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CustomActions": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "ActionDefinition": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "PublishMetricAction": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "Dimensions": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Value": {
+		//	                                  "maxLength": 128,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^[a-zA-Z0-9-_ ]+$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Value"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Dimensions"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "ActionName": {
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^[a-zA-Z0-9]+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ActionName",
+		//	                  "ActionDefinition"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "StatelessRules": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Priority": {
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "RuleDefinition": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Actions": {
+		//	                        "insertionOrder": true,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
+		//	                      "MatchAttributes": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "DestinationPorts": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "FromPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                },
+		//	                                "ToPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "FromPort",
+		//	                                "ToPort"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Destinations": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "AddressDefinition": {
+		//	                                  "maxLength": 255,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "AddressDefinition"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Protocols": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "maximum": 255,
+		//	                              "minimum": 0,
+		//	                              "type": "integer"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "SourcePorts": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "FromPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                },
+		//	                                "ToPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "FromPort",
+		//	                                "ToPort"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Sources": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "AddressDefinition": {
+		//	                                  "maxLength": 255,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "AddressDefinition"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "TCPFlags": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Flags": {
+		//	                                  "insertionOrder": true,
+		//	                                  "items": {
+		//	                                    "enum": [
+		//	                                      "FIN",
+		//	                                      "SYN",
+		//	                                      "RST",
+		//	                                      "PSH",
+		//	                                      "ACK",
+		//	                                      "URG",
+		//	                                      "ECE",
+		//	                                      "CWR"
+		//	                                    ],
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                },
+		//	                                "Masks": {
+		//	                                  "insertionOrder": true,
+		//	                                  "items": {
+		//	                                    "enum": [
+		//	                                      "FIN",
+		//	                                      "SYN",
+		//	                                      "RST",
+		//	                                      "PSH",
+		//	                                      "ACK",
+		//	                                      "URG",
+		//	                                      "ECE",
+		//	                                      "CWR"
+		//	                                    ],
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Flags"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "MatchAttributes",
+		//	                      "Actions"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "RuleDefinition",
+		//	                  "Priority"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "StatelessRules"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "StatefulRuleOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RuleOrder": {
+		//	          "enum": [
+		//	            "DEFAULT_ACTION_ORDER",
+		//	            "STRICT_ORDER"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RulesSource"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rule_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RuleVariables
+				"rule_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IPSets
+						"ip_sets":                 // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: PortSets
+						"port_sets":               // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: RulesSource
+				"rules_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RulesSourceList
+						"rules_source_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GeneratedRulesType
+								"generated_rules_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-								"port_sets": {
-									// Property: PortSets
-									// Pattern: ""
-									Attributes: tfsdk.MapNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"definition": {
-												// Property: Definition
-												Type:     types.ListType{ElemType: types.StringType},
+								}, /*END ATTRIBUTE*/
+								// Property: TargetTypes
+								"target_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Targets
+								"targets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RulesString
+						"rules_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StatefulRules
+						"stateful_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Action
+									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Header
+									"header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Destination
+											"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
+											}, /*END ATTRIBUTE*/
+											// Property: DestinationPort
+											"destination_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Direction
+											"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Protocol
+											"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Source
+											"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: SourcePort
+											"source_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: RuleOptions
+									"rule_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Keyword
+												"keyword": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Settings
+												"settings": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StatelessRulesAndCustomActions
+						"stateless_rules_and_custom_actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CustomActions
+								"custom_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ActionDefinition
+											"action_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: PublishMetricAction
+													"publish_metric_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: ActionName
+											"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"rules_source": {
-						// Property: RulesSource
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"rules_source_list": {
-									// Property: RulesSourceList
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"generated_rules_type": {
-												// Property: GeneratedRulesType
-												Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+								// Property: StatelessRules
+								"stateless_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Priority
+											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"target_types": {
-												// Property: TargetTypes
-												Type:     types.ListType{ElemType: types.StringType},
+											}, /*END ATTRIBUTE*/
+											// Property: RuleDefinition
+											"rule_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Actions
+													"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: MatchAttributes
+													"match_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: DestinationPorts
+															"destination_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: FromPort
+																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ToPort
+																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Destinations
+															"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AddressDefinition
+																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Protocols
+															"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.Int64Type,
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: SourcePorts
+															"source_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: FromPort
+																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ToPort
+																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: Sources
+															"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AddressDefinition
+																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Computed: true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+															// Property: TCPFlags
+															"tcp_flags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Flags
+																		"flags": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Masks
+																		"masks": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Computed: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Computed: true,
-											},
-											"targets": {
-												// Property: Targets
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Computed: true,
-								},
-								"rules_string": {
-									// Property: RulesString
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"stateful_rules": {
-									// Property: StatefulRules
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"action": {
-												// Property: Action
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"header": {
-												// Property: Header
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"destination": {
-															// Property: Destination
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"destination_port": {
-															// Property: DestinationPort
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"direction": {
-															// Property: Direction
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"protocol": {
-															// Property: Protocol
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"source": {
-															// Property: Source
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"source_port": {
-															// Property: SourcePort
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"rule_options": {
-												// Property: RuleOptions
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"keyword": {
-															// Property: Keyword
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"settings": {
-															// Property: Settings
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"stateless_rules_and_custom_actions": {
-									// Property: StatelessRulesAndCustomActions
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"custom_actions": {
-												// Property: CustomActions
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"action_definition": {
-															// Property: ActionDefinition
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"publish_metric_action": {
-																		// Property: PublishMetricAction
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"dimensions": {
-																					// Property: Dimensions
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"action_name": {
-															// Property: ActionName
-															Type:     types.StringType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"stateless_rules": {
-												// Property: StatelessRules
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"priority": {
-															// Property: Priority
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"rule_definition": {
-															// Property: RuleDefinition
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"actions": {
-																		// Property: Actions
-																		Type:     types.ListType{ElemType: types.StringType},
-																		Computed: true,
-																	},
-																	"match_attributes": {
-																		// Property: MatchAttributes
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"destination_ports": {
-																					// Property: DestinationPorts
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"from_port": {
-																								// Property: FromPort
-																								Type:     types.Int64Type,
-																								Computed: true,
-																							},
-																							"to_port": {
-																								// Property: ToPort
-																								Type:     types.Int64Type,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"destinations": {
-																					// Property: Destinations
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"address_definition": {
-																								// Property: AddressDefinition
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"protocols": {
-																					// Property: Protocols
-																					Type:     types.ListType{ElemType: types.Int64Type},
-																					Computed: true,
-																				},
-																				"source_ports": {
-																					// Property: SourcePorts
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"from_port": {
-																								// Property: FromPort
-																								Type:     types.Int64Type,
-																								Computed: true,
-																							},
-																							"to_port": {
-																								// Property: ToPort
-																								Type:     types.Int64Type,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"sources": {
-																					// Property: Sources
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"address_definition": {
-																								// Property: AddressDefinition
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"tcp_flags": {
-																					// Property: TCPFlags
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"flags": {
-																								// Property: Flags
-																								Type:     types.ListType{ElemType: types.StringType},
-																								Computed: true,
-																							},
-																							"masks": {
-																								// Property: Masks
-																								Type:     types.ListType{ElemType: types.StringType},
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"stateful_rule_options": {
-						// Property: StatefulRuleOptions
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"rule_order": {
-									// Property: RuleOrder
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StatefulRuleOptions
+				"stateful_rule_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RuleOrder
+						"rule_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"rule_group_arn": {
-			// Property: RuleGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^(arn:aws.*)$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws.*)$",
+		//	  "type": "string"
+		//	}
+		"rule_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"rule_group_id": {
-			// Property: RuleGroupId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 36,
-			//	  "minLength": 36,
-			//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
+		//	  "type": "string"
+		//	}
+		"rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"rule_group_name": {
-			// Property: RuleGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"rule_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^.*$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 255,
-			//	        "minLength": 0,
-			//	        "pattern": "^.*$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^.*$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 255,
+		//	        "minLength": 0,
+		//	        "pattern": "^.*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "STATELESS",
-			//	    "STATEFUL"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "STATELESS",
+		//	    "STATEFUL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::NetworkFirewall::RuleGroup",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::RuleGroup").WithTerraformTypeName("awscc_networkfirewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -1059,7 +1007,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                              "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

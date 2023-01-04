@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,403 +19,375 @@ func init() {
 // tableDataSource returns the Terraform awscc_cassandra_table data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Cassandra::Table resource.
 func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"billing_mode": {
-			// Property: BillingMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Mode": {
-			//	      "default": "ON_DEMAND",
-			//	      "description": "Capacity mode for the specified table",
-			//	      "enum": [
-			//	        "PROVISIONED",
-			//	        "ON_DEMAND"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "ProvisionedThroughput": {
-			//	      "additionalProperties": false,
-			//	      "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-			//	      "properties": {
-			//	        "ReadCapacityUnits": {
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "WriteCapacityUnits": {
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ReadCapacityUnits",
-			//	        "WriteCapacityUnits"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Mode"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"mode": {
-						// Property: Mode
-						Description: "Capacity mode for the specified table",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"provisioned_throughput": {
-						// Property: ProvisionedThroughput
-						Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"read_capacity_units": {
-									// Property: ReadCapacityUnits
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"write_capacity_units": {
-									// Property: WriteCapacityUnits
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: BillingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Mode": {
+		//	      "default": "ON_DEMAND",
+		//	      "description": "Capacity mode for the specified table",
+		//	      "enum": [
+		//	        "PROVISIONED",
+		//	        "ON_DEMAND"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ProvisionedThroughput": {
+		//	      "additionalProperties": false,
+		//	      "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
+		//	      "properties": {
+		//	        "ReadCapacityUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "WriteCapacityUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ReadCapacityUnits",
+		//	        "WriteCapacityUnits"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Mode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"billing_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Capacity mode for the specified table",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ProvisionedThroughput
+				"provisioned_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ReadCapacityUnits
+						"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: WriteCapacityUnits
+						"write_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"clustering_key_columns": {
-			// Property: ClusteringKeyColumns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Clustering key columns of the table",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Column": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ColumnName": {
-			//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	            "type": "string"
-			//	          },
-			//	          "ColumnType": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "ColumnName",
-			//	          "ColumnType"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "OrderBy": {
-			//	        "default": "ASC",
-			//	        "enum": [
-			//	          "ASC",
-			//	          "DESC"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Column"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ClusteringKeyColumns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Clustering key columns of the table",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Column": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ColumnName": {
+		//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	            "type": "string"
+		//	          },
+		//	          "ColumnType": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ColumnName",
+		//	          "ColumnType"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "OrderBy": {
+		//	        "default": "ASC",
+		//	        "enum": [
+		//	          "ASC",
+		//	          "DESC"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Column"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"clustering_key_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Column
+					"column": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ColumnName
+							"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ColumnType
+							"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: OrderBy
+					"order_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "Clustering key columns of the table",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"column": {
-						// Property: Column
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"column_name": {
-									// Property: ColumnName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"column_type": {
-									// Property: ColumnType
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"order_by": {
-						// Property: OrderBy
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"default_time_to_live": {
-			// Property: DefaultTimeToLive
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultTimeToLive
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"default_time_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"encryption_specification": {
-			// Property: EncryptionSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Represents the settings used to enable server-side encryption",
-			//	  "properties": {
-			//	    "EncryptionType": {
-			//	      "default": "AWS_OWNED_KMS_KEY",
-			//	      "description": "Server-side encryption type",
-			//	      "enum": [
-			//	        "AWS_OWNED_KMS_KEY",
-			//	        "CUSTOMER_MANAGED_KMS_KEY"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "KmsKeyIdentifier": {
-			//	      "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "EncryptionType"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the settings used to enable server-side encryption",
+		//	  "properties": {
+		//	    "EncryptionType": {
+		//	      "default": "AWS_OWNED_KMS_KEY",
+		//	      "description": "Server-side encryption type",
+		//	      "enum": [
+		//	        "AWS_OWNED_KMS_KEY",
+		//	        "CUSTOMER_MANAGED_KMS_KEY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "KmsKeyIdentifier": {
+		//	      "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EncryptionType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionType
+				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Server-side encryption type",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyIdentifier
+				"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Represents the settings used to enable server-side encryption",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"encryption_type": {
-						// Property: EncryptionType
-						Description: "Server-side encryption type",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"kms_key_identifier": {
-						// Property: KmsKeyIdentifier
-						Description: "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"keyspace_name": {
-			// Property: KeyspaceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for Cassandra keyspace",
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: KeyspaceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for Cassandra keyspace",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	  "type": "string"
+		//	}
+		"keyspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name for Cassandra keyspace",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"partition_key_columns": {
-			// Property: PartitionKeyColumns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Partition key columns of the table",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "ColumnName": {
-			//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	        "type": "string"
-			//	      },
-			//	      "ColumnType": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "ColumnName",
-			//	      "ColumnType"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PartitionKeyColumns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Partition key columns of the table",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ColumnName": {
+		//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	        "type": "string"
+		//	      },
+		//	      "ColumnType": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ColumnName",
+		//	      "ColumnType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"partition_key_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ColumnName
+					"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ColumnType
+					"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "Partition key columns of the table",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"column_name": {
-						// Property: ColumnName
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"column_type": {
-						// Property: ColumnType
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"point_in_time_recovery_enabled": {
-			// Property: PointInTimeRecoveryEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
-			//	  "type": "boolean"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PointInTimeRecoveryEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
+		//	  "type": "boolean"
+		//	}
+		"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"regular_columns": {
-			// Property: RegularColumns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Non-key columns of the table",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "ColumnName": {
-			//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	        "type": "string"
-			//	      },
-			//	      "ColumnType": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "ColumnName",
-			//	      "ColumnType"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RegularColumns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Non-key columns of the table",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ColumnName": {
+		//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	        "type": "string"
+		//	      },
+		//	      "ColumnType": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ColumnName",
+		//	      "ColumnType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"regular_columns": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ColumnName
+					"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: ColumnType
+					"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "Non-key columns of the table",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"column_name": {
-						// Property: ColumnName
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"column_type": {
-						// Property: ColumnType
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"table_name": {
-			// Property: TableName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for Cassandra table",
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	  "type": "string"
-			//	}
-			Description: "Name for Cassandra table",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to apply to the resource",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TableName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for Cassandra table",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	  "type": "string"
+		//	}
+		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name for Cassandra table",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to apply to the resource",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An array of key-value pairs to apply to this resource",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Cassandra::Table",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Table").WithTerraformTypeName("awscc_cassandra_table")
 	opts = opts.WithTerraformSchema(schema)
@@ -444,7 +416,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"write_capacity_units":           "WriteCapacityUnits",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

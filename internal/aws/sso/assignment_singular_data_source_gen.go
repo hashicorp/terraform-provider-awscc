@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,111 +19,103 @@ func init() {
 // assignmentDataSource returns the Terraform awscc_sso_assignment data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SSO::Assignment resource.
 func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"instance_arn": {
-			// Property: InstanceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The sso instance that the permission set is owned.",
-			//	  "maxLength": 1224,
-			//	  "minLength": 10,
-			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: InstanceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The sso instance that the permission set is owned.",
+		//	  "maxLength": 1224,
+		//	  "minLength": 10,
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::instance/(sso)?ins-[a-zA-Z0-9-.]{16}",
+		//	  "type": "string"
+		//	}
+		"instance_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The sso instance that the permission set is owned.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"permission_set_arn": {
-			// Property: PermissionSetArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The permission set that the assignemt will be assigned",
-			//	  "maxLength": 1224,
-			//	  "minLength": 10,
-			//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PermissionSetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The permission set that the assignemt will be assigned",
+		//	  "maxLength": 1224,
+		//	  "minLength": 10,
+		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):sso:::permissionSet/(sso)?ins-[a-zA-Z0-9-.]{16}/ps-[a-zA-Z0-9-./]{16}",
+		//	  "type": "string"
+		//	}
+		"permission_set_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The permission set that the assignemt will be assigned",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"principal_id": {
-			// Property: PrincipalId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The assignee's identifier, user id/group id",
-			//	  "maxLength": 47,
-			//	  "minLength": 1,
-			//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PrincipalId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The assignee's identifier, user id/group id",
+		//	  "maxLength": 47,
+		//	  "minLength": 1,
+		//	  "pattern": "^([0-9a-f]{10}-|)[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$",
+		//	  "type": "string"
+		//	}
+		"principal_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The assignee's identifier, user id/group id",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"principal_type": {
-			// Property: PrincipalType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The assignee's type, user/group",
-			//	  "enum": [
-			//	    "USER",
-			//	    "GROUP"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PrincipalType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The assignee's type, user/group",
+		//	  "enum": [
+		//	    "USER",
+		//	    "GROUP"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"principal_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The assignee's type, user/group",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"target_id": {
-			// Property: TargetId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The account id to be provisioned.",
-			//	  "pattern": "\\d{12}",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TargetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The account id to be provisioned.",
+		//	  "pattern": "\\d{12}",
+		//	  "type": "string"
+		//	}
+		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The account id to be provisioned.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"target_type": {
-			// Property: TargetType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of resource to be provsioned to, only aws account now",
-			//	  "enum": [
-			//	    "AWS_ACCOUNT"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TargetType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of resource to be provsioned to, only aws account now",
+		//	  "enum": [
+		//	    "AWS_ACCOUNT"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of resource to be provsioned to, only aws account now",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SSO::Assignment",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSO::Assignment").WithTerraformTypeName("awscc_sso_assignment")
 	opts = opts.WithTerraformSchema(schema)
@@ -136,7 +128,7 @@ func assignmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"target_type":        "TargetType",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

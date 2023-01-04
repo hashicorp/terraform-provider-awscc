@@ -4,14 +4,16 @@ package logs
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,112 +23,106 @@ func init() {
 // destinationResource returns the Terraform awscc_logs_destination resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Logs::Destination resource.
 func destinationResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"destination_name": {
-			// Property: DestinationName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the destination resource",
-			//	  "maxLength": 512,
-			//	  "minLength": 1,
-			//	  "pattern": "^[^:*]{1,512}$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the destination resource",
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "pattern": "^[^:*]{1,512}$",
+		//	  "type": "string"
+		//	}
+		"destination_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the destination resource",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 512),
-				validate.StringMatch(regexp.MustCompile("^[^:*]{1,512}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"destination_policy": {
-			// Property: DestinationPolicy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An IAM policy document that governs which AWS accounts can create subscription filters against this destination.",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[^:*]{1,512}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationPolicy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An IAM policy document that governs which AWS accounts can create subscription filters against this destination.",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"destination_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An IAM policy document that governs which AWS accounts can create subscription filters against this destination.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtLeast(1),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of an IAM role that permits CloudWatch Logs to send data to the specified AWS resource",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of an IAM role that permits CloudWatch Logs to send data to the specified AWS resource",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of an IAM role that permits CloudWatch Logs to send data to the specified AWS resource",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtLeast(1),
-			},
-		},
-		"target_arn": {
-			// Property: TargetArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the physical target where the log events are delivered (for example, a Kinesis stream)",
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TargetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the physical target where the log events are delivered (for example, a Kinesis stream)",
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the physical target where the log events are delivered (for example, a Kinesis stream)",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtLeast(1),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::Logs::Destination resource specifies a CloudWatch Logs destination. A destination encapsulates a physical resource (such as an Amazon Kinesis data stream) and enables you to subscribe that resource to a stream of log events.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::Destination").WithTerraformTypeName("awscc_logs_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -143,7 +139,7 @@ func destinationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

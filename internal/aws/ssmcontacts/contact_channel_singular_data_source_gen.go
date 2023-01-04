@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,105 +19,97 @@ func init() {
 // contactChannelDataSource returns the Terraform awscc_ssmcontacts_contact_channel data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SSMContacts::ContactChannel resource.
 func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the engagement to a contact channel.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"channel_address": {
-			// Property: ChannelAddress
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The details that SSM Incident Manager uses when trying to engage the contact channel.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The details that SSM Incident Manager uses when trying to engage the contact channel.",
+		//	  "type": "string"
+		//	}
+		"channel_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The details that SSM Incident Manager uses when trying to engage the contact channel.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"channel_name": {
-			// Property: ChannelName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The device name. String of 6 to 50 alphabetical, numeric, dash, and underscore characters.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"channel_type": {
-			// Property: ChannelType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
-			//	  "enum": [
-			//	    "SMS",
-			//	    "VOICE",
-			//	    "EMAIL"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
+		//	  "enum": [
+		//	    "SMS",
+		//	    "VOICE",
+		//	    "EMAIL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"channel_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Device type, which specify notification channel. Currently supported values: ?SMS?, ?VOICE?, ?EMAIL?, ?CHATBOT.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"contact_id": {
-			// Property: ContactId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ARN of the contact resource",
-			//	  "maxLength": 2048,
-			//	  "minLength": 1,
-			//	  "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ContactId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ARN of the contact resource",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "arn:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]+:[-\\w+=\\/,.@]*:[0-9]+:([\\w+=\\/,.@:-]+)*",
+		//	  "type": "string"
+		//	}
+		"contact_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ARN of the contact resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"defer_activation": {
-			// Property: DeferActivation
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DeferActivation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
+		//	  "type": "boolean"
+		//	}
+		"defer_activation": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "If you want to activate the channel at a later time, you can choose to defer activation. SSM Incident Manager can't engage your contact channel until it has been activated.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SSMContacts::ContactChannel",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMContacts::ContactChannel").WithTerraformTypeName("awscc_ssmcontacts_contact_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -130,7 +122,7 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"defer_activation": "DeferActivation",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

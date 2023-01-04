@@ -4,14 +4,19 @@ package lightsail
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,228 +26,216 @@ func init() {
 // alarmResource returns the Terraform awscc_lightsail_alarm resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Lightsail::Alarm resource.
 func alarmResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"alarm_arn": {
-			// Property: AlarmArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AlarmArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"alarm_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"alarm_name": {
-			// Property: AlarmName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
-			//	  "pattern": "\\w[\\w\\-]*\\w",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AlarmName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
+		//	  "pattern": "\\w[\\w\\-]*\\w",
+		//	  "type": "string"
+		//	}
+		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name for the alarm. Specify the name of an existing alarm to update, and overwrite the previous configuration of the alarm.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"comparison_operator": {
-			// Property: ComparisonOperator
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("\\w[\\w\\-]*\\w"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ComparisonOperator
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
+		//	  "type": "string"
+		//	}
+		"comparison_operator": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The arithmetic operation to use when comparing the specified statistic to the threshold. The specified statistic value is used as the first operand.",
-			Type:        types.StringType,
 			Required:    true,
-		},
-		"contact_protocols": {
-			// Property: ContactProtocols
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ContactProtocols
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"contact_protocols": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The contact protocols to use for the alarm, such as Email, SMS (text messaging), or both.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"datapoints_to_alarm": {
-			// Property: DatapointsToAlarm
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatapointsToAlarm
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
+		//	  "type": "integer"
+		//	}
+		"datapoints_to_alarm": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of data points that must be not within the specified threshold to trigger the alarm. If you are setting an \"M out of N\" alarm, this value (datapointsToAlarm) is the M.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"evaluation_periods": {
-			// Property: EvaluationPeriods
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-			//	  "type": "integer"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EvaluationPeriods
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
+		//	  "type": "integer"
+		//	}
+		"evaluation_periods": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of most recent periods over which data is compared to the specified threshold. If you are setting an \"M out of N\" alarm, this value (evaluationPeriods) is the N.",
-			Type:        types.Int64Type,
 			Required:    true,
-		},
-		"metric_name": {
-			// Property: MetricName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the metric to associate with the alarm.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MetricName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the metric to associate with the alarm.",
+		//	  "type": "string"
+		//	}
+		"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the metric to associate with the alarm.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"monitored_resource_name": {
-			// Property: MonitoredResourceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The validation status of the SSL/TLS certificate.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MonitoredResourceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The validation status of the SSL/TLS certificate.",
+		//	  "type": "string"
+		//	}
+		"monitored_resource_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The validation status of the SSL/TLS certificate.",
-			Type:        types.StringType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"notification_enabled": {
-			// Property: NotificationEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
-			//	  "type": "boolean"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NotificationEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
+		//	  "type": "boolean"
+		//	}
+		"notification_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether the alarm is enabled. Notifications are enabled by default if you don't specify this parameter.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"notification_triggers": {
-			// Property: NotificationTriggers
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The alarm states that trigger a notification.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NotificationTriggers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The alarm states that trigger a notification.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"notification_triggers": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The alarm states that trigger a notification.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The current state of the alarm.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current state of the alarm.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The current state of the alarm.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"threshold": {
-			// Property: Threshold
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The value against which the specified statistic is compared.",
-			//	  "type": "number"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Threshold
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The value against which the specified statistic is compared.",
+		//	  "type": "number"
+		//	}
+		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The value against which the specified statistic is compared.",
-			Type:        types.Float64Type,
 			Required:    true,
-		},
-		"treat_missing_data": {
-			// Property: TreatMissingData
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Sets how this alarm will handle missing data points.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TreatMissingData
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Sets how this alarm will handle missing data points.",
+		//	  "type": "string"
+		//	}
+		"treat_missing_data": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Sets how this alarm will handle missing data points.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Lightsail::Alarm",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lightsail::Alarm").WithTerraformTypeName("awscc_lightsail_alarm")
 	opts = opts.WithTerraformSchema(schema)
@@ -267,7 +260,7 @@ func alarmResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

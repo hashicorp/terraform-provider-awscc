@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,82 +19,75 @@ func init() {
 // requestValidatorDataSource returns the Terraform awscc_apigateway_request_validator data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ApiGateway::RequestValidator resource.
 func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name of the request validator.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name of the request validator.",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the request validator.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"request_validator_id": {
-			// Property: RequestValidatorId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "ID of the request validator.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RequestValidatorId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "ID of the request validator.",
+		//	  "type": "string"
+		//	}
+		"request_validator_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "ID of the request validator.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"rest_api_id": {
-			// Property: RestApiId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the targeted API entity.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the targeted API entity.",
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the targeted API entity.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"validate_request_body": {
-			// Property: ValidateRequestBody
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ValidateRequestBody
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
+		//	  "type": "boolean"
+		//	}
+		"validate_request_body": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether to validate the request body according to the configured schema for the targeted API and method. ",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"validate_request_parameters": {
-			// Property: ValidateRequestParameters
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether to validate request parameters.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ValidateRequestParameters
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether to validate request parameters.",
+		//	  "type": "boolean"
+		//	}
+		"validate_request_parameters": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether to validate request parameters.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ApiGateway::RequestValidator",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ApiGateway::RequestValidator").WithTerraformTypeName("awscc_apigateway_request_validator")
 	opts = opts.WithTerraformSchema(schema)
@@ -106,7 +99,7 @@ func requestValidatorDataSource(ctx context.Context) (datasource.DataSource, err
 		"validate_request_parameters": "ValidateRequestParameters",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

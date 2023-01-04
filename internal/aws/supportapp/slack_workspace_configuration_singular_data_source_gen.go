@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,52 +19,48 @@ func init() {
 // slackWorkspaceConfigurationDataSource returns the Terraform awscc_supportapp_slack_workspace_configuration data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SupportApp::SlackWorkspaceConfiguration resource.
 func slackWorkspaceConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"team_id": {
-			// Property: TeamId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The team ID in Slack, which uniquely identifies a workspace.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^\\S+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: TeamId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The team ID in Slack, which uniquely identifies a workspace.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The team ID in Slack, which uniquely identifies a workspace.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"version_id": {
-			// Property: VersionId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^[0-9]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VersionId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^[0-9]+$",
+		//	  "type": "string"
+		//	}
+		"version_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SupportApp::SlackWorkspaceConfiguration",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackWorkspaceConfiguration").WithTerraformTypeName("awscc_supportapp_slack_workspace_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -73,7 +69,7 @@ func slackWorkspaceConfigurationDataSource(ctx context.Context) (datasource.Data
 		"version_id": "VersionId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

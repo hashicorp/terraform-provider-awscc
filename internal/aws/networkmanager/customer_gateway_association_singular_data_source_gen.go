@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,70 +19,64 @@ func init() {
 // customerGatewayAssociationDataSource returns the Terraform awscc_networkmanager_customer_gateway_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::NetworkManager::CustomerGatewayAssociation resource.
 func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"customer_gateway_arn": {
-			// Property: CustomerGatewayArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the customer gateway.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CustomerGatewayArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the customer gateway.",
+		//	  "type": "string"
+		//	}
+		"customer_gateway_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the customer gateway.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"device_id": {
-			// Property: DeviceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the device",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DeviceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the device",
+		//	  "type": "string"
+		//	}
+		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the device",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"global_network_id": {
-			// Property: GlobalNetworkId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the global network.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: GlobalNetworkId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the global network.",
+		//	  "type": "string"
+		//	}
+		"global_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the global network.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"link_id": {
-			// Property: LinkId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the link",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: LinkId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the link",
+		//	  "type": "string"
+		//	}
+		"link_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the link",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::NetworkManager::CustomerGatewayAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CustomerGatewayAssociation").WithTerraformTypeName("awscc_networkmanager_customer_gateway_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -93,7 +87,7 @@ func customerGatewayAssociationDataSource(ctx context.Context) (datasource.DataS
 		"link_id":              "LinkId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

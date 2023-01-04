@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,8443 +19,7807 @@ func init() {
 // botDataSource returns the Terraform awscc_lex_bot data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Lex::Bot resource.
 func botDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 1011,
-			//	  "minLength": 1,
-			//	  "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 1011,
+		//	  "minLength": 1,
+		//	  "pattern": "^arn:aws[a-zA-Z-]*:lex:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:bot/[0-9a-zA-Z]+$",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"auto_build_bot_locales": {
-			// Property: AutoBuildBotLocales
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies whether to build the bot locales after bot creation completes.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AutoBuildBotLocales
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies whether to build the bot locales after bot creation completes.",
+		//	  "type": "boolean"
+		//	}
+		"auto_build_bot_locales": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies whether to build the bot locales after bot creation completes.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"bot_file_s3_location": {
-			// Property: BotFileS3Location
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
-			//	  "properties": {
-			//	    "S3Bucket": {
-			//	      "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-			//	      "maxLength": 63,
-			//	      "minLength": 3,
-			//	      "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//	      "type": "string"
-			//	    },
-			//	    "S3ObjectKey": {
-			//	      "description": "The Amazon S3 key of the deployment package.",
-			//	      "maxLength": 1024,
-			//	      "minLength": 1,
-			//	      "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
-			//	      "type": "string"
-			//	    },
-			//	    "S3ObjectVersion": {
-			//	      "description": "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
-			//	      "maxLength": 1024,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "S3Bucket",
-			//	    "S3ObjectKey"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: BotFileS3Location
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
+		//	  "properties": {
+		//	    "S3Bucket": {
+		//	      "description": "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
+		//	      "maxLength": 63,
+		//	      "minLength": 3,
+		//	      "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	      "type": "string"
+		//	    },
+		//	    "S3ObjectKey": {
+		//	      "description": "The Amazon S3 key of the deployment package.",
+		//	      "maxLength": 1024,
+		//	      "minLength": 1,
+		//	      "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
+		//	      "type": "string"
+		//	    },
+		//	    "S3ObjectVersion": {
+		//	      "description": "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
+		//	      "maxLength": 1024,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "S3Bucket",
+		//	    "S3ObjectKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"bot_file_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Bucket
+				"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectKey
+				"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon S3 key of the deployment package.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3ObjectVersion
+				"s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "S3 location of bot definitions zip file, if it's not defined inline in CloudFormation.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"s3_bucket": {
-						// Property: S3Bucket
-						Description: "An Amazon S3 bucket in the same AWS Region as your function. The bucket can be in a different AWS account.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"s3_object_key": {
-						// Property: S3ObjectKey
-						Description: "The Amazon S3 key of the deployment package.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"s3_object_version": {
-						// Property: S3ObjectVersion
-						Description: "For versioned objects, the version of the deployment package object to use. If not specified, the current object version will be used.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"bot_locales": {
-			// Property: BotLocales
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of bot locales",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A locale in the bot, which contains the intents and slot types that the bot uses in conversations with users in the specified language and locale.",
-			//	    "properties": {
-			//	      "CustomVocabulary": {
-			//	        "additionalProperties": false,
-			//	        "description": "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
-			//	        "properties": {
-			//	          "CustomVocabularyItems": {
-			//	            "insertionOrder": false,
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "description": "A custom vocabulary item that contains the phrase to recognize and a weight to give the boost.",
-			//	              "properties": {
-			//	                "Phrase": {
-			//	                  "description": "Phrase that should be recognized.",
-			//	                  "maxLength": 100,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                },
-			//	                "Weight": {
-			//	                  "description": "The degree to which the phrase recognition is boosted.",
-			//	                  "maximum": 3,
-			//	                  "minimum": 1,
-			//	                  "type": "integer"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Phrase"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "maxItems": 500,
-			//	            "type": "array",
-			//	            "uniqueItems": true
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "CustomVocabularyItems"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "Description": {
-			//	        "description": "A description of the resource",
-			//	        "maxLength": 200,
-			//	        "type": "string"
-			//	      },
-			//	      "Intents": {
-			//	        "description": "List of intents",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "An intent represents an action that the user wants to perform. You create a bot to support one or more related intents.",
-			//	          "properties": {
-			//	            "Description": {
-			//	              "description": "A description of the resource",
-			//	              "maxLength": 200,
-			//	              "type": "string"
-			//	            },
-			//	            "DialogCodeHook": {
-			//	              "additionalProperties": false,
-			//	              "description": "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
-			//	              "properties": {
-			//	                "Enabled": {
-			//	                  "type": "boolean"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Enabled"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "FulfillmentCodeHook": {
-			//	              "additionalProperties": false,
-			//	              "description": "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
-			//	              "properties": {
-			//	                "Enabled": {
-			//	                  "type": "boolean"
-			//	                },
-			//	                "FulfillmentUpdatesSpecification": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "Provides information for updating the user on the progress of fulfilling an intent.",
-			//	                  "properties": {
-			//	                    "Active": {
-			//	                      "description": "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
-			//	                      "type": "boolean"
-			//	                    },
-			//	                    "StartResponse": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
-			//	                      "properties": {
-			//	                        "AllowInterrupt": {
-			//	                          "description": "Determines whether the user can interrupt the start message while it is playing.",
-			//	                          "type": "boolean"
-			//	                        },
-			//	                        "DelayInSeconds": {
-			//	                          "description": "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-			//	                          "maximum": 900,
-			//	                          "minimum": 1,
-			//	                          "type": "integer"
-			//	                        },
-			//	                        "MessageGroups": {
-			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                          "insertionOrder": false,
-			//	                          "items": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                            "properties": {
-			//	                              "Message": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                "properties": {
-			//	                                  "CustomPayload": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in a custom format defined by the client application.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The string that is sent to your application.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "ImageResponseCard": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                    "properties": {
-			//	                                      "Buttons": {
-			//	                                        "description": "A list of buttons that should be displayed on the response card.",
-			//	                                        "insertionOrder": false,
-			//	                                        "items": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                          "properties": {
-			//	                                            "Text": {
-			//	                                              "description": "The text that appears on the button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Value": {
-			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Text",
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "maxItems": 5,
-			//	                                        "type": "array"
-			//	                                      },
-			//	                                      "ImageUrl": {
-			//	                                        "description": "The URL of an image to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Subtitle": {
-			//	                                        "description": "The subtitle to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Title": {
-			//	                                        "description": "The title to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Title"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "PlainTextMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in plain text format.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The message to send to the user.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "SSMLMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The SSML text that defines the prompt.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  }
-			//	                                },
-			//	                                "type": "object"
-			//	                              },
-			//	                              "Variations": {
-			//	                                "description": "Message variations to send to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                  "properties": {
-			//	                                    "CustomPayload": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in a custom format defined by the client application.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The string that is sent to your application.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "ImageResponseCard": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                      "properties": {
-			//	                                        "Buttons": {
-			//	                                          "description": "A list of buttons that should be displayed on the response card.",
-			//	                                          "insertionOrder": false,
-			//	                                          "items": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                            "properties": {
-			//	                                              "Text": {
-			//	                                                "description": "The text that appears on the button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Value": {
-			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Text",
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "maxItems": 5,
-			//	                                          "type": "array"
-			//	                                        },
-			//	                                        "ImageUrl": {
-			//	                                          "description": "The URL of an image to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Subtitle": {
-			//	                                          "description": "The subtitle to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Title": {
-			//	                                          "description": "The title to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Title"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "PlainTextMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in plain text format.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The message to send to the user.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "SSMLMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The SSML text that defines the prompt.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    }
-			//	                                  },
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 2,
-			//	                                "type": "array"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "Message"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          },
-			//	                          "maxItems": 5,
-			//	                          "minItems": 1,
-			//	                          "type": "array"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "DelayInSeconds",
-			//	                        "MessageGroups"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "TimeoutInSeconds": {
-			//	                      "description": "The length of time that the fulfillment Lambda function should run before it times out.",
-			//	                      "maximum": 900,
-			//	                      "minimum": 1,
-			//	                      "type": "integer"
-			//	                    },
-			//	                    "UpdateResponse": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
-			//	                      "properties": {
-			//	                        "AllowInterrupt": {
-			//	                          "description": "Determines whether the user can interrupt an update message while it is playing.",
-			//	                          "type": "boolean"
-			//	                        },
-			//	                        "FrequencyInSeconds": {
-			//	                          "description": "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-			//	                          "maximum": 900,
-			//	                          "minimum": 1,
-			//	                          "type": "integer"
-			//	                        },
-			//	                        "MessageGroups": {
-			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                          "insertionOrder": false,
-			//	                          "items": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                            "properties": {
-			//	                              "Message": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                "properties": {
-			//	                                  "CustomPayload": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in a custom format defined by the client application.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The string that is sent to your application.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "ImageResponseCard": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                    "properties": {
-			//	                                      "Buttons": {
-			//	                                        "description": "A list of buttons that should be displayed on the response card.",
-			//	                                        "insertionOrder": false,
-			//	                                        "items": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                          "properties": {
-			//	                                            "Text": {
-			//	                                              "description": "The text that appears on the button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Value": {
-			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Text",
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "maxItems": 5,
-			//	                                        "type": "array"
-			//	                                      },
-			//	                                      "ImageUrl": {
-			//	                                        "description": "The URL of an image to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Subtitle": {
-			//	                                        "description": "The subtitle to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Title": {
-			//	                                        "description": "The title to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Title"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "PlainTextMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in plain text format.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The message to send to the user.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "SSMLMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The SSML text that defines the prompt.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  }
-			//	                                },
-			//	                                "type": "object"
-			//	                              },
-			//	                              "Variations": {
-			//	                                "description": "Message variations to send to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                  "properties": {
-			//	                                    "CustomPayload": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in a custom format defined by the client application.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The string that is sent to your application.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "ImageResponseCard": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                      "properties": {
-			//	                                        "Buttons": {
-			//	                                          "description": "A list of buttons that should be displayed on the response card.",
-			//	                                          "insertionOrder": false,
-			//	                                          "items": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                            "properties": {
-			//	                                              "Text": {
-			//	                                                "description": "The text that appears on the button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Value": {
-			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Text",
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "maxItems": 5,
-			//	                                          "type": "array"
-			//	                                        },
-			//	                                        "ImageUrl": {
-			//	                                          "description": "The URL of an image to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Subtitle": {
-			//	                                          "description": "The subtitle to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Title": {
-			//	                                          "description": "The title to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Title"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "PlainTextMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in plain text format.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The message to send to the user.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "SSMLMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The SSML text that defines the prompt.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    }
-			//	                                  },
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 2,
-			//	                                "type": "array"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "Message"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          },
-			//	                          "maxItems": 5,
-			//	                          "minItems": 1,
-			//	                          "type": "array"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "FrequencyInSeconds",
-			//	                        "MessageGroups"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Active"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "PostFulfillmentStatusSpecification": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "Provides information for updating the user on the progress of fulfilling an intent.",
-			//	                  "properties": {
-			//	                    "FailureResponse": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//	                      "properties": {
-			//	                        "AllowInterrupt": {
-			//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                          "type": "boolean"
-			//	                        },
-			//	                        "MessageGroupsList": {
-			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                          "insertionOrder": false,
-			//	                          "items": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                            "properties": {
-			//	                              "Message": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                "properties": {
-			//	                                  "CustomPayload": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in a custom format defined by the client application.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The string that is sent to your application.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "ImageResponseCard": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                    "properties": {
-			//	                                      "Buttons": {
-			//	                                        "description": "A list of buttons that should be displayed on the response card.",
-			//	                                        "insertionOrder": false,
-			//	                                        "items": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                          "properties": {
-			//	                                            "Text": {
-			//	                                              "description": "The text that appears on the button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Value": {
-			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Text",
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "maxItems": 5,
-			//	                                        "type": "array"
-			//	                                      },
-			//	                                      "ImageUrl": {
-			//	                                        "description": "The URL of an image to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Subtitle": {
-			//	                                        "description": "The subtitle to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Title": {
-			//	                                        "description": "The title to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Title"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "PlainTextMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in plain text format.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The message to send to the user.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "SSMLMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The SSML text that defines the prompt.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  }
-			//	                                },
-			//	                                "type": "object"
-			//	                              },
-			//	                              "Variations": {
-			//	                                "description": "Message variations to send to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                  "properties": {
-			//	                                    "CustomPayload": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in a custom format defined by the client application.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The string that is sent to your application.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "ImageResponseCard": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                      "properties": {
-			//	                                        "Buttons": {
-			//	                                          "description": "A list of buttons that should be displayed on the response card.",
-			//	                                          "insertionOrder": false,
-			//	                                          "items": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                            "properties": {
-			//	                                              "Text": {
-			//	                                                "description": "The text that appears on the button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Value": {
-			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Text",
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "maxItems": 5,
-			//	                                          "type": "array"
-			//	                                        },
-			//	                                        "ImageUrl": {
-			//	                                          "description": "The URL of an image to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Subtitle": {
-			//	                                          "description": "The subtitle to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Title": {
-			//	                                          "description": "The title to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Title"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "PlainTextMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in plain text format.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The message to send to the user.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "SSMLMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The SSML text that defines the prompt.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    }
-			//	                                  },
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 2,
-			//	                                "type": "array"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "Message"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          },
-			//	                          "maxItems": 5,
-			//	                          "minItems": 1,
-			//	                          "type": "array"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "MessageGroupsList"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "SuccessResponse": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//	                      "properties": {
-			//	                        "AllowInterrupt": {
-			//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                          "type": "boolean"
-			//	                        },
-			//	                        "MessageGroupsList": {
-			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                          "insertionOrder": false,
-			//	                          "items": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                            "properties": {
-			//	                              "Message": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                "properties": {
-			//	                                  "CustomPayload": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in a custom format defined by the client application.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The string that is sent to your application.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "ImageResponseCard": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                    "properties": {
-			//	                                      "Buttons": {
-			//	                                        "description": "A list of buttons that should be displayed on the response card.",
-			//	                                        "insertionOrder": false,
-			//	                                        "items": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                          "properties": {
-			//	                                            "Text": {
-			//	                                              "description": "The text that appears on the button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Value": {
-			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Text",
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "maxItems": 5,
-			//	                                        "type": "array"
-			//	                                      },
-			//	                                      "ImageUrl": {
-			//	                                        "description": "The URL of an image to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Subtitle": {
-			//	                                        "description": "The subtitle to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Title": {
-			//	                                        "description": "The title to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Title"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "PlainTextMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in plain text format.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The message to send to the user.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "SSMLMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The SSML text that defines the prompt.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  }
-			//	                                },
-			//	                                "type": "object"
-			//	                              },
-			//	                              "Variations": {
-			//	                                "description": "Message variations to send to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                  "properties": {
-			//	                                    "CustomPayload": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in a custom format defined by the client application.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The string that is sent to your application.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "ImageResponseCard": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                      "properties": {
-			//	                                        "Buttons": {
-			//	                                          "description": "A list of buttons that should be displayed on the response card.",
-			//	                                          "insertionOrder": false,
-			//	                                          "items": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                            "properties": {
-			//	                                              "Text": {
-			//	                                                "description": "The text that appears on the button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Value": {
-			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Text",
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "maxItems": 5,
-			//	                                          "type": "array"
-			//	                                        },
-			//	                                        "ImageUrl": {
-			//	                                          "description": "The URL of an image to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Subtitle": {
-			//	                                          "description": "The subtitle to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Title": {
-			//	                                          "description": "The title to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Title"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "PlainTextMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in plain text format.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The message to send to the user.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "SSMLMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The SSML text that defines the prompt.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    }
-			//	                                  },
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 2,
-			//	                                "type": "array"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "Message"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          },
-			//	                          "maxItems": 5,
-			//	                          "minItems": 1,
-			//	                          "type": "array"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "MessageGroupsList"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "TimeoutResponse": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//	                      "properties": {
-			//	                        "AllowInterrupt": {
-			//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                          "type": "boolean"
-			//	                        },
-			//	                        "MessageGroupsList": {
-			//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                          "insertionOrder": false,
-			//	                          "items": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                            "properties": {
-			//	                              "Message": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                "properties": {
-			//	                                  "CustomPayload": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in a custom format defined by the client application.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The string that is sent to your application.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "ImageResponseCard": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                    "properties": {
-			//	                                      "Buttons": {
-			//	                                        "description": "A list of buttons that should be displayed on the response card.",
-			//	                                        "insertionOrder": false,
-			//	                                        "items": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                          "properties": {
-			//	                                            "Text": {
-			//	                                              "description": "The text that appears on the button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Value": {
-			//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                              "maxLength": 50,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Text",
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "maxItems": 5,
-			//	                                        "type": "array"
-			//	                                      },
-			//	                                      "ImageUrl": {
-			//	                                        "description": "The URL of an image to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Subtitle": {
-			//	                                        "description": "The subtitle to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      },
-			//	                                      "Title": {
-			//	                                        "description": "The title to display on the response card.",
-			//	                                        "maxLength": 250,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Title"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "PlainTextMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in plain text format.",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The message to send to the user.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "SSMLMessage": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                    "properties": {
-			//	                                      "Value": {
-			//	                                        "description": "The SSML text that defines the prompt.",
-			//	                                        "maxLength": 1000,
-			//	                                        "minLength": 1,
-			//	                                        "type": "string"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "Value"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  }
-			//	                                },
-			//	                                "type": "object"
-			//	                              },
-			//	                              "Variations": {
-			//	                                "description": "Message variations to send to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                  "properties": {
-			//	                                    "CustomPayload": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in a custom format defined by the client application.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The string that is sent to your application.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "ImageResponseCard": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                      "properties": {
-			//	                                        "Buttons": {
-			//	                                          "description": "A list of buttons that should be displayed on the response card.",
-			//	                                          "insertionOrder": false,
-			//	                                          "items": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                            "properties": {
-			//	                                              "Text": {
-			//	                                                "description": "The text that appears on the button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Value": {
-			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Text",
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "maxItems": 5,
-			//	                                          "type": "array"
-			//	                                        },
-			//	                                        "ImageUrl": {
-			//	                                          "description": "The URL of an image to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Subtitle": {
-			//	                                          "description": "The subtitle to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Title": {
-			//	                                          "description": "The title to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Title"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "PlainTextMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in plain text format.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The message to send to the user.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "SSMLMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The SSML text that defines the prompt.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    }
-			//	                                  },
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 2,
-			//	                                "type": "array"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "Message"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          },
-			//	                          "maxItems": 5,
-			//	                          "minItems": 1,
-			//	                          "type": "array"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "MessageGroupsList"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Enabled"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "InputContexts": {
-			//	              "description": "The list of input contexts specified for the intent.",
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "description": "InputContext specified for the intent.",
-			//	                "properties": {
-			//	                  "Name": {
-			//	                    "description": "The name of the context.",
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Name"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 5,
-			//	              "type": "array"
-			//	            },
-			//	            "IntentClosingSetting": {
-			//	              "additionalProperties": false,
-			//	              "description": "Response that Amazon Lex sends to the user when the intent is closed.",
-			//	              "properties": {
-			//	                "ClosingResponse": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//	                  "properties": {
-			//	                    "AllowInterrupt": {
-			//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                      "type": "boolean"
-			//	                    },
-			//	                    "MessageGroupsList": {
-			//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                      "insertionOrder": false,
-			//	                      "items": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                        "properties": {
-			//	                          "Message": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The primary message that Amazon Lex should send to the user.",
-			//	                            "properties": {
-			//	                              "CustomPayload": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in a custom format defined by the client application.",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The string that is sent to your application.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "ImageResponseCard": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                "properties": {
-			//	                                  "Buttons": {
-			//	                                    "description": "A list of buttons that should be displayed on the response card.",
-			//	                                    "insertionOrder": false,
-			//	                                    "items": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                      "properties": {
-			//	                                        "Text": {
-			//	                                          "description": "The text that appears on the button.",
-			//	                                          "maxLength": 50,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Value": {
-			//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                          "maxLength": 50,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Text",
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "maxItems": 5,
-			//	                                    "type": "array"
-			//	                                  },
-			//	                                  "ImageUrl": {
-			//	                                    "description": "The URL of an image to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Subtitle": {
-			//	                                    "description": "The subtitle to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Title": {
-			//	                                    "description": "The title to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Title"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "PlainTextMessage": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in plain text format.",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The message to send to the user.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "SSMLMessage": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The SSML text that defines the prompt.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              }
-			//	                            },
-			//	                            "type": "object"
-			//	                          },
-			//	                          "Variations": {
-			//	                            "description": "Message variations to send to the user.",
-			//	                            "insertionOrder": false,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "The primary message that Amazon Lex should send to the user.",
-			//	                              "properties": {
-			//	                                "CustomPayload": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in a custom format defined by the client application.",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The string that is sent to your application.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "ImageResponseCard": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                  "properties": {
-			//	                                    "Buttons": {
-			//	                                      "description": "A list of buttons that should be displayed on the response card.",
-			//	                                      "insertionOrder": false,
-			//	                                      "items": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                        "properties": {
-			//	                                          "Text": {
-			//	                                            "description": "The text that appears on the button.",
-			//	                                            "maxLength": 50,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          },
-			//	                                          "Value": {
-			//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                            "maxLength": 50,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "Text",
-			//	                                          "Value"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "maxItems": 5,
-			//	                                      "type": "array"
-			//	                                    },
-			//	                                    "ImageUrl": {
-			//	                                      "description": "The URL of an image to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "Subtitle": {
-			//	                                      "description": "The subtitle to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "Title": {
-			//	                                      "description": "The title to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Title"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "PlainTextMessage": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in plain text format.",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The message to send to the user.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "SSMLMessage": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The SSML text that defines the prompt.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                }
-			//	                              },
-			//	                              "type": "object"
-			//	                            },
-			//	                            "maxItems": 2,
-			//	                            "type": "array"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "Message"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      },
-			//	                      "maxItems": 5,
-			//	                      "minItems": 1,
-			//	                      "type": "array"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "MessageGroupsList"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "IsActive": {
-			//	                  "type": "boolean"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "ClosingResponse"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "IntentConfirmationSetting": {
-			//	              "additionalProperties": false,
-			//	              "description": "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
-			//	              "properties": {
-			//	                "DeclinationResponse": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A list of message groups that Amazon Lex uses to respond the user input.",
-			//	                  "properties": {
-			//	                    "AllowInterrupt": {
-			//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                      "type": "boolean"
-			//	                    },
-			//	                    "MessageGroupsList": {
-			//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                      "insertionOrder": false,
-			//	                      "items": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                        "properties": {
-			//	                          "Message": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The primary message that Amazon Lex should send to the user.",
-			//	                            "properties": {
-			//	                              "CustomPayload": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in a custom format defined by the client application.",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The string that is sent to your application.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "ImageResponseCard": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                "properties": {
-			//	                                  "Buttons": {
-			//	                                    "description": "A list of buttons that should be displayed on the response card.",
-			//	                                    "insertionOrder": false,
-			//	                                    "items": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                      "properties": {
-			//	                                        "Text": {
-			//	                                          "description": "The text that appears on the button.",
-			//	                                          "maxLength": 50,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Value": {
-			//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                          "maxLength": 50,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Text",
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "maxItems": 5,
-			//	                                    "type": "array"
-			//	                                  },
-			//	                                  "ImageUrl": {
-			//	                                    "description": "The URL of an image to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Subtitle": {
-			//	                                    "description": "The subtitle to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Title": {
-			//	                                    "description": "The title to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Title"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "PlainTextMessage": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in plain text format.",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The message to send to the user.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "SSMLMessage": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The SSML text that defines the prompt.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              }
-			//	                            },
-			//	                            "type": "object"
-			//	                          },
-			//	                          "Variations": {
-			//	                            "description": "Message variations to send to the user.",
-			//	                            "insertionOrder": false,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "The primary message that Amazon Lex should send to the user.",
-			//	                              "properties": {
-			//	                                "CustomPayload": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in a custom format defined by the client application.",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The string that is sent to your application.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "ImageResponseCard": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                  "properties": {
-			//	                                    "Buttons": {
-			//	                                      "description": "A list of buttons that should be displayed on the response card.",
-			//	                                      "insertionOrder": false,
-			//	                                      "items": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                        "properties": {
-			//	                                          "Text": {
-			//	                                            "description": "The text that appears on the button.",
-			//	                                            "maxLength": 50,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          },
-			//	                                          "Value": {
-			//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                            "maxLength": 50,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "Text",
-			//	                                          "Value"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "maxItems": 5,
-			//	                                      "type": "array"
-			//	                                    },
-			//	                                    "ImageUrl": {
-			//	                                      "description": "The URL of an image to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "Subtitle": {
-			//	                                      "description": "The subtitle to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "Title": {
-			//	                                      "description": "The title to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Title"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "PlainTextMessage": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in plain text format.",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The message to send to the user.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "SSMLMessage": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The SSML text that defines the prompt.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                }
-			//	                              },
-			//	                              "type": "object"
-			//	                            },
-			//	                            "maxItems": 2,
-			//	                            "type": "array"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "Message"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      },
-			//	                      "maxItems": 5,
-			//	                      "minItems": 1,
-			//	                      "type": "array"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "MessageGroupsList"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "IsActive": {
-			//	                  "type": "boolean"
-			//	                },
-			//	                "PromptSpecification": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "Prompts the user to confirm the intent.",
-			//	                  "properties": {
-			//	                    "AllowInterrupt": {
-			//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                      "type": "boolean"
-			//	                    },
-			//	                    "MaxRetries": {
-			//	                      "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-			//	                      "maximum": 5,
-			//	                      "minimum": 0,
-			//	                      "type": "integer"
-			//	                    },
-			//	                    "MessageGroupsList": {
-			//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                      "insertionOrder": false,
-			//	                      "items": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                        "properties": {
-			//	                          "Message": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The primary message that Amazon Lex should send to the user.",
-			//	                            "properties": {
-			//	                              "CustomPayload": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in a custom format defined by the client application.",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The string that is sent to your application.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "ImageResponseCard": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                "properties": {
-			//	                                  "Buttons": {
-			//	                                    "description": "A list of buttons that should be displayed on the response card.",
-			//	                                    "insertionOrder": false,
-			//	                                    "items": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                      "properties": {
-			//	                                        "Text": {
-			//	                                          "description": "The text that appears on the button.",
-			//	                                          "maxLength": 50,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Value": {
-			//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                          "maxLength": 50,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Text",
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "maxItems": 5,
-			//	                                    "type": "array"
-			//	                                  },
-			//	                                  "ImageUrl": {
-			//	                                    "description": "The URL of an image to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Subtitle": {
-			//	                                    "description": "The subtitle to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Title": {
-			//	                                    "description": "The title to display on the response card.",
-			//	                                    "maxLength": 250,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Title"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "PlainTextMessage": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in plain text format.",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The message to send to the user.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "SSMLMessage": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                "properties": {
-			//	                                  "Value": {
-			//	                                    "description": "The SSML text that defines the prompt.",
-			//	                                    "maxLength": 1000,
-			//	                                    "minLength": 1,
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              }
-			//	                            },
-			//	                            "type": "object"
-			//	                          },
-			//	                          "Variations": {
-			//	                            "description": "Message variations to send to the user.",
-			//	                            "insertionOrder": false,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "The primary message that Amazon Lex should send to the user.",
-			//	                              "properties": {
-			//	                                "CustomPayload": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in a custom format defined by the client application.",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The string that is sent to your application.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "ImageResponseCard": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                  "properties": {
-			//	                                    "Buttons": {
-			//	                                      "description": "A list of buttons that should be displayed on the response card.",
-			//	                                      "insertionOrder": false,
-			//	                                      "items": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                        "properties": {
-			//	                                          "Text": {
-			//	                                            "description": "The text that appears on the button.",
-			//	                                            "maxLength": 50,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          },
-			//	                                          "Value": {
-			//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                            "maxLength": 50,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "Text",
-			//	                                          "Value"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "maxItems": 5,
-			//	                                      "type": "array"
-			//	                                    },
-			//	                                    "ImageUrl": {
-			//	                                      "description": "The URL of an image to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "Subtitle": {
-			//	                                      "description": "The subtitle to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "Title": {
-			//	                                      "description": "The title to display on the response card.",
-			//	                                      "maxLength": 250,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Title"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "PlainTextMessage": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in plain text format.",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The message to send to the user.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "SSMLMessage": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                  "properties": {
-			//	                                    "Value": {
-			//	                                      "description": "The SSML text that defines the prompt.",
-			//	                                      "maxLength": 1000,
-			//	                                      "minLength": 1,
-			//	                                      "type": "string"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Value"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                }
-			//	                              },
-			//	                              "type": "object"
-			//	                            },
-			//	                            "maxItems": 2,
-			//	                            "type": "array"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "Message"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      },
-			//	                      "maxItems": 5,
-			//	                      "minItems": 1,
-			//	                      "type": "array"
-			//	                    },
-			//	                    "MessageSelectionStrategy": {
-			//	                      "description": "Indicates how a message is selected from a message group among retries.",
-			//	                      "enum": [
-			//	                        "Random",
-			//	                        "Ordered"
-			//	                      ],
-			//	                      "type": "string"
-			//	                    },
-			//	                    "PromptAttemptsSpecification": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Specifies the advanced settings on each attempt of the prompt.",
-			//	                      "patternProperties": {
-			//	                        "": {
-			//	                          "additionalProperties": false,
-			//	                          "description": "Specifies the settings on a prompt attempt.",
-			//	                          "properties": {
-			//	                            "AllowInterrupt": {
-			//	                              "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-			//	                              "type": "boolean"
-			//	                            },
-			//	                            "AllowedInputTypes": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "Specifies the allowed input types.",
-			//	                              "properties": {
-			//	                                "AllowAudioInput": {
-			//	                                  "description": "Indicates whether audio input is allowed.",
-			//	                                  "type": "boolean"
-			//	                                },
-			//	                                "AllowDTMFInput": {
-			//	                                  "description": "Indicates whether DTMF input is allowed.",
-			//	                                  "type": "boolean"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "AllowAudioInput",
-			//	                                "AllowDTMFInput"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "AudioAndDTMFInputSpecification": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "Specifies the audio and DTMF input specification.",
-			//	                              "properties": {
-			//	                                "AudioSpecification": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "Specifies the audio input specifications.",
-			//	                                  "properties": {
-			//	                                    "EndTimeoutMs": {
-			//	                                      "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-			//	                                      "minimum": 1,
-			//	                                      "type": "integer"
-			//	                                    },
-			//	                                    "MaxLengthMs": {
-			//	                                      "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-			//	                                      "minimum": 1,
-			//	                                      "type": "integer"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "EndTimeoutMs",
-			//	                                    "MaxLengthMs"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "DTMFSpecification": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "Specifies the settings on DTMF input.",
-			//	                                  "properties": {
-			//	                                    "DeletionCharacter": {
-			//	                                      "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-			//	                                      "pattern": "^[A-D0-9#*]{1}$",
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "EndCharacter": {
-			//	                                      "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-			//	                                      "pattern": "^[A-D0-9#*]{1}$",
-			//	                                      "type": "string"
-			//	                                    },
-			//	                                    "EndTimeoutMs": {
-			//	                                      "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-			//	                                      "minimum": 1,
-			//	                                      "type": "integer"
-			//	                                    },
-			//	                                    "MaxLength": {
-			//	                                      "description": "The maximum number of DTMF digits allowed in an utterance.",
-			//	                                      "maximum": 1024,
-			//	                                      "minimum": 1,
-			//	                                      "type": "integer"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "DeletionCharacter",
-			//	                                    "EndCharacter",
-			//	                                    "EndTimeoutMs",
-			//	                                    "MaxLength"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "StartTimeoutMs": {
-			//	                                  "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-			//	                                  "minimum": 1,
-			//	                                  "type": "integer"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "StartTimeoutMs"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "TextInputSpecification": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "Specifies the text input specifications.",
-			//	                              "properties": {
-			//	                                "StartTimeoutMs": {
-			//	                                  "description": "Time for which a bot waits before re-prompting a customer for text input.",
-			//	                                  "minimum": 1,
-			//	                                  "type": "integer"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "StartTimeoutMs"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            }
-			//	                          },
-			//	                          "required": [
-			//	                            "AllowedInputTypes"
-			//	                          ],
-			//	                          "type": "object"
-			//	                        }
-			//	                      },
-			//	                      "type": "object"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "MessageGroupsList",
-			//	                    "MaxRetries"
-			//	                  ],
-			//	                  "type": "object"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "PromptSpecification",
-			//	                "DeclinationResponse"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "KendraConfiguration": {
-			//	              "additionalProperties": false,
-			//	              "description": "Configuration for searching a Amazon Kendra index specified for the intent.",
-			//	              "properties": {
-			//	                "KendraIndex": {
-			//	                  "description": "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
-			//	                  "maxLength": 2048,
-			//	                  "minLength": 32,
-			//	                  "pattern": "^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$",
-			//	                  "type": "string"
-			//	                },
-			//	                "QueryFilterString": {
-			//	                  "description": "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
-			//	                  "maxLength": 5000,
-			//	                  "minLength": 1,
-			//	                  "type": "string"
-			//	                },
-			//	                "QueryFilterStringEnabled": {
-			//	                  "description": "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
-			//	                  "type": "boolean"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "KendraIndex"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Name": {
-			//	              "description": "Unique name for a resource.",
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//	              "type": "string"
-			//	            },
-			//	            "OutputContexts": {
-			//	              "description": "A list of contexts that the intent activates when it is fulfilled.",
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "description": "A session context that is activated when an intent is fulfilled.",
-			//	                "properties": {
-			//	                  "Name": {
-			//	                    "description": "Unique name for a resource.",
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "TimeToLiveInSeconds": {
-			//	                    "description": "The amount of time, in seconds, that the output context should remain active.",
-			//	                    "maximum": 86400,
-			//	                    "minimum": 5,
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "TurnsToLive": {
-			//	                    "description": "The number of conversation turns that the output context should remain active.",
-			//	                    "maximum": 20,
-			//	                    "minimum": 1,
-			//	                    "type": "integer"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Name",
-			//	                  "TimeToLiveInSeconds",
-			//	                  "TurnsToLive"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 10,
-			//	              "type": "array"
-			//	            },
-			//	            "ParentIntentSignature": {
-			//	              "description": "A unique identifier for the built-in intent to base this intent on.",
-			//	              "type": "string"
-			//	            },
-			//	            "SampleUtterances": {
-			//	              "description": "An array of sample utterances",
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
-			//	                "properties": {
-			//	                  "Utterance": {
-			//	                    "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Utterance"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "SlotPriorities": {
-			//	              "description": "List for slot priorities",
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "description": "The priority that Amazon Lex should use when eliciting slot values from a user.",
-			//	                "properties": {
-			//	                  "Priority": {
-			//	                    "description": "The priority that a slot should be elicited.",
-			//	                    "maximum": 100,
-			//	                    "minimum": 0,
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "SlotName": {
-			//	                    "description": "The name of the slot.",
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "SlotName",
-			//	                  "Priority"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "Slots": {
-			//	              "description": "List of slots",
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "description": "A slot is a variable needed to fulfill an intent, where an intent can require zero or more slots.",
-			//	                "properties": {
-			//	                  "Description": {
-			//	                    "description": "A description of the resource",
-			//	                    "maxLength": 200,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "MultipleValuesSetting": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Indicates whether a slot can return multiple values.",
-			//	                    "properties": {
-			//	                      "AllowMultipleValues": {
-			//	                        "type": "boolean"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "Name": {
-			//	                    "description": "Unique name for a resource.",
-			//	                    "maxLength": 100,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "ObfuscationSetting": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Determines whether Amazon Lex obscures slot values in conversation logs.",
-			//	                    "properties": {
-			//	                      "ObfuscationSettingType": {
-			//	                        "description": "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
-			//	                        "enum": [
-			//	                          "None",
-			//	                          "DefaultObfuscation"
-			//	                        ],
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "ObfuscationSettingType"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  },
-			//	                  "SlotTypeName": {
-			//	                    "description": "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "ValueElicitationSetting": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Settings that you can use for eliciting a slot value.",
-			//	                    "properties": {
-			//	                      "DefaultValueSpecification": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "A list of default values for a slot.",
-			//	                        "properties": {
-			//	                          "DefaultValueList": {
-			//	                            "description": "A list of slot default values",
-			//	                            "insertionOrder": false,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "The default value to use when a user doesn't provide a value for a slot.",
-			//	                              "properties": {
-			//	                                "DefaultValue": {
-			//	                                  "description": "The default value to use when a user doesn't provide a value for a slot.",
-			//	                                  "maxLength": 202,
-			//	                                  "minLength": 1,
-			//	                                  "type": "string"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "DefaultValue"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "maxItems": 10,
-			//	                            "type": "array"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "DefaultValueList"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      },
-			//	                      "PromptSpecification": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "The prompt that Amazon Lex uses to elicit the slot value from the user.",
-			//	                        "properties": {
-			//	                          "AllowInterrupt": {
-			//	                            "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                            "type": "boolean"
-			//	                          },
-			//	                          "MaxRetries": {
-			//	                            "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-			//	                            "maximum": 5,
-			//	                            "minimum": 0,
-			//	                            "type": "integer"
-			//	                          },
-			//	                          "MessageGroupsList": {
-			//	                            "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                            "insertionOrder": false,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                              "properties": {
-			//	                                "Message": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                  "properties": {
-			//	                                    "CustomPayload": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in a custom format defined by the client application.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The string that is sent to your application.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "ImageResponseCard": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                      "properties": {
-			//	                                        "Buttons": {
-			//	                                          "description": "A list of buttons that should be displayed on the response card.",
-			//	                                          "insertionOrder": false,
-			//	                                          "items": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                            "properties": {
-			//	                                              "Text": {
-			//	                                                "description": "The text that appears on the button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Value": {
-			//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                "maxLength": 50,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Text",
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "maxItems": 5,
-			//	                                          "type": "array"
-			//	                                        },
-			//	                                        "ImageUrl": {
-			//	                                          "description": "The URL of an image to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Subtitle": {
-			//	                                          "description": "The subtitle to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        },
-			//	                                        "Title": {
-			//	                                          "description": "The title to display on the response card.",
-			//	                                          "maxLength": 250,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Title"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "PlainTextMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in plain text format.",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The message to send to the user.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "SSMLMessage": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                      "properties": {
-			//	                                        "Value": {
-			//	                                          "description": "The SSML text that defines the prompt.",
-			//	                                          "maxLength": 1000,
-			//	                                          "minLength": 1,
-			//	                                          "type": "string"
-			//	                                        }
-			//	                                      },
-			//	                                      "required": [
-			//	                                        "Value"
-			//	                                      ],
-			//	                                      "type": "object"
-			//	                                    }
-			//	                                  },
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "Variations": {
-			//	                                  "description": "Message variations to send to the user.",
-			//	                                  "insertionOrder": false,
-			//	                                  "items": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                    "properties": {
-			//	                                      "CustomPayload": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "A message in a custom format defined by the client application.",
-			//	                                        "properties": {
-			//	                                          "Value": {
-			//	                                            "description": "The string that is sent to your application.",
-			//	                                            "maxLength": 1000,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "Value"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "ImageResponseCard": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                        "properties": {
-			//	                                          "Buttons": {
-			//	                                            "description": "A list of buttons that should be displayed on the response card.",
-			//	                                            "insertionOrder": false,
-			//	                                            "items": {
-			//	                                              "additionalProperties": false,
-			//	                                              "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                              "properties": {
-			//	                                                "Text": {
-			//	                                                  "description": "The text that appears on the button.",
-			//	                                                  "maxLength": 50,
-			//	                                                  "minLength": 1,
-			//	                                                  "type": "string"
-			//	                                                },
-			//	                                                "Value": {
-			//	                                                  "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                  "maxLength": 50,
-			//	                                                  "minLength": 1,
-			//	                                                  "type": "string"
-			//	                                                }
-			//	                                              },
-			//	                                              "required": [
-			//	                                                "Text",
-			//	                                                "Value"
-			//	                                              ],
-			//	                                              "type": "object"
-			//	                                            },
-			//	                                            "maxItems": 5,
-			//	                                            "type": "array"
-			//	                                          },
-			//	                                          "ImageUrl": {
-			//	                                            "description": "The URL of an image to display on the response card.",
-			//	                                            "maxLength": 250,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          },
-			//	                                          "Subtitle": {
-			//	                                            "description": "The subtitle to display on the response card.",
-			//	                                            "maxLength": 250,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          },
-			//	                                          "Title": {
-			//	                                            "description": "The title to display on the response card.",
-			//	                                            "maxLength": 250,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "Title"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "PlainTextMessage": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "A message in plain text format.",
-			//	                                        "properties": {
-			//	                                          "Value": {
-			//	                                            "description": "The message to send to the user.",
-			//	                                            "maxLength": 1000,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "Value"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "SSMLMessage": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                        "properties": {
-			//	                                          "Value": {
-			//	                                            "description": "The SSML text that defines the prompt.",
-			//	                                            "maxLength": 1000,
-			//	                                            "minLength": 1,
-			//	                                            "type": "string"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "Value"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      }
-			//	                                    },
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "maxItems": 2,
-			//	                                  "type": "array"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "Message"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "maxItems": 5,
-			//	                            "minItems": 1,
-			//	                            "type": "array"
-			//	                          },
-			//	                          "MessageSelectionStrategy": {
-			//	                            "description": "Indicates how a message is selected from a message group among retries.",
-			//	                            "enum": [
-			//	                              "Random",
-			//	                              "Ordered"
-			//	                            ],
-			//	                            "type": "string"
-			//	                          },
-			//	                          "PromptAttemptsSpecification": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "Specifies the advanced settings on each attempt of the prompt.",
-			//	                            "patternProperties": {
-			//	                              "": {
-			//	                                "additionalProperties": false,
-			//	                                "description": "Specifies the settings on a prompt attempt.",
-			//	                                "properties": {
-			//	                                  "AllowInterrupt": {
-			//	                                    "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-			//	                                    "type": "boolean"
-			//	                                  },
-			//	                                  "AllowedInputTypes": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "Specifies the allowed input types.",
-			//	                                    "properties": {
-			//	                                      "AllowAudioInput": {
-			//	                                        "description": "Indicates whether audio input is allowed.",
-			//	                                        "type": "boolean"
-			//	                                      },
-			//	                                      "AllowDTMFInput": {
-			//	                                        "description": "Indicates whether DTMF input is allowed.",
-			//	                                        "type": "boolean"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "AllowAudioInput",
-			//	                                      "AllowDTMFInput"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "AudioAndDTMFInputSpecification": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "Specifies the audio and DTMF input specification.",
-			//	                                    "properties": {
-			//	                                      "AudioSpecification": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "Specifies the audio input specifications.",
-			//	                                        "properties": {
-			//	                                          "EndTimeoutMs": {
-			//	                                            "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-			//	                                            "minimum": 1,
-			//	                                            "type": "integer"
-			//	                                          },
-			//	                                          "MaxLengthMs": {
-			//	                                            "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-			//	                                            "minimum": 1,
-			//	                                            "type": "integer"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "EndTimeoutMs",
-			//	                                          "MaxLengthMs"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "DTMFSpecification": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "Specifies the settings on DTMF input.",
-			//	                                        "properties": {
-			//	                                          "DeletionCharacter": {
-			//	                                            "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-			//	                                            "pattern": "^[A-D0-9#*]{1}$",
-			//	                                            "type": "string"
-			//	                                          },
-			//	                                          "EndCharacter": {
-			//	                                            "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-			//	                                            "pattern": "^[A-D0-9#*]{1}$",
-			//	                                            "type": "string"
-			//	                                          },
-			//	                                          "EndTimeoutMs": {
-			//	                                            "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-			//	                                            "minimum": 1,
-			//	                                            "type": "integer"
-			//	                                          },
-			//	                                          "MaxLength": {
-			//	                                            "description": "The maximum number of DTMF digits allowed in an utterance.",
-			//	                                            "maximum": 1024,
-			//	                                            "minimum": 1,
-			//	                                            "type": "integer"
-			//	                                          }
-			//	                                        },
-			//	                                        "required": [
-			//	                                          "DeletionCharacter",
-			//	                                          "EndCharacter",
-			//	                                          "EndTimeoutMs",
-			//	                                          "MaxLength"
-			//	                                        ],
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "StartTimeoutMs": {
-			//	                                        "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-			//	                                        "minimum": 1,
-			//	                                        "type": "integer"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "StartTimeoutMs"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  },
-			//	                                  "TextInputSpecification": {
-			//	                                    "additionalProperties": false,
-			//	                                    "description": "Specifies the text input specifications.",
-			//	                                    "properties": {
-			//	                                      "StartTimeoutMs": {
-			//	                                        "description": "Time for which a bot waits before re-prompting a customer for text input.",
-			//	                                        "minimum": 1,
-			//	                                        "type": "integer"
-			//	                                      }
-			//	                                    },
-			//	                                    "required": [
-			//	                                      "StartTimeoutMs"
-			//	                                    ],
-			//	                                    "type": "object"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "AllowedInputTypes"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              }
-			//	                            },
-			//	                            "type": "object"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "MessageGroupsList",
-			//	                          "MaxRetries"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      },
-			//	                      "SampleUtterances": {
-			//	                        "description": "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
-			//	                        "insertionOrder": false,
-			//	                        "items": {
-			//	                          "additionalProperties": false,
-			//	                          "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
-			//	                          "properties": {
-			//	                            "Utterance": {
-			//	                              "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-			//	                              "type": "string"
-			//	                            }
-			//	                          },
-			//	                          "required": [
-			//	                            "Utterance"
-			//	                          ],
-			//	                          "type": "object"
-			//	                        },
-			//	                        "type": "array"
-			//	                      },
-			//	                      "SlotConstraint": {
-			//	                        "description": "Specifies whether the slot is required or optional.",
-			//	                        "enum": [
-			//	                          "Required",
-			//	                          "Optional"
-			//	                        ],
-			//	                        "type": "string"
-			//	                      },
-			//	                      "WaitAndContinueSpecification": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
-			//	                        "properties": {
-			//	                          "ContinueResponse": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
-			//	                            "properties": {
-			//	                              "AllowInterrupt": {
-			//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                                "type": "boolean"
-			//	                              },
-			//	                              "MessageGroupsList": {
-			//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                                  "properties": {
-			//	                                    "Message": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                      "properties": {
-			//	                                        "CustomPayload": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in a custom format defined by the client application.",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The string that is sent to your application.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "ImageResponseCard": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                          "properties": {
-			//	                                            "Buttons": {
-			//	                                              "description": "A list of buttons that should be displayed on the response card.",
-			//	                                              "insertionOrder": false,
-			//	                                              "items": {
-			//	                                                "additionalProperties": false,
-			//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                                "properties": {
-			//	                                                  "Text": {
-			//	                                                    "description": "The text that appears on the button.",
-			//	                                                    "maxLength": 50,
-			//	                                                    "minLength": 1,
-			//	                                                    "type": "string"
-			//	                                                  },
-			//	                                                  "Value": {
-			//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                    "maxLength": 50,
-			//	                                                    "minLength": 1,
-			//	                                                    "type": "string"
-			//	                                                  }
-			//	                                                },
-			//	                                                "required": [
-			//	                                                  "Text",
-			//	                                                  "Value"
-			//	                                                ],
-			//	                                                "type": "object"
-			//	                                              },
-			//	                                              "maxItems": 5,
-			//	                                              "type": "array"
-			//	                                            },
-			//	                                            "ImageUrl": {
-			//	                                              "description": "The URL of an image to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Subtitle": {
-			//	                                              "description": "The subtitle to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Title": {
-			//	                                              "description": "The title to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Title"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "PlainTextMessage": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in plain text format.",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The message to send to the user.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "SSMLMessage": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The SSML text that defines the prompt.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        }
-			//	                                      },
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "Variations": {
-			//	                                      "description": "Message variations to send to the user.",
-			//	                                      "insertionOrder": false,
-			//	                                      "items": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                        "properties": {
-			//	                                          "CustomPayload": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in a custom format defined by the client application.",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The string that is sent to your application.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "ImageResponseCard": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                            "properties": {
-			//	                                              "Buttons": {
-			//	                                                "description": "A list of buttons that should be displayed on the response card.",
-			//	                                                "insertionOrder": false,
-			//	                                                "items": {
-			//	                                                  "additionalProperties": false,
-			//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                                  "properties": {
-			//	                                                    "Text": {
-			//	                                                      "description": "The text that appears on the button.",
-			//	                                                      "maxLength": 50,
-			//	                                                      "minLength": 1,
-			//	                                                      "type": "string"
-			//	                                                    },
-			//	                                                    "Value": {
-			//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                      "maxLength": 50,
-			//	                                                      "minLength": 1,
-			//	                                                      "type": "string"
-			//	                                                    }
-			//	                                                  },
-			//	                                                  "required": [
-			//	                                                    "Text",
-			//	                                                    "Value"
-			//	                                                  ],
-			//	                                                  "type": "object"
-			//	                                                },
-			//	                                                "maxItems": 5,
-			//	                                                "type": "array"
-			//	                                              },
-			//	                                              "ImageUrl": {
-			//	                                                "description": "The URL of an image to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Subtitle": {
-			//	                                                "description": "The subtitle to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Title": {
-			//	                                                "description": "The title to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Title"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "PlainTextMessage": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in plain text format.",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The message to send to the user.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "SSMLMessage": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The SSML text that defines the prompt.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          }
-			//	                                        },
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "maxItems": 2,
-			//	                                      "type": "array"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Message"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 5,
-			//	                                "minItems": 1,
-			//	                                "type": "array"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "MessageGroupsList"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          },
-			//	                          "IsActive": {
-			//	                            "description": "Specifies whether the bot will wait for a user to respond.",
-			//	                            "type": "boolean"
-			//	                          },
-			//	                          "StillWaitingResponse": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
-			//	                            "properties": {
-			//	                              "AllowInterrupt": {
-			//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                                "type": "boolean"
-			//	                              },
-			//	                              "FrequencyInSeconds": {
-			//	                                "description": "How often a message should be sent to the user in seconds.",
-			//	                                "maximum": 300,
-			//	                                "minimum": 1,
-			//	                                "type": "integer"
-			//	                              },
-			//	                              "MessageGroupsList": {
-			//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                                  "properties": {
-			//	                                    "Message": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                      "properties": {
-			//	                                        "CustomPayload": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in a custom format defined by the client application.",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The string that is sent to your application.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "ImageResponseCard": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                          "properties": {
-			//	                                            "Buttons": {
-			//	                                              "description": "A list of buttons that should be displayed on the response card.",
-			//	                                              "insertionOrder": false,
-			//	                                              "items": {
-			//	                                                "additionalProperties": false,
-			//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                                "properties": {
-			//	                                                  "Text": {
-			//	                                                    "description": "The text that appears on the button.",
-			//	                                                    "maxLength": 50,
-			//	                                                    "minLength": 1,
-			//	                                                    "type": "string"
-			//	                                                  },
-			//	                                                  "Value": {
-			//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                    "maxLength": 50,
-			//	                                                    "minLength": 1,
-			//	                                                    "type": "string"
-			//	                                                  }
-			//	                                                },
-			//	                                                "required": [
-			//	                                                  "Text",
-			//	                                                  "Value"
-			//	                                                ],
-			//	                                                "type": "object"
-			//	                                              },
-			//	                                              "maxItems": 5,
-			//	                                              "type": "array"
-			//	                                            },
-			//	                                            "ImageUrl": {
-			//	                                              "description": "The URL of an image to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Subtitle": {
-			//	                                              "description": "The subtitle to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Title": {
-			//	                                              "description": "The title to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Title"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "PlainTextMessage": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in plain text format.",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The message to send to the user.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "SSMLMessage": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The SSML text that defines the prompt.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        }
-			//	                                      },
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "Variations": {
-			//	                                      "description": "Message variations to send to the user.",
-			//	                                      "insertionOrder": false,
-			//	                                      "items": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                        "properties": {
-			//	                                          "CustomPayload": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in a custom format defined by the client application.",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The string that is sent to your application.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "ImageResponseCard": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                            "properties": {
-			//	                                              "Buttons": {
-			//	                                                "description": "A list of buttons that should be displayed on the response card.",
-			//	                                                "insertionOrder": false,
-			//	                                                "items": {
-			//	                                                  "additionalProperties": false,
-			//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                                  "properties": {
-			//	                                                    "Text": {
-			//	                                                      "description": "The text that appears on the button.",
-			//	                                                      "maxLength": 50,
-			//	                                                      "minLength": 1,
-			//	                                                      "type": "string"
-			//	                                                    },
-			//	                                                    "Value": {
-			//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                      "maxLength": 50,
-			//	                                                      "minLength": 1,
-			//	                                                      "type": "string"
-			//	                                                    }
-			//	                                                  },
-			//	                                                  "required": [
-			//	                                                    "Text",
-			//	                                                    "Value"
-			//	                                                  ],
-			//	                                                  "type": "object"
-			//	                                                },
-			//	                                                "maxItems": 5,
-			//	                                                "type": "array"
-			//	                                              },
-			//	                                              "ImageUrl": {
-			//	                                                "description": "The URL of an image to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Subtitle": {
-			//	                                                "description": "The subtitle to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Title": {
-			//	                                                "description": "The title to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Title"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "PlainTextMessage": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in plain text format.",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The message to send to the user.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "SSMLMessage": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The SSML text that defines the prompt.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          }
-			//	                                        },
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "maxItems": 2,
-			//	                                      "type": "array"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Message"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 5,
-			//	                                "minItems": 1,
-			//	                                "type": "array"
-			//	                              },
-			//	                              "TimeoutInSeconds": {
-			//	                                "description": "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-			//	                                "maximum": 900,
-			//	                                "minimum": 1,
-			//	                                "type": "integer"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "MessageGroupsList",
-			//	                              "FrequencyInSeconds",
-			//	                              "TimeoutInSeconds"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          },
-			//	                          "WaitingResponse": {
-			//	                            "additionalProperties": false,
-			//	                            "description": "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
-			//	                            "properties": {
-			//	                              "AllowInterrupt": {
-			//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
-			//	                                "type": "boolean"
-			//	                              },
-			//	                              "MessageGroupsList": {
-			//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-			//	                                "insertionOrder": false,
-			//	                                "items": {
-			//	                                  "additionalProperties": false,
-			//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
-			//	                                  "properties": {
-			//	                                    "Message": {
-			//	                                      "additionalProperties": false,
-			//	                                      "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                      "properties": {
-			//	                                        "CustomPayload": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in a custom format defined by the client application.",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The string that is sent to your application.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "ImageResponseCard": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                          "properties": {
-			//	                                            "Buttons": {
-			//	                                              "description": "A list of buttons that should be displayed on the response card.",
-			//	                                              "insertionOrder": false,
-			//	                                              "items": {
-			//	                                                "additionalProperties": false,
-			//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                                "properties": {
-			//	                                                  "Text": {
-			//	                                                    "description": "The text that appears on the button.",
-			//	                                                    "maxLength": 50,
-			//	                                                    "minLength": 1,
-			//	                                                    "type": "string"
-			//	                                                  },
-			//	                                                  "Value": {
-			//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                    "maxLength": 50,
-			//	                                                    "minLength": 1,
-			//	                                                    "type": "string"
-			//	                                                  }
-			//	                                                },
-			//	                                                "required": [
-			//	                                                  "Text",
-			//	                                                  "Value"
-			//	                                                ],
-			//	                                                "type": "object"
-			//	                                              },
-			//	                                              "maxItems": 5,
-			//	                                              "type": "array"
-			//	                                            },
-			//	                                            "ImageUrl": {
-			//	                                              "description": "The URL of an image to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Subtitle": {
-			//	                                              "description": "The subtitle to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            },
-			//	                                            "Title": {
-			//	                                              "description": "The title to display on the response card.",
-			//	                                              "maxLength": 250,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Title"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "PlainTextMessage": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in plain text format.",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The message to send to the user.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        },
-			//	                                        "SSMLMessage": {
-			//	                                          "additionalProperties": false,
-			//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                          "properties": {
-			//	                                            "Value": {
-			//	                                              "description": "The SSML text that defines the prompt.",
-			//	                                              "maxLength": 1000,
-			//	                                              "minLength": 1,
-			//	                                              "type": "string"
-			//	                                            }
-			//	                                          },
-			//	                                          "required": [
-			//	                                            "Value"
-			//	                                          ],
-			//	                                          "type": "object"
-			//	                                        }
-			//	                                      },
-			//	                                      "type": "object"
-			//	                                    },
-			//	                                    "Variations": {
-			//	                                      "description": "Message variations to send to the user.",
-			//	                                      "insertionOrder": false,
-			//	                                      "items": {
-			//	                                        "additionalProperties": false,
-			//	                                        "description": "The primary message that Amazon Lex should send to the user.",
-			//	                                        "properties": {
-			//	                                          "CustomPayload": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in a custom format defined by the client application.",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The string that is sent to your application.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "ImageResponseCard": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message that defines a response card that the client application can show to the user.",
-			//	                                            "properties": {
-			//	                                              "Buttons": {
-			//	                                                "description": "A list of buttons that should be displayed on the response card.",
-			//	                                                "insertionOrder": false,
-			//	                                                "items": {
-			//	                                                  "additionalProperties": false,
-			//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
-			//	                                                  "properties": {
-			//	                                                    "Text": {
-			//	                                                      "description": "The text that appears on the button.",
-			//	                                                      "maxLength": 50,
-			//	                                                      "minLength": 1,
-			//	                                                      "type": "string"
-			//	                                                    },
-			//	                                                    "Value": {
-			//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
-			//	                                                      "maxLength": 50,
-			//	                                                      "minLength": 1,
-			//	                                                      "type": "string"
-			//	                                                    }
-			//	                                                  },
-			//	                                                  "required": [
-			//	                                                    "Text",
-			//	                                                    "Value"
-			//	                                                  ],
-			//	                                                  "type": "object"
-			//	                                                },
-			//	                                                "maxItems": 5,
-			//	                                                "type": "array"
-			//	                                              },
-			//	                                              "ImageUrl": {
-			//	                                                "description": "The URL of an image to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Subtitle": {
-			//	                                                "description": "The subtitle to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              },
-			//	                                              "Title": {
-			//	                                                "description": "The title to display on the response card.",
-			//	                                                "maxLength": 250,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Title"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "PlainTextMessage": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in plain text format.",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The message to send to the user.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          },
-			//	                                          "SSMLMessage": {
-			//	                                            "additionalProperties": false,
-			//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
-			//	                                            "properties": {
-			//	                                              "Value": {
-			//	                                                "description": "The SSML text that defines the prompt.",
-			//	                                                "maxLength": 1000,
-			//	                                                "minLength": 1,
-			//	                                                "type": "string"
-			//	                                              }
-			//	                                            },
-			//	                                            "required": [
-			//	                                              "Value"
-			//	                                            ],
-			//	                                            "type": "object"
-			//	                                          }
-			//	                                        },
-			//	                                        "type": "object"
-			//	                                      },
-			//	                                      "maxItems": 2,
-			//	                                      "type": "array"
-			//	                                    }
-			//	                                  },
-			//	                                  "required": [
-			//	                                    "Message"
-			//	                                  ],
-			//	                                  "type": "object"
-			//	                                },
-			//	                                "maxItems": 5,
-			//	                                "minItems": 1,
-			//	                                "type": "array"
-			//	                              }
-			//	                            },
-			//	                            "required": [
-			//	                              "MessageGroupsList"
-			//	                            ],
-			//	                            "type": "object"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "WaitingResponse",
-			//	                          "ContinueResponse"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "SlotConstraint"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Name",
-			//	                  "SlotTypeName",
-			//	                  "ValueElicitationSetting"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 100,
-			//	              "type": "array",
-			//	              "uniqueItems": true
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Name"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 1000,
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "LocaleId": {
-			//	        "description": "The identifier of the language and locale that the bot will be used in.",
-			//	        "type": "string"
-			//	      },
-			//	      "NluConfidenceThreshold": {
-			//	        "description": "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-			//	        "maximum": 1,
-			//	        "minimum": 0,
-			//	        "type": "number"
-			//	      },
-			//	      "SlotTypes": {
-			//	        "description": "List of SlotTypes",
-			//	        "insertionOrder": false,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "A custom, extended built-in or a grammar slot type.",
-			//	          "properties": {
-			//	            "Description": {
-			//	              "description": "A description of the resource",
-			//	              "maxLength": 200,
-			//	              "type": "string"
-			//	            },
-			//	            "ExternalSourceSetting": {
-			//	              "additionalProperties": false,
-			//	              "description": "Provides information about the external source of the slot type's definition.",
-			//	              "properties": {
-			//	                "GrammarSlotTypeSetting": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "Settings required for a slot type based on a grammar that you provide.",
-			//	                  "properties": {
-			//	                    "Source": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
-			//	                      "properties": {
-			//	                        "KmsKeyArn": {
-			//	                          "description": "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
-			//	                          "maxLength": 2048,
-			//	                          "minLength": 20,
-			//	                          "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
-			//	                          "type": "string"
-			//	                        },
-			//	                        "S3BucketName": {
-			//	                          "description": "The name of the S3 bucket that contains the grammar source.",
-			//	                          "maxLength": 63,
-			//	                          "minLength": 3,
-			//	                          "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//	                          "type": "string"
-			//	                        },
-			//	                        "S3ObjectKey": {
-			//	                          "description": "The path to the grammar in the S3 bucket.",
-			//	                          "maxLength": 1024,
-			//	                          "minLength": 1,
-			//	                          "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "S3BucketName",
-			//	                        "S3ObjectKey"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "Name": {
-			//	              "description": "Unique name for a resource.",
-			//	              "maxLength": 100,
-			//	              "minLength": 1,
-			//	              "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//	              "type": "string"
-			//	            },
-			//	            "ParentSlotTypeSignature": {
-			//	              "description": "The built-in slot type used as a parent of this slot type.",
-			//	              "type": "string"
-			//	            },
-			//	            "SlotTypeValues": {
-			//	              "description": "A List of slot type values",
-			//	              "insertionOrder": false,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "description": "Value that the slot type can take.",
-			//	                "properties": {
-			//	                  "SampleValue": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Defines one of the values for a slot type.",
-			//	                    "properties": {
-			//	                      "Value": {
-			//	                        "description": "The value that can be used for a slot type.",
-			//	                        "maxLength": 140,
-			//	                        "minLength": 1,
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "Value"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  },
-			//	                  "Synonyms": {
-			//	                    "description": "Additional values related to the slot type entry.",
-			//	                    "insertionOrder": false,
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "description": "Defines one of the values for a slot type.",
-			//	                      "properties": {
-			//	                        "Value": {
-			//	                          "description": "The value that can be used for a slot type.",
-			//	                          "maxLength": 140,
-			//	                          "minLength": 1,
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Value"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "maxItems": 10000,
-			//	                    "type": "array"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "SampleValue"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "maxItems": 10000,
-			//	              "type": "array"
-			//	            },
-			//	            "ValueSelectionSetting": {
-			//	              "additionalProperties": false,
-			//	              "description": "Contains settings used by Amazon Lex to select a slot value.",
-			//	              "properties": {
-			//	                "AdvancedRecognitionSetting": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "Provides settings that enable advanced recognition settings for slot values.",
-			//	                  "properties": {
-			//	                    "AudioRecognitionStrategy": {
-			//	                      "description": "Enables using slot values as a custom vocabulary when recognizing user utterances.",
-			//	                      "enum": [
-			//	                        "UseSlotValuesAsCustomVocabulary"
-			//	                      ],
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "RegexFilter": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A regular expression used to validate the value of a slot.",
-			//	                  "properties": {
-			//	                    "Pattern": {
-			//	                      "description": "Regex pattern",
-			//	                      "maxLength": 300,
-			//	                      "minLength": 1,
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Pattern"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "ResolutionStrategy": {
-			//	                  "enum": [
-			//	                    "ORIGINAL_VALUE",
-			//	                    "TOP_RESOLUTION"
-			//	                  ],
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "ResolutionStrategy"
-			//	              ],
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Name"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 100,
-			//	        "type": "array",
-			//	        "uniqueItems": true
-			//	      },
-			//	      "VoiceSettings": {
-			//	        "additionalProperties": false,
-			//	        "description": "Settings for using an Amazon Polly voice to communicate with a user.",
-			//	        "properties": {
-			//	          "Engine": {
-			//	            "description": "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
-			//	            "enum": [
-			//	              "standard",
-			//	              "neural"
-			//	            ],
-			//	            "type": "string"
-			//	          },
-			//	          "VoiceId": {
-			//	            "description": "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "VoiceId"
-			//	        ],
-			//	        "type": "object"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "LocaleId",
-			//	      "NluConfidenceThreshold"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "List of bot locales",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"custom_vocabulary": {
-						// Property: CustomVocabulary
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: BotLocales
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of bot locales",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A locale in the bot, which contains the intents and slot types that the bot uses in conversations with users in the specified language and locale.",
+		//	    "properties": {
+		//	      "CustomVocabulary": {
+		//	        "additionalProperties": false,
+		//	        "description": "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
+		//	        "properties": {
+		//	          "CustomVocabularyItems": {
+		//	            "insertionOrder": false,
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "description": "A custom vocabulary item that contains the phrase to recognize and a weight to give the boost.",
+		//	              "properties": {
+		//	                "Phrase": {
+		//	                  "description": "Phrase that should be recognized.",
+		//	                  "maxLength": 100,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "Weight": {
+		//	                  "description": "The degree to which the phrase recognition is boosted.",
+		//	                  "maximum": 3,
+		//	                  "minimum": 1,
+		//	                  "type": "integer"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Phrase"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "maxItems": 500,
+		//	            "type": "array",
+		//	            "uniqueItems": true
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "CustomVocabularyItems"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description of the resource",
+		//	        "maxLength": 200,
+		//	        "type": "string"
+		//	      },
+		//	      "Intents": {
+		//	        "description": "List of intents",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "An intent represents an action that the user wants to perform. You create a bot to support one or more related intents.",
+		//	          "properties": {
+		//	            "Description": {
+		//	              "description": "A description of the resource",
+		//	              "maxLength": 200,
+		//	              "type": "string"
+		//	            },
+		//	            "DialogCodeHook": {
+		//	              "additionalProperties": false,
+		//	              "description": "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
+		//	              "properties": {
+		//	                "Enabled": {
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Enabled"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "FulfillmentCodeHook": {
+		//	              "additionalProperties": false,
+		//	              "description": "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
+		//	              "properties": {
+		//	                "Enabled": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "FulfillmentUpdatesSpecification": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Provides information for updating the user on the progress of fulfilling an intent.",
+		//	                  "properties": {
+		//	                    "Active": {
+		//	                      "description": "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
+		//	                      "type": "boolean"
+		//	                    },
+		//	                    "StartResponse": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
+		//	                      "properties": {
+		//	                        "AllowInterrupt": {
+		//	                          "description": "Determines whether the user can interrupt the start message while it is playing.",
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "DelayInSeconds": {
+		//	                          "description": "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
+		//	                          "maximum": 900,
+		//	                          "minimum": 1,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "MessageGroups": {
+		//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                            "properties": {
+		//	                              "Message": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                "properties": {
+		//	                                  "CustomPayload": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in a custom format defined by the client application.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The string that is sent to your application.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "ImageResponseCard": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                    "properties": {
+		//	                                      "Buttons": {
+		//	                                        "description": "A list of buttons that should be displayed on the response card.",
+		//	                                        "insertionOrder": false,
+		//	                                        "items": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                          "properties": {
+		//	                                            "Text": {
+		//	                                              "description": "The text that appears on the button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Value": {
+		//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Text",
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "maxItems": 5,
+		//	                                        "type": "array"
+		//	                                      },
+		//	                                      "ImageUrl": {
+		//	                                        "description": "The URL of an image to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Subtitle": {
+		//	                                        "description": "The subtitle to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Title": {
+		//	                                        "description": "The title to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Title"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "PlainTextMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in plain text format.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The message to send to the user.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "SSMLMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The SSML text that defines the prompt.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "Variations": {
+		//	                                "description": "Message variations to send to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                  "properties": {
+		//	                                    "CustomPayload": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in a custom format defined by the client application.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The string that is sent to your application.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "ImageResponseCard": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                      "properties": {
+		//	                                        "Buttons": {
+		//	                                          "description": "A list of buttons that should be displayed on the response card.",
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                            "properties": {
+		//	                                              "Text": {
+		//	                                                "description": "The text that appears on the button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Value": {
+		//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Text",
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "maxItems": 5,
+		//	                                          "type": "array"
+		//	                                        },
+		//	                                        "ImageUrl": {
+		//	                                          "description": "The URL of an image to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Subtitle": {
+		//	                                          "description": "The subtitle to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Title": {
+		//	                                          "description": "The title to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Title"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "PlainTextMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in plain text format.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The message to send to the user.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "SSMLMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The SSML text that defines the prompt.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 2,
+		//	                                "type": "array"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Message"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 5,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "DelayInSeconds",
+		//	                        "MessageGroups"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "TimeoutInSeconds": {
+		//	                      "description": "The length of time that the fulfillment Lambda function should run before it times out.",
+		//	                      "maximum": 900,
+		//	                      "minimum": 1,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "UpdateResponse": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
+		//	                      "properties": {
+		//	                        "AllowInterrupt": {
+		//	                          "description": "Determines whether the user can interrupt an update message while it is playing.",
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "FrequencyInSeconds": {
+		//	                          "description": "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
+		//	                          "maximum": 900,
+		//	                          "minimum": 1,
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "MessageGroups": {
+		//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                            "properties": {
+		//	                              "Message": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                "properties": {
+		//	                                  "CustomPayload": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in a custom format defined by the client application.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The string that is sent to your application.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "ImageResponseCard": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                    "properties": {
+		//	                                      "Buttons": {
+		//	                                        "description": "A list of buttons that should be displayed on the response card.",
+		//	                                        "insertionOrder": false,
+		//	                                        "items": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                          "properties": {
+		//	                                            "Text": {
+		//	                                              "description": "The text that appears on the button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Value": {
+		//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Text",
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "maxItems": 5,
+		//	                                        "type": "array"
+		//	                                      },
+		//	                                      "ImageUrl": {
+		//	                                        "description": "The URL of an image to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Subtitle": {
+		//	                                        "description": "The subtitle to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Title": {
+		//	                                        "description": "The title to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Title"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "PlainTextMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in plain text format.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The message to send to the user.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "SSMLMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The SSML text that defines the prompt.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "Variations": {
+		//	                                "description": "Message variations to send to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                  "properties": {
+		//	                                    "CustomPayload": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in a custom format defined by the client application.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The string that is sent to your application.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "ImageResponseCard": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                      "properties": {
+		//	                                        "Buttons": {
+		//	                                          "description": "A list of buttons that should be displayed on the response card.",
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                            "properties": {
+		//	                                              "Text": {
+		//	                                                "description": "The text that appears on the button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Value": {
+		//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Text",
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "maxItems": 5,
+		//	                                          "type": "array"
+		//	                                        },
+		//	                                        "ImageUrl": {
+		//	                                          "description": "The URL of an image to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Subtitle": {
+		//	                                          "description": "The subtitle to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Title": {
+		//	                                          "description": "The title to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Title"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "PlainTextMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in plain text format.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The message to send to the user.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "SSMLMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The SSML text that defines the prompt.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 2,
+		//	                                "type": "array"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Message"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 5,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "FrequencyInSeconds",
+		//	                        "MessageGroups"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Active"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "PostFulfillmentStatusSpecification": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Provides information for updating the user on the progress of fulfilling an intent.",
+		//	                  "properties": {
+		//	                    "FailureResponse": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+		//	                      "properties": {
+		//	                        "AllowInterrupt": {
+		//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "MessageGroupsList": {
+		//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                            "properties": {
+		//	                              "Message": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                "properties": {
+		//	                                  "CustomPayload": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in a custom format defined by the client application.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The string that is sent to your application.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "ImageResponseCard": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                    "properties": {
+		//	                                      "Buttons": {
+		//	                                        "description": "A list of buttons that should be displayed on the response card.",
+		//	                                        "insertionOrder": false,
+		//	                                        "items": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                          "properties": {
+		//	                                            "Text": {
+		//	                                              "description": "The text that appears on the button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Value": {
+		//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Text",
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "maxItems": 5,
+		//	                                        "type": "array"
+		//	                                      },
+		//	                                      "ImageUrl": {
+		//	                                        "description": "The URL of an image to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Subtitle": {
+		//	                                        "description": "The subtitle to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Title": {
+		//	                                        "description": "The title to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Title"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "PlainTextMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in plain text format.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The message to send to the user.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "SSMLMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The SSML text that defines the prompt.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "Variations": {
+		//	                                "description": "Message variations to send to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                  "properties": {
+		//	                                    "CustomPayload": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in a custom format defined by the client application.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The string that is sent to your application.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "ImageResponseCard": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                      "properties": {
+		//	                                        "Buttons": {
+		//	                                          "description": "A list of buttons that should be displayed on the response card.",
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                            "properties": {
+		//	                                              "Text": {
+		//	                                                "description": "The text that appears on the button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Value": {
+		//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Text",
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "maxItems": 5,
+		//	                                          "type": "array"
+		//	                                        },
+		//	                                        "ImageUrl": {
+		//	                                          "description": "The URL of an image to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Subtitle": {
+		//	                                          "description": "The subtitle to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Title": {
+		//	                                          "description": "The title to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Title"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "PlainTextMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in plain text format.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The message to send to the user.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "SSMLMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The SSML text that defines the prompt.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 2,
+		//	                                "type": "array"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Message"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 5,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "MessageGroupsList"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "SuccessResponse": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+		//	                      "properties": {
+		//	                        "AllowInterrupt": {
+		//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "MessageGroupsList": {
+		//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                            "properties": {
+		//	                              "Message": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                "properties": {
+		//	                                  "CustomPayload": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in a custom format defined by the client application.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The string that is sent to your application.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "ImageResponseCard": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                    "properties": {
+		//	                                      "Buttons": {
+		//	                                        "description": "A list of buttons that should be displayed on the response card.",
+		//	                                        "insertionOrder": false,
+		//	                                        "items": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                          "properties": {
+		//	                                            "Text": {
+		//	                                              "description": "The text that appears on the button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Value": {
+		//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Text",
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "maxItems": 5,
+		//	                                        "type": "array"
+		//	                                      },
+		//	                                      "ImageUrl": {
+		//	                                        "description": "The URL of an image to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Subtitle": {
+		//	                                        "description": "The subtitle to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Title": {
+		//	                                        "description": "The title to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Title"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "PlainTextMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in plain text format.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The message to send to the user.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "SSMLMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The SSML text that defines the prompt.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "Variations": {
+		//	                                "description": "Message variations to send to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                  "properties": {
+		//	                                    "CustomPayload": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in a custom format defined by the client application.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The string that is sent to your application.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "ImageResponseCard": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                      "properties": {
+		//	                                        "Buttons": {
+		//	                                          "description": "A list of buttons that should be displayed on the response card.",
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                            "properties": {
+		//	                                              "Text": {
+		//	                                                "description": "The text that appears on the button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Value": {
+		//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Text",
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "maxItems": 5,
+		//	                                          "type": "array"
+		//	                                        },
+		//	                                        "ImageUrl": {
+		//	                                          "description": "The URL of an image to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Subtitle": {
+		//	                                          "description": "The subtitle to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Title": {
+		//	                                          "description": "The title to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Title"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "PlainTextMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in plain text format.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The message to send to the user.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "SSMLMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The SSML text that defines the prompt.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 2,
+		//	                                "type": "array"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Message"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 5,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "MessageGroupsList"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "TimeoutResponse": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+		//	                      "properties": {
+		//	                        "AllowInterrupt": {
+		//	                          "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                          "type": "boolean"
+		//	                        },
+		//	                        "MessageGroupsList": {
+		//	                          "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                          "insertionOrder": false,
+		//	                          "items": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                            "properties": {
+		//	                              "Message": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                "properties": {
+		//	                                  "CustomPayload": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in a custom format defined by the client application.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The string that is sent to your application.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "ImageResponseCard": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                    "properties": {
+		//	                                      "Buttons": {
+		//	                                        "description": "A list of buttons that should be displayed on the response card.",
+		//	                                        "insertionOrder": false,
+		//	                                        "items": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                          "properties": {
+		//	                                            "Text": {
+		//	                                              "description": "The text that appears on the button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Value": {
+		//	                                              "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                              "maxLength": 50,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Text",
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "maxItems": 5,
+		//	                                        "type": "array"
+		//	                                      },
+		//	                                      "ImageUrl": {
+		//	                                        "description": "The URL of an image to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Subtitle": {
+		//	                                        "description": "The subtitle to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      },
+		//	                                      "Title": {
+		//	                                        "description": "The title to display on the response card.",
+		//	                                        "maxLength": 250,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Title"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "PlainTextMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in plain text format.",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The message to send to the user.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "SSMLMessage": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                    "properties": {
+		//	                                      "Value": {
+		//	                                        "description": "The SSML text that defines the prompt.",
+		//	                                        "maxLength": 1000,
+		//	                                        "minLength": 1,
+		//	                                        "type": "string"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "Value"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "type": "object"
+		//	                              },
+		//	                              "Variations": {
+		//	                                "description": "Message variations to send to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                  "properties": {
+		//	                                    "CustomPayload": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in a custom format defined by the client application.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The string that is sent to your application.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "ImageResponseCard": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                      "properties": {
+		//	                                        "Buttons": {
+		//	                                          "description": "A list of buttons that should be displayed on the response card.",
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                            "properties": {
+		//	                                              "Text": {
+		//	                                                "description": "The text that appears on the button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Value": {
+		//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Text",
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "maxItems": 5,
+		//	                                          "type": "array"
+		//	                                        },
+		//	                                        "ImageUrl": {
+		//	                                          "description": "The URL of an image to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Subtitle": {
+		//	                                          "description": "The subtitle to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Title": {
+		//	                                          "description": "The title to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Title"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "PlainTextMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in plain text format.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The message to send to the user.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "SSMLMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The SSML text that defines the prompt.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 2,
+		//	                                "type": "array"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "Message"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "maxItems": 5,
+		//	                          "minItems": 1,
+		//	                          "type": "array"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "MessageGroupsList"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Enabled"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "InputContexts": {
+		//	              "description": "The list of input contexts specified for the intent.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "InputContext specified for the intent.",
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "description": "The name of the context.",
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Name"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 5,
+		//	              "type": "array"
+		//	            },
+		//	            "IntentClosingSetting": {
+		//	              "additionalProperties": false,
+		//	              "description": "Response that Amazon Lex sends to the user when the intent is closed.",
+		//	              "properties": {
+		//	                "ClosingResponse": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+		//	                  "properties": {
+		//	                    "AllowInterrupt": {
+		//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                      "type": "boolean"
+		//	                    },
+		//	                    "MessageGroupsList": {
+		//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                        "properties": {
+		//	                          "Message": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The primary message that Amazon Lex should send to the user.",
+		//	                            "properties": {
+		//	                              "CustomPayload": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in a custom format defined by the client application.",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The string that is sent to your application.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "ImageResponseCard": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                "properties": {
+		//	                                  "Buttons": {
+		//	                                    "description": "A list of buttons that should be displayed on the response card.",
+		//	                                    "insertionOrder": false,
+		//	                                    "items": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                      "properties": {
+		//	                                        "Text": {
+		//	                                          "description": "The text that appears on the button.",
+		//	                                          "maxLength": 50,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Value": {
+		//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                          "maxLength": 50,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Text",
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "maxItems": 5,
+		//	                                    "type": "array"
+		//	                                  },
+		//	                                  "ImageUrl": {
+		//	                                    "description": "The URL of an image to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Subtitle": {
+		//	                                    "description": "The subtitle to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Title": {
+		//	                                    "description": "The title to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Title"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "PlainTextMessage": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in plain text format.",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The message to send to the user.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "SSMLMessage": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The SSML text that defines the prompt.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              }
+		//	                            },
+		//	                            "type": "object"
+		//	                          },
+		//	                          "Variations": {
+		//	                            "description": "Message variations to send to the user.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "The primary message that Amazon Lex should send to the user.",
+		//	                              "properties": {
+		//	                                "CustomPayload": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in a custom format defined by the client application.",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The string that is sent to your application.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "ImageResponseCard": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                  "properties": {
+		//	                                    "Buttons": {
+		//	                                      "description": "A list of buttons that should be displayed on the response card.",
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                        "properties": {
+		//	                                          "Text": {
+		//	                                            "description": "The text that appears on the button.",
+		//	                                            "maxLength": 50,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "Value": {
+		//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                            "maxLength": 50,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "Text",
+		//	                                          "Value"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "maxItems": 5,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "ImageUrl": {
+		//	                                      "description": "The URL of an image to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Subtitle": {
+		//	                                      "description": "The subtitle to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Title": {
+		//	                                      "description": "The title to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Title"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "PlainTextMessage": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in plain text format.",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The message to send to the user.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "SSMLMessage": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The SSML text that defines the prompt.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "maxItems": 2,
+		//	                            "type": "array"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Message"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 5,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "MessageGroupsList"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "IsActive": {
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ClosingResponse"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "IntentConfirmationSetting": {
+		//	              "additionalProperties": false,
+		//	              "description": "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
+		//	              "properties": {
+		//	                "DeclinationResponse": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A list of message groups that Amazon Lex uses to respond the user input.",
+		//	                  "properties": {
+		//	                    "AllowInterrupt": {
+		//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                      "type": "boolean"
+		//	                    },
+		//	                    "MessageGroupsList": {
+		//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                        "properties": {
+		//	                          "Message": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The primary message that Amazon Lex should send to the user.",
+		//	                            "properties": {
+		//	                              "CustomPayload": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in a custom format defined by the client application.",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The string that is sent to your application.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "ImageResponseCard": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                "properties": {
+		//	                                  "Buttons": {
+		//	                                    "description": "A list of buttons that should be displayed on the response card.",
+		//	                                    "insertionOrder": false,
+		//	                                    "items": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                      "properties": {
+		//	                                        "Text": {
+		//	                                          "description": "The text that appears on the button.",
+		//	                                          "maxLength": 50,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Value": {
+		//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                          "maxLength": 50,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Text",
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "maxItems": 5,
+		//	                                    "type": "array"
+		//	                                  },
+		//	                                  "ImageUrl": {
+		//	                                    "description": "The URL of an image to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Subtitle": {
+		//	                                    "description": "The subtitle to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Title": {
+		//	                                    "description": "The title to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Title"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "PlainTextMessage": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in plain text format.",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The message to send to the user.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "SSMLMessage": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The SSML text that defines the prompt.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              }
+		//	                            },
+		//	                            "type": "object"
+		//	                          },
+		//	                          "Variations": {
+		//	                            "description": "Message variations to send to the user.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "The primary message that Amazon Lex should send to the user.",
+		//	                              "properties": {
+		//	                                "CustomPayload": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in a custom format defined by the client application.",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The string that is sent to your application.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "ImageResponseCard": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                  "properties": {
+		//	                                    "Buttons": {
+		//	                                      "description": "A list of buttons that should be displayed on the response card.",
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                        "properties": {
+		//	                                          "Text": {
+		//	                                            "description": "The text that appears on the button.",
+		//	                                            "maxLength": 50,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "Value": {
+		//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                            "maxLength": 50,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "Text",
+		//	                                          "Value"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "maxItems": 5,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "ImageUrl": {
+		//	                                      "description": "The URL of an image to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Subtitle": {
+		//	                                      "description": "The subtitle to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Title": {
+		//	                                      "description": "The title to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Title"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "PlainTextMessage": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in plain text format.",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The message to send to the user.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "SSMLMessage": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The SSML text that defines the prompt.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "maxItems": 2,
+		//	                            "type": "array"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Message"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 5,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "MessageGroupsList"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "IsActive": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "PromptSpecification": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Prompts the user to confirm the intent.",
+		//	                  "properties": {
+		//	                    "AllowInterrupt": {
+		//	                      "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                      "type": "boolean"
+		//	                    },
+		//	                    "MaxRetries": {
+		//	                      "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+		//	                      "maximum": 5,
+		//	                      "minimum": 0,
+		//	                      "type": "integer"
+		//	                    },
+		//	                    "MessageGroupsList": {
+		//	                      "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                      "insertionOrder": false,
+		//	                      "items": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                        "properties": {
+		//	                          "Message": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The primary message that Amazon Lex should send to the user.",
+		//	                            "properties": {
+		//	                              "CustomPayload": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in a custom format defined by the client application.",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The string that is sent to your application.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "ImageResponseCard": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                "properties": {
+		//	                                  "Buttons": {
+		//	                                    "description": "A list of buttons that should be displayed on the response card.",
+		//	                                    "insertionOrder": false,
+		//	                                    "items": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                      "properties": {
+		//	                                        "Text": {
+		//	                                          "description": "The text that appears on the button.",
+		//	                                          "maxLength": 50,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Value": {
+		//	                                          "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                          "maxLength": 50,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Text",
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "maxItems": 5,
+		//	                                    "type": "array"
+		//	                                  },
+		//	                                  "ImageUrl": {
+		//	                                    "description": "The URL of an image to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Subtitle": {
+		//	                                    "description": "The subtitle to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Title": {
+		//	                                    "description": "The title to display on the response card.",
+		//	                                    "maxLength": 250,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Title"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "PlainTextMessage": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in plain text format.",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The message to send to the user.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "SSMLMessage": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                "properties": {
+		//	                                  "Value": {
+		//	                                    "description": "The SSML text that defines the prompt.",
+		//	                                    "maxLength": 1000,
+		//	                                    "minLength": 1,
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              }
+		//	                            },
+		//	                            "type": "object"
+		//	                          },
+		//	                          "Variations": {
+		//	                            "description": "Message variations to send to the user.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "The primary message that Amazon Lex should send to the user.",
+		//	                              "properties": {
+		//	                                "CustomPayload": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in a custom format defined by the client application.",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The string that is sent to your application.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "ImageResponseCard": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                  "properties": {
+		//	                                    "Buttons": {
+		//	                                      "description": "A list of buttons that should be displayed on the response card.",
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                        "properties": {
+		//	                                          "Text": {
+		//	                                            "description": "The text that appears on the button.",
+		//	                                            "maxLength": 50,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "Value": {
+		//	                                            "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                            "maxLength": 50,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "Text",
+		//	                                          "Value"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "maxItems": 5,
+		//	                                      "type": "array"
+		//	                                    },
+		//	                                    "ImageUrl": {
+		//	                                      "description": "The URL of an image to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Subtitle": {
+		//	                                      "description": "The subtitle to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "Title": {
+		//	                                      "description": "The title to display on the response card.",
+		//	                                      "maxLength": 250,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Title"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "PlainTextMessage": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in plain text format.",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The message to send to the user.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "SSMLMessage": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                  "properties": {
+		//	                                    "Value": {
+		//	                                      "description": "The SSML text that defines the prompt.",
+		//	                                      "maxLength": 1000,
+		//	                                      "minLength": 1,
+		//	                                      "type": "string"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Value"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                }
+		//	                              },
+		//	                              "type": "object"
+		//	                            },
+		//	                            "maxItems": 2,
+		//	                            "type": "array"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Message"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "maxItems": 5,
+		//	                      "minItems": 1,
+		//	                      "type": "array"
+		//	                    },
+		//	                    "MessageSelectionStrategy": {
+		//	                      "description": "Indicates how a message is selected from a message group among retries.",
+		//	                      "enum": [
+		//	                        "Random",
+		//	                        "Ordered"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "PromptAttemptsSpecification": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Specifies the advanced settings on each attempt of the prompt.",
+		//	                      "patternProperties": {
+		//	                        "": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "Specifies the settings on a prompt attempt.",
+		//	                          "properties": {
+		//	                            "AllowInterrupt": {
+		//	                              "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+		//	                              "type": "boolean"
+		//	                            },
+		//	                            "AllowedInputTypes": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "Specifies the allowed input types.",
+		//	                              "properties": {
+		//	                                "AllowAudioInput": {
+		//	                                  "description": "Indicates whether audio input is allowed.",
+		//	                                  "type": "boolean"
+		//	                                },
+		//	                                "AllowDTMFInput": {
+		//	                                  "description": "Indicates whether DTMF input is allowed.",
+		//	                                  "type": "boolean"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "AllowAudioInput",
+		//	                                "AllowDTMFInput"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "AudioAndDTMFInputSpecification": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "Specifies the audio and DTMF input specification.",
+		//	                              "properties": {
+		//	                                "AudioSpecification": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "Specifies the audio input specifications.",
+		//	                                  "properties": {
+		//	                                    "EndTimeoutMs": {
+		//	                                      "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    },
+		//	                                    "MaxLengthMs": {
+		//	                                      "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "EndTimeoutMs",
+		//	                                    "MaxLengthMs"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "DTMFSpecification": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "Specifies the settings on DTMF input.",
+		//	                                  "properties": {
+		//	                                    "DeletionCharacter": {
+		//	                                      "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+		//	                                      "pattern": "^[A-D0-9#*]{1}$",
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "EndCharacter": {
+		//	                                      "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+		//	                                      "pattern": "^[A-D0-9#*]{1}$",
+		//	                                      "type": "string"
+		//	                                    },
+		//	                                    "EndTimeoutMs": {
+		//	                                      "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    },
+		//	                                    "MaxLength": {
+		//	                                      "description": "The maximum number of DTMF digits allowed in an utterance.",
+		//	                                      "maximum": 1024,
+		//	                                      "minimum": 1,
+		//	                                      "type": "integer"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "DeletionCharacter",
+		//	                                    "EndCharacter",
+		//	                                    "EndTimeoutMs",
+		//	                                    "MaxLength"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "StartTimeoutMs": {
+		//	                                  "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+		//	                                  "minimum": 1,
+		//	                                  "type": "integer"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "StartTimeoutMs"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "TextInputSpecification": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "Specifies the text input specifications.",
+		//	                              "properties": {
+		//	                                "StartTimeoutMs": {
+		//	                                  "description": "Time for which a bot waits before re-prompting a customer for text input.",
+		//	                                  "minimum": 1,
+		//	                                  "type": "integer"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "StartTimeoutMs"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "AllowedInputTypes"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        }
+		//	                      },
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "MessageGroupsList",
+		//	                    "MaxRetries"
+		//	                  ],
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "PromptSpecification",
+		//	                "DeclinationResponse"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "KendraConfiguration": {
+		//	              "additionalProperties": false,
+		//	              "description": "Configuration for searching a Amazon Kendra index specified for the intent.",
+		//	              "properties": {
+		//	                "KendraIndex": {
+		//	                  "description": "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 32,
+		//	                  "pattern": "^arn:aws[a-zA-Z-]*:kendra:[a-z]+-[a-z]+-[0-9]:[0-9]{12}:index/[a-zA-Z0-9][a-zA-Z0-9_-]*$",
+		//	                  "type": "string"
+		//	                },
+		//	                "QueryFilterString": {
+		//	                  "description": "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
+		//	                  "maxLength": 5000,
+		//	                  "minLength": 1,
+		//	                  "type": "string"
+		//	                },
+		//	                "QueryFilterStringEnabled": {
+		//	                  "description": "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
+		//	                  "type": "boolean"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "KendraIndex"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Name": {
+		//	              "description": "Unique name for a resource.",
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "pattern": "^([0-9a-zA-Z][_-]?)+$",
+		//	              "type": "string"
+		//	            },
+		//	            "OutputContexts": {
+		//	              "description": "A list of contexts that the intent activates when it is fulfilled.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "A session context that is activated when an intent is fulfilled.",
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "description": "Unique name for a resource.",
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "TimeToLiveInSeconds": {
+		//	                    "description": "The amount of time, in seconds, that the output context should remain active.",
+		//	                    "maximum": 86400,
+		//	                    "minimum": 5,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "TurnsToLive": {
+		//	                    "description": "The number of conversation turns that the output context should remain active.",
+		//	                    "maximum": 20,
+		//	                    "minimum": 1,
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Name",
+		//	                  "TimeToLiveInSeconds",
+		//	                  "TurnsToLive"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 10,
+		//	              "type": "array"
+		//	            },
+		//	            "ParentIntentSignature": {
+		//	              "description": "A unique identifier for the built-in intent to base this intent on.",
+		//	              "type": "string"
+		//	            },
+		//	            "SampleUtterances": {
+		//	              "description": "An array of sample utterances",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
+		//	                "properties": {
+		//	                  "Utterance": {
+		//	                    "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Utterance"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "SlotPriorities": {
+		//	              "description": "List for slot priorities",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "The priority that Amazon Lex should use when eliciting slot values from a user.",
+		//	                "properties": {
+		//	                  "Priority": {
+		//	                    "description": "The priority that a slot should be elicited.",
+		//	                    "maximum": 100,
+		//	                    "minimum": 0,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "SlotName": {
+		//	                    "description": "The name of the slot.",
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SlotName",
+		//	                  "Priority"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "Slots": {
+		//	              "description": "List of slots",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "A slot is a variable needed to fulfill an intent, where an intent can require zero or more slots.",
+		//	                "properties": {
+		//	                  "Description": {
+		//	                    "description": "A description of the resource",
+		//	                    "maxLength": 200,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "MultipleValuesSetting": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Indicates whether a slot can return multiple values.",
+		//	                    "properties": {
+		//	                      "AllowMultipleValues": {
+		//	                        "type": "boolean"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Name": {
+		//	                    "description": "Unique name for a resource.",
+		//	                    "maxLength": 100,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^([0-9a-zA-Z][_-]?)+$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ObfuscationSetting": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Determines whether Amazon Lex obscures slot values in conversation logs.",
+		//	                    "properties": {
+		//	                      "ObfuscationSettingType": {
+		//	                        "description": "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
+		//	                        "enum": [
+		//	                          "None",
+		//	                          "DefaultObfuscation"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "ObfuscationSettingType"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SlotTypeName": {
+		//	                    "description": "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ValueElicitationSetting": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Settings that you can use for eliciting a slot value.",
+		//	                    "properties": {
+		//	                      "DefaultValueSpecification": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "A list of default values for a slot.",
+		//	                        "properties": {
+		//	                          "DefaultValueList": {
+		//	                            "description": "A list of slot default values",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "The default value to use when a user doesn't provide a value for a slot.",
+		//	                              "properties": {
+		//	                                "DefaultValue": {
+		//	                                  "description": "The default value to use when a user doesn't provide a value for a slot.",
+		//	                                  "maxLength": 202,
+		//	                                  "minLength": 1,
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "DefaultValue"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "maxItems": 10,
+		//	                            "type": "array"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "DefaultValueList"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "PromptSpecification": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "The prompt that Amazon Lex uses to elicit the slot value from the user.",
+		//	                        "properties": {
+		//	                          "AllowInterrupt": {
+		//	                            "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                            "type": "boolean"
+		//	                          },
+		//	                          "MaxRetries": {
+		//	                            "description": "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+		//	                            "maximum": 5,
+		//	                            "minimum": 0,
+		//	                            "type": "integer"
+		//	                          },
+		//	                          "MessageGroupsList": {
+		//	                            "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                            "insertionOrder": false,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                              "properties": {
+		//	                                "Message": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                  "properties": {
+		//	                                    "CustomPayload": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in a custom format defined by the client application.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The string that is sent to your application.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "ImageResponseCard": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                      "properties": {
+		//	                                        "Buttons": {
+		//	                                          "description": "A list of buttons that should be displayed on the response card.",
+		//	                                          "insertionOrder": false,
+		//	                                          "items": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                            "properties": {
+		//	                                              "Text": {
+		//	                                                "description": "The text that appears on the button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Value": {
+		//	                                                "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                "maxLength": 50,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Text",
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "maxItems": 5,
+		//	                                          "type": "array"
+		//	                                        },
+		//	                                        "ImageUrl": {
+		//	                                          "description": "The URL of an image to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Subtitle": {
+		//	                                          "description": "The subtitle to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        },
+		//	                                        "Title": {
+		//	                                          "description": "The title to display on the response card.",
+		//	                                          "maxLength": 250,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Title"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "PlainTextMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in plain text format.",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The message to send to the user.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "SSMLMessage": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                      "properties": {
+		//	                                        "Value": {
+		//	                                          "description": "The SSML text that defines the prompt.",
+		//	                                          "maxLength": 1000,
+		//	                                          "minLength": 1,
+		//	                                          "type": "string"
+		//	                                        }
+		//	                                      },
+		//	                                      "required": [
+		//	                                        "Value"
+		//	                                      ],
+		//	                                      "type": "object"
+		//	                                    }
+		//	                                  },
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "Variations": {
+		//	                                  "description": "Message variations to send to the user.",
+		//	                                  "insertionOrder": false,
+		//	                                  "items": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                    "properties": {
+		//	                                      "CustomPayload": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "A message in a custom format defined by the client application.",
+		//	                                        "properties": {
+		//	                                          "Value": {
+		//	                                            "description": "The string that is sent to your application.",
+		//	                                            "maxLength": 1000,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "Value"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "ImageResponseCard": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                        "properties": {
+		//	                                          "Buttons": {
+		//	                                            "description": "A list of buttons that should be displayed on the response card.",
+		//	                                            "insertionOrder": false,
+		//	                                            "items": {
+		//	                                              "additionalProperties": false,
+		//	                                              "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                              "properties": {
+		//	                                                "Text": {
+		//	                                                  "description": "The text that appears on the button.",
+		//	                                                  "maxLength": 50,
+		//	                                                  "minLength": 1,
+		//	                                                  "type": "string"
+		//	                                                },
+		//	                                                "Value": {
+		//	                                                  "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                  "maxLength": 50,
+		//	                                                  "minLength": 1,
+		//	                                                  "type": "string"
+		//	                                                }
+		//	                                              },
+		//	                                              "required": [
+		//	                                                "Text",
+		//	                                                "Value"
+		//	                                              ],
+		//	                                              "type": "object"
+		//	                                            },
+		//	                                            "maxItems": 5,
+		//	                                            "type": "array"
+		//	                                          },
+		//	                                          "ImageUrl": {
+		//	                                            "description": "The URL of an image to display on the response card.",
+		//	                                            "maxLength": 250,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "Subtitle": {
+		//	                                            "description": "The subtitle to display on the response card.",
+		//	                                            "maxLength": 250,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "Title": {
+		//	                                            "description": "The title to display on the response card.",
+		//	                                            "maxLength": 250,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "Title"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "PlainTextMessage": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "A message in plain text format.",
+		//	                                        "properties": {
+		//	                                          "Value": {
+		//	                                            "description": "The message to send to the user.",
+		//	                                            "maxLength": 1000,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "Value"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "SSMLMessage": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                        "properties": {
+		//	                                          "Value": {
+		//	                                            "description": "The SSML text that defines the prompt.",
+		//	                                            "maxLength": 1000,
+		//	                                            "minLength": 1,
+		//	                                            "type": "string"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "Value"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      }
+		//	                                    },
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "maxItems": 2,
+		//	                                  "type": "array"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Message"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "maxItems": 5,
+		//	                            "minItems": 1,
+		//	                            "type": "array"
+		//	                          },
+		//	                          "MessageSelectionStrategy": {
+		//	                            "description": "Indicates how a message is selected from a message group among retries.",
+		//	                            "enum": [
+		//	                              "Random",
+		//	                              "Ordered"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          },
+		//	                          "PromptAttemptsSpecification": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "Specifies the advanced settings on each attempt of the prompt.",
+		//	                            "patternProperties": {
+		//	                              "": {
+		//	                                "additionalProperties": false,
+		//	                                "description": "Specifies the settings on a prompt attempt.",
+		//	                                "properties": {
+		//	                                  "AllowInterrupt": {
+		//	                                    "description": "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+		//	                                    "type": "boolean"
+		//	                                  },
+		//	                                  "AllowedInputTypes": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "Specifies the allowed input types.",
+		//	                                    "properties": {
+		//	                                      "AllowAudioInput": {
+		//	                                        "description": "Indicates whether audio input is allowed.",
+		//	                                        "type": "boolean"
+		//	                                      },
+		//	                                      "AllowDTMFInput": {
+		//	                                        "description": "Indicates whether DTMF input is allowed.",
+		//	                                        "type": "boolean"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "AllowAudioInput",
+		//	                                      "AllowDTMFInput"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "AudioAndDTMFInputSpecification": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "Specifies the audio and DTMF input specification.",
+		//	                                    "properties": {
+		//	                                      "AudioSpecification": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "Specifies the audio input specifications.",
+		//	                                        "properties": {
+		//	                                          "EndTimeoutMs": {
+		//	                                            "description": "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+		//	                                            "minimum": 1,
+		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "MaxLengthMs": {
+		//	                                            "description": "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+		//	                                            "minimum": 1,
+		//	                                            "type": "integer"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "EndTimeoutMs",
+		//	                                          "MaxLengthMs"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "DTMFSpecification": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "Specifies the settings on DTMF input.",
+		//	                                        "properties": {
+		//	                                          "DeletionCharacter": {
+		//	                                            "description": "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+		//	                                            "pattern": "^[A-D0-9#*]{1}$",
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "EndCharacter": {
+		//	                                            "description": "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+		//	                                            "pattern": "^[A-D0-9#*]{1}$",
+		//	                                            "type": "string"
+		//	                                          },
+		//	                                          "EndTimeoutMs": {
+		//	                                            "description": "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+		//	                                            "minimum": 1,
+		//	                                            "type": "integer"
+		//	                                          },
+		//	                                          "MaxLength": {
+		//	                                            "description": "The maximum number of DTMF digits allowed in an utterance.",
+		//	                                            "maximum": 1024,
+		//	                                            "minimum": 1,
+		//	                                            "type": "integer"
+		//	                                          }
+		//	                                        },
+		//	                                        "required": [
+		//	                                          "DeletionCharacter",
+		//	                                          "EndCharacter",
+		//	                                          "EndTimeoutMs",
+		//	                                          "MaxLength"
+		//	                                        ],
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "StartTimeoutMs": {
+		//	                                        "description": "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+		//	                                        "minimum": 1,
+		//	                                        "type": "integer"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "StartTimeoutMs"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  },
+		//	                                  "TextInputSpecification": {
+		//	                                    "additionalProperties": false,
+		//	                                    "description": "Specifies the text input specifications.",
+		//	                                    "properties": {
+		//	                                      "StartTimeoutMs": {
+		//	                                        "description": "Time for which a bot waits before re-prompting a customer for text input.",
+		//	                                        "minimum": 1,
+		//	                                        "type": "integer"
+		//	                                      }
+		//	                                    },
+		//	                                    "required": [
+		//	                                      "StartTimeoutMs"
+		//	                                    ],
+		//	                                    "type": "object"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "AllowedInputTypes"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              }
+		//	                            },
+		//	                            "type": "object"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "MessageGroupsList",
+		//	                          "MaxRetries"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      },
+		//	                      "SampleUtterances": {
+		//	                        "description": "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
+		//	                        "insertionOrder": false,
+		//	                        "items": {
+		//	                          "additionalProperties": false,
+		//	                          "description": "A sample utterance that invokes an intent or respond to a slot elicitation prompt.",
+		//	                          "properties": {
+		//	                            "Utterance": {
+		//	                              "description": "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "Utterance"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "type": "array"
+		//	                      },
+		//	                      "SlotConstraint": {
+		//	                        "description": "Specifies whether the slot is required or optional.",
+		//	                        "enum": [
+		//	                          "Required",
+		//	                          "Optional"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "WaitAndContinueSpecification": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
+		//	                        "properties": {
+		//	                          "ContinueResponse": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
+		//	                            "properties": {
+		//	                              "AllowInterrupt": {
+		//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                                "type": "boolean"
+		//	                              },
+		//	                              "MessageGroupsList": {
+		//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                                  "properties": {
+		//	                                    "Message": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                      "properties": {
+		//	                                        "CustomPayload": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in a custom format defined by the client application.",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The string that is sent to your application.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "ImageResponseCard": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                          "properties": {
+		//	                                            "Buttons": {
+		//	                                              "description": "A list of buttons that should be displayed on the response card.",
+		//	                                              "insertionOrder": false,
+		//	                                              "items": {
+		//	                                                "additionalProperties": false,
+		//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                                "properties": {
+		//	                                                  "Text": {
+		//	                                                    "description": "The text that appears on the button.",
+		//	                                                    "maxLength": 50,
+		//	                                                    "minLength": 1,
+		//	                                                    "type": "string"
+		//	                                                  },
+		//	                                                  "Value": {
+		//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                    "maxLength": 50,
+		//	                                                    "minLength": 1,
+		//	                                                    "type": "string"
+		//	                                                  }
+		//	                                                },
+		//	                                                "required": [
+		//	                                                  "Text",
+		//	                                                  "Value"
+		//	                                                ],
+		//	                                                "type": "object"
+		//	                                              },
+		//	                                              "maxItems": 5,
+		//	                                              "type": "array"
+		//	                                            },
+		//	                                            "ImageUrl": {
+		//	                                              "description": "The URL of an image to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Subtitle": {
+		//	                                              "description": "The subtitle to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Title": {
+		//	                                              "description": "The title to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Title"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "PlainTextMessage": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in plain text format.",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The message to send to the user.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "SSMLMessage": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The SSML text that defines the prompt.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        }
+		//	                                      },
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "Variations": {
+		//	                                      "description": "Message variations to send to the user.",
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                        "properties": {
+		//	                                          "CustomPayload": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in a custom format defined by the client application.",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The string that is sent to your application.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "ImageResponseCard": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                            "properties": {
+		//	                                              "Buttons": {
+		//	                                                "description": "A list of buttons that should be displayed on the response card.",
+		//	                                                "insertionOrder": false,
+		//	                                                "items": {
+		//	                                                  "additionalProperties": false,
+		//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                                  "properties": {
+		//	                                                    "Text": {
+		//	                                                      "description": "The text that appears on the button.",
+		//	                                                      "maxLength": 50,
+		//	                                                      "minLength": 1,
+		//	                                                      "type": "string"
+		//	                                                    },
+		//	                                                    "Value": {
+		//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                      "maxLength": 50,
+		//	                                                      "minLength": 1,
+		//	                                                      "type": "string"
+		//	                                                    }
+		//	                                                  },
+		//	                                                  "required": [
+		//	                                                    "Text",
+		//	                                                    "Value"
+		//	                                                  ],
+		//	                                                  "type": "object"
+		//	                                                },
+		//	                                                "maxItems": 5,
+		//	                                                "type": "array"
+		//	                                              },
+		//	                                              "ImageUrl": {
+		//	                                                "description": "The URL of an image to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Subtitle": {
+		//	                                                "description": "The subtitle to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Title": {
+		//	                                                "description": "The title to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Title"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "PlainTextMessage": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in plain text format.",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The message to send to the user.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "SSMLMessage": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The SSML text that defines the prompt.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          }
+		//	                                        },
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "maxItems": 2,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Message"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 5,
+		//	                                "minItems": 1,
+		//	                                "type": "array"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "MessageGroupsList"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "IsActive": {
+		//	                            "description": "Specifies whether the bot will wait for a user to respond.",
+		//	                            "type": "boolean"
+		//	                          },
+		//	                          "StillWaitingResponse": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
+		//	                            "properties": {
+		//	                              "AllowInterrupt": {
+		//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                                "type": "boolean"
+		//	                              },
+		//	                              "FrequencyInSeconds": {
+		//	                                "description": "How often a message should be sent to the user in seconds.",
+		//	                                "maximum": 300,
+		//	                                "minimum": 1,
+		//	                                "type": "integer"
+		//	                              },
+		//	                              "MessageGroupsList": {
+		//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                                  "properties": {
+		//	                                    "Message": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                      "properties": {
+		//	                                        "CustomPayload": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in a custom format defined by the client application.",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The string that is sent to your application.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "ImageResponseCard": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                          "properties": {
+		//	                                            "Buttons": {
+		//	                                              "description": "A list of buttons that should be displayed on the response card.",
+		//	                                              "insertionOrder": false,
+		//	                                              "items": {
+		//	                                                "additionalProperties": false,
+		//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                                "properties": {
+		//	                                                  "Text": {
+		//	                                                    "description": "The text that appears on the button.",
+		//	                                                    "maxLength": 50,
+		//	                                                    "minLength": 1,
+		//	                                                    "type": "string"
+		//	                                                  },
+		//	                                                  "Value": {
+		//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                    "maxLength": 50,
+		//	                                                    "minLength": 1,
+		//	                                                    "type": "string"
+		//	                                                  }
+		//	                                                },
+		//	                                                "required": [
+		//	                                                  "Text",
+		//	                                                  "Value"
+		//	                                                ],
+		//	                                                "type": "object"
+		//	                                              },
+		//	                                              "maxItems": 5,
+		//	                                              "type": "array"
+		//	                                            },
+		//	                                            "ImageUrl": {
+		//	                                              "description": "The URL of an image to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Subtitle": {
+		//	                                              "description": "The subtitle to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Title": {
+		//	                                              "description": "The title to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Title"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "PlainTextMessage": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in plain text format.",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The message to send to the user.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "SSMLMessage": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The SSML text that defines the prompt.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        }
+		//	                                      },
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "Variations": {
+		//	                                      "description": "Message variations to send to the user.",
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                        "properties": {
+		//	                                          "CustomPayload": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in a custom format defined by the client application.",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The string that is sent to your application.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "ImageResponseCard": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                            "properties": {
+		//	                                              "Buttons": {
+		//	                                                "description": "A list of buttons that should be displayed on the response card.",
+		//	                                                "insertionOrder": false,
+		//	                                                "items": {
+		//	                                                  "additionalProperties": false,
+		//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                                  "properties": {
+		//	                                                    "Text": {
+		//	                                                      "description": "The text that appears on the button.",
+		//	                                                      "maxLength": 50,
+		//	                                                      "minLength": 1,
+		//	                                                      "type": "string"
+		//	                                                    },
+		//	                                                    "Value": {
+		//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                      "maxLength": 50,
+		//	                                                      "minLength": 1,
+		//	                                                      "type": "string"
+		//	                                                    }
+		//	                                                  },
+		//	                                                  "required": [
+		//	                                                    "Text",
+		//	                                                    "Value"
+		//	                                                  ],
+		//	                                                  "type": "object"
+		//	                                                },
+		//	                                                "maxItems": 5,
+		//	                                                "type": "array"
+		//	                                              },
+		//	                                              "ImageUrl": {
+		//	                                                "description": "The URL of an image to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Subtitle": {
+		//	                                                "description": "The subtitle to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Title": {
+		//	                                                "description": "The title to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Title"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "PlainTextMessage": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in plain text format.",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The message to send to the user.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "SSMLMessage": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The SSML text that defines the prompt.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          }
+		//	                                        },
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "maxItems": 2,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Message"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 5,
+		//	                                "minItems": 1,
+		//	                                "type": "array"
+		//	                              },
+		//	                              "TimeoutInSeconds": {
+		//	                                "description": "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
+		//	                                "maximum": 900,
+		//	                                "minimum": 1,
+		//	                                "type": "integer"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "MessageGroupsList",
+		//	                              "FrequencyInSeconds",
+		//	                              "TimeoutInSeconds"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          },
+		//	                          "WaitingResponse": {
+		//	                            "additionalProperties": false,
+		//	                            "description": "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
+		//	                            "properties": {
+		//	                              "AllowInterrupt": {
+		//	                                "description": "Indicates whether the user can interrupt a speech prompt from the bot.",
+		//	                                "type": "boolean"
+		//	                              },
+		//	                              "MessageGroupsList": {
+		//	                                "description": "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+		//	                                "insertionOrder": false,
+		//	                                "items": {
+		//	                                  "additionalProperties": false,
+		//	                                  "description": "One or more messages that Amazon Lex can send to the user.",
+		//	                                  "properties": {
+		//	                                    "Message": {
+		//	                                      "additionalProperties": false,
+		//	                                      "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                      "properties": {
+		//	                                        "CustomPayload": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in a custom format defined by the client application.",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The string that is sent to your application.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "ImageResponseCard": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                          "properties": {
+		//	                                            "Buttons": {
+		//	                                              "description": "A list of buttons that should be displayed on the response card.",
+		//	                                              "insertionOrder": false,
+		//	                                              "items": {
+		//	                                                "additionalProperties": false,
+		//	                                                "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                                "properties": {
+		//	                                                  "Text": {
+		//	                                                    "description": "The text that appears on the button.",
+		//	                                                    "maxLength": 50,
+		//	                                                    "minLength": 1,
+		//	                                                    "type": "string"
+		//	                                                  },
+		//	                                                  "Value": {
+		//	                                                    "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                    "maxLength": 50,
+		//	                                                    "minLength": 1,
+		//	                                                    "type": "string"
+		//	                                                  }
+		//	                                                },
+		//	                                                "required": [
+		//	                                                  "Text",
+		//	                                                  "Value"
+		//	                                                ],
+		//	                                                "type": "object"
+		//	                                              },
+		//	                                              "maxItems": 5,
+		//	                                              "type": "array"
+		//	                                            },
+		//	                                            "ImageUrl": {
+		//	                                              "description": "The URL of an image to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Subtitle": {
+		//	                                              "description": "The subtitle to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            },
+		//	                                            "Title": {
+		//	                                              "description": "The title to display on the response card.",
+		//	                                              "maxLength": 250,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Title"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "PlainTextMessage": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in plain text format.",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The message to send to the user.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        },
+		//	                                        "SSMLMessage": {
+		//	                                          "additionalProperties": false,
+		//	                                          "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                          "properties": {
+		//	                                            "Value": {
+		//	                                              "description": "The SSML text that defines the prompt.",
+		//	                                              "maxLength": 1000,
+		//	                                              "minLength": 1,
+		//	                                              "type": "string"
+		//	                                            }
+		//	                                          },
+		//	                                          "required": [
+		//	                                            "Value"
+		//	                                          ],
+		//	                                          "type": "object"
+		//	                                        }
+		//	                                      },
+		//	                                      "type": "object"
+		//	                                    },
+		//	                                    "Variations": {
+		//	                                      "description": "Message variations to send to the user.",
+		//	                                      "insertionOrder": false,
+		//	                                      "items": {
+		//	                                        "additionalProperties": false,
+		//	                                        "description": "The primary message that Amazon Lex should send to the user.",
+		//	                                        "properties": {
+		//	                                          "CustomPayload": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in a custom format defined by the client application.",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The string that is sent to your application.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "ImageResponseCard": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message that defines a response card that the client application can show to the user.",
+		//	                                            "properties": {
+		//	                                              "Buttons": {
+		//	                                                "description": "A list of buttons that should be displayed on the response card.",
+		//	                                                "insertionOrder": false,
+		//	                                                "items": {
+		//	                                                  "additionalProperties": false,
+		//	                                                  "description": "A button to use on a response card used to gather slot values from a user.",
+		//	                                                  "properties": {
+		//	                                                    "Text": {
+		//	                                                      "description": "The text that appears on the button.",
+		//	                                                      "maxLength": 50,
+		//	                                                      "minLength": 1,
+		//	                                                      "type": "string"
+		//	                                                    },
+		//	                                                    "Value": {
+		//	                                                      "description": "The value returned to Amazon Lex when the user chooses this button.",
+		//	                                                      "maxLength": 50,
+		//	                                                      "minLength": 1,
+		//	                                                      "type": "string"
+		//	                                                    }
+		//	                                                  },
+		//	                                                  "required": [
+		//	                                                    "Text",
+		//	                                                    "Value"
+		//	                                                  ],
+		//	                                                  "type": "object"
+		//	                                                },
+		//	                                                "maxItems": 5,
+		//	                                                "type": "array"
+		//	                                              },
+		//	                                              "ImageUrl": {
+		//	                                                "description": "The URL of an image to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Subtitle": {
+		//	                                                "description": "The subtitle to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              },
+		//	                                              "Title": {
+		//	                                                "description": "The title to display on the response card.",
+		//	                                                "maxLength": 250,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Title"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "PlainTextMessage": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in plain text format.",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The message to send to the user.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          },
+		//	                                          "SSMLMessage": {
+		//	                                            "additionalProperties": false,
+		//	                                            "description": "A message in Speech Synthesis Markup Language (SSML).",
+		//	                                            "properties": {
+		//	                                              "Value": {
+		//	                                                "description": "The SSML text that defines the prompt.",
+		//	                                                "maxLength": 1000,
+		//	                                                "minLength": 1,
+		//	                                                "type": "string"
+		//	                                              }
+		//	                                            },
+		//	                                            "required": [
+		//	                                              "Value"
+		//	                                            ],
+		//	                                            "type": "object"
+		//	                                          }
+		//	                                        },
+		//	                                        "type": "object"
+		//	                                      },
+		//	                                      "maxItems": 2,
+		//	                                      "type": "array"
+		//	                                    }
+		//	                                  },
+		//	                                  "required": [
+		//	                                    "Message"
+		//	                                  ],
+		//	                                  "type": "object"
+		//	                                },
+		//	                                "maxItems": 5,
+		//	                                "minItems": 1,
+		//	                                "type": "array"
+		//	                              }
+		//	                            },
+		//	                            "required": [
+		//	                              "MessageGroupsList"
+		//	                            ],
+		//	                            "type": "object"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "WaitingResponse",
+		//	                          "ContinueResponse"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "SlotConstraint"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Name",
+		//	                  "SlotTypeName",
+		//	                  "ValueElicitationSetting"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 100,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Name"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 1000,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "LocaleId": {
+		//	        "description": "The identifier of the language and locale that the bot will be used in.",
+		//	        "type": "string"
+		//	      },
+		//	      "NluConfidenceThreshold": {
+		//	        "description": "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
+		//	        "maximum": 1,
+		//	        "minimum": 0,
+		//	        "type": "number"
+		//	      },
+		//	      "SlotTypes": {
+		//	        "description": "List of SlotTypes",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "A custom, extended built-in or a grammar slot type.",
+		//	          "properties": {
+		//	            "Description": {
+		//	              "description": "A description of the resource",
+		//	              "maxLength": 200,
+		//	              "type": "string"
+		//	            },
+		//	            "ExternalSourceSetting": {
+		//	              "additionalProperties": false,
+		//	              "description": "Provides information about the external source of the slot type's definition.",
+		//	              "properties": {
+		//	                "GrammarSlotTypeSetting": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Settings required for a slot type based on a grammar that you provide.",
+		//	                  "properties": {
+		//	                    "Source": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
+		//	                      "properties": {
+		//	                        "KmsKeyArn": {
+		//	                          "description": "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
+		//	                          "maxLength": 2048,
+		//	                          "minLength": 20,
+		//	                          "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "S3BucketName": {
+		//	                          "description": "The name of the S3 bucket that contains the grammar source.",
+		//	                          "maxLength": 63,
+		//	                          "minLength": 3,
+		//	                          "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                          "type": "string"
+		//	                        },
+		//	                        "S3ObjectKey": {
+		//	                          "description": "The path to the grammar in the S3 bucket.",
+		//	                          "maxLength": 1024,
+		//	                          "minLength": 1,
+		//	                          "pattern": "[\\.\\-\\!\\*\\_\\'\\(\\)a-zA-Z0-9][\\.\\-\\!\\*\\_\\'\\(\\)\\/a-zA-Z0-9]*$",
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "S3BucketName",
+		//	                        "S3ObjectKey"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Name": {
+		//	              "description": "Unique name for a resource.",
+		//	              "maxLength": 100,
+		//	              "minLength": 1,
+		//	              "pattern": "^([0-9a-zA-Z][_-]?)+$",
+		//	              "type": "string"
+		//	            },
+		//	            "ParentSlotTypeSignature": {
+		//	              "description": "The built-in slot type used as a parent of this slot type.",
+		//	              "type": "string"
+		//	            },
+		//	            "SlotTypeValues": {
+		//	              "description": "A List of slot type values",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "description": "Value that the slot type can take.",
+		//	                "properties": {
+		//	                  "SampleValue": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Defines one of the values for a slot type.",
+		//	                    "properties": {
+		//	                      "Value": {
+		//	                        "description": "The value that can be used for a slot type.",
+		//	                        "maxLength": 140,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Value"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "Synonyms": {
+		//	                    "description": "Additional values related to the slot type entry.",
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "description": "Defines one of the values for a slot type.",
+		//	                      "properties": {
+		//	                        "Value": {
+		//	                          "description": "The value that can be used for a slot type.",
+		//	                          "maxLength": 140,
+		//	                          "minLength": 1,
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Value"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "maxItems": 10000,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "SampleValue"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "maxItems": 10000,
+		//	              "type": "array"
+		//	            },
+		//	            "ValueSelectionSetting": {
+		//	              "additionalProperties": false,
+		//	              "description": "Contains settings used by Amazon Lex to select a slot value.",
+		//	              "properties": {
+		//	                "AdvancedRecognitionSetting": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "Provides settings that enable advanced recognition settings for slot values.",
+		//	                  "properties": {
+		//	                    "AudioRecognitionStrategy": {
+		//	                      "description": "Enables using slot values as a custom vocabulary when recognizing user utterances.",
+		//	                      "enum": [
+		//	                        "UseSlotValuesAsCustomVocabulary"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "RegexFilter": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A regular expression used to validate the value of a slot.",
+		//	                  "properties": {
+		//	                    "Pattern": {
+		//	                      "description": "Regex pattern",
+		//	                      "maxLength": 300,
+		//	                      "minLength": 1,
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Pattern"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "ResolutionStrategy": {
+		//	                  "enum": [
+		//	                    "ORIGINAL_VALUE",
+		//	                    "TOP_RESOLUTION"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ResolutionStrategy"
+		//	              ],
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Name"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 100,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "VoiceSettings": {
+		//	        "additionalProperties": false,
+		//	        "description": "Settings for using an Amazon Polly voice to communicate with a user.",
+		//	        "properties": {
+		//	          "Engine": {
+		//	            "description": "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
+		//	            "enum": [
+		//	              "standard",
+		//	              "neural"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "VoiceId": {
+		//	            "description": "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "VoiceId"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "LocaleId",
+		//	      "NluConfidenceThreshold"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"bot_locales": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: CustomVocabulary
+					"custom_vocabulary": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomVocabularyItems
+							"custom_vocabulary_items": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Phrase
+										"phrase": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Phrase that should be recognized.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: Weight
+										"weight": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Description: "The degree to which the phrase recognition is boosted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "A custom vocabulary is a list of specific phrases that you want Amazon Lex V2 to recognize in the audio input.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"custom_vocabulary_items": {
-									// Property: CustomVocabularyItems
-									Attributes: tfsdk.SetNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"phrase": {
-												// Property: Phrase
-												Description: "Phrase that should be recognized.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"weight": {
-												// Property: Weight
-												Description: "The degree to which the phrase recognition is boosted.",
-												Type:        types.Int64Type,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"description": {
-						// Property: Description
-						Description: "A description of the resource",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"intents": {
-						// Property: Intents
-						Description: "List of intents",
-						Attributes: tfsdk.SetNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"description": {
-									// Property: Description
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description of the resource",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Intents
+					"intents": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A description of the resource",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"dialog_code_hook": {
-									// Property: DialogCodeHook
+								}, /*END ATTRIBUTE*/
+								// Property: DialogCodeHook
+								"dialog_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Enabled
+										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Description: "Settings that determine the Lambda function that Amazon Lex uses for processing user responses.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"enabled": {
-												// Property: Enabled
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"fulfillment_code_hook": {
-									// Property: FulfillmentCodeHook
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: FulfillmentCodeHook
+								"fulfillment_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Enabled
+										"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FulfillmentUpdatesSpecification
+										"fulfillment_updates_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Active
+												"active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: StartResponse
+												"start_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Determines whether the user can interrupt the start message while it is playing.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: DelayInSeconds
+														"delay_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroups
+														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: TimeoutInSeconds
+												"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The length of time that the fulfillment Lambda function should run before it times out.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: UpdateResponse
+												"update_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Determines whether the user can interrupt an update message while it is playing.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: FrequencyInSeconds
+														"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+															Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroups
+														"message_groups": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: PostFulfillmentStatusSpecification
+										"post_fulfillment_status_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: FailureResponse
+												"failure_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: SuccessResponse
+												"success_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: TimeoutResponse
+												"timeout_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: AllowInterrupt
+														"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: MessageGroupsList
+														"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+															NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: Message
+																	"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: CustomPayload
+																			"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The string that is sent to your application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in a custom format defined by the client application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageResponseCard
+																			"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Buttons
+																					"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Text
+																								"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The text that appears on the button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The value returned to Amazon Lex when the user chooses this button.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																						}, /*END NESTED OBJECT*/
+																						Description: "A list of buttons that should be displayed on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageUrl
+																					"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The URL of an image to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Subtitle
+																					"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The subtitle to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: Title
+																					"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The title to display on the response card.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message that defines a response card that the client application can show to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: PlainTextMessage
+																			"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The message to send to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in plain text format.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: SSMLMessage
+																			"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: Value
+																					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																						Description: "The SSML text that defines the prompt.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																				Description: "A message in Speech Synthesis Markup Language (SSML).",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "The primary message that Amazon Lex should send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: Variations
+																	"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "Message variations to send to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+															}, /*END NESTED OBJECT*/
+															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides information for updating the user on the progress of fulfilling an intent.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Description: "Settings that determine if a Lambda function should be invoked to fulfill a specific intent.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"enabled": {
-												// Property: Enabled
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"fulfillment_updates_specification": {
-												// Property: FulfillmentUpdatesSpecification
-												Description: "Provides information for updating the user on the progress of fulfilling an intent.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"active": {
-															// Property: Active
-															Description: "Determines whether fulfillment updates are sent to the user. When this field is true, updates are sent.",
-															Type:        types.BoolType,
-															Computed:    true,
-														},
-														"start_response": {
-															// Property: StartResponse
-															Description: "Provides settings for a message that is sent to the user when a fulfillment Lambda function starts running.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"allow_interrupt": {
-																		// Property: AllowInterrupt
-																		Description: "Determines whether the user can interrupt the start message while it is playing.",
-																		Type:        types.BoolType,
-																		Computed:    true,
-																	},
-																	"delay_in_seconds": {
-																		// Property: DelayInSeconds
-																		Description: "The delay between when the Lambda fulfillment function starts running and the start message is played. If the Lambda function returns before the delay is over, the start message isn't played.",
-																		Type:        types.Int64Type,
-																		Computed:    true,
-																	},
-																	"message_groups": {
-																		// Property: MessageGroups
-																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"message": {
-																					// Property: Message
-																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"variations": {
-																					// Property: Variations
-																					Description: "Message variations to send to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"timeout_in_seconds": {
-															// Property: TimeoutInSeconds
-															Description: "The length of time that the fulfillment Lambda function should run before it times out.",
-															Type:        types.Int64Type,
-															Computed:    true,
-														},
-														"update_response": {
-															// Property: UpdateResponse
-															Description: "Provides settings for a message that is sent periodically to the user while a fulfillment Lambda function is running.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"allow_interrupt": {
-																		// Property: AllowInterrupt
-																		Description: "Determines whether the user can interrupt an update message while it is playing.",
-																		Type:        types.BoolType,
-																		Computed:    true,
-																	},
-																	"frequency_in_seconds": {
-																		// Property: FrequencyInSeconds
-																		Description: "The frequency that a message is sent to the user. When the period ends, Amazon Lex chooses a message from the message groups and plays it to the user. If the fulfillment Lambda returns before the first period ends, an update message is not played to the user.",
-																		Type:        types.Int64Type,
-																		Computed:    true,
-																	},
-																	"message_groups": {
-																		// Property: MessageGroups
-																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"message": {
-																					// Property: Message
-																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"variations": {
-																					// Property: Variations
-																					Description: "Message variations to send to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"post_fulfillment_status_specification": {
-												// Property: PostFulfillmentStatusSpecification
-												Description: "Provides information for updating the user on the progress of fulfilling an intent.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"failure_response": {
-															// Property: FailureResponse
-															Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"allow_interrupt": {
-																		// Property: AllowInterrupt
-																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-																		Type:        types.BoolType,
-																		Computed:    true,
-																	},
-																	"message_groups_list": {
-																		// Property: MessageGroupsList
-																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"message": {
-																					// Property: Message
-																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"variations": {
-																					// Property: Variations
-																					Description: "Message variations to send to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"success_response": {
-															// Property: SuccessResponse
-															Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"allow_interrupt": {
-																		// Property: AllowInterrupt
-																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-																		Type:        types.BoolType,
-																		Computed:    true,
-																	},
-																	"message_groups_list": {
-																		// Property: MessageGroupsList
-																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"message": {
-																					// Property: Message
-																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"variations": {
-																					// Property: Variations
-																					Description: "Message variations to send to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"timeout_response": {
-															// Property: TimeoutResponse
-															Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"allow_interrupt": {
-																		// Property: AllowInterrupt
-																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-																		Type:        types.BoolType,
-																		Computed:    true,
-																	},
-																	"message_groups_list": {
-																		// Property: MessageGroupsList
-																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"message": {
-																					// Property: Message
-																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"variations": {
-																					// Property: Variations
-																					Description: "Message variations to send to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
-																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
-																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
-																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
-																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"input_contexts": {
-									// Property: InputContexts
-									Description: "The list of input contexts specified for the intent.",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"name": {
-												// Property: Name
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InputContexts
+								"input_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the context.",
-												Type:        types.StringType,
 												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"intent_closing_setting": {
-									// Property: IntentClosingSetting
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The list of input contexts specified for the intent.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntentClosingSetting
+								"intent_closing_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ClosingResponse
+										"closing_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: IsActive
+										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Description: "Response that Amazon Lex sends to the user when the intent is closed.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"closing_response": {
-												// Property: ClosingResponse
-												Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"allow_interrupt": {
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IntentConfirmationSetting
+								"intent_confirmation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DeclinationResponse
+										"declination_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A list of message groups that Amazon Lex uses to respond the user input.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: IsActive
+										"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: PromptSpecification
+										"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AllowInterrupt
+												"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MaxRetries
+												"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+													Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageGroupsList
+												"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Message
+															"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: CustomPayload
+																	"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The string that is sent to your application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in a custom format defined by the client application.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: ImageResponseCard
+																	"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Buttons
+																			"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																				NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Text
+																						"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The text that appears on the button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The value returned to Amazon Lex when the user chooses this button.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																				}, /*END NESTED OBJECT*/
+																				Description: "A list of buttons that should be displayed on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: ImageUrl
+																			"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The URL of an image to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Subtitle
+																			"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The subtitle to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Title
+																			"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The title to display on the response card.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message that defines a response card that the client application can show to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: PlainTextMessage
+																	"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The message to send to the user.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in plain text format.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: SSMLMessage
+																	"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The SSML text that defines the prompt.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "A message in Speech Synthesis Markup Language (SSML).",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The primary message that Amazon Lex should send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: Variations
+															"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: CustomPayload
+																		"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The string that is sent to your application.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in a custom format defined by the client application.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: ImageResponseCard
+																		"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Buttons
+																				"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Text
+																							"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The text that appears on the button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The value returned to Amazon Lex when the user chooses this button.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "A list of buttons that should be displayed on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageUrl
+																				"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The URL of an image to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Subtitle
+																				"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The subtitle to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Title
+																				"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The title to display on the response card.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message that defines a response card that the client application can show to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: PlainTextMessage
+																		"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The message to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in plain text format.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: SSMLMessage
+																		"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Value
+																				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																					Description: "The SSML text that defines the prompt.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "A message in Speech Synthesis Markup Language (SSML).",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Message variations to send to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: MessageSelectionStrategy
+												"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Indicates how a message is selected from a message group among retries.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+												// Property: PromptAttemptsSpecification
+												"prompt_attempts_specification": // Pattern: ""
+												schema.MapNestedAttribute{       /*START ATTRIBUTE*/
+													NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 															// Property: AllowInterrupt
-															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-															Type:        types.BoolType,
-															Computed:    true,
-														},
-														"message_groups_list": {
-															// Property: MessageGroupsList
-															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"message": {
-																		// Property: Message
-																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"custom_payload": {
-																					// Property: CustomPayload
-																					Description: "A message in a custom format defined by the client application.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The string that is sent to your application.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"image_response_card": {
-																					// Property: ImageResponseCard
-																					Description: "A message that defines a response card that the client application can show to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"buttons": {
-																								// Property: Buttons
-																								Description: "A list of buttons that should be displayed on the response card.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"text": {
-																											// Property: Text
-																											Description: "The text that appears on the button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"value": {
-																											// Property: Value
-																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_url": {
-																								// Property: ImageUrl
-																								Description: "The URL of an image to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"subtitle": {
-																								// Property: Subtitle
-																								Description: "The subtitle to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"title": {
-																								// Property: Title
-																								Description: "The title to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"plain_text_message": {
-																					// Property: PlainTextMessage
-																					Description: "A message in plain text format.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The message to send to the user.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"ssml_message": {
-																					// Property: SSMLMessage
-																					Description: "A message in Speech Synthesis Markup Language (SSML).",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The SSML text that defines the prompt.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"variations": {
-																		// Property: Variations
-																		Description: "Message variations to send to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"custom_payload": {
-																					// Property: CustomPayload
-																					Description: "A message in a custom format defined by the client application.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The string that is sent to your application.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"image_response_card": {
-																					// Property: ImageResponseCard
-																					Description: "A message that defines a response card that the client application can show to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"buttons": {
-																								// Property: Buttons
-																								Description: "A list of buttons that should be displayed on the response card.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"text": {
-																											// Property: Text
-																											Description: "The text that appears on the button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"value": {
-																											// Property: Value
-																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_url": {
-																								// Property: ImageUrl
-																								Description: "The URL of an image to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"subtitle": {
-																								// Property: Subtitle
-																								Description: "The subtitle to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"title": {
-																								// Property: Title
-																								Description: "The title to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"plain_text_message": {
-																					// Property: PlainTextMessage
-																					Description: "A message in plain text format.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The message to send to the user.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"ssml_message": {
-																					// Property: SSMLMessage
-																					Description: "A message in Speech Synthesis Markup Language (SSML).",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The SSML text that defines the prompt.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"is_active": {
-												// Property: IsActive
-												Type:     types.BoolType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"intent_confirmation_setting": {
-									// Property: IntentConfirmationSetting
+															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: AllowedInputTypes
+															"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowAudioInput
+																	"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether audio input is allowed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: AllowDTMFInput
+																	"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether DTMF input is allowed.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the allowed input types.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: AudioAndDTMFInputSpecification
+															"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AudioSpecification
+																	"audio_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: EndTimeoutMs
+																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: MaxLengthMs
+																			"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Specifies the audio input specifications.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: DTMFSpecification
+																	"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: DeletionCharacter
+																			"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: EndCharacter
+																			"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: EndTimeoutMs
+																			"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: MaxLength
+																			"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																				Description: "The maximum number of DTMF digits allowed in an utterance.",
+																				Computed:    true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																		Description: "Specifies the settings on DTMF input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: StartTimeoutMs
+																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the audio and DTMF input specification.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: TextInputSpecification
+															"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: StartTimeoutMs
+																	"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "Specifies the text input specifications.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+													}, /*END NESTED OBJECT*/
+													Description: "Specifies the advanced settings on each attempt of the prompt.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Prompts the user to confirm the intent.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Description: "Prompts that Amazon Lex sends to the user to confirm the completion of an intent.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"declination_response": {
-												// Property: DeclinationResponse
-												Description: "A list of message groups that Amazon Lex uses to respond the user input.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"allow_interrupt": {
-															// Property: AllowInterrupt
-															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-															Type:        types.BoolType,
-															Computed:    true,
-														},
-														"message_groups_list": {
-															// Property: MessageGroupsList
-															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"message": {
-																		// Property: Message
-																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"custom_payload": {
-																					// Property: CustomPayload
-																					Description: "A message in a custom format defined by the client application.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The string that is sent to your application.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"image_response_card": {
-																					// Property: ImageResponseCard
-																					Description: "A message that defines a response card that the client application can show to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"buttons": {
-																								// Property: Buttons
-																								Description: "A list of buttons that should be displayed on the response card.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"text": {
-																											// Property: Text
-																											Description: "The text that appears on the button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"value": {
-																											// Property: Value
-																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_url": {
-																								// Property: ImageUrl
-																								Description: "The URL of an image to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"subtitle": {
-																								// Property: Subtitle
-																								Description: "The subtitle to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"title": {
-																								// Property: Title
-																								Description: "The title to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"plain_text_message": {
-																					// Property: PlainTextMessage
-																					Description: "A message in plain text format.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The message to send to the user.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"ssml_message": {
-																					// Property: SSMLMessage
-																					Description: "A message in Speech Synthesis Markup Language (SSML).",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The SSML text that defines the prompt.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"variations": {
-																		// Property: Variations
-																		Description: "Message variations to send to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"custom_payload": {
-																					// Property: CustomPayload
-																					Description: "A message in a custom format defined by the client application.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The string that is sent to your application.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"image_response_card": {
-																					// Property: ImageResponseCard
-																					Description: "A message that defines a response card that the client application can show to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"buttons": {
-																								// Property: Buttons
-																								Description: "A list of buttons that should be displayed on the response card.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"text": {
-																											// Property: Text
-																											Description: "The text that appears on the button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"value": {
-																											// Property: Value
-																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_url": {
-																								// Property: ImageUrl
-																								Description: "The URL of an image to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"subtitle": {
-																								// Property: Subtitle
-																								Description: "The subtitle to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"title": {
-																								// Property: Title
-																								Description: "The title to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"plain_text_message": {
-																					// Property: PlainTextMessage
-																					Description: "A message in plain text format.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The message to send to the user.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"ssml_message": {
-																					// Property: SSMLMessage
-																					Description: "A message in Speech Synthesis Markup Language (SSML).",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The SSML text that defines the prompt.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"is_active": {
-												// Property: IsActive
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"prompt_specification": {
-												// Property: PromptSpecification
-												Description: "Prompts the user to confirm the intent.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"allow_interrupt": {
-															// Property: AllowInterrupt
-															Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-															Type:        types.BoolType,
-															Computed:    true,
-														},
-														"max_retries": {
-															// Property: MaxRetries
-															Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-															Type:        types.Int64Type,
-															Computed:    true,
-														},
-														"message_groups_list": {
-															// Property: MessageGroupsList
-															Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"message": {
-																		// Property: Message
-																		Description: "The primary message that Amazon Lex should send to the user.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"custom_payload": {
-																					// Property: CustomPayload
-																					Description: "A message in a custom format defined by the client application.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The string that is sent to your application.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"image_response_card": {
-																					// Property: ImageResponseCard
-																					Description: "A message that defines a response card that the client application can show to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"buttons": {
-																								// Property: Buttons
-																								Description: "A list of buttons that should be displayed on the response card.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"text": {
-																											// Property: Text
-																											Description: "The text that appears on the button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"value": {
-																											// Property: Value
-																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_url": {
-																								// Property: ImageUrl
-																								Description: "The URL of an image to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"subtitle": {
-																								// Property: Subtitle
-																								Description: "The subtitle to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"title": {
-																								// Property: Title
-																								Description: "The title to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"plain_text_message": {
-																					// Property: PlainTextMessage
-																					Description: "A message in plain text format.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The message to send to the user.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"ssml_message": {
-																					// Property: SSMLMessage
-																					Description: "A message in Speech Synthesis Markup Language (SSML).",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The SSML text that defines the prompt.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"variations": {
-																		// Property: Variations
-																		Description: "Message variations to send to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"custom_payload": {
-																					// Property: CustomPayload
-																					Description: "A message in a custom format defined by the client application.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The string that is sent to your application.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"image_response_card": {
-																					// Property: ImageResponseCard
-																					Description: "A message that defines a response card that the client application can show to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"buttons": {
-																								// Property: Buttons
-																								Description: "A list of buttons that should be displayed on the response card.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"text": {
-																											// Property: Text
-																											Description: "The text that appears on the button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"value": {
-																											// Property: Value
-																											Description: "The value returned to Amazon Lex when the user chooses this button.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_url": {
-																								// Property: ImageUrl
-																								Description: "The URL of an image to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"subtitle": {
-																								// Property: Subtitle
-																								Description: "The subtitle to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"title": {
-																								// Property: Title
-																								Description: "The title to display on the response card.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"plain_text_message": {
-																					// Property: PlainTextMessage
-																					Description: "A message in plain text format.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The message to send to the user.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"ssml_message": {
-																					// Property: SSMLMessage
-																					Description: "A message in Speech Synthesis Markup Language (SSML).",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Description: "The SSML text that defines the prompt.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"message_selection_strategy": {
-															// Property: MessageSelectionStrategy
-															Description: "Indicates how a message is selected from a message group among retries.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"prompt_attempts_specification": {
-															// Property: PromptAttemptsSpecification
-															Description: "Specifies the advanced settings on each attempt of the prompt.",
-															// Pattern: ""
-															Attributes: tfsdk.MapNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"allow_interrupt": {
-																		// Property: AllowInterrupt
-																		Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-																		Type:        types.BoolType,
-																		Computed:    true,
-																	},
-																	"allowed_input_types": {
-																		// Property: AllowedInputTypes
-																		Description: "Specifies the allowed input types.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"allow_audio_input": {
-																					// Property: AllowAudioInput
-																					Description: "Indicates whether audio input is allowed.",
-																					Type:        types.BoolType,
-																					Computed:    true,
-																				},
-																				"allow_dtmf_input": {
-																					// Property: AllowDTMFInput
-																					Description: "Indicates whether DTMF input is allowed.",
-																					Type:        types.BoolType,
-																					Computed:    true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"audio_and_dtmf_input_specification": {
-																		// Property: AudioAndDTMFInputSpecification
-																		Description: "Specifies the audio and DTMF input specification.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"audio_specification": {
-																					// Property: AudioSpecification
-																					Description: "Specifies the audio input specifications.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"end_timeout_ms": {
-																								// Property: EndTimeoutMs
-																								Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-																								Type:        types.Int64Type,
-																								Computed:    true,
-																							},
-																							"max_length_ms": {
-																								// Property: MaxLengthMs
-																								Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-																								Type:        types.Int64Type,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"dtmf_specification": {
-																					// Property: DTMFSpecification
-																					Description: "Specifies the settings on DTMF input.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"deletion_character": {
-																								// Property: DeletionCharacter
-																								Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"end_character": {
-																								// Property: EndCharacter
-																								Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-																								Type:        types.StringType,
-																								Computed:    true,
-																							},
-																							"end_timeout_ms": {
-																								// Property: EndTimeoutMs
-																								Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-																								Type:        types.Int64Type,
-																								Computed:    true,
-																							},
-																							"max_length": {
-																								// Property: MaxLength
-																								Description: "The maximum number of DTMF digits allowed in an utterance.",
-																								Type:        types.Int64Type,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"start_timeout_ms": {
-																					// Property: StartTimeoutMs
-																					Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-																					Type:        types.Int64Type,
-																					Computed:    true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"text_input_specification": {
-																		// Property: TextInputSpecification
-																		Description: "Specifies the text input specifications.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"start_timeout_ms": {
-																					// Property: StartTimeoutMs
-																					Description: "Time for which a bot waits before re-prompting a customer for text input.",
-																					Type:        types.Int64Type,
-																					Computed:    true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"kendra_configuration": {
-									// Property: KendraConfiguration
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: KendraConfiguration
+								"kendra_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: KendraIndex
+										"kendra_index": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: QueryFilterString
+										"query_filter_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: QueryFilterStringEnabled
+										"query_filter_string_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Description: "Configuration for searching a Amazon Kendra index specified for the intent.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"kendra_index": {
-												// Property: KendraIndex
-												Description: "The Amazon Resource Name (ARN) of the Amazon Kendra index that you want the AMAZON.KendraSearchIntent intent to search.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"query_filter_string": {
-												// Property: QueryFilterString
-												Description: "A query filter that Amazon Lex sends to Amazon Kendra to filter the response from a query.",
-												Type:        types.StringType,
-												Computed:    true,
-											},
-											"query_filter_string_enabled": {
-												// Property: QueryFilterStringEnabled
-												Description: "Determines whether the AMAZON.KendraSearchIntent intent uses a custom query string to query the Amazon Kendra index.",
-												Type:        types.BoolType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"name": {
-									// Property: Name
-									Description: "Unique name for a resource.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"output_contexts": {
-									// Property: OutputContexts
-									Description: "A list of contexts that the intent activates when it is fulfilled.",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"name": {
-												// Property: Name
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Unique name for a resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: OutputContexts
+								"output_contexts": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Unique name for a resource.",
-												Type:        types.StringType,
 												Computed:    true,
-											},
-											"time_to_live_in_seconds": {
-												// Property: TimeToLiveInSeconds
+											}, /*END ATTRIBUTE*/
+											// Property: TimeToLiveInSeconds
+											"time_to_live_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The amount of time, in seconds, that the output context should remain active.",
-												Type:        types.Int64Type,
 												Computed:    true,
-											},
-											"turns_to_live": {
-												// Property: TurnsToLive
+											}, /*END ATTRIBUTE*/
+											// Property: TurnsToLive
+											"turns_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The number of conversation turns that the output context should remain active.",
-												Type:        types.Int64Type,
 												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"parent_intent_signature": {
-									// Property: ParentIntentSignature
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A list of contexts that the intent activates when it is fulfilled.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ParentIntentSignature
+								"parent_intent_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A unique identifier for the built-in intent to base this intent on.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"sample_utterances": {
-									// Property: SampleUtterances
-									Description: "An array of sample utterances",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"utterance": {
-												// Property: Utterance
+								}, /*END ATTRIBUTE*/
+								// Property: SampleUtterances
+								"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Utterance
+											"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-												Type:        types.StringType,
 												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"slot_priorities": {
-									// Property: SlotPriorities
-									Description: "List for slot priorities",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"priority": {
-												// Property: Priority
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "An array of sample utterances",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SlotPriorities
+								"slot_priorities": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Priority
+											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Description: "The priority that a slot should be elicited.",
-												Type:        types.Int64Type,
 												Computed:    true,
-											},
-											"slot_name": {
-												// Property: SlotName
+											}, /*END ATTRIBUTE*/
+											// Property: SlotName
+											"slot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The name of the slot.",
-												Type:        types.StringType,
 												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"slots": {
-									// Property: Slots
-									Description: "List of slots",
-									Attributes: tfsdk.SetNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"description": {
-												// Property: Description
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List for slot priorities",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Slots
+								"slots": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Description
+											"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "A description of the resource",
-												Type:        types.StringType,
 												Computed:    true,
-											},
-											"multiple_values_setting": {
-												// Property: MultipleValuesSetting
+											}, /*END ATTRIBUTE*/
+											// Property: MultipleValuesSetting
+											"multiple_values_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AllowMultipleValues
+													"allow_multiple_values": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Description: "Indicates whether a slot can return multiple values.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"allow_multiple_values": {
-															// Property: AllowMultipleValues
-															Type:     types.BoolType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"name": {
-												// Property: Name
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "Unique name for a resource.",
-												Type:        types.StringType,
 												Computed:    true,
-											},
-											"obfuscation_setting": {
-												// Property: ObfuscationSetting
+											}, /*END ATTRIBUTE*/
+											// Property: ObfuscationSetting
+											"obfuscation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: ObfuscationSettingType
+													"obfuscation_setting_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Description: "Determines whether Amazon Lex obscures slot values in conversation logs.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"obfuscation_setting_type": {
-															// Property: ObfuscationSettingType
-															Description: "Value that determines whether Amazon Lex obscures slot values in conversation logs. The default is to obscure the values.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"slot_type_name": {
-												// Property: SlotTypeName
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SlotTypeName
+											"slot_type_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "The slot type name that is used in the slot. Allows for custom and built-in slot type names",
-												Type:        types.StringType,
 												Computed:    true,
-											},
-											"value_elicitation_setting": {
-												// Property: ValueElicitationSetting
-												Description: "Settings that you can use for eliciting a slot value.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"default_value_specification": {
-															// Property: DefaultValueSpecification
-															Description: "A list of default values for a slot.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"default_value_list": {
-																		// Property: DefaultValueList
-																		Description: "A list of slot default values",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"default_value": {
-																					// Property: DefaultValue
-																					Description: "The default value to use when a user doesn't provide a value for a slot.",
-																					Type:        types.StringType,
+											}, /*END ATTRIBUTE*/
+											// Property: ValueElicitationSetting
+											"value_elicitation_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: DefaultValueSpecification
+													"default_value_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: DefaultValueList
+															"default_value_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: DefaultValue
+																		"default_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Description: "The default value to use when a user doesn't provide a value for a slot.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "A list of slot default values",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "A list of default values for a slot.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: PromptSpecification
+													"prompt_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: AllowInterrupt
+															"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MaxRetries
+															"max_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MessageGroupsList
+															"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Message
+																		"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: CustomPayload
+																				"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The string that is sent to your application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in a custom format defined by the client application.",
 																					Computed:    true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"prompt_specification": {
-															// Property: PromptSpecification
-															Description: "The prompt that Amazon Lex uses to elicit the slot value from the user.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"allow_interrupt": {
+																				}, /*END ATTRIBUTE*/
+																				// Property: ImageResponseCard
+																				"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Buttons
+																						"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Text
+																									"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The text that appears on the button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The value returned to Amazon Lex when the user chooses this button.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																							}, /*END NESTED OBJECT*/
+																							Description: "A list of buttons that should be displayed on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageUrl
+																						"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The URL of an image to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Subtitle
+																						"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The subtitle to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: Title
+																						"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The title to display on the response card.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message that defines a response card that the client application can show to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: PlainTextMessage
+																				"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The message to send to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in plain text format.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: SSMLMessage
+																				"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: Value
+																						"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The SSML text that defines the prompt.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "A message in Speech Synthesis Markup Language (SSML).",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "The primary message that Amazon Lex should send to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: Variations
+																		"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																					// Property: CustomPayload
+																					"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The string that is sent to your application.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in a custom format defined by the client application.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: ImageResponseCard
+																					"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Buttons
+																							"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																										// Property: Text
+																										"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																											Description: "The text that appears on the button.",
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																										// Property: Value
+																										"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																											Description: "The value returned to Amazon Lex when the user chooses this button.",
+																											Computed:    true,
+																										}, /*END ATTRIBUTE*/
+																									}, /*END SCHEMA*/
+																								}, /*END NESTED OBJECT*/
+																								Description: "A list of buttons that should be displayed on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageUrl
+																							"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The URL of an image to display on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Subtitle
+																							"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The subtitle to display on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: Title
+																							"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The title to display on the response card.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message that defines a response card that the client application can show to the user.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: PlainTextMessage
+																					"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The message to send to the user.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in plain text format.",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																					// Property: SSMLMessage
+																					"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: Value
+																							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																								Description: "The SSML text that defines the prompt.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																						Description: "A message in Speech Synthesis Markup Language (SSML).",
+																						Computed:    true,
+																					}, /*END ATTRIBUTE*/
+																				}, /*END SCHEMA*/
+																			}, /*END NESTED OBJECT*/
+																			Description: "Message variations to send to the user.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: MessageSelectionStrategy
+															"message_selection_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Indicates how a message is selected from a message group among retries.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: PromptAttemptsSpecification
+															"prompt_attempts_specification": // Pattern: ""
+															schema.MapNestedAttribute{       /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 																		// Property: AllowInterrupt
+																		"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																			Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: AllowedInputTypes
+																		"allowed_input_types": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AllowAudioInput
+																				"allow_audio_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																					Description: "Indicates whether audio input is allowed.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: AllowDTMFInput
+																				"allow_dtmf_input": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																					Description: "Indicates whether DTMF input is allowed.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the allowed input types.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: AudioAndDTMFInputSpecification
+																		"audio_and_dtmf_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: AudioSpecification
+																				"audio_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: EndTimeoutMs
+																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxLengthMs
+																						"max_length_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "Specifies the audio input specifications.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: DTMFSpecification
+																				"dtmf_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: DeletionCharacter
+																						"deletion_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: EndCharacter
+																						"end_character": schema.StringAttribute{ /*START ATTRIBUTE*/
+																							Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: EndTimeoutMs
+																						"end_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: MaxLength
+																						"max_length": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																							Description: "The maximum number of DTMF digits allowed in an utterance.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "Specifies the settings on DTMF input.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: StartTimeoutMs
+																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the audio and DTMF input specification.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																		// Property: TextInputSpecification
+																		"text_input_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: StartTimeoutMs
+																				"start_timeout_ms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																					Description: "Time for which a bot waits before re-prompting a customer for text input.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																			Description: "Specifies the text input specifications.",
+																			Computed:    true,
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Description: "Specifies the advanced settings on each attempt of the prompt.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "The prompt that Amazon Lex uses to elicit the slot value from the user.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SampleUtterances
+													"sample_utterances": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+														NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Utterance
+																"utterance": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
+																	Computed:    true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
+														}, /*END NESTED OBJECT*/
+														Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: SlotConstraint
+													"slot_constraint": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "Specifies whether the slot is required or optional.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: WaitAndContinueSpecification
+													"wait_and_continue_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: ContinueResponse
+															"continue_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
 																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-																		Type:        types.BoolType,
 																		Computed:    true,
-																	},
-																	"max_retries": {
-																		// Property: MaxRetries
-																		Description: "The maximum number of times the bot tries to elicit a resonse from the user using this prompt.",
-																		Type:        types.Int64Type,
-																		Computed:    true,
-																	},
-																	"message_groups_list": {
-																		// Property: MessageGroupsList
-																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																		Attributes: tfsdk.ListNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"message": {
-																					// Property: Message
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
 																					Description: "The primary message that Amazon Lex should send to the user.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"variations": {
-																					// Property: Variations
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
 																					Description: "Message variations to send to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"custom_payload": {
-																								// Property: CustomPayload
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: IsActive
+															"is_active": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																Description: "Specifies whether the bot will wait for a user to respond.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: StillWaitingResponse
+															"still_waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: FrequencyInSeconds
+																	"frequency_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "How often a message should be sent to the user in seconds.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																											// Property: Value
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message in a custom format defined by the client application.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The string that is sent to your application.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"image_response_card": {
-																								// Property: ImageResponseCard
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message that defines a response card that the client application can show to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"buttons": {
-																											// Property: Buttons
-																											Description: "A list of buttons that should be displayed on the response card.",
-																											Attributes: tfsdk.ListNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"text": {
-																														// Property: Text
-																														Description: "The text that appears on the button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"value": {
-																														// Property: Value
-																														Description: "The value returned to Amazon Lex when the user chooses this button.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_url": {
-																											// Property: ImageUrl
-																											Description: "The URL of an image to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"subtitle": {
-																											// Property: Subtitle
-																											Description: "The subtitle to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"title": {
-																											// Property: Title
-																											Description: "The title to display on the response card.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"plain_text_message": {
-																								// Property: PlainTextMessage
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message in plain text format.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
-																											// Property: Value
-																											Description: "The message to send to the user.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"ssml_message": {
-																								// Property: SSMLMessage
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
 																								Description: "A message in Speech Synthesis Markup Language (SSML).",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"value": {
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: TimeoutInSeconds
+																	"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																		Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+															// Property: WaitingResponse
+															"waiting_response": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																	// Property: AllowInterrupt
+																	"allow_interrupt": schema.BoolAttribute{ /*START ATTRIBUTE*/
+																		Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
+																		Computed:    true,
+																	}, /*END ATTRIBUTE*/
+																	// Property: MessageGroupsList
+																	"message_groups_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																		NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																				// Property: Message
+																				"message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																						// Property: CustomPayload
+																						"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The string that is sent to your application.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in a custom format defined by the client application.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: ImageResponseCard
+																						"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Buttons
+																								"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																											// Property: Text
+																											"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The text that appears on the button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
 																											// Property: Value
-																											Description: "The SSML text that defines the prompt.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"message_selection_strategy": {
-																		// Property: MessageSelectionStrategy
-																		Description: "Indicates how a message is selected from a message group among retries.",
-																		Type:        types.StringType,
+																											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																												Description: "The value returned to Amazon Lex when the user chooses this button.",
+																												Computed:    true,
+																											}, /*END ATTRIBUTE*/
+																										}, /*END SCHEMA*/
+																									}, /*END NESTED OBJECT*/
+																									Description: "A list of buttons that should be displayed on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: ImageUrl
+																								"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The URL of an image to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Subtitle
+																								"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The subtitle to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																								// Property: Title
+																								"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The title to display on the response card.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message that defines a response card that the client application can show to the user.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: PlainTextMessage
+																						"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The message to send to the user.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in plain text format.",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																						// Property: SSMLMessage
+																						"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																								// Property: Value
+																								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																									Description: "The SSML text that defines the prompt.",
+																									Computed:    true,
+																								}, /*END ATTRIBUTE*/
+																							}, /*END SCHEMA*/
+																							Description: "A message in Speech Synthesis Markup Language (SSML).",
+																							Computed:    true,
+																						}, /*END ATTRIBUTE*/
+																					}, /*END SCHEMA*/
+																					Description: "The primary message that Amazon Lex should send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																				// Property: Variations
+																				"variations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																							// Property: CustomPayload
+																							"custom_payload": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The string that is sent to your application.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in a custom format defined by the client application.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: ImageResponseCard
+																							"image_response_card": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Buttons
+																									"buttons": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																												// Property: Text
+																												"text": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The text that appears on the button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																												// Property: Value
+																												"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																													Description: "The value returned to Amazon Lex when the user chooses this button.",
+																													Computed:    true,
+																												}, /*END ATTRIBUTE*/
+																											}, /*END SCHEMA*/
+																										}, /*END NESTED OBJECT*/
+																										Description: "A list of buttons that should be displayed on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: ImageUrl
+																									"image_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The URL of an image to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Subtitle
+																									"subtitle": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The subtitle to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																									// Property: Title
+																									"title": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The title to display on the response card.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message that defines a response card that the client application can show to the user.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: PlainTextMessage
+																							"plain_text_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The message to send to the user.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in plain text format.",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																							// Property: SSMLMessage
+																							"ssml_message": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+																								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																									// Property: Value
+																									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																										Description: "The SSML text that defines the prompt.",
+																										Computed:    true,
+																									}, /*END ATTRIBUTE*/
+																								}, /*END SCHEMA*/
+																								Description: "A message in Speech Synthesis Markup Language (SSML).",
+																								Computed:    true,
+																							}, /*END ATTRIBUTE*/
+																						}, /*END SCHEMA*/
+																					}, /*END NESTED OBJECT*/
+																					Description: "Message variations to send to the user.",
+																					Computed:    true,
+																				}, /*END ATTRIBUTE*/
+																			}, /*END SCHEMA*/
+																		}, /*END NESTED OBJECT*/
+																		Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
 																		Computed:    true,
-																	},
-																	"prompt_attempts_specification": {
-																		// Property: PromptAttemptsSpecification
-																		Description: "Specifies the advanced settings on each attempt of the prompt.",
-																		// Pattern: ""
-																		Attributes: tfsdk.MapNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"allow_interrupt": {
-																					// Property: AllowInterrupt
-																					Description: "Indicates whether the user can interrupt a speech prompt attempt from the bot.",
-																					Type:        types.BoolType,
-																					Computed:    true,
-																				},
-																				"allowed_input_types": {
-																					// Property: AllowedInputTypes
-																					Description: "Specifies the allowed input types.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"allow_audio_input": {
-																								// Property: AllowAudioInput
-																								Description: "Indicates whether audio input is allowed.",
-																								Type:        types.BoolType,
-																								Computed:    true,
-																							},
-																							"allow_dtmf_input": {
-																								// Property: AllowDTMFInput
-																								Description: "Indicates whether DTMF input is allowed.",
-																								Type:        types.BoolType,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"audio_and_dtmf_input_specification": {
-																					// Property: AudioAndDTMFInputSpecification
-																					Description: "Specifies the audio and DTMF input specification.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"audio_specification": {
-																								// Property: AudioSpecification
-																								Description: "Specifies the audio input specifications.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"end_timeout_ms": {
-																											// Property: EndTimeoutMs
-																											Description: "Time for which a bot waits after the customer stops speaking to assume the utterance is finished.",
-																											Type:        types.Int64Type,
-																											Computed:    true,
-																										},
-																										"max_length_ms": {
-																											// Property: MaxLengthMs
-																											Description: "Time for how long Amazon Lex waits before speech input is truncated and the speech is returned to application.",
-																											Type:        types.Int64Type,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"dtmf_specification": {
-																								// Property: DTMFSpecification
-																								Description: "Specifies the settings on DTMF input.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"deletion_character": {
-																											// Property: DeletionCharacter
-																											Description: "The DTMF character that clears the accumulated DTMF digits and immediately ends the input.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"end_character": {
-																											// Property: EndCharacter
-																											Description: "The DTMF character that immediately ends input. If the user does not press this character, the input ends after the end timeout.",
-																											Type:        types.StringType,
-																											Computed:    true,
-																										},
-																										"end_timeout_ms": {
-																											// Property: EndTimeoutMs
-																											Description: "How long the bot should wait after the last DTMF character input before assuming that the input has concluded.",
-																											Type:        types.Int64Type,
-																											Computed:    true,
-																										},
-																										"max_length": {
-																											// Property: MaxLength
-																											Description: "The maximum number of DTMF digits allowed in an utterance.",
-																											Type:        types.Int64Type,
-																											Computed:    true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"start_timeout_ms": {
-																								// Property: StartTimeoutMs
-																								Description: "Time for which a bot waits before assuming that the customer isn't going to speak or press a key. This timeout is shared between Audio and DTMF inputs.",
-																								Type:        types.Int64Type,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"text_input_specification": {
-																					// Property: TextInputSpecification
-																					Description: "Specifies the text input specifications.",
-																					Attributes: tfsdk.SingleNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"start_timeout_ms": {
-																								// Property: StartTimeoutMs
-																								Description: "Time for which a bot waits before re-prompting a customer for text input.",
-																								Type:        types.Int64Type,
-																								Computed:    true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"sample_utterances": {
-															// Property: SampleUtterances
-															Description: "If you know a specific pattern that users might respond to an Amazon Lex request for a slot value, you can provide those utterances to improve accuracy.",
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"utterance": {
-																		// Property: Utterance
-																		Description: "The sample utterance that Amazon Lex uses to build its machine-learning model to recognize intents/slots.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"slot_constraint": {
-															// Property: SlotConstraint
-															Description: "Specifies whether the slot is required or optional.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-														"wait_and_continue_specification": {
-															// Property: WaitAndContinueSpecification
-															Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"continue_response": {
-																		// Property: ContinueResponse
-																		Description: "The response that Amazon Lex sends to indicate that the bot is ready to continue the conversation.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"allow_interrupt": {
-																					// Property: AllowInterrupt
-																					Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-																					Type:        types.BoolType,
-																					Computed:    true,
-																				},
-																				"message_groups_list": {
-																					// Property: MessageGroupsList
-																					Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"message": {
-																								// Property: Message
-																								Description: "The primary message that Amazon Lex should send to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"custom_payload": {
-																											// Property: CustomPayload
-																											Description: "A message in a custom format defined by the client application.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The string that is sent to your application.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_response_card": {
-																											// Property: ImageResponseCard
-																											Description: "A message that defines a response card that the client application can show to the user.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"buttons": {
-																														// Property: Buttons
-																														Description: "A list of buttons that should be displayed on the response card.",
-																														Attributes: tfsdk.ListNestedAttributes(
-																															map[string]tfsdk.Attribute{
-																																"text": {
-																																	// Property: Text
-																																	Description: "The text that appears on the button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																																"value": {
-																																	// Property: Value
-																																	Description: "The value returned to Amazon Lex when the user chooses this button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																															},
-																														),
-																														Computed: true,
-																													},
-																													"image_url": {
-																														// Property: ImageUrl
-																														Description: "The URL of an image to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"subtitle": {
-																														// Property: Subtitle
-																														Description: "The subtitle to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"title": {
-																														// Property: Title
-																														Description: "The title to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"plain_text_message": {
-																											// Property: PlainTextMessage
-																											Description: "A message in plain text format.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The message to send to the user.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"ssml_message": {
-																											// Property: SSMLMessage
-																											Description: "A message in Speech Synthesis Markup Language (SSML).",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The SSML text that defines the prompt.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"variations": {
-																								// Property: Variations
-																								Description: "Message variations to send to the user.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"custom_payload": {
-																											// Property: CustomPayload
-																											Description: "A message in a custom format defined by the client application.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The string that is sent to your application.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_response_card": {
-																											// Property: ImageResponseCard
-																											Description: "A message that defines a response card that the client application can show to the user.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"buttons": {
-																														// Property: Buttons
-																														Description: "A list of buttons that should be displayed on the response card.",
-																														Attributes: tfsdk.ListNestedAttributes(
-																															map[string]tfsdk.Attribute{
-																																"text": {
-																																	// Property: Text
-																																	Description: "The text that appears on the button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																																"value": {
-																																	// Property: Value
-																																	Description: "The value returned to Amazon Lex when the user chooses this button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																															},
-																														),
-																														Computed: true,
-																													},
-																													"image_url": {
-																														// Property: ImageUrl
-																														Description: "The URL of an image to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"subtitle": {
-																														// Property: Subtitle
-																														Description: "The subtitle to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"title": {
-																														// Property: Title
-																														Description: "The title to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"plain_text_message": {
-																											// Property: PlainTextMessage
-																											Description: "A message in plain text format.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The message to send to the user.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"ssml_message": {
-																											// Property: SSMLMessage
-																											Description: "A message in Speech Synthesis Markup Language (SSML).",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The SSML text that defines the prompt.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"is_active": {
-																		// Property: IsActive
-																		Description: "Specifies whether the bot will wait for a user to respond.",
-																		Type:        types.BoolType,
-																		Computed:    true,
-																	},
-																	"still_waiting_response": {
-																		// Property: StillWaitingResponse
-																		Description: "The response that Amazon Lex sends periodically to the user to indicate that the bot is still waiting for input from the user.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"allow_interrupt": {
-																					// Property: AllowInterrupt
-																					Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-																					Type:        types.BoolType,
-																					Computed:    true,
-																				},
-																				"frequency_in_seconds": {
-																					// Property: FrequencyInSeconds
-																					Description: "How often a message should be sent to the user in seconds.",
-																					Type:        types.Int64Type,
-																					Computed:    true,
-																				},
-																				"message_groups_list": {
-																					// Property: MessageGroupsList
-																					Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"message": {
-																								// Property: Message
-																								Description: "The primary message that Amazon Lex should send to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"custom_payload": {
-																											// Property: CustomPayload
-																											Description: "A message in a custom format defined by the client application.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The string that is sent to your application.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_response_card": {
-																											// Property: ImageResponseCard
-																											Description: "A message that defines a response card that the client application can show to the user.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"buttons": {
-																														// Property: Buttons
-																														Description: "A list of buttons that should be displayed on the response card.",
-																														Attributes: tfsdk.ListNestedAttributes(
-																															map[string]tfsdk.Attribute{
-																																"text": {
-																																	// Property: Text
-																																	Description: "The text that appears on the button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																																"value": {
-																																	// Property: Value
-																																	Description: "The value returned to Amazon Lex when the user chooses this button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																															},
-																														),
-																														Computed: true,
-																													},
-																													"image_url": {
-																														// Property: ImageUrl
-																														Description: "The URL of an image to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"subtitle": {
-																														// Property: Subtitle
-																														Description: "The subtitle to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"title": {
-																														// Property: Title
-																														Description: "The title to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"plain_text_message": {
-																											// Property: PlainTextMessage
-																											Description: "A message in plain text format.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The message to send to the user.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"ssml_message": {
-																											// Property: SSMLMessage
-																											Description: "A message in Speech Synthesis Markup Language (SSML).",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The SSML text that defines the prompt.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"variations": {
-																								// Property: Variations
-																								Description: "Message variations to send to the user.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"custom_payload": {
-																											// Property: CustomPayload
-																											Description: "A message in a custom format defined by the client application.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The string that is sent to your application.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_response_card": {
-																											// Property: ImageResponseCard
-																											Description: "A message that defines a response card that the client application can show to the user.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"buttons": {
-																														// Property: Buttons
-																														Description: "A list of buttons that should be displayed on the response card.",
-																														Attributes: tfsdk.ListNestedAttributes(
-																															map[string]tfsdk.Attribute{
-																																"text": {
-																																	// Property: Text
-																																	Description: "The text that appears on the button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																																"value": {
-																																	// Property: Value
-																																	Description: "The value returned to Amazon Lex when the user chooses this button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																															},
-																														),
-																														Computed: true,
-																													},
-																													"image_url": {
-																														// Property: ImageUrl
-																														Description: "The URL of an image to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"subtitle": {
-																														// Property: Subtitle
-																														Description: "The subtitle to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"title": {
-																														// Property: Title
-																														Description: "The title to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"plain_text_message": {
-																											// Property: PlainTextMessage
-																											Description: "A message in plain text format.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The message to send to the user.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"ssml_message": {
-																											// Property: SSMLMessage
-																											Description: "A message in Speech Synthesis Markup Language (SSML).",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The SSML text that defines the prompt.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"timeout_in_seconds": {
-																					// Property: TimeoutInSeconds
-																					Description: "If Amazon Lex waits longer than this length of time in seconds for a response, it will stop sending messages.",
-																					Type:        types.Int64Type,
-																					Computed:    true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"waiting_response": {
-																		// Property: WaitingResponse
-																		Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"allow_interrupt": {
-																					// Property: AllowInterrupt
-																					Description: "Indicates whether the user can interrupt a speech prompt from the bot.",
-																					Type:        types.BoolType,
-																					Computed:    true,
-																				},
-																				"message_groups_list": {
-																					// Property: MessageGroupsList
-																					Description: "One to 5 message groups that contain update messages. Amazon Lex chooses one of the messages to play to the user.",
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"message": {
-																								// Property: Message
-																								Description: "The primary message that Amazon Lex should send to the user.",
-																								Attributes: tfsdk.SingleNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"custom_payload": {
-																											// Property: CustomPayload
-																											Description: "A message in a custom format defined by the client application.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The string that is sent to your application.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_response_card": {
-																											// Property: ImageResponseCard
-																											Description: "A message that defines a response card that the client application can show to the user.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"buttons": {
-																														// Property: Buttons
-																														Description: "A list of buttons that should be displayed on the response card.",
-																														Attributes: tfsdk.ListNestedAttributes(
-																															map[string]tfsdk.Attribute{
-																																"text": {
-																																	// Property: Text
-																																	Description: "The text that appears on the button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																																"value": {
-																																	// Property: Value
-																																	Description: "The value returned to Amazon Lex when the user chooses this button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																															},
-																														),
-																														Computed: true,
-																													},
-																													"image_url": {
-																														// Property: ImageUrl
-																														Description: "The URL of an image to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"subtitle": {
-																														// Property: Subtitle
-																														Description: "The subtitle to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"title": {
-																														// Property: Title
-																														Description: "The title to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"plain_text_message": {
-																											// Property: PlainTextMessage
-																											Description: "A message in plain text format.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The message to send to the user.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"ssml_message": {
-																											// Property: SSMLMessage
-																											Description: "A message in Speech Synthesis Markup Language (SSML).",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The SSML text that defines the prompt.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																							"variations": {
-																								// Property: Variations
-																								Description: "Message variations to send to the user.",
-																								Attributes: tfsdk.ListNestedAttributes(
-																									map[string]tfsdk.Attribute{
-																										"custom_payload": {
-																											// Property: CustomPayload
-																											Description: "A message in a custom format defined by the client application.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The string that is sent to your application.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"image_response_card": {
-																											// Property: ImageResponseCard
-																											Description: "A message that defines a response card that the client application can show to the user.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"buttons": {
-																														// Property: Buttons
-																														Description: "A list of buttons that should be displayed on the response card.",
-																														Attributes: tfsdk.ListNestedAttributes(
-																															map[string]tfsdk.Attribute{
-																																"text": {
-																																	// Property: Text
-																																	Description: "The text that appears on the button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																																"value": {
-																																	// Property: Value
-																																	Description: "The value returned to Amazon Lex when the user chooses this button.",
-																																	Type:        types.StringType,
-																																	Computed:    true,
-																																},
-																															},
-																														),
-																														Computed: true,
-																													},
-																													"image_url": {
-																														// Property: ImageUrl
-																														Description: "The URL of an image to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"subtitle": {
-																														// Property: Subtitle
-																														Description: "The subtitle to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																													"title": {
-																														// Property: Title
-																														Description: "The title to display on the response card.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"plain_text_message": {
-																											// Property: PlainTextMessage
-																											Description: "A message in plain text format.",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The message to send to the user.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																										"ssml_message": {
-																											// Property: SSMLMessage
-																											Description: "A message in Speech Synthesis Markup Language (SSML).",
-																											Attributes: tfsdk.SingleNestedAttributes(
-																												map[string]tfsdk.Attribute{
-																													"value": {
-																														// Property: Value
-																														Description: "The SSML text that defines the prompt.",
-																														Type:        types.StringType,
-																														Computed:    true,
-																													},
-																												},
-																											),
-																											Computed: true,
-																										},
-																									},
-																								),
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"locale_id": {
-						// Property: LocaleId
+																	}, /*END ATTRIBUTE*/
+																}, /*END SCHEMA*/
+																Description: "The response that Amazon Lex sends to indicate that the bot is waiting for the conversation to continue.",
+																Computed:    true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Specifies the prompts that Amazon Lex uses while a bot is waiting for customer input.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Settings that you can use for eliciting a slot value.",
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "List of slots",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of intents",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: LocaleId
+					"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier of the language and locale that the bot will be used in.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"nlu_confidence_threshold": {
-						// Property: NluConfidenceThreshold
+					}, /*END ATTRIBUTE*/
+					// Property: NluConfidenceThreshold
+					"nlu_confidence_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The specified confidence threshold for inserting the AMAZON.FallbackIntent and AMAZON.KendraSearchIntent intents.",
-						Type:        types.Float64Type,
 						Computed:    true,
-					},
-					"slot_types": {
-						// Property: SlotTypes
-						Description: "List of SlotTypes",
-						Attributes: tfsdk.SetNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"description": {
-									// Property: Description
+					}, /*END ATTRIBUTE*/
+					// Property: SlotTypes
+					"slot_types": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Description
+								"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A description of the resource",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"external_source_setting": {
-									// Property: ExternalSourceSetting
+								}, /*END ATTRIBUTE*/
+								// Property: ExternalSourceSetting
+								"external_source_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: GrammarSlotTypeSetting
+										"grammar_slot_type_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Source
+												"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: KmsKeyArn
+														"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: S3BucketName
+														"s3_bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The name of the S3 bucket that contains the grammar source.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+														// Property: S3ObjectKey
+														"s3_object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Description: "The path to the grammar in the S3 bucket.",
+															Computed:    true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Settings required for a slot type based on a grammar that you provide.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Description: "Provides information about the external source of the slot type's definition.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"grammar_slot_type_setting": {
-												// Property: GrammarSlotTypeSetting
-												Description: "Settings required for a slot type based on a grammar that you provide.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"source": {
-															// Property: Source
-															Description: "Describes the Amazon S3 bucket name and location for the grammar that is the source for the slot type.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"kms_key_arn": {
-																		// Property: KmsKeyArn
-																		Description: "The Amazon KMS key required to decrypt the contents of the grammar, if any.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"s3_bucket_name": {
-																		// Property: S3BucketName
-																		Description: "The name of the S3 bucket that contains the grammar source.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"s3_object_key": {
-																		// Property: S3ObjectKey
-																		Description: "The path to the grammar in the S3 bucket.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"name": {
-									// Property: Name
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Name
+								"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Unique name for a resource.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"parent_slot_type_signature": {
-									// Property: ParentSlotTypeSignature
+								}, /*END ATTRIBUTE*/
+								// Property: ParentSlotTypeSignature
+								"parent_slot_type_signature": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The built-in slot type used as a parent of this slot type.",
-									Type:        types.StringType,
 									Computed:    true,
-								},
-								"slot_type_values": {
-									// Property: SlotTypeValues
-									Description: "A List of slot type values",
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"sample_value": {
-												// Property: SampleValue
+								}, /*END ATTRIBUTE*/
+								// Property: SlotTypeValues
+								"slot_type_values": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: SampleValue
+											"sample_value": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The value that can be used for a slot type.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Description: "Defines one of the values for a slot type.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"value": {
-															// Property: Value
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: Synonyms
+											"synonyms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Value
+														"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Description: "The value that can be used for a slot type.",
-															Type:        types.StringType,
 															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"synonyms": {
-												// Property: Synonyms
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
 												Description: "Additional values related to the slot type entry.",
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"value": {
-															// Property: Value
-															Description: "The value that can be used for a slot type.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"value_selection_setting": {
-									// Property: ValueSelectionSetting
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "A List of slot type values",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ValueSelectionSetting
+								"value_selection_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AdvancedRecognitionSetting
+										"advanced_recognition_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AudioRecognitionStrategy
+												"audio_recognition_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "Provides settings that enable advanced recognition settings for slot values.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RegexFilter
+										"regex_filter": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Pattern
+												"pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "Regex pattern",
+													Computed:    true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Description: "A regular expression used to validate the value of a slot.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: ResolutionStrategy
+										"resolution_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Description: "Contains settings used by Amazon Lex to select a slot value.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"advanced_recognition_setting": {
-												// Property: AdvancedRecognitionSetting
-												Description: "Provides settings that enable advanced recognition settings for slot values.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"audio_recognition_strategy": {
-															// Property: AudioRecognitionStrategy
-															Description: "Enables using slot values as a custom vocabulary when recognizing user utterances.",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"regex_filter": {
-												// Property: RegexFilter
-												Description: "A regular expression used to validate the value of a slot.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"pattern": {
-															// Property: Pattern
-															Description: "Regex pattern",
-															Type:        types.StringType,
-															Computed:    true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"resolution_strategy": {
-												// Property: ResolutionStrategy
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"voice_settings": {
-						// Property: VoiceSettings
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "List of SlotTypes",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: VoiceSettings
+					"voice_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Engine
+							"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: VoiceId
+							"voice_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Description: "Settings for using an Amazon Polly voice to communicate with a user.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"engine": {
-									// Property: Engine
-									Description: "Indicates the type of Amazon Polly voice that Amazon Lex should use for voice interaction with the user. For more information, see the engine parameter of the SynthesizeSpeech operation in the Amazon Polly developer guide.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-								"voice_id": {
-									// Property: VoiceId
-									Description: "The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the user.",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"bot_tags": {
-			// Property: BotTags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of tags to add to the bot, which can only be added at bot creation.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair for tagging Lex resources",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "List of bot locales",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: BotTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of tags to add to the bot, which can only be added at bot creation.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair for tagging Lex resources",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"bot_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "A list of tags to add to the bot, which can only be added at bot creation.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"value": {
-						// Property: Value
-						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"data_privacy": {
-			// Property: DataPrivacy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Data privacy setting of the Bot.",
-			//	  "properties": {
-			//	    "ChildDirected": {
-			//	      "description": "",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ChildDirected"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DataPrivacy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Data privacy setting of the Bot.",
+		//	  "properties": {
+		//	    "ChildDirected": {
+		//	      "description": "",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ChildDirected"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"data_privacy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ChildDirected
+				"child_directed": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Data privacy setting of the Bot.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"child_directed": {
-						// Property: ChildDirected
-						Description: "",
-						Type:        types.BoolType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description of the resource",
-			//	  "maxLength": 200,
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description of the resource",
+		//	  "maxLength": 200,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description of the resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique ID of resource",
-			//	  "maxLength": 10,
-			//	  "minLength": 10,
-			//	  "pattern": "^[0-9a-zA-Z]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique ID of resource",
+		//	  "maxLength": 10,
+		//	  "minLength": 10,
+		//	  "pattern": "^[0-9a-zA-Z]+$",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique ID of resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"idle_session_ttl_in_seconds": {
-			// Property: IdleSessionTTLInSeconds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "IdleSessionTTLInSeconds of the resource",
-			//	  "maximum": 86400,
-			//	  "minimum": 60,
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IdleSessionTTLInSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "IdleSessionTTLInSeconds of the resource",
+		//	  "maximum": 86400,
+		//	  "minimum": 60,
+		//	  "type": "integer"
+		//	}
+		"idle_session_ttl_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "IdleSessionTTLInSeconds of the resource",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique name for a resource.",
-			//	  "maxLength": 100,
-			//	  "minLength": 1,
-			//	  "pattern": "^([0-9a-zA-Z][_-]?)+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique name for a resource.",
+		//	  "maxLength": 100,
+		//	  "minLength": 1,
+		//	  "pattern": "^([0-9a-zA-Z][_-]?)+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique name for a resource.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"role_arn": {
-			// Property: RoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 32,
-			//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 32,
+		//	  "pattern": "^arn:aws[a-zA-Z-]*:iam::[0-9]{12}:role/.*$",
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of an IAM role that has permission to access the bot.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"test_bot_alias_settings": {
-			// Property: TestBotAliasSettings
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Configuring the test bot alias settings for a given bot",
-			//	  "properties": {
-			//	    "BotAliasLocaleSettings": {
-			//	      "description": "A list of bot alias locale settings to add to the bot alias.",
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "A locale setting in alias",
-			//	        "properties": {
-			//	          "BotAliasLocaleSetting": {
-			//	            "additionalProperties": false,
-			//	            "description": "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
-			//	            "properties": {
-			//	              "CodeHookSpecification": {
-			//	                "additionalProperties": false,
-			//	                "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//	                "properties": {
-			//	                  "LambdaCodeHook": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//	                    "properties": {
-			//	                      "CodeHookInterfaceVersion": {
-			//	                        "description": "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
-			//	                        "maxLength": 5,
-			//	                        "minLength": 1,
-			//	                        "type": "string"
-			//	                      },
-			//	                      "LambdaArn": {
-			//	                        "description": "The Amazon Resource Name (ARN) of the Lambda function.",
-			//	                        "maxLength": 2048,
-			//	                        "minLength": 20,
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "CodeHookInterfaceVersion",
-			//	                      "LambdaArn"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "LambdaCodeHook"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Enabled": {
-			//	                "description": "Whether the Lambda code hook is enabled",
-			//	                "type": "boolean"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Enabled"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "LocaleId": {
-			//	            "description": "A string used to identify the locale",
-			//	            "maxLength": 128,
-			//	            "minLength": 1,
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "LocaleId",
-			//	          "BotAliasLocaleSetting"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 50,
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "ConversationLogSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//	      "properties": {
-			//	        "AudioLogSettings": {
-			//	          "description": "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "description": "Settings for logging audio of conversations between Amazon Lex and a user. You specify whether to log audio and the Amazon S3 bucket where the audio file is stored.",
-			//	            "properties": {
-			//	              "Destination": {
-			//	                "additionalProperties": false,
-			//	                "description": "The location of audio log files collected when conversation logging is enabled for a bot.",
-			//	                "properties": {
-			//	                  "S3Bucket": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Specifies an Amazon S3 bucket for logging audio conversations",
-			//	                    "properties": {
-			//	                      "KmsKeyArn": {
-			//	                        "description": "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
-			//	                        "maxLength": 2048,
-			//	                        "minLength": 20,
-			//	                        "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
-			//	                        "type": "string"
-			//	                      },
-			//	                      "LogPrefix": {
-			//	                        "description": "The Amazon S3 key of the deployment package.",
-			//	                        "maxLength": 1024,
-			//	                        "minLength": 0,
-			//	                        "type": "string"
-			//	                      },
-			//	                      "S3BucketArn": {
-			//	                        "description": "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-			//	                        "maxLength": 2048,
-			//	                        "minLength": 1,
-			//	                        "pattern": "^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "LogPrefix",
-			//	                      "S3BucketArn"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "S3Bucket"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Enabled": {
-			//	                "description": "",
-			//	                "type": "boolean"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Destination",
-			//	              "Enabled"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "type": "array",
-			//	          "uniqueItems": true
-			//	        },
-			//	        "TextLogSettings": {
-			//	          "description": "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
-			//	            "properties": {
-			//	              "Destination": {
-			//	                "additionalProperties": false,
-			//	                "description": "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
-			//	                "properties": {
-			//	                  "CloudWatch": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "CloudWatchLogGroupArn": {
-			//	                        "description": "A string used to identify the groupArn for the Cloudwatch Log Group",
-			//	                        "maxLength": 2048,
-			//	                        "minLength": 1,
-			//	                        "type": "string"
-			//	                      },
-			//	                      "LogPrefix": {
-			//	                        "description": "A string containing the value for the Log Prefix",
-			//	                        "maxLength": 1024,
-			//	                        "minLength": 0,
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "CloudWatchLogGroupArn",
-			//	                      "LogPrefix"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "CloudWatch"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Enabled": {
-			//	                "description": "",
-			//	                "type": "boolean"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Destination",
-			//	              "Enabled"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "maxItems": 1,
-			//	          "type": "array",
-			//	          "uniqueItems": true
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Description": {
-			//	      "description": "A description of the resource",
-			//	      "maxLength": 200,
-			//	      "type": "string"
-			//	    },
-			//	    "SentimentAnalysisSettings": {
-			//	      "additionalProperties": false,
-			//	      "description": "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
-			//	      "properties": {
-			//	        "DetectSentiment": {
-			//	          "description": "Enable to call Amazon Comprehend for Sentiment natively within Lex",
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "DetectSentiment"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Configuring the test bot alias settings for a given bot",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bot_alias_locale_settings": {
-						// Property: BotAliasLocaleSettings
-						Description: "A list of bot alias locale settings to add to the bot alias.",
-						Attributes: tfsdk.SetNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bot_alias_locale_setting": {
-									// Property: BotAliasLocaleSetting
-									Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"code_hook_specification": {
-												// Property: CodeHookSpecification
+		}, /*END ATTRIBUTE*/
+		// Property: TestBotAliasSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuring the test bot alias settings for a given bot",
+		//	  "properties": {
+		//	    "BotAliasLocaleSettings": {
+		//	      "description": "A list of bot alias locale settings to add to the bot alias.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "A locale setting in alias",
+		//	        "properties": {
+		//	          "BotAliasLocaleSetting": {
+		//	            "additionalProperties": false,
+		//	            "description": "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
+		//	            "properties": {
+		//	              "CodeHookSpecification": {
+		//	                "additionalProperties": false,
+		//	                "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+		//	                "properties": {
+		//	                  "LambdaCodeHook": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+		//	                    "properties": {
+		//	                      "CodeHookInterfaceVersion": {
+		//	                        "description": "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
+		//	                        "maxLength": 5,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "LambdaArn": {
+		//	                        "description": "The Amazon Resource Name (ARN) of the Lambda function.",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 20,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "CodeHookInterfaceVersion",
+		//	                      "LambdaArn"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "LambdaCodeHook"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Enabled": {
+		//	                "description": "Whether the Lambda code hook is enabled",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "LocaleId": {
+		//	            "description": "A string used to identify the locale",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "LocaleId",
+		//	          "BotAliasLocaleSetting"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 50,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "ConversationLogSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+		//	      "properties": {
+		//	        "AudioLogSettings": {
+		//	          "description": "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Settings for logging audio of conversations between Amazon Lex and a user. You specify whether to log audio and the Amazon S3 bucket where the audio file is stored.",
+		//	            "properties": {
+		//	              "Destination": {
+		//	                "additionalProperties": false,
+		//	                "description": "The location of audio log files collected when conversation logging is enabled for a bot.",
+		//	                "properties": {
+		//	                  "S3Bucket": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Specifies an Amazon S3 bucket for logging audio conversations",
+		//	                    "properties": {
+		//	                      "KmsKeyArn": {
+		//	                        "description": "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 20,
+		//	                        "pattern": "^arn:[\\w\\-]+:kms:[\\w\\-]+:[\\d]{12}:(?:key\\/[\\w\\-]+|alias\\/[a-zA-Z0-9:\\/_\\-]{1,256})$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "LogPrefix": {
+		//	                        "description": "The Amazon S3 key of the deployment package.",
+		//	                        "maxLength": 1024,
+		//	                        "minLength": 0,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "S3BucketArn": {
+		//	                        "description": "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "pattern": "^arn:[\\w\\-]+:s3:::[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "LogPrefix",
+		//	                      "S3BucketArn"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "S3Bucket"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Enabled": {
+		//	                "description": "",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Destination",
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "TextLogSettings": {
+		//	          "description": "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "Contains information about code hooks that Amazon Lex calls during a conversation.",
+		//	            "properties": {
+		//	              "Destination": {
+		//	                "additionalProperties": false,
+		//	                "description": "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
+		//	                "properties": {
+		//	                  "CloudWatch": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "CloudWatchLogGroupArn": {
+		//	                        "description": "A string used to identify the groupArn for the Cloudwatch Log Group",
+		//	                        "maxLength": 2048,
+		//	                        "minLength": 1,
+		//	                        "type": "string"
+		//	                      },
+		//	                      "LogPrefix": {
+		//	                        "description": "A string containing the value for the Log Prefix",
+		//	                        "maxLength": 1024,
+		//	                        "minLength": 0,
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "CloudWatchLogGroupArn",
+		//	                      "LogPrefix"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "CloudWatch"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Enabled": {
+		//	                "description": "",
+		//	                "type": "boolean"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Destination",
+		//	              "Enabled"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 1,
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Description": {
+		//	      "description": "A description of the resource",
+		//	      "maxLength": 200,
+		//	      "type": "string"
+		//	    },
+		//	    "SentimentAnalysisSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
+		//	      "properties": {
+		//	        "DetectSentiment": {
+		//	          "description": "Enable to call Amazon Comprehend for Sentiment natively within Lex",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DetectSentiment"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"test_bot_alias_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BotAliasLocaleSettings
+				"bot_alias_locale_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BotAliasLocaleSetting
+							"bot_alias_locale_setting": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: CodeHookSpecification
+									"code_hook_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: LambdaCodeHook
+											"lambda_code_hook": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CodeHookInterfaceVersion
+													"code_hook_interface_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: LambdaArn
+													"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of the Lambda function.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"lambda_code_hook": {
-															// Property: LambdaCodeHook
-															Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"code_hook_interface_version": {
-																		// Property: CodeHookInterfaceVersion
-																		Description: "The version of the request-response that you want Amazon Lex to use to invoke your Lambda function.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"lambda_arn": {
-																		// Property: LambdaArn
-																		Description: "The Amazon Resource Name (ARN) of the Lambda function.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"enabled": {
-												// Property: Enabled
-												Description: "Whether the Lambda code hook is enabled",
-												Type:        types.BoolType,
 												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"locale_id": {
-									// Property: LocaleId
-									Description: "A string used to identify the locale",
-									Type:        types.StringType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"conversation_log_settings": {
-						// Property: ConversationLogSettings
-						Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"audio_log_settings": {
-									// Property: AudioLogSettings
-									Description: "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
-									Attributes: tfsdk.SetNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"destination": {
-												// Property: Destination
-												Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"s3_bucket": {
-															// Property: S3Bucket
-															Description: "Specifies an Amazon S3 bucket for logging audio conversations",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"kms_key_arn": {
-																		// Property: KmsKeyArn
-																		Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"log_prefix": {
-																		// Property: LogPrefix
-																		Description: "The Amazon S3 key of the deployment package.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"s3_bucket_arn": {
-																		// Property: S3BucketArn
-																		Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"enabled": {
-												// Property: Enabled
-												Description: "",
-												Type:        types.BoolType,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "Whether the Lambda code hook is enabled",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "You can use this parameter to specify a specific Lambda function to run different functions in different locales.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: LocaleId
+							"locale_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A string used to identify the locale",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of bot alias locale settings to add to the bot alias.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ConversationLogSettings
+				"conversation_log_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AudioLogSettings
+						"audio_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: S3Bucket
+											"s3_bucket": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: KmsKeyArn
+													"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of an AWS Key Management Service (KMS) key for encrypting audio log files stored in an S3 bucket.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: LogPrefix
+													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon S3 key of the deployment package.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: S3BucketArn
+													"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "The Amazon Resource Name (ARN) of an Amazon S3 bucket where audio log files are stored.",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Specifies an Amazon S3 bucket for logging audio conversations",
 												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"text_log_settings": {
-									// Property: TextLogSettings
-									Description: "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
-									Attributes: tfsdk.SetNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"destination": {
-												// Property: Destination
-												Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"cloudwatch": {
-															// Property: CloudWatch
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"cloudwatch_log_group_arn": {
-																		// Property: CloudWatchLogGroupArn
-																		Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																	"log_prefix": {
-																		// Property: LogPrefix
-																		Description: "A string containing the value for the Log Prefix",
-																		Type:        types.StringType,
-																		Computed:    true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "The location of audio log files collected when conversation logging is enabled for a bot.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of audio log settings that pertain to the conversation log settings for the bot's TestBotAlias.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TextLogSettings
+						"text_log_settings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Destination
+									"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CloudWatch
+											"cloudwatch": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: CloudWatchLogGroupArn
+													"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string used to identify the groupArn for the Cloudwatch Log Group",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: LogPrefix
+													"log_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Description: "A string containing the value for the Log Prefix",
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Computed: true,
-											},
-											"enabled": {
-												// Property: Enabled
-												Description: "",
-												Type:        types.BoolType,
-												Computed:    true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"description": {
-						// Property: Description
-						Description: "A description of the resource",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"sentiment_analysis_settings": {
-						// Property: SentimentAnalysisSettings
-						Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"detect_sentiment": {
-									// Property: DetectSentiment
-									Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
-									Type:        types.BoolType,
-									Computed:    true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"test_bot_alias_tags": {
-			// Property: TestBotAliasTags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair for tagging Lex resources",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Defines the Amazon CloudWatch Logs destination log group for conversation text logs.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Description: "",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "List of text log settings that pertain to the conversation log settings for the bot's TestBotAlias",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains information about code hooks that Amazon Lex calls during a conversation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the resource",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SentimentAnalysisSettings
+				"sentiment_analysis_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DetectSentiment
+						"detect_sentiment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Enable to call Amazon Comprehend for Sentiment natively within Lex",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Determines whether Amazon Lex will use Amazon Comprehend to detect the sentiment of user utterances.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuring the test bot alias settings for a given bot",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TestBotAliasTags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair for tagging Lex resources",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"test_bot_alias_tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A list of tags to add to the test alias for a bot, , which can only be added at bot/bot alias creation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Lex::Bot",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Lex::Bot").WithTerraformTypeName("awscc_lex_bot")
 	opts = opts.WithTerraformSchema(schema)
@@ -8602,7 +7966,7 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"weight":                                "Weight",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

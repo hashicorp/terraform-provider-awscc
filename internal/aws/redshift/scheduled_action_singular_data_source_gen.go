@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,270 +19,245 @@ func init() {
 // scheduledActionDataSource returns the Terraform awscc_redshift_scheduled_action data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Redshift::ScheduledAction resource.
 func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"enable": {
-			// Property: Enable
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Enable
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
+		//	  "type": "boolean"
+		//	}
+		"enable": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "If true, the schedule is enabled. If false, the scheduled action does not trigger.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"end_time": {
-			// Property: EndTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EndTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
+		//	  "type": "string"
+		//	}
+		"end_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The end time in UTC of the scheduled action. After this time, the scheduled action does not trigger.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"iam_role": {
-			// Property: IamRole
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IAM role to assume to run the target action.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: IamRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IAM role to assume to run the target action.",
+		//	  "type": "string"
+		//	}
+		"iam_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IAM role to assume to run the target action.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"next_invocations": {
-			// Property: NextInvocations
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of times when the scheduled action will run.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NextInvocations
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of times when the scheduled action will run.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"next_invocations": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "List of times when the scheduled action will run.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"schedule": {
-			// Property: Schedule
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The schedule in `at( )` or `cron( )` format.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Schedule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The schedule in `at( )` or `cron( )` format.",
+		//	  "type": "string"
+		//	}
+		"schedule": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The schedule in `at( )` or `cron( )` format.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"scheduled_action_description": {
-			// Property: ScheduledActionDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the scheduled action.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ScheduledActionDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the scheduled action.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"scheduled_action_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the scheduled action.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"scheduled_action_name": {
-			// Property: ScheduledActionName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the scheduled action. The name must be unique within an account.",
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ScheduledActionName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the scheduled action. The name must be unique within an account.",
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"scheduled_action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the scheduled action. The name must be unique within an account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"start_time": {
-			// Property: StartTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: StartTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
+		//	  "type": "string"
+		//	}
+		"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The start time in UTC of the scheduled action. Before this time, the scheduled action does not trigger.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The state of the scheduled action.",
-			//	  "enum": [
-			//	    "ACTIVE",
-			//	    "DISABLED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the scheduled action.",
+		//	  "enum": [
+		//	    "ACTIVE",
+		//	    "DISABLED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The state of the scheduled action.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"target_action": {
-			// Property: TargetAction
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
-			//	  "properties": {
-			//	    "PauseCluster": {
-			//	      "additionalProperties": false,
-			//	      "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
-			//	      "properties": {
-			//	        "ClusterIdentifier": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ClusterIdentifier"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ResizeCluster": {
-			//	      "additionalProperties": false,
-			//	      "description": "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
-			//	      "properties": {
-			//	        "Classic": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "ClusterIdentifier": {
-			//	          "type": "string"
-			//	        },
-			//	        "ClusterType": {
-			//	          "type": "string"
-			//	        },
-			//	        "NodeType": {
-			//	          "type": "string"
-			//	        },
-			//	        "NumberOfNodes": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ClusterIdentifier"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ResumeCluster": {
-			//	      "additionalProperties": false,
-			//	      "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
-			//	      "properties": {
-			//	        "ClusterIdentifier": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ClusterIdentifier"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TargetAction
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A JSON format string of the Amazon Redshift API operation with input parameters.",
+		//	  "properties": {
+		//	    "PauseCluster": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
+		//	      "properties": {
+		//	        "ClusterIdentifier": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClusterIdentifier"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ResizeCluster": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
+		//	      "properties": {
+		//	        "Classic": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "ClusterIdentifier": {
+		//	          "type": "string"
+		//	        },
+		//	        "ClusterType": {
+		//	          "type": "string"
+		//	        },
+		//	        "NodeType": {
+		//	          "type": "string"
+		//	        },
+		//	        "NumberOfNodes": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClusterIdentifier"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ResumeCluster": {
+		//	      "additionalProperties": false,
+		//	      "description": "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
+		//	      "properties": {
+		//	        "ClusterIdentifier": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ClusterIdentifier"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"target_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PauseCluster
+				"pause_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterIdentifier
+						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResizeCluster
+				"resize_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Classic
+						"classic": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClusterIdentifier
+						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ClusterType
+						"cluster_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NodeType
+						"node_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: NumberOfNodes
+						"number_of_nodes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ResumeCluster
+				"resume_cluster": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ClusterIdentifier
+						"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A JSON format string of the Amazon Redshift API operation with input parameters.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"pause_cluster": {
-						// Property: PauseCluster
-						Description: "Describes a pause cluster operation. For example, a scheduled action to run the `PauseCluster` API operation.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cluster_identifier": {
-									// Property: ClusterIdentifier
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"resize_cluster": {
-						// Property: ResizeCluster
-						Description: "Describes a resize cluster operation. For example, a scheduled action to run the `ResizeCluster` API operation.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"classic": {
-									// Property: Classic
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"cluster_identifier": {
-									// Property: ClusterIdentifier
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"cluster_type": {
-									// Property: ClusterType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"node_type": {
-									// Property: NodeType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"number_of_nodes": {
-									// Property: NumberOfNodes
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"resume_cluster": {
-						// Property: ResumeCluster
-						Description: "Describes a resume cluster operation. For example, a scheduled action to run the `ResumeCluster` API operation.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cluster_identifier": {
-									// Property: ClusterIdentifier
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Redshift::ScheduledAction",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::ScheduledAction").WithTerraformTypeName("awscc_redshift_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -307,7 +282,7 @@ func scheduledActionDataSource(ctx context.Context) (datasource.DataSource, erro
 		"target_action":                "TargetAction",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

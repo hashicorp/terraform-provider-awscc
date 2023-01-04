@@ -4,14 +4,23 @@ package cassandra
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,528 +30,501 @@ func init() {
 // tableResource returns the Terraform awscc_cassandra_table resource.
 // This Terraform resource corresponds to the CloudFormation AWS::Cassandra::Table resource.
 func tableResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"billing_mode": {
-			// Property: BillingMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Mode": {
-			//	      "default": "ON_DEMAND",
-			//	      "description": "Capacity mode for the specified table",
-			//	      "enum": [
-			//	        "PROVISIONED",
-			//	        "ON_DEMAND"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "ProvisionedThroughput": {
-			//	      "additionalProperties": false,
-			//	      "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-			//	      "properties": {
-			//	        "ReadCapacityUnits": {
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        },
-			//	        "WriteCapacityUnits": {
-			//	          "minimum": 1,
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ReadCapacityUnits",
-			//	        "WriteCapacityUnits"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Mode"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"mode": {
-						// Property: Mode
-						Description: "Capacity mode for the specified table",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"PROVISIONED",
-								"ON_DEMAND",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.StringValue("ON_DEMAND")),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"provisioned_throughput": {
-						// Property: ProvisionedThroughput
-						Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"read_capacity_units": {
-									// Property: ReadCapacityUnits
-									Type:     types.Int64Type,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntAtLeast(1),
-									},
-								},
-								"write_capacity_units": {
-									// Property: WriteCapacityUnits
-									Type:     types.Int64Type,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.IntAtLeast(1),
-									},
-								},
-							},
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: BillingMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Mode": {
+		//	      "default": "ON_DEMAND",
+		//	      "description": "Capacity mode for the specified table",
+		//	      "enum": [
+		//	        "PROVISIONED",
+		//	        "ON_DEMAND"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ProvisionedThroughput": {
+		//	      "additionalProperties": false,
+		//	      "description": "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
+		//	      "properties": {
+		//	        "ReadCapacityUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        },
+		//	        "WriteCapacityUnits": {
+		//	          "minimum": 1,
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ReadCapacityUnits",
+		//	        "WriteCapacityUnits"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Mode"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"billing_mode": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Capacity mode for the specified table",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"PROVISIONED",
+							"ON_DEMAND",
 						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						generic.StringDefaultValue("ON_DEMAND"),
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProvisionedThroughput
+				"provisioned_throughput": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ReadCapacityUnits
+						"read_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: WriteCapacityUnits
+						"write_capacity_units": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.Int64{ /*START VALIDATORS*/
+								int64validator.AtLeast(1),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Throughput for the specified table, which consists of values for ReadCapacityUnits and WriteCapacityUnits",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"clustering_key_columns": {
-			// Property: ClusteringKeyColumns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Clustering key columns of the table",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Column": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ColumnName": {
-			//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	            "type": "string"
-			//	          },
-			//	          "ColumnType": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "ColumnName",
-			//	          "ColumnType"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "OrderBy": {
-			//	        "default": "ASC",
-			//	        "enum": [
-			//	          "ASC",
-			//	          "DESC"
-			//	        ],
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Column"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "Clustering key columns of the table",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"column": {
-						// Property: Column
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"column_name": {
-									// Property: ColumnName
-									Type:     types.StringType,
-									Required: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
-									},
-								},
-								"column_type": {
-									// Property: ColumnType
-									Type:     types.StringType,
-									Required: true,
-								},
-							},
-						),
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClusteringKeyColumns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Clustering key columns of the table",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Column": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ColumnName": {
+		//	            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	            "type": "string"
+		//	          },
+		//	          "ColumnType": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ColumnName",
+		//	          "ColumnType"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "OrderBy": {
+		//	        "default": "ASC",
+		//	        "enum": [
+		//	          "ASC",
+		//	          "DESC"
+		//	        ],
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Column"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"clustering_key_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Column
+					"column": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ColumnName
+							"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ColumnType
+							"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Required: true,
-					},
-					"order_by": {
-						// Property: OrderBy
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: OrderBy
+					"order_by": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
 								"ASC",
 								"DESC",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.StringValue("ASC")),
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"default_time_to_live": {
-			// Property: DefaultTimeToLive
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							generic.StringDefaultValue("ASC"),
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "Clustering key columns of the table",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultTimeToLive
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"default_time_to_live": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(0),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"encryption_specification": {
-			// Property: EncryptionSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Represents the settings used to enable server-side encryption",
-			//	  "properties": {
-			//	    "EncryptionType": {
-			//	      "default": "AWS_OWNED_KMS_KEY",
-			//	      "description": "Server-side encryption type",
-			//	      "enum": [
-			//	        "AWS_OWNED_KMS_KEY",
-			//	        "CUSTOMER_MANAGED_KMS_KEY"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "KmsKeyIdentifier": {
-			//	      "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "EncryptionType"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(0),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the settings used to enable server-side encryption",
+		//	  "properties": {
+		//	    "EncryptionType": {
+		//	      "default": "AWS_OWNED_KMS_KEY",
+		//	      "description": "Server-side encryption type",
+		//	      "enum": [
+		//	        "AWS_OWNED_KMS_KEY",
+		//	        "CUSTOMER_MANAGED_KMS_KEY"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "KmsKeyIdentifier": {
+		//	      "description": "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "EncryptionType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EncryptionType
+				"encryption_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Server-side encryption type",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"AWS_OWNED_KMS_KEY",
+							"CUSTOMER_MANAGED_KMS_KEY",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						generic.StringDefaultValue("AWS_OWNED_KMS_KEY"),
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyIdentifier
+				"kms_key_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Represents the settings used to enable server-side encryption",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"encryption_type": {
-						// Property: EncryptionType
-						Description: "Server-side encryption type",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"AWS_OWNED_KMS_KEY",
-								"CUSTOMER_MANAGED_KMS_KEY",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							DefaultValue(types.StringValue("AWS_OWNED_KMS_KEY")),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"kms_key_identifier": {
-						// Property: KmsKeyIdentifier
-						Description: "The AWS KMS customer master key (CMK) that should be used for the AWS KMS encryption. To specify a CMK, use its key ID, Amazon Resource Name (ARN), alias name, or alias ARN. ",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"keyspace_name": {
-			// Property: KeyspaceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for Cassandra keyspace",
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KeyspaceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for Cassandra keyspace",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	  "type": "string"
+		//	}
+		"keyspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name for Cassandra keyspace",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"partition_key_columns": {
-			// Property: PartitionKeyColumns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Partition key columns of the table",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "ColumnName": {
-			//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	        "type": "string"
-			//	      },
-			//	      "ColumnType": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "ColumnName",
-			//	      "ColumnType"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "minItems": 1,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PartitionKeyColumns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Partition key columns of the table",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ColumnName": {
+		//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	        "type": "string"
+		//	      },
+		//	      "ColumnType": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ColumnName",
+		//	      "ColumnType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "minItems": 1,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"partition_key_columns": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ColumnName
+					"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ColumnType
+					"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "Partition key columns of the table",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"column_name": {
-						// Property: ColumnName
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
-						},
-					},
-					"column_type": {
-						// Property: ColumnType
-						Type:     types.StringType,
-						Required: true,
-					},
-				},
-			),
-			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtLeast(1),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"point_in_time_recovery_enabled": {
-			// Property: PointInTimeRecoveryEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
-			//	  "type": "boolean"
-			//	}
+			Required:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtLeast(1),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PointInTimeRecoveryEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
+		//	  "type": "boolean"
+		//	}
+		"point_in_time_recovery_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether point in time recovery is enabled (true) or disabled (false) on the table",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"regular_columns": {
-			// Property: RegularColumns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Non-key columns of the table",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "ColumnName": {
-			//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	        "type": "string"
-			//	      },
-			//	      "ColumnType": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "ColumnName",
-			//	      "ColumnType"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RegularColumns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Non-key columns of the table",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "ColumnName": {
+		//	        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	        "type": "string"
+		//	      },
+		//	      "ColumnType": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ColumnName",
+		//	      "ColumnType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"regular_columns": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ColumnName
+					"column_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ColumnType
+					"column_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "Non-key columns of the table",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"column_name": {
-						// Property: ColumnName
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
-						},
-					},
-					"column_type": {
-						// Property: ColumnType
-						Type:     types.StringType,
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"table_name": {
-			// Property: TableName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Name for Cassandra table",
-			//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
-			//	  "type": "string"
-			//	}
-			Description: "Name for Cassandra table",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to apply to the resource",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: TableName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Name for Cassandra table",
+		//	  "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$",
+		//	  "type": "string"
+		//	}
+		"table_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Name for Cassandra table",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9][a-zA-Z0-9_]{1,47}$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to apply to the resource",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An array of key-value pairs to apply to this resource",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 50),
-				validate.UniqueItems(),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 50),
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::Cassandra::Table",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Table").WithTerraformTypeName("awscc_cassandra_table")
 	opts = opts.WithTerraformSchema(schema)
@@ -576,7 +558,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

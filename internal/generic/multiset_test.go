@@ -7,8 +7,9 @@ import (
 	"github.com/google/go-cmp/cmp"
 	"github.com/hashicorp/terraform-plugin-framework/attr"
 	"github.com/hashicorp/terraform-plugin-framework/path"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
+	"github.com/hashicorp/terraform-plugin-framework/types/basetypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/tfresource"
 )
 
@@ -22,17 +23,12 @@ func TestMultiset(t *testing.T) {
 	tagElemType := types.ObjectType{AttrTypes: tagAttrTypes}
 
 	type testCase struct {
-		plannedValue  attr.Value
-		currentValue  attr.Value
-		expectedValue attr.Value
+		plannedValue  basetypes.ListValue
+		currentValue  basetypes.ListValue
+		expectedValue basetypes.ListValue
 		expectError   bool
 	}
 	tests := map[string]testCase{
-		"not lists": {
-			plannedValue: types.StringValue("gamma"),
-			currentValue: types.StringValue("beta"),
-			expectError:  true,
-		},
 		"null lists": {
 			plannedValue:  types.ListNull(types.StringType),
 			currentValue:  types.ListNull(types.StringType),
@@ -117,13 +113,13 @@ func TestMultiset(t *testing.T) {
 		name, test := name, test
 		t.Run(name, func(t *testing.T) {
 			ctx := context.TODO()
-			request := tfsdk.ModifyAttributePlanRequest{
-				AttributePath:  path.Root("test"),
-				AttributePlan:  test.plannedValue,
-				AttributeState: test.currentValue,
+			request := planmodifier.ListRequest{
+				Path:       path.Root("test"),
+				PlanValue:  test.plannedValue,
+				StateValue: test.currentValue,
 			}
-			response := tfsdk.ModifyAttributePlanResponse{}
-			Multiset().Modify(ctx, request, &response)
+			response := planmodifier.ListResponse{}
+			Multiset().PlanModifyList(ctx, request, &response)
 
 			if !response.Diagnostics.HasError() && test.expectError {
 				t.Fatal("expected error, got no error")
@@ -133,7 +129,7 @@ func TestMultiset(t *testing.T) {
 				t.Fatalf("got unexpected error: %s", tfresource.DiagsError(response.Diagnostics))
 			}
 
-			if diff := cmp.Diff(response.AttributePlan, test.expectedValue); diff != "" {
+			if diff := cmp.Diff(response.PlanValue, test.expectedValue); diff != "" {
 				t.Errorf("unexpected diff (+wanted, -got): %s", diff)
 			}
 		})

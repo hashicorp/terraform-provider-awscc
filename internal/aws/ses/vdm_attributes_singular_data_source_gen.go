@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,92 +19,83 @@ func init() {
 // vdmAttributesDataSource returns the Terraform awscc_ses_vdm_attributes data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SES::VdmAttributes resource.
 func vdmAttributesDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"dashboard_attributes": {
-			// Property: DashboardAttributes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Preferences regarding the Dashboard feature.",
-			//	  "properties": {
-			//	    "EngagementMetrics": {
-			//	      "description": "Whether emails sent from this account have engagement tracking enabled.",
-			//	      "pattern": "ENABLED|DISABLED",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DashboardAttributes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Preferences regarding the Dashboard feature.",
+		//	  "properties": {
+		//	    "EngagementMetrics": {
+		//	      "description": "Whether emails sent from this account have engagement tracking enabled.",
+		//	      "pattern": "ENABLED|DISABLED",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"dashboard_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EngagementMetrics
+				"engagement_metrics": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether emails sent from this account have engagement tracking enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Preferences regarding the Dashboard feature.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"engagement_metrics": {
-						// Property: EngagementMetrics
-						Description: "Whether emails sent from this account have engagement tracking enabled.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"guardian_attributes": {
-			// Property: GuardianAttributes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Preferences regarding the Guardian feature.",
-			//	  "properties": {
-			//	    "OptimizedSharedDelivery": {
-			//	      "description": "Whether emails sent from this account have optimized delivery algorithm enabled.",
-			//	      "pattern": "ENABLED|DISABLED",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Preferences regarding the Guardian feature.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"optimized_shared_delivery": {
-						// Property: OptimizedSharedDelivery
-						Description: "Whether emails sent from this account have optimized delivery algorithm enabled.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"vdm_attributes_resource_id": {
-			// Property: VdmAttributesResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique identifier for this resource",
-			//	  "type": "string"
-			//	}
-			Description: "Unique identifier for this resource",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: GuardianAttributes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Preferences regarding the Guardian feature.",
+		//	  "properties": {
+		//	    "OptimizedSharedDelivery": {
+		//	      "description": "Whether emails sent from this account have optimized delivery algorithm enabled.",
+		//	      "pattern": "ENABLED|DISABLED",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"guardian_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: OptimizedSharedDelivery
+				"optimized_shared_delivery": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Whether emails sent from this account have optimized delivery algorithm enabled.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Preferences regarding the Guardian feature.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VdmAttributesResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique identifier for this resource",
+		//	  "type": "string"
+		//	}
+		"vdm_attributes_resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Unique identifier for this resource",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SES::VdmAttributes",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::VdmAttributes").WithTerraformTypeName("awscc_ses_vdm_attributes")
 	opts = opts.WithTerraformSchema(schema)
@@ -116,7 +107,7 @@ func vdmAttributesDataSource(ctx context.Context) (datasource.DataSource, error)
 		"vdm_attributes_resource_id": "VdmAttributesResourceId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -5,12 +5,20 @@ package cloudwatch
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,260 +28,257 @@ func init() {
 // compositeAlarmResource returns the Terraform awscc_cloudwatch_composite_alarm resource.
 // This Terraform resource corresponds to the CloudFormation AWS::CloudWatch::CompositeAlarm resource.
 func compositeAlarmResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"actions_enabled": {
-			// Property: ActionsEnabled
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ActionsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
+		//	  "type": "boolean"
+		//	}
+		"actions_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates whether actions should be executed during any changes to the alarm state. The default is TRUE.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"actions_suppressor": {
-			// Property: ActionsSuppressor
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ActionsSuppressor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"actions_suppressor": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Actions will be suppressed if the suppressor alarm is in the ALARM state. ActionsSuppressor can be an AlarmName or an Amazon Resource Name (ARN) from an existing alarm. ",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1600),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"actions_suppressor_extension_period": {
-			// Property: ActionsSuppressorExtensionPeriod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1600),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ActionsSuppressorExtensionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"actions_suppressor_extension_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Actions will be suppressed if WaitPeriod is active. The length of time that actions are suppressed is in seconds.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(0),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"actions_suppressor_wait_period": {
-			// Property: ActionsSuppressorWaitPeriod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
-			//	  "minimum": 0,
-			//	  "type": "integer"
-			//	}
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(0),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ActionsSuppressorWaitPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
+		//	  "minimum": 0,
+		//	  "type": "integer"
+		//	}
+		"actions_suppressor_wait_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Actions will be suppressed if ExtensionPeriod is active. The length of time that actions are suppressed is in seconds.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(0),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"alarm_actions": {
-			// Property: AlarmActions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
-			//	  "items": {
-			//	    "description": "Amazon Resource Name (ARN) of the action",
-			//	    "maxLength": 1024,
-			//	    "minLength": 1,
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 5,
-			//	  "type": "array"
-			//	}
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(0),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AlarmActions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
+		//	  "items": {
+		//	    "description": "Amazon Resource Name (ARN) of the action",
+		//	    "maxLength": 1024,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "type": "array"
+		//	}
+		"alarm_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The list of actions to execute when this alarm transitions into an ALARM state from any other state. Specify each action as an Amazon Resource Name (ARN).",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(5),
-				validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"alarm_description": {
-			// Property: AlarmDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the alarm",
-			//	  "maxLength": 1024,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(5),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 1024),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AlarmDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the alarm",
+		//	  "maxLength": 1024,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"alarm_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the alarm",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(0, 1024),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"alarm_name": {
-			// Property: AlarmName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the Composite Alarm",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(0, 1024),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AlarmName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Composite Alarm",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"alarm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Composite Alarm",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 255),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"alarm_rule": {
-			// Property: AlarmRule
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
-			//	  "maxLength": 10240,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AlarmRule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
+		//	  "maxLength": 10240,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"alarm_rule": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Expression which aggregates the state of other Alarms (Metric or Composite Alarms)",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 10240),
-			},
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Amazon Resource Name (ARN) of the alarm",
-			//	  "maxLength": 1600,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 10240),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Amazon Resource Name (ARN) of the alarm",
+		//	  "maxLength": 1600,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Amazon Resource Name (ARN) of the alarm",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"insufficient_data_actions": {
-			// Property: InsufficientDataActions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			//	  "items": {
-			//	    "description": "Amazon Resource Name (ARN) of the action",
-			//	    "maxLength": 1024,
-			//	    "minLength": 1,
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 5,
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InsufficientDataActions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
+		//	  "items": {
+		//	    "description": "Amazon Resource Name (ARN) of the action",
+		//	    "maxLength": 1024,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "type": "array"
+		//	}
+		"insufficient_data_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(5),
-				validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"ok_actions": {
-			// Property: OKActions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			//	  "items": {
-			//	    "description": "Amazon Resource Name (ARN) of the action",
-			//	    "maxLength": 1024,
-			//	    "minLength": 1,
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 5,
-			//	  "type": "array"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(5),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 1024),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: OKActions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
+		//	  "items": {
+		//	    "description": "Amazon Resource Name (ARN) of the action",
+		//	    "maxLength": 1024,
+		//	    "minLength": 1,
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "type": "array"
+		//	}
+		"ok_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(5),
-				validate.ArrayForEach(validate.StringLenBetween(1, 1024)),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(5),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(1, 1024),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::CloudWatch::CompositeAlarm type specifies an alarm which aggregates the states of other Alarms (Metric or Composite Alarms) as defined by the AlarmRule expression",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::CompositeAlarm").WithTerraformTypeName("awscc_cloudwatch_composite_alarm")
 	opts = opts.WithTerraformSchema(schema)
@@ -296,7 +301,7 @@ func compositeAlarmResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

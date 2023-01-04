@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,94 +19,86 @@ func init() {
 // transitGatewayMulticastDomainAssociationDataSource returns the Terraform awscc_ec2_transit_gateway_multicast_domain_association data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::TransitGatewayMulticastDomainAssociation resource.
 func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"resource_id": {
-			// Property: ResourceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the resource.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ResourceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the resource.",
+		//	  "type": "string"
+		//	}
+		"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the resource.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"resource_type": {
-			// Property: ResourceType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of resource, for example a VPC attachment.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of resource, for example a VPC attachment.",
+		//	  "type": "string"
+		//	}
+		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of resource, for example a VPC attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"state": {
-			// Property: State
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The state of the subnet association.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: State
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The state of the subnet association.",
+		//	  "type": "string"
+		//	}
+		"state": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The state of the subnet association.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"subnet_id": {
-			// Property: SubnetId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The IDs of the subnets to associate with the transit gateway multicast domain.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IDs of the subnets to associate with the transit gateway multicast domain.",
+		//	  "type": "string"
+		//	}
+		"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IDs of the subnets to associate with the transit gateway multicast domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"transit_gateway_attachment_id": {
-			// Property: TransitGatewayAttachmentId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the transit gateway attachment.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayAttachmentId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the transit gateway attachment.",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the transit gateway attachment.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"transit_gateway_multicast_domain_id": {
-			// Property: TransitGatewayMulticastDomainId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the transit gateway multicast domain.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TransitGatewayMulticastDomainId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the transit gateway multicast domain.",
+		//	  "type": "string"
+		//	}
+		"transit_gateway_multicast_domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the transit gateway multicast domain.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::EC2::TransitGatewayMulticastDomainAssociation",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomainAssociation").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -119,7 +111,7 @@ func transitGatewayMulticastDomainAssociationDataSource(ctx context.Context) (da
 		"transit_gateway_multicast_domain_id": "TransitGatewayMulticastDomainId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

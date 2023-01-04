@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,499 +19,459 @@ func init() {
 // componentVersionDataSource returns the Terraform awscc_greengrassv2_component_version data source.
 // This Terraform data source corresponds to the CloudFormation AWS::GreengrassV2::ComponentVersion resource.
 func componentVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"component_name": {
-			// Property: ComponentName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ComponentName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"component_version": {
-			// Property: ComponentVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: ComponentVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"component_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"inline_recipe": {
-			// Property: InlineRecipe
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: InlineRecipe
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"inline_recipe": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"lambda_function": {
-			// Property: LambdaFunction
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "ComponentDependencies": {
-			//	      "additionalProperties": false,
-			//	      "patternProperties": {
-			//	        "": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "DependencyType": {
-			//	              "enum": [
-			//	                "SOFT",
-			//	                "HARD"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "VersionRequirement": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ComponentLambdaParameters": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "EnvironmentVariables": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "EventSources": {
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Topic": {
-			//	                "type": "string"
-			//	              },
-			//	              "Type": {
-			//	                "enum": [
-			//	                  "PUB_SUB",
-			//	                  "IOT_CORE"
-			//	                ],
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array"
-			//	        },
-			//	        "ExecArgs": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array"
-			//	        },
-			//	        "InputPayloadEncodingType": {
-			//	          "enum": [
-			//	            "json",
-			//	            "binary"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "LinuxProcessParams": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ContainerParams": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Devices": {
-			//	                  "insertionOrder": false,
-			//	                  "items": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "AddGroupOwner": {
-			//	                        "type": "boolean"
-			//	                      },
-			//	                      "Path": {
-			//	                        "type": "string"
-			//	                      },
-			//	                      "Permission": {
-			//	                        "enum": [
-			//	                          "ro",
-			//	                          "rw"
-			//	                        ],
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "type": "array"
-			//	                },
-			//	                "MemorySizeInKB": {
-			//	                  "type": "integer"
-			//	                },
-			//	                "MountROSysfs": {
-			//	                  "type": "boolean"
-			//	                },
-			//	                "Volumes": {
-			//	                  "insertionOrder": false,
-			//	                  "items": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "AddGroupOwner": {
-			//	                        "type": "boolean"
-			//	                      },
-			//	                      "DestinationPath": {
-			//	                        "type": "string"
-			//	                      },
-			//	                      "Permission": {
-			//	                        "enum": [
-			//	                          "ro",
-			//	                          "rw"
-			//	                        ],
-			//	                        "type": "string"
-			//	                      },
-			//	                      "SourcePath": {
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "type": "array"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "IsolationMode": {
-			//	              "enum": [
-			//	                "GreengrassContainer",
-			//	                "NoContainer"
-			//	              ],
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "MaxIdleTimeInSeconds": {
-			//	          "type": "integer"
-			//	        },
-			//	        "MaxInstancesCount": {
-			//	          "type": "integer"
-			//	        },
-			//	        "MaxQueueSize": {
-			//	          "type": "integer"
-			//	        },
-			//	        "Pinned": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "StatusTimeoutInSeconds": {
-			//	          "type": "integer"
-			//	        },
-			//	        "TimeoutInSeconds": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ComponentName": {
-			//	      "type": "string"
-			//	    },
-			//	    "ComponentPlatforms": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "Attributes": {
-			//	            "additionalProperties": false,
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Name": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "ComponentVersion": {
-			//	      "type": "string"
-			//	    },
-			//	    "LambdaArn": {
-			//	      "pattern": "^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"component_dependencies": {
-						// Property: ComponentDependencies
-						// Pattern: ""
-						Attributes: tfsdk.MapNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"dependency_type": {
-									// Property: DependencyType
-									Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: LambdaFunction
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ComponentDependencies": {
+		//	      "additionalProperties": false,
+		//	      "patternProperties": {
+		//	        "": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "DependencyType": {
+		//	              "enum": [
+		//	                "SOFT",
+		//	                "HARD"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "VersionRequirement": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ComponentLambdaParameters": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "EnvironmentVariables": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "EventSources": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Topic": {
+		//	                "type": "string"
+		//	              },
+		//	              "Type": {
+		//	                "enum": [
+		//	                  "PUB_SUB",
+		//	                  "IOT_CORE"
+		//	                ],
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "ExecArgs": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "InputPayloadEncodingType": {
+		//	          "enum": [
+		//	            "json",
+		//	            "binary"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "LinuxProcessParams": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ContainerParams": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Devices": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AddGroupOwner": {
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "Path": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Permission": {
+		//	                        "enum": [
+		//	                          "ro",
+		//	                          "rw"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "MemorySizeInKB": {
+		//	                  "type": "integer"
+		//	                },
+		//	                "MountROSysfs": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "Volumes": {
+		//	                  "insertionOrder": false,
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "AddGroupOwner": {
+		//	                        "type": "boolean"
+		//	                      },
+		//	                      "DestinationPath": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Permission": {
+		//	                        "enum": [
+		//	                          "ro",
+		//	                          "rw"
+		//	                        ],
+		//	                        "type": "string"
+		//	                      },
+		//	                      "SourcePath": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "IsolationMode": {
+		//	              "enum": [
+		//	                "GreengrassContainer",
+		//	                "NoContainer"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "MaxIdleTimeInSeconds": {
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxInstancesCount": {
+		//	          "type": "integer"
+		//	        },
+		//	        "MaxQueueSize": {
+		//	          "type": "integer"
+		//	        },
+		//	        "Pinned": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "StatusTimeoutInSeconds": {
+		//	          "type": "integer"
+		//	        },
+		//	        "TimeoutInSeconds": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ComponentName": {
+		//	      "type": "string"
+		//	    },
+		//	    "ComponentPlatforms": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Attributes": {
+		//	            "additionalProperties": false,
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Name": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ComponentVersion": {
+		//	      "type": "string"
+		//	    },
+		//	    "LambdaArn": {
+		//	      "pattern": "^arn:aws(-(cn|us-gov))?:lambda:(([a-z]+-)+[0-9])?:([0-9]{12})?:[^.]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"lambda_function": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ComponentDependencies
+				"component_dependencies":  // Pattern: ""
+				schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DependencyType
+							"dependency_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: VersionRequirement
+							"version_requirement": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentLambdaParameters
+				"component_lambda_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnvironmentVariables
+						"environment_variables": // Pattern: ""
+						schema.MapAttribute{     /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: EventSources
+						"event_sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Topic
+									"topic": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Type
+									"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExecArgs
+						"exec_args": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: InputPayloadEncodingType
+						"input_payload_encoding_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LinuxProcessParams
+						"linux_process_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerParams
+								"container_params": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Devices
+										"devices": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AddGroupOwner
+													"add_group_owner": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Path
+													"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Permission
+													"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: MemorySizeInKB
+										"memory_size_in_kb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: MountROSysfs
+										"mount_ro_sysfs": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Volumes
+										"volumes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: AddGroupOwner
+													"add_group_owner": schema.BoolAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: DestinationPath
+													"destination_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Permission
+													"permission": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: SourcePath
+													"source_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Computed: true,
-								},
-								"version_requirement": {
-									// Property: VersionRequirement
-									Type:     types.StringType,
+								}, /*END ATTRIBUTE*/
+								// Property: IsolationMode
+								"isolation_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"component_lambda_parameters": {
-						// Property: ComponentLambdaParameters
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"environment_variables": {
-									// Property: EnvironmentVariables
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"event_sources": {
-									// Property: EventSources
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"topic": {
-												// Property: Topic
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"type": {
-												// Property: Type
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"exec_args": {
-									// Property: ExecArgs
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"input_payload_encoding_type": {
-									// Property: InputPayloadEncodingType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"linux_process_params": {
-									// Property: LinuxProcessParams
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"container_params": {
-												// Property: ContainerParams
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"devices": {
-															// Property: Devices
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"add_group_owner": {
-																		// Property: AddGroupOwner
-																		Type:     types.BoolType,
-																		Computed: true,
-																	},
-																	"path": {
-																		// Property: Path
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"permission": {
-																		// Property: Permission
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"memory_size_in_kb": {
-															// Property: MemorySizeInKB
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-														"mount_ro_sysfs": {
-															// Property: MountROSysfs
-															Type:     types.BoolType,
-															Computed: true,
-														},
-														"volumes": {
-															// Property: Volumes
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"add_group_owner": {
-																		// Property: AddGroupOwner
-																		Type:     types.BoolType,
-																		Computed: true,
-																	},
-																	"destination_path": {
-																		// Property: DestinationPath
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"permission": {
-																		// Property: Permission
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"source_path": {
-																		// Property: SourcePath
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"isolation_mode": {
-												// Property: IsolationMode
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"max_idle_time_in_seconds": {
-									// Property: MaxIdleTimeInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"max_instances_count": {
-									// Property: MaxInstancesCount
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"max_queue_size": {
-									// Property: MaxQueueSize
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"pinned": {
-									// Property: Pinned
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"status_timeout_in_seconds": {
-									// Property: StatusTimeoutInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"timeout_in_seconds": {
-									// Property: TimeoutInSeconds
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"component_name": {
-						// Property: ComponentName
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"component_platforms": {
-						// Property: ComponentPlatforms
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"attributes": {
-									// Property: Attributes
-									// Pattern: ""
-									Type:     types.MapType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"name": {
-									// Property: Name
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"component_version": {
-						// Property: ComponentVersion
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"lambda_arn": {
-						// Property: LambdaArn
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxIdleTimeInSeconds
+						"max_idle_time_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxInstancesCount
+						"max_instances_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxQueueSize
+						"max_queue_size": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Pinned
+						"pinned": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StatusTimeoutInSeconds
+						"status_timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TimeoutInSeconds
+						"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentName
+				"component_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentPlatforms
+				"component_platforms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Attributes
+							"attributes":        // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ComponentVersion
+				"component_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LambdaArn
+				"lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			//
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::GreengrassV2::ComponentVersion",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::GreengrassV2::ComponentVersion").WithTerraformTypeName("awscc_greengrassv2_component_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -556,7 +516,7 @@ func componentVersionDataSource(ctx context.Context) (datasource.DataSource, err
 		"volumes":                     "Volumes",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

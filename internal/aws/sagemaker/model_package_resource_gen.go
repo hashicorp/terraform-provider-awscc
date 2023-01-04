@@ -4,14 +4,23 @@ package sagemaker
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,4633 +30,4408 @@ func init() {
 // modelPackageResource returns the Terraform awscc_sagemaker_model_package resource.
 // This Terraform resource corresponds to the CloudFormation AWS::SageMaker::ModelPackage resource.
 func modelPackageResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"additional_inference_specification_definition": {
-			// Property: AdditionalInferenceSpecificationDefinition
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			//	  "properties": {
-			//	    "Containers": {
-			//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Describes the Docker container for the model package.",
-			//	        "properties": {
-			//	          "ContainerHostname": {
-			//	            "description": "The DNS host name for the Docker container.",
-			//	            "maxLength": 63,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	            "type": "string"
-			//	          },
-			//	          "Environment": {
-			//	            "additionalProperties": false,
-			//	            "description": "Sets the environment variables in the Docker container",
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              },
-			//	              "[\\S\\s]*": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Framework": {
-			//	            "description": "The machine learning framework of the model package container image.",
-			//	            "type": "string"
-			//	          },
-			//	          "FrameworkVersion": {
-			//	            "description": "The framework version of the Model Package Container Image.",
-			//	            "maxLength": 10,
-			//	            "minLength": 3,
-			//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	            "type": "string"
-			//	          },
-			//	          "Image": {
-			//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "pattern": "[\\S]{1,255}",
-			//	            "type": "string"
-			//	          },
-			//	          "ImageDigest": {
-			//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	            "maxLength": 72,
-			//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelDataUrl": {
-			//	            "description": "A structure with Model Input details.",
-			//	            "maxLength": 1024,
-			//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelInput": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataInputConfig": {
-			//	                "description": "The input configuration object for the model.",
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\S\\s]+",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataInputConfig"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "NearestModelName": {
-			//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	            "type": "string"
-			//	          },
-			//	          "ProductId": {
-			//	            "description": "The AWS Marketplace product ID of the model package.",
-			//	            "maxLength": 256,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Image"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 15,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "Description": {
-			//	      "description": "A description of the additional Inference specification.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "Name": {
-			//	      "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-			//	      "maxLength": 63,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	      "type": "string"
-			//	    },
-			//	    "SupportedContentTypes": {
-			//	      "description": "The supported MIME types for the input data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME type for the input data.",
-			//	        "maxLength": 256,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedRealtimeInferenceInstanceTypes": {
-			//	      "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance type that is used to generate inferences in real-time",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedResponseMIMETypes": {
-			//	      "description": "The supported MIME types for the output data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "maxLength": 1024,
-			//	        "pattern": "^[-\\w]+\\/.+$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedTransformInstanceTypes": {
-			//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "type": "string"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Containers",
-			//	    "Name"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdditionalInferenceSpecificationDefinition
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
+		//	  "properties": {
+		//	    "Containers": {
+		//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Describes the Docker container for the model package.",
+		//	        "properties": {
+		//	          "ContainerHostname": {
+		//	            "description": "The DNS host name for the Docker container.",
+		//	            "maxLength": 63,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	            "type": "string"
+		//	          },
+		//	          "Environment": {
+		//	            "additionalProperties": false,
+		//	            "description": "Sets the environment variables in the Docker container",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              },
+		//	              "[\\S\\s]*": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Framework": {
+		//	            "description": "The machine learning framework of the model package container image.",
+		//	            "type": "string"
+		//	          },
+		//	          "FrameworkVersion": {
+		//	            "description": "The framework version of the Model Package Container Image.",
+		//	            "maxLength": 10,
+		//	            "minLength": 3,
+		//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Image": {
+		//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "[\\S]{1,255}",
+		//	            "type": "string"
+		//	          },
+		//	          "ImageDigest": {
+		//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	            "maxLength": 72,
+		//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelDataUrl": {
+		//	            "description": "A structure with Model Input details.",
+		//	            "maxLength": 1024,
+		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelInput": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataInputConfig": {
+		//	                "description": "The input configuration object for the model.",
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\S\\s]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataInputConfig"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "NearestModelName": {
+		//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	            "type": "string"
+		//	          },
+		//	          "ProductId": {
+		//	            "description": "The AWS Marketplace product ID of the model package.",
+		//	            "maxLength": 256,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Image"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 15,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "Description": {
+		//	      "description": "A description of the additional Inference specification.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+		//	      "maxLength": 63,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	      "type": "string"
+		//	    },
+		//	    "SupportedContentTypes": {
+		//	      "description": "The supported MIME types for the input data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME type for the input data.",
+		//	        "maxLength": 256,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedRealtimeInferenceInstanceTypes": {
+		//	      "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance type that is used to generate inferences in real-time",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedResponseMIMETypes": {
+		//	      "description": "The supported MIME types for the output data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "maxLength": 1024,
+		//	        "pattern": "^[-\\w]+\\/.+$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedTransformInstanceTypes": {
+		//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "type": "string"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Containers",
+		//	    "Name"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"additional_inference_specification_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Containers
+				"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContainerHostname
+							"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The DNS host name for the Docker container.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(63),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Environment
+							"environment":       // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								// Pattern "[\\S\\s]*" ignored.
+								Description: "Sets the environment variables in the Docker container",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+									mapplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Framework
+							"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The machine learning framework of the model package container image.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: FrameworkVersion
+							"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The framework version of the Model Package Container Image.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(3, 10),
+									stringvalidator.RegexMatches(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Image
+							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.RegexMatches(regexp.MustCompile("[\\S]{1,255}"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ImageDigest
+							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(72),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataUrl
+							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A structure with Model Input details.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(1024),
+									stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ModelInput
+							"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataInputConfig
+									"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The input configuration object for the model.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+											stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NearestModelName
+							"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ProductId
+							"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS Marketplace product ID of the model package.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 15),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Description
+				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A description of the additional Inference specification.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(1024),
+						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 63),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedContentTypes
+				"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the input data.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthAtMost(256),
+							stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedRealtimeInferenceInstanceTypes
+				"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types that are used to generate inferences in real-time",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedResponseMIMETypes
+				"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the output data.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthAtMost(1024),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[-\\w]+\\/.+$"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedTransformInstanceTypes
+				"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AdditionalInferenceSpecifications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of additional Inference Specification objects.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
+		//	    "properties": {
+		//	      "Containers": {
+		//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Describes the Docker container for the model package.",
+		//	          "properties": {
+		//	            "ContainerHostname": {
+		//	              "description": "The DNS host name for the Docker container.",
+		//	              "maxLength": 63,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	              "type": "string"
+		//	            },
+		//	            "Environment": {
+		//	              "additionalProperties": false,
+		//	              "description": "Sets the environment variables in the Docker container",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                },
+		//	                "[\\S\\s]*": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Framework": {
+		//	              "description": "The machine learning framework of the model package container image.",
+		//	              "type": "string"
+		//	            },
+		//	            "FrameworkVersion": {
+		//	              "description": "The framework version of the Model Package Container Image.",
+		//	              "maxLength": 10,
+		//	              "minLength": 3,
+		//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	              "type": "string"
+		//	            },
+		//	            "Image": {
+		//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "[\\S]{1,255}",
+		//	              "type": "string"
+		//	            },
+		//	            "ImageDigest": {
+		//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelDataUrl": {
+		//	              "description": "A structure with Model Input details.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelInput": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DataInputConfig": {
+		//	                  "description": "The input configuration object for the model.",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "pattern": "[\\S\\s]+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DataInputConfig"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "NearestModelName": {
+		//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	              "type": "string"
+		//	            },
+		//	            "ProductId": {
+		//	              "description": "The AWS Marketplace product ID of the model package.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Image"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 15,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description of the additional Inference specification.",
+		//	        "maxLength": 1024,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+		//	        "maxLength": 63,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	        "type": "string"
+		//	      },
+		//	      "SupportedContentTypes": {
+		//	        "description": "The supported MIME types for the input data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME type for the input data.",
+		//	          "maxLength": 256,
+		//	          "pattern": ".*",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedRealtimeInferenceInstanceTypes": {
+		//	        "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance type that is used to generate inferences in real-time",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedResponseMIMETypes": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME types for the output data.",
+		//	          "maxLength": 1024,
+		//	          "pattern": "^[-\\w]+\\/.+$",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedTransformInstanceTypes": {
+		//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	          "type": "string"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Containers",
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 15,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"additional_inference_specifications": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Containers
+					"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerHostname
+								"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(63),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Environment
+								"environment":       // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
 									// Pattern "[\\S\\s]*" ignored.
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework": {
-									// Property: Framework
+									Description: "Sets the environment variables in the Docker container",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Framework
+								"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: FrameworkVersion
+								"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(3, 10),
-										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"image": {
-									// Property: Image
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 10),
+										stringvalidator.RegexMatches(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Image
+								"image": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-										validate.StringMatch(regexp.MustCompile("[\\S]{1,255}"), ""),
-									},
-								},
-								"image_digest": {
-									// Property: ImageDigest
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.RegexMatches(regexp.MustCompile("[\\S]{1,255}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ImageDigest
+								"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(72),
-										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ModelDataUrl
+								"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(1024),
-										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-													validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
-												},
-											},
-										},
-									),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ModelInput
+								"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DataInputConfig
+										"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The input configuration object for the model.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 1024),
+												stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NearestModelName
+								"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"product_id": {
-									// Property: ProductId
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ProductId
+								"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(256),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 15),
-						},
-					},
-					"description": {
-						// Property: Description
-						Description: "A description of the additional Inference specification.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(1024),
-							validate.StringMatch(regexp.MustCompile(".*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
-						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 63),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
-						},
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 15),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description of the additional Inference specification.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(1024),
+							stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 63),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedContentTypes
+					"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(256)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthAtMost(256),
+								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedRealtimeInferenceInstanceTypes
+					"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedResponseMIMETypes
+					"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(1024)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-\\w]+\\/.+$"), "")),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthAtMost(1024),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[-\\w]+\\/.+$"), ""),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedTransformInstanceTypes
+					"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"additional_inference_specifications": {
-			// Property: AdditionalInferenceSpecifications
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of additional Inference Specification objects.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			//	    "properties": {
-			//	      "Containers": {
-			//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Describes the Docker container for the model package.",
-			//	          "properties": {
-			//	            "ContainerHostname": {
-			//	              "description": "The DNS host name for the Docker container.",
-			//	              "maxLength": 63,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	              "type": "string"
-			//	            },
-			//	            "Environment": {
-			//	              "additionalProperties": false,
-			//	              "description": "Sets the environment variables in the Docker container",
-			//	              "patternProperties": {
-			//	                "": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                },
-			//	                "[\\S\\s]*": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "Framework": {
-			//	              "description": "The machine learning framework of the model package container image.",
-			//	              "type": "string"
-			//	            },
-			//	            "FrameworkVersion": {
-			//	              "description": "The framework version of the Model Package Container Image.",
-			//	              "maxLength": 10,
-			//	              "minLength": 3,
-			//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	              "type": "string"
-			//	            },
-			//	            "Image": {
-			//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "pattern": "[\\S]{1,255}",
-			//	              "type": "string"
-			//	            },
-			//	            "ImageDigest": {
-			//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelDataUrl": {
-			//	              "description": "A structure with Model Input details.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelInput": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "DataInputConfig": {
-			//	                  "description": "The input configuration object for the model.",
-			//	                  "maxLength": 1024,
-			//	                  "minLength": 1,
-			//	                  "pattern": "[\\S\\s]+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "DataInputConfig"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "NearestModelName": {
-			//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	              "type": "string"
-			//	            },
-			//	            "ProductId": {
-			//	              "description": "The AWS Marketplace product ID of the model package.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Image"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 15,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      },
-			//	      "Description": {
-			//	        "description": "A description of the additional Inference specification.",
-			//	        "maxLength": 1024,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-			//	        "maxLength": 63,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	        "type": "string"
-			//	      },
-			//	      "SupportedContentTypes": {
-			//	        "description": "The supported MIME types for the input data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME type for the input data.",
-			//	          "maxLength": 256,
-			//	          "pattern": ".*",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedRealtimeInferenceInstanceTypes": {
-			//	        "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance type that is used to generate inferences in real-time",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedResponseMIMETypes": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME types for the output data.",
-			//	          "maxLength": 1024,
-			//	          "pattern": "^[-\\w]+\\/.+$",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedTransformInstanceTypes": {
-			//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	          "type": "string"
-			//	        },
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Containers",
-			//	      "Name"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 15,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtLeast(1),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An array of additional Inference Specification objects.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 15),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: AdditionalInferenceSpecificationsToAdd
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of additional Inference Specification objects.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
+		//	    "properties": {
+		//	      "Containers": {
+		//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "Describes the Docker container for the model package.",
+		//	          "properties": {
+		//	            "ContainerHostname": {
+		//	              "description": "The DNS host name for the Docker container.",
+		//	              "maxLength": 63,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	              "type": "string"
+		//	            },
+		//	            "Environment": {
+		//	              "additionalProperties": false,
+		//	              "description": "Sets the environment variables in the Docker container",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                },
+		//	                "[\\S\\s]*": {
+		//	                  "maxLength": 1024,
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "Framework": {
+		//	              "description": "The machine learning framework of the model package container image.",
+		//	              "type": "string"
+		//	            },
+		//	            "FrameworkVersion": {
+		//	              "description": "The framework version of the Model Package Container Image.",
+		//	              "maxLength": 10,
+		//	              "minLength": 3,
+		//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	              "type": "string"
+		//	            },
+		//	            "Image": {
+		//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	              "maxLength": 255,
+		//	              "minLength": 1,
+		//	              "pattern": "[\\S]{1,255}",
+		//	              "type": "string"
+		//	            },
+		//	            "ImageDigest": {
+		//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelDataUrl": {
+		//	              "description": "A structure with Model Input details.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            },
+		//	            "ModelInput": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "DataInputConfig": {
+		//	                  "description": "The input configuration object for the model.",
+		//	                  "maxLength": 1024,
+		//	                  "minLength": 1,
+		//	                  "pattern": "[\\S\\s]+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "DataInputConfig"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "NearestModelName": {
+		//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	              "type": "string"
+		//	            },
+		//	            "ProductId": {
+		//	              "description": "The AWS Marketplace product ID of the model package.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Image"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "maxItems": 15,
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      },
+		//	      "Description": {
+		//	        "description": "A description of the additional Inference specification.",
+		//	        "maxLength": 1024,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+		//	        "maxLength": 63,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	        "type": "string"
+		//	      },
+		//	      "SupportedContentTypes": {
+		//	        "description": "The supported MIME types for the input data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME type for the input data.",
+		//	          "maxLength": 256,
+		//	          "pattern": ".*",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedRealtimeInferenceInstanceTypes": {
+		//	        "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance type that is used to generate inferences in real-time",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedResponseMIMETypes": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "The supported MIME types for the output data.",
+		//	          "maxLength": 1024,
+		//	          "pattern": "^[-\\w]+\\/.+$",
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
+		//	      },
+		//	      "SupportedTransformInstanceTypes": {
+		//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	          "type": "string"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Containers",
+		//	      "Name"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 15,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"additional_inference_specifications_to_add": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Containers
+					"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContainerHostname
+								"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(63),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Environment
+								"environment":       // Pattern: ""
+								schema.MapAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
 									// Pattern "[\\S\\s]*" ignored.
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework": {
-									// Property: Framework
+									Description: "Sets the environment variables in the Docker container",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Framework
+								"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: FrameworkVersion
+								"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(3, 10),
-										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"image": {
-									// Property: Image
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 10),
+										stringvalidator.RegexMatches(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Image
+								"image": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-										validate.StringMatch(regexp.MustCompile("[\\S]{1,255}"), ""),
-									},
-								},
-								"image_digest": {
-									// Property: ImageDigest
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(1, 255),
+										stringvalidator.RegexMatches(regexp.MustCompile("[\\S]{1,255}"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ImageDigest
+								"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(72),
-										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ModelDataUrl
+								"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(1024),
-										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-													validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
-												},
-											},
-										},
-									),
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ModelInput
+								"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: DataInputConfig
+										"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The input configuration object for the model.",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(1, 1024),
+												stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: NearestModelName
+								"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"product_id": {
-									// Property: ProductId
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ProductId
+								"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(256),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 15),
-						},
-					},
-					"description": {
-						// Property: Description
-						Description: "A description of the additional Inference specification.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(1024),
-							validate.StringMatch(regexp.MustCompile(".*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
-						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 63),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
-						},
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeBetween(1, 15),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Description
+					"description": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A description of the additional Inference specification.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(1024),
+							stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 63),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedContentTypes
+					"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(256)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthAtMost(256),
+								stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedRealtimeInferenceInstanceTypes
+					"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedResponseMIMETypes
+					"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(1024)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-\\w]+\\/.+$"), "")),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthAtMost(1024),
+								stringvalidator.RegexMatches(regexp.MustCompile("^[-\\w]+\\/.+$"), ""),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: SupportedTransformInstanceTypes
+					"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
 						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
 						Optional:    true,
 						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 15),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"additional_inference_specifications_to_add": {
-			// Property: AdditionalInferenceSpecificationsToAdd
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of additional Inference Specification objects.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			//	    "properties": {
-			//	      "Containers": {
-			//	        "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "description": "Describes the Docker container for the model package.",
-			//	          "properties": {
-			//	            "ContainerHostname": {
-			//	              "description": "The DNS host name for the Docker container.",
-			//	              "maxLength": 63,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	              "type": "string"
-			//	            },
-			//	            "Environment": {
-			//	              "additionalProperties": false,
-			//	              "description": "Sets the environment variables in the Docker container",
-			//	              "patternProperties": {
-			//	                "": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                },
-			//	                "[\\S\\s]*": {
-			//	                  "maxLength": 1024,
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "Framework": {
-			//	              "description": "The machine learning framework of the model package container image.",
-			//	              "type": "string"
-			//	            },
-			//	            "FrameworkVersion": {
-			//	              "description": "The framework version of the Model Package Container Image.",
-			//	              "maxLength": 10,
-			//	              "minLength": 3,
-			//	              "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	              "type": "string"
-			//	            },
-			//	            "Image": {
-			//	              "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	              "maxLength": 255,
-			//	              "minLength": 1,
-			//	              "pattern": "[\\S]{1,255}",
-			//	              "type": "string"
-			//	            },
-			//	            "ImageDigest": {
-			//	              "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelDataUrl": {
-			//	              "description": "A structure with Model Input details.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            },
-			//	            "ModelInput": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "DataInputConfig": {
-			//	                  "description": "The input configuration object for the model.",
-			//	                  "maxLength": 1024,
-			//	                  "minLength": 1,
-			//	                  "pattern": "[\\S\\s]+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "DataInputConfig"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "NearestModelName": {
-			//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	              "type": "string"
-			//	            },
-			//	            "ProductId": {
-			//	              "description": "The AWS Marketplace product ID of the model package.",
-			//	              "maxLength": 256,
-			//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Image"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "maxItems": 15,
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      },
-			//	      "Description": {
-			//	        "description": "A description of the additional Inference specification.",
-			//	        "maxLength": 1024,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "Name": {
-			//	        "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-			//	        "maxLength": 63,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	        "type": "string"
-			//	      },
-			//	      "SupportedContentTypes": {
-			//	        "description": "The supported MIME types for the input data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME type for the input data.",
-			//	          "maxLength": 256,
-			//	          "pattern": ".*",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedRealtimeInferenceInstanceTypes": {
-			//	        "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance type that is used to generate inferences in real-time",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedResponseMIMETypes": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "The supported MIME types for the output data.",
-			//	          "maxLength": 1024,
-			//	          "pattern": "^[-\\w]+\\/.+$",
-			//	          "type": "string"
-			//	        },
-			//	        "type": "array"
-			//	      },
-			//	      "SupportedTransformInstanceTypes": {
-			//	        "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	          "type": "string"
-			//	        },
-			//	        "minItems": 1,
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Containers",
-			//	      "Name"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 15,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtLeast(1),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "An array of additional Inference Specification objects.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
-									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
-									// Pattern "[\\S\\s]*" ignored.
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework": {
-									// Property: Framework
-									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
-									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(3, 10),
-										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"image": {
-									// Property: Image
-									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-										validate.StringMatch(regexp.MustCompile("[\\S]{1,255}"), ""),
-									},
-								},
-								"image_digest": {
-									// Property: ImageDigest
-									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(72),
-										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
-									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(1024),
-										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-													validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
-									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"product_id": {
-									// Property: ProductId
-									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(256),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 15),
-						},
-					},
-					"description": {
-						// Property: Description
-						Description: "A description of the additional Inference specification.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(1024),
-							validate.StringMatch(regexp.MustCompile(".*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
-						Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 63),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
-						},
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
-						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(256)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
-						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
-						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(1024)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-\\w]+\\/.+$"), "")),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
-						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(1, 15),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"approval_description": {
-			// Property: ApprovalDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A description provided for the model approval.",
-			//	  "maxLength": 1024,
-			//	  "pattern": ".*",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(1, 15),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ApprovalDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A description provided for the model approval.",
+		//	  "maxLength": 1024,
+		//	  "pattern": ".*",
+		//	  "type": "string"
+		//	}
+		"approval_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A description provided for the model approval.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(1024),
-				validate.StringMatch(regexp.MustCompile(".*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"certify_for_marketplace": {
-			// Property: CertifyForMarketplace
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to certify the model package for listing on AWS Marketplace.",
-			//	  "type": "boolean"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(1024),
+				stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertifyForMarketplace
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to certify the model package for listing on AWS Marketplace.",
+		//	  "type": "boolean"
+		//	}
+		"certify_for_marketplace": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to certify the model package for listing on AWS Marketplace.",
-			Type:        types.BoolType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"client_token": {
-			// Property: ClientToken
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique token that guarantees that the call to this API is idempotent.",
-			//	  "maxLength": 36,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ClientToken
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique token that guarantees that the call to this API is idempotent.",
+		//	  "maxLength": 36,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique token that guarantees that the call to this API is idempotent.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 36),
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"created_by": {
-			// Property: CreatedBy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			//	  "properties": {
-			//	    "DomainId": {
-			//	      "description": "The domain associated with the user.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileArn": {
-			//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileName": {
-			//	      "description": "The name of the user's profile.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 36),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreatedBy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
+		//	  "properties": {
+		//	    "DomainId": {
+		//	      "description": "The domain associated with the user.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileName": {
+		//	      "description": "The name of the user's profile.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"created_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DomainId
+				"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The domain associated with the user.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileArn
+				"user_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the user's profile.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileName
+				"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the user's profile.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"domain_id": {
-						// Property: DomainId
-						Description: "The domain associated with the user.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"user_profile_arn": {
-						// Property: UserProfileArn
-						Description: "The Amazon Resource Name (ARN) of the user's profile.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"user_profile_name": {
-						// Property: UserProfileName
-						Description: "The name of the user's profile.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"creation_time": {
-			// Property: CreationTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time at which the model package was created.",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time at which the model package was created.",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time at which the model package was created.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"customer_metadata_properties": {
-			// Property: CustomerMetadataProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The metadata properties associated with the model package versions.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 128,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    },
-			//	    "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}": {
-			//	      "maxLength": 256,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "The metadata properties associated with the model package versions.",
-			// Pattern: ""
-			Type: types.MapType{ElemType: types.StringType},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CustomerMetadataProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The metadata properties associated with the model package versions.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 128,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}": {
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"customer_metadata_properties": // Pattern: ""
+		schema.MapAttribute{            /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			// Pattern "^([\\p{L}\\p{Z}\\p{N}_.:\\/=+\\-@]*)${1,256}" ignored.
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"domain": {
-			// Property: Domain
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The machine learning domain of the model package you specified.",
-			//	  "type": "string"
-			//	}
+			Description: "The metadata properties associated with the model package versions.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Domain
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The machine learning domain of the model package you specified.",
+		//	  "type": "string"
+		//	}
+		"domain": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The machine learning domain of the model package you specified.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"drift_check_baselines": {
-			// Property: DriftCheckBaselines
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
-			//	  "properties": {
-			//	    "Bias": {
-			//	      "additionalProperties": false,
-			//	      "description": "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
-			//	      "properties": {
-			//	        "ConfigFile": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a File Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the file source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the file source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the file source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "PostTrainingConstraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "PreTrainingConstraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Explainability": {
-			//	      "additionalProperties": false,
-			//	      "description": "Contains explainability metrics for a model.",
-			//	      "properties": {
-			//	        "ConfigFile": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a File Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the file source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the file source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the file source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelDataQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bias": {
-						// Property: Bias
-						Description: "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"config_file": {
-									// Property: ConfigFile
-									Description: "Represents a File Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the file source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the file source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the file source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"post_training_constraints": {
-									// Property: PostTrainingConstraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"pre_training_constraints": {
-									// Property: PreTrainingConstraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"explainability": {
-						// Property: Explainability
-						Description: "Contains explainability metrics for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"config_file": {
-									// Property: ConfigFile
-									Description: "Represents a File Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the file source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the file source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the file source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"model_data_quality": {
-						// Property: ModelDataQuality
-						Description: "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"model_quality": {
-						// Property: ModelQuality
-						Description: "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"environment": {
-			// Property: Environment
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Sets the environment variables in the Docker container",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 1024,
-			//	      "type": "string"
-			//	    },
-			//	    "[\\S\\s]*": {
-			//	      "maxLength": 1024,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Sets the environment variables in the Docker container",
-			// Pattern: ""
-			Type: types.MapType{ElemType: types.StringType},
-			// Pattern "[\\S\\s]*" ignored.
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"inference_specification": {
-			// Property: InferenceSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Details about inference jobs that can be run with models based on this model package.",
-			//	  "properties": {
-			//	    "Containers": {
-			//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Describes the Docker container for the model package.",
-			//	        "properties": {
-			//	          "ContainerHostname": {
-			//	            "description": "The DNS host name for the Docker container.",
-			//	            "maxLength": 63,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-			//	            "type": "string"
-			//	          },
-			//	          "Environment": {
-			//	            "additionalProperties": false,
-			//	            "description": "Sets the environment variables in the Docker container",
-			//	            "patternProperties": {
-			//	              "": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              },
-			//	              "[\\S\\s]*": {
-			//	                "maxLength": 1024,
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "Framework": {
-			//	            "description": "The machine learning framework of the model package container image.",
-			//	            "type": "string"
-			//	          },
-			//	          "FrameworkVersion": {
-			//	            "description": "The framework version of the Model Package Container Image.",
-			//	            "maxLength": 10,
-			//	            "minLength": 3,
-			//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-			//	            "type": "string"
-			//	          },
-			//	          "Image": {
-			//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-			//	            "maxLength": 255,
-			//	            "minLength": 1,
-			//	            "pattern": "[\\S]{1,255}",
-			//	            "type": "string"
-			//	          },
-			//	          "ImageDigest": {
-			//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-			//	            "maxLength": 72,
-			//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelDataUrl": {
-			//	            "description": "A structure with Model Input details.",
-			//	            "maxLength": 1024,
-			//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelInput": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DataInputConfig": {
-			//	                "description": "The input configuration object for the model.",
-			//	                "maxLength": 1024,
-			//	                "minLength": 1,
-			//	                "pattern": "[\\S\\s]+",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "DataInputConfig"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "NearestModelName": {
-			//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-			//	            "type": "string"
-			//	          },
-			//	          "ProductId": {
-			//	            "description": "The AWS Marketplace product ID of the model package.",
-			//	            "maxLength": 256,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Image"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 15,
-			//	      "minItems": 1,
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "SupportedContentTypes": {
-			//	      "description": "The supported MIME types for the input data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME type for the input data.",
-			//	        "maxLength": 256,
-			//	        "pattern": ".*",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedRealtimeInferenceInstanceTypes": {
-			//	      "description": "A list of the instance types that are used to generate inferences in real-time",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance type that is used to generate inferences in real-time",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedResponseMIMETypes": {
-			//	      "description": "The supported MIME types for the output data.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "The supported MIME types for the output data.",
-			//	        "maxLength": 1024,
-			//	        "pattern": "^[-\\w]+\\/.+$",
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "SupportedTransformInstanceTypes": {
-			//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-			//	        "type": "string"
-			//	      },
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Containers",
-			//	    "SupportedContentTypes",
-			//	    "SupportedResponseMIMETypes"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Details about inference jobs that can be run with models based on this model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"containers": {
-						// Property: Containers
-						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"container_hostname": {
-									// Property: ContainerHostname
-									Description: "The DNS host name for the Docker container.",
-									Type:        types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DriftCheckBaselines
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
+		//	  "properties": {
+		//	    "Bias": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
+		//	      "properties": {
+		//	        "ConfigFile": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a File Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the file source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the file source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the file source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PostTrainingConstraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PreTrainingConstraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Explainability": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains explainability metrics for a model.",
+		//	      "properties": {
+		//	        "ConfigFile": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a File Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the file source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the file source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the file source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelDataQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"drift_check_baselines": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bias
+				"bias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConfigFile
+						"config_file": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the file source.",
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"environment": {
-									// Property: Environment
-									Description: "Sets the environment variables in the Docker container",
-									// Pattern: ""
-									Type: types.MapType{ElemType: types.StringType},
-									// Pattern "[\\S\\s]*" ignored.
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework": {
-									// Property: Framework
-									Description: "The machine learning framework of the model package container image.",
-									Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the file source.",
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"framework_version": {
-									// Property: FrameworkVersion
-									Description: "The framework version of the Model Package Container Image.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(3, 10),
-										validate.StringMatch(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"image": {
-									// Property: Image
-									Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-									Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the file source.",
 									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 255),
-										validate.StringMatch(regexp.MustCompile("[\\S]{1,255}"), ""),
-									},
-								},
-								"image_digest": {
-									// Property: ImageDigest
-									Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-									Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a File Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PostTrainingConstraints
+						"post_training_constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(72),
-										validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
-									Description: "A structure with Model Input details.",
-									Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PreTrainingConstraints
+						"pre_training_constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(1024),
-										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"model_input": {
-									// Property: ModelInput
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"data_input_config": {
-												// Property: DataInputConfig
-												Description: "The input configuration object for the model.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(1, 1024),
-													validate.StringMatch(regexp.MustCompile("[\\S\\s]+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"nearest_model_name": {
-									// Property: NearestModelName
-									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-									Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents the drift check bias baselines that can be used when the model monitor is set using the model package.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Explainability
+				"explainability": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ConfigFile
+						"config_file": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the file source.",
 									Optional:    true,
 									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"product_id": {
-									// Property: ProductId
-									Description: "The AWS Marketplace product ID of the model package.",
-									Type:        types.StringType,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the file source.",
 									Optional:    true,
 									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(256),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the file source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a File Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains explainability metrics for a model.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ModelDataQuality
+				"model_data_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents the drift check data quality baselines that can be used when the model monitor is set using the model package.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ModelQuality
+				"model_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Represents the drift check model quality baselines that can be used when the model monitor is set using the model package.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Environment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Sets the environment variables in the Docker container",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 1024,
+		//	      "type": "string"
+		//	    },
+		//	    "[\\S\\s]*": {
+		//	      "maxLength": 1024,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"environment":       // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			// Pattern "[\\S\\s]*" ignored.
+			Description: "Sets the environment variables in the Docker container",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InferenceSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Details about inference jobs that can be run with models based on this model package.",
+		//	  "properties": {
+		//	    "Containers": {
+		//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Describes the Docker container for the model package.",
+		//	        "properties": {
+		//	          "ContainerHostname": {
+		//	            "description": "The DNS host name for the Docker container.",
+		//	            "maxLength": 63,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	            "type": "string"
+		//	          },
+		//	          "Environment": {
+		//	            "additionalProperties": false,
+		//	            "description": "Sets the environment variables in the Docker container",
+		//	            "patternProperties": {
+		//	              "": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              },
+		//	              "[\\S\\s]*": {
+		//	                "maxLength": 1024,
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Framework": {
+		//	            "description": "The machine learning framework of the model package container image.",
+		//	            "type": "string"
+		//	          },
+		//	          "FrameworkVersion": {
+		//	            "description": "The framework version of the Model Package Container Image.",
+		//	            "maxLength": 10,
+		//	            "minLength": 3,
+		//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
+		//	            "type": "string"
+		//	          },
+		//	          "Image": {
+		//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+		//	            "maxLength": 255,
+		//	            "minLength": 1,
+		//	            "pattern": "[\\S]{1,255}",
+		//	            "type": "string"
+		//	          },
+		//	          "ImageDigest": {
+		//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+		//	            "maxLength": 72,
+		//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelDataUrl": {
+		//	            "description": "A structure with Model Input details.",
+		//	            "maxLength": 1024,
+		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelInput": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DataInputConfig": {
+		//	                "description": "The input configuration object for the model.",
+		//	                "maxLength": 1024,
+		//	                "minLength": 1,
+		//	                "pattern": "[\\S\\s]+",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "DataInputConfig"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "NearestModelName": {
+		//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+		//	            "type": "string"
+		//	          },
+		//	          "ProductId": {
+		//	            "description": "The AWS Marketplace product ID of the model package.",
+		//	            "maxLength": 256,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Image"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 15,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "SupportedContentTypes": {
+		//	      "description": "The supported MIME types for the input data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME type for the input data.",
+		//	        "maxLength": 256,
+		//	        "pattern": ".*",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedRealtimeInferenceInstanceTypes": {
+		//	      "description": "A list of the instance types that are used to generate inferences in real-time",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance type that is used to generate inferences in real-time",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedResponseMIMETypes": {
+		//	      "description": "The supported MIME types for the output data.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "The supported MIME types for the output data.",
+		//	        "maxLength": 1024,
+		//	        "pattern": "^[-\\w]+\\/.+$",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "SupportedTransformInstanceTypes": {
+		//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+		//	        "type": "string"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Containers",
+		//	    "SupportedContentTypes",
+		//	    "SupportedResponseMIMETypes"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"inference_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Containers
+				"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ContainerHostname
+							"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The DNS host name for the Docker container.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(63),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Environment
+							"environment":       // Pattern: ""
+							schema.MapAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								// Pattern "[\\S\\s]*" ignored.
+								Description: "Sets the environment variables in the Docker container",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+									mapplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Framework
+							"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The machine learning framework of the model package container image.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: FrameworkVersion
+							"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The framework version of the Model Package Container Image.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(3, 10),
+									stringvalidator.RegexMatches(regexp.MustCompile("[0-9]\\.[A-Za-z0-9.]+"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Image
+							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 255),
+									stringvalidator.RegexMatches(regexp.MustCompile("[\\S]{1,255}"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ImageDigest
+							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(72),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataUrl
+							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A structure with Model Input details.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(1024),
+									stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ModelInput
+							"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DataInputConfig
+									"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The input configuration object for the model.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 1024),
+											stringvalidator.RegexMatches(regexp.MustCompile("[\\S\\s]+"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NearestModelName
+							"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ProductId
+							"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The AWS Marketplace product ID of the model package.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 15),
+						listvalidator.UniqueValues(),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedContentTypes
+				"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the input data.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthAtMost(256),
+							stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
 						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 15),
-							validate.UniqueItems(),
-						},
-					},
-					"supported_content_types": {
-						// Property: SupportedContentTypes
-						Description: "The supported MIME types for the input data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(256)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile(".*"), "")),
-						},
-					},
-					"supported_realtime_inference_instance_types": {
-						// Property: SupportedRealtimeInferenceInstanceTypes
-						Description: "A list of the instance types that are used to generate inferences in real-time",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"supported_response_mime_types": {
-						// Property: SupportedResponseMIMETypes
-						Description: "The supported MIME types for the output data.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenAtMost(1024)),
-							validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^[-\\w]+\\/.+$"), "")),
-						},
-					},
-					"supported_transform_instance_types": {
-						// Property: SupportedTransformInstanceTypes
-						Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-						Type:        types.ListType{ElemType: types.StringType},
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenAtLeast(1),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"last_modified_by": {
-			// Property: LastModifiedBy
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			//	  "properties": {
-			//	    "DomainId": {
-			//	      "description": "The domain associated with the user.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileArn": {
-			//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
-			//	      "type": "string"
-			//	    },
-			//	    "UserProfileName": {
-			//	      "description": "The name of the user's profile.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedRealtimeInferenceInstanceTypes
+				"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types that are used to generate inferences in real-time",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedResponseMIMETypes
+				"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The supported MIME types for the output data.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthAtMost(1024),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[-\\w]+\\/.+$"), ""),
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SupportedTransformInstanceTypes
+				"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Details about inference jobs that can be run with models based on this model package.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedBy
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
+		//	  "properties": {
+		//	    "DomainId": {
+		//	      "description": "The domain associated with the user.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
+		//	      "type": "string"
+		//	    },
+		//	    "UserProfileName": {
+		//	      "description": "The name of the user's profile.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"last_modified_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DomainId
+				"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The domain associated with the user.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileArn
+				"user_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the user's profile.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserProfileName
+				"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the user's profile.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"domain_id": {
-						// Property: DomainId
-						Description: "The domain associated with the user.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"user_profile_arn": {
-						// Property: UserProfileArn
-						Description: "The Amazon Resource Name (ARN) of the user's profile.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"user_profile_name": {
-						// Property: UserProfileName
-						Description: "The name of the user's profile.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"last_modified_time": {
-			// Property: LastModifiedTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The time at which the model package was last modified.",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LastModifiedTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The time at which the model package was last modified.",
+		//	  "type": "string"
+		//	}
+		"last_modified_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The time at which the model package was last modified.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"metadata_properties": {
-			// Property: MetadataProperties
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Metadata properties of the tracking entity, trial, or trial component.",
-			//	  "properties": {
-			//	    "CommitId": {
-			//	      "description": "The commit ID.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "GeneratedBy": {
-			//	      "description": "The entity this entity was generated by.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "ProjectId": {
-			//	      "description": "The project ID metadata.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    },
-			//	    "Repository": {
-			//	      "description": "The repository metadata.",
-			//	      "maxLength": 1024,
-			//	      "pattern": ".*",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MetadataProperties
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Metadata properties of the tracking entity, trial, or trial component.",
+		//	  "properties": {
+		//	    "CommitId": {
+		//	      "description": "The commit ID.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "GeneratedBy": {
+		//	      "description": "The entity this entity was generated by.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "ProjectId": {
+		//	      "description": "The project ID metadata.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    },
+		//	    "Repository": {
+		//	      "description": "The repository metadata.",
+		//	      "maxLength": 1024,
+		//	      "pattern": ".*",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"metadata_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CommitId
+				"commit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The commit ID.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(1024),
+						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: GeneratedBy
+				"generated_by": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The entity this entity was generated by.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(1024),
+						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ProjectId
+				"project_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The project ID metadata.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(1024),
+						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Repository
+				"repository": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The repository metadata.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(1024),
+						stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Metadata properties of the tracking entity, trial, or trial component.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"commit_id": {
-						// Property: CommitId
-						Description: "The commit ID.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(1024),
-							validate.StringMatch(regexp.MustCompile(".*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"generated_by": {
-						// Property: GeneratedBy
-						Description: "The entity this entity was generated by.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(1024),
-							validate.StringMatch(regexp.MustCompile(".*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"project_id": {
-						// Property: ProjectId
-						Description: "The project ID metadata.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(1024),
-							validate.StringMatch(regexp.MustCompile(".*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"repository": {
-						// Property: Repository
-						Description: "The repository metadata.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(1024),
-							validate.StringMatch(regexp.MustCompile(".*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"model_approval_status": {
-			// Property: ModelApprovalStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The approval status of the model package.",
-			//	  "enum": [
-			//	    "Approved",
-			//	    "Rejected",
-			//	    "PendingManualApproval"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Description: "The approval status of the model package.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelApprovalStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The approval status of the model package.",
+		//	  "enum": [
+		//	    "Approved",
+		//	    "Rejected",
+		//	    "PendingManualApproval"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"model_approval_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The approval status of the model package.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"Approved",
 					"Rejected",
 					"PendingManualApproval",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"model_metrics": {
-			// Property: ModelMetrics
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A structure that contains model metrics reports.",
-			//	  "properties": {
-			//	    "Bias": {
-			//	      "additionalProperties": false,
-			//	      "description": "Contains bias metrics for a model.",
-			//	      "properties": {
-			//	        "PostTrainingReport": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "PreTrainingReport": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Report": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "Explainability": {
-			//	      "additionalProperties": false,
-			//	      "description": "Contains explainability metrics for a model.",
-			//	      "properties": {
-			//	        "Report": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelDataQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Metrics that measure the quality of the input data for a model.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ModelQuality": {
-			//	      "additionalProperties": false,
-			//	      "description": "Metrics that measure the quality of a model.",
-			//	      "properties": {
-			//	        "Constraints": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Statistics": {
-			//	          "additionalProperties": false,
-			//	          "description": "Represents a Metric Source Object.",
-			//	          "properties": {
-			//	            "ContentDigest": {
-			//	              "description": "The digest of the metric source.",
-			//	              "maxLength": 72,
-			//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-			//	              "type": "string"
-			//	            },
-			//	            "ContentType": {
-			//	              "description": "The type of content stored in the metric source.",
-			//	              "maxLength": 256,
-			//	              "pattern": ".*",
-			//	              "type": "string"
-			//	            },
-			//	            "S3Uri": {
-			//	              "description": "The Amazon S3 URI for the metric source.",
-			//	              "maxLength": 1024,
-			//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ContentType",
-			//	            "S3Uri"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelMetrics
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A structure that contains model metrics reports.",
+		//	  "properties": {
+		//	    "Bias": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains bias metrics for a model.",
+		//	      "properties": {
+		//	        "PostTrainingReport": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "PreTrainingReport": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Report": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "Explainability": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains explainability metrics for a model.",
+		//	      "properties": {
+		//	        "Report": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelDataQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Metrics that measure the quality of the input data for a model.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ModelQuality": {
+		//	      "additionalProperties": false,
+		//	      "description": "Metrics that measure the quality of a model.",
+		//	      "properties": {
+		//	        "Constraints": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Statistics": {
+		//	          "additionalProperties": false,
+		//	          "description": "Represents a Metric Source Object.",
+		//	          "properties": {
+		//	            "ContentDigest": {
+		//	              "description": "The digest of the metric source.",
+		//	              "maxLength": 72,
+		//	              "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
+		//	              "type": "string"
+		//	            },
+		//	            "ContentType": {
+		//	              "description": "The type of content stored in the metric source.",
+		//	              "maxLength": 256,
+		//	              "pattern": ".*",
+		//	              "type": "string"
+		//	            },
+		//	            "S3Uri": {
+		//	              "description": "The Amazon S3 URI for the metric source.",
+		//	              "maxLength": 1024,
+		//	              "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ContentType",
+		//	            "S3Uri"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"model_metrics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Bias
+				"bias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PostTrainingReport
+						"post_training_report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PreTrainingReport
+						"pre_training_report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Report
+						"report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains bias metrics for a model.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Explainability
+				"explainability": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Report
+						"report": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains explainability metrics for a model.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ModelDataQuality
+				"model_data_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Metrics that measure the quality of the input data for a model.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ModelQuality
+				"model_quality": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Constraints
+						"constraints": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Statistics
+						"statistics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ContentDigest
+								"content_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The digest of the metric source.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(72),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ContentType
+								"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The type of content stored in the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: S3Uri
+								"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 URI for the metric source.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(1024),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Represents a Metric Source Object.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Metrics that measure the quality of a model.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "A structure that contains model metrics reports.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"bias": {
-						// Property: Bias
-						Description: "Contains bias metrics for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"post_training_report": {
-									// Property: PostTrainingReport
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"pre_training_report": {
-									// Property: PreTrainingReport
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"report": {
-									// Property: Report
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"explainability": {
-						// Property: Explainability
-						Description: "Contains explainability metrics for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"report": {
-									// Property: Report
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"model_data_quality": {
-						// Property: ModelDataQuality
-						Description: "Metrics that measure the quality of the input data for a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"model_quality": {
-						// Property: ModelQuality
-						Description: "Metrics that measure the quality of a model.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"constraints": {
-									// Property: Constraints
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"statistics": {
-									// Property: Statistics
-									Description: "Represents a Metric Source Object.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"content_digest": {
-												// Property: ContentDigest
-												Description: "The digest of the metric source.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(72),
-													validate.StringMatch(regexp.MustCompile("^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"content_type": {
-												// Property: ContentType
-												Description: "The type of content stored in the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile(".*"), ""),
-												},
-											},
-											"s3_uri": {
-												// Property: S3Uri
-												Description: "The Amazon S3 URI for the metric source.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(1024),
-													validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"model_package_arn": {
-			// Property: ModelPackageArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the model package group.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the model package group.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"model_package_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the model package group.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"model_package_description": {
-			// Property: ModelPackageDescription
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the model package.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the model package.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*",
+		//	  "type": "string"
+		//	}
+		"model_package_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the model package.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(1024),
-				validate.StringMatch(regexp.MustCompile("[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"model_package_group_name": {
-			// Property: ModelPackageGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the model package group.",
-			//	  "maxLength": 170,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(1024),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\p{L}\\p{M}\\p{Z}\\p{S}\\p{N}\\p{P}]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the model package group.",
+		//	  "maxLength": 170,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"model_package_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the model package group.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 170),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"model_package_name": {
-			// Property: ModelPackageName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name or arn of the model package.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 170),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name or arn of the model package.",
+		//	  "type": "string"
+		//	}
+		"model_package_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name or arn of the model package.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"model_package_status": {
-			// Property: ModelPackageStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The current status of the model package.",
-			//	  "enum": [
-			//	    "Pending",
-			//	    "Deleting",
-			//	    "InProgress",
-			//	    "Completed",
-			//	    "Failed"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The current status of the model package.",
+		//	  "enum": [
+		//	    "Pending",
+		//	    "Deleting",
+		//	    "InProgress",
+		//	    "Completed",
+		//	    "Failed"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"model_package_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The current status of the model package.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"model_package_status_details": {
-			// Property: ModelPackageStatusDetails
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Details about the current status of the model package.",
-			//	  "properties": {
-			//	    "ImageScanStatuses": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Represents the overall status of a model package.",
-			//	        "properties": {
-			//	          "FailureReason": {
-			//	            "description": "If the overall status is Failed, the reason for the failure.",
-			//	            "type": "string"
-			//	          },
-			//	          "Name": {
-			//	            "description": "The name of the model package for which the overall status is being reported.",
-			//	            "maxLength": 63,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Status": {
-			//	            "description": "The current status.",
-			//	            "enum": [
-			//	              "NotStarted",
-			//	              "Failed",
-			//	              "InProgress",
-			//	              "Completed"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Name",
-			//	          "Status"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "ValidationStatuses": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Represents the overall status of a model package.",
-			//	        "properties": {
-			//	          "FailureReason": {
-			//	            "description": "If the overall status is Failed, the reason for the failure.",
-			//	            "type": "string"
-			//	          },
-			//	          "Name": {
-			//	            "description": "The name of the model package for which the overall status is being reported.",
-			//	            "maxLength": 63,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	            "type": "string"
-			//	          },
-			//	          "Status": {
-			//	            "description": "The current status.",
-			//	            "enum": [
-			//	              "NotStarted",
-			//	              "Failed",
-			//	              "InProgress",
-			//	              "Completed"
-			//	            ],
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "Name",
-			//	          "Status"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ValidationStatuses"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Details about the current status of the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"image_scan_statuses": {
-						// Property: ImageScanStatuses
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"failure_reason": {
-									// Property: FailureReason
-									Description: "If the overall status is Failed, the reason for the failure.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"name": {
-									// Property: Name
-									Description: "The name of the model package for which the overall status is being reported.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
-									},
-								},
-								"status": {
-									// Property: Status
-									Description: "The current status.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"NotStarted",
-											"Failed",
-											"InProgress",
-											"Completed",
-										}),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"validation_statuses": {
-						// Property: ValidationStatuses
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"failure_reason": {
-									// Property: FailureReason
-									Description: "If the overall status is Failed, the reason for the failure.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"name": {
-									// Property: Name
-									Description: "The name of the model package for which the overall status is being reported.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
-									},
-								},
-								"status": {
-									// Property: Status
-									Description: "The current status.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"NotStarted",
-											"Failed",
-											"InProgress",
-											"Completed",
-										}),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"model_package_status_item": {
-			// Property: ModelPackageStatusItem
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Represents the overall status of a model package.",
-			//	  "properties": {
-			//	    "FailureReason": {
-			//	      "description": "If the overall status is Failed, the reason for the failure.",
-			//	      "type": "string"
-			//	    },
-			//	    "Name": {
-			//	      "description": "The name of the model package for which the overall status is being reported.",
-			//	      "maxLength": 63,
-			//	      "minLength": 1,
-			//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	      "type": "string"
-			//	    },
-			//	    "Status": {
-			//	      "description": "The current status.",
-			//	      "enum": [
-			//	        "NotStarted",
-			//	        "Failed",
-			//	        "InProgress",
-			//	        "Completed"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Name",
-			//	    "Status"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Represents the overall status of a model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"failure_reason": {
-						// Property: FailureReason
-						Description: "If the overall status is Failed, the reason for the failure.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"name": {
-						// Property: Name
-						Description: "The name of the model package for which the overall status is being reported.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 63),
-							validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
-						},
-					},
-					"status": {
-						// Property: Status
-						Description: "The current status.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"NotStarted",
-								"Failed",
-								"InProgress",
-								"Completed",
-							}),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"model_package_version": {
-			// Property: ModelPackageVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The version of the model package.",
-			//	  "minimum": 1,
-			//	  "type": "integer"
-			//	}
-			Description: "The version of the model package.",
-			Type:        types.Int64Type,
-			Optional:    true,
-			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.IntAtLeast(1),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"sample_payload_url": {
-			// Property: SamplePayloadUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	  "type": "string"
-			//	}
-			Description: "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
-			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(1024),
-				validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"source_algorithm_specification": {
-			// Property: SourceAlgorithmSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Details about the algorithm that was used to create the model package.",
-			//	  "insertionOrder": true,
-			//	  "properties": {
-			//	    "SourceAlgorithms": {
-			//	      "description": "A list of algorithms that were used to create a model package.",
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Specifies an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
-			//	        "properties": {
-			//	          "AlgorithmName": {
-			//	            "description": "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
-			//	            "maxLength": 170,
-			//	            "minLength": 1,
-			//	            "pattern": "",
-			//	            "type": "string"
-			//	          },
-			//	          "ModelDataUrl": {
-			//	            "description": "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
-			//	            "maxLength": 1024,
-			//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "AlgorithmName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 1,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "SourceAlgorithms"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Details about the algorithm that was used to create the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"source_algorithms": {
-						// Property: SourceAlgorithms
-						Description: "A list of algorithms that were used to create a model package.",
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"algorithm_name": {
-									// Property: AlgorithmName
-									Description: "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 170),
-									},
-								},
-								"model_data_url": {
-									// Property: ModelDataUrl
-									Description: "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenAtMost(1024),
-										validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 1),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-			//	        "maxLength": 256,
-			//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array"
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-					},
-					"value": {
-						// Property: Value
-						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenAtMost(256),
-							validate.StringMatch(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenAtMost(50),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"task": {
-			// Property: Task
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The machine learning task your model package accomplishes.",
-			//	  "type": "string"
-			//	}
-			Description: "The machine learning task your model package accomplishes.",
-			Type:        types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"validation_specification": {
-			// Property: ValidationSpecification
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
-			//	  "insertionOrder": true,
-			//	  "properties": {
-			//	    "ValidationProfiles": {
-			//	      "insertionOrder": true,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "description": "Contains data, such as the inputs and targeted instance types that are used in the process of validating the model package.",
-			//	        "properties": {
-			//	          "ProfileName": {
-			//	            "description": "The name of the profile for the model package.",
-			//	            "maxLength": 63,
-			//	            "minLength": 1,
-			//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-			//	            "type": "string"
-			//	          },
-			//	          "TransformJobDefinition": {
-			//	            "additionalProperties": false,
-			//	            "description": "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
-			//	            "properties": {
-			//	              "BatchStrategy": {
-			//	                "description": "A string that determines the number of records included in a single mini-batch.",
-			//	                "enum": [
-			//	                  "MultiRecord",
-			//	                  "SingleRecord"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Environment": {
-			//	                "additionalProperties": false,
-			//	                "description": "Sets the environment variables in the Docker container",
-			//	                "patternProperties": {
-			//	                  "": {
-			//	                    "maxLength": 1024,
-			//	                    "type": "string"
-			//	                  },
-			//	                  "[\\S\\s]*": {
-			//	                    "maxLength": 1024,
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "MaxConcurrentTransforms": {
-			//	                "description": "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              },
-			//	              "MaxPayloadInMB": {
-			//	                "description": "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
-			//	                "minimum": 0,
-			//	                "type": "integer"
-			//	              },
-			//	              "TransformInput": {
-			//	                "additionalProperties": false,
-			//	                "description": "Describes the input source of a transform job and the way the transform job consumes it.",
-			//	                "properties": {
-			//	                  "CompressionType": {
-			//	                    "description": "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
-			//	                    "enum": [
-			//	                      "None",
-			//	                      "Gzip"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "ContentType": {
-			//	                    "description": "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
-			//	                    "maxLength": 256,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DataSource": {
-			//	                    "additionalProperties": false,
-			//	                    "description": "Describes the input source of a transform job and the way the transform job consumes it.",
-			//	                    "properties": {
-			//	                      "S3DataSource": {
-			//	                        "additionalProperties": false,
-			//	                        "description": "Describes the S3 data source.",
-			//	                        "properties": {
-			//	                          "S3DataType": {
-			//	                            "description": "The S3 Data Source Type",
-			//	                            "enum": [
-			//	                              "ManifestFile",
-			//	                              "S3Prefix",
-			//	                              "AugmentedManifestFile"
-			//	                            ],
-			//	                            "type": "string"
-			//	                          },
-			//	                          "S3Uri": {
-			//	                            "description": "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
-			//	                            "maxLength": 1024,
-			//	                            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	                            "type": "string"
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "S3DataType",
-			//	                          "S3Uri"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "S3DataSource"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  },
-			//	                  "SplitType": {
-			//	                    "description": "The method to use to split the transform job's data files into smaller batches. ",
-			//	                    "enum": [
-			//	                      "None",
-			//	                      "TFRecord",
-			//	                      "Line",
-			//	                      "RecordIO"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "DataSource"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "TransformOutput": {
-			//	                "additionalProperties": false,
-			//	                "description": "Describes the results of a transform job.",
-			//	                "properties": {
-			//	                  "Accept": {
-			//	                    "description": "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
-			//	                    "maxLength": 256,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "AssembleWith": {
-			//	                    "description": "Defines how to assemble the results of the transform job as a single S3 object.",
-			//	                    "enum": [
-			//	                      "None",
-			//	                      "Line"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "KmsKeyId": {
-			//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-			//	                    "maxLength": 2048,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "S3OutputPath": {
-			//	                    "description": "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
-			//	                    "maxLength": 1024,
-			//	                    "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "S3OutputPath"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "TransformResources": {
-			//	                "additionalProperties": false,
-			//	                "description": "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
-			//	                "properties": {
-			//	                  "InstanceCount": {
-			//	                    "description": "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
-			//	                    "minimum": 1,
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "InstanceType": {
-			//	                    "description": "The ML compute instance type for the transform job.",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "VolumeKmsKeyId": {
-			//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
-			//	                    "maxLength": 2048,
-			//	                    "pattern": ".*",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "InstanceCount",
-			//	                  "InstanceType"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "TransformResources",
-			//	              "TransformOutput",
-			//	              "TransformInput"
-			//	            ],
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "TransformJobDefinition",
-			//	          "ProfileName"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "maxItems": 1,
-			//	      "minItems": 1,
-			//	      "type": "array"
-			//	    },
-			//	    "ValidationRole": {
-			//	      "description": "The IAM roles to be used for the validation of the model package.",
-			//	      "maxLength": 2048,
-			//	      "minLength": 20,
-			//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ValidationProfiles",
-			//	    "ValidationRole"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"validation_profiles": {
-						// Property: ValidationProfiles
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"profile_name": {
-									// Property: ProfileName
-									Description: "The name of the profile for the model package.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 63),
-										validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
-									},
-								},
-								"transform_job_definition": {
-									// Property: TransformJobDefinition
-									Description: "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"batch_strategy": {
-												// Property: BatchStrategy
-												Description: "A string that determines the number of records included in a single mini-batch.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"MultiRecord",
-														"SingleRecord",
-													}),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"environment": {
-												// Property: Environment
-												Description: "Sets the environment variables in the Docker container",
-												// Pattern: ""
-												Type: types.MapType{ElemType: types.StringType},
-												// Pattern "[\\S\\s]*" ignored.
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"max_concurrent_transforms": {
-												// Property: MaxConcurrentTransforms
-												Description: "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
-												Type:        types.Int64Type,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntAtLeast(0),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"max_payload_in_mb": {
-												// Property: MaxPayloadInMB
-												Description: "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
-												Type:        types.Int64Type,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntAtLeast(0),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"transform_input": {
-												// Property: TransformInput
-												Description: "Describes the input source of a transform job and the way the transform job consumes it.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"compression_type": {
-															// Property: CompressionType
-															Description: "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"None",
-																	"Gzip",
-																}),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"content_type": {
-															// Property: ContentType
-															Description: "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(256),
-																validate.StringMatch(regexp.MustCompile(".*"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"data_source": {
-															// Property: DataSource
-															Description: "Describes the input source of a transform job and the way the transform job consumes it.",
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"s3_data_source": {
-																		// Property: S3DataSource
-																		Description: "Describes the S3 data source.",
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"s3_data_type": {
-																					// Property: S3DataType
-																					Description: "The S3 Data Source Type",
-																					Type:        types.StringType,
-																					Required:    true,
-																					Validators: []tfsdk.AttributeValidator{
-																						validate.StringInSlice([]string{
-																							"ManifestFile",
-																							"S3Prefix",
-																							"AugmentedManifestFile",
-																						}),
-																					},
-																				},
-																				"s3_uri": {
-																					// Property: S3Uri
-																					Description: "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
-																					Type:        types.StringType,
-																					Required:    true,
-																					Validators: []tfsdk.AttributeValidator{
-																						validate.StringLenAtMost(1024),
-																						validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-																					},
-																				},
-																			},
-																		),
-																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-														},
-														"split_type": {
-															// Property: SplitType
-															Description: "The method to use to split the transform job's data files into smaller batches. ",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"None",
-																	"TFRecord",
-																	"Line",
-																	"RecordIO",
-																}),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-											"transform_output": {
-												// Property: TransformOutput
-												Description: "Describes the results of a transform job.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"accept": {
-															// Property: Accept
-															Description: "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(256),
-																validate.StringMatch(regexp.MustCompile(".*"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"assemble_with": {
-															// Property: AssembleWith
-															Description: "Defines how to assemble the results of the transform job as a single S3 object.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"None",
-																	"Line",
-																}),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"kms_key_id": {
-															// Property: KmsKeyId
-															Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(2048),
-																validate.StringMatch(regexp.MustCompile(".*"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"s3_output_path": {
-															// Property: S3OutputPath
-															Description: "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(1024),
-																validate.StringMatch(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-											"transform_resources": {
-												// Property: TransformResources
-												Description: "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"instance_count": {
-															// Property: InstanceCount
-															Description: "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
-															Type:        types.Int64Type,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.IntAtLeast(1),
-															},
-														},
-														"instance_type": {
-															// Property: InstanceType
-															Description: "The ML compute instance type for the transform job.",
-															Type:        types.StringType,
-															Required:    true,
-														},
-														"volume_kms_key_id": {
-															// Property: VolumeKmsKeyId
-															Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(2048),
-																validate.StringMatch(regexp.MustCompile(".*"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageStatusDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Details about the current status of the model package.",
+		//	  "properties": {
+		//	    "ImageScanStatuses": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Represents the overall status of a model package.",
+		//	        "properties": {
+		//	          "FailureReason": {
+		//	            "description": "If the overall status is Failed, the reason for the failure.",
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the model package for which the overall status is being reported.",
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "The current status.",
+		//	            "enum": [
+		//	              "NotStarted",
+		//	              "Failed",
+		//	              "InProgress",
+		//	              "Completed"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "ValidationStatuses": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Represents the overall status of a model package.",
+		//	        "properties": {
+		//	          "FailureReason": {
+		//	            "description": "If the overall status is Failed, the reason for the failure.",
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the model package for which the overall status is being reported.",
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Status": {
+		//	            "description": "The current status.",
+		//	            "enum": [
+		//	              "NotStarted",
+		//	              "Failed",
+		//	              "InProgress",
+		//	              "Completed"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Name",
+		//	          "Status"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ValidationStatuses"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"model_package_status_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageScanStatuses
+				"image_scan_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FailureReason
+							"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "If the overall status is Failed, the reason for the failure.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the model package for which the overall status is being reported.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 63),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The current status.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"NotStarted",
+										"Failed",
+										"InProgress",
+										"Completed",
 									),
-									Required: true,
-								},
-							},
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ValidationStatuses
+				"validation_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FailureReason
+							"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "If the overall status is Failed, the reason for the failure.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the model package for which the overall status is being reported.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 63),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Status
+							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The current status.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"NotStarted",
+										"Failed",
+										"InProgress",
+										"Completed",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Details about the current status of the model package.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageStatusItem
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the overall status of a model package.",
+		//	  "properties": {
+		//	    "FailureReason": {
+		//	      "description": "If the overall status is Failed, the reason for the failure.",
+		//	      "type": "string"
+		//	    },
+		//	    "Name": {
+		//	      "description": "The name of the model package for which the overall status is being reported.",
+		//	      "maxLength": 63,
+		//	      "minLength": 1,
+		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "description": "The current status.",
+		//	      "enum": [
+		//	        "NotStarted",
+		//	        "Failed",
+		//	        "InProgress",
+		//	        "Completed"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Name",
+		//	    "Status"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"model_package_status_item": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: FailureReason
+				"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "If the overall status is Failed, the reason for the failure.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Name
+				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The name of the model package for which the overall status is being reported.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 63),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The current status.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"NotStarted",
+							"Failed",
+							"InProgress",
+							"Completed",
 						),
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(1, 1),
-						},
-					},
-					"validation_role": {
-						// Property: ValidationRole
-						Description: "The IAM roles to be used for the validation of the model package.",
-						Type:        types.StringType,
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Represents the overall status of a model package.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ModelPackageVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The version of the model package.",
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"model_package_version": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The version of the model package.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SamplePayloadUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	  "type": "string"
+		//	}
+		"sample_payload_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(1024),
+				stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceAlgorithmSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Details about the algorithm that was used to create the model package.",
+		//	  "insertionOrder": true,
+		//	  "properties": {
+		//	    "SourceAlgorithms": {
+		//	      "description": "A list of algorithms that were used to create a model package.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
+		//	        "properties": {
+		//	          "AlgorithmName": {
+		//	            "description": "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
+		//	            "maxLength": 170,
+		//	            "minLength": 1,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "ModelDataUrl": {
+		//	            "description": "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
+		//	            "maxLength": 1024,
+		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "AlgorithmName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SourceAlgorithms"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"source_algorithm_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SourceAlgorithms
+				"source_algorithms": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AlgorithmName
+							"algorithm_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of an algorithm that was used to create the model package. The algorithm must be either an algorithm resource in your Amazon SageMaker account or an algorithm in AWS Marketplace that you are subscribed to.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 170),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ModelDataUrl
+							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The Amazon S3 path where the model artifacts, which result from model training, are stored. This path must point to a single gzip compressed tar archive (.tar.gz suffix).",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthAtMost(1024),
+									stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of algorithms that were used to create a model package.",
+					Required:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Details about the algorithm that was used to create the model package.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(20, 2048),
-							validate.StringMatch(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Required:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(256),
+							stringvalidator.RegexMatches(regexp.MustCompile("^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Task
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The machine learning task your model package accomplishes.",
+		//	  "type": "string"
+		//	}
+		"task": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The machine learning task your model package accomplishes.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ValidationSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
+		//	  "insertionOrder": true,
+		//	  "properties": {
+		//	    "ValidationProfiles": {
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Contains data, such as the inputs and targeted instance types that are used in the process of validating the model package.",
+		//	        "properties": {
+		//	          "ProfileName": {
+		//	            "description": "The name of the profile for the model package.",
+		//	            "maxLength": 63,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
+		//	            "type": "string"
+		//	          },
+		//	          "TransformJobDefinition": {
+		//	            "additionalProperties": false,
+		//	            "description": "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
+		//	            "properties": {
+		//	              "BatchStrategy": {
+		//	                "description": "A string that determines the number of records included in a single mini-batch.",
+		//	                "enum": [
+		//	                  "MultiRecord",
+		//	                  "SingleRecord"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Environment": {
+		//	                "additionalProperties": false,
+		//	                "description": "Sets the environment variables in the Docker container",
+		//	                "patternProperties": {
+		//	                  "": {
+		//	                    "maxLength": 1024,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "[\\S\\s]*": {
+		//	                    "maxLength": 1024,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "MaxConcurrentTransforms": {
+		//	                "description": "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              },
+		//	              "MaxPayloadInMB": {
+		//	                "description": "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              },
+		//	              "TransformInput": {
+		//	                "additionalProperties": false,
+		//	                "description": "Describes the input source of a transform job and the way the transform job consumes it.",
+		//	                "properties": {
+		//	                  "CompressionType": {
+		//	                    "description": "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
+		//	                    "enum": [
+		//	                      "None",
+		//	                      "Gzip"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "ContentType": {
+		//	                    "description": "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
+		//	                    "maxLength": 256,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DataSource": {
+		//	                    "additionalProperties": false,
+		//	                    "description": "Describes the input source of a transform job and the way the transform job consumes it.",
+		//	                    "properties": {
+		//	                      "S3DataSource": {
+		//	                        "additionalProperties": false,
+		//	                        "description": "Describes the S3 data source.",
+		//	                        "properties": {
+		//	                          "S3DataType": {
+		//	                            "description": "The S3 Data Source Type",
+		//	                            "enum": [
+		//	                              "ManifestFile",
+		//	                              "S3Prefix",
+		//	                              "AugmentedManifestFile"
+		//	                            ],
+		//	                            "type": "string"
+		//	                          },
+		//	                          "S3Uri": {
+		//	                            "description": "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
+		//	                            "maxLength": 1024,
+		//	                            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	                            "type": "string"
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "S3DataType",
+		//	                          "S3Uri"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "S3DataSource"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  },
+		//	                  "SplitType": {
+		//	                    "description": "The method to use to split the transform job's data files into smaller batches. ",
+		//	                    "enum": [
+		//	                      "None",
+		//	                      "TFRecord",
+		//	                      "Line",
+		//	                      "RecordIO"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "DataSource"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "TransformOutput": {
+		//	                "additionalProperties": false,
+		//	                "description": "Describes the results of a transform job.",
+		//	                "properties": {
+		//	                  "Accept": {
+		//	                    "description": "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
+		//	                    "maxLength": 256,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "AssembleWith": {
+		//	                    "description": "Defines how to assemble the results of the transform job as a single S3 object.",
+		//	                    "enum": [
+		//	                      "None",
+		//	                      "Line"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "KmsKeyId": {
+		//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+		//	                    "maxLength": 2048,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "S3OutputPath": {
+		//	                    "description": "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
+		//	                    "maxLength": 1024,
+		//	                    "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "S3OutputPath"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "TransformResources": {
+		//	                "additionalProperties": false,
+		//	                "description": "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
+		//	                "properties": {
+		//	                  "InstanceCount": {
+		//	                    "description": "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
+		//	                    "minimum": 1,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "InstanceType": {
+		//	                    "description": "The ML compute instance type for the transform job.",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "VolumeKmsKeyId": {
+		//	                    "description": "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
+		//	                    "maxLength": 2048,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "InstanceCount",
+		//	                  "InstanceType"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "TransformResources",
+		//	              "TransformOutput",
+		//	              "TransformInput"
+		//	            ],
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TransformJobDefinition",
+		//	          "ProfileName"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 1,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    },
+		//	    "ValidationRole": {
+		//	      "description": "The IAM roles to be used for the validation of the model package.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ValidationProfiles",
+		//	    "ValidationRole"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"validation_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ValidationProfiles
+				"validation_profiles": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ProfileName
+							"profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the profile for the model package.",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 63),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$"), ""),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: TransformJobDefinition
+							"transform_job_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BatchStrategy
+									"batch_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A string that determines the number of records included in a single mini-batch.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"MultiRecord",
+												"SingleRecord",
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Environment
+									"environment":       // Pattern: ""
+									schema.MapAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										// Pattern "[\\S\\s]*" ignored.
+										Description: "Sets the environment variables in the Docker container",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+											mapplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MaxConcurrentTransforms
+									"max_concurrent_transforms": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum number of parallel requests that can be sent to each instance in a transform job. The default value is 1.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.AtLeast(0),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: MaxPayloadInMB
+									"max_payload_in_mb": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The maximum payload size allowed, in MB. A payload is the data portion of a record (without metadata).",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.AtLeast(0),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: TransformInput
+									"transform_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: CompressionType
+											"compression_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "If your transform data is compressed, specify the compression type. Amazon SageMaker automatically decompresses the data for the transform job accordingly. The default value is None.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"None",
+														"Gzip",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: ContentType
+											"content_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The multipurpose internet mail extension (MIME) type of the data. Amazon SageMaker uses the MIME type with each http call to transfer data to the transform job.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(256),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DataSource
+											"data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: S3DataSource
+													"s3_data_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: S3DataType
+															"s3_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "The S3 Data Source Type",
+																Required:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.OneOf(
+																		"ManifestFile",
+																		"S3Prefix",
+																		"AugmentedManifestFile",
+																	),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+															// Property: S3Uri
+															"s3_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+																Description: "Depending on the value specified for the S3DataType, identifies either a key name prefix or a manifest.",
+																Required:    true,
+																Validators: []validator.String{ /*START VALIDATORS*/
+																	stringvalidator.LengthAtMost(1024),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+																}, /*END VALIDATORS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Description: "Describes the S3 data source.",
+														Required:    true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Description: "Describes the input source of a transform job and the way the transform job consumes it.",
+												Required:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: SplitType
+											"split_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The method to use to split the transform job's data files into smaller batches. ",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"None",
+														"TFRecord",
+														"Line",
+														"RecordIO",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the input source of a transform job and the way the transform job consumes it.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransformOutput
+									"transform_output": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Accept
+											"accept": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The MIME type used to specify the output data. Amazon SageMaker uses the MIME type with each http call to transfer data from the transform job.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(256),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: AssembleWith
+											"assemble_with": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Defines how to assemble the results of the transform job as a single S3 object.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"None",
+														"Line",
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: KmsKeyId
+											"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt the model artifacts at rest using Amazon S3 server-side encryption.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(2048),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: S3OutputPath
+											"s3_output_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The Amazon S3 path where you want Amazon SageMaker to store the results of the transform job.",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(https|s3)://([^/]+)/?(.*)$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the results of a transform job.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: TransformResources
+									"transform_resources": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: InstanceCount
+											"instance_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+												Description: "The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.",
+												Required:    true,
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.AtLeast(1),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: InstanceType
+											"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The ML compute instance type for the transform job.",
+												Required:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: VolumeKmsKeyId
+											"volume_kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthAtMost(2048),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Describes the resources, including ML instance types and ML instance count, to use for transform job.",
+										Required:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Defines the input needed to run a transform job using the inference specification specified in the algorithm.",
+								Required:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Required: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 1),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ValidationRole
+				"validation_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The IAM roles to be used for the validation of the model package.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(20, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Specifies configurations for one or more transform jobs that Amazon SageMaker runs to test the model package.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::SageMaker::ModelPackage",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackage").WithTerraformTypeName("awscc_sagemaker_model_package")
 	opts = opts.WithTerraformSchema(schema)
@@ -4759,7 +4543,7 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

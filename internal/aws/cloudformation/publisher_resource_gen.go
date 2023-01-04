@@ -4,14 +4,17 @@ package cloudformation
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,135 +24,128 @@ func init() {
 // publisherResource returns the Terraform awscc_cloudformation_publisher resource.
 // This Terraform resource corresponds to the CloudFormation AWS::CloudFormation::Publisher resource.
 func publisherResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"accept_terms_and_conditions": {
-			// Property: AcceptTermsAndConditions
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
-			//	  "type": "boolean"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AcceptTermsAndConditions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
+		//	  "type": "boolean"
+		//	}
+		"accept_terms_and_conditions": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether you accept the terms and conditions for publishing extensions in the CloudFormation registry. You must accept the terms and conditions in order to publish public extensions to the CloudFormation registry. The terms and conditions can be found at https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf",
-			Type:        types.BoolType,
 			Required:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"connection_arn": {
-			// Property: ConnectionArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
-			//	  "pattern": "arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectionArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
+		//	  "pattern": "arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+",
+		//	  "type": "string"
+		//	}
+		"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "If you are using a Bitbucket or GitHub account for identity verification, the Amazon Resource Name (ARN) for your connection to that account.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"identity_provider": {
-			// Property: IdentityProvider
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The type of account used as the identity provider when registering this publisher with CloudFormation.",
-			//	  "enum": [
-			//	    "AWS_Marketplace",
-			//	    "GitHub",
-			//	    "Bitbucket"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[w]+)*:.+:.+:[0-9]{12}:.+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IdentityProvider
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The type of account used as the identity provider when registering this publisher with CloudFormation.",
+		//	  "enum": [
+		//	    "AWS_Marketplace",
+		//	    "GitHub",
+		//	    "Bitbucket"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"identity_provider": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The type of account used as the identity provider when registering this publisher with CloudFormation.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"publisher_id": {
-			// Property: PublisherId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
-			//	  "maxLength": 40,
-			//	  "minLength": 1,
-			//	  "pattern": "[0-9a-zA-Z]{40}",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PublisherId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The publisher id assigned by CloudFormation for publishing in this region.",
+		//	  "maxLength": 40,
+		//	  "minLength": 1,
+		//	  "pattern": "[0-9a-zA-Z]{40}",
+		//	  "type": "string"
+		//	}
+		"publisher_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The publisher id assigned by CloudFormation for publishing in this region.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"publisher_profile": {
-			// Property: PublisherProfile
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The URL to the publisher's profile with the identity provider.",
-			//	  "maxLength": 1024,
-			//	  "pattern": "(http:|https:)+[^s]+[w]",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PublisherProfile
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The URL to the publisher's profile with the identity provider.",
+		//	  "maxLength": 1024,
+		//	  "pattern": "(http:|https:)+[^s]+[w]",
+		//	  "type": "string"
+		//	}
+		"publisher_profile": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The URL to the publisher's profile with the identity provider.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"publisher_status": {
-			// Property: PublisherStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether the publisher is verified.",
-			//	  "enum": [
-			//	    "VERIFIED",
-			//	    "UNVERIFIED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PublisherStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether the publisher is verified.",
+		//	  "enum": [
+		//	    "VERIFIED",
+		//	    "UNVERIFIED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"publisher_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether the publisher is verified.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Register as a publisher in the CloudFormation Registry.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::Publisher").WithTerraformTypeName("awscc_cloudformation_publisher")
 	opts = opts.WithTerraformSchema(schema)
@@ -167,7 +163,7 @@ func publisherResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

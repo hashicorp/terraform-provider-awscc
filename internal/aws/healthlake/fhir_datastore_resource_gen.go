@@ -4,14 +4,18 @@ package healthlake
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,375 +25,353 @@ func init() {
 // fHIRDatastoreResource returns the Terraform awscc_healthlake_fhir_datastore resource.
 // This Terraform resource corresponds to the CloudFormation AWS::HealthLake::FHIRDatastore resource.
 func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"created_at": {
-			// Property: CreatedAt
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The time that a Data Store was created.",
-			//	  "properties": {
-			//	    "Nanos": {
-			//	      "description": "Nanoseconds.",
-			//	      "type": "integer"
-			//	    },
-			//	    "Seconds": {
-			//	      "description": "Seconds since epoch.",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Seconds",
-			//	    "Nanos"
-			//	  ],
-			//	  "type": "object"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreatedAt
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The time that a Data Store was created.",
+		//	  "properties": {
+		//	    "Nanos": {
+		//	      "description": "Nanoseconds.",
+		//	      "type": "integer"
+		//	    },
+		//	    "Seconds": {
+		//	      "description": "Seconds since epoch.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Seconds",
+		//	    "Nanos"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"created_at": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Nanos
+				"nanos": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Nanoseconds.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Seconds
+				"seconds": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Seconds since epoch.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "The time that a Data Store was created.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"nanos": {
-						// Property: Nanos
-						Description: "Nanoseconds.",
-						Type:        types.Int64Type,
-						Required:    true,
-					},
-					"seconds": {
-						// Property: Seconds
-						Description: "Seconds since epoch.",
-						Type:        types.StringType,
-						Required:    true,
-					},
-				},
-			),
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"datastore_arn": {
-			// Property: DatastoreArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name used in the creation of the Data Store.",
-			//	  "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatastoreArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name used in the creation of the Data Store.",
+		//	  "pattern": "^arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:healthlake:[a-zA-Z0-9-]+:[0-9]{12}:datastore/.+?",
+		//	  "type": "string"
+		//	}
+		"datastore_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name used in the creation of the Data Store.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"datastore_endpoint": {
-			// Property: DatastoreEndpoint
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.",
-			//	  "maxLength": 10000,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatastoreEndpoint
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.",
+		//	  "maxLength": 10000,
+		//	  "type": "string"
+		//	}
+		"datastore_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS endpoint for the Data Store. Each Data Store will have it's own endpoint with Data Store ID in the endpoint URL.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"datastore_id": {
-			// Property: DatastoreId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS-generated ID number for the Data Store.",
-			//	  "maxLength": 32,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatastoreId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS-generated ID number for the Data Store.",
+		//	  "maxLength": 32,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"datastore_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS-generated ID number for the Data Store.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"datastore_name": {
-			// Property: DatastoreName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The user-generated name for the Data Store.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatastoreName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The user-generated name for the Data Store.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"datastore_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The user-generated name for the Data Store.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 256),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"datastore_status": {
-			// Property: DatastoreStatus
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
-			//	  "enum": [
-			//	    "CREATING",
-			//	    "ACTIVE",
-			//	    "DELETING",
-			//	    "DELETED"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatastoreStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
+		//	  "enum": [
+		//	    "CREATING",
+		//	    "ACTIVE",
+		//	    "DELETING",
+		//	    "DELETED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"datastore_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"datastore_type_version": {
-			// Property: DatastoreTypeVersion
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The FHIR version. Only R4 version data is supported.",
-			//	  "enum": [
-			//	    "R4"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DatastoreTypeVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The FHIR version. Only R4 version data is supported.",
+		//	  "enum": [
+		//	    "R4"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"datastore_type_version": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The FHIR version. Only R4 version data is supported.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"R4",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"preload_data_config": {
-			// Property: PreloadDataConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.",
-			//	  "properties": {
-			//	    "PreloadDataType": {
-			//	      "description": "The type of preloaded data. Only Synthea preloaded data is supported.",
-			//	      "enum": [
-			//	        "SYNTHEA"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "PreloadDataType"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"preload_data_type": {
-						// Property: PreloadDataType
-						Description: "The type of preloaded data. Only Synthea preloaded data is supported.",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"SYNTHEA",
-							}),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"sse_configuration": {
-			// Property: SseConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "The server-side encryption key configuration for a customer provided encryption key.",
-			//	  "properties": {
-			//	    "KmsEncryptionConfig": {
-			//	      "additionalProperties": false,
-			//	      "description": "The customer-managed-key (CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption.",
-			//	      "properties": {
-			//	        "CmkType": {
-			//	          "description": "The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.",
-			//	          "enum": [
-			//	            "CUSTOMER_MANAGED_KMS_KEY",
-			//	            "AWS_OWNED_KMS_KEY"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "KmsKeyId": {
-			//	          "description": "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
-			//	          "maxLength": 400,
-			//	          "minLength": 1,
-			//	          "pattern": "(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "CmkType"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "KmsEncryptionConfig"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "The server-side encryption key configuration for a customer provided encryption key.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"kms_encryption_config": {
-						// Property: KmsEncryptionConfig
-						Description: "The customer-managed-key (CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption.",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"cmk_type": {
-									// Property: CmkType
-									Description: "The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"CUSTOMER_MANAGED_KMS_KEY",
-											"AWS_OWNED_KMS_KEY",
-										}),
-									},
-								},
-								"kms_key_id": {
-									// Property: KmsKeyId
-									Description: "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 400),
-										validate.StringMatch(regexp.MustCompile("(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PreloadDataConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.",
+		//	  "properties": {
+		//	    "PreloadDataType": {
+		//	      "description": "The type of preloaded data. Only Synthea preloaded data is supported.",
+		//	      "enum": [
+		//	        "SYNTHEA"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "PreloadDataType"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"preload_data_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PreloadDataType
+				"preload_data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The type of preloaded data. Only Synthea preloaded data is supported.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SYNTHEA",
 						),
-						Required: true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key of the tag.",
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value of the tag.",
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SseConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The server-side encryption key configuration for a customer provided encryption key.",
+		//	  "properties": {
+		//	    "KmsEncryptionConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The customer-managed-key (CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption.",
+		//	      "properties": {
+		//	        "CmkType": {
+		//	          "description": "The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.",
+		//	          "enum": [
+		//	            "CUSTOMER_MANAGED_KMS_KEY",
+		//	            "AWS_OWNED_KMS_KEY"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "KmsKeyId": {
+		//	          "description": "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
+		//	          "maxLength": 400,
+		//	          "minLength": 1,
+		//	          "pattern": "(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "CmkType"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "KmsEncryptionConfig"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"sse_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsEncryptionConfig
+				"kms_encryption_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CmkType
+						"cmk_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The type of customer-managed-key (CMK) used for encryption. The two types of supported CMKs are customer owned CMKs and AWS owned CMKs.",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"CUSTOMER_MANAGED_KMS_KEY",
+									"AWS_OWNED_KMS_KEY",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: KmsKeyId
+						"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The KMS encryption key id/alias used to encrypt the Data Store contents at rest.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 400),
+								stringvalidator.RegexMatches(regexp.MustCompile("(arn:aws((-us-gov)|(-iso)|(-iso-b)|(-cn))?:kms:)?([a-z]{2}-[a-z]+(-[a-z]+)?-\\d:)?(\\d{12}:)?(((key/)?[a-zA-Z0-9-_]+)|(alias/[a-zA-Z0-9:/_-]+))"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The customer-managed-key (CMK) used when creating a Data Store. If a customer owned key is not specified, an AWS owned key will be used for encryption.",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The server-side encryption key configuration for a customer provided encryption key.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag values are both required, but tag values can be empty (null) strings.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key of the tag.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value of the tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key of the tag.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value of the tag.",
-						Type:        types.StringType,
 						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-					},
-				},
-			),
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "HealthLake FHIR Datastore",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::HealthLake::FHIRDatastore").WithTerraformTypeName("awscc_healthlake_fhir_datastore")
 	opts = opts.WithTerraformSchema(schema)
@@ -419,7 +401,7 @@ func fHIRDatastoreResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

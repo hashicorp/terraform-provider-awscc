@@ -4,14 +4,23 @@ package appflow
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,2862 +30,2662 @@ func init() {
 // connectorProfileResource returns the Terraform awscc_appflow_connector_profile resource.
 // This Terraform resource corresponds to the CloudFormation AWS::AppFlow::ConnectorProfile resource.
 func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"connection_mode": {
-			// Property: ConnectionMode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
-			//	  "enum": [
-			//	    "Public",
-			//	    "Private"
-			//	  ],
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ConnectionMode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
+		//	  "enum": [
+		//	    "Public",
+		//	    "Private"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"connection_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Mode in which data transfer should be enabled. Private connection mode is currently enabled for Salesforce, Snowflake, Trendmicro and Singular",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"Public",
 					"Private",
-				}),
-			},
-		},
-		"connector_label": {
-			// Property: ConnectorLabel
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
-			//	  "maxLength": 256,
-			//	  "pattern": "[\\w!@#.-]+",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorLabel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
+		//	  "maxLength": 256,
+		//	  "pattern": "[\\w!@#.-]+",
+		//	  "type": "string"
+		//	}
+		"connector_label": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The label of the connector. The label is unique for each ConnectorRegistration in your AWS account. Only needed if calling for CUSTOMCONNECTOR connector type/.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(256),
-				validate.StringMatch(regexp.MustCompile("[\\w!@#.-]+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"connector_profile_arn": {
-			// Property: ConnectorProfileArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Unique identifier for connector profile resources",
-			//	  "maxLength": 512,
-			//	  "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\w!@#.-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorProfileArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Unique identifier for connector profile resources",
+		//	  "maxLength": 512,
+		//	  "pattern": "arn:aws:appflow:.*:[0-9]+:.*",
+		//	  "type": "string"
+		//	}
+		"connector_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Unique identifier for connector profile resources",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"connector_profile_config": {
-			// Property: ConnectorProfileConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Connector specific configurations needed to create connector profile",
-			//	  "properties": {
-			//	    "ConnectorProfileCredentials": {
-			//	      "description": "Connector specific configuration needed to create connector profile based on Authentication mechanism",
-			//	      "properties": {
-			//	        "Amplitude": {
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "SecretKey": {
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiKey",
-			//	            "SecretKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "CustomConnector": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "ApiKey": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ApiSecretKey": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "ApiKey"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "AuthenticationType": {
-			//	              "enum": [
-			//	                "OAUTH2",
-			//	                "APIKEY",
-			//	                "BASIC",
-			//	                "CUSTOM"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "Basic": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Password": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "Username": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Username",
-			//	                "Password"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Custom": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "CredentialsMap": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A map for properties for custom authentication.",
-			//	                  "patternProperties": {
-			//	                    "": {
-			//	                      "description": "A string containing the value for the property",
-			//	                      "maxLength": 2048,
-			//	                      "minLength": 1,
-			//	                      "pattern": "\\S+",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "CustomAuthenticationType": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "CustomAuthenticationType"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Oauth2": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "AccessToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientId": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientSecret": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "OAuthRequest": {
-			//	                  "properties": {
-			//	                    "AuthCode": {
-			//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "RedirectUri": {
-			//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "RefreshToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "AuthenticationType"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Datadog": {
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ApplicationKey": {
-			//	              "description": "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiKey",
-			//	            "ApplicationKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Dynatrace": {
-			//	          "properties": {
-			//	            "ApiToken": {
-			//	              "description": "The API tokens used by Dynatrace API to authenticate various API calls.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiToken"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "GoogleAnalytics": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "RefreshToken": {
-			//	              "description": "The credentials used to acquire new access tokens.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "InforNexus": {
-			//	          "properties": {
-			//	            "AccessKeyId": {
-			//	              "description": "The Access Key portion of the credentials.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Datakey": {
-			//	              "description": "The encryption keys used to encrypt data.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "SecretAccessKey": {
-			//	              "description": "The secret key used to sign requests.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "UserId": {
-			//	              "description": "The identi?er for the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "AccessKeyId",
-			//	            "UserId",
-			//	            "SecretAccessKey",
-			//	            "Datakey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Marketo": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Redshift": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "SAPOData": {
-			//	          "properties": {
-			//	            "BasicAuthCredentials": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Password": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "Username": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Username",
-			//	                "Password"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "OAuthCredentials": {
-			//	              "properties": {
-			//	                "AccessToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientId": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ClientSecret": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                },
-			//	                "ConnectorOAuthRequest": {
-			//	                  "properties": {
-			//	                    "AuthCode": {
-			//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "RedirectUri": {
-			//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                },
-			//	                "RefreshToken": {
-			//	                  "maxLength": 512,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Salesforce": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientCredentialsArn": {
-			//	              "description": "The client credentials to fetch access token and refresh token.",
-			//	              "maxLength": 2048,
-			//	              "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "RefreshToken": {
-			//	              "description": "The credentials used to acquire new access tokens.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ServiceNow": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Username",
-			//	            "Password"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Singular": {
-			//	          "properties": {
-			//	            "ApiKey": {
-			//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Slack": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Snowflake": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Username",
-			//	            "Password"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Trendmicro": {
-			//	          "properties": {
-			//	            "ApiSecretKey": {
-			//	              "description": "The Secret Access Key portion of the credentials.",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ApiSecretKey"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Veeva": {
-			//	          "properties": {
-			//	            "Password": {
-			//	              "description": "The password that corresponds to the username.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Username": {
-			//	              "description": "The name of the user.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Username",
-			//	            "Password"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Zendesk": {
-			//	          "properties": {
-			//	            "AccessToken": {
-			//	              "description": "The credentials used to access protected resources.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientId": {
-			//	              "description": "The identi?er for the desired client.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientSecret": {
-			//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ConnectorOAuthRequest": {
-			//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
-			//	              "properties": {
-			//	                "AuthCode": {
-			//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
-			//	                  "type": "string"
-			//	                },
-			//	                "RedirectUri": {
-			//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ClientId",
-			//	            "ClientSecret"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "ConnectorProfileProperties": {
-			//	      "description": "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
-			//	      "properties": {
-			//	        "CustomConnector": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "OAuth2Properties": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "OAuth2GrantType": {
-			//	                  "enum": [
-			//	                    "CLIENT_CREDENTIALS",
-			//	                    "AUTHORIZATION_CODE"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "TokenUrl": {
-			//	                  "maxLength": 256,
-			//	                  "minLength": 0,
-			//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	                  "type": "string"
-			//	                },
-			//	                "TokenUrlCustomProperties": {
-			//	                  "additionalProperties": false,
-			//	                  "description": "A map for properties for custom connector Token Url.",
-			//	                  "patternProperties": {
-			//	                    "": {
-			//	                      "description": "A string containing the value for the property",
-			//	                      "maxLength": 2048,
-			//	                      "minLength": 1,
-			//	                      "pattern": "\\S+",
-			//	                      "type": "string"
-			//	                    }
-			//	                  },
-			//	                  "type": "object"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "ProfileProperties": {
-			//	              "additionalProperties": false,
-			//	              "description": "A map for properties for custom connector.",
-			//	              "patternProperties": {
-			//	                "": {
-			//	                  "description": "A string containing the value for the property",
-			//	                  "maxLength": 2048,
-			//	                  "minLength": 1,
-			//	                  "pattern": "\\S+",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Datadog": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Datadog resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Dynatrace": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Dynatrace resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "InforNexus": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the InforNexus resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Marketo": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Marketo resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Redshift": {
-			//	          "properties": {
-			//	            "BucketName": {
-			//	              "description": "The name of the Amazon S3 bucket associated with Redshift.",
-			//	              "maxLength": 63,
-			//	              "minLength": 3,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "BucketPrefix": {
-			//	              "description": "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
-			//	              "maxLength": 128,
-			//	              "type": "string"
-			//	            },
-			//	            "ClusterIdentifier": {
-			//	              "description": "The unique identifier of the Amazon Redshift cluster.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "DataApiRoleArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
-			//	              "maxLength": 512,
-			//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
-			//	              "type": "string"
-			//	            },
-			//	            "DatabaseName": {
-			//	              "description": "The name of the Amazon Redshift database that will store the transferred data.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "DatabaseUrl": {
-			//	              "description": "The JDBC URL of the Amazon Redshift cluster.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "IsRedshiftServerless": {
-			//	              "description": "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
-			//	              "type": "boolean"
-			//	            },
-			//	            "RoleArn": {
-			//	              "description": "The Amazon Resource Name (ARN) of the IAM role.",
-			//	              "maxLength": 512,
-			//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
-			//	              "type": "string"
-			//	            },
-			//	            "WorkgroupName": {
-			//	              "description": "The name of the Amazon Redshift serverless workgroup",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "BucketName",
-			//	            "RoleArn"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "SAPOData": {
-			//	          "properties": {
-			//	            "ApplicationHostUrl": {
-			//	              "maxLength": 256,
-			//	              "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	              "type": "string"
-			//	            },
-			//	            "ApplicationServicePath": {
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "ClientNumber": {
-			//	              "maxLength": 3,
-			//	              "minLength": 3,
-			//	              "pattern": "^\\d{3}$",
-			//	              "type": "string"
-			//	            },
-			//	            "LogonLanguage": {
-			//	              "maxLength": 2,
-			//	              "pattern": "^[a-zA-Z0-9_]*$",
-			//	              "type": "string"
-			//	            },
-			//	            "OAuthProperties": {
-			//	              "properties": {
-			//	                "AuthCodeUrl": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	                  "type": "string"
-			//	                },
-			//	                "OAuthScopes": {
-			//	                  "items": {
-			//	                    "maxLength": 128,
-			//	                    "pattern": "[/\\w]*",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array",
-			//	                  "uniqueItems": true
-			//	                },
-			//	                "TokenUrl": {
-			//	                  "maxLength": 256,
-			//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "PortNumber": {
-			//	              "maximum": 65535,
-			//	              "minimum": 1,
-			//	              "type": "integer"
-			//	            },
-			//	            "PrivateLinkServiceName": {
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "Salesforce": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Salesforce resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "isSandboxEnvironment": {
-			//	              "type": "boolean"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ServiceNow": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the ServiceNow resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Slack": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Slack resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Snowflake": {
-			//	          "properties": {
-			//	            "AccountName": {
-			//	              "description": "The name of the account.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "BucketName": {
-			//	              "description": "The name of the Amazon S3 bucket associated with Snow?ake.",
-			//	              "maxLength": 63,
-			//	              "minLength": 3,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "BucketPrefix": {
-			//	              "description": "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
-			//	              "maxLength": 128,
-			//	              "type": "string"
-			//	            },
-			//	            "PrivateLinkServiceName": {
-			//	              "description": "The Snow?ake Private Link service name to be used for private data transfers.",
-			//	              "maxLength": 512,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Region": {
-			//	              "description": "The region of the Snow?ake account.",
-			//	              "maxLength": 64,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Stage": {
-			//	              "description": "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: \u003c Database\u003e\u003c Schema\u003e\u003cStage Name\u003e.",
-			//	              "maxLength": 16,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            },
-			//	            "Warehouse": {
-			//	              "description": "The name of the Snow?ake warehouse.",
-			//	              "maxLength": 512,
-			//	              "pattern": "[\\s\\w/!@#+=.-]*",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Warehouse",
-			//	            "Stage",
-			//	            "BucketName"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Veeva": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Veeva resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "Zendesk": {
-			//	          "properties": {
-			//	            "InstanceUrl": {
-			//	              "description": "The location of the Zendesk resource",
-			//	              "maxLength": 256,
-			//	              "pattern": "\\S+",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "InstanceUrl"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorProfileConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Connector specific configurations needed to create connector profile",
+		//	  "properties": {
+		//	    "ConnectorProfileCredentials": {
+		//	      "description": "Connector specific configuration needed to create connector profile based on Authentication mechanism",
+		//	      "properties": {
+		//	        "Amplitude": {
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretKey": {
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiKey",
+		//	            "SecretKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "CustomConnector": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ApiKey": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ApiSecretKey": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "ApiKey"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "AuthenticationType": {
+		//	              "enum": [
+		//	                "OAUTH2",
+		//	                "APIKEY",
+		//	                "BASIC",
+		//	                "CUSTOM"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Basic": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Password": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "Username": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Username",
+		//	                "Password"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Custom": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "CredentialsMap": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A map for properties for custom authentication.",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "description": "A string containing the value for the property",
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "pattern": "\\S+",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "CustomAuthenticationType": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "CustomAuthenticationType"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Oauth2": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "AccessToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientId": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientSecret": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "OAuthRequest": {
+		//	                  "properties": {
+		//	                    "AuthCode": {
+		//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RedirectUri": {
+		//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "RefreshToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AuthenticationType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Datadog": {
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ApplicationKey": {
+		//	              "description": "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiKey",
+		//	            "ApplicationKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Dynatrace": {
+		//	          "properties": {
+		//	            "ApiToken": {
+		//	              "description": "The API tokens used by Dynatrace API to authenticate various API calls.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiToken"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "GoogleAnalytics": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshToken": {
+		//	              "description": "The credentials used to acquire new access tokens.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "InforNexus": {
+		//	          "properties": {
+		//	            "AccessKeyId": {
+		//	              "description": "The Access Key portion of the credentials.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Datakey": {
+		//	              "description": "The encryption keys used to encrypt data.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "SecretAccessKey": {
+		//	              "description": "The secret key used to sign requests.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "UserId": {
+		//	              "description": "The identi?er for the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "AccessKeyId",
+		//	            "UserId",
+		//	            "SecretAccessKey",
+		//	            "Datakey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Marketo": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Redshift": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "SAPOData": {
+		//	          "properties": {
+		//	            "BasicAuthCredentials": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Password": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "Username": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Username",
+		//	                "Password"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "OAuthCredentials": {
+		//	              "properties": {
+		//	                "AccessToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientId": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ClientSecret": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                },
+		//	                "ConnectorOAuthRequest": {
+		//	                  "properties": {
+		//	                    "AuthCode": {
+		//	                      "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "RedirectUri": {
+		//	                      "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                },
+		//	                "RefreshToken": {
+		//	                  "maxLength": 512,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Salesforce": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientCredentialsArn": {
+		//	              "description": "The client credentials to fetch access token and refresh token.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshToken": {
+		//	              "description": "The credentials used to acquire new access tokens.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ServiceNow": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Username",
+		//	            "Password"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Singular": {
+		//	          "properties": {
+		//	            "ApiKey": {
+		//	              "description": "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Slack": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Snowflake": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Username",
+		//	            "Password"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Trendmicro": {
+		//	          "properties": {
+		//	            "ApiSecretKey": {
+		//	              "description": "The Secret Access Key portion of the credentials.",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ApiSecretKey"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Veeva": {
+		//	          "properties": {
+		//	            "Password": {
+		//	              "description": "The password that corresponds to the username.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Username": {
+		//	              "description": "The name of the user.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Username",
+		//	            "Password"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Zendesk": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientId": {
+		//	              "description": "The identi?er for the desired client.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientSecret": {
+		//	              "description": "The client secret used by the oauth client to authenticate to the authorization server.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ClientId",
+		//	            "ClientSecret"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ConnectorProfileProperties": {
+		//	      "description": "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
+		//	      "properties": {
+		//	        "CustomConnector": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "OAuth2Properties": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "OAuth2GrantType": {
+		//	                  "enum": [
+		//	                    "CLIENT_CREDENTIALS",
+		//	                    "AUTHORIZATION_CODE"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenUrl": {
+		//	                  "maxLength": 256,
+		//	                  "minLength": 0,
+		//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	                  "type": "string"
+		//	                },
+		//	                "TokenUrlCustomProperties": {
+		//	                  "additionalProperties": false,
+		//	                  "description": "A map for properties for custom connector Token Url.",
+		//	                  "patternProperties": {
+		//	                    "": {
+		//	                      "description": "A string containing the value for the property",
+		//	                      "maxLength": 2048,
+		//	                      "minLength": 1,
+		//	                      "pattern": "\\S+",
+		//	                      "type": "string"
+		//	                    }
+		//	                  },
+		//	                  "type": "object"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "ProfileProperties": {
+		//	              "additionalProperties": false,
+		//	              "description": "A map for properties for custom connector.",
+		//	              "patternProperties": {
+		//	                "": {
+		//	                  "description": "A string containing the value for the property",
+		//	                  "maxLength": 2048,
+		//	                  "minLength": 1,
+		//	                  "pattern": "\\S+",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Datadog": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Datadog resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Dynatrace": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Dynatrace resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "InforNexus": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the InforNexus resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Marketo": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Marketo resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Redshift": {
+		//	          "properties": {
+		//	            "BucketName": {
+		//	              "description": "The name of the Amazon S3 bucket associated with Redshift.",
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "BucketPrefix": {
+		//	              "description": "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
+		//	              "maxLength": 128,
+		//	              "type": "string"
+		//	            },
+		//	            "ClusterIdentifier": {
+		//	              "description": "The unique identifier of the Amazon Redshift cluster.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "DataApiRoleArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+		//	              "maxLength": 512,
+		//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseName": {
+		//	              "description": "The name of the Amazon Redshift database that will store the transferred data.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "DatabaseUrl": {
+		//	              "description": "The JDBC URL of the Amazon Redshift cluster.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "IsRedshiftServerless": {
+		//	              "description": "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+		//	              "type": "boolean"
+		//	            },
+		//	            "RoleArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the IAM role.",
+		//	              "maxLength": 512,
+		//	              "pattern": "arn:aws:iam:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "WorkgroupName": {
+		//	              "description": "The name of the Amazon Redshift serverless workgroup",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BucketName",
+		//	            "RoleArn"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "SAPOData": {
+		//	          "properties": {
+		//	            "ApplicationHostUrl": {
+		//	              "maxLength": 256,
+		//	              "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	              "type": "string"
+		//	            },
+		//	            "ApplicationServicePath": {
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientNumber": {
+		//	              "maxLength": 3,
+		//	              "minLength": 3,
+		//	              "pattern": "^\\d{3}$",
+		//	              "type": "string"
+		//	            },
+		//	            "LogonLanguage": {
+		//	              "maxLength": 2,
+		//	              "pattern": "^[a-zA-Z0-9_]*$",
+		//	              "type": "string"
+		//	            },
+		//	            "OAuthProperties": {
+		//	              "properties": {
+		//	                "AuthCodeUrl": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	                  "type": "string"
+		//	                },
+		//	                "OAuthScopes": {
+		//	                  "items": {
+		//	                    "maxLength": 128,
+		//	                    "pattern": "[/\\w]*",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": true
+		//	                },
+		//	                "TokenUrl": {
+		//	                  "maxLength": 256,
+		//	                  "pattern": "^(https?)://[-a-zA-Z0-9+\u0026amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+\u0026amp;@#/%=~_|]",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "PortNumber": {
+		//	              "maximum": 65535,
+		//	              "minimum": 1,
+		//	              "type": "integer"
+		//	            },
+		//	            "PrivateLinkServiceName": {
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "Salesforce": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Salesforce resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "isSandboxEnvironment": {
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ServiceNow": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the ServiceNow resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Slack": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Slack resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Snowflake": {
+		//	          "properties": {
+		//	            "AccountName": {
+		//	              "description": "The name of the account.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "BucketName": {
+		//	              "description": "The name of the Amazon S3 bucket associated with Snow?ake.",
+		//	              "maxLength": 63,
+		//	              "minLength": 3,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "BucketPrefix": {
+		//	              "description": "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
+		//	              "maxLength": 128,
+		//	              "type": "string"
+		//	            },
+		//	            "PrivateLinkServiceName": {
+		//	              "description": "The Snow?ake Private Link service name to be used for private data transfers.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Region": {
+		//	              "description": "The region of the Snow?ake account.",
+		//	              "maxLength": 64,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Stage": {
+		//	              "description": "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: \u003c Database\u003e\u003c Schema\u003e\u003cStage Name\u003e.",
+		//	              "maxLength": 16,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "Warehouse": {
+		//	              "description": "The name of the Snow?ake warehouse.",
+		//	              "maxLength": 512,
+		//	              "pattern": "[\\s\\w/!@#+=.-]*",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Warehouse",
+		//	            "Stage",
+		//	            "BucketName"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Veeva": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Veeva resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Zendesk": {
+		//	          "properties": {
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Zendesk resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "InstanceUrl"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"connector_profile_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ConnectorProfileCredentials
+				"connector_profile_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Amplitude
+						"amplitude": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretKey
+								"secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: CustomConnector
+						"custom_connector": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ApiKey
+										"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(256),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ApiSecretKey
+										"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(256),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: AuthenticationType
+								"authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"OAUTH2",
+											"APIKEY",
+											"BASIC",
+											"CUSTOM",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Basic
+								"basic": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Custom
+								"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: CredentialsMap
+										"credentials_map":   // Pattern: ""
+										schema.MapAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "A map for properties for custom authentication.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: CustomAuthenticationType
+										"custom_authentication_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(256),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Oauth2
+								"oauth_2": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AccessToken
+										"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ClientId
+										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ClientSecret
+										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: OAuthRequest
+										"o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthCode
+												"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code provided by the connector when it has been authenticated via the connected app.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: RedirectUri
+												"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RefreshToken
+										"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Datadog
+						"datadog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ApplicationKey
+								"application_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Dynatrace
+						"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiToken
+								"api_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: GoogleAnalytics
+						"google_analytics": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InforNexus
+						"infor_nexus": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessKeyId
+								"access_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Access Key portion of the credentials.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Datakey
+								"datakey": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The encryption keys used to encrypt data.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SecretAccessKey
+								"secret_access_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The secret key used to sign requests.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: UserId
+								"user_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the user.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Marketo
+						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Redshift
+						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SAPOData
+						"sapo_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BasicAuthCredentials
+								"basic_auth_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Password
+										"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Username
+										"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthCredentials
+								"o_auth_credentials": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AccessToken
+										"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ClientId
+										"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ClientSecret
+										"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: ConnectorOAuthRequest
+										"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: AuthCode
+												"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The code provided by the connector when it has been authenticated via the connected app.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+												// Property: RedirectUri
+												"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+													Optional:    true,
+													Computed:    true,
+													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+														stringplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+												objectplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RefreshToken
+										"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(512),
+												stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Salesforce
+						"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCredentialsArn
+								"client_credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client credentials to fetch access token and refresh token.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:secretsmanager:.*:[0-9]+:.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceNow
+						"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Singular
+						"singular": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiKey
+								"api_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Slack
+						"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Snowflake
+						"snowflake": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Trendmicro
+						"trendmicro": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApiSecretKey
+								"api_secret_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Secret Access Key portion of the credentials.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Veeva
+						"veeva": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Password
+								"password": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The password that corresponds to the username.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Username
+								"username": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the user.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Zendesk
+						"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientId
+								"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The identi?er for the desired client.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientSecret
+								"client_secret": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client secret used by the oauth client to authenticate to the authorization server.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ConnectorProfileProperties
+				"connector_profile_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomConnector
+						"custom_connector": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: OAuth2Properties
+								"o_auth_2_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: OAuth2GrantType
+										"o_auth_2_grant_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"CLIENT_CREDENTIALS",
+													"AUTHORIZATION_CODE",
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrl
+										"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthBetween(0, 256),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrlCustomProperties
+										"token_url_custom_properties": // Pattern: ""
+										schema.MapAttribute{           /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Description: "A map for properties for custom connector Token Url.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+												mapplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ProfileProperties
+								"profile_properties": // Pattern: ""
+								schema.MapAttribute{  /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "A map for properties for custom connector.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Datadog
+						"datadog": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Datadog resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Dynatrace
+						"dynatrace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Dynatrace resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: InforNexus
+						"infor_nexus": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the InforNexus resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Marketo
+						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Marketo resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Redshift
+						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 bucket associated with Redshift.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 63),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BucketPrefix
+								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(128),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClusterIdentifier
+								"cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The unique identifier of the Amazon Redshift cluster.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DataApiRoleArn
+								"data_api_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseName
+								"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon Redshift database that will store the transferred data.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DatabaseUrl
+								"database_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The JDBC URL of the Amazon Redshift cluster.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IsRedshiftServerless
+								"is_redshift_serverless": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RoleArn
+								"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the IAM role.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: WorkgroupName
+								"workgroup_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon Redshift serverless workgroup",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SAPOData
+						"sapo_data": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ApplicationHostUrl
+								"application_host_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ApplicationServicePath
+								"application_service_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientNumber
+								"client_number": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 3),
+										stringvalidator.RegexMatches(regexp.MustCompile("^\\d{3}$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LogonLanguage
+								"logon_language": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2),
+										stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_]*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: OAuthProperties
+								"o_auth_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCodeUrl
+										"auth_code_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(256),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: OAuthScopes
+										"o_auth_scopes": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											Validators: []validator.List{ /*START VALIDATORS*/
+												listvalidator.UniqueValues(),
+												listvalidator.ValueStringsAre(
+													stringvalidator.LengthAtMost(128),
+													stringvalidator.RegexMatches(regexp.MustCompile("[/\\w]*"), ""),
+												),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: TokenUrl
+										"token_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Optional: true,
+											Computed: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(256),
+												stringvalidator.RegexMatches(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
+											}, /*END VALIDATORS*/
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PortNumber
+								"port_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.Int64{ /*START VALIDATORS*/
+										int64validator.Between(1, 65535),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+										int64planmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateLinkServiceName
+								"private_link_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Salesforce
+						"salesforce": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Salesforce resource",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: isSandboxEnvironment
+								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ServiceNow
+						"service_now": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the ServiceNow resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Slack
+						"slack": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Slack resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Snowflake
+						"snowflake": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccountName
+								"account_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the account.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BucketName
+								"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthBetween(3, 63),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: BucketPrefix
+								"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(128),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: PrivateLinkServiceName
+								"private_link_service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Snow?ake Private Link service name to be used for private data transfers.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Region
+								"region": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The region of the Snow?ake account.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(64),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Stage
+								"stage": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(16),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Warehouse
+								"warehouse": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the Snow?ake warehouse.",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("[\\s\\w/!@#+=.-]*"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Veeva
+						"veeva": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Veeva resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Zendesk
+						"zendesk": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Zendesk resource",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Connector specific configurations needed to create connector profile",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"connector_profile_credentials": {
-						// Property: ConnectorProfileCredentials
-						Description: "Connector specific configuration needed to create connector profile based on Authentication mechanism",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"amplitude": {
-									// Property: Amplitude
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"secret_key": {
-												// Property: SecretKey
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"custom_connector": {
-									// Property: CustomConnector
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"api_key": {
-															// Property: ApiKey
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(256),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-														},
-														"api_secret_key": {
-															// Property: ApiSecretKey
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(256),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"authentication_type": {
-												// Property: AuthenticationType
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"OAUTH2",
-														"APIKEY",
-														"BASIC",
-														"CUSTOM",
-													}),
-												},
-											},
-											"basic": {
-												// Property: Basic
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"password": {
-															// Property: Password
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-														},
-														"username": {
-															// Property: Username
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"custom": {
-												// Property: Custom
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"credentials_map": {
-															// Property: CredentialsMap
-															Description: "A map for properties for custom authentication.",
-															// Pattern: ""
-															Type:     types.MapType{ElemType: types.StringType},
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"custom_authentication_type": {
-															// Property: CustomAuthenticationType
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(256),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"oauth_2": {
-												// Property: Oauth2
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"access_token": {
-															// Property: AccessToken
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"client_id": {
-															// Property: ClientId
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"client_secret": {
-															// Property: ClientSecret
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"o_auth_request": {
-															// Property: OAuthRequest
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"auth_code": {
-																		// Property: AuthCode
-																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
-																		Type:        types.StringType,
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"redirect_uri": {
-																		// Property: RedirectUri
-																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-																		Type:        types.StringType,
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"refresh_token": {
-															// Property: RefreshToken
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"datadog": {
-									// Property: Datadog
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"application_key": {
-												// Property: ApplicationKey
-												Description: "Application keys, in conjunction with your API key, give you full access to Datadog?s programmatic API. Application keys are associated with the user account that created them. The application key is used to log all requests made to the API.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"dynatrace": {
-									// Property: Dynatrace
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_token": {
-												// Property: ApiToken
-												Description: "The API tokens used by Dynatrace API to authenticate various API calls.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"google_analytics": {
-									// Property: GoogleAnalytics
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"refresh_token": {
-												// Property: RefreshToken
-												Description: "The credentials used to acquire new access tokens.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"infor_nexus": {
-									// Property: InforNexus
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_key_id": {
-												// Property: AccessKeyId
-												Description: "The Access Key portion of the credentials.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"datakey": {
-												// Property: Datakey
-												Description: "The encryption keys used to encrypt data.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"secret_access_key": {
-												// Property: SecretAccessKey
-												Description: "The secret key used to sign requests.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"user_id": {
-												// Property: UserId
-												Description: "The identi?er for the user.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"marketo": {
-									// Property: Marketo
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"redshift": {
-									// Property: Redshift
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"sapo_data": {
-									// Property: SAPOData
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"basic_auth_credentials": {
-												// Property: BasicAuthCredentials
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"password": {
-															// Property: Password
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-														},
-														"username": {
-															// Property: Username
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"o_auth_credentials": {
-												// Property: OAuthCredentials
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"access_token": {
-															// Property: AccessToken
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"client_id": {
-															// Property: ClientId
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"client_secret": {
-															// Property: ClientSecret
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"connector_o_auth_request": {
-															// Property: ConnectorOAuthRequest
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"auth_code": {
-																		// Property: AuthCode
-																		Description: "The code provided by the connector when it has been authenticated via the connected app.",
-																		Type:        types.StringType,
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"redirect_uri": {
-																		// Property: RedirectUri
-																		Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-																		Type:        types.StringType,
-																		Optional:    true,
-																		Computed:    true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"refresh_token": {
-															// Property: RefreshToken
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(512),
-																validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"salesforce": {
-									// Property: Salesforce
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"client_credentials_arn": {
-												// Property: ClientCredentialsArn
-												Description: "The client credentials to fetch access token and refresh token.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(2048),
-													validate.StringMatch(regexp.MustCompile("arn:aws:secretsmanager:.*:[0-9]+:.*"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"refresh_token": {
-												// Property: RefreshToken
-												Description: "The credentials used to acquire new access tokens.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"service_now": {
-									// Property: ServiceNow
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"singular": {
-									// Property: Singular
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_key": {
-												// Property: ApiKey
-												Description: "A unique alphanumeric identi?er used to authenticate a user, developer, or calling program to your API.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"slack": {
-									// Property: Slack
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"snowflake": {
-									// Property: Snowflake
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"trendmicro": {
-									// Property: Trendmicro
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"api_secret_key": {
-												// Property: ApiSecretKey
-												Description: "The Secret Access Key portion of the credentials.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"veeva": {
-									// Property: Veeva
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"password": {
-												// Property: Password
-												Description: "The password that corresponds to the username.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"username": {
-												// Property: Username
-												Description: "The name of the user.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"zendesk": {
-									// Property: Zendesk
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"access_token": {
-												// Property: AccessToken
-												Description: "The credentials used to access protected resources.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"client_id": {
-												// Property: ClientId
-												Description: "The identi?er for the desired client.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"client_secret": {
-												// Property: ClientSecret
-												Description: "The client secret used by the oauth client to authenticate to the authorization server.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"connector_o_auth_request": {
-												// Property: ConnectorOAuthRequest
-												Description: "The oauth needed to request security tokens from the connector endpoint.",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code": {
-															// Property: AuthCode
-															Description: "The code provided by the connector when it has been authenticated via the connected app.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"redirect_uri": {
-															// Property: RedirectUri
-															Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"connector_profile_properties": {
-						// Property: ConnectorProfileProperties
-						Description: "Connector specific properties needed to create connector profile - currently not needed for Amplitude, Trendmicro, Googleanalytics and Singular",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"custom_connector": {
-									// Property: CustomConnector
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"o_auth_2_properties": {
-												// Property: OAuth2Properties
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"o_auth_2_grant_type": {
-															// Property: OAuth2GrantType
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"CLIENT_CREDENTIALS",
-																	"AUTHORIZATION_CODE",
-																}),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"token_url": {
-															// Property: TokenUrl
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(0, 256),
-																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"token_url_custom_properties": {
-															// Property: TokenUrlCustomProperties
-															Description: "A map for properties for custom connector Token Url.",
-															// Pattern: ""
-															Type:     types.MapType{ElemType: types.StringType},
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"profile_properties": {
-												// Property: ProfileProperties
-												Description: "A map for properties for custom connector.",
-												// Pattern: ""
-												Type:     types.MapType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"datadog": {
-									// Property: Datadog
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Datadog resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"dynatrace": {
-									// Property: Dynatrace
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Dynatrace resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"infor_nexus": {
-									// Property: InforNexus
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the InforNexus resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"marketo": {
-									// Property: Marketo
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Marketo resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"redshift": {
-									// Property: Redshift
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"bucket_name": {
-												// Property: BucketName
-												Description: "The name of the Amazon S3 bucket associated with Redshift.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(3, 63),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"bucket_prefix": {
-												// Property: BucketPrefix
-												Description: "The object key for the destination bucket in which Amazon AppFlow will place the ?les.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(128),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"cluster_identifier": {
-												// Property: ClusterIdentifier
-												Description: "The unique identifier of the Amazon Redshift cluster.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"data_api_role_arn": {
-												// Property: DataApiRoleArn
-												Description: "The Amazon Resource Name (ARN) of the IAM role that grants Amazon AppFlow access to the data through the Amazon Redshift Data API.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"database_name": {
-												// Property: DatabaseName
-												Description: "The name of the Amazon Redshift database that will store the transferred data.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"database_url": {
-												// Property: DatabaseUrl
-												Description: "The JDBC URL of the Amazon Redshift cluster.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"is_redshift_serverless": {
-												// Property: IsRedshiftServerless
-												Description: "If Amazon AppFlow will connect to Amazon Redshift Serverless or Amazon Redshift cluster.",
-												Type:        types.BoolType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"role_arn": {
-												// Property: RoleArn
-												Description: "The Amazon Resource Name (ARN) of the IAM role.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("arn:aws:iam:.*:[0-9]+:.*"), ""),
-												},
-											},
-											"workgroup_name": {
-												// Property: WorkgroupName
-												Description: "The name of the Amazon Redshift serverless workgroup",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"sapo_data": {
-									// Property: SAPOData
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"application_host_url": {
-												// Property: ApplicationHostUrl
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"application_service_path": {
-												// Property: ApplicationServicePath
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"client_number": {
-												// Property: ClientNumber
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(3, 3),
-													validate.StringMatch(regexp.MustCompile("^\\d{3}$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"logon_language": {
-												// Property: LogonLanguage
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(2),
-													validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9_]*$"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"o_auth_properties": {
-												// Property: OAuthProperties
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"auth_code_url": {
-															// Property: AuthCodeUrl
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(256),
-																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"o_auth_scopes": {
-															// Property: OAuthScopes
-															Type:     types.ListType{ElemType: types.StringType},
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.UniqueItems(),
-																validate.ArrayForEach(validate.StringLenAtMost(128)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("[/\\w]*"), "")),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"token_url": {
-															// Property: TokenUrl
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenAtMost(256),
-																validate.StringMatch(regexp.MustCompile("^(https?)://[-a-zA-Z0-9+&amp;@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&amp;@#/%=~_|]"), ""),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"port_number": {
-												// Property: PortNumber
-												Type:     types.Int64Type,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.IntBetween(1, 65535),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"private_link_service_name": {
-												// Property: PrivateLinkServiceName
-												Type:     types.StringType,
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"salesforce": {
-									// Property: Salesforce
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Salesforce resource",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"is_sandbox_environment": {
-												// Property: isSandboxEnvironment
-												Type:     types.BoolType,
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"service_now": {
-									// Property: ServiceNow
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the ServiceNow resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"slack": {
-									// Property: Slack
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Slack resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"snowflake": {
-									// Property: Snowflake
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"account_name": {
-												// Property: AccountName
-												Description: "The name of the account.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"bucket_name": {
-												// Property: BucketName
-												Description: "The name of the Amazon S3 bucket associated with Snow?ake.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenBetween(3, 63),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"bucket_prefix": {
-												// Property: BucketPrefix
-												Description: "The bucket prefix that refers to the Amazon S3 bucket associated with Snow?ake.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(128),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"private_link_service_name": {
-												// Property: PrivateLinkServiceName
-												Description: "The Snow?ake Private Link service name to be used for private data transfers.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"region": {
-												// Property: Region
-												Description: "The region of the Snow?ake account.",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(64),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"stage": {
-												// Property: Stage
-												Description: "The name of the Amazon S3 stage that was created while setting up an Amazon S3 stage in the\nSnow?ake account. This is written in the following format: < Database>< Schema><Stage Name>.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(16),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-											"warehouse": {
-												// Property: Warehouse
-												Description: "The name of the Snow?ake warehouse.",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(512),
-													validate.StringMatch(regexp.MustCompile("[\\s\\w/!@#+=.-]*"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"veeva": {
-									// Property: Veeva
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Veeva resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"zendesk": {
-									// Property: Zendesk
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"instance_url": {
-												// Property: InstanceUrl
-												Description: "The location of the Zendesk resource",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringLenAtMost(256),
-													validate.StringMatch(regexp.MustCompile("\\S+"), ""),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// ConnectorProfileConfig is a write-only property.
-		},
-		"connector_profile_name": {
-			// Property: ConnectorProfileName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The maximum number of items to retrieve in a single batch.",
-			//	  "maxLength": 256,
-			//	  "pattern": "[\\w/!@#+=.-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorProfileName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum number of items to retrieve in a single batch.",
+		//	  "maxLength": 256,
+		//	  "pattern": "[\\w/!@#+=.-]+",
+		//	  "type": "string"
+		//	}
+		"connector_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The maximum number of items to retrieve in a single batch.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(256),
-				validate.StringMatch(regexp.MustCompile("[\\w/!@#+=.-]+"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"connector_type": {
-			// Property: ConnectorType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "List of Saas providers that need connector profile to be created",
-			//	  "enum": [
-			//	    "Salesforce",
-			//	    "Singular",
-			//	    "Slack",
-			//	    "Redshift",
-			//	    "Marketo",
-			//	    "Googleanalytics",
-			//	    "Zendesk",
-			//	    "Servicenow",
-			//	    "SAPOData",
-			//	    "Datadog",
-			//	    "Trendmicro",
-			//	    "Snowflake",
-			//	    "Dynatrace",
-			//	    "Infornexus",
-			//	    "Amplitude",
-			//	    "Veeva",
-			//	    "CustomConnector"
-			//	  ],
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("[\\w/!@#+=.-]+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ConnectorType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of Saas providers that need connector profile to be created",
+		//	  "enum": [
+		//	    "Salesforce",
+		//	    "Singular",
+		//	    "Slack",
+		//	    "Redshift",
+		//	    "Marketo",
+		//	    "Googleanalytics",
+		//	    "Zendesk",
+		//	    "Servicenow",
+		//	    "SAPOData",
+		//	    "Datadog",
+		//	    "Trendmicro",
+		//	    "Snowflake",
+		//	    "Dynatrace",
+		//	    "Infornexus",
+		//	    "Amplitude",
+		//	    "Veeva",
+		//	    "CustomConnector"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"connector_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "List of Saas providers that need connector profile to be created",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"Salesforce",
 					"Singular",
 					"Slack",
@@ -2894,71 +2703,68 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 					"Amplitude",
 					"Veeva",
 					"CustomConnector",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"credentials_arn": {
-			// Property: CredentialsArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique Arn for Connector-Profile resource",
-			//	  "maxLength": 512,
-			//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
-			//	  "type": "string"
-			//	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CredentialsArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique Arn for Connector-Profile resource",
+		//	  "maxLength": 512,
+		//	  "pattern": "arn:aws:.*:.*:[0-9]+:.*",
+		//	  "type": "string"
+		//	}
+		"credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique Arn for Connector-Profile resource",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"kms_arn": {
-			// Property: KMSArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:aws:kms:.*:[0-9]+:.*",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KMSArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:aws:kms:.*:[0-9]+:.*",
+		//	  "type": "string"
+		//	}
+		"kms_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(20, 2048),
-				validate.StringMatch(regexp.MustCompile("arn:aws:kms:.*:[0-9]+:.*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(20, 2048),
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:kms:.*:[0-9]+:.*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::AppFlow::ConnectorProfile",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::ConnectorProfile").WithTerraformTypeName("awscc_appflow_connector_profile")
 	opts = opts.WithTerraformSchema(schema)
@@ -3057,7 +2863,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

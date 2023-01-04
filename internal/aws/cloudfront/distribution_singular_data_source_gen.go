@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,1619 +19,1487 @@ func init() {
 // distributionDataSource returns the Terraform awscc_cloudfront_distribution data source.
 // This Terraform data source corresponds to the CloudFormation AWS::CloudFront::Distribution resource.
 func distributionDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"distribution_config": {
-			// Property: DistributionConfig
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "Aliases": {
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "CNAMEs": {
-			//	      "items": {
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "CacheBehaviors": {
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "AllowedMethods": {
-			//	            "default": [
-			//	              "GET",
-			//	              "HEAD"
-			//	            ],
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "CachePolicyId": {
-			//	            "type": "string"
-			//	          },
-			//	          "CachedMethods": {
-			//	            "default": [
-			//	              "GET",
-			//	              "HEAD"
-			//	            ],
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "Compress": {
-			//	            "default": false,
-			//	            "type": "boolean"
-			//	          },
-			//	          "DefaultTTL": {
-			//	            "default": 86400,
-			//	            "type": "number"
-			//	          },
-			//	          "FieldLevelEncryptionId": {
-			//	            "default": "",
-			//	            "type": "string"
-			//	          },
-			//	          "ForwardedValues": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Cookies": {
-			//	                "additionalProperties": false,
-			//	                "default": {
-			//	                  "Forward": "none"
-			//	                },
-			//	                "properties": {
-			//	                  "Forward": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "WhitelistedNames": {
-			//	                    "items": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "type": "array",
-			//	                    "uniqueItems": false
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Forward"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Headers": {
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": false
-			//	              },
-			//	              "QueryString": {
-			//	                "type": "boolean"
-			//	              },
-			//	              "QueryStringCacheKeys": {
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": false
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "QueryString"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "FunctionAssociations": {
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "EventType": {
-			//	                  "type": "string"
-			//	                },
-			//	                "FunctionARN": {
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "LambdaFunctionAssociations": {
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "EventType": {
-			//	                  "type": "string"
-			//	                },
-			//	                "IncludeBody": {
-			//	                  "type": "boolean"
-			//	                },
-			//	                "LambdaFunctionARN": {
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "MaxTTL": {
-			//	            "default": 31536000,
-			//	            "type": "number"
-			//	          },
-			//	          "MinTTL": {
-			//	            "default": 0,
-			//	            "type": "number"
-			//	          },
-			//	          "OriginRequestPolicyId": {
-			//	            "type": "string"
-			//	          },
-			//	          "PathPattern": {
-			//	            "type": "string"
-			//	          },
-			//	          "RealtimeLogConfigArn": {
-			//	            "type": "string"
-			//	          },
-			//	          "ResponseHeadersPolicyId": {
-			//	            "type": "string"
-			//	          },
-			//	          "SmoothStreaming": {
-			//	            "default": false,
-			//	            "type": "boolean"
-			//	          },
-			//	          "TargetOriginId": {
-			//	            "type": "string"
-			//	          },
-			//	          "TrustedKeyGroups": {
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "TrustedSigners": {
-			//	            "items": {
-			//	              "type": "string"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "ViewerProtocolPolicy": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "PathPattern",
-			//	          "TargetOriginId",
-			//	          "ViewerProtocolPolicy"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "Comment": {
-			//	      "default": "",
-			//	      "type": "string"
-			//	    },
-			//	    "ContinuousDeploymentPolicyId": {
-			//	      "type": "string"
-			//	    },
-			//	    "CustomErrorResponses": {
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ErrorCachingMinTTL": {
-			//	            "default": 300,
-			//	            "type": "number"
-			//	          },
-			//	          "ErrorCode": {
-			//	            "type": "integer"
-			//	          },
-			//	          "ResponseCode": {
-			//	            "type": "integer"
-			//	          },
-			//	          "ResponsePagePath": {
-			//	            "type": "string"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "ErrorCode"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "CustomOrigin": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DNSName": {
-			//	          "type": "string"
-			//	        },
-			//	        "HTTPPort": {
-			//	          "default": 80,
-			//	          "type": "integer"
-			//	        },
-			//	        "HTTPSPort": {
-			//	          "default": 443,
-			//	          "type": "integer"
-			//	        },
-			//	        "OriginProtocolPolicy": {
-			//	          "type": "string"
-			//	        },
-			//	        "OriginSSLProtocols": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "DNSName",
-			//	        "OriginProtocolPolicy",
-			//	        "OriginSSLProtocols"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "DefaultCacheBehavior": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "AllowedMethods": {
-			//	          "default": [
-			//	            "GET",
-			//	            "HEAD"
-			//	          ],
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "CachePolicyId": {
-			//	          "default": "",
-			//	          "type": "string"
-			//	        },
-			//	        "CachedMethods": {
-			//	          "default": [
-			//	            "GET",
-			//	            "HEAD"
-			//	          ],
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "Compress": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "DefaultTTL": {
-			//	          "default": 86400,
-			//	          "type": "number"
-			//	        },
-			//	        "FieldLevelEncryptionId": {
-			//	          "default": "",
-			//	          "type": "string"
-			//	        },
-			//	        "ForwardedValues": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Cookies": {
-			//	              "additionalProperties": false,
-			//	              "default": {
-			//	                "Forward": "none"
-			//	              },
-			//	              "properties": {
-			//	                "Forward": {
-			//	                  "type": "string"
-			//	                },
-			//	                "WhitelistedNames": {
-			//	                  "items": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array",
-			//	                  "uniqueItems": false
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Forward"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "Headers": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            },
-			//	            "QueryString": {
-			//	              "type": "boolean"
-			//	            },
-			//	            "QueryStringCacheKeys": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "QueryString"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "FunctionAssociations": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "EventType": {
-			//	                "type": "string"
-			//	              },
-			//	              "FunctionARN": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "LambdaFunctionAssociations": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "EventType": {
-			//	                "type": "string"
-			//	              },
-			//	              "IncludeBody": {
-			//	                "type": "boolean"
-			//	              },
-			//	              "LambdaFunctionARN": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "MaxTTL": {
-			//	          "default": 31536000,
-			//	          "type": "number"
-			//	        },
-			//	        "MinTTL": {
-			//	          "default": 0,
-			//	          "type": "number"
-			//	        },
-			//	        "OriginRequestPolicyId": {
-			//	          "default": "",
-			//	          "type": "string"
-			//	        },
-			//	        "RealtimeLogConfigArn": {
-			//	          "default": "",
-			//	          "type": "string"
-			//	        },
-			//	        "ResponseHeadersPolicyId": {
-			//	          "default": "",
-			//	          "type": "string"
-			//	        },
-			//	        "SmoothStreaming": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "TargetOriginId": {
-			//	          "type": "string"
-			//	        },
-			//	        "TrustedKeyGroups": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "TrustedSigners": {
-			//	          "items": {
-			//	            "type": "string"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "ViewerProtocolPolicy": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "TargetOriginId",
-			//	        "ViewerProtocolPolicy"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "DefaultRootObject": {
-			//	      "default": "",
-			//	      "type": "string"
-			//	    },
-			//	    "Enabled": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "HttpVersion": {
-			//	      "default": "http1.1",
-			//	      "type": "string"
-			//	    },
-			//	    "IPV6Enabled": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "Logging": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Bucket": {
-			//	          "type": "string"
-			//	        },
-			//	        "IncludeCookies": {
-			//	          "default": false,
-			//	          "type": "boolean"
-			//	        },
-			//	        "Prefix": {
-			//	          "default": "",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Bucket"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "OriginGroups": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Items": {
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "FailoverCriteria": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "StatusCodes": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Items": {
-			//	                        "items": {
-			//	                          "type": "integer"
-			//	                        },
-			//	                        "type": "array",
-			//	                        "uniqueItems": false
-			//	                      },
-			//	                      "Quantity": {
-			//	                        "type": "integer"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "Quantity",
-			//	                      "Items"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "StatusCodes"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "Id": {
-			//	                "type": "string"
-			//	              },
-			//	              "Members": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Items": {
-			//	                    "items": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "OriginId": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "OriginId"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "type": "array",
-			//	                    "uniqueItems": false
-			//	                  },
-			//	                  "Quantity": {
-			//	                    "type": "integer"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Quantity",
-			//	                  "Items"
-			//	                ],
-			//	                "type": "object"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Id",
-			//	              "FailoverCriteria",
-			//	              "Members"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "Quantity": {
-			//	          "type": "integer"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "Quantity"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Origins": {
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "ConnectionAttempts": {
-			//	            "type": "integer"
-			//	          },
-			//	          "ConnectionTimeout": {
-			//	            "type": "integer"
-			//	          },
-			//	          "CustomOriginConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "HTTPPort": {
-			//	                "default": 80,
-			//	                "type": "integer"
-			//	              },
-			//	              "HTTPSPort": {
-			//	                "default": 443,
-			//	                "type": "integer"
-			//	              },
-			//	              "OriginKeepaliveTimeout": {
-			//	                "default": 5,
-			//	                "type": "integer"
-			//	              },
-			//	              "OriginProtocolPolicy": {
-			//	                "type": "string"
-			//	              },
-			//	              "OriginReadTimeout": {
-			//	                "default": 30,
-			//	                "type": "integer"
-			//	              },
-			//	              "OriginSSLProtocols": {
-			//	                "default": [
-			//	                  "TLSv1",
-			//	                  "SSLv3"
-			//	                ],
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": false
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "OriginProtocolPolicy"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "DomainName": {
-			//	            "type": "string"
-			//	          },
-			//	          "Id": {
-			//	            "type": "string"
-			//	          },
-			//	          "OriginAccessControlId": {
-			//	            "type": "string"
-			//	          },
-			//	          "OriginCustomHeaders": {
-			//	            "items": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "HeaderName": {
-			//	                  "type": "string"
-			//	                },
-			//	                "HeaderValue": {
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "HeaderValue",
-			//	                "HeaderName"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "type": "array",
-			//	            "uniqueItems": false
-			//	          },
-			//	          "OriginPath": {
-			//	            "default": "",
-			//	            "type": "string"
-			//	          },
-			//	          "OriginShield": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Enabled": {
-			//	                "type": "boolean"
-			//	              },
-			//	              "OriginShieldRegion": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "S3OriginConfig": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "OriginAccessIdentity": {
-			//	                "default": "",
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "DomainName",
-			//	          "Id"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": false
-			//	    },
-			//	    "PriceClass": {
-			//	      "default": "PriceClass_All",
-			//	      "type": "string"
-			//	    },
-			//	    "Restrictions": {
-			//	      "additionalProperties": false,
-			//	      "default": {
-			//	        "GeoRestriction": {
-			//	          "RestrictionType": "none"
-			//	        }
-			//	      },
-			//	      "properties": {
-			//	        "GeoRestriction": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "Locations": {
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            },
-			//	            "RestrictionType": {
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "RestrictionType"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "GeoRestriction"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "S3Origin": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "DNSName": {
-			//	          "type": "string"
-			//	        },
-			//	        "OriginAccessIdentity": {
-			//	          "default": "",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "DNSName"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "Staging": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "ViewerCertificate": {
-			//	      "additionalProperties": false,
-			//	      "default": {
-			//	        "CloudFrontDefaultCertificate": true
-			//	      },
-			//	      "properties": {
-			//	        "AcmCertificateArn": {
-			//	          "type": "string"
-			//	        },
-			//	        "CloudFrontDefaultCertificate": {
-			//	          "type": "boolean"
-			//	        },
-			//	        "IamCertificateId": {
-			//	          "type": "string"
-			//	        },
-			//	        "MinimumProtocolVersion": {
-			//	          "type": "string"
-			//	        },
-			//	        "SslSupportMethod": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "WebACLId": {
-			//	      "default": "",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "Enabled",
-			//	    "DefaultCacheBehavior"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"aliases": {
-						// Property: Aliases
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"cnames": {
-						// Property: CNAMEs
-						Type:     types.ListType{ElemType: types.StringType},
-						Computed: true,
-					},
-					"cache_behaviors": {
-						// Property: CacheBehaviors
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allowed_methods": {
-									// Property: AllowedMethods
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"cache_policy_id": {
-									// Property: CachePolicyId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"cached_methods": {
-									// Property: CachedMethods
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"compress": {
-									// Property: Compress
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"default_ttl": {
-									// Property: DefaultTTL
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"field_level_encryption_id": {
-									// Property: FieldLevelEncryptionId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"forwarded_values": {
-									// Property: ForwardedValues
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"cookies": {
-												// Property: Cookies
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"forward": {
-															// Property: Forward
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"whitelisted_names": {
-															// Property: WhitelistedNames
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-													},
-												),
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: DistributionConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Aliases": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "CNAMEs": {
+		//	      "items": {
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "CacheBehaviors": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "AllowedMethods": {
+		//	            "default": [
+		//	              "GET",
+		//	              "HEAD"
+		//	            ],
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "CachePolicyId": {
+		//	            "type": "string"
+		//	          },
+		//	          "CachedMethods": {
+		//	            "default": [
+		//	              "GET",
+		//	              "HEAD"
+		//	            ],
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "Compress": {
+		//	            "default": false,
+		//	            "type": "boolean"
+		//	          },
+		//	          "DefaultTTL": {
+		//	            "default": 86400,
+		//	            "type": "number"
+		//	          },
+		//	          "FieldLevelEncryptionId": {
+		//	            "default": "",
+		//	            "type": "string"
+		//	          },
+		//	          "ForwardedValues": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Cookies": {
+		//	                "additionalProperties": false,
+		//	                "default": {
+		//	                  "Forward": "none"
+		//	                },
+		//	                "properties": {
+		//	                  "Forward": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "WhitelistedNames": {
+		//	                    "items": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": false
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Forward"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Headers": {
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              },
+		//	              "QueryString": {
+		//	                "type": "boolean"
+		//	              },
+		//	              "QueryStringCacheKeys": {
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "QueryString"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "FunctionAssociations": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "EventType": {
+		//	                  "type": "string"
+		//	                },
+		//	                "FunctionARN": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "LambdaFunctionAssociations": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "EventType": {
+		//	                  "type": "string"
+		//	                },
+		//	                "IncludeBody": {
+		//	                  "type": "boolean"
+		//	                },
+		//	                "LambdaFunctionARN": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "MaxTTL": {
+		//	            "default": 31536000,
+		//	            "type": "number"
+		//	          },
+		//	          "MinTTL": {
+		//	            "default": 0,
+		//	            "type": "number"
+		//	          },
+		//	          "OriginRequestPolicyId": {
+		//	            "type": "string"
+		//	          },
+		//	          "PathPattern": {
+		//	            "type": "string"
+		//	          },
+		//	          "RealtimeLogConfigArn": {
+		//	            "type": "string"
+		//	          },
+		//	          "ResponseHeadersPolicyId": {
+		//	            "type": "string"
+		//	          },
+		//	          "SmoothStreaming": {
+		//	            "default": false,
+		//	            "type": "boolean"
+		//	          },
+		//	          "TargetOriginId": {
+		//	            "type": "string"
+		//	          },
+		//	          "TrustedKeyGroups": {
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "TrustedSigners": {
+		//	            "items": {
+		//	              "type": "string"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "ViewerProtocolPolicy": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "PathPattern",
+		//	          "TargetOriginId",
+		//	          "ViewerProtocolPolicy"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "Comment": {
+		//	      "default": "",
+		//	      "type": "string"
+		//	    },
+		//	    "ContinuousDeploymentPolicyId": {
+		//	      "type": "string"
+		//	    },
+		//	    "CustomErrorResponses": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ErrorCachingMinTTL": {
+		//	            "default": 300,
+		//	            "type": "number"
+		//	          },
+		//	          "ErrorCode": {
+		//	            "type": "integer"
+		//	          },
+		//	          "ResponseCode": {
+		//	            "type": "integer"
+		//	          },
+		//	          "ResponsePagePath": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "ErrorCode"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "CustomOrigin": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DNSName": {
+		//	          "type": "string"
+		//	        },
+		//	        "HTTPPort": {
+		//	          "default": 80,
+		//	          "type": "integer"
+		//	        },
+		//	        "HTTPSPort": {
+		//	          "default": 443,
+		//	          "type": "integer"
+		//	        },
+		//	        "OriginProtocolPolicy": {
+		//	          "type": "string"
+		//	        },
+		//	        "OriginSSLProtocols": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DNSName",
+		//	        "OriginProtocolPolicy",
+		//	        "OriginSSLProtocols"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DefaultCacheBehavior": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "AllowedMethods": {
+		//	          "default": [
+		//	            "GET",
+		//	            "HEAD"
+		//	          ],
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "CachePolicyId": {
+		//	          "default": "",
+		//	          "type": "string"
+		//	        },
+		//	        "CachedMethods": {
+		//	          "default": [
+		//	            "GET",
+		//	            "HEAD"
+		//	          ],
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "Compress": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "DefaultTTL": {
+		//	          "default": 86400,
+		//	          "type": "number"
+		//	        },
+		//	        "FieldLevelEncryptionId": {
+		//	          "default": "",
+		//	          "type": "string"
+		//	        },
+		//	        "ForwardedValues": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Cookies": {
+		//	              "additionalProperties": false,
+		//	              "default": {
+		//	                "Forward": "none"
+		//	              },
+		//	              "properties": {
+		//	                "Forward": {
+		//	                  "type": "string"
+		//	                },
+		//	                "WhitelistedNames": {
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Forward"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "Headers": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "QueryString": {
+		//	              "type": "boolean"
+		//	            },
+		//	            "QueryStringCacheKeys": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "QueryString"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "FunctionAssociations": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "EventType": {
+		//	                "type": "string"
+		//	              },
+		//	              "FunctionARN": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "LambdaFunctionAssociations": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "EventType": {
+		//	                "type": "string"
+		//	              },
+		//	              "IncludeBody": {
+		//	                "type": "boolean"
+		//	              },
+		//	              "LambdaFunctionARN": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "MaxTTL": {
+		//	          "default": 31536000,
+		//	          "type": "number"
+		//	        },
+		//	        "MinTTL": {
+		//	          "default": 0,
+		//	          "type": "number"
+		//	        },
+		//	        "OriginRequestPolicyId": {
+		//	          "default": "",
+		//	          "type": "string"
+		//	        },
+		//	        "RealtimeLogConfigArn": {
+		//	          "default": "",
+		//	          "type": "string"
+		//	        },
+		//	        "ResponseHeadersPolicyId": {
+		//	          "default": "",
+		//	          "type": "string"
+		//	        },
+		//	        "SmoothStreaming": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "TargetOriginId": {
+		//	          "type": "string"
+		//	        },
+		//	        "TrustedKeyGroups": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "TrustedSigners": {
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "ViewerProtocolPolicy": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "TargetOriginId",
+		//	        "ViewerProtocolPolicy"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DefaultRootObject": {
+		//	      "default": "",
+		//	      "type": "string"
+		//	    },
+		//	    "Enabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "HttpVersion": {
+		//	      "default": "http1.1",
+		//	      "type": "string"
+		//	    },
+		//	    "IPV6Enabled": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "Logging": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Bucket": {
+		//	          "type": "string"
+		//	        },
+		//	        "IncludeCookies": {
+		//	          "default": false,
+		//	          "type": "boolean"
+		//	        },
+		//	        "Prefix": {
+		//	          "default": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Bucket"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "OriginGroups": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Items": {
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "FailoverCriteria": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "StatusCodes": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Items": {
+		//	                        "items": {
+		//	                          "type": "integer"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
+		//	                      "Quantity": {
+		//	                        "type": "integer"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "Quantity",
+		//	                      "Items"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "StatusCodes"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "Id": {
+		//	                "type": "string"
+		//	              },
+		//	              "Members": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Items": {
+		//	                    "items": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "OriginId": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "OriginId"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "type": "array",
+		//	                    "uniqueItems": false
+		//	                  },
+		//	                  "Quantity": {
+		//	                    "type": "integer"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Quantity",
+		//	                  "Items"
+		//	                ],
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Id",
+		//	              "FailoverCriteria",
+		//	              "Members"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "Quantity": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Quantity"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Origins": {
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ConnectionAttempts": {
+		//	            "type": "integer"
+		//	          },
+		//	          "ConnectionTimeout": {
+		//	            "type": "integer"
+		//	          },
+		//	          "CustomOriginConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "HTTPPort": {
+		//	                "default": 80,
+		//	                "type": "integer"
+		//	              },
+		//	              "HTTPSPort": {
+		//	                "default": 443,
+		//	                "type": "integer"
+		//	              },
+		//	              "OriginKeepaliveTimeout": {
+		//	                "default": 5,
+		//	                "type": "integer"
+		//	              },
+		//	              "OriginProtocolPolicy": {
+		//	                "type": "string"
+		//	              },
+		//	              "OriginReadTimeout": {
+		//	                "default": 30,
+		//	                "type": "integer"
+		//	              },
+		//	              "OriginSSLProtocols": {
+		//	                "default": [
+		//	                  "TLSv1",
+		//	                  "SSLv3"
+		//	                ],
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "OriginProtocolPolicy"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "DomainName": {
+		//	            "type": "string"
+		//	          },
+		//	          "Id": {
+		//	            "type": "string"
+		//	          },
+		//	          "OriginAccessControlId": {
+		//	            "type": "string"
+		//	          },
+		//	          "OriginCustomHeaders": {
+		//	            "items": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "HeaderName": {
+		//	                  "type": "string"
+		//	                },
+		//	                "HeaderValue": {
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "HeaderValue",
+		//	                "HeaderName"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "type": "array",
+		//	            "uniqueItems": false
+		//	          },
+		//	          "OriginPath": {
+		//	            "default": "",
+		//	            "type": "string"
+		//	          },
+		//	          "OriginShield": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Enabled": {
+		//	                "type": "boolean"
+		//	              },
+		//	              "OriginShieldRegion": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "S3OriginConfig": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "OriginAccessIdentity": {
+		//	                "default": "",
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "DomainName",
+		//	          "Id"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "PriceClass": {
+		//	      "default": "PriceClass_All",
+		//	      "type": "string"
+		//	    },
+		//	    "Restrictions": {
+		//	      "additionalProperties": false,
+		//	      "default": {
+		//	        "GeoRestriction": {
+		//	          "RestrictionType": "none"
+		//	        }
+		//	      },
+		//	      "properties": {
+		//	        "GeoRestriction": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Locations": {
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "RestrictionType": {
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "RestrictionType"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "GeoRestriction"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "S3Origin": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DNSName": {
+		//	          "type": "string"
+		//	        },
+		//	        "OriginAccessIdentity": {
+		//	          "default": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DNSName"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "Staging": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "ViewerCertificate": {
+		//	      "additionalProperties": false,
+		//	      "default": {
+		//	        "CloudFrontDefaultCertificate": true
+		//	      },
+		//	      "properties": {
+		//	        "AcmCertificateArn": {
+		//	          "type": "string"
+		//	        },
+		//	        "CloudFrontDefaultCertificate": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "IamCertificateId": {
+		//	          "type": "string"
+		//	        },
+		//	        "MinimumProtocolVersion": {
+		//	          "type": "string"
+		//	        },
+		//	        "SslSupportMethod": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "WebACLId": {
+		//	      "default": "",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Enabled",
+		//	    "DefaultCacheBehavior"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"distribution_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Aliases
+				"aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CNAMEs
+				"cnames": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CacheBehaviors
+				"cache_behaviors": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: AllowedMethods
+							"allowed_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: CachePolicyId
+							"cache_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CachedMethods
+							"cached_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Compress
+							"compress": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DefaultTTL
+							"default_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FieldLevelEncryptionId
+							"field_level_encryption_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ForwardedValues
+							"forwarded_values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Cookies
+									"cookies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Forward
+											"forward": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-											"headers": {
-												// Property: Headers
-												Type:     types.ListType{ElemType: types.StringType},
+											}, /*END ATTRIBUTE*/
+											// Property: WhitelistedNames
+											"whitelisted_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Headers
+									"headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: QueryString
+									"query_string": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: QueryStringCacheKeys
+									"query_string_cache_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: FunctionAssociations
+							"function_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EventType
+										"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: FunctionARN
+										"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: LambdaFunctionAssociations
+							"lambda_function_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: EventType
+										"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: IncludeBody
+										"include_body": schema.BoolAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: LambdaFunctionARN
+										"lambda_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: MaxTTL
+							"max_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: MinTTL
+							"min_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OriginRequestPolicyId
+							"origin_request_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PathPattern
+							"path_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: RealtimeLogConfigArn
+							"realtime_log_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResponseHeadersPolicyId
+							"response_headers_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: SmoothStreaming
+							"smooth_streaming": schema.BoolAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetOriginId
+							"target_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TrustedKeyGroups
+							"trusted_key_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: TrustedSigners
+							"trusted_signers": schema.ListAttribute{ /*START ATTRIBUTE*/
+								ElementType: types.StringType,
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: ViewerProtocolPolicy
+							"viewer_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Comment
+				"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ContinuousDeploymentPolicyId
+				"continuous_deployment_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomErrorResponses
+				"custom_error_responses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ErrorCachingMinTTL
+							"error_caching_min_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ErrorCode
+							"error_code": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResponseCode
+							"response_code": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ResponsePagePath
+							"response_page_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomOrigin
+				"custom_origin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DNSName
+						"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: HTTPPort
+						"http_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: HTTPSPort
+						"https_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OriginProtocolPolicy
+						"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OriginSSLProtocols
+						"origin_ssl_protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultCacheBehavior
+				"default_cache_behavior": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AllowedMethods
+						"allowed_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: CachePolicyId
+						"cache_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CachedMethods
+						"cached_methods": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: Compress
+						"compress": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultTTL
+						"default_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: FieldLevelEncryptionId
+						"field_level_encryption_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ForwardedValues
+						"forwarded_values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Cookies
+								"cookies": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Forward
+										"forward": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: WhitelistedNames
+										"whitelisted_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: Headers
+								"headers": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: QueryString
+								"query_string": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+								// Property: QueryStringCacheKeys
+								"query_string_cache_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: FunctionAssociations
+						"function_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EventType
+									"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: FunctionARN
+									"function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LambdaFunctionAssociations
+						"lambda_function_associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EventType
+									"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: IncludeBody
+									"include_body": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: LambdaFunctionARN
+									"lambda_function_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MaxTTL
+						"max_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MinTTL
+						"min_ttl": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OriginRequestPolicyId
+						"origin_request_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RealtimeLogConfigArn
+						"realtime_log_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ResponseHeadersPolicyId
+						"response_headers_policy_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SmoothStreaming
+						"smooth_streaming": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TargetOriginId
+						"target_origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrustedKeyGroups
+						"trusted_key_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: TrustedSigners
+						"trusted_signers": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ViewerProtocolPolicy
+						"viewer_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultRootObject
+				"default_root_object": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Enabled
+				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: HttpVersion
+				"http_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IPV6Enabled
+				"ipv6_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Logging
+				"logging": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Bucket
+						"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: IncludeCookies
+						"include_cookies": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Prefix
+						"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: OriginGroups
+				"origin_groups": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Items
+						"items": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: FailoverCriteria
+									"failover_criteria": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: StatusCodes
+											"status_codes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Items
+													"items": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.Int64Type,
+														Computed:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: Quantity
+													"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Computed: true,
-											},
-											"query_string": {
-												// Property: QueryString
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"query_string_cache_keys": {
-												// Property: QueryStringCacheKeys
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"function_associations": {
-									// Property: FunctionAssociations
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"event_type": {
-												// Property: EventType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"function_arn": {
-												// Property: FunctionARN
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"lambda_function_associations": {
-									// Property: LambdaFunctionAssociations
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"event_type": {
-												// Property: EventType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"include_body": {
-												// Property: IncludeBody
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"lambda_function_arn": {
-												// Property: LambdaFunctionARN
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"max_ttl": {
-									// Property: MaxTTL
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"min_ttl": {
-									// Property: MinTTL
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"origin_request_policy_id": {
-									// Property: OriginRequestPolicyId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"path_pattern": {
-									// Property: PathPattern
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"realtime_log_config_arn": {
-									// Property: RealtimeLogConfigArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"response_headers_policy_id": {
-									// Property: ResponseHeadersPolicyId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"smooth_streaming": {
-									// Property: SmoothStreaming
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"target_origin_id": {
-									// Property: TargetOriginId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"trusted_key_groups": {
-									// Property: TrustedKeyGroups
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"trusted_signers": {
-									// Property: TrustedSigners
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"viewer_protocol_policy": {
-									// Property: ViewerProtocolPolicy
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"comment": {
-						// Property: Comment
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"continuous_deployment_policy_id": {
-						// Property: ContinuousDeploymentPolicyId
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"custom_error_responses": {
-						// Property: CustomErrorResponses
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"error_caching_min_ttl": {
-									// Property: ErrorCachingMinTTL
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"error_code": {
-									// Property: ErrorCode
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"response_code": {
-									// Property: ResponseCode
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"response_page_path": {
-									// Property: ResponsePagePath
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"custom_origin": {
-						// Property: CustomOrigin
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"dns_name": {
-									// Property: DNSName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"http_port": {
-									// Property: HTTPPort
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"https_port": {
-									// Property: HTTPSPort
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"origin_protocol_policy": {
-									// Property: OriginProtocolPolicy
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"origin_ssl_protocols": {
-									// Property: OriginSSLProtocols
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"default_cache_behavior": {
-						// Property: DefaultCacheBehavior
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"allowed_methods": {
-									// Property: AllowedMethods
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"cache_policy_id": {
-									// Property: CachePolicyId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"cached_methods": {
-									// Property: CachedMethods
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"compress": {
-									// Property: Compress
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"default_ttl": {
-									// Property: DefaultTTL
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"field_level_encryption_id": {
-									// Property: FieldLevelEncryptionId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"forwarded_values": {
-									// Property: ForwardedValues
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"cookies": {
-												// Property: Cookies
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"forward": {
-															// Property: Forward
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"whitelisted_names": {
-															// Property: WhitelistedNames
-															Type:     types.ListType{ElemType: types.StringType},
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"headers": {
-												// Property: Headers
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"query_string": {
-												// Property: QueryString
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"query_string_cache_keys": {
-												// Property: QueryStringCacheKeys
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"function_associations": {
-									// Property: FunctionAssociations
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"event_type": {
-												// Property: EventType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"function_arn": {
-												// Property: FunctionARN
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"lambda_function_associations": {
-									// Property: LambdaFunctionAssociations
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"event_type": {
-												// Property: EventType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"include_body": {
-												// Property: IncludeBody
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"lambda_function_arn": {
-												// Property: LambdaFunctionARN
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"max_ttl": {
-									// Property: MaxTTL
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"min_ttl": {
-									// Property: MinTTL
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-								"origin_request_policy_id": {
-									// Property: OriginRequestPolicyId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"realtime_log_config_arn": {
-									// Property: RealtimeLogConfigArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"response_headers_policy_id": {
-									// Property: ResponseHeadersPolicyId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"smooth_streaming": {
-									// Property: SmoothStreaming
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"target_origin_id": {
-									// Property: TargetOriginId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"trusted_key_groups": {
-									// Property: TrustedKeyGroups
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"trusted_signers": {
-									// Property: TrustedSigners
-									Type:     types.ListType{ElemType: types.StringType},
-									Computed: true,
-								},
-								"viewer_protocol_policy": {
-									// Property: ViewerProtocolPolicy
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"default_root_object": {
-						// Property: DefaultRootObject
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"enabled": {
-						// Property: Enabled
-						Type:     types.BoolType,
-						Computed: true,
-					},
-					"http_version": {
-						// Property: HttpVersion
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"ipv6_enabled": {
-						// Property: IPV6Enabled
-						Type:     types.BoolType,
-						Computed: true,
-					},
-					"logging": {
-						// Property: Logging
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"bucket": {
-									// Property: Bucket
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"include_cookies": {
-									// Property: IncludeCookies
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"prefix": {
-									// Property: Prefix
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"origin_groups": {
-						// Property: OriginGroups
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"items": {
-									// Property: Items
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"failover_criteria": {
-												// Property: FailoverCriteria
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"status_codes": {
-															// Property: StatusCodes
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"items": {
-																		// Property: Items
-																		Type:     types.ListType{ElemType: types.Int64Type},
-																		Computed: true,
-																	},
-																	"quantity": {
-																		// Property: Quantity
-																		Type:     types.Int64Type,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-											"id": {
-												// Property: Id
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"members": {
-												// Property: Members
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"items": {
-															// Property: Items
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"origin_id": {
-																		// Property: OriginId
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"quantity": {
-															// Property: Quantity
-															Type:     types.Int64Type,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"quantity": {
-									// Property: Quantity
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"origins": {
-						// Property: Origins
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"connection_attempts": {
-									// Property: ConnectionAttempts
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"connection_timeout": {
-									// Property: ConnectionTimeout
-									Type:     types.Int64Type,
-									Computed: true,
-								},
-								"custom_origin_config": {
-									// Property: CustomOriginConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"http_port": {
-												// Property: HTTPPort
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"https_port": {
-												// Property: HTTPSPort
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"origin_keepalive_timeout": {
-												// Property: OriginKeepaliveTimeout
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"origin_protocol_policy": {
-												// Property: OriginProtocolPolicy
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"origin_read_timeout": {
-												// Property: OriginReadTimeout
-												Type:     types.Int64Type,
-												Computed: true,
-											},
-											"origin_ssl_protocols": {
-												// Property: OriginSSLProtocols
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"domain_name": {
-									// Property: DomainName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"id": {
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: Id
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"origin_access_control_id": {
-									// Property: OriginAccessControlId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"origin_custom_headers": {
-									// Property: OriginCustomHeaders
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"header_name": {
-												// Property: HeaderName
-												Type:     types.StringType,
+									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Members
+									"members": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Items
+											"items": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+												NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: OriginId
+														"origin_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+															Computed: true,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+												}, /*END NESTED OBJECT*/
 												Computed: true,
-											},
-											"header_value": {
-												// Property: HeaderValue
-												Type:     types.StringType,
+											}, /*END ATTRIBUTE*/
+											// Property: Quantity
+											"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"origin_path": {
-									// Property: OriginPath
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"origin_shield": {
-									// Property: OriginShield
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"enabled": {
-												// Property: Enabled
-												Type:     types.BoolType,
-												Computed: true,
-											},
-											"origin_shield_region": {
-												// Property: OriginShieldRegion
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"s3_origin_config": {
-									// Property: S3OriginConfig
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"origin_access_identity": {
-												// Property: OriginAccessIdentity
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"price_class": {
-						// Property: PriceClass
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"restrictions": {
-						// Property: Restrictions
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"geo_restriction": {
-									// Property: GeoRestriction
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"locations": {
-												// Property: Locations
-												Type:     types.ListType{ElemType: types.StringType},
-												Computed: true,
-											},
-											"restriction_type": {
-												// Property: RestrictionType
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"s3_origin": {
-						// Property: S3Origin
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"dns_name": {
-									// Property: DNSName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"origin_access_identity": {
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Quantity
+						"quantity": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Origins
+				"origins": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ConnectionAttempts
+							"connection_attempts": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: ConnectionTimeout
+							"connection_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CustomOriginConfig
+							"custom_origin_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: HTTPPort
+									"http_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: HTTPSPort
+									"https_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OriginKeepaliveTimeout
+									"origin_keepalive_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OriginProtocolPolicy
+									"origin_protocol_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OriginReadTimeout
+									"origin_read_timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OriginSSLProtocols
+									"origin_ssl_protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DomainName
+							"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Id
+							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OriginAccessControlId
+							"origin_access_control_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OriginCustomHeaders
+							"origin_custom_headers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+								NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: HeaderName
+										"header_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: HeaderValue
+										"header_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+								}, /*END NESTED OBJECT*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OriginPath
+							"origin_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: OriginShield
+							"origin_shield": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Enabled
+									"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: OriginShieldRegion
+									"origin_shield_region": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: S3OriginConfig
+							"s3_origin_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: OriginAccessIdentity
-									Type:     types.StringType,
+									"origin_access_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PriceClass
+				"price_class": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Restrictions
+				"restrictions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: GeoRestriction
+						"geo_restriction": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Locations
+								"locations": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RestrictionType
+								"restriction_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"staging": {
-						// Property: Staging
-						Type:     types.BoolType,
-						Computed: true,
-					},
-					"viewer_certificate": {
-						// Property: ViewerCertificate
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"acm_certificate_arn": {
-									// Property: AcmCertificateArn
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"cloudfront_default_certificate": {
-									// Property: CloudFrontDefaultCertificate
-									Type:     types.BoolType,
-									Computed: true,
-								},
-								"iam_certificate_id": {
-									// Property: IamCertificateId
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"minimum_protocol_version": {
-									// Property: MinimumProtocolVersion
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"ssl_support_method": {
-									// Property: SslSupportMethod
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"web_acl_id": {
-						// Property: WebACLId
-						Type:     types.StringType,
-						Computed: true,
-					},
-				},
-			),
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: S3Origin
+				"s3_origin": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DNSName
+						"dns_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: OriginAccessIdentity
+						"origin_access_identity": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Staging
+				"staging": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ViewerCertificate
+				"viewer_certificate": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AcmCertificateArn
+						"acm_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: CloudFrontDefaultCertificate
+						"cloudfront_default_certificate": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: IamCertificateId
+						"iam_certificate_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MinimumProtocolVersion
+						"minimum_protocol_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: SslSupportMethod
+						"ssl_support_method": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: WebACLId
+				"web_acl_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-		},
-		"domain_name": {
-			// Property: DomainName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: DomainName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"domain_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Value",
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": false
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Value",
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::CloudFront::Distribution",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Distribution").WithTerraformTypeName("awscc_cloudfront_distribution")
 	opts = opts.WithTerraformSchema(schema)
@@ -1735,7 +1603,7 @@ func distributionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"whitelisted_names":               "WhitelistedNames",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

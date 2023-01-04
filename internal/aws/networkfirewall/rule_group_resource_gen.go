@@ -4,14 +4,23 @@ package networkfirewall
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,1267 +30,1230 @@ func init() {
 // ruleGroupResource returns the Terraform awscc_networkfirewall_rule_group resource.
 // This Terraform resource corresponds to the CloudFormation AWS::NetworkFirewall::RuleGroup resource.
 func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"capacity": {
-			// Property: Capacity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "integer"
-			//	}
-			Type:     types.Int64Type,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Capacity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Required: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 512,
-			//	  "minLength": 1,
-			//	  "pattern": "^.*$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 512,
+		//	  "minLength": 1,
+		//	  "pattern": "^.*$",
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 512),
-				validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"rule_group": {
-			// Property: RuleGroup
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "RuleVariables": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "IPSets": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Definition": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array",
-			//	                  "uniqueItems": false
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "PortSets": {
-			//	          "additionalProperties": false,
-			//	          "patternProperties": {
-			//	            "": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "Definition": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array",
-			//	                  "uniqueItems": false
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "RulesSource": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "RulesSourceList": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "GeneratedRulesType": {
-			//	              "enum": [
-			//	                "ALLOWLIST",
-			//	                "DENYLIST"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "TargetTypes": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "enum": [
-			//	                  "TLS_SNI",
-			//	                  "HTTP_HOST"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            },
-			//	            "Targets": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "type": "string"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Targets",
-			//	            "TargetTypes",
-			//	            "GeneratedRulesType"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "RulesString": {
-			//	          "maxLength": 1000000,
-			//	          "minLength": 0,
-			//	          "type": "string"
-			//	        },
-			//	        "StatefulRules": {
-			//	          "insertionOrder": true,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Action": {
-			//	                "enum": [
-			//	                  "PASS",
-			//	                  "DROP",
-			//	                  "ALERT"
-			//	                ],
-			//	                "type": "string"
-			//	              },
-			//	              "Header": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Destination": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "DestinationPort": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Direction": {
-			//	                    "enum": [
-			//	                      "FORWARD",
-			//	                      "ANY"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Protocol": {
-			//	                    "enum": [
-			//	                      "IP",
-			//	                      "TCP",
-			//	                      "UDP",
-			//	                      "ICMP",
-			//	                      "HTTP",
-			//	                      "FTP",
-			//	                      "TLS",
-			//	                      "SMB",
-			//	                      "DNS",
-			//	                      "DCERPC",
-			//	                      "SSH",
-			//	                      "SMTP",
-			//	                      "IMAP",
-			//	                      "MSN",
-			//	                      "KRB5",
-			//	                      "IKEV2",
-			//	                      "TFTP",
-			//	                      "NTP",
-			//	                      "DHCP"
-			//	                    ],
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Source": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  },
-			//	                  "SourcePort": {
-			//	                    "maxLength": 1024,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^.*$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "Protocol",
-			//	                  "Source",
-			//	                  "SourcePort",
-			//	                  "Direction",
-			//	                  "Destination",
-			//	                  "DestinationPort"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "RuleOptions": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Keyword": {
-			//	                      "maxLength": 128,
-			//	                      "minLength": 1,
-			//	                      "pattern": "^.*$",
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Settings": {
-			//	                      "insertionOrder": true,
-			//	                      "items": {
-			//	                        "maxLength": 8192,
-			//	                        "minLength": 1,
-			//	                        "pattern": "^.*$",
-			//	                        "type": "string"
-			//	                      },
-			//	                      "type": "array",
-			//	                      "uniqueItems": false
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Keyword"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": false
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Action",
-			//	              "Header",
-			//	              "RuleOptions"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": false
-			//	        },
-			//	        "StatelessRulesAndCustomActions": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "CustomActions": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "ActionDefinition": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "PublishMetricAction": {
-			//	                        "additionalProperties": false,
-			//	                        "properties": {
-			//	                          "Dimensions": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "Value": {
-			//	                                  "maxLength": 128,
-			//	                                  "minLength": 1,
-			//	                                  "pattern": "^[a-zA-Z0-9-_ ]+$",
-			//	                                  "type": "string"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "Value"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          }
-			//	                        },
-			//	                        "required": [
-			//	                          "Dimensions"
-			//	                        ],
-			//	                        "type": "object"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "ActionName": {
-			//	                    "maxLength": 128,
-			//	                    "minLength": 1,
-			//	                    "pattern": "^[a-zA-Z0-9]+$",
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "ActionName",
-			//	                  "ActionDefinition"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            },
-			//	            "StatelessRules": {
-			//	              "insertionOrder": true,
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Priority": {
-			//	                    "maximum": 65535,
-			//	                    "minimum": 1,
-			//	                    "type": "integer"
-			//	                  },
-			//	                  "RuleDefinition": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Actions": {
-			//	                        "insertionOrder": true,
-			//	                        "items": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "type": "array",
-			//	                        "uniqueItems": false
-			//	                      },
-			//	                      "MatchAttributes": {
-			//	                        "additionalProperties": false,
-			//	                        "properties": {
-			//	                          "DestinationPorts": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "FromPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                },
-			//	                                "ToPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "FromPort",
-			//	                                "ToPort"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "Destinations": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "AddressDefinition": {
-			//	                                  "maxLength": 255,
-			//	                                  "minLength": 1,
-			//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
-			//	                                  "type": "string"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "AddressDefinition"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "Protocols": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "maximum": 255,
-			//	                              "minimum": 0,
-			//	                              "type": "integer"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "SourcePorts": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "FromPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                },
-			//	                                "ToPort": {
-			//	                                  "maximum": 65535,
-			//	                                  "minimum": 0,
-			//	                                  "type": "integer"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "FromPort",
-			//	                                "ToPort"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "Sources": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "AddressDefinition": {
-			//	                                  "maxLength": 255,
-			//	                                  "minLength": 1,
-			//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
-			//	                                  "type": "string"
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "AddressDefinition"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          },
-			//	                          "TCPFlags": {
-			//	                            "insertionOrder": true,
-			//	                            "items": {
-			//	                              "additionalProperties": false,
-			//	                              "properties": {
-			//	                                "Flags": {
-			//	                                  "insertionOrder": true,
-			//	                                  "items": {
-			//	                                    "enum": [
-			//	                                      "FIN",
-			//	                                      "SYN",
-			//	                                      "RST",
-			//	                                      "PSH",
-			//	                                      "ACK",
-			//	                                      "URG",
-			//	                                      "ECE",
-			//	                                      "CWR"
-			//	                                    ],
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "type": "array",
-			//	                                  "uniqueItems": false
-			//	                                },
-			//	                                "Masks": {
-			//	                                  "insertionOrder": true,
-			//	                                  "items": {
-			//	                                    "enum": [
-			//	                                      "FIN",
-			//	                                      "SYN",
-			//	                                      "RST",
-			//	                                      "PSH",
-			//	                                      "ACK",
-			//	                                      "URG",
-			//	                                      "ECE",
-			//	                                      "CWR"
-			//	                                    ],
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "type": "array",
-			//	                                  "uniqueItems": false
-			//	                                }
-			//	                              },
-			//	                              "required": [
-			//	                                "Flags"
-			//	                              ],
-			//	                              "type": "object"
-			//	                            },
-			//	                            "type": "array",
-			//	                            "uniqueItems": false
-			//	                          }
-			//	                        },
-			//	                        "type": "object"
-			//	                      }
-			//	                    },
-			//	                    "required": [
-			//	                      "MatchAttributes",
-			//	                      "Actions"
-			//	                    ],
-			//	                    "type": "object"
-			//	                  }
-			//	                },
-			//	                "required": [
-			//	                  "RuleDefinition",
-			//	                  "Priority"
-			//	                ],
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array",
-			//	              "uniqueItems": false
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "StatelessRules"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "StatefulRuleOptions": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "RuleOrder": {
-			//	          "enum": [
-			//	            "DEFAULT_ACTION_ORDER",
-			//	            "STRICT_ORDER"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "RulesSource"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"rule_variables": {
-						// Property: RuleVariables
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"ip_sets": {
-									// Property: IPSets
-									// Pattern: ""
-									Attributes: tfsdk.MapNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"definition": {
-												// Property: Definition
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayForEach(validate.StringLenAtLeast(1)),
-													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 512),
+				stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "RuleVariables": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IPSets": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Definition": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "PortSets": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Definition": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RulesSource": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RulesSourceList": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "GeneratedRulesType": {
+		//	              "enum": [
+		//	                "ALLOWLIST",
+		//	                "DENYLIST"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "TargetTypes": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "enum": [
+		//	                  "TLS_SNI",
+		//	                  "HTTP_HOST"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "Targets": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "type": "string"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Targets",
+		//	            "TargetTypes",
+		//	            "GeneratedRulesType"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RulesString": {
+		//	          "maxLength": 1000000,
+		//	          "minLength": 0,
+		//	          "type": "string"
+		//	        },
+		//	        "StatefulRules": {
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Action": {
+		//	                "enum": [
+		//	                  "PASS",
+		//	                  "DROP",
+		//	                  "ALERT"
+		//	                ],
+		//	                "type": "string"
+		//	              },
+		//	              "Header": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Destination": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "DestinationPort": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Direction": {
+		//	                    "enum": [
+		//	                      "FORWARD",
+		//	                      "ANY"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Protocol": {
+		//	                    "enum": [
+		//	                      "IP",
+		//	                      "TCP",
+		//	                      "UDP",
+		//	                      "ICMP",
+		//	                      "HTTP",
+		//	                      "FTP",
+		//	                      "TLS",
+		//	                      "SMB",
+		//	                      "DNS",
+		//	                      "DCERPC",
+		//	                      "SSH",
+		//	                      "SMTP",
+		//	                      "IMAP",
+		//	                      "MSN",
+		//	                      "KRB5",
+		//	                      "IKEV2",
+		//	                      "TFTP",
+		//	                      "NTP",
+		//	                      "DHCP"
+		//	                    ],
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Source": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "SourcePort": {
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Protocol",
+		//	                  "Source",
+		//	                  "SourcePort",
+		//	                  "Direction",
+		//	                  "Destination",
+		//	                  "DestinationPort"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "RuleOptions": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Keyword": {
+		//	                      "maxLength": 128,
+		//	                      "minLength": 1,
+		//	                      "pattern": "^.*$",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Settings": {
+		//	                      "insertionOrder": true,
+		//	                      "items": {
+		//	                        "maxLength": 8192,
+		//	                        "minLength": 1,
+		//	                        "pattern": "^.*$",
+		//	                        "type": "string"
+		//	                      },
+		//	                      "type": "array",
+		//	                      "uniqueItems": false
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Keyword"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": false
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Action",
+		//	              "Header",
+		//	              "RuleOptions"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "StatelessRulesAndCustomActions": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "CustomActions": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "ActionDefinition": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "PublishMetricAction": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "Dimensions": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Value": {
+		//	                                  "maxLength": 128,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^[a-zA-Z0-9-_ ]+$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Value"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          }
+		//	                        },
+		//	                        "required": [
+		//	                          "Dimensions"
+		//	                        ],
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "ActionName": {
+		//	                    "maxLength": 128,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^[a-zA-Z0-9]+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "ActionName",
+		//	                  "ActionDefinition"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            },
+		//	            "StatelessRules": {
+		//	              "insertionOrder": true,
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Priority": {
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "integer"
+		//	                  },
+		//	                  "RuleDefinition": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Actions": {
+		//	                        "insertionOrder": true,
+		//	                        "items": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "type": "array",
+		//	                        "uniqueItems": false
+		//	                      },
+		//	                      "MatchAttributes": {
+		//	                        "additionalProperties": false,
+		//	                        "properties": {
+		//	                          "DestinationPorts": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "FromPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                },
+		//	                                "ToPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "FromPort",
+		//	                                "ToPort"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Destinations": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "AddressDefinition": {
+		//	                                  "maxLength": 255,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "AddressDefinition"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Protocols": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "maximum": 255,
+		//	                              "minimum": 0,
+		//	                              "type": "integer"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "SourcePorts": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "FromPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                },
+		//	                                "ToPort": {
+		//	                                  "maximum": 65535,
+		//	                                  "minimum": 0,
+		//	                                  "type": "integer"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "FromPort",
+		//	                                "ToPort"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "Sources": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "AddressDefinition": {
+		//	                                  "maxLength": 255,
+		//	                                  "minLength": 1,
+		//	                                  "pattern": "^([a-fA-F\\d:\\.]+/\\d{1,3})$",
+		//	                                  "type": "string"
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "AddressDefinition"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          },
+		//	                          "TCPFlags": {
+		//	                            "insertionOrder": true,
+		//	                            "items": {
+		//	                              "additionalProperties": false,
+		//	                              "properties": {
+		//	                                "Flags": {
+		//	                                  "insertionOrder": true,
+		//	                                  "items": {
+		//	                                    "enum": [
+		//	                                      "FIN",
+		//	                                      "SYN",
+		//	                                      "RST",
+		//	                                      "PSH",
+		//	                                      "ACK",
+		//	                                      "URG",
+		//	                                      "ECE",
+		//	                                      "CWR"
+		//	                                    ],
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                },
+		//	                                "Masks": {
+		//	                                  "insertionOrder": true,
+		//	                                  "items": {
+		//	                                    "enum": [
+		//	                                      "FIN",
+		//	                                      "SYN",
+		//	                                      "RST",
+		//	                                      "PSH",
+		//	                                      "ACK",
+		//	                                      "URG",
+		//	                                      "ECE",
+		//	                                      "CWR"
+		//	                                    ],
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "type": "array",
+		//	                                  "uniqueItems": false
+		//	                                }
+		//	                              },
+		//	                              "required": [
+		//	                                "Flags"
+		//	                              ],
+		//	                              "type": "object"
+		//	                            },
+		//	                            "type": "array",
+		//	                            "uniqueItems": false
+		//	                          }
+		//	                        },
+		//	                        "type": "object"
+		//	                      }
+		//	                    },
+		//	                    "required": [
+		//	                      "MatchAttributes",
+		//	                      "Actions"
+		//	                    ],
+		//	                    "type": "object"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "RuleDefinition",
+		//	                  "Priority"
+		//	                ],
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array",
+		//	              "uniqueItems": false
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "StatelessRules"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "StatefulRuleOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RuleOrder": {
+		//	          "enum": [
+		//	            "DEFAULT_ACTION_ORDER",
+		//	            "STRICT_ORDER"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "RulesSource"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"rule_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RuleVariables
+				"rule_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IPSets
+						"ip_sets":                 // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtLeast(1),
+												stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: PortSets
+						"port_sets":               // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtLeast(1),
+												stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: RulesSource
+				"rules_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RulesSourceList
+						"rules_source_list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: GeneratedRulesType
+								"generated_rules_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"ALLOWLIST",
+											"DENYLIST",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: TargetTypes
+								"target_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Required:    true,
+									Validators: []validator.List{ /*START VALIDATORS*/
+										listvalidator.ValueStringsAre(
+											stringvalidator.OneOf(
+												"TLS_SNI",
+												"HTTP_HOST",
+											),
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Targets
+								"targets": schema.ListAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RulesString
+						"rules_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(0, 1000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StatefulRules
+						"stateful_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Action
+									"action": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.OneOf(
+												"PASS",
+												"DROP",
+												"ALERT",
+											),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Header
+									"header": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Destination
+											"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: DestinationPort
+											"destination_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Direction
+											"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"FORWARD",
+														"ANY",
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Protocol
+											"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.OneOf(
+														"IP",
+														"TCP",
+														"UDP",
+														"ICMP",
+														"HTTP",
+														"FTP",
+														"TLS",
+														"SMB",
+														"DNS",
+														"DCERPC",
+														"SSH",
+														"SMTP",
+														"IMAP",
+														"MSN",
+														"KRB5",
+														"IKEV2",
+														"TFTP",
+														"NTP",
+														"DHCP",
+													),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Source
+											"source": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SourcePort
+											"source_port": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+									// Property: RuleOptions
+									"rule_options": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Keyword
+												"keyword": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Required: true,
+													Validators: []validator.String{ /*START VALIDATORS*/
+														stringvalidator.LengthBetween(1, 128),
+														stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+													}, /*END VALIDATORS*/
+												}, /*END ATTRIBUTE*/
+												// Property: Settings
+												"settings": schema.ListAttribute{ /*START ATTRIBUTE*/
+													ElementType: types.StringType,
+													Optional:    true,
+													Computed:    true,
+													Validators: []validator.List{ /*START VALIDATORS*/
+														listvalidator.ValueStringsAre(
+															stringvalidator.LengthBetween(1, 8192),
+															stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+														),
+													}, /*END VALIDATORS*/
+													PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+														listplanmodifier.UseStateForUnknown(),
+													}, /*END PLAN MODIFIERS*/
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StatelessRulesAndCustomActions
+						"stateless_rules_and_custom_actions": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CustomActions
+								"custom_actions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: ActionDefinition
+											"action_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: PublishMetricAction
+													"publish_metric_action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: Dimensions
+															"dimensions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Value
+																		"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Required: true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 128),
+																				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_ ]+$"), ""),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Required: true,
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+															objectplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+												Required: true,
+											}, /*END ATTRIBUTE*/
+											// Property: ActionName
+											"action_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Required: true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 128),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"port_sets": {
-									// Property: PortSets
-									// Pattern: ""
-									Attributes: tfsdk.MapNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"definition": {
-												// Property: Definition
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayForEach(validate.StringLenAtLeast(1)),
-													validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"rules_source": {
-						// Property: RulesSource
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"rules_source_list": {
-									// Property: RulesSourceList
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"generated_rules_type": {
-												// Property: GeneratedRulesType
-												Type:     types.StringType,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: StatelessRules
+								"stateless_rules": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Priority
+											"priority": schema.Int64Attribute{ /*START ATTRIBUTE*/
 												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"ALLOWLIST",
-														"DENYLIST",
-													}),
-												},
-											},
-											"target_types": {
-												// Property: TargetTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayForEach(validate.StringInSlice([]string{
-														"TLS_SNI",
-														"HTTP_HOST",
-													})),
-												},
-											},
-											"targets": {
-												// Property: Targets
-												Type:     types.ListType{ElemType: types.StringType},
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"rules_string": {
-									// Property: RulesString
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(0, 1000000),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"stateful_rules": {
-									// Property: StatefulRules
-									Attributes: tfsdk.ListNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"action": {
-												// Property: Action
-												Type:     types.StringType,
-												Required: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"PASS",
-														"DROP",
-														"ALERT",
-													}),
-												},
-											},
-											"header": {
-												// Property: Header
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"destination": {
-															// Property: Destination
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 1024),
-																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-															},
-														},
-														"destination_port": {
-															// Property: DestinationPort
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 1024),
-																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-															},
-														},
-														"direction": {
-															// Property: Direction
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"FORWARD",
-																	"ANY",
-																}),
-															},
-														},
-														"protocol": {
-															// Property: Protocol
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"IP",
-																	"TCP",
-																	"UDP",
-																	"ICMP",
-																	"HTTP",
-																	"FTP",
-																	"TLS",
-																	"SMB",
-																	"DNS",
-																	"DCERPC",
-																	"SSH",
-																	"SMTP",
-																	"IMAP",
-																	"MSN",
-																	"KRB5",
-																	"IKEV2",
-																	"TFTP",
-																	"NTP",
-																	"DHCP",
-																}),
-															},
-														},
-														"source": {
-															// Property: Source
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 1024),
-																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-															},
-														},
-														"source_port": {
-															// Property: SourcePort
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 1024),
-																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-											"rule_options": {
-												// Property: RuleOptions
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"keyword": {
-															// Property: Keyword
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-																validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-															},
-														},
-														"settings": {
-															// Property: Settings
-															Type:     types.ListType{ElemType: types.StringType},
-															Optional: true,
-															Computed: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.ArrayForEach(validate.StringLenBetween(1, 8192)),
-																validate.ArrayForEach(validate.StringMatch(regexp.MustCompile("^.*$"), "")),
-															},
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"stateless_rules_and_custom_actions": {
-									// Property: StatelessRulesAndCustomActions
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"custom_actions": {
-												// Property: CustomActions
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"action_definition": {
-															// Property: ActionDefinition
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"publish_metric_action": {
-																		// Property: PublishMetricAction
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"dimensions": {
-																					// Property: Dimensions
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"value": {
-																								// Property: Value
-																								Type:     types.StringType,
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.StringLenBetween(1, 128),
-																									validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-_ ]+$"), ""),
-																								},
-																							},
-																						},
+												Validators: []validator.Int64{ /*START VALIDATORS*/
+													int64validator.Between(1, 65535),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: RuleDefinition
+											"rule_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Actions
+													"actions": schema.ListAttribute{ /*START ATTRIBUTE*/
+														ElementType: types.StringType,
+														Required:    true,
+													}, /*END ATTRIBUTE*/
+													// Property: MatchAttributes
+													"match_attributes": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+														Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+															// Property: DestinationPorts
+															"destination_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: FromPort
+																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Required: true,
+																			Validators: []validator.Int64{ /*START VALIDATORS*/
+																				int64validator.Between(0, 65535),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: ToPort
+																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Required: true,
+																			Validators: []validator.Int64{ /*START VALIDATORS*/
+																				int64validator.Between(0, 65535),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Destinations
+															"destinations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AddressDefinition
+																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Required: true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 255),
+																				stringvalidator.RegexMatches(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Protocols
+															"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+																ElementType: types.Int64Type,
+																Optional:    true,
+																Computed:    true,
+																Validators: []validator.List{ /*START VALIDATORS*/
+																	listvalidator.ValueInt64sAre(
+																		int64validator.Between(0, 255),
+																	),
+																}, /*END VALIDATORS*/
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: SourcePorts
+															"source_ports": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: FromPort
+																		"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Required: true,
+																			Validators: []validator.Int64{ /*START VALIDATORS*/
+																				int64validator.Between(0, 65535),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: ToPort
+																		"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+																			Required: true,
+																			Validators: []validator.Int64{ /*START VALIDATORS*/
+																				int64validator.Between(0, 65535),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: Sources
+															"sources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: AddressDefinition
+																		"address_definition": schema.StringAttribute{ /*START ATTRIBUTE*/
+																			Required: true,
+																			Validators: []validator.String{ /*START VALIDATORS*/
+																				stringvalidator.LengthBetween(1, 255),
+																				stringvalidator.RegexMatches(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+															// Property: TCPFlags
+															"tcp_flags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+																NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																	Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																		// Property: Flags
+																		"flags": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Required:    true,
+																			Validators: []validator.List{ /*START VALIDATORS*/
+																				listvalidator.ValueStringsAre(
+																					stringvalidator.OneOf(
+																						"FIN",
+																						"SYN",
+																						"RST",
+																						"PSH",
+																						"ACK",
+																						"URG",
+																						"ECE",
+																						"CWR",
 																					),
-																					Required: true,
-																				},
-																			},
-																		),
-																		Optional: true,
-																		Computed: true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
-															),
-															Required: true,
-														},
-														"action_name": {
-															// Property: ActionName
-															Type:     types.StringType,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringLenBetween(1, 128),
-																validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"stateless_rules": {
-												// Property: StatelessRules
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"priority": {
-															// Property: Priority
-															Type:     types.Int64Type,
-															Required: true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.IntBetween(1, 65535),
-															},
-														},
-														"rule_definition": {
-															// Property: RuleDefinition
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"actions": {
-																		// Property: Actions
-																		Type:     types.ListType{ElemType: types.StringType},
-																		Required: true,
-																	},
-																	"match_attributes": {
-																		// Property: MatchAttributes
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"destination_ports": {
-																					// Property: DestinationPorts
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"from_port": {
-																								// Property: FromPort
-																								Type:     types.Int64Type,
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.IntBetween(0, 65535),
-																								},
-																							},
-																							"to_port": {
-																								// Property: ToPort
-																								Type:     types.Int64Type,
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.IntBetween(0, 65535),
-																								},
-																							},
-																						},
+																				),
+																			}, /*END VALIDATORS*/
+																		}, /*END ATTRIBUTE*/
+																		// Property: Masks
+																		"masks": schema.ListAttribute{ /*START ATTRIBUTE*/
+																			ElementType: types.StringType,
+																			Optional:    true,
+																			Computed:    true,
+																			Validators: []validator.List{ /*START VALIDATORS*/
+																				listvalidator.ValueStringsAre(
+																					stringvalidator.OneOf(
+																						"FIN",
+																						"SYN",
+																						"RST",
+																						"PSH",
+																						"ACK",
+																						"URG",
+																						"ECE",
+																						"CWR",
 																					),
-																					Optional: true,
-																					Computed: true,
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																				"destinations": {
-																					// Property: Destinations
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"address_definition": {
-																								// Property: AddressDefinition
-																								Type:     types.StringType,
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.StringLenBetween(1, 255),
-																									validate.StringMatch(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
-																								},
-																							},
-																						},
-																					),
-																					Optional: true,
-																					Computed: true,
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																				"protocols": {
-																					// Property: Protocols
-																					Type:     types.ListType{ElemType: types.Int64Type},
-																					Optional: true,
-																					Computed: true,
-																					Validators: []tfsdk.AttributeValidator{
-																						validate.ArrayForEach(validate.IntBetween(0, 255)),
-																					},
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																				"source_ports": {
-																					// Property: SourcePorts
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"from_port": {
-																								// Property: FromPort
-																								Type:     types.Int64Type,
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.IntBetween(0, 65535),
-																								},
-																							},
-																							"to_port": {
-																								// Property: ToPort
-																								Type:     types.Int64Type,
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.IntBetween(0, 65535),
-																								},
-																							},
-																						},
-																					),
-																					Optional: true,
-																					Computed: true,
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																				"sources": {
-																					// Property: Sources
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"address_definition": {
-																								// Property: AddressDefinition
-																								Type:     types.StringType,
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.StringLenBetween(1, 255),
-																									validate.StringMatch(regexp.MustCompile("^([a-fA-F\\d:\\.]+/\\d{1,3})$"), ""),
-																								},
-																							},
-																						},
-																					),
-																					Optional: true,
-																					Computed: true,
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																				"tcp_flags": {
-																					// Property: TCPFlags
-																					Attributes: tfsdk.ListNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"flags": {
-																								// Property: Flags
-																								Type:     types.ListType{ElemType: types.StringType},
-																								Required: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.ArrayForEach(validate.StringInSlice([]string{
-																										"FIN",
-																										"SYN",
-																										"RST",
-																										"PSH",
-																										"ACK",
-																										"URG",
-																										"ECE",
-																										"CWR",
-																									})),
-																								},
-																							},
-																							"masks": {
-																								// Property: Masks
-																								Type:     types.ListType{ElemType: types.StringType},
-																								Optional: true,
-																								Computed: true,
-																								Validators: []tfsdk.AttributeValidator{
-																									validate.ArrayForEach(validate.StringInSlice([]string{
-																										"FIN",
-																										"SYN",
-																										"RST",
-																										"PSH",
-																										"ACK",
-																										"URG",
-																										"ECE",
-																										"CWR",
-																									})),
-																								},
-																								PlanModifiers: []tfsdk.AttributePlanModifier{
-																									resource.UseStateForUnknown(),
-																								},
-																							},
-																						},
-																					),
-																					Optional: true,
-																					Computed: true,
-																					PlanModifiers: []tfsdk.AttributePlanModifier{
-																						resource.UseStateForUnknown(),
-																					},
-																				},
-																			},
-																		),
-																		Required: true,
-																	},
-																},
-															),
-															Required: true,
-														},
-													},
-												),
+																				),
+																			}, /*END VALIDATORS*/
+																			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																				listplanmodifier.UseStateForUnknown(),
+																			}, /*END PLAN MODIFIERS*/
+																		}, /*END ATTRIBUTE*/
+																	}, /*END SCHEMA*/
+																}, /*END NESTED OBJECT*/
+																Optional: true,
+																Computed: true,
+																PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+																	listplanmodifier.UseStateForUnknown(),
+																}, /*END PLAN MODIFIERS*/
+															}, /*END ATTRIBUTE*/
+														}, /*END SCHEMA*/
+														Required: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
 												Required: true,
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Required: true,
-					},
-					"stateful_rule_options": {
-						// Property: StatefulRuleOptions
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"rule_order": {
-									// Property: RuleOrder
-									Type:     types.StringType,
-									Optional: true,
-									Computed: true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"DEFAULT_ACTION_ORDER",
-											"STRICT_ORDER",
-										}),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Required: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: StatefulRuleOptions
+				"stateful_rule_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RuleOrder
+						"rule_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"DEFAULT_ACTION_ORDER",
+									"STRICT_ORDER",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"rule_group_arn": {
-			// Property: RuleGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A resource ARN.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^(arn:aws.*)$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A resource ARN.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^(arn:aws.*)$",
+		//	  "type": "string"
+		//	}
+		"rule_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A resource ARN.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"rule_group_id": {
-			// Property: RuleGroupId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 36,
-			//	  "minLength": 36,
-			//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 36,
+		//	  "minLength": 36,
+		//	  "pattern": "^([0-9a-f]{8})-([0-9a-f]{4}-){3}([0-9a-f]{12})$",
+		//	  "type": "string"
+		//	}
+		"rule_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"rule_group_name": {
-			// Property: RuleGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9-]+$",
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RuleGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"rule_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 128),
-				validate.StringMatch(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "pattern": "^.*$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 255,
-			//	        "minLength": 0,
-			//	        "pattern": "^.*$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 128),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "pattern": "^.*$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 255,
+		//	        "minLength": 0,
+		//	        "pattern": "^.*$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-							validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 255),
-							validate.StringMatch(regexp.MustCompile("^.*$"), ""),
-						},
-					},
-				},
-			),
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 255),
+							stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"type": {
-			// Property: Type
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "enum": [
-			//	    "STATELESS",
-			//	    "STATEFUL"
-			//	  ],
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Type
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "STATELESS",
+		//	    "STATEFUL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringInSlice([]string{
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
 					"STATELESS",
 					"STATEFUL",
-				}),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-	}
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource type definition for AWS::NetworkFirewall::RuleGroup",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkFirewall::RuleGroup").WithTerraformTypeName("awscc_networkfirewall_rule_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -1349,7 +1321,7 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

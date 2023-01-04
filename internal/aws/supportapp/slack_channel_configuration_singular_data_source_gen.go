@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,135 +19,125 @@ func init() {
 // slackChannelConfigurationDataSource returns the Terraform awscc_supportapp_slack_channel_configuration data source.
 // This Terraform data source corresponds to the CloudFormation AWS::SupportApp::SlackChannelConfiguration resource.
 func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"channel_id": {
-			// Property: ChannelId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The channel ID in Slack, which identifies a channel within a workspace.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^\\S+$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: ChannelId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The channel ID in Slack, which identifies a channel within a workspace.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"channel_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The channel ID in Slack, which identifies a channel within a workspace.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"channel_name": {
-			// Property: ChannelName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The channel name in Slack.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^.+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The channel name in Slack.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^.+$",
+		//	  "type": "string"
+		//	}
+		"channel_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The channel name in Slack.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"channel_role_arn": {
-			// Property: ChannelRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 31,
-			//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ChannelRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 31,
+		//	  "pattern": "^arn:aws[-a-z0-9]*:iam::[0-9]{12}:role\\/(.+)$",
+		//	  "type": "string"
+		//	}
+		"channel_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of an IAM role that grants the AWS Support App access to perform operations for AWS services.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"notify_on_add_correspondence_to_case": {
-			// Property: NotifyOnAddCorrespondenceToCase
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to notify when a correspondence is added to a case.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnAddCorrespondenceToCase
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to notify when a correspondence is added to a case.",
+		//	  "type": "boolean"
+		//	}
+		"notify_on_add_correspondence_to_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to notify when a correspondence is added to a case.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"notify_on_case_severity": {
-			// Property: NotifyOnCaseSeverity
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The severity level of a support case that a customer wants to get notified for.",
-			//	  "enum": [
-			//	    "none",
-			//	    "all",
-			//	    "high"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnCaseSeverity
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The severity level of a support case that a customer wants to get notified for.",
+		//	  "enum": [
+		//	    "none",
+		//	    "all",
+		//	    "high"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"notify_on_case_severity": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The severity level of a support case that a customer wants to get notified for.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"notify_on_create_or_reopen_case": {
-			// Property: NotifyOnCreateOrReopenCase
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to notify when a case is created or reopened.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnCreateOrReopenCase
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to notify when a case is created or reopened.",
+		//	  "type": "boolean"
+		//	}
+		"notify_on_create_or_reopen_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to notify when a case is created or reopened.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"notify_on_resolve_case": {
-			// Property: NotifyOnResolveCase
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Whether to notify when a case is resolved.",
-			//	  "type": "boolean"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: NotifyOnResolveCase
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Whether to notify when a case is resolved.",
+		//	  "type": "boolean"
+		//	}
+		"notify_on_resolve_case": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Description: "Whether to notify when a case is resolved.",
-			Type:        types.BoolType,
 			Computed:    true,
-		},
-		"team_id": {
-			// Property: TeamId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The team ID in Slack, which uniquely identifies a workspace.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^\\S+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: TeamId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The team ID in Slack, which uniquely identifies a workspace.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"team_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The team ID in Slack, which uniquely identifies a workspace.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::SupportApp::SlackChannelConfiguration",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackChannelConfiguration").WithTerraformTypeName("awscc_supportapp_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -162,7 +152,7 @@ func slackChannelConfigurationDataSource(ctx context.Context) (datasource.DataSo
 		"team_id":                              "TeamId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

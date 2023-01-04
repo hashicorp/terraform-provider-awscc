@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,593 +19,557 @@ func init() {
 // taskDataSource returns the Terraform awscc_datasync_task data source.
 // This Terraform data source corresponds to the CloudFormation AWS::DataSync::Task resource.
 func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"cloudwatch_log_group_arn": {
-			// Property: CloudWatchLogGroupArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
-			//	  "maxLength": 562,
-			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CloudWatchLogGroupArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
+		//	  "maxLength": 562,
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):logs:[a-z\\-0-9]*:[0-9]{12}:log-group:([^:\\*]*)(:\\*)?$",
+		//	  "type": "string"
+		//	}
+		"cloudwatch_log_group_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"destination_location_arn": {
-			// Property: DestinationLocationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of an AWS storage resource's location.",
-			//	  "maxLength": 128,
-			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationLocationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of an AWS storage resource's location.",
+		//	  "maxLength": 128,
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "type": "string"
+		//	}
+		"destination_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of an AWS storage resource's location.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"destination_network_interface_arns": {
-			// Property: DestinationNetworkInterfaceArns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 128,
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: DestinationNetworkInterfaceArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 128,
+		//	  "type": "array"
+		//	}
+		"destination_network_interface_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"error_code": {
-			// Property: ErrorCode
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ErrorCode
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.",
+		//	  "type": "string"
+		//	}
+		"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"error_detail": {
-			// Property: ErrorDetail
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Detailed description of an error that was encountered during the task execution.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ErrorDetail
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Detailed description of an error that was encountered during the task execution.",
+		//	  "type": "string"
+		//	}
+		"error_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Detailed description of an error that was encountered during the task execution.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"excludes": {
-			// Property: Excludes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Specifies which files folders and objects to include or exclude when transferring files from source to destination.",
-			//	    "properties": {
-			//	      "FilterType": {
-			//	        "description": "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
-			//	        "enum": [
-			//	          "SIMPLE_PATTERN"
-			//	        ],
-			//	        "maxLength": 128,
-			//	        "pattern": "^[A-Z0-9_]+$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
-			//	        "maxLength": 409600,
-			//	        "pattern": "^[^\\x00]+$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 1,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"filter_type": {
-						// Property: FilterType
+		}, /*END ATTRIBUTE*/
+		// Property: Excludes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Specifies which files folders and objects to include or exclude when transferring files from source to destination.",
+		//	    "properties": {
+		//	      "FilterType": {
+		//	        "description": "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
+		//	        "enum": [
+		//	          "SIMPLE_PATTERN"
+		//	        ],
+		//	        "maxLength": 128,
+		//	        "pattern": "^[A-Z0-9_]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
+		//	        "maxLength": 409600,
+		//	        "pattern": "^[^\\x00]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"excludes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FilterType
+					"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"includes": {
-			// Property: Includes
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "Specifies which files folders and objects to include or exclude when transferring files from source to destination.",
-			//	    "properties": {
-			//	      "FilterType": {
-			//	        "description": "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
-			//	        "enum": [
-			//	          "SIMPLE_PATTERN"
-			//	        ],
-			//	        "maxLength": 128,
-			//	        "pattern": "^[A-Z0-9_]+$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
-			//	        "maxLength": 409600,
-			//	        "pattern": "^[^\\x00]+$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 1,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"filter_type": {
-						// Property: FilterType
+		}, /*END ATTRIBUTE*/
+		// Property: Includes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Specifies which files folders and objects to include or exclude when transferring files from source to destination.",
+		//	    "properties": {
+		//	      "FilterType": {
+		//	        "description": "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
+		//	        "enum": [
+		//	          "SIMPLE_PATTERN"
+		//	        ],
+		//	        "maxLength": 128,
+		//	        "pattern": "^[A-Z0-9_]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
+		//	        "maxLength": 409600,
+		//	        "pattern": "^[^\\x00]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"includes": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FilterType
+					"filter_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN rule type.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A single filter string that consists of the patterns to include or exclude. The patterns are delimited by \"|\".",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Computed: true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of a task. This value is a text reference that is used to identify the task in the console.",
-			//	  "maxLength": 256,
-			//	  "minLength": 1,
-			//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of a task. This value is a text reference that is used to identify the task in the console.",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of a task. This value is a text reference that is used to identify the task in the console.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"options": {
-			// Property: Options
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Represents the options that are available to control the behavior of a StartTaskExecution operation.",
-			//	  "properties": {
-			//	    "Atime": {
-			//	      "description": "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "BEST_EFFORT"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "BytesPerSecond": {
-			//	      "description": "A value that limits the bandwidth used by AWS DataSync.",
-			//	      "format": "int64",
-			//	      "minimum": -1,
-			//	      "type": "integer"
-			//	    },
-			//	    "Gid": {
-			//	      "description": "The group ID (GID) of the file's owners.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "INT_VALUE",
-			//	        "NAME",
-			//	        "BOTH"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "LogLevel": {
-			//	      "description": "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
-			//	      "enum": [
-			//	        "OFF",
-			//	        "BASIC",
-			//	        "TRANSFER"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Mtime": {
-			//	      "description": "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "PRESERVE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "ObjectTags": {
-			//	      "description": "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
-			//	      "enum": [
-			//	        "PRESERVE",
-			//	        "NONE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "OverwriteMode": {
-			//	      "description": "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
-			//	      "enum": [
-			//	        "ALWAYS",
-			//	        "NEVER"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "PosixPermissions": {
-			//	      "description": "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "PRESERVE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "PreserveDeletedFiles": {
-			//	      "description": "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
-			//	      "enum": [
-			//	        "PRESERVE",
-			//	        "REMOVE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "PreserveDevices": {
-			//	      "description": "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "PRESERVE"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "SecurityDescriptorCopyFlags": {
-			//	      "description": "A value that determines which components of the SMB security descriptor are copied during transfer.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "OWNER_DACL",
-			//	        "OWNER_DACL_SACL"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "TaskQueueing": {
-			//	      "description": "A value that determines whether tasks should be queued before executing the tasks.",
-			//	      "enum": [
-			//	        "ENABLED",
-			//	        "DISABLED"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "TransferMode": {
-			//	      "description": "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
-			//	      "enum": [
-			//	        "CHANGED",
-			//	        "ALL"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Uid": {
-			//	      "description": "The user ID (UID) of the file's owner.",
-			//	      "enum": [
-			//	        "NONE",
-			//	        "INT_VALUE",
-			//	        "NAME",
-			//	        "BOTH"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "VerifyMode": {
-			//	      "description": "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
-			//	      "enum": [
-			//	        "POINT_IN_TIME_CONSISTENT",
-			//	        "ONLY_FILES_TRANSFERRED",
-			//	        "NONE"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Options
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Represents the options that are available to control the behavior of a StartTaskExecution operation.",
+		//	  "properties": {
+		//	    "Atime": {
+		//	      "description": "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "BEST_EFFORT"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "BytesPerSecond": {
+		//	      "description": "A value that limits the bandwidth used by AWS DataSync.",
+		//	      "format": "int64",
+		//	      "minimum": -1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Gid": {
+		//	      "description": "The group ID (GID) of the file's owners.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "INT_VALUE",
+		//	        "NAME",
+		//	        "BOTH"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "LogLevel": {
+		//	      "description": "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
+		//	      "enum": [
+		//	        "OFF",
+		//	        "BASIC",
+		//	        "TRANSFER"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Mtime": {
+		//	      "description": "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "PRESERVE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "ObjectTags": {
+		//	      "description": "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
+		//	      "enum": [
+		//	        "PRESERVE",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "OverwriteMode": {
+		//	      "description": "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
+		//	      "enum": [
+		//	        "ALWAYS",
+		//	        "NEVER"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PosixPermissions": {
+		//	      "description": "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "PRESERVE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PreserveDeletedFiles": {
+		//	      "description": "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
+		//	      "enum": [
+		//	        "PRESERVE",
+		//	        "REMOVE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "PreserveDevices": {
+		//	      "description": "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "PRESERVE"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "SecurityDescriptorCopyFlags": {
+		//	      "description": "A value that determines which components of the SMB security descriptor are copied during transfer.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "OWNER_DACL",
+		//	        "OWNER_DACL_SACL"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TaskQueueing": {
+		//	      "description": "A value that determines whether tasks should be queued before executing the tasks.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "TransferMode": {
+		//	      "description": "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
+		//	      "enum": [
+		//	        "CHANGED",
+		//	        "ALL"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Uid": {
+		//	      "description": "The user ID (UID) of the file's owner.",
+		//	      "enum": [
+		//	        "NONE",
+		//	        "INT_VALUE",
+		//	        "NAME",
+		//	        "BOTH"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "VerifyMode": {
+		//	      "description": "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
+		//	      "enum": [
+		//	        "POINT_IN_TIME_CONSISTENT",
+		//	        "ONLY_FILES_TRANSFERRED",
+		//	        "NONE"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Atime
+				"atime": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: BytesPerSecond
+				"bytes_per_second": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "A value that limits the bandwidth used by AWS DataSync.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Gid
+				"gid": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The group ID (GID) of the file's owners.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogLevel
+				"log_level": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mtime
+				"mtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectTags
+				"object_tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: OverwriteMode
+				"overwrite_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PosixPermissions
+				"posix_permissions": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreserveDeletedFiles
+				"preserve_deleted_files": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: PreserveDevices
+				"preserve_devices": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityDescriptorCopyFlags
+				"security_descriptor_copy_flags": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TaskQueueing
+				"task_queueing": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether tasks should be queued before executing the tasks.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: TransferMode
+				"transfer_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Uid
+				"uid": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The user ID (UID) of the file's owner.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VerifyMode
+				"verify_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Represents the options that are available to control the behavior of a StartTaskExecution operation.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"atime": {
-						// Property: Atime
-						Description: "A file metadata value that shows the last time a file was accessed (that is, when the file was read or written to).",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"bytes_per_second": {
-						// Property: BytesPerSecond
-						Description: "A value that limits the bandwidth used by AWS DataSync.",
-						Type:        types.Int64Type,
-						Computed:    true,
-					},
-					"gid": {
-						// Property: Gid
-						Description: "The group ID (GID) of the file's owners.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"log_level": {
-						// Property: LogLevel
-						Description: "A value that determines the types of logs that DataSync publishes to a log stream in the Amazon CloudWatch log group that you provide.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"mtime": {
-						// Property: Mtime
-						Description: "A value that indicates the last time that a file was modified (that is, a file was written to) before the PREPARING phase.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"object_tags": {
-						// Property: ObjectTags
-						Description: "A value that determines whether object tags should be read from the source object store and written to the destination object store.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"overwrite_mode": {
-						// Property: OverwriteMode
-						Description: "A value that determines whether files at the destination should be overwritten or preserved when copying files.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"posix_permissions": {
-						// Property: PosixPermissions
-						Description: "A value that determines which users or groups can access a file for a specific purpose such as reading, writing, or execution of the file.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"preserve_deleted_files": {
-						// Property: PreserveDeletedFiles
-						Description: "A value that specifies whether files in the destination that don't exist in the source file system should be preserved.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"preserve_devices": {
-						// Property: PreserveDevices
-						Description: "A value that determines whether AWS DataSync should preserve the metadata of block and character devices in the source file system, and recreate the files with that device name and metadata on the destination.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"security_descriptor_copy_flags": {
-						// Property: SecurityDescriptorCopyFlags
-						Description: "A value that determines which components of the SMB security descriptor are copied during transfer.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"task_queueing": {
-						// Property: TaskQueueing
-						Description: "A value that determines whether tasks should be queued before executing the tasks.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"transfer_mode": {
-						// Property: TransferMode
-						Description: "A value that determines whether DataSync transfers only the data and metadata that differ between the source and the destination location, or whether DataSync transfers all the content from the source, without comparing to the destination location.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"uid": {
-						// Property: Uid
-						Description: "The user ID (UID) of the file's owner.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-					"verify_mode": {
-						// Property: VerifyMode
-						Description: "A value that determines whether a data integrity verification should be performed at the end of a task execution after all data and metadata have been transferred.",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"schedule": {
-			// Property: Schedule
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Specifies the schedule you want your task to use for repeated executions.",
-			//	  "properties": {
-			//	    "ScheduleExpression": {
-			//	      "description": "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
-			//	      "maxLength": 256,
-			//	      "pattern": "^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ScheduleExpression"
-			//	  ],
-			//	  "type": "object"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Schedule
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Specifies the schedule you want your task to use for repeated executions.",
+		//	  "properties": {
+		//	    "ScheduleExpression": {
+		//	      "description": "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
+		//	      "maxLength": 256,
+		//	      "pattern": "^[a-zA-Z0-9\\ \\_\\*\\?\\,\\|\\^\\-\\/\\#\\s\\(\\)\\+]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ScheduleExpression"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"schedule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ScheduleExpression
+				"schedule_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Specifies the schedule you want your task to use for repeated executions.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"schedule_expression": {
-						// Property: ScheduleExpression
-						Description: "A cron expression that specifies when AWS DataSync initiates a scheduled transfer from a source to a destination location",
-						Type:        types.StringType,
-						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"source_location_arn": {
-			// Property: SourceLocationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the source location for the task.",
-			//	  "maxLength": 128,
-			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceLocationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the source location for the task.",
+		//	  "maxLength": 128,
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]+:[0-9]{12}:location/loc-[0-9a-z]{17}$",
+		//	  "type": "string"
+		//	}
+		"source_location_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the source location for the task.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"source_network_interface_arns": {
-			// Property: SourceNetworkInterfaceArns
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 128,
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SourceNetworkInterfaceArns
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "pattern": "^arn:aws[\\-a-z]{0,}:ec2:[a-z\\-0-9]*:[0-9]{12}:network-interface/eni-[0-9a-f]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 128,
+		//	  "type": "array"
+		//	}
+		"source_network_interface_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The status of the task that was described.",
-			//	  "enum": [
-			//	    "AVAILABLE",
-			//	    "CREATING",
-			//	    "QUEUED",
-			//	    "RUNNING",
-			//	    "UNAVAILABLE"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the task that was described.",
+		//	  "enum": [
+		//	    "AVAILABLE",
+		//	    "CREATING",
+		//	    "QUEUED",
+		//	    "RUNNING",
+		//	    "UNAVAILABLE"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The status of the task that was described.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "An array of key-value pairs to apply to this resource.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "description": "A key-value pair to associate with a resource.",
-			//	    "properties": {
-			//	      "Key": {
-			//	        "description": "The key for an AWS resource tag.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "description": "The value for an AWS resource tag.",
-			//	        "maxLength": 256,
-			//	        "minLength": 1,
-			//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "An array of key-value pairs to apply to this resource.",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A key-value pair to associate with a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key for an AWS resource tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9\\s+=._:/-]+$",
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for an AWS resource tag.",
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "pattern": "^[a-zA-Z0-9\\s+=._:@/-]+$",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The key for an AWS resource tag.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-					"value": {
-						// Property: Value
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The value for an AWS resource tag.",
-						Type:        types.StringType,
 						Computed:    true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"task_arn": {
-			// Property: TaskArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the task.",
-			//	  "maxLength": 128,
-			//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$",
-			//	  "type": "string"
-			//	}
-			Description: "The ARN of the task.",
-			Type:        types.StringType,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+		// Property: TaskArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the task.",
+		//	  "maxLength": 128,
+		//	  "pattern": "^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):datasync:[a-z\\-0-9]*:[0-9]{12}:task/task-[0-9a-f]{17}$",
+		//	  "type": "string"
+		//	}
+		"task_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the task.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::DataSync::Task",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::Task").WithTerraformTypeName("awscc_datasync_task")
 	opts = opts.WithTerraformSchema(schema)
@@ -646,7 +610,7 @@ func taskDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"verify_mode":                        "VerifyMode",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

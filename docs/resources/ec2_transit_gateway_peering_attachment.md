@@ -46,7 +46,7 @@ Optional:
 <a id="nestedatt--status"></a>
 ### Nested Schema for `status`
 
-Optional:
+Read-Only:
 
 - `code` (String) The status code.
 - `message` (String) The status message, if applicable.

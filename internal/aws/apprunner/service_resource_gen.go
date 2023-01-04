@@ -4,14 +4,21 @@ package apprunner
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
+	"github.com/hashicorp/terraform-plugin-framework/resource"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -21,1136 +28,1063 @@ func init() {
 // serviceResource returns the Terraform awscc_apprunner_service resource.
 // This Terraform resource corresponds to the CloudFormation AWS::AppRunner::Service resource.
 func serviceResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"auto_scaling_configuration_arn": {
-			// Property: AutoScalingConfigurationArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Autoscaling configuration ARN",
-			//	  "maxLength": 1011,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AutoScalingConfigurationArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Autoscaling configuration ARN",
+		//	  "maxLength": 1011,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"auto_scaling_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Autoscaling configuration ARN",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(1, 1011),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 1011),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// AutoScalingConfigurationArn is a write-only property.
-		},
-		"encryption_configuration": {
-			// Property: EncryptionConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Encryption configuration (KMS key)",
-			//	  "properties": {
-			//	    "KmsKey": {
-			//	      "description": "The KMS Key",
-			//	      "maxLength": 256,
-			//	      "minLength": 0,
-			//	      "pattern": "arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "KmsKey"
-			//	  ],
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EncryptionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Encryption configuration (KMS key)",
+		//	  "properties": {
+		//	    "KmsKey": {
+		//	      "description": "The KMS Key",
+		//	      "maxLength": 256,
+		//	      "minLength": 0,
+		//	      "pattern": "arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "KmsKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKey
+				"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The KMS Key",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 256),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Encryption configuration (KMS key)",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"kms_key": {
-						// Property: KmsKey
-						Description: "The KMS Key",
-						Type:        types.StringType,
-						Required:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-							validate.StringMatch(regexp.MustCompile("arn:aws(-[\\w]+)*:kms:[a-z\\-]+-[0-9]{1}:[0-9]{12}:key\\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"), ""),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"health_check_configuration": {
-			// Property: HealthCheckConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Health check configuration",
-			//	  "properties": {
-			//	    "HealthyThreshold": {
-			//	      "description": "Health check Healthy Threshold",
-			//	      "maximum": 20,
-			//	      "minimum": 1,
-			//	      "type": "integer"
-			//	    },
-			//	    "Interval": {
-			//	      "description": "Health check Interval",
-			//	      "type": "integer"
-			//	    },
-			//	    "Path": {
-			//	      "description": "Health check Path",
-			//	      "type": "string"
-			//	    },
-			//	    "Protocol": {
-			//	      "description": "Health Check Protocol",
-			//	      "enum": [
-			//	        "TCP",
-			//	        "HTTP"
-			//	      ],
-			//	      "type": "string"
-			//	    },
-			//	    "Timeout": {
-			//	      "description": "Health check Timeout",
-			//	      "maximum": 20,
-			//	      "minimum": 1,
-			//	      "type": "integer"
-			//	    },
-			//	    "UnhealthyThreshold": {
-			//	      "description": "Health check Unhealthy Threshold",
-			//	      "maximum": 20,
-			//	      "minimum": 1,
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Health check configuration",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"healthy_threshold": {
-						// Property: HealthyThreshold
-						Description: "Health check Healthy Threshold",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(1, 20),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"interval": {
-						// Property: Interval
-						Description: "Health check Interval",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"path": {
-						// Property: Path
-						Description: "Health check Path",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"protocol": {
-						// Property: Protocol
-						Description: "Health Check Protocol",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"TCP",
-								"HTTP",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"timeout": {
-						// Property: Timeout
-						Description: "Health check Timeout",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(1, 20),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"unhealthy_threshold": {
-						// Property: UnhealthyThreshold
-						Description: "Health check Unhealthy Threshold",
-						Type:        types.Int64Type,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.IntBetween(1, 20),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"instance_configuration": {
-			// Property: InstanceConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Instance Configuration",
-			//	  "properties": {
-			//	    "Cpu": {
-			//	      "description": "CPU",
-			//	      "maxLength": 6,
-			//	      "minLength": 4,
-			//	      "pattern": "1024|2048|(1|2) vCPU",
-			//	      "type": "string"
-			//	    },
-			//	    "InstanceRoleArn": {
-			//	      "description": "Instance Role Arn",
-			//	      "maxLength": 102,
-			//	      "minLength": 29,
-			//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
-			//	      "type": "string"
-			//	    },
-			//	    "Memory": {
-			//	      "description": "Memory",
-			//	      "maxLength": 4,
-			//	      "minLength": 4,
-			//	      "pattern": "2048|3072|4096|(2|3|4) GB",
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Instance Configuration",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"cpu": {
-						// Property: Cpu
-						Description: "CPU",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(4, 6),
-							validate.StringMatch(regexp.MustCompile("1024|2048|(1|2) vCPU"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"instance_role_arn": {
-						// Property: InstanceRoleArn
-						Description: "Instance Role Arn",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(29, 102),
-							validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"memory": {
-						// Property: Memory
-						Description: "Memory",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(4, 4),
-							validate.StringMatch(regexp.MustCompile("2048|3072|4096|(2|3|4) GB"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"network_configuration": {
-			// Property: NetworkConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Network configuration",
-			//	  "properties": {
-			//	    "EgressConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Network egress configuration",
-			//	      "properties": {
-			//	        "EgressType": {
-			//	          "description": "Network egress type.",
-			//	          "enum": [
-			//	            "DEFAULT",
-			//	            "VPC"
-			//	          ],
-			//	          "type": "string"
-			//	        },
-			//	        "VpcConnectorArn": {
-			//	          "description": "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
-			//	          "maxLength": 1011,
-			//	          "minLength": 44,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "EgressType"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "IngressConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Network ingress configuration",
-			//	      "properties": {
-			//	        "IsPubliclyAccessible": {
-			//	          "description": "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
-			//	          "type": "boolean"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "IsPubliclyAccessible"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Description: "Network configuration",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"egress_configuration": {
-						// Property: EgressConfiguration
-						Description: "Network egress configuration",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"egress_type": {
-									// Property: EgressType
-									Description: "Network egress type.",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"DEFAULT",
-											"VPC",
-										}),
-									},
-								},
-								"vpc_connector_arn": {
-									// Property: VpcConnectorArn
-									Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(44, 1011),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"ingress_configuration": {
-						// Property: IngressConfiguration
-						Description: "Network ingress configuration",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"is_publicly_accessible": {
-									// Property: IsPubliclyAccessible
-									Description: "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
-									Type:        types.BoolType,
-									Required:    true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"observability_configuration": {
-			// Property: ObservabilityConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Service observability configuration",
-			//	  "properties": {
-			//	    "ObservabilityConfigurationArn": {
-			//	      "description": "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
-			//	      "maxLength": 1011,
-			//	      "minLength": 1,
-			//	      "pattern": "",
-			//	      "type": "string"
-			//	    },
-			//	    "ObservabilityEnabled": {
-			//	      "description": "Observability enabled",
-			//	      "type": "boolean"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "ObservabilityEnabled"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "Service observability configuration",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"observability_configuration_arn": {
-						// Property: ObservabilityConfigurationArn
-						Description: "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
-						Type:        types.StringType,
-						Optional:    true,
-						Computed:    true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 1011),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"observability_enabled": {
-						// Property: ObservabilityEnabled
-						Description: "Observability enabled",
-						Type:        types.BoolType,
-						Required:    true,
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"service_arn": {
-			// Property: ServiceArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the AppRunner Service.",
-			//	  "maxLength": 1011,
-			//	  "minLength": 1,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
-			Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"service_id": {
-			// Property: ServiceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AppRunner Service Id",
-			//	  "maxLength": 32,
-			//	  "minLength": 32,
-			//	  "type": "string"
-			//	}
-			Description: "The AppRunner Service Id",
-			Type:        types.StringType,
-			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"service_name": {
-			// Property: ServiceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AppRunner Service Name.",
-			//	  "maxLength": 40,
-			//	  "minLength": 4,
-			//	  "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}",
-			//	  "type": "string"
-			//	}
-			Description: "The AppRunner Service Name.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(4, 40),
-				validate.StringMatch(regexp.MustCompile("[A-Za-z0-9][A-Za-z0-9-_]{3,39}"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
-		},
-		"service_url": {
-			// Property: ServiceUrl
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Service Url of the AppRunner Service.",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HealthCheckConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Health check configuration",
+		//	  "properties": {
+		//	    "HealthyThreshold": {
+		//	      "description": "Health check Healthy Threshold",
+		//	      "maximum": 20,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "Interval": {
+		//	      "description": "Health check Interval",
+		//	      "type": "integer"
+		//	    },
+		//	    "Path": {
+		//	      "description": "Health check Path",
+		//	      "type": "string"
+		//	    },
+		//	    "Protocol": {
+		//	      "description": "Health Check Protocol",
+		//	      "enum": [
+		//	        "TCP",
+		//	        "HTTP"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Timeout": {
+		//	      "description": "Health check Timeout",
+		//	      "maximum": 20,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    },
+		//	    "UnhealthyThreshold": {
+		//	      "description": "Health check Unhealthy Threshold",
+		//	      "maximum": 20,
+		//	      "minimum": 1,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"health_check_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: HealthyThreshold
+				"healthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Healthy Threshold",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 20),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Interval
+				"interval": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Interval",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Path
+				"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Health check Path",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Protocol
+				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Health Check Protocol",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"TCP",
+							"HTTP",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Timeout
+				"timeout": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Timeout",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 20),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UnhealthyThreshold
+				"unhealthy_threshold": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "Health check Unhealthy Threshold",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(1, 20),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Health check configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: InstanceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Instance Configuration",
+		//	  "properties": {
+		//	    "Cpu": {
+		//	      "description": "CPU",
+		//	      "maxLength": 6,
+		//	      "minLength": 4,
+		//	      "pattern": "1024|2048|(1|2) vCPU",
+		//	      "type": "string"
+		//	    },
+		//	    "InstanceRoleArn": {
+		//	      "description": "Instance Role Arn",
+		//	      "maxLength": 102,
+		//	      "minLength": 29,
+		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
+		//	      "type": "string"
+		//	    },
+		//	    "Memory": {
+		//	      "description": "Memory",
+		//	      "maxLength": 4,
+		//	      "minLength": 4,
+		//	      "pattern": "2048|3072|4096|(2|3|4) GB",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"instance_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Cpu
+				"cpu": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "CPU",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(4, 6),
+						stringvalidator.RegexMatches(regexp.MustCompile("1024|2048|(1|2) vCPU"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: InstanceRoleArn
+				"instance_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Instance Role Arn",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(29, 102),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Memory
+				"memory": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Memory",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(4, 4),
+						stringvalidator.RegexMatches(regexp.MustCompile("2048|3072|4096|(2|3|4) GB"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Instance Configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Network configuration",
+		//	  "properties": {
+		//	    "EgressConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Network egress configuration",
+		//	      "properties": {
+		//	        "EgressType": {
+		//	          "description": "Network egress type.",
+		//	          "enum": [
+		//	            "DEFAULT",
+		//	            "VPC"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "VpcConnectorArn": {
+		//	          "description": "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+		//	          "maxLength": 1011,
+		//	          "minLength": 44,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EgressType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "IngressConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Network ingress configuration",
+		//	      "properties": {
+		//	        "IsPubliclyAccessible": {
+		//	          "description": "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "IsPubliclyAccessible"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"network_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EgressConfiguration
+				"egress_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EgressType
+						"egress_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Network egress type.",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"DEFAULT",
+									"VPC",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: VpcConnectorArn
+						"vpc_connector_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The Amazon Resource Name (ARN) of the App Runner VpcConnector.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(44, 1011),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network egress configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: IngressConfiguration
+				"ingress_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IsPubliclyAccessible
+						"is_publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "It's set to true if the Apprunner service is publicly accessible. It's set to false otherwise.",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Network ingress configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Network configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ObservabilityConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Service observability configuration",
+		//	  "properties": {
+		//	    "ObservabilityConfigurationArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
+		//	      "maxLength": 1011,
+		//	      "minLength": 1,
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "ObservabilityEnabled": {
+		//	      "description": "Observability enabled",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ObservabilityEnabled"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"observability_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ObservabilityConfigurationArn
+				"observability_configuration_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the App Runner ObservabilityConfiguration.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 1011),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ObservabilityEnabled
+				"observability_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Observability enabled",
+					Required:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Service observability configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the AppRunner Service.",
+		//	  "maxLength": 1011,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"service_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Amazon Resource Name (ARN) of the AppRunner Service.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AppRunner Service Id",
+		//	  "maxLength": 32,
+		//	  "minLength": 32,
+		//	  "type": "string"
+		//	}
+		"service_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AppRunner Service Id",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AppRunner Service Name.",
+		//	  "maxLength": 40,
+		//	  "minLength": 4,
+		//	  "pattern": "[A-Za-z0-9][A-Za-z0-9-_]{3,39}",
+		//	  "type": "string"
+		//	}
+		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The AppRunner Service Name.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(4, 40),
+				stringvalidator.RegexMatches(regexp.MustCompile("[A-Za-z0-9][A-Za-z0-9-_]{3,39}"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ServiceUrl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Service Url of the AppRunner Service.",
+		//	  "type": "string"
+		//	}
+		"service_url": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Service Url of the AppRunner Service.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"source_configuration": {
-			// Property: SourceConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "Source Code configuration",
-			//	  "properties": {
-			//	    "AuthenticationConfiguration": {
-			//	      "additionalProperties": false,
-			//	      "description": "Authentication Configuration",
-			//	      "properties": {
-			//	        "AccessRoleArn": {
-			//	          "description": "Access Role Arn",
-			//	          "maxLength": 102,
-			//	          "minLength": 29,
-			//	          "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
-			//	          "type": "string"
-			//	        },
-			//	        "ConnectionArn": {
-			//	          "description": "Connection Arn",
-			//	          "maxLength": 1011,
-			//	          "minLength": 1,
-			//	          "pattern": "",
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "type": "object"
-			//	    },
-			//	    "AutoDeploymentsEnabled": {
-			//	      "description": "Auto Deployment enabled",
-			//	      "type": "boolean"
-			//	    },
-			//	    "CodeRepository": {
-			//	      "additionalProperties": false,
-			//	      "description": "Source Code Repository",
-			//	      "properties": {
-			//	        "CodeConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "description": "Code Configuration",
-			//	          "properties": {
-			//	            "CodeConfigurationValues": {
-			//	              "additionalProperties": false,
-			//	              "description": "Code Configuration Values",
-			//	              "properties": {
-			//	                "BuildCommand": {
-			//	                  "description": "Build Command",
-			//	                  "type": "string"
-			//	                },
-			//	                "Port": {
-			//	                  "description": "Port",
-			//	                  "type": "string"
-			//	                },
-			//	                "Runtime": {
-			//	                  "description": "Runtime",
-			//	                  "enum": [
-			//	                    "PYTHON_3",
-			//	                    "NODEJS_12",
-			//	                    "NODEJS_14",
-			//	                    "CORRETTO_8",
-			//	                    "CORRETTO_11",
-			//	                    "NODEJS_16",
-			//	                    "GO_1",
-			//	                    "DOTNET_6",
-			//	                    "PHP_81",
-			//	                    "RUBY_31"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "RuntimeEnvironmentVariables": {
-			//	                  "items": {
-			//	                    "additionalProperties": false,
-			//	                    "properties": {
-			//	                      "Name": {
-			//	                        "type": "string"
-			//	                      },
-			//	                      "Value": {
-			//	                        "type": "string"
-			//	                      }
-			//	                    },
-			//	                    "type": "object"
-			//	                  },
-			//	                  "type": "array"
-			//	                },
-			//	                "StartCommand": {
-			//	                  "description": "Start Command",
-			//	                  "type": "string"
-			//	                }
-			//	              },
-			//	              "required": [
-			//	                "Runtime"
-			//	              ],
-			//	              "type": "object"
-			//	            },
-			//	            "ConfigurationSource": {
-			//	              "description": "Configuration Source",
-			//	              "enum": [
-			//	                "REPOSITORY",
-			//	                "API"
-			//	              ],
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "ConfigurationSource"
-			//	          ],
-			//	          "type": "object"
-			//	        },
-			//	        "RepositoryUrl": {
-			//	          "description": "Repository Url",
-			//	          "type": "string"
-			//	        },
-			//	        "SourceCodeVersion": {
-			//	          "additionalProperties": false,
-			//	          "description": "Source Code Version",
-			//	          "properties": {
-			//	            "Type": {
-			//	              "description": "Source Code Version Type",
-			//	              "enum": [
-			//	                "BRANCH"
-			//	              ],
-			//	              "type": "string"
-			//	            },
-			//	            "Value": {
-			//	              "description": "Source Code Version Value",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "required": [
-			//	            "Type",
-			//	            "Value"
-			//	          ],
-			//	          "type": "object"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "RepositoryUrl",
-			//	        "SourceCodeVersion"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "ImageRepository": {
-			//	      "additionalProperties": false,
-			//	      "description": "Image Repository",
-			//	      "properties": {
-			//	        "ImageConfiguration": {
-			//	          "additionalProperties": false,
-			//	          "description": "Image Configuration",
-			//	          "properties": {
-			//	            "Port": {
-			//	              "description": "Port",
-			//	              "type": "string"
-			//	            },
-			//	            "RuntimeEnvironmentVariables": {
-			//	              "items": {
-			//	                "additionalProperties": false,
-			//	                "properties": {
-			//	                  "Name": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "Value": {
-			//	                    "type": "string"
-			//	                  }
-			//	                },
-			//	                "type": "object"
-			//	              },
-			//	              "type": "array"
-			//	            },
-			//	            "StartCommand": {
-			//	              "description": "Start Command",
-			//	              "type": "string"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "ImageIdentifier": {
-			//	          "description": "Image Identifier",
-			//	          "maxLength": 1024,
-			//	          "minLength": 1,
-			//	          "pattern": "([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)",
-			//	          "type": "string"
-			//	        },
-			//	        "ImageRepositoryType": {
-			//	          "description": "Image Repository Type",
-			//	          "enum": [
-			//	            "ECR",
-			//	            "ECR_PUBLIC"
-			//	          ],
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "ImageIdentifier",
-			//	        "ImageRepositoryType"
-			//	      ],
-			//	      "type": "object"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Source Code configuration",
+		//	  "properties": {
+		//	    "AuthenticationConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Authentication Configuration",
+		//	      "properties": {
+		//	        "AccessRoleArn": {
+		//	          "description": "Access Role Arn",
+		//	          "maxLength": 102,
+		//	          "minLength": 29,
+		//	          "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
+		//	          "type": "string"
+		//	        },
+		//	        "ConnectionArn": {
+		//	          "description": "Connection Arn",
+		//	          "maxLength": 1011,
+		//	          "minLength": 1,
+		//	          "pattern": "",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "AutoDeploymentsEnabled": {
+		//	      "description": "Auto Deployment enabled",
+		//	      "type": "boolean"
+		//	    },
+		//	    "CodeRepository": {
+		//	      "additionalProperties": false,
+		//	      "description": "Source Code Repository",
+		//	      "properties": {
+		//	        "CodeConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Code Configuration",
+		//	          "properties": {
+		//	            "CodeConfigurationValues": {
+		//	              "additionalProperties": false,
+		//	              "description": "Code Configuration Values",
+		//	              "properties": {
+		//	                "BuildCommand": {
+		//	                  "description": "Build Command",
+		//	                  "type": "string"
+		//	                },
+		//	                "Port": {
+		//	                  "description": "Port",
+		//	                  "type": "string"
+		//	                },
+		//	                "Runtime": {
+		//	                  "description": "Runtime",
+		//	                  "enum": [
+		//	                    "PYTHON_3",
+		//	                    "NODEJS_12",
+		//	                    "NODEJS_14",
+		//	                    "CORRETTO_8",
+		//	                    "CORRETTO_11",
+		//	                    "NODEJS_16",
+		//	                    "GO_1",
+		//	                    "DOTNET_6",
+		//	                    "PHP_81",
+		//	                    "RUBY_31"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "RuntimeEnvironmentVariables": {
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "StartCommand": {
+		//	                  "description": "Start Command",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Runtime"
+		//	              ],
+		//	              "type": "object"
+		//	            },
+		//	            "ConfigurationSource": {
+		//	              "description": "Configuration Source",
+		//	              "enum": [
+		//	                "REPOSITORY",
+		//	                "API"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "ConfigurationSource"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "RepositoryUrl": {
+		//	          "description": "Repository Url",
+		//	          "type": "string"
+		//	        },
+		//	        "SourceCodeVersion": {
+		//	          "additionalProperties": false,
+		//	          "description": "Source Code Version",
+		//	          "properties": {
+		//	            "Type": {
+		//	              "description": "Source Code Version Type",
+		//	              "enum": [
+		//	                "BRANCH"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "Value": {
+		//	              "description": "Source Code Version Value",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Type",
+		//	            "Value"
+		//	          ],
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "RepositoryUrl",
+		//	        "SourceCodeVersion"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "ImageRepository": {
+		//	      "additionalProperties": false,
+		//	      "description": "Image Repository",
+		//	      "properties": {
+		//	        "ImageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Image Configuration",
+		//	          "properties": {
+		//	            "Port": {
+		//	              "description": "Port",
+		//	              "type": "string"
+		//	            },
+		//	            "RuntimeEnvironmentVariables": {
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
+		//	            "StartCommand": {
+		//	              "description": "Start Command",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "ImageIdentifier": {
+		//	          "description": "Image Identifier",
+		//	          "maxLength": 1024,
+		//	          "minLength": 1,
+		//	          "pattern": "([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)",
+		//	          "type": "string"
+		//	        },
+		//	        "ImageRepositoryType": {
+		//	          "description": "Image Repository Type",
+		//	          "enum": [
+		//	            "ECR",
+		//	            "ECR_PUBLIC"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "ImageIdentifier",
+		//	        "ImageRepositoryType"
+		//	      ],
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"source_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthenticationConfiguration
+				"authentication_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AccessRoleArn
+						"access_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Access Role Arn",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(29, 102),
+								stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ConnectionArn
+						"connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Connection Arn",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1011),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Authentication Configuration",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AutoDeploymentsEnabled
+				"auto_deployments_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Auto Deployment enabled",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: CodeRepository
+				"code_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CodeConfiguration
+						"code_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: CodeConfigurationValues
+								"code_configuration_values": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: BuildCommand
+										"build_command": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Build Command",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Port
+										"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Port",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Runtime
+										"runtime": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Runtime",
+											Required:    true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"PYTHON_3",
+													"NODEJS_12",
+													"NODEJS_14",
+													"CORRETTO_8",
+													"CORRETTO_11",
+													"NODEJS_16",
+													"GO_1",
+													"DOTNET_6",
+													"PHP_81",
+													"RUBY_31",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RuntimeEnvironmentVariables
+										"runtime_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Optional: true,
+											Computed: true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: StartCommand
+										"start_command": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "Start Command",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "Code Configuration Values",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ConfigurationSource
+								"configuration_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Configuration Source",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"REPOSITORY",
+											"API",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Code Configuration",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: RepositoryUrl
+						"repository_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Repository Url",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: SourceCodeVersion
+						"source_code_version": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Type
+								"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Source Code Version Type",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"BRANCH",
+										),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: Value
+								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Source Code Version Value",
+									Required:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Source Code Version",
+							Required:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Source Code Repository",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ImageRepository
+				"image_repository": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ImageConfiguration
+						"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Port
+								"port": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Port",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RuntimeEnvironmentVariables
+								"runtime_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: StartCommand
+								"start_command": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "Start Command",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Image Configuration",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ImageIdentifier
+						"image_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Image Identifier",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 1024),
+								stringvalidator.RegexMatches(regexp.MustCompile("([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)"), ""),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ImageRepositoryType
+						"image_repository_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "Image Repository Type",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ECR",
+									"ECR_PUBLIC",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Image Repository",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Description: "Source Code configuration",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"authentication_configuration": {
-						// Property: AuthenticationConfiguration
-						Description: "Authentication Configuration",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"access_role_arn": {
-									// Property: AccessRoleArn
-									Description: "Access Role Arn",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(29, 102),
-										validate.StringMatch(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"connection_arn": {
-									// Property: ConnectionArn
-									Description: "Connection Arn",
-									Type:        types.StringType,
-									Optional:    true,
-									Computed:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1011),
-									},
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"auto_deployments_enabled": {
-						// Property: AutoDeploymentsEnabled
-						Description: "Auto Deployment enabled",
-						Type:        types.BoolType,
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"code_repository": {
-						// Property: CodeRepository
-						Description: "Source Code Repository",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"code_configuration": {
-									// Property: CodeConfiguration
-									Description: "Code Configuration",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"code_configuration_values": {
-												// Property: CodeConfigurationValues
-												Description: "Code Configuration Values",
-												Attributes: tfsdk.SingleNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"build_command": {
-															// Property: BuildCommand
-															Description: "Build Command",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"port": {
-															// Property: Port
-															Description: "Port",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"runtime": {
-															// Property: Runtime
-															Description: "Runtime",
-															Type:        types.StringType,
-															Required:    true,
-															Validators: []tfsdk.AttributeValidator{
-																validate.StringInSlice([]string{
-																	"PYTHON_3",
-																	"NODEJS_12",
-																	"NODEJS_14",
-																	"CORRETTO_8",
-																	"CORRETTO_11",
-																	"NODEJS_16",
-																	"GO_1",
-																	"DOTNET_6",
-																	"PHP_81",
-																	"RUBY_31",
-																}),
-															},
-														},
-														"runtime_environment_variables": {
-															// Property: RuntimeEnvironmentVariables
-															Attributes: tfsdk.ListNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"name": {
-																		// Property: Name
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																	"value": {
-																		// Property: Value
-																		Type:     types.StringType,
-																		Optional: true,
-																		Computed: true,
-																		PlanModifiers: []tfsdk.AttributePlanModifier{
-																			resource.UseStateForUnknown(),
-																		},
-																	},
-																},
-															),
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"start_command": {
-															// Property: StartCommand
-															Description: "Start Command",
-															Type:        types.StringType,
-															Optional:    true,
-															Computed:    true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"configuration_source": {
-												// Property: ConfigurationSource
-												Description: "Configuration Source",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"REPOSITORY",
-														"API",
-													}),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"repository_url": {
-									// Property: RepositoryUrl
-									Description: "Repository Url",
-									Type:        types.StringType,
-									Required:    true,
-								},
-								"source_code_version": {
-									// Property: SourceCodeVersion
-									Description: "Source Code Version",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"type": {
-												// Property: Type
-												Description: "Source Code Version Type",
-												Type:        types.StringType,
-												Required:    true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.StringInSlice([]string{
-														"BRANCH",
-													}),
-												},
-											},
-											"value": {
-												// Property: Value
-												Description: "Source Code Version Value",
-												Type:        types.StringType,
-												Required:    true,
-											},
-										},
-									),
-									Required: true,
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"image_repository": {
-						// Property: ImageRepository
-						Description: "Image Repository",
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"image_configuration": {
-									// Property: ImageConfiguration
-									Description: "Image Configuration",
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"port": {
-												// Property: Port
-												Description: "Port",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"runtime_environment_variables": {
-												// Property: RuntimeEnvironmentVariables
-												Attributes: tfsdk.ListNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"name": {
-															// Property: Name
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-														"value": {
-															// Property: Value
-															Type:     types.StringType,
-															Optional: true,
-															Computed: true,
-															PlanModifiers: []tfsdk.AttributePlanModifier{
-																resource.UseStateForUnknown(),
-															},
-														},
-													},
-												),
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"start_command": {
-												// Property: StartCommand
-												Description: "Start Command",
-												Type:        types.StringType,
-												Optional:    true,
-												Computed:    true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"image_identifier": {
-									// Property: ImageIdentifier
-									Description: "Image Identifier",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringLenBetween(1, 1024),
-										validate.StringMatch(regexp.MustCompile("([0-9]{12}.dkr.ecr.[a-z\\-]+-[0-9]{1}.amazonaws.com\\/.*)|(^public\\.ecr\\.aws\\/.+\\/.+)"), ""),
-									},
-								},
-								"image_repository_type": {
-									// Property: ImageRepositoryType
-									Description: "Image Repository Type",
-									Type:        types.StringType,
-									Required:    true,
-									Validators: []tfsdk.AttributeValidator{
-										validate.StringInSlice([]string{
-											"ECR",
-											"ECR_PUBLIC",
-										}),
-									},
-								},
-							},
-						),
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
-			Required: true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "AppRunner Service status.",
-			//	  "type": "string"
-			//	}
+			Required:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "AppRunner Service status.",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "AppRunner Service status.",
-			Type:        types.StringType,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "The AWS::AppRunner::Service resource specifies an AppRunner Service.",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::Service").WithTerraformTypeName("awscc_apprunner_service")
 	opts = opts.WithTerraformSchema(schema)
@@ -1219,7 +1153,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

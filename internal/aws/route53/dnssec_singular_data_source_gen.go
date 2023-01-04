@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,35 +19,32 @@ func init() {
 // dNSSECDataSource returns the Terraform awscc_route53_dnssec data source.
 // This Terraform data source corresponds to the CloudFormation AWS::Route53::DNSSEC resource.
 func dNSSECDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"hosted_zone_id": {
-			// Property: HostedZoneId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The unique string (ID) used to identify a hosted zone.",
-			//	  "pattern": "^[A-Z0-9]{1,32}$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: HostedZoneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The unique string (ID) used to identify a hosted zone.",
+		//	  "pattern": "^[A-Z0-9]{1,32}$",
+		//	  "type": "string"
+		//	}
+		"hosted_zone_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The unique string (ID) used to identify a hosted zone.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::Route53::DNSSEC",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53::DNSSEC").WithTerraformTypeName("awscc_route53_dnssec")
 	opts = opts.WithTerraformSchema(schema)
@@ -55,7 +52,7 @@ func dNSSECDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"hosted_zone_id": "HostedZoneId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -210,7 +210,7 @@ Required:
 <a id="nestedatt--version"></a>
 ### Nested Schema for `version`
 
-Optional:
+Read-Only:
 
 - `arn` (String) <p>The Amazon Resource Name (ARN) of the resource.</p>
 - `base_theme_id` (String) <p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All
@@ -226,7 +226,7 @@ Optional:
 <a id="nestedatt--version--configuration"></a>
 ### Nested Schema for `version.configuration`
 
-Optional:
+Read-Only:
 
 - `data_color_palette` (Attributes) <p>The theme colors that are used for data colors in charts. The colors description is a
             hexadecimal color code that consists of six alphanumerical characters, prefixed with
@@ -242,7 +242,7 @@ Optional:
 <a id="nestedatt--version--configuration--data_color_palette"></a>
 ### Nested Schema for `version.configuration.data_color_palette`
 
-Optional:
+Read-Only:
 
 - `colors` (List of String) <p>The hexadecimal codes for the colors.</p>
 - `empty_fill_color` (String) <p>The hexadecimal code of a color that applies to charts where a lack of data is
@@ -253,7 +253,7 @@ Optional:
 <a id="nestedatt--version--configuration--sheet"></a>
 ### Nested Schema for `version.configuration.sheet`
 
-Optional:
+Read-Only:
 
 - `tile` (Attributes) <p>Display options related to tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile))
 - `tile_layout` (Attributes) <p>The display options for the layout of tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout))
@@ -261,14 +261,14 @@ Optional:
 <a id="nestedatt--version--configuration--sheet--tile"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout`
 
-Optional:
+Read-Only:
 
 - `border` (Attributes) <p>The display options for tile borders for visuals.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--border))
 
 <a id="nestedatt--version--configuration--sheet--tile_layout--border"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout.border`
 
-Optional:
+Read-Only:
 
 - `show` (Boolean) <p>The option to enable display of borders for visuals.</p>
 
@@ -277,7 +277,7 @@ Optional:
 <a id="nestedatt--version--configuration--sheet--tile_layout"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout`
 
-Optional:
+Read-Only:
 
 - `gutter` (Attributes) <p>The display options for gutter spacing between tiles on a sheet.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--gutter))
 - `margin` (Attributes) <p>The display options for margins around the outside edge of sheets.</p> (see [below for nested schema](#nestedatt--version--configuration--sheet--tile_layout--margin))
@@ -285,7 +285,7 @@ Optional:
 <a id="nestedatt--version--configuration--sheet--tile_layout--gutter"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout.gutter`
 
-Optional:
+Read-Only:
 
 - `show` (Boolean) <p>This Boolean value controls whether to display a gutter space between sheet tiles.
         </p>
@@ -294,7 +294,7 @@ Optional:
 <a id="nestedatt--version--configuration--sheet--tile_layout--margin"></a>
 ### Nested Schema for `version.configuration.sheet.tile_layout.margin`
 
-Optional:
+Read-Only:
 
 - `show` (Boolean) <p>This Boolean value controls whether to display sheet margins.</p>
 
@@ -304,14 +304,14 @@ Optional:
 <a id="nestedatt--version--configuration--typography"></a>
 ### Nested Schema for `version.configuration.typography`
 
-Optional:
+Read-Only:
 
 - `font_families` (Attributes List) (see [below for nested schema](#nestedatt--version--configuration--typography--font_families))
 
 <a id="nestedatt--version--configuration--typography--font_families"></a>
 ### Nested Schema for `version.configuration.typography.font_families`
 
-Optional:
+Read-Only:
 
 - `font_family` (String)
 
@@ -320,7 +320,7 @@ Optional:
 <a id="nestedatt--version--configuration--ui_color_palette"></a>
 ### Nested Schema for `version.configuration.ui_color_palette`
 
-Optional:
+Read-Only:
 
 - `accent` (String) <p>This color is that applies to selected states and buttons.</p>
 - `accent_foreground` (String) <p>The foreground color that applies to any text or other elements that appear over the
@@ -354,7 +354,7 @@ Optional:
 <a id="nestedatt--version--errors"></a>
 ### Nested Schema for `version.errors`
 
-Optional:
+Read-Only:
 
 - `message` (String) <p>The error message.</p>
 - `type` (String)

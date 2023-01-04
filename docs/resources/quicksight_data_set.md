@@ -396,7 +396,7 @@ Required:
 <a id="nestedatt--output_columns"></a>
 ### Nested Schema for `output_columns`
 
-Optional:
+Read-Only:
 
 - `description` (String) <p>A description for a column.</p>
 - `name` (String) <p>A display name for the dataset.</p>

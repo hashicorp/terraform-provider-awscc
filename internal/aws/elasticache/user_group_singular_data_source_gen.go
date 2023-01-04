@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,92 +19,86 @@ func init() {
 // userGroupDataSource returns the Terraform awscc_elasticache_user_group data source.
 // This Terraform data source corresponds to the CloudFormation AWS::ElastiCache::UserGroup resource.
 func userGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The Amazon Resource Name (ARN) of the user account.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the user account.",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the user account.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"engine": {
-			// Property: Engine
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Must be redis.",
-			//	  "enum": [
-			//	    "redis"
-			//	  ],
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Engine
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Must be redis.",
+		//	  "enum": [
+		//	    "redis"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"engine": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Must be redis.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"status": {
-			// Property: Status
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Status
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
+		//	  "type": "string"
+		//	}
+		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Indicates user group status. Can be \"creating\", \"active\", \"modifying\", \"deleting\".",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"user_group_id": {
-			// Property: UserGroupId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the user group.",
-			//	  "pattern": "[a-z][a-z0-9\\\\-]*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: UserGroupId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the user group.",
+		//	  "pattern": "[a-z][a-z0-9\\\\-]*",
+		//	  "type": "string"
+		//	}
+		"user_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the user group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"user_ids": {
-			// Property: UserIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "$comment": "List of users.",
-			//	  "description": "List of users associated to this user group.",
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: UserIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "$comment": "List of users.",
+		//	  "description": "List of users associated to this user group.",
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"user_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "List of users associated to this user group.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::ElastiCache::UserGroup",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ElastiCache::UserGroup").WithTerraformTypeName("awscc_elasticache_user_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -116,7 +110,7 @@ func userGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"user_ids":      "UserIds",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,165 +19,156 @@ func init() {
 // sceneDataSource returns the Terraform awscc_iottwinmaker_scene data source.
 // This Terraform data source corresponds to the CloudFormation AWS::IoTTwinMaker::Scene resource.
 func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the scene.",
-			//	  "maxLength": 2048,
-			//	  "minLength": 20,
-			//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the scene.",
+		//	  "maxLength": 2048,
+		//	  "minLength": 20,
+		//	  "pattern": "arn:((aws)|(aws-cn)|(aws-us-gov)):iottwinmaker:[a-z0-9-]+:[0-9]{12}:[\\/a-zA-Z0-9_\\-\\.:]+",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the scene.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"capabilities": {
-			// Property: Capabilities
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of capabilities that the scene uses to render.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "maxLength": 256,
-			//	    "minLength": 0,
-			//	    "pattern": ".*",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 50,
-			//	  "minItems": 0,
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Capabilities
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of capabilities that the scene uses to render.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 256,
+		//	    "minLength": 0,
+		//	    "pattern": ".*",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 50,
+		//	  "minItems": 0,
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"capabilities": schema.SetAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of capabilities that the scene uses to render.",
-			Type:        types.SetType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"content_location": {
-			// Property: ContentLocation
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The relative path that specifies the location of the content definition file.",
-			//	  "maxLength": 256,
-			//	  "minLength": 0,
-			//	  "pattern": "[sS]3://[A-Za-z0-9._/-]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: ContentLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The relative path that specifies the location of the content definition file.",
+		//	  "maxLength": 256,
+		//	  "minLength": 0,
+		//	  "pattern": "[sS]3://[A-Za-z0-9._/-]+",
+		//	  "type": "string"
+		//	}
+		"content_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The relative path that specifies the location of the content definition file.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"creation_date_time": {
-			// Property: CreationDateTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date and time when the scene was created.",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: CreationDateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time when the scene was created.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"creation_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date and time when the scene was created.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"description": {
-			// Property: Description
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The description of the scene.",
-			//	  "maxLength": 512,
-			//	  "minLength": 0,
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Description
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The description of the scene.",
+		//	  "maxLength": 512,
+		//	  "minLength": 0,
+		//	  "type": "string"
+		//	}
+		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The description of the scene.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"scene_id": {
-			// Property: SceneId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the scene.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SceneId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the scene.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"scene_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the scene.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A key-value pair to associate with a resource.",
-			//	  "patternProperties": {
-			//	    "": {
-			//	      "maxLength": 256,
-			//	      "minLength": 1,
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair to associate with a resource.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 256,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A key-value pair to associate with a resource.",
-			// Pattern: ""
-			Type:     types.MapType{ElemType: types.StringType},
-			Computed: true,
-		},
-		"update_date_time": {
-			// Property: UpdateDateTime
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The date and time of the current update.",
-			//	  "format": "date-time",
-			//	  "type": "string"
-			//	}
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: UpdateDateTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time of the current update.",
+		//	  "format": "date-time",
+		//	  "type": "string"
+		//	}
+		"update_date_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The date and time of the current update.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"workspace_id": {
-			// Property: WorkspaceId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the scene.",
-			//	  "maxLength": 128,
-			//	  "minLength": 1,
-			//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: WorkspaceId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the scene.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "[a-zA-Z_0-9][a-zA-Z_\\-0-9]*[a-zA-Z0-9]+",
+		//	  "type": "string"
+		//	}
+		"workspace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the scene.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::IoTTwinMaker::Scene",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTTwinMaker::Scene").WithTerraformTypeName("awscc_iottwinmaker_scene")
 	opts = opts.WithTerraformSchema(schema)
@@ -193,7 +184,7 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"workspace_id":       "WorkspaceId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

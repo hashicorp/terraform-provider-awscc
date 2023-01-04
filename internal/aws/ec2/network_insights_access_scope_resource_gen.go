@@ -5,12 +5,18 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 )
 
 func init() {
@@ -20,1153 +26,1126 @@ func init() {
 // networkInsightsAccessScopeResource returns the Terraform awscc_ec2_network_insights_access_scope resource.
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::NetworkInsightsAccessScope resource.
 func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"created_date": {
-			// Property: CreatedDate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreatedDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"created_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"exclude_paths": {
-			// Property: ExcludePaths
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Destination": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "PacketHeaderStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DestinationAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Protocols": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "enum": [
-			//	                    "tcp",
-			//	                    "udp"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourceAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "ResourceStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ResourceTypes": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Resources": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "Source": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "PacketHeaderStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DestinationAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Protocols": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "enum": [
-			//	                    "tcp",
-			//	                    "udp"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourceAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "ResourceStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ResourceTypes": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Resources": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "ThroughResources": {
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ResourceStatement": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "ResourceTypes": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array"
-			//	                },
-			//	                "Resources": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"destination": {
-						// Property: Destination
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"packet_header_statement": {
-									// Property: PacketHeaderStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"destination_addresses": {
-												// Property: DestinationAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_ports": {
-												// Property: DestinationPorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_prefix_lists": {
-												// Property: DestinationPrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"protocols": {
-												// Property: Protocols
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayForEach(validate.StringInSlice([]string{
-														"tcp",
-														"udp",
-													})),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_addresses": {
-												// Property: SourceAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_ports": {
-												// Property: SourcePorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_prefix_lists": {
-												// Property: SourcePrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"resource_statement": {
-									// Property: ResourceStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"resource_types": {
-												// Property: ResourceTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resources": {
-												// Property: Resources
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ExcludePaths
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Destination": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PacketHeaderStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DestinationAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Protocols": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "enum": [
+		//	                    "tcp",
+		//	                    "udp"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourceAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "ResourceStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ResourceTypes": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Resources": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Source": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PacketHeaderStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DestinationAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Protocols": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "enum": [
+		//	                    "tcp",
+		//	                    "udp"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourceAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "ResourceStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ResourceTypes": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Resources": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ThroughResources": {
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ResourceStatement": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ResourceTypes": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "Resources": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"exclude_paths": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destination
+					"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PacketHeaderStatement
+							"packet_header_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DestinationAddresses
+									"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPorts
+									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPrefixLists
+									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Protocols
+									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueStringsAre(
+												stringvalidator.OneOf(
+													"tcp",
+													"udp",
+												),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourceAddresses
+									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePorts
+									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePrefixLists
+									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResourceStatement
+							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ResourceTypes
+									"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Resources
+									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"source": {
-						// Property: Source
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"packet_header_statement": {
-									// Property: PacketHeaderStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"destination_addresses": {
-												// Property: DestinationAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_ports": {
-												// Property: DestinationPorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_prefix_lists": {
-												// Property: DestinationPrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"protocols": {
-												// Property: Protocols
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayForEach(validate.StringInSlice([]string{
-														"tcp",
-														"udp",
-													})),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_addresses": {
-												// Property: SourceAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_ports": {
-												// Property: SourcePorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_prefix_lists": {
-												// Property: SourcePrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"resource_statement": {
-									// Property: ResourceStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"resource_types": {
-												// Property: ResourceTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resources": {
-												// Property: Resources
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Source
+					"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PacketHeaderStatement
+							"packet_header_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DestinationAddresses
+									"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPorts
+									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPrefixLists
+									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Protocols
+									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueStringsAre(
+												stringvalidator.OneOf(
+													"tcp",
+													"udp",
+												),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourceAddresses
+									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePorts
+									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePrefixLists
+									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResourceStatement
+							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ResourceTypes
+									"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Resources
+									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"through_resources": {
-						// Property: ThroughResources
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"resource_statement": {
-									// Property: ResourceStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"resource_types": {
-												// Property: ResourceTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resources": {
-												// Property: Resources
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ThroughResources
+					"through_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceStatement
+								"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceTypes
+										"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Resources
+										"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// ExcludePaths is a write-only property.
-		},
-		"match_paths": {
-			// Property: MatchPaths
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": true,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Destination": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "PacketHeaderStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DestinationAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Protocols": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "enum": [
-			//	                    "tcp",
-			//	                    "udp"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourceAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "ResourceStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ResourceTypes": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Resources": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "Source": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "PacketHeaderStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "DestinationAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "DestinationPrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Protocols": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "enum": [
-			//	                    "tcp",
-			//	                    "udp"
-			//	                  ],
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourceAddresses": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePorts": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "SourcePrefixLists": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          },
-			//	          "ResourceStatement": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "ResourceTypes": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              },
-			//	              "Resources": {
-			//	                "insertionOrder": true,
-			//	                "items": {
-			//	                  "type": "string"
-			//	                },
-			//	                "type": "array"
-			//	              }
-			//	            },
-			//	            "type": "object"
-			//	          }
-			//	        },
-			//	        "type": "object"
-			//	      },
-			//	      "ThroughResources": {
-			//	        "insertionOrder": true,
-			//	        "items": {
-			//	          "additionalProperties": false,
-			//	          "properties": {
-			//	            "ResourceStatement": {
-			//	              "additionalProperties": false,
-			//	              "properties": {
-			//	                "ResourceTypes": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array"
-			//	                },
-			//	                "Resources": {
-			//	                  "insertionOrder": true,
-			//	                  "items": {
-			//	                    "type": "string"
-			//	                  },
-			//	                  "type": "array"
-			//	                }
-			//	              },
-			//	              "type": "object"
-			//	            }
-			//	          },
-			//	          "type": "object"
-			//	        },
-			//	        "type": "array"
-			//	      }
-			//	    },
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"destination": {
-						// Property: Destination
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"packet_header_statement": {
-									// Property: PacketHeaderStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"destination_addresses": {
-												// Property: DestinationAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_ports": {
-												// Property: DestinationPorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_prefix_lists": {
-												// Property: DestinationPrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"protocols": {
-												// Property: Protocols
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayForEach(validate.StringInSlice([]string{
-														"tcp",
-														"udp",
-													})),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_addresses": {
-												// Property: SourceAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_ports": {
-												// Property: SourcePorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_prefix_lists": {
-												// Property: SourcePrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"resource_statement": {
-									// Property: ResourceStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"resource_types": {
-												// Property: ResourceTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resources": {
-												// Property: Resources
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+		}, /*END ATTRIBUTE*/
+		// Property: MatchPaths
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Destination": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PacketHeaderStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DestinationAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Protocols": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "enum": [
+		//	                    "tcp",
+		//	                    "udp"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourceAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "ResourceStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ResourceTypes": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Resources": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "Source": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "PacketHeaderStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "DestinationAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "DestinationPrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Protocols": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "enum": [
+		//	                    "tcp",
+		//	                    "udp"
+		//	                  ],
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourceAddresses": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePorts": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "SourcePrefixLists": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "ResourceStatement": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "ResourceTypes": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              },
+		//	              "Resources": {
+		//	                "insertionOrder": true,
+		//	                "items": {
+		//	                  "type": "string"
+		//	                },
+		//	                "type": "array"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "ThroughResources": {
+		//	        "insertionOrder": true,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "ResourceStatement": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ResourceTypes": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                },
+		//	                "Resources": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
+		//	        "type": "array"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"match_paths": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Destination
+					"destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PacketHeaderStatement
+							"packet_header_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DestinationAddresses
+									"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPorts
+									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPrefixLists
+									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Protocols
+									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueStringsAre(
+												stringvalidator.OneOf(
+													"tcp",
+													"udp",
+												),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourceAddresses
+									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePorts
+									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePrefixLists
+									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResourceStatement
+							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ResourceTypes
+									"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Resources
+									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"source": {
-						// Property: Source
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"packet_header_statement": {
-									// Property: PacketHeaderStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"destination_addresses": {
-												// Property: DestinationAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_ports": {
-												// Property: DestinationPorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"destination_prefix_lists": {
-												// Property: DestinationPrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"protocols": {
-												// Property: Protocols
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												Validators: []tfsdk.AttributeValidator{
-													validate.ArrayForEach(validate.StringInSlice([]string{
-														"tcp",
-														"udp",
-													})),
-												},
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_addresses": {
-												// Property: SourceAddresses
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_ports": {
-												// Property: SourcePorts
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"source_prefix_lists": {
-												// Property: SourcePrefixLists
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-								"resource_statement": {
-									// Property: ResourceStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"resource_types": {
-												// Property: ResourceTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resources": {
-												// Property: Resources
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
-									Optional: true,
-									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Source
+					"source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: PacketHeaderStatement
+							"packet_header_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: DestinationAddresses
+									"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPorts
+									"destination_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DestinationPrefixLists
+									"destination_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Protocols
+									"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueStringsAre(
+												stringvalidator.OneOf(
+													"tcp",
+													"udp",
+												),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourceAddresses
+									"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePorts
+									"source_ports": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: SourcePrefixLists
+									"source_prefix_lists": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: ResourceStatement
+							"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ResourceTypes
+									"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: Resources
+									"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"through_resources": {
-						// Property: ThroughResources
-						Attributes: tfsdk.ListNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"resource_statement": {
-									// Property: ResourceStatement
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"resource_types": {
-												// Property: ResourceTypes
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-											"resources": {
-												// Property: Resources
-												Type:     types.ListType{ElemType: types.StringType},
-												Optional: true,
-												Computed: true,
-												PlanModifiers: []tfsdk.AttributePlanModifier{
-													resource.UseStateForUnknown(),
-												},
-											},
-										},
-									),
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: ThroughResources
+					"through_resources": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: ResourceStatement
+								"resource_statement": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: ResourceTypes
+										"resource_types": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Resources
+										"resources": schema.ListAttribute{ /*START ATTRIBUTE*/
+											ElementType: types.StringType,
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
 									Optional: true,
 									Computed: true,
-									PlanModifiers: []tfsdk.AttributePlanModifier{
-										resource.UseStateForUnknown(),
-									},
-								},
-							},
-						),
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// MatchPaths is a write-only property.
-		},
-		"network_insights_access_scope_arn": {
-			// Property: NetworkInsightsAccessScopeArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkInsightsAccessScopeArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"network_insights_access_scope_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"network_insights_access_scope_id": {
-			// Property: NetworkInsightsAccessScopeId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NetworkInsightsAccessScopeId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"network_insights_access_scope_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array"
-			//	}
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Required: true,
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Optional: true,
 						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Optional: true,
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"updated_date": {
-			// Property: UpdatedDate
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: UpdatedDate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"updated_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Resource schema for AWS::EC2::NetworkInsightsAccessScope",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NetworkInsightsAccessScope").WithTerraformTypeName("awscc_ec2_network_insights_access_scope")
 	opts = opts.WithTerraformSchema(schema)
@@ -1205,7 +1184,7 @@ func networkInsightsAccessScopeResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

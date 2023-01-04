@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
-	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
+
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,1067 +19,969 @@ func init() {
 // scalingPolicyDataSource returns the Terraform awscc_autoscaling_scaling_policy data source.
 // This Terraform data source corresponds to the CloudFormation AWS::AutoScaling::ScalingPolicy resource.
 func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"adjustment_type": {
-			// Property: AdjustmentType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "Specifies how the scaling adjustment is interpreted. The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdjustmentType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Specifies how the scaling adjustment is interpreted. The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.",
+		//	  "type": "string"
+		//	}
+		"adjustment_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Specifies how the scaling adjustment is interpreted. The valid values are ChangeInCapacity, ExactCapacity, and PercentChangeInCapacity.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"arn": {
-			// Property: Arn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ARN of the AutoScaling scaling policy",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Arn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the AutoScaling scaling policy",
+		//	  "type": "string"
+		//	}
+		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the AutoScaling scaling policy",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"auto_scaling_group_name": {
-			// Property: AutoScalingGroupName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the Auto Scaling group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AutoScalingGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the Auto Scaling group.",
+		//	  "type": "string"
+		//	}
+		"auto_scaling_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the Auto Scaling group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"cooldown": {
-			// Property: Cooldown
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The duration of the policy's cooldown period, in seconds. When a cooldown period is specified here, it overrides the default cooldown period defined for the Auto Scaling group.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Cooldown
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The duration of the policy's cooldown period, in seconds. When a cooldown period is specified here, it overrides the default cooldown period defined for the Auto Scaling group.",
+		//	  "type": "string"
+		//	}
+		"cooldown": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The duration of the policy's cooldown period, in seconds. When a cooldown period is specified here, it overrides the default cooldown period defined for the Auto Scaling group.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"estimated_instance_warmup": {
-			// Property: EstimatedInstanceWarmup
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. If not provided, the default is to use the value from the default cooldown period for the Auto Scaling group. Valid only if the policy type is TargetTrackingScaling or StepScaling.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: EstimatedInstanceWarmup
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. If not provided, the default is to use the value from the default cooldown period for the Auto Scaling group. Valid only if the policy type is TargetTrackingScaling or StepScaling.",
+		//	  "type": "integer"
+		//	}
+		"estimated_instance_warmup": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The estimated time, in seconds, until a newly launched instance can contribute to the CloudWatch metrics. If not provided, the default is to use the value from the default cooldown period for the Auto Scaling group. Valid only if the policy type is TargetTrackingScaling or StepScaling.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"metric_aggregation_type": {
-			// Property: MetricAggregationType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The aggregation type for the CloudWatch metrics. The valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. Valid only if the policy type is StepScaling.",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MetricAggregationType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The aggregation type for the CloudWatch metrics. The valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. Valid only if the policy type is StepScaling.",
+		//	  "type": "string"
+		//	}
+		"metric_aggregation_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The aggregation type for the CloudWatch metrics. The valid values are Minimum, Maximum, and Average. If the aggregation type is null, the value is treated as Average. Valid only if the policy type is StepScaling.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"min_adjustment_magnitude": {
-			// Property: MinAdjustmentMagnitude
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The minimum value to scale by when the adjustment type is PercentChangeInCapacity. For example, suppose that you create a step scaling policy to scale out an Auto Scaling group by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group has 4 instances and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2 Auto Scaling scales out the group by 2 instances.",
-			//	  "type": "integer"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: MinAdjustmentMagnitude
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The minimum value to scale by when the adjustment type is PercentChangeInCapacity. For example, suppose that you create a step scaling policy to scale out an Auto Scaling group by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group has 4 instances and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2 Auto Scaling scales out the group by 2 instances.",
+		//	  "type": "integer"
+		//	}
+		"min_adjustment_magnitude": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The minimum value to scale by when the adjustment type is PercentChangeInCapacity. For example, suppose that you create a step scaling policy to scale out an Auto Scaling group by 25 percent and you specify a MinAdjustmentMagnitude of 2. If the group has 4 instances and the scaling policy is performed, 25 percent of 4 is 1. However, because you specified a MinAdjustmentMagnitude of 2, Amazon EC2 Auto Scaling scales out the group by 2 instances.",
-			Type:        types.Int64Type,
 			Computed:    true,
-		},
-		"policy_name": {
-			// Property: PolicyName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "type": "string"
-			//	}
-			Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
-		},
-		"policy_type": {
-			// Property: PolicyType
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "One of the following policy types: TargetTrackingScaling, StepScaling, SimpleScaling (default), PredictiveScaling",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: PolicyType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "One of the following policy types: TargetTrackingScaling, StepScaling, SimpleScaling (default), PredictiveScaling",
+		//	  "type": "string"
+		//	}
+		"policy_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "One of the following policy types: TargetTrackingScaling, StepScaling, SimpleScaling (default), PredictiveScaling",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"predictive_scaling_configuration": {
-			// Property: PredictiveScalingConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A predictive scaling policy. Includes support for predefined metrics only.",
-			//	  "properties": {
-			//	    "MaxCapacityBreachBehavior": {
-			//	      "type": "string"
-			//	    },
-			//	    "MaxCapacityBuffer": {
-			//	      "type": "integer"
-			//	    },
-			//	    "MetricSpecifications": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "additionalProperties": false,
-			//	        "properties": {
-			//	          "CustomizedCapacityMetricSpecification": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "MetricDataQueries": {
-			//	                "insertionOrder": false,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Expression": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Id": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Label": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "MetricStat": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Metric": {
-			//	                          "additionalProperties": false,
-			//	                          "properties": {
-			//	                            "Dimensions": {
-			//	                              "insertionOrder": false,
-			//	                              "items": {
-			//	                                "additionalProperties": false,
-			//	                                "properties": {
-			//	                                  "Name": {
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Value": {
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value",
-			//	                                  "Name"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "type": "array",
-			//	                              "uniqueItems": true
-			//	                            },
-			//	                            "MetricName": {
-			//	                              "type": "string"
-			//	                            },
-			//	                            "Namespace": {
-			//	                              "type": "string"
-			//	                            }
-			//	                          },
-			//	                          "required": [
-			//	                            "MetricName",
-			//	                            "Namespace"
-			//	                          ],
-			//	                          "type": "object"
-			//	                        },
-			//	                        "Stat": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Unit": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Stat",
-			//	                        "Metric"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "ReturnData": {
-			//	                      "type": "boolean"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Id"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": true
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "MetricDataQueries"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "CustomizedLoadMetricSpecification": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "MetricDataQueries": {
-			//	                "insertionOrder": false,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Expression": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Id": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Label": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "MetricStat": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Metric": {
-			//	                          "additionalProperties": false,
-			//	                          "properties": {
-			//	                            "Dimensions": {
-			//	                              "insertionOrder": false,
-			//	                              "items": {
-			//	                                "additionalProperties": false,
-			//	                                "properties": {
-			//	                                  "Name": {
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Value": {
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value",
-			//	                                  "Name"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "type": "array",
-			//	                              "uniqueItems": true
-			//	                            },
-			//	                            "MetricName": {
-			//	                              "type": "string"
-			//	                            },
-			//	                            "Namespace": {
-			//	                              "type": "string"
-			//	                            }
-			//	                          },
-			//	                          "required": [
-			//	                            "MetricName",
-			//	                            "Namespace"
-			//	                          ],
-			//	                          "type": "object"
-			//	                        },
-			//	                        "Stat": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Unit": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Stat",
-			//	                        "Metric"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "ReturnData": {
-			//	                      "type": "boolean"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Id"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": true
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "MetricDataQueries"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "CustomizedScalingMetricSpecification": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "MetricDataQueries": {
-			//	                "insertionOrder": false,
-			//	                "items": {
-			//	                  "additionalProperties": false,
-			//	                  "properties": {
-			//	                    "Expression": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Id": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "Label": {
-			//	                      "type": "string"
-			//	                    },
-			//	                    "MetricStat": {
-			//	                      "additionalProperties": false,
-			//	                      "properties": {
-			//	                        "Metric": {
-			//	                          "additionalProperties": false,
-			//	                          "properties": {
-			//	                            "Dimensions": {
-			//	                              "insertionOrder": false,
-			//	                              "items": {
-			//	                                "additionalProperties": false,
-			//	                                "properties": {
-			//	                                  "Name": {
-			//	                                    "type": "string"
-			//	                                  },
-			//	                                  "Value": {
-			//	                                    "type": "string"
-			//	                                  }
-			//	                                },
-			//	                                "required": [
-			//	                                  "Value",
-			//	                                  "Name"
-			//	                                ],
-			//	                                "type": "object"
-			//	                              },
-			//	                              "type": "array",
-			//	                              "uniqueItems": true
-			//	                            },
-			//	                            "MetricName": {
-			//	                              "type": "string"
-			//	                            },
-			//	                            "Namespace": {
-			//	                              "type": "string"
-			//	                            }
-			//	                          },
-			//	                          "required": [
-			//	                            "MetricName",
-			//	                            "Namespace"
-			//	                          ],
-			//	                          "type": "object"
-			//	                        },
-			//	                        "Stat": {
-			//	                          "type": "string"
-			//	                        },
-			//	                        "Unit": {
-			//	                          "type": "string"
-			//	                        }
-			//	                      },
-			//	                      "required": [
-			//	                        "Stat",
-			//	                        "Metric"
-			//	                      ],
-			//	                      "type": "object"
-			//	                    },
-			//	                    "ReturnData": {
-			//	                      "type": "boolean"
-			//	                    }
-			//	                  },
-			//	                  "required": [
-			//	                    "Id"
-			//	                  ],
-			//	                  "type": "object"
-			//	                },
-			//	                "type": "array",
-			//	                "uniqueItems": true
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "MetricDataQueries"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "PredefinedLoadMetricSpecification": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "PredefinedMetricType": {
-			//	                "type": "string"
-			//	              },
-			//	              "ResourceLabel": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "PredefinedMetricType"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "PredefinedMetricPairSpecification": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "PredefinedMetricType": {
-			//	                "type": "string"
-			//	              },
-			//	              "ResourceLabel": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "PredefinedMetricType"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "PredefinedScalingMetricSpecification": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "PredefinedMetricType": {
-			//	                "type": "string"
-			//	              },
-			//	              "ResourceLabel": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "PredefinedMetricType"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "TargetValue": {
-			//	            "type": "number"
-			//	          }
-			//	        },
-			//	        "required": [
-			//	          "TargetValue"
-			//	        ],
-			//	        "type": "object"
-			//	      },
-			//	      "type": "array",
-			//	      "uniqueItems": true
-			//	    },
-			//	    "Mode": {
-			//	      "type": "string"
-			//	    },
-			//	    "SchedulingBufferTime": {
-			//	      "type": "integer"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "MetricSpecifications"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "A predictive scaling policy. Includes support for predefined metrics only.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"max_capacity_breach_behavior": {
-						// Property: MaxCapacityBreachBehavior
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"max_capacity_buffer": {
-						// Property: MaxCapacityBuffer
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-					"metric_specifications": {
-						// Property: MetricSpecifications
-						Attributes: tfsdk.SetNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"customized_capacity_metric_specification": {
-									// Property: CustomizedCapacityMetricSpecification
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"metric_data_queries": {
-												// Property: MetricDataQueries
-												Attributes: tfsdk.SetNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"expression": {
-															// Property: Expression
-															Type:     types.StringType,
+		}, /*END ATTRIBUTE*/
+		// Property: PredictiveScalingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A predictive scaling policy. Includes support for predefined metrics only.",
+		//	  "properties": {
+		//	    "MaxCapacityBreachBehavior": {
+		//	      "type": "string"
+		//	    },
+		//	    "MaxCapacityBuffer": {
+		//	      "type": "integer"
+		//	    },
+		//	    "MetricSpecifications": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "CustomizedCapacityMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value",
+		//	                                  "Name"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": true
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "MetricName",
+		//	                            "Namespace"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Stat",
+		//	                        "Metric"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Id"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "CustomizedLoadMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value",
+		//	                                  "Name"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": true
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "MetricName",
+		//	                            "Namespace"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Stat",
+		//	                        "Metric"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Id"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "CustomizedScalingMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "MetricDataQueries": {
+		//	                "insertionOrder": false,
+		//	                "items": {
+		//	                  "additionalProperties": false,
+		//	                  "properties": {
+		//	                    "Expression": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Id": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "Label": {
+		//	                      "type": "string"
+		//	                    },
+		//	                    "MetricStat": {
+		//	                      "additionalProperties": false,
+		//	                      "properties": {
+		//	                        "Metric": {
+		//	                          "additionalProperties": false,
+		//	                          "properties": {
+		//	                            "Dimensions": {
+		//	                              "insertionOrder": false,
+		//	                              "items": {
+		//	                                "additionalProperties": false,
+		//	                                "properties": {
+		//	                                  "Name": {
+		//	                                    "type": "string"
+		//	                                  },
+		//	                                  "Value": {
+		//	                                    "type": "string"
+		//	                                  }
+		//	                                },
+		//	                                "required": [
+		//	                                  "Value",
+		//	                                  "Name"
+		//	                                ],
+		//	                                "type": "object"
+		//	                              },
+		//	                              "type": "array",
+		//	                              "uniqueItems": true
+		//	                            },
+		//	                            "MetricName": {
+		//	                              "type": "string"
+		//	                            },
+		//	                            "Namespace": {
+		//	                              "type": "string"
+		//	                            }
+		//	                          },
+		//	                          "required": [
+		//	                            "MetricName",
+		//	                            "Namespace"
+		//	                          ],
+		//	                          "type": "object"
+		//	                        },
+		//	                        "Stat": {
+		//	                          "type": "string"
+		//	                        },
+		//	                        "Unit": {
+		//	                          "type": "string"
+		//	                        }
+		//	                      },
+		//	                      "required": [
+		//	                        "Stat",
+		//	                        "Metric"
+		//	                      ],
+		//	                      "type": "object"
+		//	                    },
+		//	                    "ReturnData": {
+		//	                      "type": "boolean"
+		//	                    }
+		//	                  },
+		//	                  "required": [
+		//	                    "Id"
+		//	                  ],
+		//	                  "type": "object"
+		//	                },
+		//	                "type": "array",
+		//	                "uniqueItems": true
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "MetricDataQueries"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedLoadMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedMetricPairSpecification": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "PredefinedScalingMetricSpecification": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "PredefinedMetricType": {
+		//	                "type": "string"
+		//	              },
+		//	              "ResourceLabel": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "PredefinedMetricType"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "TargetValue": {
+		//	            "type": "number"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TargetValue"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "Mode": {
+		//	      "type": "string"
+		//	    },
+		//	    "SchedulingBufferTime": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MetricSpecifications"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"predictive_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCapacityBreachBehavior
+				"max_capacity_breach_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MaxCapacityBuffer
+				"max_capacity_buffer": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: MetricSpecifications
+				"metric_specifications": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: CustomizedCapacityMetricSpecification
+							"customized_capacity_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
 															Computed: true,
-														},
-														"id": {
-															// Property: Id
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-														"label": {
-															// Property: Label
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-														"metric_stat": {
-															// Property: MetricStat
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"metric": {
-																		// Property: Metric
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"dimensions": {
-																					// Property: Dimensions
-																					Attributes: tfsdk.SetNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"name": {
-																								// Property: Name
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																							"value": {
-																								// Property: Value
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"metric_name": {
-																					// Property: MetricName
-																					Type:     types.StringType,
-																					Computed: true,
-																				},
-																				"namespace": {
-																					// Property: Namespace
-																					Type:     types.StringType,
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"stat": {
-																		// Property: Stat
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"unit": {
-																		// Property: Unit
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CustomizedLoadMetricSpecification
+							"customized_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
 															Computed: true,
-														},
-														"return_data": {
-															// Property: ReturnData
-															Type:     types.BoolType,
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"customized_load_metric_specification": {
-									// Property: CustomizedLoadMetricSpecification
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"metric_data_queries": {
-												// Property: MetricDataQueries
-												Attributes: tfsdk.SetNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"expression": {
-															// Property: Expression
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-														"id": {
-															// Property: Id
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: CustomizedScalingMetricSpecification
+							"customized_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: MetricDataQueries
+									"metric_data_queries": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+										NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+											Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+												// Property: Expression
+												"expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Id
+												"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: Label
+												"label": schema.StringAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: MetricStat
+												"metric_stat": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+													Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+														// Property: Metric
+														"metric": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+															Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																// Property: Dimensions
+																"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+																	NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+																		Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+																			// Property: Name
+																			"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																			// Property: Value
+																			"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+																				Computed: true,
+																			}, /*END ATTRIBUTE*/
+																		}, /*END SCHEMA*/
+																	}, /*END NESTED OBJECT*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: MetricName
+																"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+																// Property: Namespace
+																"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+																	Computed: true,
+																}, /*END ATTRIBUTE*/
+															}, /*END SCHEMA*/
 															Computed: true,
-														},
-														"label": {
-															// Property: Label
-															Type:     types.StringType,
+														}, /*END ATTRIBUTE*/
+														// Property: Stat
+														"stat": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-														"metric_stat": {
-															// Property: MetricStat
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"metric": {
-																		// Property: Metric
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"dimensions": {
-																					// Property: Dimensions
-																					Attributes: tfsdk.SetNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"name": {
-																								// Property: Name
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																							"value": {
-																								// Property: Value
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"metric_name": {
-																					// Property: MetricName
-																					Type:     types.StringType,
-																					Computed: true,
-																				},
-																				"namespace": {
-																					// Property: Namespace
-																					Type:     types.StringType,
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"stat": {
-																		// Property: Stat
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"unit": {
-																		// Property: Unit
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
+														}, /*END ATTRIBUTE*/
+														// Property: Unit
+														"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
 															Computed: true,
-														},
-														"return_data": {
-															// Property: ReturnData
-															Type:     types.BoolType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"customized_scaling_metric_specification": {
-									// Property: CustomizedScalingMetricSpecification
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"metric_data_queries": {
-												// Property: MetricDataQueries
-												Attributes: tfsdk.SetNestedAttributes(
-													map[string]tfsdk.Attribute{
-														"expression": {
-															// Property: Expression
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"id": {
-															// Property: Id
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"label": {
-															// Property: Label
-															Type:     types.StringType,
-															Computed: true,
-														},
-														"metric_stat": {
-															// Property: MetricStat
-															Attributes: tfsdk.SingleNestedAttributes(
-																map[string]tfsdk.Attribute{
-																	"metric": {
-																		// Property: Metric
-																		Attributes: tfsdk.SingleNestedAttributes(
-																			map[string]tfsdk.Attribute{
-																				"dimensions": {
-																					// Property: Dimensions
-																					Attributes: tfsdk.SetNestedAttributes(
-																						map[string]tfsdk.Attribute{
-																							"name": {
-																								// Property: Name
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																							"value": {
-																								// Property: Value
-																								Type:     types.StringType,
-																								Computed: true,
-																							},
-																						},
-																					),
-																					Computed: true,
-																				},
-																				"metric_name": {
-																					// Property: MetricName
-																					Type:     types.StringType,
-																					Computed: true,
-																				},
-																				"namespace": {
-																					// Property: Namespace
-																					Type:     types.StringType,
-																					Computed: true,
-																				},
-																			},
-																		),
-																		Computed: true,
-																	},
-																	"stat": {
-																		// Property: Stat
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																	"unit": {
-																		// Property: Unit
-																		Type:     types.StringType,
-																		Computed: true,
-																	},
-																},
-															),
-															Computed: true,
-														},
-														"return_data": {
-															// Property: ReturnData
-															Type:     types.BoolType,
-															Computed: true,
-														},
-													},
-												),
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"predefined_load_metric_specification": {
-									// Property: PredefinedLoadMetricSpecification
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"predefined_metric_type": {
-												// Property: PredefinedMetricType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"resource_label": {
-												// Property: ResourceLabel
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"predefined_metric_pair_specification": {
-									// Property: PredefinedMetricPairSpecification
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"predefined_metric_type": {
-												// Property: PredefinedMetricType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"resource_label": {
-												// Property: ResourceLabel
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"predefined_scaling_metric_specification": {
-									// Property: PredefinedScalingMetricSpecification
-									Attributes: tfsdk.SingleNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"predefined_metric_type": {
-												// Property: PredefinedMetricType
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"resource_label": {
-												// Property: ResourceLabel
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"target_value": {
-									// Property: TargetValue
-									Type:     types.Float64Type,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"mode": {
-						// Property: Mode
-						Type:     types.StringType,
-						Computed: true,
-					},
-					"scheduling_buffer_time": {
-						// Property: SchedulingBufferTime
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"scaling_adjustment": {
-			// Property: ScalingAdjustment
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.)",
-			//	  "type": "integer"
-			//	}
-			Description: "The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.)",
-			Type:        types.Int64Type,
-			Computed:    true,
-		},
-		"step_adjustments": {
-			// Property: StepAdjustments
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A set of adjustments that enable you to scale based on the size of the alarm breach. Required if the policy type is StepScaling. (Not used with any other policy type.)",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "insertionOrder": false,
-			//	    "properties": {
-			//	      "MetricIntervalLowerBound": {
-			//	        "type": "number"
-			//	      },
-			//	      "MetricIntervalUpperBound": {
-			//	        "type": "number"
-			//	      },
-			//	      "ScalingAdjustment": {
-			//	        "type": "integer"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "ScalingAdjustment"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "type": "array",
-			//	  "uniqueItems": true
-			//	}
-			Description: "A set of adjustments that enable you to scale based on the size of the alarm breach. Required if the policy type is StepScaling. (Not used with any other policy type.)",
-			Attributes: tfsdk.SetNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"metric_interval_lower_bound": {
-						// Property: MetricIntervalLowerBound
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"metric_interval_upper_bound": {
-						// Property: MetricIntervalUpperBound
-						Type:     types.Float64Type,
-						Computed: true,
-					},
-					"scaling_adjustment": {
-						// Property: ScalingAdjustment
-						Type:     types.Int64Type,
-						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-		"target_tracking_configuration": {
-			// Property: TargetTrackingConfiguration
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "description": "A target tracking scaling policy. Includes support for predefined or customized metrics.",
-			//	  "properties": {
-			//	    "CustomizedMetricSpecification": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "Dimensions": {
-			//	          "insertionOrder": false,
-			//	          "items": {
-			//	            "additionalProperties": false,
-			//	            "properties": {
-			//	              "Name": {
-			//	                "type": "string"
-			//	              },
-			//	              "Value": {
-			//	                "type": "string"
-			//	              }
-			//	            },
-			//	            "required": [
-			//	              "Value",
-			//	              "Name"
-			//	            ],
-			//	            "type": "object"
-			//	          },
-			//	          "type": "array",
-			//	          "uniqueItems": true
-			//	        },
-			//	        "MetricName": {
-			//	          "type": "string"
-			//	        },
-			//	        "Namespace": {
-			//	          "type": "string"
-			//	        },
-			//	        "Statistic": {
-			//	          "type": "string"
-			//	        },
-			//	        "Unit": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "MetricName",
-			//	        "Statistic",
-			//	        "Namespace"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "DisableScaleIn": {
-			//	      "type": "boolean"
-			//	    },
-			//	    "PredefinedMetricSpecification": {
-			//	      "additionalProperties": false,
-			//	      "properties": {
-			//	        "PredefinedMetricType": {
-			//	          "type": "string"
-			//	        },
-			//	        "ResourceLabel": {
-			//	          "type": "string"
-			//	        }
-			//	      },
-			//	      "required": [
-			//	        "PredefinedMetricType"
-			//	      ],
-			//	      "type": "object"
-			//	    },
-			//	    "TargetValue": {
-			//	      "type": "number"
-			//	    }
-			//	  },
-			//	  "required": [
-			//	    "TargetValue"
-			//	  ],
-			//	  "type": "object"
-			//	}
-			Description: "A target tracking scaling policy. Includes support for predefined or customized metrics.",
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"customized_metric_specification": {
-						// Property: CustomizedMetricSpecification
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"dimensions": {
-									// Property: Dimensions
-									Attributes: tfsdk.SetNestedAttributes(
-										map[string]tfsdk.Attribute{
-											"name": {
-												// Property: Name
-												Type:     types.StringType,
-												Computed: true,
-											},
-											"value": {
-												// Property: Value
-												Type:     types.StringType,
-												Computed: true,
-											},
-										},
-									),
-									Computed: true,
-								},
-								"metric_name": {
-									// Property: MetricName
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"namespace": {
-									// Property: Namespace
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"statistic": {
-									// Property: Statistic
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"unit": {
-									// Property: Unit
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
-						Computed: true,
-					},
-					"disable_scale_in": {
-						// Property: DisableScaleIn
-						Type:     types.BoolType,
-						Computed: true,
-					},
-					"predefined_metric_specification": {
-						// Property: PredefinedMetricSpecification
-						Attributes: tfsdk.SingleNestedAttributes(
-							map[string]tfsdk.Attribute{
-								"predefined_metric_type": {
+														}, /*END ATTRIBUTE*/
+													}, /*END SCHEMA*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+												// Property: ReturnData
+												"return_data": schema.BoolAttribute{ /*START ATTRIBUTE*/
+													Computed: true,
+												}, /*END ATTRIBUTE*/
+											}, /*END SCHEMA*/
+										}, /*END NESTED OBJECT*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedLoadMetricSpecification
+							"predefined_load_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: PredefinedMetricType
-									Type:     types.StringType,
-									Computed: true,
-								},
-								"resource_label": {
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: ResourceLabel
-									Type:     types.StringType,
-									Computed: true,
-								},
-							},
-						),
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedMetricPairSpecification
+							"predefined_metric_pair_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: PredefinedScalingMetricSpecification
+							"predefined_scaling_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: PredefinedMetricType
+									"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: ResourceLabel
+									"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TargetValue
+							"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Mode
+				"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: SchedulingBufferTime
+				"scheduling_buffer_time": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A predictive scaling policy. Includes support for predefined metrics only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ScalingAdjustment
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.)",
+		//	  "type": "integer"
+		//	}
+		"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The amount by which to scale, based on the specified adjustment type. A positive value adds to the current capacity while a negative number removes from the current capacity. For exact capacity, you must specify a positive value. Required if the policy type is SimpleScaling. (Not used with any other policy type.)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StepAdjustments
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A set of adjustments that enable you to scale based on the size of the alarm breach. Required if the policy type is StepScaling. (Not used with any other policy type.)",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "insertionOrder": false,
+		//	    "properties": {
+		//	      "MetricIntervalLowerBound": {
+		//	        "type": "number"
+		//	      },
+		//	      "MetricIntervalUpperBound": {
+		//	        "type": "number"
+		//	      },
+		//	      "ScalingAdjustment": {
+		//	        "type": "integer"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "ScalingAdjustment"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"step_adjustments": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricIntervalLowerBound
+					"metric_interval_lower_bound": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-					"target_value": {
-						// Property: TargetValue
-						Type:     types.Float64Type,
+					}, /*END ATTRIBUTE*/
+					// Property: MetricIntervalUpperBound
+					"metric_interval_upper_bound": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Computed: true,
-					},
-				},
-			),
-			Computed: true,
-		},
-	}
+					}, /*END ATTRIBUTE*/
+					// Property: ScalingAdjustment
+					"scaling_adjustment": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "A set of adjustments that enable you to scale based on the size of the alarm breach. Required if the policy type is StepScaling. (Not used with any other policy type.)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: TargetTrackingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A target tracking scaling policy. Includes support for predefined or customized metrics.",
+		//	  "properties": {
+		//	    "CustomizedMetricSpecification": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Dimensions": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Name": {
+		//	                "type": "string"
+		//	              },
+		//	              "Value": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Value",
+		//	              "Name"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        },
+		//	        "MetricName": {
+		//	          "type": "string"
+		//	        },
+		//	        "Namespace": {
+		//	          "type": "string"
+		//	        },
+		//	        "Statistic": {
+		//	          "type": "string"
+		//	        },
+		//	        "Unit": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "MetricName",
+		//	        "Statistic",
+		//	        "Namespace"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "DisableScaleIn": {
+		//	      "type": "boolean"
+		//	    },
+		//	    "PredefinedMetricSpecification": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "PredefinedMetricType": {
+		//	          "type": "string"
+		//	        },
+		//	        "ResourceLabel": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "PredefinedMetricType"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TargetValue": {
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "TargetValue"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"target_tracking_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CustomizedMetricSpecification
+				"customized_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Dimensions
+						"dimensions": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Name
+									"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Value
+									"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: MetricName
+						"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Namespace
+						"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Statistic
+						"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Unit
+						"unit": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DisableScaleIn
+				"disable_scale_in": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PredefinedMetricSpecification
+				"predefined_metric_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: PredefinedMetricType
+						"predefined_metric_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: ResourceLabel
+						"resource_label": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TargetValue
+				"target_value": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A target tracking scaling policy. Includes support for predefined or customized metrics.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::AutoScaling::ScalingPolicy",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AutoScaling::ScalingPolicy").WithTerraformTypeName("awscc_autoscaling_scaling_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -1133,7 +1035,7 @@ func scalingPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		"value":                                   "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

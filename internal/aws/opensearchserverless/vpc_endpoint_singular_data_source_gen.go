@@ -6,9 +6,9 @@ import (
 	"context"
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -19,109 +19,104 @@ func init() {
 // vpcEndpointDataSource returns the Terraform awscc_opensearchserverless_vpc_endpoint data source.
 // This Terraform data source corresponds to the CloudFormation AWS::OpenSearchServerless::VpcEndpoint resource.
 func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"id": {
-			// Property: Id
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The identifier of the VPC Endpoint",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^vpce-[0-9a-z]*$",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Id
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the VPC Endpoint",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^vpce-[0-9a-z]*$",
+		//	  "type": "string"
+		//	}
+		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The identifier of the VPC Endpoint",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"name": {
-			// Property: Name
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the VPC Endpoint",
-			//	  "maxLength": 32,
-			//	  "minLength": 3,
-			//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: Name
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the VPC Endpoint",
+		//	  "maxLength": 32,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z][a-z0-9-]{2,31}$",
+		//	  "type": "string"
+		//	}
+		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the VPC Endpoint",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-		"security_group_ids": {
-			// Property: SecurityGroupIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of one or more security groups to associate with the endpoint network interface",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "maxLength": 128,
-			//	    "minLength": 1,
-			//	    "pattern": "^[\\w+\\-]+$",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 5,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SecurityGroupIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of one or more security groups to associate with the endpoint network interface",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 128,
+		//	    "minLength": 1,
+		//	    "pattern": "^[\\w+\\-]+$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 5,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The ID of one or more security groups to associate with the endpoint network interface",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"subnet_ids": {
-			// Property: SubnetIds
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of one or more subnets in which to create an endpoint network interface",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "maxLength": 32,
-			//	    "minLength": 1,
-			//	    "pattern": "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$",
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 6,
-			//	  "minItems": 1,
-			//	  "type": "array"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: SubnetIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of one or more subnets in which to create an endpoint network interface",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 32,
+		//	    "minLength": 1,
+		//	    "pattern": "^subnet-([0-9a-f]{8}|[0-9a-f]{17})$",
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 6,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The ID of one or more subnets in which to create an endpoint network interface",
-			Type:        types.ListType{ElemType: types.StringType},
 			Computed:    true,
-		},
-		"vpc_id": {
-			// Property: VpcId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The ID of the VPC in which the endpoint will be used.",
-			//	  "maxLength": 255,
-			//	  "minLength": 1,
-			//	  "pattern": "^vpc-[0-9a-z]*$",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: VpcId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the VPC in which the endpoint will be used.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": "^vpc-[0-9a-z]*$",
+		//	  "type": "string"
+		//	}
+		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the VPC in which the endpoint will be used.",
-			Type:        types.StringType,
 			Computed:    true,
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Required:    true,
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Data Source schema for AWS::OpenSearchServerless::VpcEndpoint",
-		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::OpenSearchServerless::VpcEndpoint").WithTerraformTypeName("awscc_opensearchserverless_vpc_endpoint")
 	opts = opts.WithTerraformSchema(schema)
@@ -133,7 +128,7 @@ func vpcEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"vpc_id":             "VpcId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

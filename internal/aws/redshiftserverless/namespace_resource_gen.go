@@ -4,14 +4,20 @@ package redshiftserverless
 
 import (
 	"context"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
-	"github.com/hashicorp/terraform-plugin-framework/tfsdk"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
+	"regexp"
 )
 
 func init() {
@@ -21,512 +27,429 @@ func init() {
 // namespaceResource returns the Terraform awscc_redshiftserverless_namespace resource.
 // This Terraform resource corresponds to the CloudFormation AWS::RedshiftServerless::Namespace resource.
 func namespaceResource(ctx context.Context) (resource.Resource, error) {
-	attributes := map[string]tfsdk.Attribute{
-		"admin_user_password": {
-			// Property: AdminUserPassword
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit.",
-			//	  "maxLength": 64,
-			//	  "minLength": 8,
-			//	  "pattern": "",
-			//	  "type": "string"
-			//	}
+	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdminUserPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit.",
+		//	  "maxLength": 64,
+		//	  "minLength": 8,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"admin_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password associated with the admin user for the namespace that is being created. Password must be at least 8 characters in length, should be any printable ASCII character. Must contain at least one lowercase letter, one uppercase letter and one decimal digit.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(8, 64),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(8, 64),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// AdminUserPassword is a write-only property.
-		},
-		"admin_username": {
-			// Property: AdminUsername
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The user name associated with the admin user for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
-			//	  "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
-			//	  "type": "string"
-			//	}
+		}, /*END ATTRIBUTE*/
+		// Property: AdminUsername
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The user name associated with the admin user for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
+		//	  "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
+		//	  "type": "string"
+		//	}
+		"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The user name associated with the admin user for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringMatch(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"db_name": {
-			// Property: DbName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The database name associated for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
-			//	  "maxLength": 127,
-			//	  "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DbName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The database name associated for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
+		//	  "maxLength": 127,
+		//	  "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
+		//	  "type": "string"
+		//	}
+		"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The database name associated for the namespace that is being created. Only alphanumeric characters and underscores are allowed. It should start with an alphabet.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(127),
-				validate.StringMatch(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"default_iam_role_arn": {
-			// Property: DefaultIamRoleArn
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The default IAM role ARN for the namespace that is being created.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(127),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultIamRoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The default IAM role ARN for the namespace that is being created.",
+		//	  "type": "string"
+		//	}
+		"default_iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The default IAM role ARN for the namespace that is being created.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"final_snapshot_name": {
-			// Property: FinalSnapshotName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace",
-			//	  "maxLength": 255,
-			//	  "pattern": "[a-z][a-z0-9]*(-[a-z0-9]+)*",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FinalSnapshotName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace",
+		//	  "maxLength": 255,
+		//	  "pattern": "[a-z][a-z0-9]*(-[a-z0-9]+)*",
+		//	  "type": "string"
+		//	}
+		"final_snapshot_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the namespace the source snapshot was created from. Please specify the name if needed before deleting namespace",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenAtMost(255),
-				validate.StringMatch(regexp.MustCompile("[a-z][a-z0-9]*(-[a-z0-9]+)*"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"final_snapshot_retention_period": {
-			// Property: FinalSnapshotRetentionPeriod
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
-			//	  "type": "integer"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(255),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-z][a-z0-9]*(-[a-z0-9]+)*"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FinalSnapshotRetentionPeriod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
+		//	  "type": "integer"
+		//	}
+		"final_snapshot_retention_period": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The number of days to retain automated snapshot in the destination region after they are copied from the source region. If the value is -1, the manual snapshot is retained indefinitely. The value must be either -1 or an integer between 1 and 3,653.",
-			Type:        types.Int64Type,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"iam_roles": {
-			// Property: IamRoles
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "maxLength": 512,
-			//	    "minLength": 0,
-			//	    "type": "string"
-			//	  },
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: IamRoles
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "maxLength": 512,
+		//	    "minLength": 0,
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayForEach(validate.StringLenBetween(0, 512)),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"kms_key_id": {
-			// Property: KmsKeyId
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.",
-			//	  "type": "string"
-			//	}
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(0, 512),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: KmsKeyId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.",
+		//	  "type": "string"
+		//	}
+		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.",
-			Type:        types.StringType,
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"log_exports": {
-			// Property: LogExports
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "enum": [
-			//	      "useractivitylog",
-			//	      "userlog",
-			//	      "connectionlog"
-			//	    ],
-			//	    "type": "string"
-			//	  },
-			//	  "maxItems": 16,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: LogExports
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "enum": [
+		//	      "useractivitylog",
+		//	      "userlog",
+		//	      "connectionlog"
+		//	    ],
+		//	    "type": "string"
+		//	  },
+		//	  "maxItems": 16,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
 			Description: "The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog",
-			Type:        types.ListType{ElemType: types.StringType},
 			Optional:    true,
 			Computed:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 16),
-				validate.ArrayForEach(validate.StringInSlice([]string{
-					"useractivitylog",
-					"userlog",
-					"connectionlog",
-				})),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-			},
-		},
-		"namespace": {
-			// Property: Namespace
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "additionalProperties": false,
-			//	  "properties": {
-			//	    "AdminUsername": {
-			//	      "type": "string"
-			//	    },
-			//	    "CreationDate": {
-			//	      "type": "string"
-			//	    },
-			//	    "DbName": {
-			//	      "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
-			//	      "type": "string"
-			//	    },
-			//	    "DefaultIamRoleArn": {
-			//	      "type": "string"
-			//	    },
-			//	    "IamRoles": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "maxLength": 512,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      },
-			//	      "type": "array"
-			//	    },
-			//	    "KmsKeyId": {
-			//	      "type": "string"
-			//	    },
-			//	    "LogExports": {
-			//	      "insertionOrder": false,
-			//	      "items": {
-			//	        "enum": [
-			//	          "useractivitylog",
-			//	          "userlog",
-			//	          "connectionlog"
-			//	        ],
-			//	        "type": "string"
-			//	      },
-			//	      "maxItems": 16,
-			//	      "minItems": 0,
-			//	      "type": "array"
-			//	    },
-			//	    "NamespaceArn": {
-			//	      "type": "string"
-			//	    },
-			//	    "NamespaceId": {
-			//	      "type": "string"
-			//	    },
-			//	    "NamespaceName": {
-			//	      "maxLength": 64,
-			//	      "minLength": 3,
-			//	      "pattern": "^[a-z0-9-]+$",
-			//	      "type": "string"
-			//	    },
-			//	    "Status": {
-			//	      "enum": [
-			//	        "AVAILABLE",
-			//	        "MODIFYING",
-			//	        "DELETING"
-			//	      ],
-			//	      "type": "string"
-			//	    }
-			//	  },
-			//	  "type": "object"
-			//	}
-			Attributes: tfsdk.SingleNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"admin_username": {
-						// Property: AdminUsername
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"creation_date": {
-						// Property: CreationDate
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"db_name": {
-						// Property: DbName
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringMatch(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"default_iam_role_arn": {
-						// Property: DefaultIamRoleArn
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"iam_roles": {
-						// Property: IamRoles
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayForEach(validate.StringLenBetween(0, 512)),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"kms_key_id": {
-						// Property: KmsKeyId
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"log_exports": {
-						// Property: LogExports
-						Type:     types.ListType{ElemType: types.StringType},
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.ArrayLenBetween(0, 16),
-							validate.ArrayForEach(validate.StringInSlice([]string{
-								"useractivitylog",
-								"userlog",
-								"connectionlog",
-							})),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							Multiset(),
-							resource.UseStateForUnknown(),
-						},
-					},
-					"namespace_arn": {
-						// Property: NamespaceArn
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"namespace_id": {
-						// Property: NamespaceId
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"namespace_name": {
-						// Property: NamespaceName
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(3, 64),
-							validate.StringMatch(regexp.MustCompile("^[a-z0-9-]+$"), ""),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-					"status": {
-						// Property: Status
-						Type:     types.StringType,
-						Optional: true,
-						Computed: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringInSlice([]string{
-								"AVAILABLE",
-								"MODIFYING",
-								"DELETING",
-							}),
-						},
-						PlanModifiers: []tfsdk.AttributePlanModifier{
-							resource.UseStateForUnknown(),
-						},
-					},
-				},
-			),
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 16),
+				listvalidator.ValueStringsAre(
+					stringvalidator.OneOf(
+						"useractivitylog",
+						"userlog",
+						"connectionlog",
+					),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Namespace
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AdminUsername": {
+		//	      "type": "string"
+		//	    },
+		//	    "CreationDate": {
+		//	      "type": "string"
+		//	    },
+		//	    "DbName": {
+		//	      "pattern": "[a-zA-Z][a-zA-Z_0-9+.@-]*",
+		//	      "type": "string"
+		//	    },
+		//	    "DefaultIamRoleArn": {
+		//	      "type": "string"
+		//	    },
+		//	    "IamRoles": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "maxLength": 512,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array"
+		//	    },
+		//	    "KmsKeyId": {
+		//	      "type": "string"
+		//	    },
+		//	    "LogExports": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "useractivitylog",
+		//	          "userlog",
+		//	          "connectionlog"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 16,
+		//	      "minItems": 0,
+		//	      "type": "array"
+		//	    },
+		//	    "NamespaceArn": {
+		//	      "type": "string"
+		//	    },
+		//	    "NamespaceId": {
+		//	      "type": "string"
+		//	    },
+		//	    "NamespaceName": {
+		//	      "maxLength": 64,
+		//	      "minLength": 3,
+		//	      "pattern": "^[a-z0-9-]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "Status": {
+		//	      "enum": [
+		//	        "AVAILABLE",
+		//	        "MODIFYING",
+		//	        "DELETING"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"namespace": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdminUsername
+				"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: CreationDate
+				"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DbName
+				"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: DefaultIamRoleArn
+				"default_iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: IamRoles
+				"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogExports
+				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceArn
+				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceId
+				"namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: NamespaceName
+				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
 			Computed: true,
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.UseStateForUnknown(),
-			},
-		},
-		"namespace_name": {
-			// Property: NamespaceName
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "A unique identifier for the namespace. You use this identifier to refer to the namespace for any subsequent namespace operations such as deleting or modifying. All alphabetical characters must be lower case. Namespace name should be unique for all namespaces within an AWS account.",
-			//	  "maxLength": 64,
-			//	  "minLength": 3,
-			//	  "pattern": "^[a-z0-9-]+$",
-			//	  "type": "string"
-			//	}
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: NamespaceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A unique identifier for the namespace. You use this identifier to refer to the namespace for any subsequent namespace operations such as deleting or modifying. All alphabetical characters must be lower case. Namespace name should be unique for all namespaces within an AWS account.",
+		//	  "maxLength": 64,
+		//	  "minLength": 3,
+		//	  "pattern": "^[a-z0-9-]+$",
+		//	  "type": "string"
+		//	}
+		"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique identifier for the namespace. You use this identifier to refer to the namespace for any subsequent namespace operations such as deleting or modifying. All alphabetical characters must be lower case. Namespace name should be unique for all namespaces within an AWS account.",
-			Type:        types.StringType,
 			Required:    true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.StringLenBetween(3, 64),
-				validate.StringMatch(regexp.MustCompile("^[a-z0-9-]+$"), ""),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				resource.RequiresReplace(),
-			},
-		},
-		"tags": {
-			// Property: Tags
-			// CloudFormation resource type schema:
-			//
-			//	{
-			//	  "description": "The list of tags for the namespace.",
-			//	  "insertionOrder": false,
-			//	  "items": {
-			//	    "additionalProperties": false,
-			//	    "properties": {
-			//	      "Key": {
-			//	        "maxLength": 128,
-			//	        "minLength": 1,
-			//	        "type": "string"
-			//	      },
-			//	      "Value": {
-			//	        "maxLength": 256,
-			//	        "minLength": 0,
-			//	        "type": "string"
-			//	      }
-			//	    },
-			//	    "required": [
-			//	      "Key",
-			//	      "Value"
-			//	    ],
-			//	    "type": "object"
-			//	  },
-			//	  "maxItems": 200,
-			//	  "minItems": 0,
-			//	  "type": "array"
-			//	}
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 64),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of tags for the namespace.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "properties": {
+		//	      "Key": {
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 200,
+		//	  "minItems": 0,
+		//	  "type": "array"
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 128),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Required: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(0, 256),
+						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
 			Description: "The list of tags for the namespace.",
-			Attributes: tfsdk.ListNestedAttributes(
-				map[string]tfsdk.Attribute{
-					"key": {
-						// Property: Key
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(1, 128),
-						},
-					},
-					"value": {
-						// Property: Value
-						Type:     types.StringType,
-						Required: true,
-						Validators: []tfsdk.AttributeValidator{
-							validate.StringLenBetween(0, 256),
-						},
-					},
-				},
-			),
-			Optional: true,
-			Computed: true,
-			Validators: []tfsdk.AttributeValidator{
-				validate.ArrayLenBetween(0, 200),
-			},
-			PlanModifiers: []tfsdk.AttributePlanModifier{
-				Multiset(),
-				resource.UseStateForUnknown(),
-				resource.RequiresReplace(),
-			},
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeBetween(0, 200),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+				listplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 			// Tags is a write-only property.
-		},
-	}
+		}, /*END ATTRIBUTE*/
+	} /*END SCHEMA*/
 
-	attributes["id"] = tfsdk.Attribute{
+	attributes["id"] = schema.StringAttribute{
 		Description: "Uniquely identifies the resource.",
-		Type:        types.StringType,
 		Computed:    true,
-		PlanModifiers: []tfsdk.AttributePlanModifier{
-			resource.UseStateForUnknown(),
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
 		},
 	}
 
-	schema := tfsdk.Schema{
+	schema := schema.Schema{
 		Description: "Definition of AWS::RedshiftServerless::Namespace Resource Type",
 		Version:     1,
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RedshiftServerless::Namespace").WithTerraformTypeName("awscc_redshiftserverless_namespace")
 	opts = opts.WithTerraformSchema(schema)
@@ -560,7 +483,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
