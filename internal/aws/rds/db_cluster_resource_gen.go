@@ -468,17 +468,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				"address": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The connection endpoint for the DB cluster.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Port
 				"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The port number that will accept connections on this DB cluster.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Computed: true,

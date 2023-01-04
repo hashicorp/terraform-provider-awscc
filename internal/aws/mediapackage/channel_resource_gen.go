@@ -142,41 +142,26 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated unique identifier for the IngestEndpoint",
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Password
 							"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated password for ingest authentication.",
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Url
 							"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ingest URL to which the source stream should be sent.",
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Username
 							"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated username for ingest authentication.",
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of endpoints to which the source stream should be sent.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						listplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "A short text description of the Channel.",

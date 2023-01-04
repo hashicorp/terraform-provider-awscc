@@ -720,17 +720,11 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				"apply_on": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Applying SnapStart setting on function resource type.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: OptimizationStatus
 				"optimization_status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether SnapStart is activated for the specified function version.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The SnapStart response of your function",

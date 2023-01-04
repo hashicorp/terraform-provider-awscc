@@ -85,9 +85,6 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 				"is_public": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Specifies whether the policy is public or not.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The Policy Status associated with this Multi Region Access Point",

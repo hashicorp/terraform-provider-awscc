@@ -594,17 +594,11 @@ func analysisResource(ctx context.Context) (resource.Resource, error) {
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: SheetId
 					"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "<p>The unique identifier associated with a sheet.</p>",
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
