@@ -721,8 +721,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		features.UsesRegexpInValidation = false
 	}
 
-	if computed {
+	if computed && !parentComputedOnly {
 		// Computed.
+		// If our parent is Computed-only (and hence we are) then we don't need our own plan modifier.
 		planModifiers = append(planModifiers, fmt.Sprintf("%s.UseStateForUnknown()", fwPlanModifierPackage))
 		features.FrameworkPlanModifierPackages = append(features.FrameworkPlanModifierPackages, fwPlanModifierPackage)
 	}
