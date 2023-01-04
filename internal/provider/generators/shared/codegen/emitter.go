@@ -11,6 +11,7 @@ import (
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
 	"github.com/hashicorp/terraform-provider-awscc/internal/naming"
 	"github.com/mitchellh/cli"
+	"golang.org/x/exp/slices"
 )
 
 // Features of the emitted code.
@@ -30,8 +31,10 @@ type Features struct {
 func (f Features) LogicalOr(features Features) Features {
 	var result Features
 
-	result.FrameworkPlanModifierPackages = append(f.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
-	result.FrameworkValidatorsPackages = append(f.FrameworkValidatorsPackages, features.FrameworkValidatorsPackages...)
+	result.FrameworkPlanModifierPackages = slices.Clone(f.FrameworkPlanModifierPackages)
+	result.FrameworkPlanModifierPackages = append(result.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
+	result.FrameworkValidatorsPackages = slices.Clone(f.FrameworkValidatorsPackages)
+	result.FrameworkValidatorsPackages = append(result.FrameworkValidatorsPackages, features.FrameworkValidatorsPackages...)
 	result.HasIDRootProperty = f.HasIDRootProperty || features.HasIDRootProperty
 	result.HasRequiredRootProperty = f.HasRequiredRootProperty || features.HasRequiredRootProperty
 	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
