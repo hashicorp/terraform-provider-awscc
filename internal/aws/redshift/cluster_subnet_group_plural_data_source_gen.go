@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -36,12 +36,12 @@ func clusterSubnetGroupsDataSource(ctx context.Context) (datasource.DataSource, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::ClusterSubnetGroup").WithTerraformTypeName("awscc_redshift_cluster_subnet_groups")
 	opts = opts.WithTerraformSchema(schema)
 
-	v, err := NewPluralDataSource(ctx, opts...)
+	v, err := generic.NewPluralDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
