@@ -61,8 +61,9 @@ type Emitter struct {
 }
 
 type parent struct {
-	path []string
-	reqd interface {
+	computedOnly bool
+	path         []string
+	reqd         interface {
 		IsRequired(name string) bool
 	}
 }
@@ -70,7 +71,6 @@ type parent struct {
 // EmitRootPropertiesSchema generates the Terraform Plugin SDK code for a CloudFormation root schema
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // The root schema is the map of root property names to Attributes.
-// To generate all code features as "Computed", e.g. to be used in a singular data source, set the computedOnly argument to true.
 func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (Features, error) {
 	var features Features
 
@@ -111,12 +111,58 @@ func (e Emitter) EmitRootPropertiesSchema(attributeNameMap map[string]string) (F
 
 // emitAttribute generates the Terraform Plugin SDK code for a CloudFormation property's Attributes
 // and emits the generated code to the emitter's Writer. Code features are returned.
-// To generate all code features as "Computed", e.g. to be used in a singular data source, set the computedOnly argument to true.
-func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required bool) (Features, error) {
+func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string, name string, property *cfschema.Property, required, parentComputedOnly bool) (Features, error) {
 	var features Features
 	var validators []string
 	var planModifiers []string
 	var fwPlanModifierPackage, fwPlanModifierType, fwValidatorType string
+
+	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
+	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
+	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
+	hasDefaultValue := property.Default != nil
+
+	if readOnly && required {
+		e.warnf("%s is ReadOnly and Required", strings.Join(path, "/"))
+	}
+	if readOnly && writeOnly {
+		e.warnf("%s is ReadOnly and WriteOnly", strings.Join(path, "/"))
+	}
+
+	var optional, computed bool
+
+	if required && hasDefaultValue {
+		e.warnf("%s is Required and has a default value. Emitting as Computed,Optional", strings.Join(path, "/"))
+
+		required = false
+		optional = true
+	}
+
+	if !required && !readOnly {
+		optional = true
+	}
+
+	if (readOnly || createOnly) && !required {
+		computed = true
+	}
+
+	if hasDefaultValue && !computed {
+		computed = true
+	}
+
+	// All Optional attributes are also Computed.
+	if optional && !computed {
+		computed = true
+	}
+
+	// If our parent is Computed-only then so are we.
+	if parentComputedOnly {
+		required = false
+		optional = false
+		computed = true
+	}
+
+	computedOnly := computed && !optional
 
 	switch propertyType := property.Type.String(); propertyType {
 	//
@@ -216,8 +262,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				f, err := e.emitSchema(
 					attributeNameMap,
 					parent{
-						path: path,
-						reqd: property.Items,
+						computedOnly: computedOnly,
+						path:         path,
+						reqd:         property.Items,
 					},
 					property.Items.Properties)
 
@@ -322,8 +369,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				f, err := e.emitSchema(
 					attributeNameMap,
 					parent{
-						path: path,
-						reqd: property.Items,
+						computedOnly: computedOnly,
+						path:         path,
+						reqd:         property.Items,
 					},
 					property.Items.Properties)
 
@@ -533,8 +581,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 				f, err := e.emitSchema(
 					attributeNameMap,
 					parent{
-						path: path,
-						reqd: property.Items,
+						computedOnly: computedOnly,
+						path:         path,
+						reqd:         property.Items,
 					},
 					patternProperty.Properties)
 
@@ -605,8 +654,9 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		f, err := e.emitSchema(
 			attributeNameMap,
 			parent{
-				path: path,
-				reqd: property,
+				computedOnly: computedOnly,
+				path:         path,
+				reqd:         property,
 			},
 			property.Properties)
 
@@ -635,53 +685,11 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	// Handle any default value.
-	var hasDefaultValue bool
-
 	if f, planModifier, err := defaultValueAttributePlanModifier(path, property); err != nil {
 		return features, err
 	} else if planModifier != "" {
-		if required {
-			e.warnf("%s is Required and has a default value. Emitting as Computed,Optional", strings.Join(path, "/"))
-		}
-
-		hasDefaultValue = true
 		features = features.LogicalOr(f)
 		planModifiers = append(planModifiers, planModifier)
-	}
-
-	createOnly := e.CfResource.CreateOnlyProperties.ContainsPath(path)
-	readOnly := e.CfResource.ReadOnlyProperties.ContainsPath(path)
-	writeOnly := e.CfResource.WriteOnlyProperties.ContainsPath(path)
-
-	if readOnly && required {
-		e.warnf("%s is ReadOnly and Required", strings.Join(path, "/"))
-	}
-	if readOnly && writeOnly {
-		e.warnf("%s is ReadOnly and WriteOnly", strings.Join(path, "/"))
-	}
-
-	var optional, computed bool
-
-	if required && hasDefaultValue {
-		required = false
-		optional = true
-	}
-
-	if !required && !readOnly {
-		optional = true
-	}
-
-	if (readOnly || createOnly) && !required {
-		computed = true
-	}
-
-	if hasDefaultValue && !computed {
-		computed = true
-	}
-
-	// All Optional attributes are also Computed.
-	if optional && !computed {
-		computed = true
 	}
 
 	if required {
@@ -695,7 +703,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 	}
 
 	// Don't emit validators for Computed-only attributes.
-	if !computed || optional {
+	if !computedOnly {
 		if len(validators) > 0 {
 			features.HasValidator = true
 			e.printf("Validators:[]validator.%s{/*START VALIDATORS*/\n", fwValidatorType)
@@ -747,7 +755,6 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 // and emits the generated code to the emitter's Writer. Code features are returned.
 // A schema is a map of property names to Attributes.
 // Property names are sorted prior to code generation to reduce diffs.
-// To generate all code features as "Computed", e.g. to be used in a singular data source, set the computedOnly argument to true.
 func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, properties map[string]*cfschema.Property) (Features, error) {
 	names := make([]string, 0)
 	for name := range properties {
@@ -785,7 +792,9 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 			append(parent.path, name),
 			name,
 			properties[name],
-			parent.reqd.IsRequired(name))
+			parent.reqd.IsRequired(name),
+			parent.computedOnly,
+		)
 
 		if err != nil {
 			return features, err
