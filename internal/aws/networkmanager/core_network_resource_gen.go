@@ -117,7 +117,6 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Asn
 					"asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The ASN of a core network edge.",
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 							float64planmodifier.UseStateForUnknown(),
@@ -126,7 +125,6 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EdgeLocation
 					"edge_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Region where a core network edge is located.",
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -135,7 +133,6 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: InsideCidrBlocks
 					"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							Multiset(),
@@ -236,7 +233,6 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EdgeLocations
 					"edge_locations": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							Multiset(),
@@ -246,7 +242,6 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Name
 					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Name of segment",
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -255,7 +250,6 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SharedSegments
 					"shared_segments": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							Multiset(),

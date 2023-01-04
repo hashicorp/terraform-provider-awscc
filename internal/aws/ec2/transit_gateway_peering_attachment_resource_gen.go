@@ -118,7 +118,6 @@ func transitGatewayPeeringAttachmentResource(ctx context.Context) (resource.Reso
 				// Property: Code
 				"code": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The status code.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -127,7 +126,6 @@ func transitGatewayPeeringAttachmentResource(ctx context.Context) (resource.Reso
 				// Property: Message
 				"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The status message, if applicable.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

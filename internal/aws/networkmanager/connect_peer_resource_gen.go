@@ -116,7 +116,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: CoreNetworkAddress
 							"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -124,7 +123,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: CoreNetworkAsn
 							"core_network_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 									float64planmodifier.UseStateForUnknown(),
@@ -132,7 +130,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: PeerAddress
 							"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -140,7 +137,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 							// Property: PeerAsn
 							"peer_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 									float64planmodifier.UseStateForUnknown(),
@@ -148,7 +144,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						Multiset(),
@@ -157,7 +152,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CoreNetworkAddress
 				"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -166,7 +160,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				// Property: InsideCidrBlocks
 				"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						Multiset(),
@@ -175,7 +168,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PeerAddress
 				"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -184,7 +176,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Tunnel protocol type (Only support GRE for now)",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

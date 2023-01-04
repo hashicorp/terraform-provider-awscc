@@ -908,7 +908,6 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -917,7 +916,6 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CreatedTime
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The time that this dashboard version was created.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -927,11 +925,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				"data_set_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
 					Description: "<p>The Amazon Resource Numbers (ARNs) for the datasets that are associated with this\n            version of the dashboard.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 100),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -939,11 +933,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>Description.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 512),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -955,33 +945,14 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Message
 							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Message.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"ACCESS_DENIED",
-										"SOURCE_NOT_FOUND",
-										"DATA_SET_NOT_FOUND",
-										"INTERNAL_FAILURE",
-										"PARAMETER_VALUE_INCOMPATIBLE",
-										"PARAMETER_TYPE_INVALID",
-										"PARAMETER_NOT_FOUND",
-										"COLUMN_TYPE_MISMATCH",
-										"COLUMN_GEOGRAPHIC_ROLE_MISMATCH",
-										"COLUMN_REPLACEMENT_MISSING",
-									),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -989,11 +960,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Errors associated with this dashboard version.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtLeast(1),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1005,11 +972,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -1017,12 +980,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 							// Property: SheetId
 							"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The unique identifier associated with a sheet.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 2048),
-									stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\-]+"), ""),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -1030,11 +988,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 20),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1042,7 +996,6 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SourceEntityArn
 				"source_entity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>Source entity ARN.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1050,19 +1003,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"CREATION_IN_PROGRESS",
-							"CREATION_SUCCESSFUL",
-							"CREATION_FAILED",
-							"UPDATE_IN_PROGRESS",
-							"UPDATE_SUCCESSFUL",
-							"UPDATE_FAILED",
-							"DELETED",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1070,7 +1011,6 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ThemeArn
 				"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The ARN of the theme associated with a version of the dashboard.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1079,11 +1019,7 @@ func dashboardResource(ctx context.Context) (resource.Resource, error) {
 				// Property: VersionNumber
 				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "<p>Version number for this version of the dashboard.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.AtLeast(1.000000),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

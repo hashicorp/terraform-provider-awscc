@@ -294,7 +294,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AdminUsername
 				"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -302,7 +301,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CreationDate
 				"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -310,18 +308,13 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: DbName
 				"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z][a-zA-Z_0-9+.@-]*"), ""),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DefaultIamRoleArn
 				"default_iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -330,13 +323,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: IamRoles
 				"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.ValueStringsAre(
-							stringvalidator.LengthBetween(0, 512),
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						Multiset(),
 						listplanmodifier.UseStateForUnknown(),
@@ -344,7 +331,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyId
 				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -353,18 +339,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: LogExports
 				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 16),
-						listvalidator.ValueStringsAre(
-							stringvalidator.OneOf(
-								"useractivitylog",
-								"userlog",
-								"connectionlog",
-							),
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						Multiset(),
 						listplanmodifier.UseStateForUnknown(),
@@ -372,7 +347,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceArn
 				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -380,7 +354,6 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceId
 				"namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -388,27 +361,14 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceName
 				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(3, 64),
-						stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9-]+$"), ""),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"AVAILABLE",
-							"MODIFYING",
-							"DELETING",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

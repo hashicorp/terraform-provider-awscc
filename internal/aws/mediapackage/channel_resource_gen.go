@@ -141,7 +141,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated unique identifier for the IngestEndpoint",
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -150,7 +149,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Password
 							"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated password for ingest authentication.",
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -159,7 +157,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Url
 							"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ingest URL to which the source stream should be sent.",
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -168,7 +165,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Username
 							"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated username for ingest authentication.",
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -177,7 +173,6 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of endpoints to which the source stream should be sent.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),

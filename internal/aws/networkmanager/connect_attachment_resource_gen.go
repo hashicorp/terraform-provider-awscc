@@ -216,7 +216,6 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AttachmentPolicyRuleNumber
 				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "New policy rule number of the attachment",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 						int64planmodifier.UseStateForUnknown(),
@@ -225,7 +224,6 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SegmentName
 				"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Proposed segment name",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -238,17 +236,22 @@ func connectAttachmentResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Required:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Required:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "Proposed tags for the Segment.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						Multiset(),

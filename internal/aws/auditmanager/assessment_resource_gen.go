@@ -297,12 +297,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AssessmentId
 					"assessment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(36, 36),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -310,12 +305,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AssessmentName
 					"assessment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the related assessment.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 127),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_\\.]+$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -323,12 +313,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Comment
 					"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The comment related to the delegation.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthAtMost(350),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -336,12 +321,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ControlSetId
 					"control_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier for the specified control set.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 300),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -349,12 +329,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CreatedBy
 					"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The IAM user or role that performed the action.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 100),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_()\\[\\]\\s]+$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -362,7 +337,6 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: CreationTime
 					"creation_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The sequence of characters that identifies when the event occurred.",
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 							float64planmodifier.UseStateForUnknown(),
@@ -370,12 +344,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(36, 36),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -383,7 +352,6 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: LastUpdated
 					"last_updated": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The sequence of characters that identifies when the event occurred.",
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 							float64planmodifier.UseStateForUnknown(),
@@ -392,12 +360,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(20, 2048),
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*:iam:.*"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -405,14 +368,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: RoleType
 					"role_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: " The IAM role type.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"PROCESS_OWNER",
-								"RESOURCE_OWNER",
-							),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -420,15 +376,7 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The status of the delegation.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"IN_PROGRESS",
-								"UNDER_REVIEW",
-								"COMPLETE",
-							),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/

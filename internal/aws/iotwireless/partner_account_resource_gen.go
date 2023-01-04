@@ -183,18 +183,13 @@ func partnerAccountResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AmazonId
 				"amazon_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtMost(2048),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -202,12 +197,7 @@ func partnerAccountResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Fingerprint
 				"fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(64, 64),
-						stringvalidator.RegexMatches(regexp.MustCompile("[a-fA-F0-9]{64}"), ""),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

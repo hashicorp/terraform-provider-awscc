@@ -231,33 +231,20 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ServerCertificateArn
 					"server_certificate_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 2048),
-							stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ServerCertificateStatus
 					"server_certificate_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"INVALID",
-								"VALID",
-							),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ServerCertificateStatusDetail
 					"server_certificate_status_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),

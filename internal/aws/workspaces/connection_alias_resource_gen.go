@@ -84,7 +84,6 @@ func connectionAliasResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AssociatedAccountId
 					"associated_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -92,41 +91,21 @@ func connectionAliasResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 					// Property: AssociationStatus
 					"association_status": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.OneOf(
-								"NOT_ASSOCIATED",
-								"PENDING_ASSOCIATION",
-								"ASSOCIATED_WITH_OWNER_ACCOUNT",
-								"ASSOCIATED_WITH_SHARED_ACCOUNT",
-								"PENDING_DISASSOCIATION",
-							),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ConnectionIdentifier
 					"connection_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 20),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]+$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ResourceId
 					"resource_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 1000),
-							stringvalidator.RegexMatches(regexp.MustCompile(".+"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/

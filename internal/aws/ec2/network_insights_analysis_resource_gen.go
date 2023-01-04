@@ -49,7 +49,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: ComponentArn
 					"component_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -57,7 +56,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: ComponentId
 					"component_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -606,7 +604,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -614,14 +611,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -632,7 +627,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -640,7 +634,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Egress
 							"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
@@ -651,7 +644,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: From
 									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
@@ -659,14 +651,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									}, /*END ATTRIBUTE*/
 									// Property: To
 									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -674,7 +664,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -682,7 +671,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: RuleAction
 							"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -690,14 +678,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: RuleNumber
 							"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -705,7 +691,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: Address
 					"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -714,7 +699,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					// Property: Addresses
 					"addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -725,7 +709,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -733,14 +716,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -749,7 +730,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					// Property: AvailabilityZones
 					"availability_zones": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -758,7 +738,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					// Property: Cidrs
 					"cidrs": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -769,7 +748,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: InstancePort
 							"instance_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
@@ -777,14 +755,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: LoadBalancerPort
 							"load_balancer_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -795,7 +771,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -803,14 +778,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -821,7 +794,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -829,14 +801,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -847,7 +817,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -855,14 +824,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -873,7 +840,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -881,14 +847,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -896,7 +860,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: Direction
 					"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -907,7 +870,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -915,14 +877,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -930,7 +890,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: ExplanationCode
 					"explanation_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -941,7 +900,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -949,14 +907,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -967,7 +923,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -975,14 +930,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -990,7 +943,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: LoadBalancerArn
 					"load_balancer_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -998,7 +950,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: LoadBalancerListenerPort
 					"load_balancer_listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
@@ -1009,7 +960,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Address
 							"address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1017,7 +967,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: AvailabilityZone
 							"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1028,7 +977,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: Arn
 									"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
@@ -1036,14 +984,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									}, /*END ATTRIBUTE*/
 									// Property: Id
 									"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -1051,14 +997,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Port
 							"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1069,7 +1013,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1077,14 +1020,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1096,7 +1037,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Arn
 								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1104,7 +1044,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								}, /*END ATTRIBUTE*/
 								// Property: Id
 								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1112,7 +1051,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -1120,7 +1058,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: LoadBalancerTargetPort
 					"load_balancer_target_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
@@ -1128,7 +1065,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: MissingComponent
 					"missing_component": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1139,7 +1075,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1147,14 +1082,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1165,7 +1098,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1173,14 +1105,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1188,7 +1118,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: PacketField
 					"packet_field": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1196,7 +1125,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
@@ -1208,7 +1136,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: From
 								"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
@@ -1216,7 +1143,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								}, /*END ATTRIBUTE*/
 								// Property: To
 								"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 										int64planmodifier.UseStateForUnknown(),
@@ -1224,7 +1150,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -1235,7 +1160,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1243,14 +1167,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1259,7 +1181,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					// Property: Protocols
 					"protocols": schema.ListAttribute{ /*START ATTRIBUTE*/
 						ElementType: types.StringType,
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -1270,7 +1191,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1278,14 +1198,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1296,7 +1214,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: NatGatewayId
 							"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1304,7 +1221,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: NetworkInterfaceId
 							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1312,7 +1228,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Origin
 							"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1320,7 +1235,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: TransitGatewayId
 							"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1328,7 +1242,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: VpcPeeringConnectionId
 							"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1336,7 +1249,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: destinationCidr
 							"destination_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1344,7 +1256,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: destinationPrefixListId
 							"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1352,7 +1263,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: egressOnlyInternetGatewayId
 							"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1360,7 +1270,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: gatewayId
 							"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1368,14 +1277,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: instanceId
 							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1386,7 +1293,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1394,14 +1300,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1412,7 +1316,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1420,7 +1323,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Direction
 							"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1431,7 +1333,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: From
 									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
@@ -1439,14 +1340,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									}, /*END ATTRIBUTE*/
 									// Property: To
 									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -1454,7 +1353,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: PrefixListId
 							"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1462,7 +1360,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1470,14 +1367,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: SecurityGroupId
 							"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1489,7 +1384,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Arn
 								"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1497,7 +1391,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								}, /*END ATTRIBUTE*/
 								// Property: Id
 								"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1505,7 +1398,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -1516,7 +1408,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1524,14 +1415,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1539,7 +1428,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: State
 					"state": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
@@ -1550,7 +1438,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1558,14 +1445,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1576,7 +1461,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1584,14 +1468,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1602,7 +1484,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1610,14 +1491,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1628,7 +1507,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1636,14 +1514,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1654,7 +1530,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1662,14 +1537,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1680,7 +1553,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1688,14 +1560,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -1706,7 +1576,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -1714,14 +1583,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2039,7 +1906,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2047,7 +1913,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Egress
 							"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
@@ -2058,7 +1923,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: From
 									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
@@ -2066,14 +1930,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									}, /*END ATTRIBUTE*/
 									// Property: To
 									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -2081,7 +1943,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2089,7 +1950,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: RuleAction
 							"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2097,14 +1957,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: RuleNumber
 							"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2115,7 +1973,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2123,14 +1980,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2141,7 +1996,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2149,14 +2003,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2168,7 +2020,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: DestinationAddresses
 							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -2180,7 +2031,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2188,7 +2038,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2196,7 +2045,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -2204,7 +2052,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2213,7 +2060,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: SourceAddresses
 							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -2225,7 +2071,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2233,7 +2078,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2241,14 +2085,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2260,7 +2102,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: DestinationAddresses
 							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -2272,7 +2113,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2280,7 +2120,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2288,7 +2127,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -2296,7 +2134,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2305,7 +2142,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: SourceAddresses
 							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -2317,7 +2153,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2325,7 +2160,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -2333,14 +2167,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2351,7 +2183,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: NatGatewayId
 							"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2359,7 +2190,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: NetworkInterfaceId
 							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2367,7 +2197,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Origin
 							"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2375,7 +2204,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: TransitGatewayId
 							"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2383,7 +2211,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: VpcPeeringConnectionId
 							"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2391,7 +2218,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: destinationCidr
 							"destination_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2399,7 +2225,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: destinationPrefixListId
 							"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2407,7 +2232,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: egressOnlyInternetGatewayId
 							"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2415,7 +2239,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: gatewayId
 							"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2423,14 +2246,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: instanceId
 							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2441,7 +2262,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2449,7 +2269,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Direction
 							"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2460,7 +2279,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: From
 									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
@@ -2468,14 +2286,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									}, /*END ATTRIBUTE*/
 									// Property: To
 									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -2483,7 +2299,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: PrefixListId
 							"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2491,7 +2306,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2499,14 +2313,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: SecurityGroupId
 							"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2514,7 +2326,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: SequenceNumber
 					"sequence_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
@@ -2525,7 +2336,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2533,14 +2343,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2551,7 +2359,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2559,14 +2366,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2577,7 +2382,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2585,14 +2389,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -2940,7 +2742,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2948,7 +2749,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Egress
 							"egress": schema.BoolAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 									boolplanmodifier.UseStateForUnknown(),
@@ -2959,7 +2759,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: From
 									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
@@ -2967,14 +2766,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									}, /*END ATTRIBUTE*/
 									// Property: To
 									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -2982,7 +2779,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2990,7 +2786,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: RuleAction
 							"rule_action": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -2998,14 +2793,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: RuleNumber
 							"rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 									int64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3016,7 +2809,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3024,14 +2816,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3042,7 +2832,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3050,14 +2839,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3069,7 +2856,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: DestinationAddresses
 							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -3081,7 +2867,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3089,7 +2874,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3097,7 +2881,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -3105,7 +2888,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3114,7 +2896,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: SourceAddresses
 							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -3126,7 +2907,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3134,7 +2914,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3142,14 +2921,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3161,7 +2938,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: DestinationAddresses
 							"destination_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -3173,7 +2949,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3181,7 +2956,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3189,7 +2963,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -3197,7 +2970,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3206,7 +2978,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							// Property: SourceAddresses
 							"source_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
@@ -3218,7 +2989,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 										// Property: From
 										"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3226,7 +2996,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 										// Property: To
 										"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-											Optional: true,
 											Computed: true,
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 												int64planmodifier.UseStateForUnknown(),
@@ -3234,14 +3003,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3252,7 +3019,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: NatGatewayId
 							"nat_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3260,7 +3026,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: NetworkInterfaceId
 							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3268,7 +3033,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Origin
 							"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3276,7 +3040,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: TransitGatewayId
 							"transit_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3284,7 +3047,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: VpcPeeringConnectionId
 							"vpc_peering_connection_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3292,7 +3054,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: destinationCidr
 							"destination_cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3300,7 +3061,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: destinationPrefixListId
 							"destination_prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3308,7 +3068,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: egressOnlyInternetGatewayId
 							"egress_only_internet_gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3316,7 +3075,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: gatewayId
 							"gateway_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3324,14 +3082,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: instanceId
 							"instance_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3342,7 +3098,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Cidr
 							"cidr": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3350,7 +3105,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Direction
 							"direction": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3361,7 +3115,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: From
 									"from": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
@@ -3369,14 +3122,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 									}, /*END ATTRIBUTE*/
 									// Property: To
 									"to": schema.Int64Attribute{ /*START ATTRIBUTE*/
-										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -3384,7 +3135,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: PrefixListId
 							"prefix_list_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3392,7 +3142,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Protocol
 							"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3400,14 +3149,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: SecurityGroupId
 							"security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3415,7 +3162,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 					}, /*END ATTRIBUTE*/
 					// Property: SequenceNumber
 					"sequence_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 							int64planmodifier.UseStateForUnknown(),
@@ -3426,7 +3172,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3434,14 +3179,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3452,7 +3195,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3460,14 +3202,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
@@ -3478,7 +3218,6 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Arn
 							"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -3486,14 +3225,12 @@ func networkInsightsAnalysisResource(ctx context.Context) (resource.Resource, er
 							}, /*END ATTRIBUTE*/
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
-						Optional: true,
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),

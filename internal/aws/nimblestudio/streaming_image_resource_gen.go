@@ -96,12 +96,7 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 				// Property: KeyArn
 				"key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The ARN for a KMS key that is used to encrypt studio data.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthAtLeast(4),
-						stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*"), ""),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -109,12 +104,10 @@ func streamingImageResource(ctx context.Context) (resource.Resource, error) {
 				// Property: KeyType
 				"key_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p/>",
-					Required:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"CUSTOMER_MANAGED_KEY",
-						),
-					}, /*END VALIDATORS*/
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>TODO</p>",

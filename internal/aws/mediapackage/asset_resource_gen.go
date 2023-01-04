@@ -85,12 +85,18 @@ func assetResource(ctx context.Context) (resource.Resource, error) {
 					// Property: PackagingConfigurationId
 					"packaging_configuration_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The ID of the PackagingConfiguration being applied to the Asset.",
-						Required:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Url
 					"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The URL of the parent manifest for the repackaged Asset.",
-						Required:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/

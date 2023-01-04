@@ -1179,7 +1179,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Arn
 				"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of the resource.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1188,12 +1187,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 				// Property: BaseThemeId
 				"base_theme_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon QuickSight-defined ID of the theme that a custom theme inherits from. All\n            themes initially inherit from a default QuickSight theme.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\-]+"), ""),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1208,14 +1202,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								"colors": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "<p>The hexadecimal codes for the colors.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(0, 100),
-										listvalidator.ValueStringsAre(
-											stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-										),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1223,11 +1210,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: EmptyFillColor
 								"empty_fill_color": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The hexadecimal code of a color that applies to charts where a lack of data is\n            highlighted.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1236,21 +1219,13 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								"min_max_gradient": schema.ListAttribute{ /*START ATTRIBUTE*/
 									ElementType: types.StringType,
 									Description: "<p>The minimum and maximum hexadecimal codes that describe a color gradient. </p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(0, 100),
-										listvalidator.ValueStringsAre(
-											stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-										),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "<p>The theme colors that are used for data colors in charts. The colors description is a\n            hexadecimal color code that consists of six alphanumerical characters, prefixed with\n                <code>#</code>, for example #37BFF5. </p>",
-							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
@@ -1268,7 +1243,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Show
 												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The option to enable display of borders for visuals.</p>",
-													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 														boolplanmodifier.UseStateForUnknown(),
@@ -1276,7 +1250,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "<p>The display options for tile borders for visuals.</p>",
-											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
@@ -1284,7 +1257,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>Display options related to tiles on a sheet.</p>",
-									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
@@ -1299,7 +1271,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Show
 												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>This Boolean value controls whether to display a gutter space between sheet tiles.\n        </p>",
-													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 														boolplanmodifier.UseStateForUnknown(),
@@ -1307,7 +1278,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "<p>The display options for gutter spacing between tiles on a sheet.</p>",
-											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
@@ -1319,7 +1289,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Show
 												"show": schema.BoolAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>This Boolean value controls whether to display sheet margins.</p>",
-													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 														boolplanmodifier.UseStateForUnknown(),
@@ -1327,7 +1296,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END ATTRIBUTE*/
 											}, /*END SCHEMA*/
 											Description: "<p>The display options for margins around the outside edge of sheets.</p>",
-											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 												objectplanmodifier.UseStateForUnknown(),
@@ -1335,7 +1303,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 										}, /*END ATTRIBUTE*/
 									}, /*END SCHEMA*/
 									Description: "<p>The display options for the layout of tiles on a sheet.</p>",
-									Optional:    true,
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
@@ -1343,7 +1310,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "<p>The theme display options for sheets. </p>",
-							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
@@ -1358,7 +1324,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: FontFamily
 											"font_family": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Optional: true,
 												Computed: true,
 												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 													stringplanmodifier.UseStateForUnknown(),
@@ -1366,18 +1331,13 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 									}, /*END NESTED OBJECT*/
-									Optional: true,
 									Computed: true,
-									Validators: []validator.List{ /*START VALIDATORS*/
-										listvalidator.SizeBetween(0, 5),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "<p>The typeface for the theme.</p>",
-							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
@@ -1389,11 +1349,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Accent
 								"accent": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>This color is that applies to selected states and buttons.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1401,11 +1357,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: AccentForeground
 								"accent_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            accent color.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1413,11 +1365,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Danger
 								"danger": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The color that applies to error messages.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1425,11 +1373,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DangerForeground
 								"danger_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            error color.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1437,11 +1381,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Dimension
 								"dimension": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The color that applies to the names of fields that are identified as\n            dimensions.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1449,11 +1389,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: DimensionForeground
 								"dimension_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            dimension color.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1461,11 +1397,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Measure
 								"measure": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The color that applies to the names of fields that are identified as measures.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1473,11 +1405,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: MeasureForeground
 								"measure_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            measure color.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1485,11 +1413,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: PrimaryBackground
 								"primary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The background color that applies to visuals and other high emphasis UI.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1497,11 +1421,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: PrimaryForeground
 								"primary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The color of text and other foreground elements that appear over the primary\n            background regions, such as grid lines, borders, table banding, icons, and so on.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1509,11 +1429,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: SecondaryBackground
 								"secondary_background": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The background color that applies to the sheet background and sheet controls.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1521,11 +1437,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: SecondaryForeground
 								"secondary_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The foreground color that applies to any sheet title, sheet control text, or UI that\n            appears over the secondary background.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1533,11 +1445,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Success
 								"success": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The color that applies to success messages, for example the check mark for a\n            successful download.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1545,11 +1453,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: SuccessForeground
 								"success_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            success color.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1557,11 +1461,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Warning
 								"warning": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>This color that applies to warning and informational messages.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -1569,18 +1469,13 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 								// Property: WarningForeground
 								"warning_foreground": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "<p>The foreground color that applies to any text or other elements that appear over the\n            warning color.</p>",
-									Optional:    true,
 									Computed:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.RegexMatches(regexp.MustCompile("^#[A-F0-9]{6}$"), ""),
-									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "<p>The theme colors that apply to UI and to charts, excluding data colors. The colors\n            description is a hexadecimal color code that consists of six alphanumerical characters,\n            prefixed with <code>#</code>, for example #37BFF5. For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/themes-in-quicksight.html\">Using Themes in Amazon QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n        </p>",
-							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 								objectplanmodifier.UseStateForUnknown(),
@@ -1588,7 +1483,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>The theme configuration. This configuration contains all of the display properties for\n            a theme.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
@@ -1597,7 +1491,6 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CreatedTime
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The date and time that this theme version was created.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -1606,11 +1499,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The description of the theme.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 512),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1622,24 +1511,14 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Message
 							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The error message.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"INTERNAL_FAILURE",
-									),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -1647,30 +1526,14 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Errors associated with the theme.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtLeast(1),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"CREATION_IN_PROGRESS",
-							"CREATION_SUCCESSFUL",
-							"CREATION_FAILED",
-							"UPDATE_IN_PROGRESS",
-							"UPDATE_SUCCESSFUL",
-							"UPDATE_FAILED",
-							"DELETED",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -1678,11 +1541,7 @@ func themeResource(ctx context.Context) (resource.Resource, error) {
 				// Property: VersionNumber
 				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "<p>The version number of the theme.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.AtLeast(1.000000),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

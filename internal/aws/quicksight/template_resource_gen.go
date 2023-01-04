@@ -576,7 +576,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: CreatedTime
 				"created_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The time that this template version was created.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -597,7 +596,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 													// Property: Name
 													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 														Description: "<p>The name of the column group's column schema.</p>",
-														Optional:    true,
 														Computed:    true,
 														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 															stringplanmodifier.UseStateForUnknown(),
@@ -606,11 +604,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END SCHEMA*/
 											}, /*END NESTED OBJECT*/
 											Description: "<p>A structure containing the list of schemas for column group columns.</p>",
-											Optional:    true,
 											Computed:    true,
-											Validators: []validator.List{ /*START VALIDATORS*/
-												listvalidator.SizeBetween(0, 500),
-											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 												listplanmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
@@ -618,7 +612,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 										// Property: Name
 										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 											Description: "<p>The name of the column group schema.</p>",
-											Optional:    true,
 											Computed:    true,
 											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 												stringplanmodifier.UseStateForUnknown(),
@@ -627,11 +620,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 									}, /*END SCHEMA*/
 								}, /*END NESTED OBJECT*/
 								Description: "<p>A structure containing the list of column group schemas.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.List{ /*START VALIDATORS*/
-									listvalidator.SizeBetween(0, 500),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -646,7 +635,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 												// Property: DataType
 												"data_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The data type of the column schema.</p>",
-													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -655,7 +643,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 												// Property: GeographicRole
 												"geographic_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The geographic role of the column schema.</p>",
-													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -664,7 +651,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 												// Property: Name
 												"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 													Description: "<p>The name of the column schema.</p>",
-													Optional:    true,
 													Computed:    true,
 													PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 														stringplanmodifier.UseStateForUnknown(),
@@ -673,18 +659,13 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END SCHEMA*/
 										}, /*END NESTED OBJECT*/
 										Description: "<p>A structure containing the list of column schemas.</p>",
-										Optional:    true,
 										Computed:    true,
-										Validators: []validator.List{ /*START VALIDATORS*/
-											listvalidator.SizeBetween(0, 500),
-										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
 								}, /*END SCHEMA*/
 								Description: "<p>Dataset schema.</p>",
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 									objectplanmodifier.UseStateForUnknown(),
@@ -693,7 +674,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Placeholder
 							"placeholder": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Placeholder.</p>",
-								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
@@ -702,11 +682,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Schema of the dataset identified by the placeholder. Any dashboard created from this\n            template should be bound to new datasets matching the same schema described through this\n            API operation.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 30),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -714,11 +690,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Description
 				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The description of the template.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 512),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -730,27 +702,14 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Message
 							"message": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>Description of the error type.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: Type
 							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Optional: true,
 								Computed: true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.OneOf(
-										"SOURCE_NOT_FOUND",
-										"DATA_SET_NOT_FOUND",
-										"INTERNAL_FAILURE",
-										"ACCESS_DENIED",
-									),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -758,11 +717,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>Errors associated with this template version.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeAtLeast(1),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -774,11 +729,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Name
 							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight\n            console.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -786,12 +737,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 							// Property: SheetId
 							"sheet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The unique identifier associated with a sheet.</p>",
-								Optional:    true,
 								Computed:    true,
-								Validators: []validator.String{ /*START VALIDATORS*/
-									stringvalidator.LengthBetween(1, 2048),
-									stringvalidator.RegexMatches(regexp.MustCompile("[\\w\\-]+"), ""),
-								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
@@ -799,11 +745,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "<p>A list of the associated sheets with the unique identifier and name of each sheet.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(0, 20),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -811,7 +753,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: SourceEntityArn
 				"source_entity_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The Amazon Resource Name (ARN) of an analysis or template that was used to create this\n            template.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -819,19 +760,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Optional: true,
 					Computed: true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"CREATION_IN_PROGRESS",
-							"CREATION_SUCCESSFUL",
-							"CREATION_FAILED",
-							"UPDATE_IN_PROGRESS",
-							"UPDATE_SUCCESSFUL",
-							"UPDATE_FAILED",
-							"DELETED",
-						),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -839,7 +768,6 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ThemeArn
 				"theme_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "<p>The ARN of the theme associated with this version of the template.</p>",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -848,11 +776,7 @@ func templateResource(ctx context.Context) (resource.Resource, error) {
 				// Property: VersionNumber
 				"version_number": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Description: "<p>The version number of the template version.</p>",
-					Optional:    true,
 					Computed:    true,
-					Validators: []validator.Float64{ /*START VALIDATORS*/
-						float64validator.AtLeast(1.000000),
-					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/

@@ -104,25 +104,22 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 								// Property: Key
 								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "A key to identify the metadata.",
-									Required:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
-										stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									}, /*END VALIDATORS*/
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: Value
 								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Corresponding metadata value for the key.",
-									Required:    true,
-									Validators: []validator.String{ /*START VALIDATORS*/
-										stringvalidator.LengthBetween(1, 255),
-										stringvalidator.RegexMatches(regexp.MustCompile(".*\\S.*"), ""),
-									}, /*END VALIDATORS*/
+									Computed:    true,
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The metadata associated with the client.",
-						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 							listplanmodifier.UseStateForUnknown(),
@@ -131,11 +128,7 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: ClientId
 					"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier for the client that is associated with the event integration.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 255),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -143,12 +136,7 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EventBridgeRuleName
 					"event_bridge_rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the Eventbridge rule.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 2048),
-							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9/\\._\\-]+$"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -156,11 +144,7 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EventIntegrationAssociationArn
 					"event_integration_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) for the event integration association.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.LengthBetween(1, 2048),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
@@ -168,11 +152,7 @@ func eventIntegrationResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EventIntegrationAssociationId
 					"event_integration_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier for the event integration association.",
-						Optional:    true,
 						Computed:    true,
-						Validators: []validator.String{ /*START VALIDATORS*/
-							stringvalidator.RegexMatches(regexp.MustCompile("[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"), ""),
-						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 							stringplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
