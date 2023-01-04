@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	{{if .ImportFrameworkTypes }}"github.com/hashicorp/terraform-plugin-framework/types"{{- end}}
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -31,7 +31,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (datasource.DataSource, err
 		Attributes:  attributes,
 	}
 
-    var opts DataSourceOptions
+    var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("{{ .CloudFormationTypeName }}").WithTerraformTypeName("{{ .TerraformTypeName }}")
 	opts = opts.WithTerraformSchema(schema)
@@ -41,7 +41,7 @@ func {{ .FactoryFunctionName }}(ctx context.Context) (datasource.DataSource, err
 {{- end }}
 	})
 
-    v, err := NewSingularDataSource(ctx, opts...)
+    v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -396,7 +396,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
-					planModifiers = append(planModifiers, "Multiset()")
+					planModifiers = append(planModifiers, "generic.Multiset()")
 				}
 
 			default:
@@ -421,7 +421,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					validators = append(validators, "listvalidator.UniqueValues()")
 					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				case aggregateMultiset:
-					planModifiers = append(planModifiers, "Multiset()")
+					planModifiers = append(planModifiers, "generic.Multiset()")
 				}
 
 				if validatorsGenerator != nil {
@@ -623,8 +623,8 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			if *e.CfResource.TypeName == "AWS::NetworkManager::CoreNetwork" && len(path) == 1 && name == "PolicyDocument" {
 				// Hack for AWS::NetworkManager::CoreNetwork.PolicyDocument.
 				e.printf("schema.StringAttribute{/*START ATTRIBUTE*/\n")
-				e.printf("CustomType:JSONStringType,\n")
-				planModifiers = append(planModifiers, "JSONStringType.AttributePlanModifier()")
+				e.printf("CustomType:generic.JSONStringType,\n")
+				planModifiers = append(planModifiers, "generic.JSONStringType.AttributePlanModifier()")
 
 				fwPlanModifierPackage = "stringplanmodifier"
 				fwPlanModifierType = "String"
@@ -908,16 +908,16 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 		// Handle default values for string properties encoded as booleans.
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeString:
-			return features, fmt.Sprintf("StringDefaultValue(%q)", strconv.FormatBool(v)), nil
+			return features, fmt.Sprintf("generic.StringDefaultValue(%q)", strconv.FormatBool(v)), nil
 		default:
-			return features, fmt.Sprintf("BoolDefaultValue(%t)", v), nil
+			return features, fmt.Sprintf("generic.BoolDefaultValue(%t)", v), nil
 		}
 	case float64:
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
-			return features, fmt.Sprintf("Int64DefaultValue(%d)", int64(v)), nil
+			return features, fmt.Sprintf("generic.Int64DefaultValue(%d)", int64(v)), nil
 		case cfschema.PropertyTypeNumber:
-			return features, fmt.Sprintf("Float64DefaultValue(%f)", v), nil
+			return features, fmt.Sprintf("generic.Float64DefaultValue(%f)", v), nil
 		default:
 			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
@@ -928,10 +928,10 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			if v, err := strconv.ParseBool(v); err != nil {
 				return features, "", err
 			} else {
-				return features, fmt.Sprintf("BoolDefaultValue(%t)", v), nil
+				return features, fmt.Sprintf("generic.BoolDefaultValue(%t)", v), nil
 			}
 		default:
-			return features, fmt.Sprintf("StringDefaultValue(%q)", v), nil
+			return features, fmt.Sprintf("generic.StringDefaultValue(%q)", v), nil
 		}
 
 	//
@@ -943,7 +943,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			return features, "", fmt.Errorf("%s has invalid default value type: %T", strings.Join(path, "/"), v)
 		case aggregateSet:
 			w := &strings.Builder{}
-			fprintf(w, "SetOfStringDefaultValue(\n")
+			fprintf(w, "generic.SetOfStringDefaultValue(\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
@@ -956,7 +956,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			return features, w.String(), nil
 		default:
 			w := &strings.Builder{}
-			fprintf(w, "ListOfStringDefaultValue(\n")
+			fprintf(w, "generic.ListOfStringDefaultValue(\n")
 			for _, elem := range v {
 				switch v := elem.(type) {
 				case string:
@@ -971,7 +971,7 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 
 	case map[string]interface{}:
 		w := &strings.Builder{}
-		fprintf(w, "ObjectDefaultValue()")
+		fprintf(w, "generic.ObjectDefaultValue()")
 		return features, w.String(), nil
 
 	default:
