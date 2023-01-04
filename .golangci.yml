@@ -54,8 +54,8 @@ linters-settings:
           - return
         ignored-functions:
           - os.Exit
-          - validate.StringLenAtMost
-          - validate.StringLenBetween
+          - stringvalidator.LengthAtMost
+          - stringvalidator.LengthBetween
   nolintlint:
     allow-unused: false
   stylecheck:
