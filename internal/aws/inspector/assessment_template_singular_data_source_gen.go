@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -120,7 +120,7 @@ func assessmentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Inspector::AssessmentTemplate").WithTerraformTypeName("awscc_inspector_assessment_template")
 	opts = opts.WithTerraformSchema(schema)
@@ -135,7 +135,7 @@ func assessmentTemplateDataSource(ctx context.Context) (datasource.DataSource, e
 		"value":                        "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

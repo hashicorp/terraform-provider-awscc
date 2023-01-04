@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -168,7 +168,7 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Panorama::PackageVersion").WithTerraformTypeName("awscc_panorama_package_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -187,7 +187,7 @@ func packageVersionDataSource(ctx context.Context) (datasource.DataSource, error
 		"updated_latest_patch_version": "UpdatedLatestPatchVersion",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -251,7 +251,7 @@ func emailIdentityDataSource(ctx context.Context) (datasource.DataSource, error)
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::EmailIdentity").WithTerraformTypeName("awscc_ses_email_identity")
 	opts = opts.WithTerraformSchema(schema)
@@ -278,7 +278,7 @@ func emailIdentityDataSource(ctx context.Context) (datasource.DataSource, error)
 		"signing_enabled":              "SigningEnabled",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

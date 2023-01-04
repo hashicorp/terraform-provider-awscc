@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -697,7 +697,7 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::StorageLens").WithTerraformTypeName("awscc_s3_storage_lens")
 	opts = opts.WithTerraformSchema(schema)
@@ -740,7 +740,7 @@ func storageLensDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"value":                              "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -387,7 +387,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Table").WithTerraformTypeName("awscc_cassandra_table")
 	opts = opts.WithTerraformSchema(schema)
@@ -416,7 +416,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"write_capacity_units":           "WriteCapacityUnits",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

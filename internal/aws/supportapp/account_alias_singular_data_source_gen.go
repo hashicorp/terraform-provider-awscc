@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -60,7 +60,7 @@ func accountAliasDataSource(ctx context.Context) (datasource.DataSource, error) 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::AccountAlias").WithTerraformTypeName("awscc_supportapp_account_alias")
 	opts = opts.WithTerraformSchema(schema)
@@ -69,7 +69,7 @@ func accountAliasDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"account_alias_resource_id": "AccountAliasResourceId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

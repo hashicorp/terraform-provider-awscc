@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -81,7 +81,7 @@ func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSourc
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::MonitoringSubscription").WithTerraformTypeName("awscc_cloudfront_monitoring_subscription")
 	opts = opts.WithTerraformSchema(schema)
@@ -92,7 +92,7 @@ func monitoringSubscriptionDataSource(ctx context.Context) (datasource.DataSourc
 		"realtime_metrics_subscription_status": "RealtimeMetricsSubscriptionStatus",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

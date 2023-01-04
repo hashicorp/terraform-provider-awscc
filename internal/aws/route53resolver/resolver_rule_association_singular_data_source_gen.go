@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -76,7 +76,7 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Route53Resolver::ResolverRuleAssociation").WithTerraformTypeName("awscc_route53resolver_resolver_rule_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -87,7 +87,7 @@ func resolverRuleAssociationDataSource(ctx context.Context) (datasource.DataSour
 		"vpc_id":                       "VPCId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -220,7 +220,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::CACertificate").WithTerraformTypeName("awscc_iot_ca_certificate")
 	opts = opts.WithTerraformSchema(schema)
@@ -242,7 +242,7 @@ func cACertificateDataSource(ctx context.Context) (datasource.DataSource, error)
 		"verification_certificate_pem": "VerificationCertificatePem",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

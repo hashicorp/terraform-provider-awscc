@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -59,7 +59,7 @@ func assessmentTargetDataSource(ctx context.Context) (datasource.DataSource, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Inspector::AssessmentTarget").WithTerraformTypeName("awscc_inspector_assessment_target")
 	opts = opts.WithTerraformSchema(schema)
@@ -69,7 +69,7 @@ func assessmentTargetDataSource(ctx context.Context) (datasource.DataSource, err
 		"resource_group_arn":     "ResourceGroupArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

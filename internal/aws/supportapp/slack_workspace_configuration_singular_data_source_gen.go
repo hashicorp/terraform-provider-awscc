@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -60,7 +60,7 @@ func slackWorkspaceConfigurationDataSource(ctx context.Context) (datasource.Data
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackWorkspaceConfiguration").WithTerraformTypeName("awscc_supportapp_slack_workspace_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -69,7 +69,7 @@ func slackWorkspaceConfigurationDataSource(ctx context.Context) (datasource.Data
 		"version_id": "VersionId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

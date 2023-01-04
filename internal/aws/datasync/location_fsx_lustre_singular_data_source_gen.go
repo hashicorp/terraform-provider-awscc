@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -158,7 +158,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationFSxLustre").WithTerraformTypeName("awscc_datasync_location_fsx_lustre")
 	opts = opts.WithTerraformSchema(schema)
@@ -173,7 +173,7 @@ func locationFSxLustreDataSource(ctx context.Context) (datasource.DataSource, er
 		"value":               "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -75,7 +75,7 @@ func robotApplicationVersionDataSource(ctx context.Context) (datasource.DataSour
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RoboMaker::RobotApplicationVersion").WithTerraformTypeName("awscc_robomaker_robot_application_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -86,7 +86,7 @@ func robotApplicationVersionDataSource(ctx context.Context) (datasource.DataSour
 		"current_revision_id": "CurrentRevisionId",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

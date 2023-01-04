@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -272,7 +272,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::HoursOfOperation").WithTerraformTypeName("awscc_connect_hours_of_operation")
 	opts = opts.WithTerraformSchema(schema)
@@ -293,7 +293,7 @@ func hoursOfOperationDataSource(ctx context.Context) (datasource.DataSource, err
 		"value":                  "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

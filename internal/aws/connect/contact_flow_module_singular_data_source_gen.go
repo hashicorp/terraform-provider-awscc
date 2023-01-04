@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -181,7 +181,7 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::ContactFlowModule").WithTerraformTypeName("awscc_connect_contact_flow_module")
 	opts = opts.WithTerraformSchema(schema)
@@ -198,7 +198,7 @@ func contactFlowModuleDataSource(ctx context.Context) (datasource.DataSource, er
 		"value":                   "Value",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

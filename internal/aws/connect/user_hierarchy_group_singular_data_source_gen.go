@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -81,7 +81,7 @@ func userHierarchyGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Connect::UserHierarchyGroup").WithTerraformTypeName("awscc_connect_user_hierarchy_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -92,7 +92,7 @@ func userHierarchyGroupDataSource(ctx context.Context) (datasource.DataSource, e
 		"user_hierarchy_group_arn": "UserHierarchyGroupArn",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -99,7 +99,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::OriginAccessControl").WithTerraformTypeName("awscc_cloudfront_origin_access_control")
 	opts = opts.WithTerraformSchema(schema)
@@ -113,7 +113,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		"signing_protocol":                  "SigningProtocol",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

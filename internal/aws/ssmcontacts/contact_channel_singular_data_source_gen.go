@@ -8,7 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -109,7 +109,7 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		Attributes:  attributes,
 	}
 
-	var opts DataSourceOptions
+	var opts generic.DataSourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMContacts::ContactChannel").WithTerraformTypeName("awscc_ssmcontacts_contact_channel")
 	opts = opts.WithTerraformSchema(schema)
@@ -122,7 +122,7 @@ func contactChannelDataSource(ctx context.Context) (datasource.DataSource, error
 		"defer_activation": "DeferActivation",
 	})
 
-	v, err := NewSingularDataSource(ctx, opts...)
+	v, err := generic.NewSingularDataSource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
