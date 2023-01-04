@@ -713,6 +713,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			e.printf("}/*END VALIDATORS*/,\n")
 		}
 	} else {
+		features.HasValidator = false
 		features.UsesRegexpInValidation = false
 	}
 
