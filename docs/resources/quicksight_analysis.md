@@ -163,7 +163,7 @@ Required:
 <a id="nestedatt--sheets"></a>
 ### Nested Schema for `sheets`
 
-Optional:
+Read-Only:
 
 - `name` (String) <p>The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
             console.</p>

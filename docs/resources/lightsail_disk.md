@@ -76,7 +76,7 @@ Optional:
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
 
-Optional:
+Read-Only:
 
 - `availability_zone` (String) The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
 - `region_name` (String) The Region Name in which to create your disk.

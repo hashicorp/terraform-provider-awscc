@@ -52,7 +52,7 @@ Required:
 <a id="nestedatt--associations"></a>
 ### Nested Schema for `associations`
 
-Optional:
+Read-Only:
 
 - `client_association_metadata` (Attributes List) The metadata associated with the client. (see [below for nested schema](#nestedatt--associations--client_association_metadata))
 - `client_id` (String) The identifier for the client that is associated with the event integration.
@@ -63,7 +63,7 @@ Optional:
 <a id="nestedatt--associations--client_association_metadata"></a>
 ### Nested Schema for `associations.client_association_metadata`
 
-Required:
+Read-Only:
 
 - `key` (String) A key to identify the metadata.
 - `value` (String) Corresponding metadata value for the key.

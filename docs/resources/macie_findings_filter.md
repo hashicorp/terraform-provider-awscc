@@ -56,7 +56,7 @@ Optional:
 <a id="nestedatt--findings_filter_list_items"></a>
 ### Nested Schema for `findings_filter_list_items`
 
-Optional:
+Read-Only:
 
 - `id` (String)
 - `name` (String)

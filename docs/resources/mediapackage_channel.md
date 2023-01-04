@@ -59,14 +59,14 @@ Required:
 <a id="nestedatt--hls_ingest"></a>
 ### Nested Schema for `hls_ingest`
 
-Optional:
+Read-Only:
 
 - `ingest_endpoints` (Attributes List) A list of endpoints to which the source stream should be sent. (see [below for nested schema](#nestedatt--hls_ingest--ingest_endpoints))
 
 <a id="nestedatt--hls_ingest--ingest_endpoints"></a>
 ### Nested Schema for `hls_ingest.ingest_endpoints`
 
-Optional:
+Read-Only:
 
 - `id` (String) The system generated unique identifier for the IngestEndpoint
 - `password` (String) The system generated password for ingest authentication.

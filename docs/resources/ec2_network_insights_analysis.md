@@ -53,7 +53,7 @@ Optional:
 <a id="nestedatt--alternate_path_hints"></a>
 ### Nested Schema for `alternate_path_hints`
 
-Optional:
+Read-Only:
 
 - `component_arn` (String)
 - `component_id` (String)
@@ -62,7 +62,7 @@ Optional:
 <a id="nestedatt--explanations"></a>
 ### Nested Schema for `explanations`
 
-Optional:
+Read-Only:
 
 - `acl` (Attributes) (see [below for nested schema](#nestedatt--explanations--acl))
 - `acl_rule` (Attributes) (see [below for nested schema](#nestedatt--explanations--acl_rule))
@@ -113,7 +113,7 @@ Optional:
 <a id="nestedatt--explanations--acl"></a>
 ### Nested Schema for `explanations.acl`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -122,7 +122,7 @@ Optional:
 <a id="nestedatt--explanations--acl_rule"></a>
 ### Nested Schema for `explanations.acl_rule`
 
-Optional:
+Read-Only:
 
 - `cidr` (String)
 - `egress` (Boolean)
@@ -134,7 +134,7 @@ Optional:
 <a id="nestedatt--explanations--acl_rule--port_range"></a>
 ### Nested Schema for `explanations.acl_rule.port_range`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -144,7 +144,7 @@ Optional:
 <a id="nestedatt--explanations--attached_to"></a>
 ### Nested Schema for `explanations.attached_to`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -153,7 +153,7 @@ Optional:
 <a id="nestedatt--explanations--classic_load_balancer_listener"></a>
 ### Nested Schema for `explanations.classic_load_balancer_listener`
 
-Optional:
+Read-Only:
 
 - `instance_port` (Number)
 - `load_balancer_port` (Number)
@@ -162,7 +162,7 @@ Optional:
 <a id="nestedatt--explanations--component"></a>
 ### Nested Schema for `explanations.component`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -171,7 +171,7 @@ Optional:
 <a id="nestedatt--explanations--customer_gateway"></a>
 ### Nested Schema for `explanations.customer_gateway`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -180,7 +180,7 @@ Optional:
 <a id="nestedatt--explanations--destination"></a>
 ### Nested Schema for `explanations.destination`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -189,7 +189,7 @@ Optional:
 <a id="nestedatt--explanations--destination_vpc"></a>
 ### Nested Schema for `explanations.destination_vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -198,7 +198,7 @@ Optional:
 <a id="nestedatt--explanations--elastic_load_balancer_listener"></a>
 ### Nested Schema for `explanations.elastic_load_balancer_listener`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -207,7 +207,7 @@ Optional:
 <a id="nestedatt--explanations--ingress_route_table"></a>
 ### Nested Schema for `explanations.ingress_route_table`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -216,7 +216,7 @@ Optional:
 <a id="nestedatt--explanations--internet_gateway"></a>
 ### Nested Schema for `explanations.internet_gateway`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -225,7 +225,7 @@ Optional:
 <a id="nestedatt--explanations--load_balancer_target"></a>
 ### Nested Schema for `explanations.load_balancer_target`
 
-Optional:
+Read-Only:
 
 - `address` (String)
 - `availability_zone` (String)
@@ -235,7 +235,7 @@ Optional:
 <a id="nestedatt--explanations--load_balancer_target--instance"></a>
 ### Nested Schema for `explanations.load_balancer_target.instance`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -245,7 +245,7 @@ Optional:
 <a id="nestedatt--explanations--load_balancer_target_group"></a>
 ### Nested Schema for `explanations.load_balancer_target_group`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -254,7 +254,7 @@ Optional:
 <a id="nestedatt--explanations--load_balancer_target_groups"></a>
 ### Nested Schema for `explanations.load_balancer_target_groups`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -263,7 +263,7 @@ Optional:
 <a id="nestedatt--explanations--nat_gateway"></a>
 ### Nested Schema for `explanations.nat_gateway`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -272,7 +272,7 @@ Optional:
 <a id="nestedatt--explanations--network_interface"></a>
 ### Nested Schema for `explanations.network_interface`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -281,7 +281,7 @@ Optional:
 <a id="nestedatt--explanations--port_ranges"></a>
 ### Nested Schema for `explanations.port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -290,7 +290,7 @@ Optional:
 <a id="nestedatt--explanations--prefix_list"></a>
 ### Nested Schema for `explanations.prefix_list`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -299,7 +299,7 @@ Optional:
 <a id="nestedatt--explanations--route_table"></a>
 ### Nested Schema for `explanations.route_table`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -308,7 +308,7 @@ Optional:
 <a id="nestedatt--explanations--route_table_route"></a>
 ### Nested Schema for `explanations.route_table_route`
 
-Optional:
+Read-Only:
 
 - `destination_cidr` (String)
 - `destination_prefix_list_id` (String)
@@ -325,7 +325,7 @@ Optional:
 <a id="nestedatt--explanations--security_group"></a>
 ### Nested Schema for `explanations.security_group`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -334,7 +334,7 @@ Optional:
 <a id="nestedatt--explanations--security_group_rule"></a>
 ### Nested Schema for `explanations.security_group_rule`
 
-Optional:
+Read-Only:
 
 - `cidr` (String)
 - `direction` (String)
@@ -346,7 +346,7 @@ Optional:
 <a id="nestedatt--explanations--security_group_rule--port_range"></a>
 ### Nested Schema for `explanations.security_group_rule.port_range`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -356,7 +356,7 @@ Optional:
 <a id="nestedatt--explanations--security_groups"></a>
 ### Nested Schema for `explanations.security_groups`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -365,7 +365,7 @@ Optional:
 <a id="nestedatt--explanations--source_vpc"></a>
 ### Nested Schema for `explanations.source_vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -374,7 +374,7 @@ Optional:
 <a id="nestedatt--explanations--subnet"></a>
 ### Nested Schema for `explanations.subnet`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -383,7 +383,7 @@ Optional:
 <a id="nestedatt--explanations--subnet_route_table"></a>
 ### Nested Schema for `explanations.subnet_route_table`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -392,7 +392,7 @@ Optional:
 <a id="nestedatt--explanations--vpc"></a>
 ### Nested Schema for `explanations.vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -401,7 +401,7 @@ Optional:
 <a id="nestedatt--explanations--vpc_endpoint"></a>
 ### Nested Schema for `explanations.vpc_endpoint`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -410,7 +410,7 @@ Optional:
 <a id="nestedatt--explanations--vpc_peering_connection"></a>
 ### Nested Schema for `explanations.vpc_peering_connection`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -419,7 +419,7 @@ Optional:
 <a id="nestedatt--explanations--vpn_connection"></a>
 ### Nested Schema for `explanations.vpn_connection`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -428,7 +428,7 @@ Optional:
 <a id="nestedatt--explanations--vpn_gateway"></a>
 ### Nested Schema for `explanations.vpn_gateway`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -438,7 +438,7 @@ Optional:
 <a id="nestedatt--forward_path_components"></a>
 ### Nested Schema for `forward_path_components`
 
-Optional:
+Read-Only:
 
 - `acl_rule` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--acl_rule))
 - `component` (Attributes) (see [below for nested schema](#nestedatt--forward_path_components--component))
@@ -455,7 +455,7 @@ Optional:
 <a id="nestedatt--forward_path_components--acl_rule"></a>
 ### Nested Schema for `forward_path_components.acl_rule`
 
-Optional:
+Read-Only:
 
 - `cidr` (String)
 - `egress` (Boolean)
@@ -467,7 +467,7 @@ Optional:
 <a id="nestedatt--forward_path_components--acl_rule--port_range"></a>
 ### Nested Schema for `forward_path_components.acl_rule.port_range`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -477,7 +477,7 @@ Optional:
 <a id="nestedatt--forward_path_components--component"></a>
 ### Nested Schema for `forward_path_components.component`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -486,7 +486,7 @@ Optional:
 <a id="nestedatt--forward_path_components--destination_vpc"></a>
 ### Nested Schema for `forward_path_components.destination_vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -495,7 +495,7 @@ Optional:
 <a id="nestedatt--forward_path_components--inbound_header"></a>
 ### Nested Schema for `forward_path_components.inbound_header`
 
-Optional:
+Read-Only:
 
 - `destination_addresses` (List of String)
 - `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--inbound_header--destination_port_ranges))
@@ -506,7 +506,7 @@ Optional:
 <a id="nestedatt--forward_path_components--inbound_header--destination_port_ranges"></a>
 ### Nested Schema for `forward_path_components.inbound_header.destination_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -515,7 +515,7 @@ Optional:
 <a id="nestedatt--forward_path_components--inbound_header--source_port_ranges"></a>
 ### Nested Schema for `forward_path_components.inbound_header.source_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -525,7 +525,7 @@ Optional:
 <a id="nestedatt--forward_path_components--outbound_header"></a>
 ### Nested Schema for `forward_path_components.outbound_header`
 
-Optional:
+Read-Only:
 
 - `destination_addresses` (List of String)
 - `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--forward_path_components--outbound_header--destination_port_ranges))
@@ -536,7 +536,7 @@ Optional:
 <a id="nestedatt--forward_path_components--outbound_header--destination_port_ranges"></a>
 ### Nested Schema for `forward_path_components.outbound_header.destination_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -545,7 +545,7 @@ Optional:
 <a id="nestedatt--forward_path_components--outbound_header--source_port_ranges"></a>
 ### Nested Schema for `forward_path_components.outbound_header.source_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -555,7 +555,7 @@ Optional:
 <a id="nestedatt--forward_path_components--route_table_route"></a>
 ### Nested Schema for `forward_path_components.route_table_route`
 
-Optional:
+Read-Only:
 
 - `destination_cidr` (String)
 - `destination_prefix_list_id` (String)
@@ -572,7 +572,7 @@ Optional:
 <a id="nestedatt--forward_path_components--security_group_rule"></a>
 ### Nested Schema for `forward_path_components.security_group_rule`
 
-Optional:
+Read-Only:
 
 - `cidr` (String)
 - `direction` (String)
@@ -584,7 +584,7 @@ Optional:
 <a id="nestedatt--forward_path_components--security_group_rule--port_range"></a>
 ### Nested Schema for `forward_path_components.security_group_rule.port_range`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -594,7 +594,7 @@ Optional:
 <a id="nestedatt--forward_path_components--source_vpc"></a>
 ### Nested Schema for `forward_path_components.source_vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -603,7 +603,7 @@ Optional:
 <a id="nestedatt--forward_path_components--subnet"></a>
 ### Nested Schema for `forward_path_components.subnet`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -612,7 +612,7 @@ Optional:
 <a id="nestedatt--forward_path_components--vpc"></a>
 ### Nested Schema for `forward_path_components.vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -622,7 +622,7 @@ Optional:
 <a id="nestedatt--return_path_components"></a>
 ### Nested Schema for `return_path_components`
 
-Optional:
+Read-Only:
 
 - `acl_rule` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--acl_rule))
 - `component` (Attributes) (see [below for nested schema](#nestedatt--return_path_components--component))
@@ -639,7 +639,7 @@ Optional:
 <a id="nestedatt--return_path_components--acl_rule"></a>
 ### Nested Schema for `return_path_components.acl_rule`
 
-Optional:
+Read-Only:
 
 - `cidr` (String)
 - `egress` (Boolean)
@@ -651,7 +651,7 @@ Optional:
 <a id="nestedatt--return_path_components--acl_rule--port_range"></a>
 ### Nested Schema for `return_path_components.acl_rule.port_range`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -661,7 +661,7 @@ Optional:
 <a id="nestedatt--return_path_components--component"></a>
 ### Nested Schema for `return_path_components.component`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -670,7 +670,7 @@ Optional:
 <a id="nestedatt--return_path_components--destination_vpc"></a>
 ### Nested Schema for `return_path_components.destination_vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -679,7 +679,7 @@ Optional:
 <a id="nestedatt--return_path_components--inbound_header"></a>
 ### Nested Schema for `return_path_components.inbound_header`
 
-Optional:
+Read-Only:
 
 - `destination_addresses` (List of String)
 - `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--inbound_header--destination_port_ranges))
@@ -690,7 +690,7 @@ Optional:
 <a id="nestedatt--return_path_components--inbound_header--destination_port_ranges"></a>
 ### Nested Schema for `return_path_components.inbound_header.destination_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -699,7 +699,7 @@ Optional:
 <a id="nestedatt--return_path_components--inbound_header--source_port_ranges"></a>
 ### Nested Schema for `return_path_components.inbound_header.source_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -709,7 +709,7 @@ Optional:
 <a id="nestedatt--return_path_components--outbound_header"></a>
 ### Nested Schema for `return_path_components.outbound_header`
 
-Optional:
+Read-Only:
 
 - `destination_addresses` (List of String)
 - `destination_port_ranges` (Attributes List) (see [below for nested schema](#nestedatt--return_path_components--outbound_header--destination_port_ranges))
@@ -720,7 +720,7 @@ Optional:
 <a id="nestedatt--return_path_components--outbound_header--destination_port_ranges"></a>
 ### Nested Schema for `return_path_components.outbound_header.destination_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -729,7 +729,7 @@ Optional:
 <a id="nestedatt--return_path_components--outbound_header--source_port_ranges"></a>
 ### Nested Schema for `return_path_components.outbound_header.source_port_ranges`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -739,7 +739,7 @@ Optional:
 <a id="nestedatt--return_path_components--route_table_route"></a>
 ### Nested Schema for `return_path_components.route_table_route`
 
-Optional:
+Read-Only:
 
 - `destination_cidr` (String)
 - `destination_prefix_list_id` (String)
@@ -756,7 +756,7 @@ Optional:
 <a id="nestedatt--return_path_components--security_group_rule"></a>
 ### Nested Schema for `return_path_components.security_group_rule`
 
-Optional:
+Read-Only:
 
 - `cidr` (String)
 - `direction` (String)
@@ -768,7 +768,7 @@ Optional:
 <a id="nestedatt--return_path_components--security_group_rule--port_range"></a>
 ### Nested Schema for `return_path_components.security_group_rule.port_range`
 
-Optional:
+Read-Only:
 
 - `from` (Number)
 - `to` (Number)
@@ -778,7 +778,7 @@ Optional:
 <a id="nestedatt--return_path_components--source_vpc"></a>
 ### Nested Schema for `return_path_components.source_vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -787,7 +787,7 @@ Optional:
 <a id="nestedatt--return_path_components--subnet"></a>
 ### Nested Schema for `return_path_components.subnet`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)
@@ -796,7 +796,7 @@ Optional:
 <a id="nestedatt--return_path_components--vpc"></a>
 ### Nested Schema for `return_path_components.vpc`
 
-Optional:
+Read-Only:
 
 - `arn` (String)
 - `id` (String)

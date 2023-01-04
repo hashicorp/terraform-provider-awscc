@@ -54,7 +54,7 @@ Required:
 <a id="nestedatt--configuration"></a>
 ### Nested Schema for `configuration`
 
-Optional:
+Read-Only:
 
 - `bgp_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--bgp_configurations))
 - `core_network_address` (String)
@@ -65,7 +65,7 @@ Optional:
 <a id="nestedatt--configuration--bgp_configurations"></a>
 ### Nested Schema for `configuration.bgp_configurations`
 
-Optional:
+Read-Only:
 
 - `core_network_address` (String)
 - `core_network_asn` (Number)

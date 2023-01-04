@@ -102,7 +102,7 @@ Required:
 <a id="nestedatt--delegations"></a>
 ### Nested Schema for `delegations`
 
-Optional:
+Read-Only:
 
 - `assessment_id` (String)
 - `assessment_name` (String) The name of the related assessment.

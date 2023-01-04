@@ -61,7 +61,7 @@ Required:
 <a id="nestedatt--proposed_segment_change"></a>
 ### Nested Schema for `proposed_segment_change`
 
-Optional:
+Read-Only:
 
 - `attachment_policy_rule_number` (Number) New policy rule number of the attachment
 - `segment_name` (String) Proposed segment name
@@ -70,7 +70,7 @@ Optional:
 <a id="nestedatt--proposed_segment_change--tags"></a>
 ### Nested Schema for `proposed_segment_change.tags`
 
-Required:
+Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

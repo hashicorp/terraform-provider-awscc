@@ -38,13 +38,10 @@ Represents a streaming session machine image that can be used to launch a stream
 <a id="nestedatt--encryption_configuration"></a>
 ### Nested Schema for `encryption_configuration`
 
-Required:
-
-- `key_type` (String) <p/>
-
-Optional:
+Read-Only:
 
 - `key_arn` (String) <p>The ARN for a KMS key that is used to encrypt studio data.</p>
+- `key_type` (String) <p/>
 
 ## Import
 
