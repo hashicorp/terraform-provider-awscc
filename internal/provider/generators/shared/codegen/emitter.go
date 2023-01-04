@@ -5,6 +5,7 @@ import (
 	"io"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 
 	cfschema "github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go"
@@ -713,7 +714,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			e.printf("}/*END VALIDATORS*/,\n")
 		}
 	} else {
-		features.HasValidator = false
+		features.UsesInternalValidate = false
 		features.UsesRegexpInValidation = false
 	}
 
@@ -914,7 +915,17 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 			return features, "", fmt.Errorf("%s has invalid default value element type: %T", strings.Join(path, "/"), v)
 		}
 	case string:
-		return features, fmt.Sprintf("StringDefaultValue(%q)", v), nil
+		// Handle default values for boolean properties encoded as strings.
+		switch propertyType := property.Type.String(); propertyType {
+		case cfschema.PropertyTypeBoolean:
+			if v, err := strconv.ParseBool(v); err != nil {
+				return features, "", err
+			} else {
+				return features, fmt.Sprintf("BoolDefaultValue(%t)", v), nil
+			}
+		default:
+			return features, fmt.Sprintf("StringDefaultValue(%q)", v), nil
+		}
 
 	//
 	// Complex types.
