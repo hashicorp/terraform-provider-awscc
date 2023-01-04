@@ -18,7 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"regexp"
@@ -2286,7 +2286,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										int64validator.Between(2, 10000),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										Int64DefaultValue(0),
+										generic.Int64DefaultValue(0),
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2445,7 +2445,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 										int64validator.Between(1, 10),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-										Int64DefaultValue(0),
+										generic.Int64DefaultValue(0),
 										int64planmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -2511,7 +2511,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											int64validator.Between(0, 100000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64DefaultValue(0),
+											generic.Int64DefaultValue(0),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2530,7 +2530,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 											int64validator.Between(0, 1000),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64DefaultValue(0),
+											generic.Int64DefaultValue(0),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -2550,7 +2550,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								BoolDefaultValue(false),
+								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -2559,7 +2559,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								BoolDefaultValue(false),
+								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -2802,7 +2802,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 												int64validator.Between(21, 200),
 											}, /*END VALIDATORS*/
 											PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-												Int64DefaultValue(0),
+												generic.Int64DefaultValue(0),
 												int64planmodifier.UseStateForUnknown(),
 											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
@@ -3273,7 +3273,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								BoolDefaultValue(false),
+								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -3404,7 +3404,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Pipes::Pipe").WithTerraformTypeName("awscc_pipes_pipe")
 	opts = opts.WithTerraformSchema(schema)
@@ -3549,7 +3549,7 @@ func pipeResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

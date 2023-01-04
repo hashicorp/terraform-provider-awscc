@@ -14,7 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -87,7 +87,7 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 			Description: "List of times when the scheduled action will run.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -333,7 +333,7 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Redshift::ScheduledAction").WithTerraformTypeName("awscc_redshift_scheduled_action")
 	opts = opts.WithTerraformSchema(schema)
@@ -363,7 +363,7 @@ func scheduledActionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

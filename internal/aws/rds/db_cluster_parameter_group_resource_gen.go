@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -148,7 +148,7 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 				listvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -168,7 +168,7 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBClusterParameterGroup").WithTerraformTypeName("awscc_rds_db_cluster_parameter_group")
 	opts = opts.WithTerraformSchema(schema)
@@ -190,7 +190,7 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(180)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

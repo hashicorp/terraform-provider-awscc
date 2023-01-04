@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -227,7 +227,7 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::AppRunner::VpcIngressConnection").WithTerraformTypeName("awscc_apprunner_vpc_ingress_connection")
 	opts = opts.WithTerraformSchema(schema)
@@ -253,7 +253,7 @@ func vpcIngressConnectionResource(ctx context.Context) (resource.Resource, error
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

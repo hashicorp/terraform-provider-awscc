@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -225,7 +225,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 					Description: "The key-value tags that changed for the segment.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						Multiset(),
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -325,7 +325,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -376,7 +376,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::SiteToSiteVpnAttachment").WithTerraformTypeName("awscc_networkmanager_site_to_site_vpn_attachment")
 	opts = opts.WithTerraformSchema(schema)
@@ -408,7 +408,7 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

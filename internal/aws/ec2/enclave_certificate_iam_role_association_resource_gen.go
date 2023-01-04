@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -124,7 +124,7 @@ func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::EnclaveCertificateIamRoleAssociation").WithTerraformTypeName("awscc_ec2_enclave_certificate_iam_role_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -141,7 +141,7 @@ func enclaveCertificateIamRoleAssociationResource(ctx context.Context) (resource
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

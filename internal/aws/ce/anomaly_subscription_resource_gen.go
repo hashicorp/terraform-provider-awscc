@@ -14,7 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -89,7 +89,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
@@ -154,7 +154,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 				listvalidator.SizeBetween(0, 200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -234,7 +234,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 			Description: "A list of subscriber",
 			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SubscriptionArn
@@ -301,7 +301,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CE::AnomalySubscription").WithTerraformTypeName("awscc_ce_anomaly_subscription")
 	opts = opts.WithTerraformSchema(schema)
@@ -326,7 +326,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

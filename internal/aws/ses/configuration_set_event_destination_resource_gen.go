@@ -14,7 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -188,7 +188,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								Multiset(),
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -236,7 +236,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 					Description: "The type of email sending events, send, reject, bounce, complaint, delivery, open, click, renderingFailure, deliveryDelay, and subscription.",
 					Required:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						Multiset(),
+						generic.Multiset(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Name
@@ -294,7 +294,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SES::ConfigurationSetEventDestination").WithTerraformTypeName("awscc_ses_configuration_set_event_destination")
 	opts = opts.WithTerraformSchema(schema)
@@ -322,7 +322,7 @@ func configurationSetEventDestinationResource(ctx context.Context) (resource.Res
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

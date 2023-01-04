@@ -16,7 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -345,7 +345,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									ElementType: types.StringType,
 									Required:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										Multiset(),
+										generic.Multiset(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -359,7 +359,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									ElementType: types.StringType,
 									Required:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										Multiset(),
+										generic.Multiset(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -373,7 +373,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									ElementType: types.StringType,
 									Required:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										Multiset(),
+										generic.Multiset(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -387,7 +387,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 									ElementType: types.StringType,
 									Required:    true,
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										Multiset(),
+										generic.Multiset(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -439,7 +439,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 							}, /*END NESTED OBJECT*/
 							Required: true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								Multiset(),
+								generic.Multiset(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -641,7 +641,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::ResponseHeadersPolicy").WithTerraformTypeName("awscc_cloudfront_response_headers_policy")
 	opts = opts.WithTerraformSchema(schema)
@@ -687,7 +687,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

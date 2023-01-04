@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -122,7 +122,7 @@ func transitGatewayMulticastDomainAssociationResource(ctx context.Context) (reso
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::TransitGatewayMulticastDomainAssociation").WithTerraformTypeName("awscc_ec2_transit_gateway_multicast_domain_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -140,7 +140,7 @@ func transitGatewayMulticastDomainAssociationResource(ctx context.Context) (reso
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

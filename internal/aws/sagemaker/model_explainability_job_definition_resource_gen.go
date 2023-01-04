@@ -17,7 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -1154,7 +1154,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelExplainabilityJobDefinition").WithTerraformTypeName("awscc_sagemaker_model_explainability_job_definition")
 	opts = opts.WithTerraformSchema(schema)
@@ -1217,7 +1217,7 @@ func modelExplainabilityJobDefinitionResource(ctx context.Context) (resource.Res
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

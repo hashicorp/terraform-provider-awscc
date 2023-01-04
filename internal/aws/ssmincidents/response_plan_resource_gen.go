@@ -17,7 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -226,7 +226,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 									setvalidator.SizeAtMost(200),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-									SetOfStringDefaultValue(),
+									generic.SetOfStringDefaultValue(),
 									setplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -262,7 +262,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 									setvalidator.SizeBetween(1, 200),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-									SetOfStringDefaultValue(),
+									generic.SetOfStringDefaultValue(),
 									setplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -308,7 +308,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.UniqueValues(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				ListOfStringDefaultValue(),
+				generic.ListOfStringDefaultValue(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -365,7 +365,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						ListOfStringDefaultValue(),
+						generic.ListOfStringDefaultValue(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -427,7 +427,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				SetOfStringDefaultValue(),
+				generic.SetOfStringDefaultValue(),
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -567,7 +567,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 						setvalidator.SizeAtMost(50),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-						SetOfStringDefaultValue(),
+						generic.SetOfStringDefaultValue(),
 						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -597,8 +597,8 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeAtMost(10),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						Multiset(),
-						ListOfStringDefaultValue(),
+						generic.Multiset(),
+						generic.ListOfStringDefaultValue(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -745,7 +745,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.UniqueValues(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				ListOfStringDefaultValue(),
+				generic.ListOfStringDefaultValue(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -829,7 +829,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 				setvalidator.SizeAtMost(50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
-				SetOfStringDefaultValue(),
+				generic.SetOfStringDefaultValue(),
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -849,7 +849,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SSMIncidents::ResponsePlan").WithTerraformTypeName("awscc_ssmincidents_response_plan")
 	opts = opts.WithTerraformSchema(schema)
@@ -893,7 +893,7 @@ func responsePlanResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

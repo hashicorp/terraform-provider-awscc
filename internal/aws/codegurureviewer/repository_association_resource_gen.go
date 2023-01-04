@@ -14,7 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -241,7 +241,7 @@ func repositoryAssociationResource(ctx context.Context) (resource.Resource, erro
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CodeGuruReviewer::RepositoryAssociation").WithTerraformTypeName("awscc_codegurureviewer_repository_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -262,7 +262,7 @@ func repositoryAssociationResource(ctx context.Context) (resource.Resource, erro
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

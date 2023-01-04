@@ -18,7 +18,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -853,7 +853,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtMost(50),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								Multiset(),
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1148,7 +1148,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 													listvalidator.SizeAtMost(1000),
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-													Multiset(),
+													generic.Multiset(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: RecordEncoding
@@ -1302,7 +1302,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtMost(1),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								Multiset(),
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1327,7 +1327,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									listvalidator.SizeBetween(1, 5),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									Multiset(),
+									generic.Multiset(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetIds
@@ -1339,7 +1339,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 									listvalidator.SizeBetween(1, 16),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									Multiset(),
+									generic.Multiset(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
@@ -1351,7 +1351,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 						listvalidator.SizeAtMost(1),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						Multiset(),
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1495,7 +1495,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtMost(50),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								Multiset(),
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1601,7 +1601,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.LengthBetween(0, 1024),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				StringDefaultValue(""),
+				generic.StringDefaultValue(""),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -1898,7 +1898,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(1, 50),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -1918,7 +1918,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::KinesisAnalyticsV2::Application").WithTerraformTypeName("awscc_kinesisanalyticsv2_application")
 	opts = opts.WithTerraformSchema(schema)
@@ -2019,7 +2019,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

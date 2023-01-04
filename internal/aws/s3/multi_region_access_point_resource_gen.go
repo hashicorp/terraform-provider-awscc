@@ -16,7 +16,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -216,7 +216,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::S3::MultiRegionAccessPoint").WithTerraformTypeName("awscc_s3_multi_region_access_point")
 	opts = opts.WithTerraformSchema(schema)
@@ -238,7 +238,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

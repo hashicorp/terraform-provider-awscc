@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -104,7 +104,7 @@ func robotApplicationVersionResource(ctx context.Context) (resource.Resource, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::RoboMaker::RobotApplicationVersion").WithTerraformTypeName("awscc_robomaker_robot_application_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -120,7 +120,7 @@ func robotApplicationVersionResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

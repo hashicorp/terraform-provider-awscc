@@ -10,7 +10,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -78,7 +78,7 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::CloudFrontOriginAccessIdentity").WithTerraformTypeName("awscc_cloudfront_cloudfront_origin_access_identity")
 	opts = opts.WithTerraformSchema(schema)
@@ -94,7 +94,7 @@ func cloudFrontOriginAccessIdentityResource(ctx context.Context) (resource.Resou
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

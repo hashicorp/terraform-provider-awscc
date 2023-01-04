@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -106,7 +106,7 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation").WithTerraformTypeName("awscc_servicecatalogappregistry_attribute_group_association")
 	opts = opts.WithTerraformSchema(schema)
@@ -123,7 +123,7 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

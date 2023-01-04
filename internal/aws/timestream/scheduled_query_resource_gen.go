@@ -15,7 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -505,7 +505,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeAtMost(200),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -737,7 +737,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 							Description: "This is to allow mapping column(s) from the query result to the dimension in the destination table.",
 							Required:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								Multiset(),
+								generic.Multiset(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: MeasureNameColumn
@@ -817,7 +817,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 											listvalidator.SizeAtLeast(1),
 										}, /*END VALIDATORS*/
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											Multiset(),
+											generic.Multiset(),
 											listplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -848,7 +848,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 								listvalidator.SizeAtLeast(1),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								Multiset(),
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -895,7 +895,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 										listvalidator.SizeAtLeast(1),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-										Multiset(),
+										generic.Multiset(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: TargetMultiMeasureName
@@ -954,7 +954,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Timestream::ScheduledQuery").WithTerraformTypeName("awscc_timestream_scheduled_query")
 	opts = opts.WithTerraformSchema(schema)
@@ -1011,7 +1011,7 @@ func scheduledQueryResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

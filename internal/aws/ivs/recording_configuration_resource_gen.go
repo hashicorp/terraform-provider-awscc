@@ -17,7 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -146,7 +146,7 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 				int64validator.Between(0, 300),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64DefaultValue(0),
+				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -310,7 +310,7 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IVS::RecordingConfiguration").WithTerraformTypeName("awscc_ivs_recording_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -335,7 +335,7 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

@@ -14,7 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -157,7 +157,7 @@ func aggregationAuthorizationResource(ctx context.Context) (resource.Resource, e
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::Config::AggregationAuthorization").WithTerraformTypeName("awscc_config_aggregation_authorization")
 	opts = opts.WithTerraformSchema(schema)
@@ -175,7 +175,7 @@ func aggregationAuthorizationResource(ctx context.Context) (resource.Resource, e
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

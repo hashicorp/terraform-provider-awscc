@@ -15,7 +15,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -823,7 +823,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									ListOfStringDefaultValue(
+									generic.ListOfStringDefaultValue(
 										"GET",
 										"HEAD",
 									),
@@ -844,7 +844,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional:    true,
 								Computed:    true,
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-									ListOfStringDefaultValue(
+									generic.ListOfStringDefaultValue(
 										"GET",
 										"HEAD",
 									),
@@ -856,7 +856,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									BoolDefaultValue(false),
+									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -865,7 +865,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									Float64DefaultValue(86400.000000),
+									generic.Float64DefaultValue(86400.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -874,7 +874,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									StringDefaultValue(""),
+									generic.StringDefaultValue(""),
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -901,7 +901,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-											ObjectDefaultValue(),
+											generic.ObjectDefaultValue(),
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1003,7 +1003,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									Float64DefaultValue(31536000.000000),
+									generic.Float64DefaultValue(31536000.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1012,7 +1012,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									Float64DefaultValue(0.000000),
+									generic.Float64DefaultValue(0.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1049,7 +1049,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-									BoolDefaultValue(false),
+									generic.BoolDefaultValue(false),
 									boolplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1092,7 +1092,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						StringDefaultValue(""),
+						generic.StringDefaultValue(""),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1113,7 +1113,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-									Float64DefaultValue(300.000000),
+									generic.Float64DefaultValue(300.000000),
 									float64planmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1157,7 +1157,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								Int64DefaultValue(80),
+								generic.Int64DefaultValue(80),
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1166,7 +1166,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-								Int64DefaultValue(443),
+								generic.Int64DefaultValue(443),
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1195,7 +1195,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								ListOfStringDefaultValue(
+								generic.ListOfStringDefaultValue(
 									"GET",
 									"HEAD",
 								),
@@ -1207,7 +1207,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								StringDefaultValue(""),
+								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1217,7 +1217,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-								ListOfStringDefaultValue(
+								generic.ListOfStringDefaultValue(
 									"GET",
 									"HEAD",
 								),
@@ -1229,7 +1229,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								BoolDefaultValue(false),
+								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1238,7 +1238,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								Float64DefaultValue(86400.000000),
+								generic.Float64DefaultValue(86400.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1247,7 +1247,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								StringDefaultValue(""),
+								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1274,7 +1274,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 									Optional: true,
 									Computed: true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-										ObjectDefaultValue(),
+										generic.ObjectDefaultValue(),
 										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
@@ -1376,7 +1376,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								Float64DefaultValue(31536000.000000),
+								generic.Float64DefaultValue(31536000.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1385,7 +1385,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-								Float64DefaultValue(0.000000),
+								generic.Float64DefaultValue(0.000000),
 								float64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1394,7 +1394,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								StringDefaultValue(""),
+								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1403,7 +1403,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								StringDefaultValue(""),
+								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1412,7 +1412,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								StringDefaultValue(""),
+								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1421,7 +1421,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								BoolDefaultValue(false),
+								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1459,7 +1459,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						StringDefaultValue(""),
+						generic.StringDefaultValue(""),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1472,7 +1472,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						StringDefaultValue("http1.1"),
+						generic.StringDefaultValue("http1.1"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1496,7 +1496,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-								BoolDefaultValue(false),
+								generic.BoolDefaultValue(false),
 								boolplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1505,7 +1505,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								StringDefaultValue(""),
+								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1617,7 +1617,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64DefaultValue(80),
+											generic.Int64DefaultValue(80),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1626,7 +1626,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64DefaultValue(443),
+											generic.Int64DefaultValue(443),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1635,7 +1635,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64DefaultValue(5),
+											generic.Int64DefaultValue(5),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1648,7 +1648,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-											Int64DefaultValue(30),
+											generic.Int64DefaultValue(30),
 											int64planmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1658,7 +1658,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-											ListOfStringDefaultValue(
+											generic.ListOfStringDefaultValue(
 												"TLSv1",
 												"SSLv3",
 											),
@@ -1713,7 +1713,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 								Optional: true,
 								Computed: true,
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									StringDefaultValue(""),
+									generic.StringDefaultValue(""),
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -1751,7 +1751,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 										Optional: true,
 										Computed: true,
 										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-											StringDefaultValue(""),
+											generic.StringDefaultValue(""),
 											stringplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
@@ -1775,7 +1775,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						StringDefaultValue("PriceClass_All"),
+						generic.StringDefaultValue("PriceClass_All"),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1805,7 +1805,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						ObjectDefaultValue(),
+						generic.ObjectDefaultValue(),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1821,7 +1821,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 							Optional: true,
 							Computed: true,
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								StringDefaultValue(""),
+								generic.StringDefaultValue(""),
 								stringplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -1887,7 +1887,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-						ObjectDefaultValue(),
+						generic.ObjectDefaultValue(),
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1896,7 +1896,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 					Optional: true,
 					Computed: true,
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						StringDefaultValue(""),
+						generic.StringDefaultValue(""),
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -1977,7 +1977,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFront::Distribution").WithTerraformTypeName("awscc_cloudfront_distribution")
 	opts = opts.WithTerraformSchema(schema)
@@ -2086,7 +2086,7 @@ func distributionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

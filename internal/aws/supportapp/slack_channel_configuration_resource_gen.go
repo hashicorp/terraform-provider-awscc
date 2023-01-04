@@ -13,7 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -191,7 +191,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::SupportApp::SlackChannelConfiguration").WithTerraformTypeName("awscc_supportapp_slack_channel_configuration")
 	opts = opts.WithTerraformSchema(schema)
@@ -211,7 +211,7 @@ func slackChannelConfigurationResource(ctx context.Context) (resource.Resource, 
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

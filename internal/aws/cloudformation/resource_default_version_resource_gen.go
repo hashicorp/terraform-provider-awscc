@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -112,7 +112,7 @@ func resourceDefaultVersionResource(ctx context.Context) (resource.Resource, err
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudFormation::ResourceDefaultVersion").WithTerraformTypeName("awscc_cloudformation_resource_default_version")
 	opts = opts.WithTerraformSchema(schema)
@@ -128,7 +128,7 @@ func resourceDefaultVersionResource(ctx context.Context) (resource.Resource, err
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

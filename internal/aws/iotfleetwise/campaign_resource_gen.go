@@ -20,7 +20,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"github.com/hashicorp/terraform-provider-awscc/internal/validate"
 	"regexp"
@@ -221,7 +221,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				StringDefaultValue("OFF"),
+				generic.StringDefaultValue("OFF"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -266,7 +266,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -310,7 +310,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				StringDefaultValue("OFF"),
+				generic.StringDefaultValue("OFF"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -330,7 +330,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				validate.IsRFC3339Time(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				StringDefaultValue("253402243200"),
+				generic.StringDefaultValue("253402243200"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -383,7 +383,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				float64validator.Between(0.000000, 4294967295.000000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
-				Float64DefaultValue(0.000000),
+				generic.Float64DefaultValue(0.000000),
 				float64planmodifier.UseStateForUnknown(),
 				float64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -403,7 +403,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				int64validator.AtLeast(0),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
-				Int64DefaultValue(0),
+				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -495,7 +495,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				listvalidator.SizeBetween(0, 1000),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -520,7 +520,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				StringDefaultValue("OFF"),
+				generic.StringDefaultValue("OFF"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -540,7 +540,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				validate.IsRFC3339Time(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				StringDefaultValue("0"),
+				generic.StringDefaultValue("0"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -649,7 +649,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoTFleetWise::Campaign").WithTerraformTypeName("awscc_iotfleetwise_campaign")
 	opts = opts.WithTerraformSchema(schema)
@@ -695,7 +695,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

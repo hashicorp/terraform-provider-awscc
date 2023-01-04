@@ -17,7 +17,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 	"regexp"
 )
@@ -535,7 +535,7 @@ func cloudFormationProvisionedProductResource(ctx context.Context) (resource.Res
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::ServiceCatalog::CloudFormationProvisionedProduct").WithTerraformTypeName("awscc_servicecatalog_cloudformation_provisioned_product")
 	opts = opts.WithTerraformSchema(schema)
@@ -572,7 +572,7 @@ func cloudFormationProvisionedProductResource(ctx context.Context) (resource.Res
 
 	opts = opts.WithUpdateTimeoutInMinutes(720)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

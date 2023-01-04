@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"regexp"
 
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -133,7 +133,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::IoT::ResourceSpecificLogging").WithTerraformTypeName("awscc_iot_resource_specific_logging")
 	opts = opts.WithTerraformSchema(schema)
@@ -149,7 +149,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err

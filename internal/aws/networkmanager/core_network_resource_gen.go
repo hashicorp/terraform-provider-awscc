@@ -12,7 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
-	. "github.com/hashicorp/terraform-provider-awscc/internal/generic"
+	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
 
@@ -135,7 +135,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 						ElementType: types.StringType,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							Multiset(),
+							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -144,7 +144,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The edges within a core network.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -184,12 +184,12 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "object"
 		//	}
 		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
-			CustomType:  JSONStringType,
+			CustomType:  generic.JSONStringType,
 			Description: "Live policy document for the core network, you must provide PolicyDocument in Json Format",
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				JSONStringType.AttributePlanModifier(),
+				generic.JSONStringType.AttributePlanModifier(),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -235,7 +235,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 						ElementType: types.StringType,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							Multiset(),
+							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -252,7 +252,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 						ElementType: types.StringType,
 						Computed:    true,
 						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-							Multiset(),
+							generic.Multiset(),
 							listplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
@@ -261,7 +261,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 			Description: "The segments within a core network.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -325,7 +325,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				Multiset(),
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -345,7 +345,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 		Attributes:  attributes,
 	}
 
-	var opts ResourceOptions
+	var opts generic.ResourceOptions
 
 	opts = opts.WithCloudFormationTypeName("AWS::NetworkManager::CoreNetwork").WithTerraformTypeName("awscc_networkmanager_core_network")
 	opts = opts.WithTerraformSchema(schema)
@@ -376,7 +376,7 @@ func coreNetworkResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithUpdateTimeoutInMinutes(720)
 
-	v, err := NewResource(ctx, opts...)
+	v, err := generic.NewResource(ctx, opts...)
 
 	if err != nil {
 		return nil, err
