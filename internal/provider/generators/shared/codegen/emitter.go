@@ -905,7 +905,13 @@ func defaultValueAttributePlanModifier(path []string, property *cfschema.Propert
 	// Primitive types.
 	//
 	case bool:
-		return features, fmt.Sprintf("BoolDefaultValue(%t)", v), nil
+		// Handle default values for string properties encoded as booleans.
+		switch propertyType := property.Type.String(); propertyType {
+		case cfschema.PropertyTypeString:
+			return features, fmt.Sprintf("StringDefaultValue(%q)", strconv.FormatBool(v)), nil
+		default:
+			return features, fmt.Sprintf("BoolDefaultValue(%t)", v), nil
+		}
 	case float64:
 		switch propertyType := property.Type.String(); propertyType {
 		case cfschema.PropertyTypeInteger:
