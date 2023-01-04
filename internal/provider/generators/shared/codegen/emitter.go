@@ -27,30 +27,20 @@ type Features struct {
 	FrameworkValidatorsPackages   []string // Package names for any terraform-plugin-framework-validators validators. May contain duplicates.
 }
 
-func (f *Features) LogicalOr(features Features) {
-	f.FrameworkPlanModifierPackages = append(f.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
-	f.FrameworkValidatorsPackages = append(f.FrameworkValidatorsPackages, features.FrameworkValidatorsPackages...)
-	if features.HasIDRootProperty {
-		f.HasIDRootProperty = true
-	}
-	if features.HasRequiredRootProperty {
-		f.HasRequiredRootProperty = true
-	}
-	if features.HasUpdatableProperty {
-		f.HasUpdatableProperty = true
-	}
-	if features.HasValidator {
-		f.HasValidator = true
-	}
-	if features.UsesFrameworkTypes {
-		f.UsesFrameworkTypes = true
-	}
-	if features.UsesInternalValidate {
-		f.UsesInternalValidate = true
-	}
-	if features.UsesRegexpInValidation {
-		f.UsesRegexpInValidation = true
-	}
+func (f Features) LogicalOr(features Features) Features {
+	var result Features
+
+	result.FrameworkPlanModifierPackages = append(f.FrameworkPlanModifierPackages, features.FrameworkPlanModifierPackages...)
+	result.FrameworkValidatorsPackages = append(f.FrameworkValidatorsPackages, features.FrameworkValidatorsPackages...)
+	result.HasIDRootProperty = f.HasIDRootProperty || features.HasIDRootProperty
+	result.HasRequiredRootProperty = f.HasRequiredRootProperty || features.HasRequiredRootProperty
+	result.HasUpdatableProperty = f.HasUpdatableProperty || features.HasUpdatableProperty
+	result.HasValidator = f.HasValidator || features.HasValidator
+	result.UsesFrameworkTypes = f.UsesFrameworkTypes || features.UsesFrameworkTypes
+	result.UsesInternalValidate = f.UsesInternalValidate || features.UsesInternalValidate
+	result.UsesRegexpInValidation = f.UsesRegexpInValidation || features.UsesRegexpInValidation
+
+	return result
 }
 
 var (
@@ -147,7 +137,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		if f, v, err := integerValidators(path, property); err != nil {
 			return features, err
 		} else if len(v) > 0 {
-			features.LogicalOr(f)
+			features = features.LogicalOr(f)
 			validators = append(validators, v...)
 		}
 
@@ -160,7 +150,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		if f, v, err := numberValidators(path, property); err != nil {
 			return features, err
 		} else if len(v) > 0 {
-			features.LogicalOr(f)
+			features = features.LogicalOr(f)
 			validators = append(validators, v...)
 		}
 
@@ -173,7 +163,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		if f, v, err := stringValidators(path, property); err != nil {
 			return features, err
 		} else if len(v) > 0 {
-			features.LogicalOr(f)
+			features = features.LogicalOr(f)
 			validators = append(validators, v...)
 		}
 
@@ -235,7 +225,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, err
 				}
 
-				features.LogicalOr(f)
+				features = features.LogicalOr(f)
 
 				e.printf(",\n")
 				e.printf("}/*END NESTED OBJECT*/,\n")
@@ -268,7 +258,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
 						return features, err
 					} else if len(v) > 0 {
-						features.LogicalOr(f)
+						features = features.LogicalOr(f)
 
 						w := &strings.Builder{}
 						switch itemType := property.Items.Type.String(); itemType {
@@ -341,7 +331,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, err
 				}
 
-				features.LogicalOr(f)
+				features = features.LogicalOr(f)
 
 				e.printf(",\n")
 				e.printf("}/*END NESTED OBJECT*/,\n")
@@ -390,7 +380,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					if f, v, err := validatorsGenerator(path, property.Items); err != nil {
 						return features, err
 					} else if len(v) > 0 {
-						features.LogicalOr(f)
+						features = features.LogicalOr(f)
 
 						w := &strings.Builder{}
 						switch itemType := property.Items.Type.String(); itemType {
@@ -552,7 +542,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, err
 				}
 
-				features.LogicalOr(f)
+				features = features.LogicalOr(f)
 
 				if !e.IsDataSource {
 					if patternProperty.MinItems != nil {
@@ -624,7 +614,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 			return features, err
 		}
 
-		features.LogicalOr(f)
+		features = features.LogicalOr(f)
 
 		e.printf(",\n")
 
@@ -655,7 +645,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 		}
 
 		hasDefaultValue = true
-		features.LogicalOr(f)
+		features = features.LogicalOr(f)
 		planModifiers = append(planModifiers, planModifier)
 	}
 
@@ -801,7 +791,7 @@ func (e Emitter) emitSchema(attributeNameMap map[string]string, parent parent, p
 			return features, err
 		}
 
-		features.LogicalOr(f)
+		features = features.LogicalOr(f)
 
 		e.printf(",\n")
 	}
