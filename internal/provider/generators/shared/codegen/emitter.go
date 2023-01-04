@@ -275,7 +275,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 						case cfschema.PropertyTypeString:
 							fprintf(w, "setvalidator.ValueStringsAre(\n")
 						case cfschema.PropertyTypeInteger:
-							fprintf(w, "setvalidator. ValueInt64sAre(\n")
+							fprintf(w, "setvalidator.ValueInt64sAre(\n")
 						default:
 							return features, fmt.Errorf("%s is of unsupported type for set item validation: %s", strings.Join(path, "/"), itemType)
 						}
@@ -375,6 +375,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 					return features, err
 				} else if v != "" {
 					validators = append(validators, v)
+					features.FrameworkValidatorsPackages = append(features.FrameworkValidatorsPackages, "listvalidator")
 				}
 
 				switch arrayType {
@@ -396,7 +397,7 @@ func (e Emitter) emitAttribute(attributeNameMap map[string]string, path []string
 						case cfschema.PropertyTypeString:
 							fprintf(w, "listvalidator.ValueStringsAre(\n")
 						case cfschema.PropertyTypeInteger:
-							fprintf(w, "listvalidator. ValueInt64sAre(\n")
+							fprintf(w, "listvalidator.ValueInt64sAre(\n")
 						default:
 							return features, fmt.Errorf("%s is of unsupported type for list item validation: %s", strings.Join(path, "/"), itemType)
 						}
