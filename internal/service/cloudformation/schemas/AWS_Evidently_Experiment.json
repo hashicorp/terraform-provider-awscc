@@ -189,7 +189,6 @@
         "MetricName",
         "EntityIdKey",
         "ValueKey",
-        "EventPattern",
         "DesiredChange"
       ],
       "additionalProperties": false

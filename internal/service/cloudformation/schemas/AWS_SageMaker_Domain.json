@@ -224,7 +224,7 @@
           "type": "string",
           "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
           "maxLength": 256,
-          "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"
+          "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"
         }
       }
     },
@@ -432,11 +432,8 @@
   ],
   "createOnlyProperties": [
     "/properties/AppNetworkAccessType",
-    "/properties/AppSecurityGroupManagement",
     "/properties/AuthMode",
     "/properties/DomainName",
-    "/properties/DomainSettings/SecurityGroupIds",
-    "/properties/DomainSettings/RStudioServerProDomainSettings/DomainExecutionRoleArn",
     "/properties/DomainSettings/RStudioServerProDomainSettings/DefaultResourceSpec",
     "/properties/KmsKeyId",
     "/properties/SubnetIds",
@@ -481,6 +478,7 @@
     },
     "update": {
       "permissions": [
+        "sagemaker:CreateApp",
         "sagemaker:UpdateDomain",
         "sagemaker:DescribeDomain",
         "sagemaker:DescribeImage",

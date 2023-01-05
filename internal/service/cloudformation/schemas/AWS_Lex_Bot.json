@@ -1578,7 +1578,7 @@
         "SlotTypes": {
           "description": "List of SlotTypes",
           "type": "array",
-          "maxItems": 100,
+          "maxItems": 250,
           "uniqueItems": true,
           "insertionOrder": false,
           "items": {

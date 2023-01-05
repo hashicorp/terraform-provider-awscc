@@ -126,8 +126,7 @@
     "tagProperty": "/properties/Tags"
   },
   "required": [
-    "Ec2Config",
-    "EfsFilesystemArn"
+    "Ec2Config"
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",

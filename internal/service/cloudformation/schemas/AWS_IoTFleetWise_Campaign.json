@@ -215,7 +215,7 @@
     "ExpiryTime": {
       "format": "date-time",
       "type": "string",
-      "default": "253402243200"
+      "default": "253402214400"
     },
     "LastModificationTime": {
       "type": "string",

@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::RedshiftServerless::Namespace",
   "description": "Definition of AWS::RedshiftServerless::Namespace Resource Type",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-redshiftserverless",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-redshift-serverless",
   "definitions": {
     "LogExport": {
       "type": "string",
@@ -180,11 +180,25 @@
     "NamespaceName"
   ],
   "readOnlyProperties": [
-    "/properties/Namespace"
+    "/properties/Namespace/NamespaceArn",
+    "/properties/Namespace/NamespaceId",
+    "/properties/Namespace/NamespaceName",
+    "/properties/Namespace/AdminUsername",
+    "/properties/Namespace/DbName",
+    "/properties/Namespace/KmsKeyId",
+    "/properties/Namespace/DefaultIamRoleArn",
+    "/properties/Namespace/IamRoles",
+    "/properties/Namespace/LogExports",
+    "/properties/Namespace/Status",
+    "/properties/Namespace/CreationDate"
   ],
   "writeOnlyProperties": [
     "/properties/AdminUserPassword",
-    "/properties/Tags"
+    "/properties/FinalSnapshotName",
+    "/properties/FinalSnapshotRetentionPeriod",
+    "/properties/Tags",
+    "/properties/Tags/*/Key",
+    "/properties/Tags/*/Value"
   ],
   "createOnlyProperties": [
     "/properties/NamespaceName",

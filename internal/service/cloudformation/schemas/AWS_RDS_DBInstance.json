@@ -179,6 +179,10 @@
       "type": "string",
       "description": "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC."
     },
+    "DBSystemId": {
+      "type": "string",
+      "description": "The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only."
+    },
     "DeleteAutomatedBackups": {
       "type": "boolean",
       "description": "A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted."
@@ -453,7 +457,8 @@
     "/properties/Endpoint/Port",
     "/properties/Endpoint/HostedZoneId",
     "/properties/DbiResourceId",
-    "/properties/DBInstanceArn"
+    "/properties/DBInstanceArn",
+    "/properties/DBSystemId"
   ],
   "primaryIdentifier": [
     "/properties/DBInstanceIdentifier"
