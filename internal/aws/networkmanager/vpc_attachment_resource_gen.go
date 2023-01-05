@@ -131,6 +131,11 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Vpc options of the attachment.",
 		//	  "properties": {
+		//	    "ApplianceModeSupport": {
+		//	      "default": false,
+		//	      "description": "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
+		//	      "type": "boolean"
+		//	    },
 		//	    "Ipv6Support": {
 		//	      "default": false,
 		//	      "description": "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
@@ -141,6 +146,16 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ApplianceModeSupport
+				"appliance_mode_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						generic.BoolDefaultValue(false),
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Ipv6Support
 				"ipv_6_support": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable",
@@ -419,6 +434,7 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"appliance_mode_support":        "ApplianceModeSupport",
 		"attachment_id":                 "AttachmentId",
 		"attachment_policy_rule_number": "AttachmentPolicyRuleNumber",
 		"attachment_type":               "AttachmentType",

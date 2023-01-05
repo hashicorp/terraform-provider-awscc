@@ -180,7 +180,14 @@
   },
   "properties": {
     "CreationDate": {
-      "format": "date-time",
+      "oneOf": [
+        {
+          "format": "date-time"
+        },
+        {
+          "format": "timestamp"
+        }
+      ],
       "description": "The date of creation of the metric stream.",
       "type": "string"
     },
@@ -257,7 +264,14 @@
       }
     },
     "LastUpdateDate": {
-      "format": "date-time",
+      "oneOf": [
+        {
+          "format": "date-time"
+        },
+        {
+          "format": "timestamp"
+        }
+      ],
       "description": "The date of the last update of the metric stream.",
       "type": "string"
     }

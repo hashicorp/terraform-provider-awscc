@@ -72,6 +72,13 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	            "STRICT_ORDER"
 		//	          ],
 		//	          "type": "string"
+		//	        },
+		//	        "StreamExceptionPolicy": {
+		//	          "enum": [
+		//	            "DROP",
+		//	            "CONTINUE"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -242,6 +249,20 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"DEFAULT_ACTION_ORDER",
 									"STRICT_ORDER",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: StreamExceptionPolicy
+						"stream_exception_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"DROP",
+									"CONTINUE",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -555,6 +576,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"stateless_default_actions":          "StatelessDefaultActions",
 		"stateless_fragment_default_actions": "StatelessFragmentDefaultActions",
 		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
+		"stream_exception_policy":            "StreamExceptionPolicy",
 		"tags":                               "Tags",
 		"value":                              "Value",
 	})

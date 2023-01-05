@@ -125,6 +125,45 @@
       ],
       "additionalProperties": false
     },
+    "VpcConfiguration": {
+      "type": "object",
+      "description": "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
+      "properties": {
+        "SecurityGroupIds": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "VPC Security Group Id"
+          },
+          "description": "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect."
+        },
+        "SubnetIds": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "minItems": 2,
+          "maxItems": 6,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 255,
+            "description": "VPC Subnet Id"
+          },
+          "description": "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect."
+        }
+      },
+      "required": [
+        "SecurityGroupIds",
+        "SubnetIds"
+      ],
+      "additionalProperties": false
+    },
     "AccountAccessType": {
       "type": "string",
       "description": "These enums represent valid account access types. Specifically these enums determine whether the workspace can access AWS resources in the AWS account only, or whether it can also access resources in other accounts in the same organization. If the value CURRENT_ACCOUNT is used, a workspace role ARN must be provided. If the value is ORGANIZATION, a list of organizational units must be provided.",
@@ -213,6 +252,9 @@
     },
     "SamlConfiguration": {
       "$ref": "#/definitions/SamlConfiguration"
+    },
+    "VpcConfiguration": {
+      "$ref": "#/definitions/VpcConfiguration"
     },
     "SamlConfigurationStatus": {
       "$ref": "#/definitions/SamlConfigurationStatus"
@@ -346,7 +388,11 @@
         "sso:CreateManagedApplicationInstance",
         "organizations:DescribeOrganization",
         "sso:GetSharedSsoConfiguration",
-        "iam:PassRole"
+        "iam:PassRole",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {
@@ -361,7 +407,11 @@
         "grafana:UpdateWorkspaceAuthentication",
         "sso:DescribeRegisteredRegions",
         "sso:CreateManagedApplicationInstance",
-        "iam:PassRole"
+        "iam:PassRole",
+        "ec2:DescribeSecurityGroups",
+        "ec2:DescribeSubnets",
+        "ec2:DescribeVpcs",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "delete": {

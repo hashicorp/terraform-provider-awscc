@@ -2,12 +2,19 @@
 
 FEATURES:
 
+* **New Data Source:** `awscc_directoryservice_simple_ad`
+* **New Data Source:** `awscc_directoryservice_simple_ads`
 * **New Data Source:** `awscc_elasticbeanstalk_configuration_template`
 * **New Data Source:** `awscc_elasticbeanstalk_configuration_templates`
 * **New Data Source:** `awscc_elasticloadbalancingv2_target_group`
 * **New Data Source:** `awscc_elasticloadbalancingv2_target_groups`
+* **New Data Source:** `awscc_gamelift_build`
+* **New Data Source:** `awscc_gamelift_builds`
+* **New Data Source:** `awscc_stepfunctions_state_machines`
+* **New Resource:** `awscc_directoryservice_simple_ad`
 * **New Resource:** `awscc_elasticbeanstalk_configuration_template`
 * **New Resource:** `awscc_elasticloadbalancingv2_target_group`
+* **New Resource:** `awscc_gamelift_build`
 
 ## [0.43.0](https://github.com/hashicorp/terraform-provider-awscc/releases/tag/v0.43.0) (December 15, 2022)
 

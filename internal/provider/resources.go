@@ -155,6 +155,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_detective_member_invitation -cfschema ../service/cloudformation/schemas/AWS_Detective_MemberInvitation.json -package detective -- ../aws/detective/member_invitation_resource_gen.go ../aws/detective/member_invitation_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_devopsguru_notification_channel -cfschema ../service/cloudformation/schemas/AWS_DevOpsGuru_NotificationChannel.json -package devopsguru -- ../aws/devopsguru/notification_channel_resource_gen.go ../aws/devopsguru/notification_channel_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_devopsguru_resource_collection -cfschema ../service/cloudformation/schemas/AWS_DevOpsGuru_ResourceCollection.json -package devopsguru -- ../aws/devopsguru/resource_collection_resource_gen.go ../aws/devopsguru/resource_collection_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_directoryservice_simple_ad -cfschema ../service/cloudformation/schemas/AWS_DirectoryService_SimpleAD.json -package directoryservice -- ../aws/directoryservice/simple_ad_resource_gen.go ../aws/directoryservice/simple_ad_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_dynamodb_global_table -cfschema ../service/cloudformation/schemas/AWS_DynamoDB_GlobalTable.json -package dynamodb -- ../aws/dynamodb/global_table_resource_gen.go ../aws/dynamodb/global_table_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_dynamodb_table -cfschema ../service/cloudformation/schemas/AWS_DynamoDB_Table.json -package dynamodb -- ../aws/dynamodb/table_resource_gen.go ../aws/dynamodb/table_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_ec2_capacity_reservation -cfschema ../service/cloudformation/schemas/AWS_EC2_CapacityReservation.json -package ec2 -- ../aws/ec2/capacity_reservation_resource_gen.go ../aws/ec2/capacity_reservation_resource_gen_test.go
@@ -263,6 +264,7 @@
 //go:generate go run generators/resource/main.go -resource awscc_frauddetector_outcome -cfschema ../service/cloudformation/schemas/AWS_FraudDetector_Outcome.json -package frauddetector -- ../aws/frauddetector/outcome_resource_gen.go ../aws/frauddetector/outcome_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_frauddetector_variable -cfschema ../service/cloudformation/schemas/AWS_FraudDetector_Variable.json -package frauddetector -- ../aws/frauddetector/variable_resource_gen.go ../aws/frauddetector/variable_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_gamelift_alias -cfschema ../service/cloudformation/schemas/AWS_GameLift_Alias.json -package gamelift -- ../aws/gamelift/alias_resource_gen.go ../aws/gamelift/alias_resource_gen_test.go
+//go:generate go run generators/resource/main.go -resource awscc_gamelift_build -cfschema ../service/cloudformation/schemas/AWS_GameLift_Build.json -package gamelift -- ../aws/gamelift/build_resource_gen.go ../aws/gamelift/build_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_gamelift_fleet -cfschema ../service/cloudformation/schemas/AWS_GameLift_Fleet.json -package gamelift -- ../aws/gamelift/fleet_resource_gen.go ../aws/gamelift/fleet_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_gamelift_game_server_group -cfschema ../service/cloudformation/schemas/AWS_GameLift_GameServerGroup.json -package gamelift -- ../aws/gamelift/game_server_group_resource_gen.go ../aws/gamelift/game_server_group_resource_gen_test.go
 //go:generate go run generators/resource/main.go -resource awscc_gamelift_location -cfschema ../service/cloudformation/schemas/AWS_GameLift_Location.json -package gamelift -- ../aws/gamelift/location_resource_gen.go ../aws/gamelift/location_resource_gen_test.go
@@ -667,6 +669,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/datasync"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/detective"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/devopsguru"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dynamodb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ec2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"

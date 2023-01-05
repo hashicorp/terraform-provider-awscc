@@ -284,6 +284,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DBSystemId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only.",
+		//	  "type": "string"
+		//	}
+		"db_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DbiResourceId
 		// CloudFormation resource type schema:
 		//
@@ -958,6 +969,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"db_security_groups":                       "DBSecurityGroups",
 		"db_snapshot_identifier":                   "DBSnapshotIdentifier",
 		"db_subnet_group_name":                     "DBSubnetGroupName",
+		"db_system_id":                             "DBSystemId",
 		"dbi_resource_id":                          "DbiResourceId",
 		"delete_automated_backups":                 "DeleteAutomatedBackups",
 		"deletion_protection":                      "DeletionProtection",

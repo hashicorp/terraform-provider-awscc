@@ -176,6 +176,7 @@ func clusterParameterGroupResource(ctx context.Context) (resource.Resource, erro
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -210,6 +211,11 @@ func clusterParameterGroupResource(ctx context.Context) (resource.Resource, erro
 		"value":                  "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Tags",
+		"/properties/Tags/*/Key",
+		"/properties/Tags/*/Value",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

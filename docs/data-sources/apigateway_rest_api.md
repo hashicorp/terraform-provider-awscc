@@ -23,7 +23,7 @@ Data Source schema for AWS::ApiGateway::RestApi
 
 - `api_key_source_type` (String)
 - `binary_media_types` (List of String)
-- `body` (String)
+- `body` (Map of String)
 - `body_s3_location` (Attributes) (see [below for nested schema](#nestedatt--body_s3_location))
 - `clone_from` (String)
 - `description` (String)
@@ -33,9 +33,8 @@ Data Source schema for AWS::ApiGateway::RestApi
 - `minimum_compression_size` (Number)
 - `mode` (String)
 - `name` (String)
-- `parameters` (String)
-- `policy` (String)
-- `rest_api_id` (String)
+- `parameters` (Map of String)
+- `policy` (Map of String)
 - `root_resource_id` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

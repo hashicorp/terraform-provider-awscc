@@ -134,7 +134,13 @@
     },
     "Labels": {
       "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
-      "type": "object"
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "LaunchTemplate": {
       "description": "An object representing a node group's launch template specification.",
@@ -172,7 +178,13 @@
     },
     "Tags": {
       "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
-      "type": "object"
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": false
     },
     "Taints": {
       "description": "The Kubernetes taints to be applied to the nodes in the node group when they are created.",

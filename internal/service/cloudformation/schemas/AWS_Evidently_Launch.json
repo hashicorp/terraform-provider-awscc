@@ -231,8 +231,7 @@
       "required": [
         "MetricName",
         "EntityIdKey",
-        "ValueKey",
-        "EventPattern"
+        "ValueKey"
       ],
       "additionalProperties": false
     },

@@ -125,6 +125,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// FinalSnapshotName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: FinalSnapshotRetentionPeriod
 		// CloudFormation resource type schema:
@@ -140,6 +141,7 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// FinalSnapshotRetentionPeriod is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: IamRoles
 		// CloudFormation resource type schema:
@@ -295,18 +297,30 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AdminUsername
 				"admin_username": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: CreationDate
 				"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DbName
 				"db_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DefaultIamRoleArn
 				"default_iam_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: IamRoles
 				"iam_roles": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -314,11 +328,15 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: KmsKeyId
 				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: LogExports
 				"log_exports": schema.ListAttribute{ /*START ATTRIBUTE*/
@@ -326,25 +344,39 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceArn
 				"namespace_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceId
 				"namespace_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: NamespaceName
 				"namespace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Status
 				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
+			Optional: true,
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -477,7 +509,11 @@ func namespaceResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AdminUserPassword",
+		"/properties/FinalSnapshotName",
+		"/properties/FinalSnapshotRetentionPeriod",
 		"/properties/Tags",
+		"/properties/Tags/*/Key",
+		"/properties/Tags/*/Value",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

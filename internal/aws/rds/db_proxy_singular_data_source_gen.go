@@ -36,6 +36,16 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "string"
 		//	      },
+		//	      "ClientPasswordAuthType": {
+		//	        "description": "The type of authentication the proxy uses for connections from clients.",
+		//	        "enum": [
+		//	          "MYSQL_NATIVE_PASSWORD",
+		//	          "POSTGRES_SCRAM_SHA_256",
+		//	          "POSTGRES_MD5",
+		//	          "SQL_SERVER_AUTHENTICATION"
+		//	        ],
+		//	        "type": "string"
+		//	      },
 		//	      "Description": {
 		//	        "description": "A user-specified description about the authentication used by a proxy to log in as a specific database user. ",
 		//	        "type": "string"
@@ -69,6 +79,11 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: AuthScheme
 					"auth_scheme": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The type of authentication that the proxy uses for connections from the proxy to the underlying database. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: ClientPasswordAuthType
+					"client_password_auth_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of authentication the proxy uses for connections from clients.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Description
@@ -293,26 +308,27 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::RDS::DBProxy").WithTerraformTypeName("awscc_rds_db_proxy")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"auth":                   "Auth",
-		"auth_scheme":            "AuthScheme",
-		"db_proxy_arn":           "DBProxyArn",
-		"db_proxy_name":          "DBProxyName",
-		"debug_logging":          "DebugLogging",
-		"description":            "Description",
-		"endpoint":               "Endpoint",
-		"engine_family":          "EngineFamily",
-		"iam_auth":               "IAMAuth",
-		"idle_client_timeout":    "IdleClientTimeout",
-		"key":                    "Key",
-		"require_tls":            "RequireTLS",
-		"role_arn":               "RoleArn",
-		"secret_arn":             "SecretArn",
-		"tags":                   "Tags",
-		"user_name":              "UserName",
-		"value":                  "Value",
-		"vpc_id":                 "VpcId",
-		"vpc_security_group_ids": "VpcSecurityGroupIds",
-		"vpc_subnet_ids":         "VpcSubnetIds",
+		"auth":                      "Auth",
+		"auth_scheme":               "AuthScheme",
+		"client_password_auth_type": "ClientPasswordAuthType",
+		"db_proxy_arn":              "DBProxyArn",
+		"db_proxy_name":             "DBProxyName",
+		"debug_logging":             "DebugLogging",
+		"description":               "Description",
+		"endpoint":                  "Endpoint",
+		"engine_family":             "EngineFamily",
+		"iam_auth":                  "IAMAuth",
+		"idle_client_timeout":       "IdleClientTimeout",
+		"key":                       "Key",
+		"require_tls":               "RequireTLS",
+		"role_arn":                  "RoleArn",
+		"secret_arn":                "SecretArn",
+		"tags":                      "Tags",
+		"user_name":                 "UserName",
+		"value":                     "Value",
+		"vpc_id":                    "VpcId",
+		"vpc_security_group_ids":    "VpcSecurityGroupIds",
+		"vpc_subnet_ids":            "VpcSubnetIds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

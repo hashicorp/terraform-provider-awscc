@@ -773,6 +773,82 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: VpcConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
+		//	  "properties": {
+		//	    "SecurityGroupIds": {
+		//	      "description": "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "VPC Security Group Id",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 1,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "SubnetIds": {
+		//	      "description": "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "VPC Subnet Id",
+		//	        "maxLength": 255,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 6,
+		//	      "minItems": 2,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "SecurityGroupIds",
+		//	    "SubnetIds"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"vpc_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityGroupIds
+				"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.",
+					Required:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(1, 5),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 255),
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SubnetIds
+				"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.",
+					Required:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(2, 6),
+						setvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 255),
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	schema := schema.Schema{
@@ -817,10 +893,13 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		"role_values":               "RoleValues",
 		"saml_configuration":        "SamlConfiguration",
 		"saml_configuration_status": "SamlConfigurationStatus",
+		"security_group_ids":        "SecurityGroupIds",
 		"sso_client_id":             "SsoClientId",
 		"stack_set_name":            "StackSetName",
 		"status":                    "Status",
+		"subnet_ids":                "SubnetIds",
 		"url":                       "Url",
+		"vpc_configuration":         "VpcConfiguration",
 		"xml":                       "Xml",
 	})
 

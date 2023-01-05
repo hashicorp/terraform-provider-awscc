@@ -185,6 +185,32 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		//	    "Name": {
 		//	      "type": "string"
 		//	    },
+		//	    "RemoveHeadersConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Items": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Header": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Header"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Items"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "SecurityHeadersConfig": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -453,6 +479,28 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 				}, /*END ATTRIBUTE*/
+				// Property: RemoveHeadersConfig
+				"remove_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Items
+						"items": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Header
+									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Required: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityHeadersConfig
 				"security_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -673,6 +721,7 @@ func responseHeadersPolicyResource(ctx context.Context) (resource.Resource, erro
 		"preload":                          "Preload",
 		"protection":                       "Protection",
 		"referrer_policy":                  "ReferrerPolicy",
+		"remove_headers_config":            "RemoveHeadersConfig",
 		"report_uri":                       "ReportUri",
 		"response_headers_policy_config":   "ResponseHeadersPolicyConfig",
 		"sampling_rate":                    "SamplingRate",

@@ -30,21 +30,12 @@ Definition of AWS::RedshiftServerless::Namespace Resource Type
 - `iam_roles` (List of String) A list of AWS Identity and Access Management (IAM) roles that can be used by the namespace to access other AWS services. You must supply the IAM roles in their Amazon Resource Name (ARN) format. The Default role limit for each request is 10.
 - `kms_key_id` (String) The AWS Key Management Service (KMS) key ID of the encryption key that you want to use to encrypt data in the namespace.
 - `log_exports` (List of String) The collection of log types to be exported provided by the customer. Should only be one of the three supported log types: userlog, useractivitylog and connectionlog
+- `namespace` (Attributes) (see [below for nested schema](#nestedatt--namespace))
 - `tags` (Attributes List) The list of tags for the namespace. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `namespace` (Attributes) (see [below for nested schema](#nestedatt--namespace))
-
-<a id="nestedatt--tags"></a>
-### Nested Schema for `tags`
-
-Required:
-
-- `key` (String)
-- `value` (String)
-
 
 <a id="nestedatt--namespace"></a>
 ### Nested Schema for `namespace`
@@ -62,6 +53,15 @@ Read-Only:
 - `namespace_id` (String)
 - `namespace_name` (String)
 - `status` (String)
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String)
+- `value` (String)
 
 ## Import
 

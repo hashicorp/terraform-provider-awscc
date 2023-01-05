@@ -57,12 +57,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"function_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-			// FunctionCode is a write-only property.
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionConfig
 		// CloudFormation resource type schema:
@@ -94,11 +89,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 					Required: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: FunctionMetadata
 		// CloudFormation resource type schema:
@@ -184,7 +175,6 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/AutoPublish",
-		"/properties/FunctionCode",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -29,11 +29,11 @@ Definition of AWS::RedshiftServerless::Workgroup Resource Type
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `workgroup` (Attributes) (see [below for nested schema](#nestedatt--workgroup))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `workgroup` (Attributes) (see [below for nested schema](#nestedatt--workgroup))
 
 <a id="nestedatt--config_parameters"></a>
 ### Nested Schema for `config_parameters`
@@ -56,12 +56,15 @@ Required:
 <a id="nestedatt--workgroup"></a>
 ### Nested Schema for `workgroup`
 
+Optional:
+
+- `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--workgroup--config_parameters))
+- `endpoint` (Attributes) (see [below for nested schema](#nestedatt--workgroup--endpoint))
+
 Read-Only:
 
 - `base_capacity` (Number)
-- `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--workgroup--config_parameters))
 - `creation_date` (String)
-- `endpoint` (Attributes) (see [below for nested schema](#nestedatt--workgroup--endpoint))
 - `enhanced_vpc_routing` (Boolean)
 - `namespace_name` (String)
 - `publicly_accessible` (Boolean)
@@ -75,7 +78,7 @@ Read-Only:
 <a id="nestedatt--workgroup--config_parameters"></a>
 ### Nested Schema for `workgroup.config_parameters`
 
-Read-Only:
+Optional:
 
 - `parameter_key` (String)
 - `parameter_value` (String)
@@ -84,16 +87,19 @@ Read-Only:
 <a id="nestedatt--workgroup--endpoint"></a>
 ### Nested Schema for `workgroup.endpoint`
 
+Optional:
+
+- `vpc_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--workgroup--endpoint--vpc_endpoints))
+
 Read-Only:
 
 - `address` (String)
 - `port` (Number)
-- `vpc_endpoints` (Attributes List) (see [below for nested schema](#nestedatt--workgroup--endpoint--vpc_endpoints))
 
 <a id="nestedatt--workgroup--endpoint--vpc_endpoints"></a>
 ### Nested Schema for `workgroup.endpoint.vpc_endpoints`
 
-Read-Only:
+Optional:
 
 - `network_interfaces` (Attributes List) (see [below for nested schema](#nestedatt--workgroup--endpoint--vpc_endpoints--network_interfaces))
 - `vpc_endpoint_id` (String)
@@ -102,7 +108,7 @@ Read-Only:
 <a id="nestedatt--workgroup--endpoint--vpc_endpoints--network_interfaces"></a>
 ### Nested Schema for `workgroup.endpoint.vpc_endpoints.vpc_id`
 
-Read-Only:
+Optional:
 
 - `availability_zone` (String)
 - `network_interface_id` (String)

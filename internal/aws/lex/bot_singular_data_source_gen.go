@@ -4172,7 +4172,7 @@ func botDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
-		//	        "maxItems": 100,
+		//	        "maxItems": 250,
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },

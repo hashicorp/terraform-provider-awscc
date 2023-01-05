@@ -213,6 +213,9 @@
       "properties": {
         "RuleOrder": {
           "$ref": "#/definitions/RuleOrder"
+        },
+        "StreamExceptionPolicy": {
+          "$ref": "#/definitions/StreamExceptionPolicy"
         }
       },
       "additionalProperties": false
@@ -222,6 +225,13 @@
       "enum": [
         "DEFAULT_ACTION_ORDER",
         "STRICT_ORDER"
+      ]
+    },
+    "StreamExceptionPolicy": {
+      "type": "string",
+      "enum": [
+        "DROP",
+        "CONTINUE"
       ]
     }
   },

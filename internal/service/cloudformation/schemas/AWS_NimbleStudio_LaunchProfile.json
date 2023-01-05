@@ -3,6 +3,20 @@
   "description": "Represents a launch profile which delegates access to a collection of studio components to studio users",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-nimblestudio",
   "definitions": {
+    "AutomaticTerminationMode": {
+      "type": "string",
+      "enum": [
+        "DEACTIVATED",
+        "ACTIVATED"
+      ]
+    },
+    "SessionPersistenceMode": {
+      "type": "string",
+      "enum": [
+        "DEACTIVATED",
+        "ACTIVATED"
+      ]
+    },
     "StreamConfiguration": {
       "type": "object",
       "description": "<p>A configuration for a streaming session.</p>",
@@ -21,6 +35,7 @@
         },
         "MaxSessionLengthInMinutes": {
           "type": "number",
+          "default": 690,
           "maximum": 43200,
           "minimum": 1,
           "description": "<p>The length of time, in minutes, that a streaming session can be active before it is\n            stopped or terminated. After this point, Nimble Studio automatically terminates or\n            stops the session. The default length of time is 690 minutes, and the maximum length of\n            time is 30 days.</p>"
@@ -39,12 +54,22 @@
         },
         "MaxStoppedSessionLengthInMinutes": {
           "type": "number",
+          "default": 0,
           "maximum": 5760,
           "minimum": 0,
-          "description": "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>"
+          "description": "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n         <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated (instead of stopped).</p>\n         <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>"
         },
         "SessionStorage": {
           "$ref": "#/definitions/StreamConfigurationSessionStorage"
+        },
+        "SessionPersistenceMode": {
+          "$ref": "#/definitions/SessionPersistenceMode"
+        },
+        "VolumeConfiguration": {
+          "$ref": "#/definitions/VolumeConfiguration"
+        },
+        "AutomaticTerminationMode": {
+          "$ref": "#/definitions/AutomaticTerminationMode"
         }
       },
       "required": [
@@ -132,6 +157,30 @@
       "patternProperties": {
         "": {
           "type": "string"
+        }
+      },
+      "additionalProperties": false
+    },
+    "VolumeConfiguration": {
+      "type": "object",
+      "properties": {
+        "Size": {
+          "type": "number",
+          "default": 500,
+          "maximum": 16000,
+          "minimum": 100
+        },
+        "Throughput": {
+          "type": "number",
+          "default": 125,
+          "maximum": 1000,
+          "minimum": 125
+        },
+        "Iops": {
+          "type": "number",
+          "default": 3000,
+          "maximum": 16000,
+          "minimum": 3000
         }
       },
       "additionalProperties": false

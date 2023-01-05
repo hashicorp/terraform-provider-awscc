@@ -35,7 +35,6 @@ Data Source schema for AWS::Lambda::EventSourceMapping
 - `maximum_retry_attempts` (Number) (Streams) The maximum number of times to retry when the function returns an error.
 - `parallelization_factor` (Number) (Streams) The number of batches to process from each shard concurrently.
 - `queues` (List of String) (ActiveMQ) A list of ActiveMQ queues.
-- `scaling_config` (Attributes) The scaling configuration for the event source. (see [below for nested schema](#nestedatt--scaling_config))
 - `self_managed_event_source` (Attributes) Self-managed event source endpoints. (see [below for nested schema](#nestedatt--self_managed_event_source))
 - `self_managed_kafka_event_source_config` (Attributes) Specific configuration settings for a Self-Managed Apache Kafka event source. (see [below for nested schema](#nestedatt--self_managed_kafka_event_source_config))
 - `source_access_configurations` (Attributes List) A list of SourceAccessConfiguration. (see [below for nested schema](#nestedatt--source_access_configurations))
@@ -82,14 +81,6 @@ Read-Only:
 
 - `pattern` (String) The filter pattern that defines which events should be passed for invocations.
 
-
-
-<a id="nestedatt--scaling_config"></a>
-### Nested Schema for `scaling_config`
-
-Read-Only:
-
-- `maximum_concurrency` (Number) The maximum number of concurrent functions that the event source can invoke.
 
 
 <a id="nestedatt--self_managed_event_source"></a>

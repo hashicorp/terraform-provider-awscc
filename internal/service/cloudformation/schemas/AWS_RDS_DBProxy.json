@@ -33,6 +33,16 @@
         "UserName": {
           "description": "The name of the database user to which the proxy connects.",
           "type": "string"
+        },
+        "ClientPasswordAuthType": {
+          "description": "The type of authentication the proxy uses for connections from clients.",
+          "type": "string",
+          "enum": [
+            "MYSQL_NATIVE_PASSWORD",
+            "POSTGRES_SCRAM_SHA_256",
+            "POSTGRES_MD5",
+            "SQL_SERVER_AUTHENTICATION"
+          ]
         }
       },
       "additionalProperties": false

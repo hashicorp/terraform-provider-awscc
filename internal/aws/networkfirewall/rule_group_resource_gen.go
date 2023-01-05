@@ -69,6 +69,31 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "ReferenceSets": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IPSetReferences": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ReferenceArn": {
+		//	                  "description": "A resource ARN.",
+		//	                  "maxLength": 256,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^(arn:aws.*)$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "RuleVariables": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -572,6 +597,42 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"rule_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReferenceSets
+				"reference_sets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IPSetReferences
+						"ip_set_references":       // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ReferenceArn
+									"reference_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A resource ARN.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthBetween(1, 256),
+											stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws.*)$"), ""),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+											stringplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: RuleVariables
 				"rule_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1278,6 +1339,7 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"from_port":                          "FromPort",
 		"generated_rules_type":               "GeneratedRulesType",
 		"header":                             "Header",
+		"ip_set_references":                  "IPSetReferences",
 		"ip_sets":                            "IPSets",
 		"key":                                "Key",
 		"keyword":                            "Keyword",
@@ -1288,6 +1350,8 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		"protocol":                           "Protocol",
 		"protocols":                          "Protocols",
 		"publish_metric_action":              "PublishMetricAction",
+		"reference_arn":                      "ReferenceArn",
+		"reference_sets":                     "ReferenceSets",
 		"rule_definition":                    "RuleDefinition",
 		"rule_group":                         "RuleGroup",
 		"rule_group_arn":                     "RuleGroupArn",

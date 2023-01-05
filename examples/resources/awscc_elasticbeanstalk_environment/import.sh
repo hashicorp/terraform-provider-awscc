@@ -1,0 +1,1 @@
+$ terraform import awscc_elasticbeanstalk_environment.example <resource ID>

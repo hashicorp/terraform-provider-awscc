@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 656 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 659 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -766,6 +766,10 @@ resource_schema "aws_devopsguru_resource_collection" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_directoryservice_simple_ad" {
+  cloudformation_type_name = "AWS::DirectoryService::SimpleAD"
+}
+
 resource_schema "aws_dynamodb_global_table" {
   cloudformation_type_name = "AWS::DynamoDB::GlobalTable"
 }
@@ -1255,6 +1259,10 @@ resource_schema "aws_gamelift_alias" {
   cloudformation_type_name = "AWS::GameLift::Alias"
 }
 
+resource_schema "aws_gamelift_build" {
+  cloudformation_type_name = "AWS::GameLift::Build"
+}
+
 resource_schema "aws_gamelift_fleet" {
   cloudformation_type_name = "AWS::GameLift::Fleet"
 }
@@ -1490,6 +1498,15 @@ resource_schema "aws_iot_scheduled_audit" {
 
 resource_schema "aws_iot_security_profile" {
   cloudformation_type_name = "AWS::IoT::SecurityProfile"
+}
+
+resource_schema "aws_iot_thing" {
+  cloudformation_type_name = "AWS::IoT::Thing"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_topic_rule" {
@@ -2835,8 +2852,7 @@ resource_schema "aws_stepfunctions_activity" {
 }
 
 resource_schema "aws_stepfunctions_state_machine" {
-  cloudformation_type_name               = "AWS::StepFunctions::StateMachine"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::StepFunctions::StateMachine"
 }
 
 resource_schema "aws_supportapp_account_alias" {

@@ -170,6 +170,32 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		//	    "Name": {
 		//	      "type": "string"
 		//	    },
+		//	    "RemoveHeadersConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Items": {
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "properties": {
+		//	              "Header": {
+		//	                "type": "string"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "Header"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "type": "array",
+		//	          "uniqueItems": true
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Items"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "SecurityHeadersConfig": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -403,6 +429,24 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
+				// Property: RemoveHeadersConfig
+				"remove_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Items
+						"items": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Header
+									"header": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: SecurityHeadersConfig
 				"security_headers_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -565,6 +609,7 @@ func responseHeadersPolicyDataSource(ctx context.Context) (datasource.DataSource
 		"preload":                          "Preload",
 		"protection":                       "Protection",
 		"referrer_policy":                  "ReferrerPolicy",
+		"remove_headers_config":            "RemoveHeadersConfig",
 		"report_uri":                       "ReportUri",
 		"response_headers_policy_config":   "ResponseHeadersPolicyConfig",
 		"sampling_rate":                    "SamplingRate",

@@ -93,6 +93,11 @@
   "readOnlyProperties": [
     "/properties/ParameterGroupName"
   ],
+  "writeOnlyProperties": [
+    "/properties/Tags",
+    "/properties/Tags/*/Key",
+    "/properties/Tags/*/Value"
+  ],
   "handlers": {
     "create": {
       "permissions": [

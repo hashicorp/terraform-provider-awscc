@@ -55,6 +55,13 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	            "STRICT_ORDER"
 		//	          ],
 		//	          "type": "string"
+		//	        },
+		//	        "StreamExceptionPolicy": {
+		//	          "enum": [
+		//	            "DROP",
+		//	            "CONTINUE"
+		//	          ],
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -215,6 +222,10 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: RuleOrder
 						"rule_order": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: StreamExceptionPolicy
+						"stream_exception_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
@@ -435,6 +446,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"stateless_default_actions":          "StatelessDefaultActions",
 		"stateless_fragment_default_actions": "StatelessFragmentDefaultActions",
 		"stateless_rule_group_references":    "StatelessRuleGroupReferences",
+		"stream_exception_policy":            "StreamExceptionPolicy",
 		"tags":                               "Tags",
 		"value":                              "Value",
 	})

@@ -150,6 +150,10 @@
   ],
   "additionalProperties": false,
   "tagging": {
-    "taggable": true
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
   }
 }

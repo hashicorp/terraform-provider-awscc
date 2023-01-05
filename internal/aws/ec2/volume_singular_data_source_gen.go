@@ -24,103 +24,116 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Availability Zone in which to create the volume.",
 		//	  "type": "boolean"
 		//	}
 		"auto_enable_io": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Availability Zone in which to create the volume.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: AvailabilityZone
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Availability Zone in which to create the volume.",
 		//	  "type": "string"
 		//	}
 		"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Availability Zone in which to create the volume.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Encrypted
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Specifies whether the volume should be encrypted. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Encryption by default in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types.",
 		//	  "type": "boolean"
 		//	}
 		"encrypted": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Specifies whether the volume should be encrypted. The effect of setting the encryption state to true depends on the volume origin (new or from a snapshot), starting encryption state, ownership, and whether encryption by default is enabled. For more information, see Encryption by default in the Amazon Elastic Compute Cloud User Guide. Encrypted Amazon EBS volumes must be attached to instances that support Amazon EBS encryption. For more information, see Supported instance types.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Iops
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The number of I/O operations per second (IOPS) to provision for an io1 or io2 volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1 and io2) volumes. ",
 		//	  "type": "integer"
 		//	}
 		"iops": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The number of I/O operations per second (IOPS) to provision for an io1 or io2 volume, with a maximum ratio of 50 IOPS/GiB for io1, and 500 IOPS/GiB for io2. Range is 100 to 64,000 IOPS for volumes in most Regions. Maximum IOPS of 64,000 is guaranteed only on Nitro-based instances. Other instance families guarantee performance up to 32,000 IOPS. For more information, see Amazon EBS volume types in the Amazon Elastic Compute Cloud User Guide. This parameter is valid only for Provisioned IOPS SSD (io1 and io2) volumes. ",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If KmsKeyId is specified, the encrypted state must be true. If you omit this property and your account is enabled for encryption by default, or Encrypted is set to true, then the volume is encrypted using the default CMK specified for your account. If your account does not have a default CMK, then the volume is encrypted using the AWS managed CMK.  Alternatively, if you want to specify a different CMK, you can specify one of the following:  Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab. Key alias. Specify the alias for the CMK, prefixed with alias/. For example, for a CMK with the alias my_cmk, use alias/my_cmk. Or to specify the AWS managed CMK, use alias/aws/ebs. Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab. Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.",
 		//	  "type": "string"
 		//	}
 		"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The identifier of the AWS Key Management Service (AWS KMS) customer master key (CMK) to use for Amazon EBS encryption. If KmsKeyId is specified, the encrypted state must be true. If you omit this property and your account is enabled for encryption by default, or Encrypted is set to true, then the volume is encrypted using the default CMK specified for your account. If your account does not have a default CMK, then the volume is encrypted using the AWS managed CMK.  Alternatively, if you want to specify a different CMK, you can specify one of the following:  Key ID. For example, 1234abcd-12ab-34cd-56ef-1234567890ab. Key alias. Specify the alias for the CMK, prefixed with alias/. For example, for a CMK with the alias my_cmk, use alias/my_cmk. Or to specify the AWS managed CMK, use alias/aws/ebs. Key ARN. For example, arn:aws:kms:us-east-1:012345678910:key/1234abcd-12ab-34cd-56ef-1234567890ab. Alias ARN. For example, arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MultiAttachEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicates whether Amazon EBS Multi-Attach is enabled.",
 		//	  "type": "boolean"
 		//	}
 		"multi_attach_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Indicates whether Amazon EBS Multi-Attach is enabled.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: OutpostArn
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The Amazon Resource Name (ARN) of the Outpost.",
 		//	  "type": "string"
 		//	}
 		"outpost_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The Amazon Resource Name (ARN) of the Outpost.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Size
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.  Constraints: 1-16,384 for gp2, 4-16,384 for io1 and io2, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size. ",
 		//	  "type": "integer"
 		//	}
 		"size": schema.Int64Attribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The size of the volume, in GiBs. You must specify either a snapshot ID or a volume size.  Constraints: 1-16,384 for gp2, 4-16,384 for io1 and io2, 500-16,384 for st1, 500-16,384 for sc1, and 1-1,024 for standard. If you specify a snapshot, the volume size must be equal to or larger than the snapshot size. Default: If you're creating the volume from a snapshot and don't specify a volume size, the default is the snapshot size. ",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotId
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The snapshot from which to create the volume. You must specify either a snapshot ID or a volume size. ",
 		//	  "type": "string"
 		//	}
 		"snapshot_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The snapshot from which to create the volume. You must specify either a snapshot ID or a volume size. ",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The tags to apply to the volume during creation.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -138,33 +151,49 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -. ",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "The tags to apply to the volume during creation.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Throughput
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The throughput that the volume supports, in MiB/s.",
 		//	  "type": "integer"
 		//	}
 		"throughput": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The throughput that the volume supports, in MiB/s.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VolumeId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"volume_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: VolumeType
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The volume type. This parameter can be one of the following values: General Purpose SSD: gp2 | gp3, Provisioned IOPS SSD: io1 | io2, Throughput Optimized HDD: st1, Cold HDD: sc1, Magnetic: standard",
 		//	  "type": "string"
 		//	}
 		"volume_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The volume type. This parameter can be one of the following values: General Purpose SSD: gp2 | gp3, Provisioned IOPS SSD: io1 | io2, Throughput Optimized HDD: st1, Cold HDD: sc1, Magnetic: standard",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -186,7 +215,6 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_enable_io":       "AutoEnableIO",
 		"availability_zone":    "AvailabilityZone",
 		"encrypted":            "Encrypted",
-		"id":                   "Id",
 		"iops":                 "Iops",
 		"key":                  "Key",
 		"kms_key_id":           "KmsKeyId",
@@ -197,6 +225,7 @@ func volumeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags":                 "Tags",
 		"throughput":           "Throughput",
 		"value":                "Value",
+		"volume_id":            "VolumeId",
 		"volume_type":          "VolumeType",
 	})
 

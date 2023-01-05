@@ -47,6 +47,31 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "ReferenceSets": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "IPSetReferences": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "ReferenceArn": {
+		//	                  "description": "A resource ARN.",
+		//	                  "maxLength": 256,
+		//	                  "minLength": 1,
+		//	                  "pattern": "^(arn:aws.*)$",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "RuleVariables": {
 		//	      "additionalProperties": false,
 		//	      "properties": {
@@ -550,6 +575,26 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"rule_group": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ReferenceSets
+				"reference_sets": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: IPSetReferences
+						"ip_set_references":       // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: ReferenceArn
+									"reference_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "A resource ARN.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: RuleVariables
 				"rule_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -968,6 +1013,7 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"from_port":                          "FromPort",
 		"generated_rules_type":               "GeneratedRulesType",
 		"header":                             "Header",
+		"ip_set_references":                  "IPSetReferences",
 		"ip_sets":                            "IPSets",
 		"key":                                "Key",
 		"keyword":                            "Keyword",
@@ -978,6 +1024,8 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol":                           "Protocol",
 		"protocols":                          "Protocols",
 		"publish_metric_action":              "PublishMetricAction",
+		"reference_arn":                      "ReferenceArn",
+		"reference_sets":                     "ReferenceSets",
 		"rule_definition":                    "RuleDefinition",
 		"rule_group":                         "RuleGroup",
 		"rule_group_arn":                     "RuleGroupArn",

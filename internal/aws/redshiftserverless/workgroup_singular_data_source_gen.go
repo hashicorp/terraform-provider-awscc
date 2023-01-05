@@ -73,6 +73,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": false,
 		//	  "type": "boolean"
 		//	}
 		"enhanced_vpc_routing": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -94,6 +95,7 @@ func workgroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": false,
 		//	  "type": "boolean"
 		//	}
 		"publicly_accessible": schema.BoolAttribute{ /*START ATTRIBUTE*/

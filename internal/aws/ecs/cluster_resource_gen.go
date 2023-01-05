@@ -341,6 +341,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// ServiceConnectDefaults is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -436,6 +437,9 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"weight":                             "Weight",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ServiceConnectDefaults",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

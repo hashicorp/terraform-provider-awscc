@@ -47,6 +47,7 @@ AWS::NetworkManager::VpcAttachment Resoruce Type
 
 Optional:
 
+- `appliance_mode_support` (Boolean) Indicates whether to enable ApplianceModeSupport Support for Vpc Attachment. Valid Values: true | false
 - `ipv_6_support` (Boolean) Indicates whether to enable Ipv6 Support for Vpc Attachment. Valid Values: enable | disable
 
 

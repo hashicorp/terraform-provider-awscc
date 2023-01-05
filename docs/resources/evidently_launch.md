@@ -109,12 +109,12 @@ Optional:
 Required:
 
 - `entity_id_key` (String) The JSON path to reference the entity id in the event.
-- `event_pattern` (String) Event patterns have the same structure as the events they match. Rules use event patterns to select events. An event pattern either matches an event or it doesn't.
 - `metric_name` (String)
 - `value_key` (String) The JSON path to reference the numerical metric value in the event.
 
 Optional:
 
+- `event_pattern` (String) Event patterns have the same structure as the events they match. Rules use event patterns to select events. An event pattern either matches an event or it doesn't.
 - `unit_label` (String)
 
 

@@ -85,7 +85,6 @@ func experimentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "MetricName",
 		//	      "EntityIdKey",
 		//	      "ValueKey",
-		//	      "EventPattern",
 		//	      "DesiredChange"
 		//	    ],
 		//	    "type": "object"
