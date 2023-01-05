@@ -319,7 +319,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "253402243200",
+		//	  "default": "253402214400",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}
@@ -330,7 +330,7 @@ func campaignResource(ctx context.Context) (resource.Resource, error) {
 				validate.IsRFC3339Time(),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				generic.StringDefaultValue("253402243200"),
+				generic.StringDefaultValue("253402214400"),
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/

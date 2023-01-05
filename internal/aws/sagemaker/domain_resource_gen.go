@@ -78,7 +78,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AuthMode
@@ -167,7 +166,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -273,7 +272,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -378,7 +377,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -538,7 +537,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -690,7 +689,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -843,7 +842,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1112,7 +1111,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -1229,7 +1228,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									Validators: []validator.String{ /*START VALIDATORS*/
 										stringvalidator.LengthAtMost(256),
-										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
@@ -1277,9 +1276,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.LengthBetween(20, 2048),
 								stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 							}, /*END VALIDATORS*/
-							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-								stringplanmodifier.RequiresReplace(),
-							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 						// Property: RStudioConnectUrl
 						"r_studio_connect_url": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -1329,7 +1325,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
-						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/

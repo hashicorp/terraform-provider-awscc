@@ -4214,7 +4214,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
-		//	        "maxItems": 100,
+		//	        "maxItems": 250,
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
@@ -9294,7 +9294,7 @@ func botResource(ctx context.Context) (resource.Resource, error) {
 						Optional:    true,
 						Computed:    true,
 						Validators: []validator.Set{ /*START VALIDATORS*/
-							setvalidator.SizeAtMost(100),
+							setvalidator.SizeAtMost(250),
 						}, /*END VALIDATORS*/
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 							setplanmodifier.UseStateForUnknown(),

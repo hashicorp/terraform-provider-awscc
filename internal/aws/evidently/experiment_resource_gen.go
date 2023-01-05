@@ -105,7 +105,6 @@ func experimentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "MetricName",
 		//	      "EntityIdKey",
 		//	      "ValueKey",
-		//	      "EventPattern",
 		//	      "DesiredChange"
 		//	    ],
 		//	    "type": "object"
@@ -136,7 +135,11 @@ func experimentResource(ctx context.Context) (resource.Resource, error) {
 					// Property: EventPattern
 					"event_pattern": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Event patterns have the same structure as the events they match. Rules use event patterns to select events. An event pattern either matches an event or it doesn't.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: MetricName
 					"metric_name": schema.StringAttribute{ /*START ATTRIBUTE*/

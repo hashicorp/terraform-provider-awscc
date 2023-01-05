@@ -138,6 +138,35 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "DatabricksParameters": {
+		//	        "description": "\u003cp\u003eDatabricks parameters.\u003c/p\u003e",
+		//	        "properties": {
+		//	          "Host": {
+		//	            "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	            "maxLength": 256,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Port": {
+		//	            "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	            "maximum": 65535,
+		//	            "minimum": 1,
+		//	            "type": "number"
+		//	          },
+		//	          "SqlEndpointPath": {
+		//	            "description": "\u003cp\u003eThe HTTP Path of the Databricks data source.\u003c/p\u003e",
+		//	            "maxLength": 4096,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Host",
+		//	          "Port",
+		//	          "SqlEndpointPath"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "MariaDbParameters": {
 		//	        "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
 		//	        "properties": {
@@ -609,6 +638,41 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DatabricksParameters
+					"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Host
+							"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Host.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 256),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Port
+							"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+								Description: "<p>Port.</p>",
+								Required:    true,
+								Validators: []validator.Float64{ /*START VALIDATORS*/
+									float64validator.Between(1.000000, 65535.000000),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SqlEndpointPath
+							"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>The HTTP Path of the Databricks data source.</p>",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 4096),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "<p>Databricks parameters.</p>",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -1215,6 +1279,35 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "DatabricksParameters": {
+		//	                "description": "\u003cp\u003eDatabricks parameters.\u003c/p\u003e",
+		//	                "properties": {
+		//	                  "Host": {
+		//	                    "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	                    "maxLength": 256,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Port": {
+		//	                    "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	                    "maximum": 65535,
+		//	                    "minimum": 1,
+		//	                    "type": "number"
+		//	                  },
+		//	                  "SqlEndpointPath": {
+		//	                    "description": "\u003cp\u003eThe HTTP Path of the Databricks data source.\u003c/p\u003e",
+		//	                    "maxLength": 4096,
+		//	                    "minLength": 1,
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "Host",
+		//	                  "Port",
+		//	                  "SqlEndpointPath"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "MariaDbParameters": {
 		//	                "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
 		//	                "properties": {
@@ -1733,6 +1826,41 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: DatabricksParameters
+									"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Host
+											"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Host.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 256),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Port
+											"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+												Description: "<p>Port.</p>",
+												Required:    true,
+												Validators: []validator.Float64{ /*START VALIDATORS*/
+													float64validator.Between(1.000000, 65535.000000),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+											// Property: SqlEndpointPath
+											"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>The HTTP Path of the Databricks data source.</p>",
+												Required:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 4096),
+												}, /*END VALIDATORS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "<p>Databricks parameters.</p>",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -2336,6 +2464,35 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "object"
 		//	    },
+		//	    "DatabricksParameters": {
+		//	      "description": "\u003cp\u003eDatabricks parameters.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "Host": {
+		//	          "description": "\u003cp\u003eHost.\u003c/p\u003e",
+		//	          "maxLength": 256,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "Port": {
+		//	          "description": "\u003cp\u003ePort.\u003c/p\u003e",
+		//	          "maximum": 65535,
+		//	          "minimum": 1,
+		//	          "type": "number"
+		//	        },
+		//	        "SqlEndpointPath": {
+		//	          "description": "\u003cp\u003eThe HTTP Path of the Databricks data source.\u003c/p\u003e",
+		//	          "maxLength": 4096,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "Host",
+		//	        "Port",
+		//	        "SqlEndpointPath"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "MariaDbParameters": {
 		//	      "description": "\u003cp\u003eMariaDB parameters.\u003c/p\u003e",
 		//	      "properties": {
@@ -2802,6 +2959,41 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>Amazon Aurora with PostgreSQL compatibility parameters.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DatabricksParameters
+				"databricks_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Host
+						"host": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Host.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 256),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Port
+						"port": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>Port.</p>",
+							Required:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(1.000000, 65535.000000),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+						// Property: SqlEndpointPath
+						"sql_endpoint_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>The HTTP Path of the Databricks data source.</p>",
+							Required:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(1, 4096),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Databricks parameters.</p>",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -3528,6 +3720,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AURORA",
 		//	    "AURORA_POSTGRESQL",
 		//	    "AWS_IOT_ANALYTICS",
+		//	    "DATABRICKS",
 		//	    "GITHUB",
 		//	    "JIRA",
 		//	    "MARIADB",
@@ -3560,6 +3753,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					"AURORA",
 					"AURORA_POSTGRESQL",
 					"AWS_IOT_ANALYTICS",
+					"DATABRICKS",
 					"GITHUB",
 					"JIRA",
 					"MARIADB",
@@ -3656,6 +3850,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"data_source_id":                   "DataSourceId",
 		"data_source_parameters":           "DataSourceParameters",
 		"database":                         "Database",
+		"databricks_parameters":            "DatabricksParameters",
 		"disable_ssl":                      "DisableSsl",
 		"domain":                           "Domain",
 		"error_info":                       "ErrorInfo",
@@ -3681,6 +3876,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"secret_arn":                       "SecretArn",
 		"snowflake_parameters":             "SnowflakeParameters",
 		"spark_parameters":                 "SparkParameters",
+		"sql_endpoint_path":                "SqlEndpointPath",
 		"sql_server_parameters":            "SqlServerParameters",
 		"ssl_properties":                   "SslProperties",
 		"status":                           "Status",
