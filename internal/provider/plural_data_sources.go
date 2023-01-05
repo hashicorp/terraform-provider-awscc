@@ -95,6 +95,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_graphs -cftype AWS::Detective::Graph -package detective ../aws/detective/graph_plural_data_source_gen.go ../aws/detective/graph_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_member_invitations -cftype AWS::Detective::MemberInvitation -package detective ../aws/detective/member_invitation_plural_data_source_gen.go ../aws/detective/member_invitation_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_devopsguru_notification_channels -cftype AWS::DevOpsGuru::NotificationChannel -package devopsguru ../aws/devopsguru/notification_channel_plural_data_source_gen.go ../aws/devopsguru/notification_channel_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_directoryservice_simple_ads -cftype AWS::DirectoryService::SimpleAD -package directoryservice ../aws/directoryservice/simple_ad_plural_data_source_gen.go ../aws/directoryservice/simple_ad_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dynamodb_global_tables -cftype AWS::DynamoDB::GlobalTable -package dynamodb ../aws/dynamodb/global_table_plural_data_source_gen.go ../aws/dynamodb/global_table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_dynamodb_tables -cftype AWS::DynamoDB::Table -package dynamodb ../aws/dynamodb/table_plural_data_source_gen.go ../aws/dynamodb/table_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_capacity_reservations -cftype AWS::EC2::CapacityReservation -package ec2 ../aws/ec2/capacity_reservation_plural_data_source_gen.go ../aws/ec2/capacity_reservation_plural_data_source_gen_test.go
@@ -182,6 +183,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_outcomes -cftype AWS::FraudDetector::Outcome -package frauddetector ../aws/frauddetector/outcome_plural_data_source_gen.go ../aws/frauddetector/outcome_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_variables -cftype AWS::FraudDetector::Variable -package frauddetector ../aws/frauddetector/variable_plural_data_source_gen.go ../aws/frauddetector/variable_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_aliases -cftype AWS::GameLift::Alias -package gamelift ../aws/gamelift/alias_plural_data_source_gen.go ../aws/gamelift/alias_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_builds -cftype AWS::GameLift::Build -package gamelift ../aws/gamelift/build_plural_data_source_gen.go ../aws/gamelift/build_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_fleets -cftype AWS::GameLift::Fleet -package gamelift ../aws/gamelift/fleet_plural_data_source_gen.go ../aws/gamelift/fleet_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_game_server_groups -cftype AWS::GameLift::GameServerGroup -package gamelift ../aws/gamelift/game_server_group_plural_data_source_gen.go ../aws/gamelift/game_server_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_locations -cftype AWS::GameLift::Location -package gamelift ../aws/gamelift/location_plural_data_source_gen.go ../aws/gamelift/location_plural_data_source_gen_test.go
@@ -417,6 +419,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_applications -cftype AWS::ServiceCatalogAppRegistry::Application -package servicecatalogappregistry ../aws/servicecatalogappregistry/application_plural_data_source_gen.go ../aws/servicecatalogappregistry/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_servicecatalogappregistry_attribute_groups -cftype AWS::ServiceCatalogAppRegistry::AttributeGroup -package servicecatalogappregistry ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen.go ../aws/servicecatalogappregistry/attribute_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_signer_signing_profiles -cftype AWS::Signer::SigningProfile -package signer ../aws/signer/signing_profile_plural_data_source_gen.go ../aws/signer/signing_profile_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_stepfunctions_state_machines -cftype AWS::StepFunctions::StateMachine -package stepfunctions ../aws/stepfunctions/state_machine_plural_data_source_gen.go ../aws/stepfunctions/state_machine_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_supportapp_account_aliases -cftype AWS::SupportApp::AccountAlias -package supportapp ../aws/supportapp/account_alias_plural_data_source_gen.go ../aws/supportapp/account_alias_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_supportapp_slack_channel_configurations -cftype AWS::SupportApp::SlackChannelConfiguration -package supportapp ../aws/supportapp/slack_channel_configuration_plural_data_source_gen.go ../aws/supportapp/slack_channel_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_supportapp_slack_workspace_configurations -cftype AWS::SupportApp::SlackWorkspaceConfiguration -package supportapp ../aws/supportapp/slack_workspace_configuration_plural_data_source_gen.go ../aws/supportapp/slack_workspace_configuration_plural_data_source_gen_test.go
@@ -473,6 +476,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/datasync"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/detective"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/devopsguru"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dynamodb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ec2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"
@@ -568,6 +572,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/sqs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssm"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ssmincidents"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/stepfunctions"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/supportapp"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/timestream"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/transfer"
