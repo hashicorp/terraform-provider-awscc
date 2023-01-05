@@ -184,8 +184,7 @@ func launchDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "required": [
 		//	      "MetricName",
 		//	      "EntityIdKey",
-		//	      "ValueKey",
-		//	      "EventPattern"
+		//	      "ValueKey"
 		//	    ],
 		//	    "type": "object"
 		//	  },

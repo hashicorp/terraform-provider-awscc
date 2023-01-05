@@ -116,10 +116,17 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
 		//	  "type": "object"
 		//	}
-		"labels": schema.MapAttribute{ /*START ATTRIBUTE*/
+		"labels":            // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "The Kubernetes labels to be applied to the nodes in the node group when they are created.",
 			Computed:    true,
@@ -298,10 +305,17 @@ func nodegroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schema.MapAttribute{ /*START ATTRIBUTE*/
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "The metadata, as key-value pairs, to apply to the node group to assist with categorization and organization. Follows same schema as Labels for consistency.",
 			Computed:    true,

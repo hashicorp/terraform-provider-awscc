@@ -206,7 +206,7 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "default": "253402243200",
+		//	  "default": "253402214400",
 		//	  "format": "date-time",
 		//	  "type": "string"
 		//	}

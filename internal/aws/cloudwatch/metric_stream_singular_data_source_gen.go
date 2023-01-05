@@ -38,7 +38,10 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The date of creation of the metric stream.",
-		//	  "format": "date-time",
+		//	  "oneOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -139,7 +142,10 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The date of the last update of the metric stream.",
-		//	  "format": "date-time",
+		//	  "oneOf": [
+		//	    {},
+		//	    {}
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"last_update_date": schema.StringAttribute{ /*START ATTRIBUTE*/

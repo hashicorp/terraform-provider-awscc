@@ -127,7 +127,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -233,7 +233,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -338,7 +338,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {
@@ -723,7 +723,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "LifecycleConfigArn": {
 		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
 		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
 		//	              "type": "string"
 		//	            },
 		//	            "SageMakerImageArn": {

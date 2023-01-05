@@ -98,6 +98,13 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "additionalProperties": false,
 		//	  "description": "\u003cp\u003eA configuration for a streaming session.\u003c/p\u003e",
 		//	  "properties": {
+		//	    "AutomaticTerminationMode": {
+		//	      "enum": [
+		//	        "DEACTIVATED",
+		//	        "ACTIVATED"
+		//	      ],
+		//	      "type": "string"
+		//	    },
 		//	    "ClipboardMode": {
 		//	      "enum": [
 		//	        "ENABLED",
@@ -130,16 +137,25 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "type": "array"
 		//	    },
 		//	    "MaxSessionLengthInMinutes": {
+		//	      "default": 690,
 		//	      "description": "\u003cp\u003eThe length of time, in minutes, that a streaming session can be active before it is\n            stopped or terminated. After this point, Nimble Studio automatically terminates or\n            stops the session. The default length of time is 690 minutes, and the maximum length of\n            time is 30 days.\u003c/p\u003e",
 		//	      "maximum": 43200,
 		//	      "minimum": 1,
 		//	      "type": "number"
 		//	    },
 		//	    "MaxStoppedSessionLengthInMinutes": {
-		//	      "description": "\u003cp\u003eInteger that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.\u003c/p\u003e\n        \u003cp\u003eIf the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e, the session fails. If the time that a session\n            stays in the READY state exceeds the \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the\n            session will automatically be terminated (instead of stopped).\u003c/p\u003e\n        \u003cp\u003eIf the value is set to a positive number, the session can be stopped. You can call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the session will automatically be\n            stopped (instead of terminated).\u003c/p\u003e",
+		//	      "default": 0,
+		//	      "description": "\u003cp\u003eInteger that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.\u003c/p\u003e\n         \u003cp\u003eIf the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e, the session fails. If the time that a session\n            stays in the READY state exceeds the \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the\n            session will automatically be terminated (instead of stopped).\u003c/p\u003e\n         \u003cp\u003eIf the value is set to a positive number, the session can be stopped. You can call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the session will automatically be\n            stopped (instead of terminated).\u003c/p\u003e",
 		//	      "maximum": 5760,
 		//	      "minimum": 0,
 		//	      "type": "number"
+		//	    },
+		//	    "SessionPersistenceMode": {
+		//	      "enum": [
+		//	        "DEACTIVATED",
+		//	        "ACTIVATED"
+		//	      ],
+		//	      "type": "string"
 		//	    },
 		//	    "SessionStorage": {
 		//	      "additionalProperties": false,
@@ -194,6 +210,30 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	      "maxItems": 20,
 		//	      "minItems": 1,
 		//	      "type": "array"
+		//	    },
+		//	    "VolumeConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "Iops": {
+		//	          "default": 3000,
+		//	          "maximum": 16000,
+		//	          "minimum": 3000,
+		//	          "type": "number"
+		//	        },
+		//	        "Size": {
+		//	          "default": 500,
+		//	          "maximum": 16000,
+		//	          "minimum": 100,
+		//	          "type": "number"
+		//	        },
+		//	        "Throughput": {
+		//	          "default": 125,
+		//	          "maximum": 1000,
+		//	          "minimum": 125,
+		//	          "type": "number"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "required": [
@@ -205,6 +245,10 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	}
 		"stream_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutomaticTerminationMode
+				"automatic_termination_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: ClipboardMode
 				"clipboard_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
@@ -222,8 +266,12 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 				}, /*END ATTRIBUTE*/
 				// Property: MaxStoppedSessionLengthInMinutes
 				"max_stopped_session_length_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n        <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated (instead of stopped).</p>\n        <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
+					Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n         <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated (instead of stopped).</p>\n         <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SessionPersistenceMode
+				"session_persistence_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: SessionStorage
 				"session_storage": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -260,6 +308,24 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 					ElementType: types.StringType,
 					Description: "<p>The streaming images that users can select from when launching a streaming session\n            with this launch profile.</p>",
 					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VolumeConfiguration
+				"volume_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: Iops
+						"iops": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Size
+						"size": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Throughput
+						"throughput": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "<p>A configuration for a streaming session.</p>",
@@ -327,10 +393,12 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::NimbleStudio::LaunchProfile").WithTerraformTypeName("awscc_nimblestudio_launch_profile")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"automatic_termination_mode":            "AutomaticTerminationMode",
 		"clipboard_mode":                        "ClipboardMode",
 		"description":                           "Description",
 		"ec_2_instance_types":                   "Ec2InstanceTypes",
 		"ec_2_subnet_ids":                       "Ec2SubnetIds",
+		"iops":                                  "Iops",
 		"launch_profile_id":                     "LaunchProfileId",
 		"launch_profile_protocol_versions":      "LaunchProfileProtocolVersions",
 		"linux":                                 "Linux",
@@ -339,12 +407,16 @@ func launchProfileDataSource(ctx context.Context) (datasource.DataSource, error)
 		"mode":                                  "Mode",
 		"name":                                  "Name",
 		"root":                                  "Root",
+		"session_persistence_mode":              "SessionPersistenceMode",
 		"session_storage":                       "SessionStorage",
+		"size":                                  "Size",
 		"stream_configuration":                  "StreamConfiguration",
 		"streaming_image_ids":                   "StreamingImageIds",
 		"studio_component_ids":                  "StudioComponentIds",
 		"studio_id":                             "StudioId",
 		"tags":                                  "Tags",
+		"throughput":                            "Throughput",
+		"volume_configuration":                  "VolumeConfiguration",
 		"windows":                               "Windows",
 	})
 
