@@ -55,6 +55,7 @@ Constraints:
 - `db_security_groups` (List of String) A list of the DB security groups to assign to the DB instance. The list can include both the name of existing DB security groups or references to AWS::RDS::DBSecurityGroup resources created in the template.
 - `db_snapshot_identifier` (String) The name or Amazon Resource Name (ARN) of the DB snapshot that's used to restore the DB instance. If you're restoring from a shared manual DB snapshot, you must specify the ARN of the snapshot.
 - `db_subnet_group_name` (String) A DB subnet group to associate with the DB instance. If you update this value, the new subnet group must be a subnet group in a new VPC.
+- `db_system_id` (String) The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only.
 - `dbi_resource_id` (String) The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.
 - `delete_automated_backups` (Boolean) A value that indicates whether to remove automated backups immediately after the DB instance is deleted. This parameter isn't case-sensitive. The default is to remove automated backups immediately after the DB instance is deleted.
 - `deletion_protection` (Boolean) A value that indicates whether the DB instance has deletion protection enabled. The database can't be deleted when deletion protection is enabled. By default, deletion protection is disabled.

@@ -47,6 +47,7 @@ Read-Only:
 Read-Only:
 
 - `rule_order` (String)
+- `stream_exception_policy` (String)
 
 
 <a id="nestedatt--firewall_policy--stateful_rule_group_references"></a>

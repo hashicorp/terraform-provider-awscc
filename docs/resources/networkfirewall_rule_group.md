@@ -42,6 +42,7 @@ Required:
 
 Optional:
 
+- `reference_sets` (Attributes) (see [below for nested schema](#nestedatt--rule_group--reference_sets))
 - `rule_variables` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rule_variables))
 - `stateful_rule_options` (Attributes) (see [below for nested schema](#nestedatt--rule_group--stateful_rule_options))
 
@@ -220,6 +221,22 @@ Required:
 
 
 
+
+
+
+<a id="nestedatt--rule_group--reference_sets"></a>
+### Nested Schema for `rule_group.reference_sets`
+
+Optional:
+
+- `ip_set_references` (Attributes Map) (see [below for nested schema](#nestedatt--rule_group--reference_sets--ip_set_references))
+
+<a id="nestedatt--rule_group--reference_sets--ip_set_references"></a>
+### Nested Schema for `rule_group.reference_sets.ip_set_references`
+
+Optional:
+
+- `reference_arn` (String) A resource ARN.
 
 
 

@@ -100,6 +100,7 @@ Constraints:
 ### Read-Only
 
 - `db_instance_arn` (String) The Amazon Resource Name (ARN) for the DB instance.
+- `db_system_id` (String) The Oracle system ID (Oracle SID) for a container database (CDB). The Oracle SID is also the name of the CDB. This setting is valid for RDS Custom only.
 - `dbi_resource_id` (String) The AWS Region-unique, immutable identifier for the DB instance. This identifier is found in AWS CloudTrail log entries whenever the AWS KMS key for the DB instance is accessed.
 - `id` (String) Uniquely identifies the resource.
 

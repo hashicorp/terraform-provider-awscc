@@ -60,6 +60,7 @@ Optional:
 - `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--athena_parameters))
 - `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_parameters))
 - `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--aurora_postgre_sql_parameters))
+- `databricks_parameters` (Attributes) <p>Databricks parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--databricks_parameters))
 - `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--maria_db_parameters))
 - `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--alternate_data_source_parameters--my_sql_parameters))
 - `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--alternate_data_source_parameters--oracle_parameters))
@@ -117,6 +118,16 @@ Required:
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--alternate_data_source_parameters--databricks_parameters"></a>
+### Nested Schema for `alternate_data_source_parameters.databricks_parameters`
+
+Required:
+
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+- `sql_endpoint_path` (String) <p>The HTTP Path of the Databricks data source.</p>
 
 
 <a id="nestedatt--alternate_data_source_parameters--maria_db_parameters"></a>
@@ -292,6 +303,7 @@ Optional:
 - `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--athena_parameters))
 - `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_parameters))
 - `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--aurora_postgre_sql_parameters))
+- `databricks_parameters` (Attributes) <p>Databricks parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters))
 - `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters))
 - `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--my_sql_parameters))
 - `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--credentials--credential_pair--alternate_data_source_parameters--oracle_parameters))
@@ -349,6 +361,16 @@ Required:
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--databricks_parameters"></a>
+### Nested Schema for `credentials.credential_pair.alternate_data_source_parameters.teradata_parameters`
+
+Required:
+
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+- `sql_endpoint_path` (String) <p>The HTTP Path of the Databricks data source.</p>
 
 
 <a id="nestedatt--credentials--credential_pair--alternate_data_source_parameters--maria_db_parameters"></a>
@@ -494,6 +516,7 @@ Optional:
 - `athena_parameters` (Attributes) <p>Amazon Athena parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--athena_parameters))
 - `aurora_parameters` (Attributes) <p>Amazon Aurora parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_parameters))
 - `aurora_postgre_sql_parameters` (Attributes) <p>Amazon Aurora with PostgreSQL compatibility parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--aurora_postgre_sql_parameters))
+- `databricks_parameters` (Attributes) <p>Databricks parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--databricks_parameters))
 - `maria_db_parameters` (Attributes) <p>MariaDB parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--maria_db_parameters))
 - `my_sql_parameters` (Attributes) <p>MySQL parameters.</p> (see [below for nested schema](#nestedatt--data_source_parameters--my_sql_parameters))
 - `oracle_parameters` (Attributes) (see [below for nested schema](#nestedatt--data_source_parameters--oracle_parameters))
@@ -551,6 +574,16 @@ Required:
 - `database` (String) <p>Database.</p>
 - `host` (String) <p>Host.</p>
 - `port` (Number) <p>Port.</p>
+
+
+<a id="nestedatt--data_source_parameters--databricks_parameters"></a>
+### Nested Schema for `data_source_parameters.databricks_parameters`
+
+Required:
+
+- `host` (String) <p>Host.</p>
+- `port` (Number) <p>Port.</p>
+- `sql_endpoint_path` (String) <p>The HTTP Path of the Databricks data source.</p>
 
 
 <a id="nestedatt--data_source_parameters--maria_db_parameters"></a>

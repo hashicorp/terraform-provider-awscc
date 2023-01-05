@@ -17,13 +17,13 @@ Resource Type definition for AWS::CloudFront::Function
 
 ### Required
 
+- `function_code` (String)
+- `function_config` (Attributes) (see [below for nested schema](#nestedatt--function_config))
 - `name` (String)
 
 ### Optional
 
 - `auto_publish` (Boolean)
-- `function_code` (String)
-- `function_config` (Attributes) (see [below for nested schema](#nestedatt--function_config))
 - `function_metadata` (Attributes) (see [below for nested schema](#nestedatt--function_metadata))
 
 ### Read-Only

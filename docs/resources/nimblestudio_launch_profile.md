@@ -50,22 +50,25 @@ Required:
 
 Optional:
 
+- `automatic_termination_mode` (String)
 - `max_session_length_in_minutes` (Number) <p>The length of time, in minutes, that a streaming session can be active before it is
             stopped or terminated. After this point, Nimble Studio automatically terminates or
             stops the session. The default length of time is 690 minutes, and the maximum length of
             time is 30 days.</p>
 - `max_stopped_session_length_in_minutes` (Number) <p>Integer that determines if you can start and stop your sessions and how long a session
             can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>
-        <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call
+         <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call
                 <code>StopStreamingSession</code>, the session fails. If the time that a session
             stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the
             session will automatically be terminated (instead of stopped).</p>
-        <p>If the value is set to a positive number, the session can be stopped. You can call
+         <p>If the value is set to a positive number, the session can be stopped. You can call
                 <code>StopStreamingSession</code> to stop sessions in the READY state. If the time
             that a session stays in the READY state exceeds the
                 <code>maxSessionLengthInMinutes</code> value, the session will automatically be
             stopped (instead of terminated).</p>
+- `session_persistence_mode` (String)
 - `session_storage` (Attributes) <p>The configuration for a streaming session?s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
+- `volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--stream_configuration--volume_configuration))
 
 <a id="nestedatt--stream_configuration--session_storage"></a>
 ### Nested Schema for `stream_configuration.session_storage`
@@ -87,6 +90,17 @@ Optional:
 
 - `linux` (String) <p>The folder path in Linux workstations where files are uploaded.</p>
 - `windows` (String) <p>The folder path in Windows workstations where files are uploaded.</p>
+
+
+
+<a id="nestedatt--stream_configuration--volume_configuration"></a>
+### Nested Schema for `stream_configuration.volume_configuration`
+
+Optional:
+
+- `iops` (Number)
+- `size` (Number)
+- `throughput` (Number)
 
 ## Import
 

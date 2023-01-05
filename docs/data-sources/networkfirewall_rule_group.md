@@ -35,9 +35,26 @@ Data Source schema for AWS::NetworkFirewall::RuleGroup
 
 Read-Only:
 
+- `reference_sets` (Attributes) (see [below for nested schema](#nestedatt--rule_group--reference_sets))
 - `rule_variables` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rule_variables))
 - `rules_source` (Attributes) (see [below for nested schema](#nestedatt--rule_group--rules_source))
 - `stateful_rule_options` (Attributes) (see [below for nested schema](#nestedatt--rule_group--stateful_rule_options))
+
+<a id="nestedatt--rule_group--reference_sets"></a>
+### Nested Schema for `rule_group.reference_sets`
+
+Read-Only:
+
+- `ip_set_references` (Attributes Map) (see [below for nested schema](#nestedatt--rule_group--reference_sets--ip_set_references))
+
+<a id="nestedatt--rule_group--reference_sets--ip_set_references"></a>
+### Nested Schema for `rule_group.reference_sets.ip_set_references`
+
+Read-Only:
+
+- `reference_arn` (String) A resource ARN.
+
+
 
 <a id="nestedatt--rule_group--rule_variables"></a>
 ### Nested Schema for `rule_group.rule_variables`
