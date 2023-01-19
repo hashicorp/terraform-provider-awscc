@@ -18,18 +18,18 @@ Create and manage partner account
 ### Optional
 
 - `account_linked` (Boolean) Whether the partner account is linked to the AWS account.
-- `fingerprint` (String) The fingerprint of the Sidewalk application server private key.
 - `partner_account_id` (String) The partner account ID to disassociate from the AWS account
 - `partner_type` (String) The partner type
 - `sidewalk` (Attributes) The Sidewalk account credentials. (see [below for nested schema](#nestedatt--sidewalk))
+- `sidewalk_response` (Attributes) The Sidewalk account credentials. (see [below for nested schema](#nestedatt--sidewalk_response))
 - `sidewalk_update` (Attributes) The Sidewalk account credentials. (see [below for nested schema](#nestedatt--sidewalk_update))
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the destination. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `arn` (String) PartnerAccount arn. Returned after successful create.
+- `fingerprint` (String) The fingerprint of the Sidewalk application server private key.
 - `id` (String) Uniquely identifies the resource.
-- `sidewalk_response` (Attributes) The Sidewalk account credentials. (see [below for nested schema](#nestedatt--sidewalk_response))
 
 <a id="nestedatt--sidewalk"></a>
 ### Nested Schema for `sidewalk`
@@ -37,6 +37,16 @@ Create and manage partner account
 Required:
 
 - `app_server_private_key` (String)
+
+
+<a id="nestedatt--sidewalk_response"></a>
+### Nested Schema for `sidewalk_response`
+
+Optional:
+
+- `amazon_id` (String)
+- `arn` (String)
+- `fingerprint` (String)
 
 
 <a id="nestedatt--sidewalk_update"></a>
@@ -54,16 +64,6 @@ Optional:
 
 - `key` (String)
 - `value` (String)
-
-
-<a id="nestedatt--sidewalk_response"></a>
-### Nested Schema for `sidewalk_response`
-
-Read-Only:
-
-- `amazon_id` (String)
-- `arn` (String)
-- `fingerprint` (String)
 
 ## Import
 

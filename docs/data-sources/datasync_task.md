@@ -24,8 +24,6 @@ Data Source schema for AWS::DataSync::Task
 - `cloudwatch_log_group_arn` (String) The ARN of the Amazon CloudWatch log group that is used to monitor and log events in the task.
 - `destination_location_arn` (String) The ARN of an AWS storage resource's location.
 - `destination_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.
-- `error_code` (String) Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
-- `error_detail` (String) Detailed description of an error that was encountered during the task execution.
 - `excludes` (Attributes List) (see [below for nested schema](#nestedatt--excludes))
 - `includes` (Attributes List) (see [below for nested schema](#nestedatt--includes))
 - `name` (String) The name of a task. This value is a text reference that is used to identify the task in the console.

@@ -26,6 +26,7 @@ Job templates enable you to preconfigure jobs so that you can deploy them to mul
 - `document` (String) The job document. Required if you don't specify a value for documentSource.
 - `document_source` (String) An S3 link to the job document to use in the template. Required if you don't specify a value for document.
 - `job_arn` (String) Optional for copying a JobTemplate from a pre-existing Job configuration.
+- `job_executions_retry_config` (Attributes) (see [below for nested schema](#nestedatt--job_executions_retry_config))
 - `job_executions_rollout_config` (Attributes) Allows you to create a staged rollout of a job. (see [below for nested schema](#nestedatt--job_executions_rollout_config))
 - `presigned_url_config` (Attributes) Configuration for pre-signed S3 URLs. (see [below for nested schema](#nestedatt--presigned_url_config))
 - `tags` (Attributes Set) Metadata that can be used to manage the JobTemplate. (see [below for nested schema](#nestedatt--tags))
@@ -52,6 +53,23 @@ Required:
 - `failure_type` (String) The type of job execution failures that can initiate a job abort.
 - `min_number_of_executed_things` (Number) The minimum number of things which must receive job execution notifications before the job can be aborted.
 - `threshold_percentage` (Number) The minimum percentage of job execution failures that must occur to initiate the job abort.
+
+
+
+<a id="nestedatt--job_executions_retry_config"></a>
+### Nested Schema for `job_executions_retry_config`
+
+Optional:
+
+- `retry_criteria_list` (Attributes List) (see [below for nested schema](#nestedatt--job_executions_retry_config--retry_criteria_list))
+
+<a id="nestedatt--job_executions_retry_config--retry_criteria_list"></a>
+### Nested Schema for `job_executions_retry_config.retry_criteria_list`
+
+Optional:
+
+- `failure_type` (String)
+- `number_of_retries` (Number)
 
 
 

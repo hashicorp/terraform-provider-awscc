@@ -145,8 +145,18 @@ Read-Only:
 - `build_command` (String) Build Command
 - `port` (String) Port
 - `runtime` (String) Runtime
+- `runtime_environment_secrets` (Attributes List) The secrets and parameters that get referenced by your service as environment variables (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration--configuration_source--runtime_environment_secrets))
 - `runtime_environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--source_configuration--code_repository--code_configuration--configuration_source--runtime_environment_variables))
 - `start_command` (String) Start Command
+
+<a id="nestedatt--source_configuration--code_repository--code_configuration--configuration_source--runtime_environment_secrets"></a>
+### Nested Schema for `source_configuration.code_repository.code_configuration.configuration_source.runtime_environment_secrets`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
 
 <a id="nestedatt--source_configuration--code_repository--code_configuration--configuration_source--runtime_environment_variables"></a>
 ### Nested Schema for `source_configuration.code_repository.code_configuration.configuration_source.runtime_environment_variables`
@@ -184,8 +194,18 @@ Read-Only:
 Read-Only:
 
 - `port` (String) Port
+- `runtime_environment_secrets` (Attributes List) The secrets and parameters that get referenced by your service as environment variables (see [below for nested schema](#nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_secrets))
 - `runtime_environment_variables` (Attributes List) (see [below for nested schema](#nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables))
 - `start_command` (String) Start Command
+
+<a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_secrets"></a>
+### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`
+
+Read-Only:
+
+- `name` (String)
+- `value` (String)
+
 
 <a id="nestedatt--source_configuration--image_repository--image_configuration--runtime_environment_variables"></a>
 ### Nested Schema for `source_configuration.image_repository.image_configuration.start_command`

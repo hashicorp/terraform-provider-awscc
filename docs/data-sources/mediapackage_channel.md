@@ -24,7 +24,7 @@ Data Source schema for AWS::MediaPackage::Channel
 - `arn` (String) The Amazon Resource Name (ARN) assigned to the Channel.
 - `description` (String) A short text description of the Channel.
 - `egress_access_logs` (Attributes) The configuration parameters for egress access logging. (see [below for nested schema](#nestedatt--egress_access_logs))
-- `hls_ingest` (Attributes) A short text description of the Channel. (see [below for nested schema](#nestedatt--hls_ingest))
+- `hls_ingest` (Attributes) An HTTP Live Streaming (HLS) ingest resource configuration. (see [below for nested schema](#nestedatt--hls_ingest))
 - `ingress_access_logs` (Attributes) The configuration parameters for egress access logging. (see [below for nested schema](#nestedatt--ingress_access_logs))
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 

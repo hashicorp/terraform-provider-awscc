@@ -24,6 +24,11 @@ The AWS::RDS::DBInstance resource creates an Amazon RDS DB instance.
 - `availability_zone` (String) The Availability Zone (AZ) where the database will be created. For information on AWS Regions and Availability Zones.
 - `backup_retention_period` (Number) The number of days for which automated backups are retained. Setting this parameter to a positive number enables backups. Setting this parameter to 0 disables automated backups.
 - `ca_certificate_identifier` (String) The identifier of the CA certificate for this DB instance.
+- `certificate_details` (Attributes) Returns the details of the DB instance's server certificate. (see [below for nested schema](#nestedatt--certificate_details))
+- `certificate_rotation_restart` (Boolean) A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.
+By default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.
+If you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate
+This setting doesn't apply to RDS Custom.
 - `character_set_name` (String) For supported engines, indicates that the DB instance should be associated with the specified character set.
 - `copy_tags_to_snapshot` (Boolean) A value that indicates whether to copy tags from the DB instance to snapshots of the DB instance. By default, tags are not copied.
 - `custom_iam_instance_profile` (String) The instance profile associated with the underlying Amazon EC2 instance of an RDS Custom DB instance. The instance profile must meet the following requirements:
@@ -63,7 +68,9 @@ Constraints:
 - `iops` (Number) The number of I/O operations per second (IOPS) that the database provisions.
 - `kms_key_id` (String) The ARN of the AWS Key Management Service (AWS KMS) master key that's used to encrypt the DB instance.
 - `license_model` (String) License model information for this DB instance.
+- `manage_master_user_password` (Boolean) A value that indicates whether to manage the master user password with AWS Secrets Manager.
 - `master_user_password` (String) The password for the master user.
+- `master_user_secret` (Attributes) Contains the secret managed by RDS in AWS Secrets Manager for the master user password. (see [below for nested schema](#nestedatt--master_user_secret))
 - `master_username` (String) The master user name for the DB instance.
 - `max_allocated_storage` (Number) The upper limit to which Amazon RDS can automatically scale the storage of the DB instance.
 - `monitoring_interval` (Number) The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB instance. To disable collecting Enhanced Monitoring metrics, specify 0. The default is 0.
@@ -113,6 +120,15 @@ Required:
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that is associated with the DB instance.
 
 
+<a id="nestedatt--certificate_details"></a>
+### Nested Schema for `certificate_details`
+
+Read-Only:
+
+- `ca_identifier` (String) The CA identifier of the CA certificate used for the DB instance's server certificate.
+- `valid_till` (String) The expiration date of the DB instance’s server certificate.
+
+
 <a id="nestedatt--endpoint"></a>
 ### Nested Schema for `endpoint`
 
@@ -121,6 +137,18 @@ Read-Only:
 - `address` (String) Specifies the DNS address of the DB instance.
 - `hosted_zone_id` (String) Specifies the ID that Amazon Route 53 assigns when you create a hosted zone.
 - `port` (String) Specifies the port that the database engine is listening on.
+
+
+<a id="nestedatt--master_user_secret"></a>
+### Nested Schema for `master_user_secret`
+
+Optional:
+
+- `kms_key_id` (String) The AWS KMS key identifier that is used to encrypt the secret.
+
+Read-Only:
+
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret.
 
 
 <a id="nestedatt--processor_features"></a>

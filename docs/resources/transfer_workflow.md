@@ -38,6 +38,7 @@ Optional:
 
 - `copy_step_details` (Attributes) Details for a step that performs a file copy. (see [below for nested schema](#nestedatt--steps--copy_step_details))
 - `custom_step_details` (Attributes) Details for a step that invokes a lambda function. (see [below for nested schema](#nestedatt--steps--custom_step_details))
+- `decrypt_step_details` (Attributes) Details for a step that performs a file decryption. (see [below for nested schema](#nestedatt--steps--decrypt_step_details))
 - `delete_step_details` (Attributes) Details for a step that deletes the file. (see [below for nested schema](#nestedatt--steps--delete_step_details))
 - `tag_step_details` (Attributes) Details for a step that creates one or more tags. (see [below for nested schema](#nestedatt--steps--tag_step_details))
 - `type` (String)
@@ -57,14 +58,14 @@ Optional:
 
 Optional:
 
-- `s3_file_location` (Attributes) Specifies the details for the S3 file being copied. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location--s3_file_location))
+- `s3_file_location` (Attributes) Specifies the details for a S3 file. (see [below for nested schema](#nestedatt--steps--copy_step_details--destination_file_location--s3_file_location))
 
 <a id="nestedatt--steps--copy_step_details--destination_file_location--s3_file_location"></a>
 ### Nested Schema for `steps.copy_step_details.destination_file_location.s3_file_location`
 
 Optional:
 
-- `bucket` (String) Specifies the S3 bucket that contains the file being copied.
+- `bucket` (String) Specifies the S3 bucket that contains the file.
 - `key` (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
 
 
@@ -79,6 +80,45 @@ Optional:
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
 - `target` (String) The ARN for the lambda function that is being called.
 - `timeout_seconds` (Number) Timeout, in seconds, for the step.
+
+
+<a id="nestedatt--steps--decrypt_step_details"></a>
+### Nested Schema for `steps.decrypt_step_details`
+
+Optional:
+
+- `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--steps--decrypt_step_details--destination_file_location))
+- `name` (String) The name of the step, used as an identifier.
+- `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `type` (String) Specifies which encryption method to use.
+
+<a id="nestedatt--steps--decrypt_step_details--destination_file_location"></a>
+### Nested Schema for `steps.decrypt_step_details.destination_file_location`
+
+Optional:
+
+- `efs_file_location` (Attributes) Specifies the details for an EFS file. (see [below for nested schema](#nestedatt--steps--decrypt_step_details--destination_file_location--efs_file_location))
+- `s3_file_location` (Attributes) Specifies the details for a S3 file. (see [below for nested schema](#nestedatt--steps--decrypt_step_details--destination_file_location--s3_file_location))
+
+<a id="nestedatt--steps--decrypt_step_details--destination_file_location--efs_file_location"></a>
+### Nested Schema for `steps.decrypt_step_details.destination_file_location.s3_file_location`
+
+Optional:
+
+- `file_system_id` (String) Specifies the EFS filesystem that contains the file.
+- `path` (String) The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.
+
+
+<a id="nestedatt--steps--decrypt_step_details--destination_file_location--s3_file_location"></a>
+### Nested Schema for `steps.decrypt_step_details.destination_file_location.s3_file_location`
+
+Optional:
+
+- `bucket` (String) Specifies the S3 bucket that contains the file.
+- `key` (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+
+
 
 
 <a id="nestedatt--steps--delete_step_details"></a>
@@ -117,6 +157,7 @@ Optional:
 
 - `copy_step_details` (Attributes) Details for a step that performs a file copy. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details))
 - `custom_step_details` (Attributes) Details for a step that invokes a lambda function. (see [below for nested schema](#nestedatt--on_exception_steps--custom_step_details))
+- `decrypt_step_details` (Attributes) Details for a step that performs a file decryption. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details))
 - `delete_step_details` (Attributes) Details for a step that deletes the file. (see [below for nested schema](#nestedatt--on_exception_steps--delete_step_details))
 - `tag_step_details` (Attributes) Details for a step that creates one or more tags. (see [below for nested schema](#nestedatt--on_exception_steps--tag_step_details))
 - `type` (String)
@@ -136,14 +177,14 @@ Optional:
 
 Optional:
 
-- `s3_file_location` (Attributes) Specifies the details for the S3 file being copied. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details--destination_file_location--s3_file_location))
+- `s3_file_location` (Attributes) Specifies the details for a S3 file. (see [below for nested schema](#nestedatt--on_exception_steps--copy_step_details--destination_file_location--s3_file_location))
 
 <a id="nestedatt--on_exception_steps--copy_step_details--destination_file_location--s3_file_location"></a>
 ### Nested Schema for `on_exception_steps.copy_step_details.destination_file_location.s3_file_location`
 
 Optional:
 
-- `bucket` (String) Specifies the S3 bucket that contains the file being copied.
+- `bucket` (String) Specifies the S3 bucket that contains the file.
 - `key` (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
 
 
@@ -158,6 +199,45 @@ Optional:
 - `source_file_location` (String) Specifies which file to use as input to the workflow step.
 - `target` (String) The ARN for the lambda function that is being called.
 - `timeout_seconds` (Number) Timeout, in seconds, for the step.
+
+
+<a id="nestedatt--on_exception_steps--decrypt_step_details"></a>
+### Nested Schema for `on_exception_steps.decrypt_step_details`
+
+Optional:
+
+- `destination_file_location` (Attributes) Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details--destination_file_location))
+- `name` (String) The name of the step, used as an identifier.
+- `overwrite_existing` (String) A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.
+- `source_file_location` (String) Specifies which file to use as input to the workflow step.
+- `type` (String) Specifies which encryption method to use.
+
+<a id="nestedatt--on_exception_steps--decrypt_step_details--destination_file_location"></a>
+### Nested Schema for `on_exception_steps.decrypt_step_details.destination_file_location`
+
+Optional:
+
+- `efs_file_location` (Attributes) Specifies the details for an EFS file. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details--destination_file_location--efs_file_location))
+- `s3_file_location` (Attributes) Specifies the details for a S3 file. (see [below for nested schema](#nestedatt--on_exception_steps--decrypt_step_details--destination_file_location--s3_file_location))
+
+<a id="nestedatt--on_exception_steps--decrypt_step_details--destination_file_location--efs_file_location"></a>
+### Nested Schema for `on_exception_steps.decrypt_step_details.destination_file_location.s3_file_location`
+
+Optional:
+
+- `file_system_id` (String) Specifies the EFS filesystem that contains the file.
+- `path` (String) The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.
+
+
+<a id="nestedatt--on_exception_steps--decrypt_step_details--destination_file_location--s3_file_location"></a>
+### Nested Schema for `on_exception_steps.decrypt_step_details.destination_file_location.s3_file_location`
+
+Optional:
+
+- `bucket` (String) Specifies the S3 bucket that contains the file.
+- `key` (String) The name assigned to the file when it was created in S3. You use the object key to retrieve the object.
+
+
 
 
 <a id="nestedatt--on_exception_steps--delete_step_details"></a>

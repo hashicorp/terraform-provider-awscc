@@ -24,6 +24,7 @@ Resource Schema for AWS::EKS::Addon
 
 - `addon_version` (String) Version of Addon
 - `configuration_values` (String) The configuration values to use with the add-on
+- `preserve_on_delete` (Boolean) PreserveOnDelete parameter value
 - `resolve_conflicts` (String) Resolve parameter value conflicts
 - `service_account_role_arn` (String) IAM role to bind to the add-on's service account
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

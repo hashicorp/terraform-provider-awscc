@@ -45,7 +45,9 @@ The AWS::RDS::DBCluster resource creates an Amazon Aurora DB cluster.
 If you aren't configuring a global database cluster, don't specify this property.
 - `iops` (Number) The amount of Provisioned IOPS (input/output operations per second) to be initially allocated for each DB instance in the Multi-AZ DB cluster.
 - `kms_key_id` (String) The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.
+- `manage_master_user_password` (Boolean) A value that indicates whether to manage the master user password with AWS Secrets Manager.
 - `master_user_password` (String) The master password for the DB instance.
+- `master_user_secret` (Attributes) Contains the secret managed by RDS in AWS Secrets Manager for the master user password. (see [below for nested schema](#nestedatt--master_user_secret))
 - `master_username` (String) The name of the master user for the DB cluster. You must specify MasterUsername, unless you specify SnapshotIdentifier. In that case, don't specify MasterUsername.
 - `monitoring_interval` (Number) The interval, in seconds, between points when Enhanced Monitoring metrics are collected for the DB cluster. To turn off collecting Enhanced Monitoring metrics, specify 0. The default is 0.
 - `monitoring_role_arn` (String) The Amazon Resource Name (ARN) for the IAM role that permits RDS to send Enhanced Monitoring metrics to Amazon CloudWatch Logs.
@@ -93,6 +95,18 @@ Required:
 Optional:
 
 - `feature_name` (String) The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon RDS API Reference.
+
+
+<a id="nestedatt--master_user_secret"></a>
+### Nested Schema for `master_user_secret`
+
+Optional:
+
+- `kms_key_id` (String) The AWS KMS key identifier that is used to encrypt the secret.
+
+Read-Only:
+
+- `secret_arn` (String) The Amazon Resource Name (ARN) of the secret.
 
 
 <a id="nestedatt--read_endpoint"></a>
