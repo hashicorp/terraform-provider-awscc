@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -158,6 +159,7 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ResourceTags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Subscribers
 		// CloudFormation resource type schema:
@@ -280,10 +282,29 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 		//	}
 		"threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Description: "The dollar value that triggers a notification if the threshold is exceeded. ",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.Float64{ /*START VALIDATORS*/
 				float64validator.AtLeast(0.000000),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ThresholdExpression
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
+		//	  "type": "string"
+		//	}
+		"threshold_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -307,21 +328,25 @@ func anomalySubscriptionResource(ctx context.Context) (resource.Resource, error)
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":        "AccountId",
-		"address":           "Address",
-		"frequency":         "Frequency",
-		"key":               "Key",
-		"monitor_arn_list":  "MonitorArnList",
-		"resource_tags":     "ResourceTags",
-		"status":            "Status",
-		"subscribers":       "Subscribers",
-		"subscription_arn":  "SubscriptionArn",
-		"subscription_name": "SubscriptionName",
-		"threshold":         "Threshold",
-		"type":              "Type",
-		"value":             "Value",
+		"account_id":           "AccountId",
+		"address":              "Address",
+		"frequency":            "Frequency",
+		"key":                  "Key",
+		"monitor_arn_list":     "MonitorArnList",
+		"resource_tags":        "ResourceTags",
+		"status":               "Status",
+		"subscribers":          "Subscribers",
+		"subscription_arn":     "SubscriptionArn",
+		"subscription_name":    "SubscriptionName",
+		"threshold":            "Threshold",
+		"threshold_expression": "ThresholdExpression",
+		"type":                 "Type",
+		"value":                "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ResourceTags",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

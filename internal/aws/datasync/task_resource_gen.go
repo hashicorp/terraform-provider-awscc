@@ -94,34 +94,6 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: ErrorCode
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.",
-		//	  "type": "string"
-		//	}
-		"error_code": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: ErrorDetail
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "Detailed description of an error that was encountered during the task execution.",
-		//	  "type": "string"
-		//	}
-		"error_detail": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Detailed description of an error that was encountered during the task execution.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Excludes
 		// CloudFormation resource type schema:
 		//
@@ -880,8 +852,6 @@ func taskResource(ctx context.Context) (resource.Resource, error) {
 		"cloudwatch_log_group_arn":           "CloudWatchLogGroupArn",
 		"destination_location_arn":           "DestinationLocationArn",
 		"destination_network_interface_arns": "DestinationNetworkInterfaceArns",
-		"error_code":                         "ErrorCode",
-		"error_detail":                       "ErrorDetail",
 		"excludes":                           "Excludes",
 		"filter_type":                        "FilterType",
 		"gid":                                "Gid",

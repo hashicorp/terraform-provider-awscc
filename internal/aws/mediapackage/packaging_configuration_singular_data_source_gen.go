@@ -459,6 +459,10 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	      "description": "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
 		//	      "type": "boolean"
 		//	    },
+		//	    "IncludeIframeOnlyStream": {
+		//	      "description": "When enabled, an I-Frame only stream will be included in the output.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "PeriodTriggers": {
 		//	      "description": "A list of triggers that controls when the outgoing Dynamic Adaptive Streaming over HTTP (DASH) Media Presentation Description (MPD) will be partitioned into multiple periods. If empty, the content will not be partitioned into more than one period. If the list contains \"ADS\", new periods will be created where the Asset contains SCTE-35 ad markers.",
 		//	      "items": {
@@ -596,6 +600,11 @@ func packagingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 				// Property: IncludeEncoderConfigurationInSegments
 				"include_encoder_configuration_in_segments": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "When includeEncoderConfigurationInSegments is set to true, MediaPackage places your encoder's Sequence Parameter Set (SPS), Picture Parameter Set (PPS), and Video Parameter Set (VPS) metadata in every video segment instead of in the init fragment. This lets you use different SPS/PPS/VPS settings for your assets during content playback.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IncludeIframeOnlyStream
+				"include_iframe_only_stream": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "When enabled, an I-Frame only stream will be included in the output.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: PeriodTriggers

@@ -8,6 +8,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -112,6 +113,22 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PreserveOnDelete
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "PreserveOnDelete parameter value",
+		//	  "type": "boolean"
+		//	}
+		"preserve_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "PreserveOnDelete parameter value",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// PreserveOnDelete is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ResolveConflicts
 		// CloudFormation resource type schema:
@@ -250,6 +267,7 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 		"cluster_name":             "ClusterName",
 		"configuration_values":     "ConfigurationValues",
 		"key":                      "Key",
+		"preserve_on_delete":       "PreserveOnDelete",
 		"resolve_conflicts":        "ResolveConflicts",
 		"service_account_role_arn": "ServiceAccountRoleArn",
 		"tags":                     "Tags",
@@ -258,6 +276,7 @@ func addonResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/ResolveConflicts",
+		"/properties/PreserveOnDelete",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

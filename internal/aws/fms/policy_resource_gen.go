@@ -227,20 +227,39 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PolicyDescription
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maxLength": 256,
+		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]+)$",
+		//	  "type": "string"
+		//	}
+		"policy_description": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9_.:/=+\\-@\\s]+)$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "maxLength": 1024,
 		//	  "minLength": 1,
-		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@]+)$",
+		//	  "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]+)$",
 		//	  "type": "string"
 		//	}
 		"policy_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Required: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 1024),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9_.:/=+\\-@]+)$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([a-zA-Z0-9_.:/=+\\-@\\s]+)$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: RemediationEnabled
@@ -251,6 +270,36 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"remediation_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Required: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceSetIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "description": "A Base62 ID",
+		//	    "maxLength": 22,
+		//	    "minLength": 22,
+		//	    "pattern": "^[a-z0-9A-Z]{22}$",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"resource_set_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+				listvalidator.ValueStringsAre(
+					stringvalidator.LengthBetween(22, 22),
+					stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9A-Z]{22}$"), ""),
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceTags
 		// CloudFormation resource type schema:
@@ -323,11 +372,15 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "An AWS resource type",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^([^\\s]*)$"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceTypeList
 		// CloudFormation resource type schema:
@@ -449,7 +502,8 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "SECURITY_GROUPS_USAGE_AUDIT",
 		//	        "NETWORK_FIREWALL",
 		//	        "THIRD_PARTY_FIREWALL",
-		//	        "DNS_FIREWALL"
+		//	        "DNS_FIREWALL",
+		//	        "IMPORT_NETWORK_FIREWALL"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -543,6 +597,7 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 							"NETWORK_FIREWALL",
 							"THIRD_PARTY_FIREWALL",
 							"DNS_FIREWALL",
+							"IMPORT_NETWORK_FIREWALL",
 						),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
@@ -632,9 +687,11 @@ func policyResource(ctx context.Context) (resource.Resource, error) {
 		"managed_service_data":         "ManagedServiceData",
 		"network_firewall_policy":      "NetworkFirewallPolicy",
 		"orgunit":                      "ORGUNIT",
+		"policy_description":           "PolicyDescription",
 		"policy_name":                  "PolicyName",
 		"policy_option":                "PolicyOption",
 		"remediation_enabled":          "RemediationEnabled",
+		"resource_set_ids":             "ResourceSetIds",
 		"resource_tags":                "ResourceTags",
 		"resource_type":                "ResourceType",
 		"resource_type_list":           "ResourceTypeList",

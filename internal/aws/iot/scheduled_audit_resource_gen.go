@@ -31,7 +31,7 @@ func scheduledAuditResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.",
-		//	  "pattern": "^([1-9]|[12][0-9]|3[01])$|^LAST$",
+		//	  "pattern": "^([1-9]|[12][0-9]|3[01])$|^LAST$|^UNSET_VALUE$",
 		//	  "type": "string"
 		//	}
 		"day_of_month": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -39,7 +39,7 @@ func scheduledAuditResource(ctx context.Context) (resource.Resource, error) {
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("^([1-9]|[12][0-9]|3[01])$|^LAST$"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("^([1-9]|[12][0-9]|3[01])$|^LAST$|^UNSET_VALUE$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -57,7 +57,8 @@ func scheduledAuditResource(ctx context.Context) (resource.Resource, error) {
 		//	    "WED",
 		//	    "THU",
 		//	    "FRI",
-		//	    "SAT"
+		//	    "SAT",
+		//	    "UNSET_VALUE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -74,6 +75,7 @@ func scheduledAuditResource(ctx context.Context) (resource.Resource, error) {
 					"THU",
 					"FRI",
 					"SAT",
+					"UNSET_VALUE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

@@ -170,6 +170,62 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Optional for copying a JobTemplate from a pre-existing Job configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: JobExecutionsRetryConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "RetryCriteriaList": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies how many times a failure type should be retried.",
+		//	        "properties": {
+		//	          "FailureType": {
+		//	            "enum": [
+		//	              "FAILED",
+		//	              "TIMED_OUT",
+		//	              "ALL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "NumberOfRetries": {
+		//	            "maximum": 10,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"job_executions_retry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RetryCriteriaList
+				"retry_criteria_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FailureType
+							"failure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: NumberOfRetries
+							"number_of_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: JobExecutionsRolloutConfig
 		// CloudFormation resource type schema:
 		//
@@ -431,15 +487,18 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"in_progress_timeout_in_minutes": "InProgressTimeoutInMinutes",
 		"increment_factor":               "IncrementFactor",
 		"job_arn":                        "JobArn",
+		"job_executions_retry_config":    "JobExecutionsRetryConfig",
 		"job_executions_rollout_config":  "JobExecutionsRolloutConfig",
 		"job_template_id":                "JobTemplateId",
 		"key":                            "Key",
 		"maximum_per_minute":             "MaximumPerMinute",
 		"min_number_of_executed_things":  "MinNumberOfExecutedThings",
 		"number_of_notified_things":      "NumberOfNotifiedThings",
+		"number_of_retries":              "NumberOfRetries",
 		"number_of_succeeded_things":     "NumberOfSucceededThings",
 		"presigned_url_config":           "PresignedUrlConfig",
 		"rate_increase_criteria":         "RateIncreaseCriteria",
+		"retry_criteria_list":            "RetryCriteriaList",
 		"role_arn":                       "RoleArn",
 		"tags":                           "Tags",
 		"threshold_percentage":           "ThresholdPercentage",

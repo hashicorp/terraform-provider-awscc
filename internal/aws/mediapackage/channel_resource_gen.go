@@ -100,7 +100,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "A short text description of the Channel.",
+		//	  "description": "An HTTP Live Streaming (HLS) ingest resource configuration.",
 		//	  "properties": {
 		//	    "ingestEndpoints": {
 		//	      "description": "A list of endpoints to which the source stream should be sent.",
@@ -125,6 +125,12 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "Id",
+		//	          "Username",
+		//	          "Password",
+		//	          "Url"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array"
@@ -141,30 +147,35 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 							// Property: Id
 							"id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated unique identifier for the IngestEndpoint",
-								Computed:    true,
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Password
 							"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated password for ingest authentication.",
-								Computed:    true,
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Url
 							"url": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The ingest URL to which the source stream should be sent.",
-								Computed:    true,
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Username
 							"username": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The system generated username for ingest authentication.",
-								Computed:    true,
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "A list of endpoints to which the source stream should be sent.",
+					Optional:    true,
 					Computed:    true,
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "A short text description of the Channel.",
+			Description: "An HTTP Live Streaming (HLS) ingest resource configuration.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),

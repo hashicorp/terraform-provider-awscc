@@ -455,6 +455,44 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ScalingConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The scaling configuration for the event source.",
+		//	  "properties": {
+		//	    "MaximumConcurrency": {
+		//	      "description": "The maximum number of concurrent functions that the event source can invoke.",
+		//	      "maximum": 1000,
+		//	      "minimum": 2,
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"scaling_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaximumConcurrency
+				"maximum_concurrency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of concurrent functions that the event source can invoke.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Int64{ /*START VALIDATORS*/
+						int64validator.Between(2, 1000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The scaling configuration for the event source.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SelfManagedEventSource
 		// CloudFormation resource type schema:
 		//
@@ -777,12 +815,14 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		"id":                                     "Id",
 		"kafka_bootstrap_servers":                "KafkaBootstrapServers",
 		"maximum_batching_window_in_seconds":     "MaximumBatchingWindowInSeconds",
+		"maximum_concurrency":                    "MaximumConcurrency",
 		"maximum_record_age_in_seconds":          "MaximumRecordAgeInSeconds",
 		"maximum_retry_attempts":                 "MaximumRetryAttempts",
 		"on_failure":                             "OnFailure",
 		"parallelization_factor":                 "ParallelizationFactor",
 		"pattern":                                "Pattern",
 		"queues":                                 "Queues",
+		"scaling_config":                         "ScalingConfig",
 		"self_managed_event_source":              "SelfManagedEventSource",
 		"self_managed_kafka_event_source_config": "SelfManagedKafkaEventSourceConfig",
 		"source_access_configurations":           "SourceAccessConfigurations",

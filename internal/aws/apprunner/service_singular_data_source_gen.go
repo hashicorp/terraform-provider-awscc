@@ -161,7 +161,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "InstanceRoleArn": {
 		//	      "description": "Instance Role Arn",
-		//	      "maxLength": 102,
+		//	      "maxLength": 1024,
 		//	      "minLength": 29,
 		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 		//	      "type": "string"
@@ -386,7 +386,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "properties": {
 		//	        "AccessRoleArn": {
 		//	          "description": "Access Role Arn",
-		//	          "maxLength": 102,
+		//	          "maxLength": 1024,
 		//	          "minLength": 29,
 		//	          "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 		//	          "type": "string"
@@ -440,6 +440,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                    "RUBY_31"
 		//	                  ],
 		//	                  "type": "string"
+		//	                },
+		//	                "RuntimeEnvironmentSecrets": {
+		//	                  "description": "The secrets and parameters that get referenced by your service as environment variables",
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
 		//	                },
 		//	                "RuntimeEnvironmentVariables": {
 		//	                  "items": {
@@ -524,6 +540,22 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "Port": {
 		//	              "description": "Port",
 		//	              "type": "string"
+		//	            },
+		//	            "RuntimeEnvironmentSecrets": {
+		//	              "description": "The secrets and parameters that get referenced by your service as environment variables",
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
 		//	            },
 		//	            "RuntimeEnvironmentVariables": {
 		//	              "items": {
@@ -620,6 +652,23 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 											Description: "Runtime",
 											Computed:    true,
 										}, /*END ATTRIBUTE*/
+										// Property: RuntimeEnvironmentSecrets
+										"runtime_environment_secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Computed: true,
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The secrets and parameters that get referenced by your service as environment variables",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
 										// Property: RuntimeEnvironmentVariables
 										"runtime_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -689,6 +738,23 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 								// Property: Port
 								"port": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Description: "Port",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RuntimeEnvironmentSecrets
+								"runtime_environment_secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Computed: true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The secrets and parameters that get referenced by your service as environment variables",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
 								// Property: RuntimeEnvironmentVariables
@@ -833,6 +899,7 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"protocol":                        "Protocol",
 		"repository_url":                  "RepositoryUrl",
 		"runtime":                         "Runtime",
+		"runtime_environment_secrets":     "RuntimeEnvironmentSecrets",
 		"runtime_environment_variables":   "RuntimeEnvironmentVariables",
 		"service_arn":                     "ServiceArn",
 		"service_id":                      "ServiceId",

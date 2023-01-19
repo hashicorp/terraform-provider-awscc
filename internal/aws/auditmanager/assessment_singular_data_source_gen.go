@@ -183,9 +183,9 @@ func assessmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "CreatedBy": {
 		//	        "description": "The IAM user or role that performed the action.",
-		//	        "maxLength": 100,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9-_()\\[\\]\\s]+$",
+		//	        "maxLength": 2048,
+		//	        "minLength": 20,
+		//	        "pattern": "^arn:.*:*:.*",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {

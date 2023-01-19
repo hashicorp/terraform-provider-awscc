@@ -9,6 +9,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -46,11 +47,11 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The date of creation of the metric stream.",
-		//	  "oneOf": [
+		//	  "anyOf": [
 		//	    {},
 		//	    {}
 		//	  ],
+		//	  "description": "The date of creation of the metric stream.",
 		//	  "type": "string"
 		//	}
 		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -174,15 +175,30 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IncludeLinkedAccountsMetrics
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.",
+		//	  "type": "boolean"
+		//	}
+		"include_linked_accounts_metrics": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdateDate
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The date of the last update of the metric stream.",
-		//	  "oneOf": [
+		//	  "anyOf": [
 		//	    {},
 		//	    {}
 		//	  ],
+		//	  "description": "The date of the last update of the metric stream.",
 		//	  "type": "string"
 		//	}
 		"last_update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -464,24 +480,25 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"additional_statistics":     "AdditionalStatistics",
-		"arn":                       "Arn",
-		"creation_date":             "CreationDate",
-		"exclude_filters":           "ExcludeFilters",
-		"firehose_arn":              "FirehoseArn",
-		"include_filters":           "IncludeFilters",
-		"include_metrics":           "IncludeMetrics",
-		"key":                       "Key",
-		"last_update_date":          "LastUpdateDate",
-		"metric_name":               "MetricName",
-		"name":                      "Name",
-		"namespace":                 "Namespace",
-		"output_format":             "OutputFormat",
-		"role_arn":                  "RoleArn",
-		"state":                     "State",
-		"statistics_configurations": "StatisticsConfigurations",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"additional_statistics":           "AdditionalStatistics",
+		"arn":                             "Arn",
+		"creation_date":                   "CreationDate",
+		"exclude_filters":                 "ExcludeFilters",
+		"firehose_arn":                    "FirehoseArn",
+		"include_filters":                 "IncludeFilters",
+		"include_linked_accounts_metrics": "IncludeLinkedAccountsMetrics",
+		"include_metrics":                 "IncludeMetrics",
+		"key":                             "Key",
+		"last_update_date":                "LastUpdateDate",
+		"metric_name":                     "MetricName",
+		"name":                            "Name",
+		"namespace":                       "Namespace",
+		"output_format":                   "OutputFormat",
+		"role_arn":                        "RoleArn",
+		"state":                           "State",
+		"statistics_configurations":       "StatisticsConfigurations",
+		"tags":                            "Tags",
+		"value":                           "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -37,11 +37,11 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The date of creation of the metric stream.",
-		//	  "oneOf": [
+		//	  "anyOf": [
 		//	    {},
 		//	    {}
 		//	  ],
+		//	  "description": "The date of creation of the metric stream.",
 		//	  "type": "string"
 		//	}
 		"creation_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -137,15 +137,26 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "Define which metrics will be streamed. Metrics matched by multiple instances of MetricStreamFilter are joined with an OR operation by default. If both IncludeFilters and ExcludeFilters are omitted, all metrics in the account will be streamed. IncludeFilters and ExcludeFilters are mutually exclusive. Default to null.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IncludeLinkedAccountsMetrics
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.",
+		//	  "type": "boolean"
+		//	}
+		"include_linked_accounts_metrics": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If you are creating a metric stream in a monitoring account, specify true to include metrics from source accounts that are linked to this monitoring account, in the metric stream. The default is false.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LastUpdateDate
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The date of the last update of the metric stream.",
-		//	  "oneOf": [
+		//	  "anyOf": [
 		//	    {},
 		//	    {}
 		//	  ],
+		//	  "description": "The date of the last update of the metric stream.",
 		//	  "type": "string"
 		//	}
 		"last_update_date": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -361,24 +372,25 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::CloudWatch::MetricStream").WithTerraformTypeName("awscc_cloudwatch_metric_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"additional_statistics":     "AdditionalStatistics",
-		"arn":                       "Arn",
-		"creation_date":             "CreationDate",
-		"exclude_filters":           "ExcludeFilters",
-		"firehose_arn":              "FirehoseArn",
-		"include_filters":           "IncludeFilters",
-		"include_metrics":           "IncludeMetrics",
-		"key":                       "Key",
-		"last_update_date":          "LastUpdateDate",
-		"metric_name":               "MetricName",
-		"name":                      "Name",
-		"namespace":                 "Namespace",
-		"output_format":             "OutputFormat",
-		"role_arn":                  "RoleArn",
-		"state":                     "State",
-		"statistics_configurations": "StatisticsConfigurations",
-		"tags":                      "Tags",
-		"value":                     "Value",
+		"additional_statistics":           "AdditionalStatistics",
+		"arn":                             "Arn",
+		"creation_date":                   "CreationDate",
+		"exclude_filters":                 "ExcludeFilters",
+		"firehose_arn":                    "FirehoseArn",
+		"include_filters":                 "IncludeFilters",
+		"include_linked_accounts_metrics": "IncludeLinkedAccountsMetrics",
+		"include_metrics":                 "IncludeMetrics",
+		"key":                             "Key",
+		"last_update_date":                "LastUpdateDate",
+		"metric_name":                     "MetricName",
+		"name":                            "Name",
+		"namespace":                       "Namespace",
+		"output_format":                   "OutputFormat",
+		"role_arn":                        "RoleArn",
+		"state":                           "State",
+		"statistics_configurations":       "StatisticsConfigurations",
+		"tags":                            "Tags",
+		"value":                           "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

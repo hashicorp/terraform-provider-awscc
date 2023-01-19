@@ -171,11 +171,15 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password of the user who can mount the share and has the permissions to access files and folders in the SMB share.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(104),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.{0,104}$"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ServerHostname
@@ -189,12 +193,14 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the SMB server. This value is the IP address or Domain Name Service (DNS) name of the SMB server.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// ServerHostname is a write-only property.
@@ -210,11 +216,15 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The subdirectory in the SMB file system that is used to read data from the SMB source location or write data to the SMB destination",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(4096),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Subdirectory is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
