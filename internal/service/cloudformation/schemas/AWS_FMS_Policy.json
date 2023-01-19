@@ -10,6 +10,13 @@
       "minLength": 12,
       "maxLength": 12
     },
+    "Base62Id": {
+      "description": "A Base62 ID",
+      "type": "string",
+      "pattern": "^[a-z0-9A-Z]{22}$",
+      "minLength": 22,
+      "maxLength": 22
+    },
     "OrganizationalUnitId": {
       "description": "An Organizational Unit ID.",
       "type": "string",
@@ -138,7 +145,8 @@
         "SECURITY_GROUPS_USAGE_AUDIT",
         "NETWORK_FIREWALL",
         "THIRD_PARTY_FIREWALL",
-        "DNS_FIREWALL"
+        "DNS_FIREWALL",
+        "IMPORT_NETWORK_FIREWALL"
       ]
     },
     "NetworkFirewallPolicy": {
@@ -211,9 +219,14 @@
     },
     "PolicyName": {
       "type": "string",
-      "pattern": "^([a-zA-Z0-9_.:/=+\\-@]+)$",
+      "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]+)$",
       "minLength": 1,
       "maxLength": 1024
+    },
+    "PolicyDescription": {
+      "type": "string",
+      "pattern": "^([a-zA-Z0-9_.:/=+\\-@\\s]+)$",
+      "maxLength": 256
     },
     "RemediationEnabled": {
       "type": "boolean"
@@ -235,6 +248,14 @@
         "$ref": "#/definitions/ResourceType"
       },
       "insertionOrder": true
+    },
+    "ResourceSetIds": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Base62Id"
+      },
+      "insertionOrder": true,
+      "uniqueItems": true
     },
     "SecurityServicePolicyData": {
       "$ref": "#/definitions/SecurityServicePolicyData"
@@ -261,7 +282,6 @@
     "ExcludeResourceTags",
     "PolicyName",
     "RemediationEnabled",
-    "ResourceType",
     "SecurityServicePolicyData"
   ],
   "readOnlyProperties": [
@@ -285,6 +305,7 @@
         "wafv2:ListAvailableManagedRuleGroups",
         "wafv2:ListAvailableManagedRuleGroupVersions",
         "network-firewall:DescribeRuleGroup",
+        "network-firewall:DescribeRuleGroupMetadata",
         "route53resolver:ListFirewallRuleGroups",
         "ec2:DescribeAvailabilityZones",
         "s3:PutBucketPolicy",
@@ -304,6 +325,7 @@
         "wafv2:ListAvailableManagedRuleGroups",
         "wafv2:ListAvailableManagedRuleGroupVersions",
         "network-firewall:DescribeRuleGroup",
+        "network-firewall:DescribeRuleGroupMetadata",
         "route53resolver:ListFirewallRuleGroups",
         "ec2:DescribeAvailabilityZones",
         "s3:PutBucketPolicy",

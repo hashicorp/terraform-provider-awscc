@@ -3,6 +3,21 @@
   "description": "The AWS::RDS::DBInstance resource creates an Amazon RDS DB instance.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
+    "CertificateDetails": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "CAIdentifier": {
+          "type": "string",
+          "description": "The CA identifier of the CA certificate used for the DB instance's server certificate."
+        },
+        "ValidTill": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The expiration date of the DB instance\u2019s server certificate."
+        }
+      }
+    },
     "Endpoint": {
       "type": "object",
       "additionalProperties": false,
@@ -78,6 +93,20 @@
       "required": [
         "Key"
       ]
+    },
+    "MasterUserSecret": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "SecretArn": {
+          "type": "string",
+          "description": "The Amazon Resource Name (ARN) of the secret."
+        },
+        "KmsKeyId": {
+          "type": "string",
+          "description": "The AWS KMS key identifier that is used to encrypt the secret."
+        }
+      }
     }
   },
   "properties": {
@@ -114,6 +143,14 @@
     "CACertificateIdentifier": {
       "type": "string",
       "description": "The identifier of the CA certificate for this DB instance."
+    },
+    "CertificateDetails": {
+      "$ref": "#/definitions/CertificateDetails",
+      "description": "Returns the details of the DB instance's server certificate."
+    },
+    "CertificateRotationRestart": {
+      "type": "boolean",
+      "description": "A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.\nBy default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.\nIf you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate\nThis setting doesn't apply to RDS Custom."
     },
     "CharacterSetName": {
       "type": "string",
@@ -226,6 +263,10 @@
       "type": "string",
       "description": "The version number of the database engine to use."
     },
+    "ManageMasterUserPassword": {
+      "type": "boolean",
+      "description": "A value that indicates whether to manage the master user password with AWS Secrets Manager."
+    },
     "Iops": {
       "type": "integer",
       "description": "The number of I/O operations per second (IOPS) that the database provisions."
@@ -248,6 +289,10 @@
     "MasterUserPassword": {
       "type": "string",
       "description": "The password for the master user."
+    },
+    "MasterUserSecret": {
+      "$ref": "#/definitions/MasterUserSecret",
+      "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password."
     },
     "MaxAllocatedStorage": {
       "type": "integer",
@@ -401,7 +446,10 @@
     "/properties/DBSnapshotIdentifier": "$lowercase(DBSnapshotIdentifier)",
     "/properties/OptionGroupName": "$lowercase(OptionGroupName)",
     "/properties/SourceDBInstanceAutomatedBackupsArn": "$lowercase(SourceDBInstanceAutomatedBackupsArn)",
-    "/properties/SourceDBInstanceIdentifier": "$lowercase(SourceDBInstanceIdentifier)"
+    "/properties/SourceDBInstanceIdentifier": "$lowercase(SourceDBInstanceIdentifier)",
+    "/properties/MasterUserSecret/KmsKeyId": "$join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:kms:[a-z]{2}[-]{1}[a-z]{3,10}[-]{0,1}[a-z]{0,10}[-]{1}[1-3]{1}:[0-9]{12}[:]{1}key\\/\", KmsKeyId])",
+    "/properties/KmsKeyId": "$join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:kms:[a-z]{2}[-]{1}[a-z]{3,10}[-]{0,1}[a-z]{0,10}[-]{1}[1-3]{1}:[0-9]{12}[:]{1}key\\/\", KmsKeyId])",
+    "/properties/PerformanceInsightsKMSKeyId": "$join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:kms:[a-z]{2}[-]{1}[a-z]{3,10}[-]{0,1}[a-z]{0,10}[-]{1}[1-3]{1}:[0-9]{12}[:]{1}key\\/\", PerformanceInsightsKMSKeyId])"
   },
   "createOnlyProperties": [
     "/properties/CharacterSetName",
@@ -450,7 +498,8 @@
     "/properties/SourceDbiResourceId",
     "/properties/SourceRegion",
     "/properties/TdeCredentialPassword",
-    "/properties/UseLatestRestorableTime"
+    "/properties/UseLatestRestorableTime",
+    "/properties/CertificateRotationRestart"
   ],
   "readOnlyProperties": [
     "/properties/Endpoint/Address",
@@ -458,7 +507,10 @@
     "/properties/Endpoint/HostedZoneId",
     "/properties/DbiResourceId",
     "/properties/DBInstanceArn",
-    "/properties/DBSystemId"
+    "/properties/DBSystemId",
+    "/properties/MasterUserSecret/SecretArn",
+    "/properties/CertificateDetails/CAIdentifier",
+    "/properties/CertificateDetails/ValidTill"
   ],
   "primaryIdentifier": [
     "/properties/DBInstanceIdentifier"
@@ -485,10 +537,13 @@
         "rds:CreateDBInstanceReadReplica",
         "rds:DescribeDBInstances",
         "rds:DescribeDBSnapshots",
+        "rds:DescribeEvents",
         "rds:ModifyDBInstance",
         "rds:RebootDBInstance",
         "rds:RestoreDBInstanceFromDBSnapshot",
-        "rds:RestoreDBInstanceToPointInTime"
+        "rds:RestoreDBInstanceToPointInTime",
+        "secretsmanager:CreateSecret",
+        "secretsmanager:TagResource"
       ],
       "timeoutInMinutes": 2160
     },
@@ -525,11 +580,14 @@
         "rds:DescribeDBEngineVersions",
         "rds:DescribeDBInstances",
         "rds:DescribeDBParameterGroups",
+        "rds:DescribeEvents",
         "rds:ModifyDBInstance",
         "rds:PromoteReadReplica",
         "rds:RebootDBInstance",
         "rds:RemoveRoleFromDBInstance",
-        "rds:RemoveTagsFromResource"
+        "rds:RemoveTagsFromResource",
+        "secretsmanager:CreateSecret",
+        "secretsmanager:TagResource"
       ],
       "timeoutInMinutes": 2160
     },

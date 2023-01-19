@@ -127,9 +127,6 @@
   "additionalProperties": false,
   "required": [
     "User",
-    "Password",
-    "Subdirectory",
-    "ServerHostname",
     "AgentArns"
   ],
   "readOnlyProperties": [

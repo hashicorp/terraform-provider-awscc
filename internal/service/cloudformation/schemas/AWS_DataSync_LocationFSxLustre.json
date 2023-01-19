@@ -87,8 +87,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "SecurityGroupArns",
-    "FsxFilesystemArn"
+    "SecurityGroupArns"
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",

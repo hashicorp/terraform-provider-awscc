@@ -250,7 +250,6 @@
     },
     "LastUplinkReceivedAt": {
       "description": "The date and time when the most recent uplink was received.",
-      "pattern": "",
       "type": "string"
     }
   },
