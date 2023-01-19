@@ -91,10 +91,10 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            "properties": {
 		//	              "S3FileLocation": {
 		//	                "additionalProperties": false,
-		//	                "description": "Specifies the details for the S3 file being copied.",
+		//	                "description": "Specifies the details for a S3 file.",
 		//	                "properties": {
 		//	                  "Bucket": {
-		//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
+		//	                    "description": "Specifies the S3 bucket that contains the file.",
 		//	                    "maxLength": 63,
 		//	                    "minLength": 3,
 		//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
@@ -168,6 +168,91 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            "maximum": 1800,
 		//	            "minimum": 1,
 		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "DecryptStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that performs a file decryption.",
+		//	        "properties": {
+		//	          "DestinationFileLocation": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
+		//	            "properties": {
+		//	              "EfsFileLocation": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies the details for an EFS file.",
+		//	                "properties": {
+		//	                  "FileSystemId": {
+		//	                    "description": "Specifies the EFS filesystem that contains the file.",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Path": {
+		//	                    "description": "The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.",
+		//	                    "maxLength": 65536,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^[^\\x00]+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "S3FileLocation": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies the details for a S3 file.",
+		//	                "properties": {
+		//	                  "Bucket": {
+		//	                    "description": "Specifies the S3 bucket that contains the file.",
+		//	                    "maxLength": 63,
+		//	                    "minLength": 3,
+		//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Key": {
+		//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 0,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "OverwriteExisting": {
+		//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+		//	            "enum": [
+		//	              "TRUE",
+		//	              "FALSE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Specifies which encryption method to use.",
+		//	            "enum": [
+		//	              "PGP"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -248,6 +333,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "enum": [
 		//	          "COPY",
 		//	          "CUSTOM",
+		//	          "DECRYPT",
 		//	          "DELETE",
 		//	          "TAG"
 		//	        ],
@@ -274,7 +360,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Bucket
 											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the S3 bucket that contains the file being copied.",
+												Description: "Specifies the S3 bucket that contains the file.",
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
@@ -299,7 +385,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "Specifies the details for the S3 file being copied.",
+										Description: "Specifies the details for a S3 file.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -425,6 +511,157 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: DecryptStepDetails
+					"decrypt_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EfsFileLocation
+									"efs_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FileSystemId
+											"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the EFS filesystem that contains the file.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Path
+											"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 65536),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[^\\x00]+$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for an EFS file.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(3, 63),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for a S3 file.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"TRUE",
+										"FALSE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which encryption method to use.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"PGP",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file decryption.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: DeleteStepDetails
 					"delete_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -539,6 +776,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.OneOf(
 								"COPY",
 								"CUSTOM",
+								"DECRYPT",
 								"DELETE",
 								"TAG",
 							),
@@ -581,10 +819,10 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            "properties": {
 		//	              "S3FileLocation": {
 		//	                "additionalProperties": false,
-		//	                "description": "Specifies the details for the S3 file being copied.",
+		//	                "description": "Specifies the details for a S3 file.",
 		//	                "properties": {
 		//	                  "Bucket": {
-		//	                    "description": "Specifies the S3 bucket that contains the file being copied.",
+		//	                    "description": "Specifies the S3 bucket that contains the file.",
 		//	                    "maxLength": 63,
 		//	                    "minLength": 3,
 		//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
@@ -658,6 +896,91 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	            "maximum": 1800,
 		//	            "minimum": 1,
 		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "DecryptStepDetails": {
+		//	        "additionalProperties": false,
+		//	        "description": "Details for a step that performs a file decryption.",
+		//	        "properties": {
+		//	          "DestinationFileLocation": {
+		//	            "additionalProperties": false,
+		//	            "description": "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
+		//	            "properties": {
+		//	              "EfsFileLocation": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies the details for an EFS file.",
+		//	                "properties": {
+		//	                  "FileSystemId": {
+		//	                    "description": "Specifies the EFS filesystem that contains the file.",
+		//	                    "maxLength": 128,
+		//	                    "minLength": 0,
+		//	                    "pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Path": {
+		//	                    "description": "The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.",
+		//	                    "maxLength": 65536,
+		//	                    "minLength": 1,
+		//	                    "pattern": "^[^\\x00]+$",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "S3FileLocation": {
+		//	                "additionalProperties": false,
+		//	                "description": "Specifies the details for a S3 file.",
+		//	                "properties": {
+		//	                  "Bucket": {
+		//	                    "description": "Specifies the S3 bucket that contains the file.",
+		//	                    "maxLength": 63,
+		//	                    "minLength": 3,
+		//	                    "pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Key": {
+		//	                    "description": "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+		//	                    "maxLength": 1024,
+		//	                    "minLength": 0,
+		//	                    "pattern": ".*",
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              }
+		//	            },
+		//	            "type": "object"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the step, used as an identifier.",
+		//	            "maxLength": 30,
+		//	            "minLength": 0,
+		//	            "pattern": "^[\\w-]*$",
+		//	            "type": "string"
+		//	          },
+		//	          "OverwriteExisting": {
+		//	            "description": "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+		//	            "enum": [
+		//	              "TRUE",
+		//	              "FALSE"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "SourceFileLocation": {
+		//	            "description": "Specifies which file to use as input to the workflow step.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "pattern": "^\\$\\{(\\w+.)+\\w+\\}$",
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "description": "Specifies which encryption method to use.",
+		//	            "enum": [
+		//	              "PGP"
+		//	            ],
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "type": "object"
@@ -738,6 +1061,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "enum": [
 		//	          "COPY",
 		//	          "CUSTOM",
+		//	          "DECRYPT",
 		//	          "DELETE",
 		//	          "TAG"
 		//	        ],
@@ -764,7 +1088,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 											// Property: Bucket
 											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
-												Description: "Specifies the S3 bucket that contains the file being copied.",
+												Description: "Specifies the S3 bucket that contains the file.",
 												Optional:    true,
 												Computed:    true,
 												Validators: []validator.String{ /*START VALIDATORS*/
@@ -789,7 +1113,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
-										Description: "Specifies the details for the S3 file being copied.",
+										Description: "Specifies the details for a S3 file.",
 										Optional:    true,
 										Computed:    true,
 										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
@@ -915,6 +1239,157 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
+					// Property: DecryptStepDetails
+					"decrypt_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: DestinationFileLocation
+							"destination_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: EfsFileLocation
+									"efs_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: FileSystemId
+											"file_system_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the EFS filesystem that contains the file.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 128),
+													stringvalidator.RegexMatches(regexp.MustCompile("^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Path
+											"path": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in EFS. You use the object path to retrieve the object.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(1, 65536),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[^\\x00]+$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for an EFS file.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+									// Property: S3FileLocation
+									"s3_file_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Bucket
+											"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "Specifies the S3 bucket that contains the file.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(3, 63),
+													stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Key
+											"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "The name assigned to the file when it was created in S3. You use the object key to retrieve the object.",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(0, 1024),
+													stringvalidator.RegexMatches(regexp.MustCompile(".*"), ""),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Description: "Specifies the details for a S3 file.",
+										Optional:    true,
+										Computed:    true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+								Description: "Specifies the location for the file being decrypted. Only applicable for the Decrypt type of workflow steps.",
+								Optional:    true,
+								Computed:    true,
+								PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+									objectplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the step, used as an identifier.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 30),
+									stringvalidator.RegexMatches(regexp.MustCompile("^[\\w-]*$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: OverwriteExisting
+							"overwrite_existing": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "A flag that indicates whether or not to overwrite an existing file of the same name. The default is FALSE.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"TRUE",
+										"FALSE",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: SourceFileLocation
+							"source_file_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which file to use as input to the workflow step.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(0, 256),
+									stringvalidator.RegexMatches(regexp.MustCompile("^\\$\\{(\\w+.)+\\w+\\}$"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Specifies which encryption method to use.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"PGP",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "Details for a step that performs a file decryption.",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: DeleteStepDetails
 					"delete_step_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1029,6 +1504,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.OneOf(
 								"COPY",
 								"CUSTOM",
+								"DECRYPT",
 								"DELETE",
 								"TAG",
 							),
@@ -1156,13 +1632,17 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		"bucket":                    "Bucket",
 		"copy_step_details":         "CopyStepDetails",
 		"custom_step_details":       "CustomStepDetails",
+		"decrypt_step_details":      "DecryptStepDetails",
 		"delete_step_details":       "DeleteStepDetails",
 		"description":               "Description",
 		"destination_file_location": "DestinationFileLocation",
+		"efs_file_location":         "EfsFileLocation",
+		"file_system_id":            "FileSystemId",
 		"key":                       "Key",
 		"name":                      "Name",
 		"on_exception_steps":        "OnExceptionSteps",
 		"overwrite_existing":        "OverwriteExisting",
+		"path":                      "Path",
 		"s3_file_location":          "S3FileLocation",
 		"source_file_location":      "SourceFileLocation",
 		"steps":                     "Steps",

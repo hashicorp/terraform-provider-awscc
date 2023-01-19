@@ -47,11 +47,10 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "type": "object"
+		//	  "type": "string"
 		//	}
-		"body": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: BodyS3Location
 		// CloudFormation resource type schema:
@@ -169,15 +168,6 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"fail_on_warnings": schema.BoolAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: MinimumCompressionSize
 		// CloudFormation resource type schema:
 		//
@@ -209,27 +199,34 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "patternProperties": {
 		//	    "": {
 		//	      "type": "string"
 		//	    }
 		//	  },
-		//	  "type": "object"
+		//	  "type": "string"
 		//	}
-		"parameters":        // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Policy
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "type": "object"
+		//	  "type": "string"
 		//	}
-		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: RestApiId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"rest_api_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: RootResourceId
 		// CloudFormation resource type schema:
@@ -255,8 +252,8 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Value",
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -306,13 +303,13 @@ func restApiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"e_tag":                        "ETag",
 		"endpoint_configuration":       "EndpointConfiguration",
 		"fail_on_warnings":             "FailOnWarnings",
-		"id":                           "Id",
 		"key":                          "Key",
 		"minimum_compression_size":     "MinimumCompressionSize",
 		"mode":                         "Mode",
 		"name":                         "Name",
 		"parameters":                   "Parameters",
 		"policy":                       "Policy",
+		"rest_api_id":                  "RestApiId",
 		"root_resource_id":             "RootResourceId",
 		"tags":                         "Tags",
 		"types":                        "Types",

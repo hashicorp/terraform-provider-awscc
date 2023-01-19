@@ -47,7 +47,6 @@ func partnerAccountDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The fingerprint of the Sidewalk application server private key.",
-		//	  "pattern": "[a-fA-F0-9]{64}",
 		//	  "type": "string"
 		//	}
 		"fingerprint": schema.StringAttribute{ /*START ATTRIBUTE*/

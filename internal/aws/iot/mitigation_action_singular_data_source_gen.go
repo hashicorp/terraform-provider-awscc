@@ -78,7 +78,8 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	            "DEBUG",
 		//	            "INFO",
 		//	            "ERROR",
-		//	            "WARN"
+		//	            "WARN",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -117,7 +118,8 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "properties": {
 		//	        "TemplateName": {
 		//	          "enum": [
-		//	            "BLANK_POLICY"
+		//	            "BLANK_POLICY",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -133,7 +135,8 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "properties": {
 		//	        "Action": {
 		//	          "enum": [
-		//	            "DEACTIVATE"
+		//	            "DEACTIVATE",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -149,7 +152,8 @@ func mitigationActionDataSource(ctx context.Context) (datasource.DataSource, err
 		//	      "properties": {
 		//	        "Action": {
 		//	          "enum": [
-		//	            "DEACTIVATE"
+		//	            "DEACTIVATE",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        }

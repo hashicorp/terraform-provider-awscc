@@ -12,6 +12,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -242,6 +243,92 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// JobArn is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: JobExecutionsRetryConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "RetryCriteriaList": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "Specifies how many times a failure type should be retried.",
+		//	        "properties": {
+		//	          "FailureType": {
+		//	            "enum": [
+		//	              "FAILED",
+		//	              "TIMED_OUT",
+		//	              "ALL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "NumberOfRetries": {
+		//	            "maximum": 10,
+		//	            "minimum": 0,
+		//	            "type": "integer"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"job_executions_retry_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RetryCriteriaList
+				"retry_criteria_list": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: FailureType
+							"failure_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"FAILED",
+										"TIMED_OUT",
+										"ALL",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: NumberOfRetries
+							"number_of_retries": schema.Int64Attribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.Int64{ /*START VALIDATORS*/
+									int64validator.Between(0, 10),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+									int64planmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(1, 2),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: JobExecutionsRolloutConfig
 		// CloudFormation resource type schema:
@@ -590,15 +677,18 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"in_progress_timeout_in_minutes": "InProgressTimeoutInMinutes",
 		"increment_factor":               "IncrementFactor",
 		"job_arn":                        "JobArn",
+		"job_executions_retry_config":    "JobExecutionsRetryConfig",
 		"job_executions_rollout_config":  "JobExecutionsRolloutConfig",
 		"job_template_id":                "JobTemplateId",
 		"key":                            "Key",
 		"maximum_per_minute":             "MaximumPerMinute",
 		"min_number_of_executed_things":  "MinNumberOfExecutedThings",
 		"number_of_notified_things":      "NumberOfNotifiedThings",
+		"number_of_retries":              "NumberOfRetries",
 		"number_of_succeeded_things":     "NumberOfSucceededThings",
 		"presigned_url_config":           "PresignedUrlConfig",
 		"rate_increase_criteria":         "RateIncreaseCriteria",
+		"retry_criteria_list":            "RetryCriteriaList",
 		"role_arn":                       "RoleArn",
 		"tags":                           "Tags",
 		"threshold_percentage":           "ThresholdPercentage",

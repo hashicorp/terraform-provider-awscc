@@ -103,9 +103,7 @@
   "additionalProperties": false,
   "required": [
     "User",
-    "Password",
-    "SecurityGroupArns",
-    "FsxFilesystemArn"
+    "SecurityGroupArns"
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",

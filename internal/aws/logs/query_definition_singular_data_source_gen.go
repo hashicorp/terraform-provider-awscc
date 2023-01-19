@@ -47,7 +47,6 @@ func queryDefinitionDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	  "description": "A name for the saved query definition",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
-		//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -20,7 +20,6 @@ Creates an AWS Firewall Manager policy.
 - `exclude_resource_tags` (Boolean)
 - `policy_name` (String)
 - `remediation_enabled` (Boolean)
-- `resource_type` (String) An AWS resource type
 - `security_service_policy_data` (Attributes) Firewall security service policy data. (see [below for nested schema](#nestedatt--security_service_policy_data))
 
 ### Optional
@@ -28,7 +27,10 @@ Creates an AWS Firewall Manager policy.
 - `delete_all_policy_resources` (Boolean)
 - `exclude_map` (Attributes) An FMS includeMap or excludeMap. (see [below for nested schema](#nestedatt--exclude_map))
 - `include_map` (Attributes) An FMS includeMap or excludeMap. (see [below for nested schema](#nestedatt--include_map))
+- `policy_description` (String)
+- `resource_set_ids` (List of String)
 - `resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
+- `resource_type` (String) An AWS resource type
 - `resource_type_list` (List of String)
 - `resources_clean_up` (Boolean)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))

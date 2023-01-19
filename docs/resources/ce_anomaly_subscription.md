@@ -21,11 +21,12 @@ AWS Cost Anomaly Detection leverages advanced Machine Learning technologies to i
 - `monitor_arn_list` (List of String) A list of cost anomaly monitors.
 - `subscribers` (Attributes List) A list of subscriber (see [below for nested schema](#nestedatt--subscribers))
 - `subscription_name` (String) The name of the subscription.
-- `threshold` (Number) The dollar value that triggers a notification if the threshold is exceeded.
 
 ### Optional
 
 - `resource_tags` (Attributes List) Tags to assign to subscription. (see [below for nested schema](#nestedatt--resource_tags))
+- `threshold` (Number) The dollar value that triggers a notification if the threshold is exceeded.
+- `threshold_expression` (String) An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.
 
 ### Read-Only
 

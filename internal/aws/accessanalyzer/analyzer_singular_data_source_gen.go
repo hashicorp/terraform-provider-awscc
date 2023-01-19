@@ -39,11 +39,13 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "description": "An Access Analyzer archive rule. Archive rules automatically archive new findings that meet the criteria you define when you create the rule.",
 		//	    "properties": {
 		//	      "Filter": {
 		//	        "insertionOrder": false,
 		//	        "items": {
+		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "Contains": {
 		//	              "insertionOrder": false,
@@ -157,6 +159,7 @@ func analyzerDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "An array of key-value pairs to apply to this resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
+		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a resource.",
 		//	    "properties": {
 		//	      "Key": {

@@ -26,9 +26,11 @@ A markup/discount that is defined for a specific set of services that can later 
 - `billing_entity` (String) The seller of services provided by AWS, their affiliates, or third-party providers selling services via AWS Marketplaces. Supported billing entities are AWS, AWS Marketplace, and AISPL.
 - `description` (String) Pricing rule description
 - `modifier_percentage` (Number) Pricing rule modifier percentage
+- `operation` (String) The Operation which a SKU pricing rule is modifying
 - `service` (String) The service which a pricing rule is applied on
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `tiering` (Attributes) The set of tiering configurations for the pricing rule. (see [below for nested schema](#nestedatt--tiering))
+- `usage_type` (String) The UsageType which a SKU pricing rule is modifying
 
 ### Read-Only
 

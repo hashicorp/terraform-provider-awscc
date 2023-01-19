@@ -213,6 +213,17 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 			Description: "The dollar value that triggers a notification if the threshold is exceeded. ",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ThresholdExpression
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
+		//	  "type": "string"
+		//	}
+		"threshold_expression": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -230,19 +241,20 @@ func anomalySubscriptionDataSource(ctx context.Context) (datasource.DataSource, 
 	opts = opts.WithCloudFormationTypeName("AWS::CE::AnomalySubscription").WithTerraformTypeName("awscc_ce_anomaly_subscription")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"account_id":        "AccountId",
-		"address":           "Address",
-		"frequency":         "Frequency",
-		"key":               "Key",
-		"monitor_arn_list":  "MonitorArnList",
-		"resource_tags":     "ResourceTags",
-		"status":            "Status",
-		"subscribers":       "Subscribers",
-		"subscription_arn":  "SubscriptionArn",
-		"subscription_name": "SubscriptionName",
-		"threshold":         "Threshold",
-		"type":              "Type",
-		"value":             "Value",
+		"account_id":           "AccountId",
+		"address":              "Address",
+		"frequency":            "Frequency",
+		"key":                  "Key",
+		"monitor_arn_list":     "MonitorArnList",
+		"resource_tags":        "ResourceTags",
+		"status":               "Status",
+		"subscribers":          "Subscribers",
+		"subscription_arn":     "SubscriptionArn",
+		"subscription_name":    "SubscriptionName",
+		"threshold":            "Threshold",
+		"threshold_expression": "ThresholdExpression",
+		"type":                 "Type",
+		"value":                "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -121,9 +121,7 @@
   },
   "additionalProperties": false,
   "required": [
-    "AgentArns",
-    "BucketName",
-    "ServerHostname"
+    "AgentArns"
   ],
   "readOnlyProperties": [
     "/properties/LocationArn",

@@ -29,6 +29,7 @@ Data Source schema for AWS::CE::AnomalySubscription
 - `subscription_arn` (String) Subscription ARN
 - `subscription_name` (String) The name of the subscription.
 - `threshold` (Number) The dollar value that triggers a notification if the threshold is exceeded.
+- `threshold_expression` (String) An Expression object in JSON String format used to specify the anomalies that you want to generate alerts for.
 
 <a id="nestedatt--resource_tags"></a>
 ### Nested Schema for `resource_tags`

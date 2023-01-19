@@ -18,12 +18,12 @@ Resource schema for AWS::DataSync::LocationNFS
 ### Required
 
 - `on_prem_config` (Attributes) Contains a list of Amazon Resource Names (ARNs) of agents that are used to connect an NFS server. (see [below for nested schema](#nestedatt--on_prem_config))
-- `server_hostname` (String) The name of the NFS server. This value is the IP address or DNS name of the NFS server.
-- `subdirectory` (String) The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.
 
 ### Optional
 
 - `mount_options` (Attributes) The NFS mount options that DataSync can use to mount your NFS share. (see [below for nested schema](#nestedatt--mount_options))
+- `server_hostname` (String) The name of the NFS server. This value is the IP address or DNS name of the NFS server.
+- `subdirectory` (String) The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

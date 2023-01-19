@@ -19,6 +19,7 @@ An entity that defines the scope of audit evidence collected by AWS Audit Manage
 
 - `assessment_reports_destination` (Attributes) The destination in which evidence reports are stored for the specified assessment. (see [below for nested schema](#nestedatt--assessment_reports_destination))
 - `aws_account` (Attributes) The AWS account associated with the assessment. (see [below for nested schema](#nestedatt--aws_account))
+- `delegations` (Attributes List) The list of delegations. (see [below for nested schema](#nestedatt--delegations))
 - `description` (String) The description of the specified assessment.
 - `framework_id` (String) The identifier for the specified framework.
 - `name` (String) The name of the related assessment.
@@ -32,7 +33,6 @@ An entity that defines the scope of audit evidence collected by AWS Audit Manage
 - `arn` (String) The Amazon Resource Name (ARN) of the assessment.
 - `assessment_id` (String)
 - `creation_time` (Number) The sequence of characters that identifies when the event occurred.
-- `delegations` (Attributes List) The list of delegations. (see [below for nested schema](#nestedatt--delegations))
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--assessment_reports_destination"></a>
@@ -52,6 +52,24 @@ Optional:
 - `email_address` (String) The unique identifier for the email account.
 - `id` (String) The identifier for the specified AWS account.
 - `name` (String) The name of the specified AWS account.
+
+
+<a id="nestedatt--delegations"></a>
+### Nested Schema for `delegations`
+
+Optional:
+
+- `assessment_id` (String)
+- `assessment_name` (String) The name of the related assessment.
+- `comment` (String) The comment related to the delegation.
+- `control_set_id` (String) The identifier for the specified control set.
+- `created_by` (String) The IAM user or role that performed the action.
+- `creation_time` (Number) The sequence of characters that identifies when the event occurred.
+- `id` (String)
+- `last_updated` (Number) The sequence of characters that identifies when the event occurred.
+- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM user or role.
+- `role_type` (String) The IAM role type.
+- `status` (String) The status of the delegation.
 
 
 <a id="nestedatt--roles"></a>
@@ -97,24 +115,6 @@ Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-
-<a id="nestedatt--delegations"></a>
-### Nested Schema for `delegations`
-
-Read-Only:
-
-- `assessment_id` (String)
-- `assessment_name` (String) The name of the related assessment.
-- `comment` (String) The comment related to the delegation.
-- `control_set_id` (String) The identifier for the specified control set.
-- `created_by` (String) The IAM user or role that performed the action.
-- `creation_time` (Number) The sequence of characters that identifies when the event occurred.
-- `id` (String)
-- `last_updated` (Number) The sequence of characters that identifies when the event occurred.
-- `role_arn` (String) The Amazon Resource Name (ARN) of the IAM user or role.
-- `role_type` (String) The IAM role type.
-- `status` (String) The status of the delegation.
 
 ## Import
 

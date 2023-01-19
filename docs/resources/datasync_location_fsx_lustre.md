@@ -17,11 +17,11 @@ Resource schema for AWS::DataSync::LocationFSxLustre.
 
 ### Required
 
-- `fsx_filesystem_arn` (String) The Amazon Resource Name (ARN) for the FSx for Lustre file system.
 - `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx for Lustre file system.
 
 ### Optional
 
+- `fsx_filesystem_arn` (String) The Amazon Resource Name (ARN) for the FSx for Lustre file system.
 - `subdirectory` (String) A subdirectory in the location's path.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

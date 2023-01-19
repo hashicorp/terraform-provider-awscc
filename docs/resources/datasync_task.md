@@ -33,8 +33,6 @@ Resource schema for AWS::DataSync::Task.
 ### Read-Only
 
 - `destination_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the destination ENIs (Elastic Network Interfaces) that were created for your subnet.
-- `error_code` (String) Errors that AWS DataSync encountered during execution of the task. You can use this error code to help troubleshoot issues.
-- `error_detail` (String) Detailed description of an error that was encountered during the task execution.
 - `id` (String) Uniquely identifies the resource.
 - `source_network_interface_arns` (List of String) The Amazon Resource Names (ARNs) of the source ENIs (Elastic Network Interfaces) that were created for your subnet.
 - `status` (String) The status of the task that was described.

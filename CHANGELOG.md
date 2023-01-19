@@ -1,4 +1,11 @@
 ## 0.45.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_kendraranking_execution_plan`
+* **New Data Source:** `awscc_kendraranking_execution_plans`
+* **New Resource:** `awscc_/kendraranking_execution_plan`
+
 ## 0.44.0 (January  5, 2023)
 
 FEATURES:

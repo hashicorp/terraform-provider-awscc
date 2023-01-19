@@ -169,12 +169,14 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"server_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the NFS server. This value is the IP address or DNS name of the NFS server.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(255),
 				stringvalidator.RegexMatches(regexp.MustCompile("^(([a-zA-Z0-9\\-]*[a-zA-Z0-9])\\.)*([A-Za-z0-9\\-]*[A-Za-z0-9])$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// ServerHostname is a write-only property.
@@ -190,11 +192,15 @@ func locationNFSResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"subdirectory": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The subdirectory in the NFS file system that is used to read data from the NFS source location or write data to the NFS destination.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(4096),
 				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_\\-\\+\\./\\(\\)\\$\\p{Zs}]+$"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Subdirectory is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags

@@ -204,7 +204,9 @@
     "/properties/SpotPrice",
     "/properties/UserData"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "primaryIdentifier": [
     "/properties/LaunchConfigurationName"
   ],

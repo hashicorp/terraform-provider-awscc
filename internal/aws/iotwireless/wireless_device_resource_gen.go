@@ -95,7 +95,6 @@ func wirelessDeviceResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "The date and time when the most recent uplink was received.",
-		//	  "pattern": "",
 		//	  "type": "string"
 		//	}
 		"last_uplink_received_at": schema.StringAttribute{ /*START ATTRIBUTE*/

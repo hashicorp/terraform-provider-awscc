@@ -114,6 +114,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "maxLength": 2048,
 		//	    "minLength": 1,
@@ -132,6 +133,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -193,6 +195,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {

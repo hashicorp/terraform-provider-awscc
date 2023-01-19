@@ -7,7 +7,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 659 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 661 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1734,6 +1734,10 @@ resource_schema "aws_kendra_faq" {
 
 resource_schema "aws_kendra_index" {
   cloudformation_type_name = "AWS::Kendra::Index"
+}
+
+resource_schema "aws_kendraranking_execution_plan" {
+  cloudformation_type_name = "AWS::KendraRanking::ExecutionPlan"
 }
 
 resource_schema "aws_kinesis_stream" {

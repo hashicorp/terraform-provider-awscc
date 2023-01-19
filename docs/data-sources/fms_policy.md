@@ -26,8 +26,10 @@ Data Source schema for AWS::FMS::Policy
 - `exclude_map` (Attributes) An FMS includeMap or excludeMap. (see [below for nested schema](#nestedatt--exclude_map))
 - `exclude_resource_tags` (Boolean)
 - `include_map` (Attributes) An FMS includeMap or excludeMap. (see [below for nested schema](#nestedatt--include_map))
+- `policy_description` (String)
 - `policy_name` (String)
 - `remediation_enabled` (Boolean)
+- `resource_set_ids` (List of String)
 - `resource_tags` (Attributes List) (see [below for nested schema](#nestedatt--resource_tags))
 - `resource_type` (String) An AWS resource type
 - `resource_type_list` (List of String)

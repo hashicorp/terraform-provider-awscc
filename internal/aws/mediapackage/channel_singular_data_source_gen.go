@@ -75,7 +75,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "A short text description of the Channel.",
+		//	  "description": "An HTTP Live Streaming (HLS) ingest resource configuration.",
 		//	  "properties": {
 		//	    "ingestEndpoints": {
 		//	      "description": "A list of endpoints to which the source stream should be sent.",
@@ -100,6 +100,12 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "string"
 		//	          }
 		//	        },
+		//	        "required": [
+		//	          "Id",
+		//	          "Username",
+		//	          "Password",
+		//	          "Url"
+		//	        ],
 		//	        "type": "object"
 		//	      },
 		//	      "type": "array"
@@ -139,7 +145,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Description: "A short text description of the Channel.",
+			Description: "An HTTP Live Streaming (HLS) ingest resource configuration.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Id

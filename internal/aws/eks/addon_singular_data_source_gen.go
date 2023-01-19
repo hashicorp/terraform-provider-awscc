@@ -79,6 +79,17 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The configuration values to use with the add-on",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PreserveOnDelete
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "PreserveOnDelete parameter value",
+		//	  "type": "boolean"
+		//	}
+		"preserve_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "PreserveOnDelete parameter value",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ResolveConflicts
 		// CloudFormation resource type schema:
 		//
@@ -181,6 +192,7 @@ func addonDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"cluster_name":             "ClusterName",
 		"configuration_values":     "ConfigurationValues",
 		"key":                      "Key",
+		"preserve_on_delete":       "PreserveOnDelete",
 		"resolve_conflicts":        "ResolveConflicts",
 		"service_account_role_arn": "ServiceAccountRoleArn",
 		"tags":                     "Tags",

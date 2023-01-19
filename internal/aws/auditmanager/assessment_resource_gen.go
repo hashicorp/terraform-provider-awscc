@@ -244,9 +244,9 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 		//	      },
 		//	      "CreatedBy": {
 		//	        "description": "The IAM user or role that performed the action.",
-		//	        "maxLength": 100,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9-_()\\[\\]\\s]+$",
+		//	        "maxLength": 2048,
+		//	        "minLength": 20,
+		//	        "pattern": "^arn:.*:*:.*",
 		//	        "type": "string"
 		//	      },
 		//	      "CreationTime": {
@@ -297,60 +297,146 @@ func assessmentResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: AssessmentId
 					"assessment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
 						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(36, 36),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: AssessmentName
 					"assessment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The name of the related assessment.",
+						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 127),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9-_\\.]+$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Comment
 					"comment": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The comment related to the delegation.",
+						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthAtMost(350),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: ControlSetId
 					"control_set_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier for the specified control set.",
+						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 300),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[\\w\\W\\s\\S]*$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: CreatedBy
 					"created_by": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The IAM user or role that performed the action.",
+						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(20, 2048),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*:*:.*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: CreationTime
 					"creation_time": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The sequence of characters that identifies when the event occurred.",
+						Optional:    true,
 						Computed:    true,
+						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+							float64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Id
 					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
 						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(36, 36),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: LastUpdated
 					"last_updated": schema.Float64Attribute{ /*START ATTRIBUTE*/
 						Description: "The sequence of characters that identifies when the event occurred.",
+						Optional:    true,
 						Computed:    true,
+						PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+							float64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: RoleArn
 					"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) of the IAM user or role.",
+						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(20, 2048),
+							stringvalidator.RegexMatches(regexp.MustCompile("^arn:.*:iam:.*"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: RoleType
 					"role_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: " The IAM role type.",
+						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"PROCESS_OWNER",
+								"RESOURCE_OWNER",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The status of the delegation.",
+						Optional:    true,
 						Computed:    true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.OneOf(
+								"IN_PROGRESS",
+								"UNDER_REVIEW",
+								"COMPLETE",
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The list of delegations.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),

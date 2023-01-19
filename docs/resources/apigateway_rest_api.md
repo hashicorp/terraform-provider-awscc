@@ -3,12 +3,12 @@
 page_title: "awscc_apigateway_rest_api Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  Resource Type definition for AWS::ApiGateway::RestApi
+  Resource Type definition for AWS::ApiGateway::RestApi.
 ---
 
 # awscc_apigateway_rest_api (Resource)
 
-Resource Type definition for AWS::ApiGateway::RestApi
+Resource Type definition for AWS::ApiGateway::RestApi.
 
 
 
@@ -19,7 +19,7 @@ Resource Type definition for AWS::ApiGateway::RestApi
 
 - `api_key_source_type` (String)
 - `binary_media_types` (List of String)
-- `body` (Map of String)
+- `body` (String)
 - `body_s3_location` (Attributes) (see [below for nested schema](#nestedatt--body_s3_location))
 - `clone_from` (String)
 - `description` (String)
@@ -29,13 +29,14 @@ Resource Type definition for AWS::ApiGateway::RestApi
 - `minimum_compression_size` (Number)
 - `mode` (String)
 - `name` (String)
-- `parameters` (Map of String)
-- `policy` (Map of String)
+- `parameters` (String)
+- `policy` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
-- `id` (String) The ID of this resource.
+- `id` (String) Uniquely identifies the resource.
+- `rest_api_id` (String)
 - `root_resource_id` (String)
 
 <a id="nestedatt--body_s3_location"></a>

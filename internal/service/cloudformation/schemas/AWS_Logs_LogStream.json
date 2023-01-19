@@ -12,6 +12,9 @@
       "description": "The name of the log stream. The name must be unique wihtin the log group."
     }
   },
+  "tagging": {
+    "taggable": false
+  },
   "required": [
     "LogGroupName"
   ],
@@ -26,8 +29,7 @@
   "handlers": {
     "create": {
       "permissions": [
-        "logs:CreateLogStream",
-        "logs:DescribeLogStreams"
+        "logs:CreateLogStream"
       ]
     },
     "read": {

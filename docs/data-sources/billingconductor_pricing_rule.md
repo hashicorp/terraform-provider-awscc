@@ -29,11 +29,13 @@ Data Source schema for AWS::BillingConductor::PricingRule
 - `last_modified_time` (Number) Latest modified timestamp in UNIX epoch time format
 - `modifier_percentage` (Number) Pricing rule modifier percentage
 - `name` (String) Pricing rule name
+- `operation` (String) The Operation which a SKU pricing rule is modifying
 - `scope` (String) A term used to categorize the granularity of a Pricing Rule.
 - `service` (String) The service which a pricing rule is applied on
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 - `tiering` (Attributes) The set of tiering configurations for the pricing rule. (see [below for nested schema](#nestedatt--tiering))
 - `type` (String) One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.
+- `usage_type` (String) The UsageType which a SKU pricing rule is modifying
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

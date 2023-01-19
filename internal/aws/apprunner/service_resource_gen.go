@@ -230,7 +230,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "InstanceRoleArn": {
 		//	      "description": "Instance Role Arn",
-		//	      "maxLength": 102,
+		//	      "maxLength": 1024,
 		//	      "minLength": 29,
 		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 		//	      "type": "string"
@@ -266,7 +266,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(29, 102),
+						stringvalidator.LengthBetween(29, 1024),
 						stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -537,7 +537,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "AccessRoleArn": {
 		//	          "description": "Access Role Arn",
-		//	          "maxLength": 102,
+		//	          "maxLength": 1024,
 		//	          "minLength": 29,
 		//	          "pattern": "arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}",
 		//	          "type": "string"
@@ -591,6 +591,22 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "RUBY_31"
 		//	                  ],
 		//	                  "type": "string"
+		//	                },
+		//	                "RuntimeEnvironmentSecrets": {
+		//	                  "description": "The secrets and parameters that get referenced by your service as environment variables",
+		//	                  "items": {
+		//	                    "additionalProperties": false,
+		//	                    "properties": {
+		//	                      "Name": {
+		//	                        "type": "string"
+		//	                      },
+		//	                      "Value": {
+		//	                        "type": "string"
+		//	                      }
+		//	                    },
+		//	                    "type": "object"
+		//	                  },
+		//	                  "type": "array"
 		//	                },
 		//	                "RuntimeEnvironmentVariables": {
 		//	                  "items": {
@@ -676,6 +692,22 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "description": "Port",
 		//	              "type": "string"
 		//	            },
+		//	            "RuntimeEnvironmentSecrets": {
+		//	              "description": "The secrets and parameters that get referenced by your service as environment variables",
+		//	              "items": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "Name": {
+		//	                    "type": "string"
+		//	                  },
+		//	                  "Value": {
+		//	                    "type": "string"
+		//	                  }
+		//	                },
+		//	                "type": "object"
+		//	              },
+		//	              "type": "array"
+		//	            },
 		//	            "RuntimeEnvironmentVariables": {
 		//	              "items": {
 		//	                "additionalProperties": false,
@@ -734,7 +766,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 							Optional:    true,
 							Computed:    true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.LengthBetween(29, 102),
+								stringvalidator.LengthBetween(29, 1024),
 								stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn|aws-iso|aws-iso-b):iam::[0-9]{12}:role/[\\w+=,.@-]{1,64}"), ""),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -815,6 +847,35 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 													"RUBY_31",
 												),
 											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RuntimeEnvironmentSecrets
+										"runtime_environment_secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+											NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+												Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+													// Property: Name
+													"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+													// Property: Value
+													"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+														Optional: true,
+														Computed: true,
+														PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+															stringplanmodifier.UseStateForUnknown(),
+														}, /*END PLAN MODIFIERS*/
+													}, /*END ATTRIBUTE*/
+												}, /*END SCHEMA*/
+											}, /*END NESTED OBJECT*/
+											Description: "The secrets and parameters that get referenced by your service as environment variables",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+												listplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
 										}, /*END ATTRIBUTE*/
 										// Property: RuntimeEnvironmentVariables
 										"runtime_environment_variables": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -928,6 +989,35 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RuntimeEnvironmentSecrets
+								"runtime_environment_secrets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+									NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: Name
+											"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: Value
+											"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Optional: true,
+												Computed: true,
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+									}, /*END NESTED OBJECT*/
+									Description: "The secrets and parameters that get referenced by your service as environment variables",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+										listplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: RuntimeEnvironmentVariables
@@ -1128,6 +1218,7 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		"protocol":                        "Protocol",
 		"repository_url":                  "RepositoryUrl",
 		"runtime":                         "Runtime",
+		"runtime_environment_secrets":     "RuntimeEnvironmentSecrets",
 		"runtime_environment_variables":   "RuntimeEnvironmentVariables",
 		"service_arn":                     "ServiceArn",
 		"service_id":                      "ServiceId",

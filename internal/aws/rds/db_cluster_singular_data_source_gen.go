@@ -414,6 +414,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the AWS Key Management Service master key that is used to encrypt the database instances in the DB cluster, such as arn:aws:kms:us-east-1:012345678910:key/abcd1234-a123-456a-a12b-a123b4cd56ef. If you enable the StorageEncrypted property but don't specify this property, the default master key is used. If you specify this property, you must set the StorageEncrypted property to true.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ManageMasterUserPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+		//	  "type": "boolean"
+		//	}
+		"manage_master_user_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -423,6 +434,40 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The master password for the DB instance.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUserSecret
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
+		//	  "properties": {
+		//	    "KmsKeyId": {
+		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the secret.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"master_user_secret": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS key identifier that is used to encrypt the secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
@@ -885,7 +930,9 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"iops":                                  "Iops",
 		"key":                                   "Key",
 		"kms_key_id":                            "KmsKeyId",
+		"manage_master_user_password":           "ManageMasterUserPassword",
 		"master_user_password":                  "MasterUserPassword",
+		"master_user_secret":                    "MasterUserSecret",
 		"master_username":                       "MasterUsername",
 		"max_capacity":                          "MaxCapacity",
 		"min_capacity":                          "MinCapacity",
@@ -906,6 +953,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"scaling_configuration":                 "ScalingConfiguration",
 		"seconds_before_timeout":                "SecondsBeforeTimeout",
 		"seconds_until_auto_pause":              "SecondsUntilAutoPause",
+		"secret_arn":                            "SecretArn",
 		"serverless_v2_scaling_configuration":   "ServerlessV2ScalingConfiguration",
 		"snapshot_identifier":                   "SnapshotIdentifier",
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",

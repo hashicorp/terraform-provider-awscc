@@ -178,6 +178,67 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CertificateDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Returns the details of the DB instance's server certificate.",
+		//	  "properties": {
+		//	    "CAIdentifier": {
+		//	      "description": "The CA identifier of the CA certificate used for the DB instance's server certificate.",
+		//	      "type": "string"
+		//	    },
+		//	    "ValidTill": {
+		//	      "description": "The expiration date of the DB instance’s server certificate.",
+		//	      "format": "date-time",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"certificate_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CAIdentifier
+				"ca_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CA identifier of the CA certificate used for the DB instance's server certificate.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ValidTill
+				"valid_till": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The expiration date of the DB instance’s server certificate.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Returns the details of the DB instance's server certificate.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateRotationRestart
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.\nBy default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.\nIf you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate\nThis setting doesn't apply to RDS Custom.",
+		//	  "type": "boolean"
+		//	}
+		"certificate_rotation_restart": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.\nBy default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.\nIf you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate\nThis setting doesn't apply to RDS Custom.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// CertificateRotationRestart is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: CharacterSetName
 		// CloudFormation resource type schema:
 		//
@@ -667,6 +728,21 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ManageMasterUserPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+		//	  "type": "boolean"
+		//	}
+		"manage_master_user_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -682,6 +758,51 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// MasterUserPassword is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUserSecret
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
+		//	  "properties": {
+		//	    "KmsKeyId": {
+		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the secret.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"master_user_secret": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS key identifier that is used to encrypt the secret.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the secret.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
@@ -1333,6 +1454,9 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"availability_zone":                        "AvailabilityZone",
 		"backup_retention_period":                  "BackupRetentionPeriod",
 		"ca_certificate_identifier":                "CACertificateIdentifier",
+		"ca_identifier":                            "CAIdentifier",
+		"certificate_details":                      "CertificateDetails",
+		"certificate_rotation_restart":             "CertificateRotationRestart",
 		"character_set_name":                       "CharacterSetName",
 		"copy_tags_to_snapshot":                    "CopyTagsToSnapshot",
 		"custom_iam_instance_profile":              "CustomIAMInstanceProfile",
@@ -1364,7 +1488,9 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                      "Key",
 		"kms_key_id":                               "KmsKeyId",
 		"license_model":                            "LicenseModel",
+		"manage_master_user_password":              "ManageMasterUserPassword",
 		"master_user_password":                     "MasterUserPassword",
+		"master_user_secret":                       "MasterUserSecret",
 		"master_username":                          "MasterUsername",
 		"max_allocated_storage":                    "MaxAllocatedStorage",
 		"monitoring_interval":                      "MonitoringInterval",
@@ -1385,6 +1511,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"replica_mode":                             "ReplicaMode",
 		"restore_time":                             "RestoreTime",
 		"role_arn":                                 "RoleArn",
+		"secret_arn":                               "SecretArn",
 		"source_db_instance_automated_backups_arn": "SourceDBInstanceAutomatedBackupsArn",
 		"source_db_instance_identifier":            "SourceDBInstanceIdentifier",
 		"source_dbi_resource_id":                   "SourceDbiResourceId",
@@ -1398,6 +1525,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"timezone":                                 "Timezone",
 		"use_default_processor_features":           "UseDefaultProcessorFeatures",
 		"use_latest_restorable_time":               "UseLatestRestorableTime",
+		"valid_till":                               "ValidTill",
 		"value":                                    "Value",
 		"vpc_security_groups":                      "VPCSecurityGroups",
 	})
@@ -1413,6 +1541,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SourceRegion",
 		"/properties/TdeCredentialPassword",
 		"/properties/UseLatestRestorableTime",
+		"/properties/CertificateRotationRestart",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
 

@@ -171,6 +171,7 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "maxLength": 2048,
 		//	    "minLength": 1,
@@ -202,6 +203,7 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -278,6 +280,7 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
@@ -332,6 +335,7 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ValidationCertificateArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -376,6 +380,7 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ValidationCertificateArn",
 		"/properties/ServerCertificateArns",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

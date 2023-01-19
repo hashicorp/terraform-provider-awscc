@@ -61,12 +61,14 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"fsx_filesystem_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) for the FSx for Windows file system.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(128),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):fsx:[a-z\\-0-9]*:[0-9]{12}:file-system/fs-.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// FsxFilesystemArn is a write-only property.
@@ -114,12 +116,14 @@ func locationFSxWindowsResource(ctx context.Context) (resource.Resource, error) 
 		//	}
 		"password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password of the user who has the permissions to access files and folders in the FSx for Windows file system.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(104),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.{0,104}$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// Password is a write-only property.

@@ -132,6 +132,52 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The identifier of the CA certificate for this DB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CertificateDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Returns the details of the DB instance's server certificate.",
+		//	  "properties": {
+		//	    "CAIdentifier": {
+		//	      "description": "The CA identifier of the CA certificate used for the DB instance's server certificate.",
+		//	      "type": "string"
+		//	    },
+		//	    "ValidTill": {
+		//	      "description": "The expiration date of the DB instance’s server certificate.",
+		//	      "format": "date-time",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"certificate_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CAIdentifier
+				"ca_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The CA identifier of the CA certificate used for the DB instance's server certificate.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ValidTill
+				"valid_till": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The expiration date of the DB instance’s server certificate.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Returns the details of the DB instance's server certificate.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: CertificateRotationRestart
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.\nBy default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.\nIf you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate\nThis setting doesn't apply to RDS Custom.",
+		//	  "type": "boolean"
+		//	}
+		"certificate_rotation_restart": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether the DB instance is restarted when you rotate your SSL/TLS certificate.\nBy default, the DB instance is restarted when you rotate your SSL/TLS certificate. The certificate is not updated until the DB instance is restarted.\nIf you are using SSL/TLS to connect to the DB instance, follow the appropriate instructions for your DB engine to rotate your SSL/TLS certificate\nThis setting doesn't apply to RDS Custom.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CharacterSetName
 		// CloudFormation resource type schema:
 		//
@@ -485,6 +531,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "License model information for this DB instance.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ManageMasterUserPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+		//	  "type": "boolean"
+		//	}
+		"manage_master_user_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -494,6 +551,40 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"master_user_password": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The password for the master user.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUserSecret
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
+		//	  "properties": {
+		//	    "KmsKeyId": {
+		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the secret.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"master_user_secret": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS key identifier that is used to encrypt the secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the secret.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
@@ -956,6 +1047,9 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"availability_zone":                        "AvailabilityZone",
 		"backup_retention_period":                  "BackupRetentionPeriod",
 		"ca_certificate_identifier":                "CACertificateIdentifier",
+		"ca_identifier":                            "CAIdentifier",
+		"certificate_details":                      "CertificateDetails",
+		"certificate_rotation_restart":             "CertificateRotationRestart",
 		"character_set_name":                       "CharacterSetName",
 		"copy_tags_to_snapshot":                    "CopyTagsToSnapshot",
 		"custom_iam_instance_profile":              "CustomIAMInstanceProfile",
@@ -987,7 +1081,9 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                                      "Key",
 		"kms_key_id":                               "KmsKeyId",
 		"license_model":                            "LicenseModel",
+		"manage_master_user_password":              "ManageMasterUserPassword",
 		"master_user_password":                     "MasterUserPassword",
+		"master_user_secret":                       "MasterUserSecret",
 		"master_username":                          "MasterUsername",
 		"max_allocated_storage":                    "MaxAllocatedStorage",
 		"monitoring_interval":                      "MonitoringInterval",
@@ -1008,6 +1104,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"replica_mode":                             "ReplicaMode",
 		"restore_time":                             "RestoreTime",
 		"role_arn":                                 "RoleArn",
+		"secret_arn":                               "SecretArn",
 		"source_db_instance_automated_backups_arn": "SourceDBInstanceAutomatedBackupsArn",
 		"source_db_instance_identifier":            "SourceDBInstanceIdentifier",
 		"source_dbi_resource_id":                   "SourceDbiResourceId",
@@ -1021,6 +1118,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"timezone":                                 "Timezone",
 		"use_default_processor_features":           "UseDefaultProcessorFeatures",
 		"use_latest_restorable_time":               "UseLatestRestorableTime",
+		"valid_till":                               "ValidTill",
 		"value":                                    "Value",
 		"vpc_security_groups":                      "VPCSecurityGroups",
 	})

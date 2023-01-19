@@ -579,6 +579,21 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ManageMasterUserPassword
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+		//	  "type": "boolean"
+		//	}
+		"manage_master_user_password": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to manage the master user password with AWS Secrets Manager.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MasterUserPassword
 		// CloudFormation resource type schema:
 		//
@@ -594,6 +609,51 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// MasterUserPassword is a write-only property.
+		}, /*END ATTRIBUTE*/
+		// Property: MasterUserSecret
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
+		//	  "properties": {
+		//	    "KmsKeyId": {
+		//	      "description": "The AWS KMS key identifier that is used to encrypt the secret.",
+		//	      "type": "string"
+		//	    },
+		//	    "SecretArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the secret.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"master_user_secret": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsKeyId
+				"kms_key_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The AWS KMS key identifier that is used to encrypt the secret.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecretArn
+				"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the secret.",
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the secret managed by RDS in AWS Secrets Manager for the master user password.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: MasterUsername
 		// CloudFormation resource type schema:
@@ -1231,7 +1291,9 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"iops":                                  "Iops",
 		"key":                                   "Key",
 		"kms_key_id":                            "KmsKeyId",
+		"manage_master_user_password":           "ManageMasterUserPassword",
 		"master_user_password":                  "MasterUserPassword",
+		"master_user_secret":                    "MasterUserSecret",
 		"master_username":                       "MasterUsername",
 		"max_capacity":                          "MaxCapacity",
 		"min_capacity":                          "MinCapacity",
@@ -1252,6 +1314,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"scaling_configuration":                 "ScalingConfiguration",
 		"seconds_before_timeout":                "SecondsBeforeTimeout",
 		"seconds_until_auto_pause":              "SecondsUntilAutoPause",
+		"secret_arn":                            "SecretArn",
 		"serverless_v2_scaling_configuration":   "ServerlessV2ScalingConfiguration",
 		"snapshot_identifier":                   "SnapshotIdentifier",
 		"source_db_cluster_identifier":          "SourceDBClusterIdentifier",

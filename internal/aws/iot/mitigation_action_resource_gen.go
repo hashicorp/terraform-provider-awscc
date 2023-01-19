@@ -95,7 +95,8 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 		//	            "DEBUG",
 		//	            "INFO",
 		//	            "ERROR",
-		//	            "WARN"
+		//	            "WARN",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        },
@@ -134,7 +135,8 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "TemplateName": {
 		//	          "enum": [
-		//	            "BLANK_POLICY"
+		//	            "BLANK_POLICY",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -150,7 +152,8 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "Action": {
 		//	          "enum": [
-		//	            "DEACTIVATE"
+		//	            "DEACTIVATE",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -166,7 +169,8 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 		//	      "properties": {
 		//	        "Action": {
 		//	          "enum": [
-		//	            "DEACTIVATE"
+		//	            "DEACTIVATE",
+		//	            "UNSET_VALUE"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -226,6 +230,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 									"INFO",
 									"ERROR",
 									"WARN",
+									"UNSET_VALUE",
 								),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -273,6 +278,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"BLANK_POLICY",
+									"UNSET_VALUE",
 								),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -293,6 +299,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"DEACTIVATE",
+									"UNSET_VALUE",
 								),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
@@ -313,6 +320,7 @@ func mitigationActionResource(ctx context.Context) (resource.Resource, error) {
 							Validators: []validator.String{ /*START VALIDATORS*/
 								stringvalidator.OneOf(
 									"DEACTIVATE",
+									"UNSET_VALUE",
 								),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/

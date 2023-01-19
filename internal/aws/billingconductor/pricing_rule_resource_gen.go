@@ -171,6 +171,29 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_\\+=\\.\\-@]+"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Operation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Operation which a SKU pricing rule is modifying",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Operation which a SKU pricing rule is modifying",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -179,7 +202,8 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "GLOBAL",
 		//	    "SERVICE",
-		//	    "BILLING_ENTITY"
+		//	    "BILLING_ENTITY",
+		//	    "SKU"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -191,6 +215,7 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 					"GLOBAL",
 					"SERVICE",
 					"BILLING_ENTITY",
+					"SKU",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -344,6 +369,29 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 				),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
+		// Property: UsageType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The UsageType which a SKU pricing rule is modifying",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"usage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The UsageType which a SKU pricing rule is modifying",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 256),
+				stringvalidator.RegexMatches(regexp.MustCompile("^\\S+$"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -377,11 +425,13 @@ func pricingRuleResource(ctx context.Context) (resource.Resource, error) {
 		"last_modified_time":            "LastModifiedTime",
 		"modifier_percentage":           "ModifierPercentage",
 		"name":                          "Name",
+		"operation":                     "Operation",
 		"scope":                         "Scope",
 		"service":                       "Service",
 		"tags":                          "Tags",
 		"tiering":                       "Tiering",
 		"type":                          "Type",
+		"usage_type":                    "UsageType",
 		"value":                         "Value",
 	})
 

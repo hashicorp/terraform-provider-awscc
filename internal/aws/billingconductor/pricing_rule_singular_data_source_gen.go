@@ -120,6 +120,20 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Pricing rule name",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Operation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Operation which a SKU pricing rule is modifying",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"operation": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Operation which a SKU pricing rule is modifying",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Scope
 		// CloudFormation resource type schema:
 		//
@@ -128,7 +142,8 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "GLOBAL",
 		//	    "SERVICE",
-		//	    "BILLING_ENTITY"
+		//	    "BILLING_ENTITY",
+		//	    "SKU"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -249,6 +264,20 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "One of MARKUP, DISCOUNT or TIERING that describes the behaviour of the pricing rule.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: UsageType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The UsageType which a SKU pricing rule is modifying",
+		//	  "maxLength": 256,
+		//	  "minLength": 1,
+		//	  "pattern": "^\\S+$",
+		//	  "type": "string"
+		//	}
+		"usage_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The UsageType which a SKU pricing rule is modifying",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -277,11 +306,13 @@ func pricingRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"last_modified_time":            "LastModifiedTime",
 		"modifier_percentage":           "ModifierPercentage",
 		"name":                          "Name",
+		"operation":                     "Operation",
 		"scope":                         "Scope",
 		"service":                       "Service",
 		"tags":                          "Tags",
 		"tiering":                       "Tiering",
 		"type":                          "Type",
+		"usage_type":                    "UsageType",
 		"value":                         "Value",
 	})
 

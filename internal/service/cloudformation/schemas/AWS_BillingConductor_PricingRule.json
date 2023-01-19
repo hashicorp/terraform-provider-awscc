@@ -61,7 +61,8 @@
       "enum": [
         "GLOBAL",
         "SERVICE",
-        "BILLING_ENTITY"
+        "BILLING_ENTITY",
+        "SKU"
       ]
     },
     "Type": {
@@ -104,6 +105,20 @@
         }
       }
     },
+    "UsageType": {
+      "description": "The UsageType which a SKU pricing rule is modifying",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^\\S+$"
+    },
+    "Operation": {
+      "description": "The Operation which a SKU pricing rule is modifying",
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^\\S+$"
+    },
     "AssociatedPricingPlanCount": {
       "description": "The number of pricing plans associated with pricing rule",
       "type": "integer",
@@ -142,7 +157,9 @@
   "createOnlyProperties": [
     "/properties/Scope",
     "/properties/Service",
-    "/properties/BillingEntity"
+    "/properties/BillingEntity",
+    "/properties/UsageType",
+    "/properties/Operation"
   ],
   "readOnlyProperties": [
     "/properties/Arn",

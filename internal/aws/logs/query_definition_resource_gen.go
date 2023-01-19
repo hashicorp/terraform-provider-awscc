@@ -64,7 +64,6 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "A name for the saved query definition",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
-		//	  "pattern": "^([^:*\\/]+\\/?)*[^:*\\/]+$",
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -72,7 +71,6 @@ func queryDefinitionResource(ctx context.Context) (resource.Resource, error) {
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^([^:*\\/]+\\/?)*[^:*\\/]+$"), ""),
 			}, /*END VALIDATORS*/
 		}, /*END ATTRIBUTE*/
 		// Property: QueryDefinitionId

@@ -262,6 +262,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kms_replica_keys -cftype AWS::KMS::ReplicaKey -package kms ../aws/kms/replica_key_plural_data_source_gen.go ../aws/kms/replica_key_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kafkaconnect_connectors -cftype AWS::KafkaConnect::Connector -package kafkaconnect ../aws/kafkaconnect/connector_plural_data_source_gen.go ../aws/kafkaconnect/connector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kendra_indices -cftype AWS::Kendra::Index -package kendra ../aws/kendra/index_plural_data_source_gen.go ../aws/kendra/index_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_kendraranking_execution_plans -cftype AWS::KendraRanking::ExecutionPlan -package kendraranking ../aws/kendraranking/execution_plan_plural_data_source_gen.go ../aws/kendraranking/execution_plan_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesis_streams -cftype AWS::Kinesis::Stream -package kinesis ../aws/kinesis/stream_plural_data_source_gen.go ../aws/kinesis/stream_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesisanalyticsv2_applications -cftype AWS::KinesisAnalyticsV2::Application -package kinesisanalyticsv2 ../aws/kinesisanalyticsv2/application_plural_data_source_gen.go ../aws/kinesisanalyticsv2/application_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kinesisfirehose_delivery_streams -cftype AWS::KinesisFirehose::DeliveryStream -package kinesisfirehose ../aws/kinesisfirehose/delivery_stream_plural_data_source_gen.go ../aws/kinesisfirehose/delivery_stream_plural_data_source_gen_test.go
@@ -517,6 +518,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ivs"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kafkaconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kendra"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kendraranking"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesis"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisanalyticsv2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/kinesisfirehose"

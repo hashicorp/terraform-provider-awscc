@@ -25,7 +25,7 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//
 		//	{
 		//	  "description": "The day of the month on which the scheduled audit takes place. Can be 1 through 31 or LAST. This field is required if the frequency parameter is set to MONTHLY.",
-		//	  "pattern": "^([1-9]|[12][0-9]|3[01])$|^LAST$",
+		//	  "pattern": "^([1-9]|[12][0-9]|3[01])$|^LAST$|^UNSET_VALUE$",
 		//	  "type": "string"
 		//	}
 		"day_of_month": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -44,7 +44,8 @@ func scheduledAuditDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    "WED",
 		//	    "THU",
 		//	    "FRI",
-		//	    "SAT"
+		//	    "SAT",
+		//	    "UNSET_VALUE"
 		//	  ],
 		//	  "type": "string"
 		//	}
