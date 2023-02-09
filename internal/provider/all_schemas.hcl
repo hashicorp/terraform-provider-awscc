@@ -2202,6 +2202,11 @@ resource_schema "aws_oam_sink" {
 
 resource_schema "aws_omics_annotation_store" {
   cloudformation_type_name = "AWS::Omics::AnnotationStore"
+
+  # "StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map".
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_omics_reference_store" {
@@ -2218,6 +2223,11 @@ resource_schema "aws_omics_sequence_store" {
 
 resource_schema "aws_omics_variant_store" {
   cloudformation_type_name = "AWS::Omics::VariantStore"
+
+  # "top-level property Id is not a primary identifier".
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_omics_workflow" {
@@ -2827,6 +2837,11 @@ resource_schema "aws_sagemaker_model_bias_job_definition" {
 
 resource_schema "aws_sagemaker_model_card" {
   cloudformation_type_name = "AWS::SageMaker::ModelCard"
+
+  # "Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of ".
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_sagemaker_model_explainability_job_definition" {
