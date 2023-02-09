@@ -142,14 +142,8 @@
     "/properties/EndpointStatus",
     "/properties/EndpointCreateTime",
     "/properties/Port",
-    "/properties/VpcSecurityGroups/*/VpcSecurityGroupId",
-    "/properties/VpcSecurityGroups/*/Status",
-    "/properties/VpcEndpoint/VpcEndpointId",
-    "/properties/VpcEndpoint/VpcId",
-    "/properties/VpcEndpoint/NetworkInterfaces/*/NetworkInterfaceId",
-    "/properties/VpcEndpoint/NetworkInterfaces/*/PrivateIpAddress",
-    "/properties/VpcEndpoint/NetworkInterfaces/*/SubnetId",
-    "/properties/VpcEndpoint/NetworkInterfaces/*/AvailabilityZone"
+    "/properties/VpcSecurityGroups",
+    "/properties/VpcEndpoint"
   ],
   "handlers": {
     "create": {

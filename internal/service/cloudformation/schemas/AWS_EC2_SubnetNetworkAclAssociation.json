@@ -30,7 +30,9 @@
   "readOnlyProperties": [
     "/properties/AssociationId"
   ],
-  "taggable": false,
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

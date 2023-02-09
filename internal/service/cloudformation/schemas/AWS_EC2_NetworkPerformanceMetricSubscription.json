@@ -1,23 +1,23 @@
 {
   "typeName": "AWS::EC2::NetworkPerformanceMetricSubscription",
-  "description": "An example resource schema demonstrating some basic constructs and validation rules.",
-  "sourceUrl": "https://github.com/aws-cloudformation",
+  "description": "Resource Type definition for AWS::EC2::NetworkPerformanceMetricSubscription",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {},
   "properties": {
     "Source": {
-      "description": "The source is a mandatory element for the metric subscription.",
+      "description": "The starting Region or Availability Zone for metric to subscribe to.",
       "type": "string"
     },
     "Destination": {
-      "description": "The destination is a mandatory element for the metric subscription.",
+      "description": "The target Region or Availability Zone for the metric to subscribe to.",
       "type": "string"
     },
     "Metric": {
-      "description": "The metric type for the metric subscription.",
+      "description": "The metric type to subscribe to.",
       "type": "string"
     },
     "Statistic": {
-      "description": "The statistic type for the metric subscription.",
+      "description": "The statistic to subscribe to.",
       "type": "string"
     }
   },

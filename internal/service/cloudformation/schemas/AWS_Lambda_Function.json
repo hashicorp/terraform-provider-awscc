@@ -165,6 +165,28 @@
         }
       }
     },
+    "RuntimeManagementConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "UpdateRuntimeOn": {
+          "description": "Trigger for runtime update",
+          "type": "string",
+          "enum": [
+            "Auto",
+            "FunctionUpdate",
+            "Manual"
+          ]
+        },
+        "RuntimeVersionArn": {
+          "description": "Unique identifier for a runtime version arn",
+          "type": "string"
+        }
+      },
+      "required": [
+        "UpdateRuntimeOn"
+      ]
+    },
     "SnapStart": {
       "description": "The function's SnapStart setting. When set to PublishedVersions, Lambda creates a snapshot of the execution environment when you publish a function version.",
       "additionalProperties": false,
@@ -333,6 +355,10 @@
     "VpcConfig": {
       "description": "For network connectivity to AWS resources in a VPC, specify a list of security groups and subnets in the VPC.",
       "$ref": "#/definitions/VpcConfig"
+    },
+    "RuntimeManagementConfig": {
+      "description": "RuntimeManagementConfig",
+      "$ref": "#/definitions/RuntimeManagementConfig"
     },
     "ReservedConcurrentExecutions": {
       "description": "The number of simultaneous executions to reserve for the function.",

@@ -96,14 +96,21 @@
     "/properties/DBProxyEndpointArn",
     "/properties/Endpoint",
     "/properties/VpcId",
-    "/properties/IsDefault"
+    "/properties/IsDefault",
+    "/properties/TargetRole"
   ],
   "createOnlyProperties": [
     "/properties/DBProxyName",
     "/properties/DBProxyEndpointName",
-    "/properties/VpcSubnetIds",
-    "/properties/TargetRole"
+    "/properties/VpcSubnetIds"
   ],
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
+  },
   "primaryIdentifier": [
     "/properties/DBProxyEndpointName"
   ],

@@ -225,6 +225,24 @@
       "required": [
         "Name"
       ]
+    },
+    "CustomEventsStatus": {
+      "type": "string",
+      "enum": [
+        "ENABLED",
+        "DISABLED"
+      ]
+    },
+    "CustomEvents": {
+      "description": "AppMonitor custom events configuration",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Status": {
+          "description": "Indicates whether AppMonitor accepts custom events.",
+          "$ref": "#/definitions/CustomEventsStatus"
+        }
+      }
     }
   },
   "properties": {
@@ -251,6 +269,9 @@
     },
     "AppMonitorConfiguration": {
       "$ref": "#/definitions/AppMonitorConfiguration"
+    },
+    "CustomEvents": {
+      "$ref": "#/definitions/CustomEvents"
     }
   },
   "additionalProperties": false,

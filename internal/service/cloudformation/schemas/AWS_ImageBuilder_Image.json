@@ -43,6 +43,10 @@
       "description": "Collects additional information about the image being created, including the operating system (OS) version and package list.",
       "type": "boolean"
     },
+    "ImageScanningConfiguration": {
+      "description": "Contains settings for vulnerability scans.",
+      "$ref": "#/definitions/ImageScanningConfiguration"
+    },
     "Tags": {
       "description": "The tags associated with the image.",
       "type": "object",
@@ -69,6 +73,40 @@
           "type": "integer",
           "minimum": 60,
           "maximum": 1440
+        }
+      }
+    },
+    "ImageScanningConfiguration": {
+      "description": "Contains settings for Image Builder image resource and container image scans.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "EcrConfiguration": {
+          "description": "Contains ECR settings for vulnerability scans.",
+          "$ref": "#/definitions/EcrConfiguration"
+        },
+        "ImageScanningEnabled": {
+          "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+          "type": "boolean"
+        }
+      }
+    },
+    "EcrConfiguration": {
+      "description": "Settings for Image Builder to configure the ECR repository and output container images that are scanned.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ContainerTags": {
+          "description": "Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.",
+          "type": "array",
+          "insertionOrder": true,
+          "items": {
+            "type": "string"
+          }
+        },
+        "RepositoryName": {
+          "description": "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don?t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
+          "type": "string"
         }
       }
     }
@@ -103,12 +141,14 @@
     "/properties/InfrastructureConfigurationArn",
     "/properties/DistributionConfigurationArn",
     "/properties/ImageTestsConfiguration",
+    "/properties/ImageScanningConfiguration",
     "/properties/EnhancedImageMetadataEnabled",
     "/properties/Tags"
   ],
   "handlers": {
     "create": {
       "permissions": [
+        "ecr:BatchGetRepositoryScanningConfiguration",
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
         "imagebuilder:GetImageRecipe",
@@ -116,7 +156,8 @@
         "imagebuilder:GetDistributionConfiguration",
         "imagebuilder:GetImage",
         "imagebuilder:CreateImage",
-        "imagebuilder:TagResource"
+        "imagebuilder:TagResource",
+        "inspector2:BatchGetAccountStatus"
       ],
       "timeoutInMinutes": 720
     },

@@ -28,6 +28,10 @@
     "Type": {
       "type": "string",
       "description": "The type of VPN connection that this customer gateway supports."
+    },
+    "DeviceName": {
+      "type": "string",
+      "description": "A name for the customer gateway device."
     }
   },
   "definitions": {
@@ -56,7 +60,8 @@
   "createOnlyProperties": [
     "/properties/BgpAsn",
     "/properties/Type",
-    "/properties/IpAddress"
+    "/properties/IpAddress",
+    "/properties/DeviceName"
   ],
   "readOnlyProperties": [
     "/properties/CustomerGatewayId"

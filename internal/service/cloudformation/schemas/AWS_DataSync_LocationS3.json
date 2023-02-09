@@ -107,7 +107,6 @@
     "tagProperty": "/properties/Tags"
   },
   "required": [
-    "S3BucketArn",
     "S3Config"
   ],
   "readOnlyProperties": [

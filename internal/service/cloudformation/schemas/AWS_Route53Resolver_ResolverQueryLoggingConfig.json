@@ -69,6 +69,7 @@
       "maxLength": 40
     }
   },
+  "taggable": false,
   "createOnlyProperties": [
     "/properties/Name",
     "/properties/DestinationArn"

@@ -1,6 +1,6 @@
 {
   "typeName": "AWS::RoboMaker::RobotApplication",
-  "description": "AWS::RoboMaker::RobotApplication resource creates an AWS RoboMaker RobotApplication. Robot application can be used in AWS RoboMaker Simulation Jobs.",
+  "description": "This schema is for testing purpose only.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-rpdk.git",
   "definitions": {
     "Arn": {
@@ -120,6 +120,10 @@
   ],
   "readOnlyProperties": [
     "/properties/Arn"
+  ],
+  "writeOnlyProperties": [
+    "/properties/RobotSoftwareSuite/Version",
+    "/properties/Sources"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

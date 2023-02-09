@@ -144,10 +144,9 @@
   "primaryIdentifier": [
     "/properties/AttachmentId"
   ],
-  "additionalIdentifiers": [
-    [
-      "/properties/ResourceArn"
-    ]
+  "required": [
+    "CoreNetworkId",
+    "VpnConnectionArn"
   ],
   "handlers": {
     "create": {

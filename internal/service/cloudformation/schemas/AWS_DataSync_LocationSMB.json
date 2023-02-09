@@ -13,6 +13,8 @@
           "type": "string",
           "enum": [
             "AUTOMATIC",
+            "SMB1",
+            "SMB2_0",
             "SMB2",
             "SMB3"
           ]

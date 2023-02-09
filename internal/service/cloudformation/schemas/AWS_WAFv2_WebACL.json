@@ -306,8 +306,7 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleGroupConfig"
-          },
-          "minItems": 1
+          }
         },
         "RuleActionOverrides": {
           "description": "Action overrides for rules in the rule group.",
