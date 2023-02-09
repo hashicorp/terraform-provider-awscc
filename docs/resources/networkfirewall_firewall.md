@@ -44,6 +44,10 @@ Required:
 
 - `subnet_id` (String) A SubnetId.
 
+Optional:
+
+- `ip_address_type` (String) A IPAddressType
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

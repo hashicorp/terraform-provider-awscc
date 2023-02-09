@@ -97,6 +97,12 @@
         "$ref": "#/definitions/EndpointDetails"
       }
     },
+    "ContactPrePassDurationSeconds": {
+      "type": "integer"
+    },
+    "ContactPostPassDurationSeconds": {
+      "type": "integer"
+    },
     "Tags": {
       "type": "array",
       "items": {

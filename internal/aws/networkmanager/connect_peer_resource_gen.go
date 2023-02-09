@@ -177,10 +177,8 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"connect_attachment_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the attachment to connect.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -271,11 +269,9 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "The inside IP addresses used for a Connect peer configuration.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// InsideCidrBlocks is a write-only property.
@@ -289,10 +285,8 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The IP address of the Connect peer.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// PeerAddress is a write-only property.

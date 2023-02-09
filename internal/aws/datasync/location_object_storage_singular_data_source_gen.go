@@ -111,6 +111,18 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 			Description: "Optional. The secret key is used if credentials are required to access the self-managed object storage server.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ServerCertificate
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "X.509 PEM content containing a certificate authority or chain to trust.",
+		//	  "maxLength": 32768,
+		//	  "type": "string"
+		//	}
+		"server_certificate": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "X.509 PEM content containing a certificate authority or chain to trust.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ServerHostname
 		// CloudFormation resource type schema:
 		//
@@ -235,19 +247,20 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 	opts = opts.WithCloudFormationTypeName("AWS::DataSync::LocationObjectStorage").WithTerraformTypeName("awscc_datasync_location_object_storage")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"access_key":      "AccessKey",
-		"agent_arns":      "AgentArns",
-		"bucket_name":     "BucketName",
-		"key":             "Key",
-		"location_arn":    "LocationArn",
-		"location_uri":    "LocationUri",
-		"secret_key":      "SecretKey",
-		"server_hostname": "ServerHostname",
-		"server_port":     "ServerPort",
-		"server_protocol": "ServerProtocol",
-		"subdirectory":    "Subdirectory",
-		"tags":            "Tags",
-		"value":           "Value",
+		"access_key":         "AccessKey",
+		"agent_arns":         "AgentArns",
+		"bucket_name":        "BucketName",
+		"key":                "Key",
+		"location_arn":       "LocationArn",
+		"location_uri":       "LocationUri",
+		"secret_key":         "SecretKey",
+		"server_certificate": "ServerCertificate",
+		"server_hostname":    "ServerHostname",
+		"server_port":        "ServerPort",
+		"server_protocol":    "ServerProtocol",
+		"subdirectory":       "Subdirectory",
+		"tags":               "Tags",
+		"value":              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

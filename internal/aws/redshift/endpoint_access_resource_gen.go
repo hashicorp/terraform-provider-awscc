@@ -205,68 +205,43 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 							// Property: AvailabilityZone
 							"availability_zone": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The Availability Zone.",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: NetworkInterfaceId
 							"network_interface_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The network interface identifier.",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: PrivateIpAddress
 							"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The IPv4 address of the network interface within the subnet.",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: SubnetId
 							"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The subnet identifier.",
-								Optional:    true,
 								Computed:    true,
-								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-									stringplanmodifier.UseStateForUnknown(),
-								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "One or more network interfaces of the endpoint. Also known as an interface endpoint.",
-					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
-						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VpcEndpointId
 				"vpc_endpoint_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: VpcId
 				"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The VPC identifier that the endpoint is associated.",
 					Computed:    true,
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The connection endpoint for connecting to an Amazon Redshift cluster through the proxy.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -320,25 +295,16 @@ func endpointAccessResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Status
 					"status": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The status of the VPC security group.",
-						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: VpcSecurityGroupId
 					"vpc_security_group_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The identifier of the VPC security group.",
-						Optional:    true,
 						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),

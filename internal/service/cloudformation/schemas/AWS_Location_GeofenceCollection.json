@@ -61,10 +61,13 @@
     "/properties/UpdateTime"
   ],
   "createOnlyProperties": [
-    "/properties/KmsKeyId",
-    "/properties/PricingPlan",
+    "/properties/CollectionName",
     "/properties/Description",
-    "/properties/CollectionName"
+    "/properties/KmsKeyId"
+  ],
+  "deprecatedProperties": [
+    "/properties/PricingPlan",
+    "/properties/PricingPlanDataSource"
   ],
   "required": [
     "CollectionName"

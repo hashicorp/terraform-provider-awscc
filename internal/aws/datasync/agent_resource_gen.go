@@ -42,12 +42,14 @@ func agentResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"activation_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Activation key of the Agent.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(29),
 				stringvalidator.RegexMatches(regexp.MustCompile("[A-Z0-9]{5}(-[A-Z0-9]{5}){4}"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// ActivationKey is a write-only property.

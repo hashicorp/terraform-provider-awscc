@@ -51,11 +51,7 @@ func trustAnchorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Source
 		// CloudFormation resource type schema:
@@ -129,11 +125,7 @@ func trustAnchorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:

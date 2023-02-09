@@ -473,6 +473,49 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: CustomEvents
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "AppMonitor custom events configuration",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "Indicates whether AppMonitor accepts custom events.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"custom_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether AppMonitor accepts custom events.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ENABLED",
+							"DISABLED",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AppMonitor custom events configuration",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: CwLogEnabled
 		// CloudFormation resource type schema:
 		//
@@ -611,6 +654,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_cookies":             "AllowCookies",
 		"app_monitor_configuration": "AppMonitorConfiguration",
+		"custom_events":             "CustomEvents",
 		"cw_log_enabled":            "CwLogEnabled",
 		"destination":               "Destination",
 		"destination_arn":           "DestinationArn",
@@ -629,6 +673,7 @@ func appMonitorResource(ctx context.Context) (resource.Resource, error) {
 		"metric_destinations":       "MetricDestinations",
 		"name":                      "Name",
 		"session_sample_rate":       "SessionSampleRate",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"telemetries":               "Telemetries",
 		"unit_label":                "UnitLabel",

@@ -149,6 +149,11 @@
     "tagUpdatable": true,
     "cloudFormationSystemTags": false
   },
+  "required": [
+    "ConnectAttachmentId",
+    "PeerAddress",
+    "InsideCidrBlocks"
+  ],
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/PeerAddress",

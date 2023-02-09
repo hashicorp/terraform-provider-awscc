@@ -2,6 +2,9 @@
   "typeName": "AWS::SupportApp::SlackWorkspaceConfiguration",
   "description": "An AWS Support App resource that creates, updates, lists, and deletes Slack workspace configurations.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-supportapp.git",
+  "tagging": {
+    "taggable": false
+  },
   "properties": {
     "TeamId": {
       "description": "The team ID in Slack, which uniquely identifies a workspace.",

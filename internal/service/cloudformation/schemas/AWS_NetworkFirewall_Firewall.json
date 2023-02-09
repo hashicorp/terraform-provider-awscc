@@ -21,6 +21,10 @@
         "SubnetId": {
           "description": "A SubnetId.",
           "type": "string"
+        },
+        "IPAddressType": {
+          "description": "A IPAddressType",
+          "type": "string"
         }
       },
       "required": [

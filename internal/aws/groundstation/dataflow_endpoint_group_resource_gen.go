@@ -43,6 +43,32 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ContactPostPassDurationSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"contact_post_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ContactPrePassDurationSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"contact_pre_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointDetails
 		// CloudFormation resource type schema:
 		//
@@ -278,21 +304,23 @@ func dataflowEndpointGroupResource(ctx context.Context) (resource.Resource, erro
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":            "Address",
-		"arn":                "Arn",
-		"endpoint":           "Endpoint",
-		"endpoint_details":   "EndpointDetails",
-		"id":                 "Id",
-		"key":                "Key",
-		"mtu":                "Mtu",
-		"name":               "Name",
-		"port":               "Port",
-		"role_arn":           "RoleArn",
-		"security_details":   "SecurityDetails",
-		"security_group_ids": "SecurityGroupIds",
-		"subnet_ids":         "SubnetIds",
-		"tags":               "Tags",
-		"value":              "Value",
+		"address":                            "Address",
+		"arn":                                "Arn",
+		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
+		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
+		"endpoint":                           "Endpoint",
+		"endpoint_details":                   "EndpointDetails",
+		"id":                                 "Id",
+		"key":                                "Key",
+		"mtu":                                "Mtu",
+		"name":                               "Name",
+		"port":                               "Port",
+		"role_arn":                           "RoleArn",
+		"security_details":                   "SecurityDetails",
+		"security_group_ids":                 "SecurityGroupIds",
+		"subnet_ids":                         "SubnetIds",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

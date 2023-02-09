@@ -492,8 +492,6 @@
     "Variants"
   ],
   "readOnlyProperties": [
-    "/properties/AppId",
-    "/properties/EnvironmentName",
     "/properties/Id"
   ],
   "createOnlyProperties": [
@@ -535,6 +533,13 @@
         "amplifyuibuilder:ListComponents"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "#/properties/Tags"
   },
   "additionalProperties": false
 }

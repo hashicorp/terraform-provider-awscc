@@ -21,9 +21,9 @@ Data Source schema for AWS::EC2::NetworkPerformanceMetricSubscription
 
 ### Read-Only
 
-- `destination` (String) The destination is a mandatory element for the metric subscription.
-- `metric` (String) The metric type for the metric subscription.
-- `source` (String) The source is a mandatory element for the metric subscription.
-- `statistic` (String) The statistic type for the metric subscription.
+- `destination` (String) The target Region or Availability Zone for the metric to subscribe to.
+- `metric` (String) The metric type to subscribe to.
+- `source` (String) The starting Region or Availability Zone for metric to subscribe to.
+- `statistic` (String) The statistic to subscribe to.
 
 

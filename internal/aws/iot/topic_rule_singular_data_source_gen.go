@@ -115,6 +115,9 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "CloudwatchLogs": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "BatchMode": {
+		//	                "type": "boolean"
+		//	              },
 		//	              "LogGroupName": {
 		//	                "type": "string"
 		//	              },
@@ -854,6 +857,9 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "CloudwatchLogs": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
+		//	            "BatchMode": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "LogGroupName": {
 		//	              "type": "string"
 		//	            },
@@ -1599,6 +1605,10 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 							// Property: CloudwatchLogs
 							"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BatchMode
+									"batch_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
 									// Property: LogGroupName
 									"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Computed: true,
@@ -2272,6 +2282,10 @@ func topicRuleDataSource(ctx context.Context) (datasource.DataSource, error) {
 						// Property: CloudwatchLogs
 						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BatchMode
+								"batch_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
 								// Property: LogGroupName
 								"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Computed: true,

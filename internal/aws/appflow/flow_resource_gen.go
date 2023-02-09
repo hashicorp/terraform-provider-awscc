@@ -83,6 +83,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	        "enum": [
 		//	          "SAPOData",
 		//	          "Salesforce",
+		//	          "Pardot",
 		//	          "Singular",
 		//	          "Slack",
 		//	          "Redshift",
@@ -727,6 +728,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.OneOf(
 								"SAPOData",
 								"Salesforce",
+								"Pardot",
 								"Singular",
 								"Slack",
 								"Redshift",
@@ -1919,6 +1921,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	      "enum": [
 		//	        "SAPOData",
 		//	        "Salesforce",
+		//	        "Pardot",
 		//	        "Singular",
 		//	        "Slack",
 		//	        "Redshift",
@@ -2054,6 +2057,20 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "Marketo": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Object": {
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Object"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Pardot": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "Object": {
@@ -2285,6 +2302,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"SAPOData",
 							"Salesforce",
+							"Pardot",
 							"Singular",
 							"Slack",
 							"Redshift",
@@ -2454,6 +2472,24 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Marketo
 						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Object
+								"object": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Required: true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Object
 								"object": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2927,6 +2963,25 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	            ],
 		//	            "type": "string"
 		//	          },
+		//	          "Pardot": {
+		//	            "enum": [
+		//	              "PROJECTION",
+		//	              "EQUAL_TO",
+		//	              "NO_OP",
+		//	              "ADDITION",
+		//	              "MULTIPLICATION",
+		//	              "DIVISION",
+		//	              "SUBTRACTION",
+		//	              "MASK_ALL",
+		//	              "MASK_FIRST_N",
+		//	              "MASK_LAST_N",
+		//	              "VALIDATE_NON_NULL",
+		//	              "VALIDATE_NON_ZERO",
+		//	              "VALIDATE_NON_NEGATIVE",
+		//	              "VALIDATE_NUMERIC"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "S3": {
 		//	            "enum": [
 		//	              "PROJECTION",
@@ -3384,6 +3439,32 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 										"VALIDATE_NON_NEGATIVE",
 										"VALIDATE_NUMERIC",
 										"NO_OP",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Pardot
+							"pardot": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"PROJECTION",
+										"EQUAL_TO",
+										"NO_OP",
+										"ADDITION",
+										"MULTIPLICATION",
+										"DIVISION",
+										"SUBTRACTION",
+										"MASK_ALL",
+										"MASK_FIRST_N",
+										"MASK_LAST_N",
+										"VALIDATE_NON_NULL",
+										"VALIDATE_NON_ZERO",
+										"VALIDATE_NON_NEGATIVE",
+										"VALIDATE_NUMERIC",
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -3999,6 +4080,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"metadata_catalog_config":           "MetadataCatalogConfig",
 		"object":                            "Object",
 		"object_path":                       "ObjectPath",
+		"pardot":                            "Pardot",
 		"path_prefix_hierarchy":             "PathPrefixHierarchy",
 		"prefix_config":                     "PrefixConfig",
 		"prefix_format":                     "PrefixFormat",

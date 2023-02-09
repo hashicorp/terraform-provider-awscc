@@ -27,6 +27,7 @@ Resource Type definition for AWS::SageMaker::Domain
 
 - `app_network_access_type` (String) Specifies the VPC used for non-EFS traffic. The default value is PublicInternetOnly.
 - `app_security_group_management` (String) The entity that creates and manages the required security groups for inter-app communication in VPCOnly mode. Required when CreateDomain.AppNetworkAccessType is VPCOnly and DomainSettings.RStudioServerProDomainSettings.DomainExecutionRoleArn is provided.
+- `default_space_settings` (Attributes) The default space settings. (see [below for nested schema](#nestedatt--default_space_settings))
 - `domain_settings` (Attributes) A collection of Domain settings. (see [below for nested schema](#nestedatt--domain_settings))
 - `kms_key_id` (String) SageMaker uses AWS KMS to encrypt the EFS volume attached to the domain with an AWS managed customer master key (CMK) by default.
 - `tags` (Attributes List) A list of tags to apply to the user profile. (see [below for nested schema](#nestedatt--tags))
@@ -46,7 +47,7 @@ Resource Type definition for AWS::SageMaker::Domain
 
 Optional:
 
-- `execution_role` (String) The user profile Amazon Resource Name (ARN).
+- `execution_role` (String) The execution role for the user.
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings))
 - `r_session_app_settings` (Attributes) A collection of settings that apply to an RSessionGateway app. (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings))
@@ -156,6 +157,69 @@ Optional:
 - `notebook_output_option` (String) Whether to include the notebook cell output when sharing the notebook. The default is Disabled.
 - `s3_kms_key_id` (String) When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
 - `s3_output_path` (String) When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.
+
+
+
+<a id="nestedatt--default_space_settings"></a>
+### Nested Schema for `default_space_settings`
+
+Optional:
+
+- `execution_role` (String) The execution role for the space.
+- `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_server_app_settings))
+- `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_space_settings--kernel_gateway_app_settings))
+- `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.
+
+<a id="nestedatt--default_space_settings--jupyter_server_app_settings"></a>
+### Nested Schema for `default_space_settings.jupyter_server_app_settings`
+
+Optional:
+
+- `default_resource_spec` (Attributes) (see [below for nested schema](#nestedatt--default_space_settings--jupyter_server_app_settings--default_resource_spec))
+
+<a id="nestedatt--default_space_settings--jupyter_server_app_settings--default_resource_spec"></a>
+### Nested Schema for `default_space_settings.jupyter_server_app_settings.default_resource_spec`
+
+Optional:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+
+
+
+<a id="nestedatt--default_space_settings--kernel_gateway_app_settings"></a>
+### Nested Schema for `default_space_settings.kernel_gateway_app_settings`
+
+Optional:
+
+- `custom_images` (Attributes List) A list of custom SageMaker images that are configured to run as a KernelGateway app. (see [below for nested schema](#nestedatt--default_space_settings--kernel_gateway_app_settings--custom_images))
+- `default_resource_spec` (Attributes) The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app. (see [below for nested schema](#nestedatt--default_space_settings--kernel_gateway_app_settings--default_resource_spec))
+
+<a id="nestedatt--default_space_settings--kernel_gateway_app_settings--custom_images"></a>
+### Nested Schema for `default_space_settings.kernel_gateway_app_settings.custom_images`
+
+Required:
+
+- `app_image_config_name` (String) The Name of the AppImageConfig.
+- `image_name` (String) The name of the CustomImage. Must be unique to your account.
+
+Optional:
+
+- `image_version_number` (Number) The version number of the CustomImage.
+
+
+<a id="nestedatt--default_space_settings--kernel_gateway_app_settings--default_resource_spec"></a>
+### Nested Schema for `default_space_settings.kernel_gateway_app_settings.default_resource_spec`
+
+Optional:
+
+- `instance_type` (String) The instance type that the image version runs on.
+- `lifecycle_config_arn` (String) The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.
+- `sage_maker_image_arn` (String) The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.
+- `sage_maker_image_version_arn` (String) The Amazon Resource Name (ARN) of the image version created on the instance.
+
 
 
 

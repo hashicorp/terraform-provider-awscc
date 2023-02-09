@@ -11,6 +11,20 @@
       ],
       "type": "string"
     },
+    "ImageConfigurationInput": {
+      "type": "object",
+      "description": "The image configuration.",
+      "properties": {
+        "ImageUri": {
+          "type": "string",
+          "maxLength": 1024,
+          "minLength": 1,
+          "pattern": "^([a-z0-9]+[a-z0-9-.]*)\\/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?:\\:([a-zA-Z0-9_][a-zA-Z0-9-._]{0,299})|@(sha256:[0-9a-f]{64}))$",
+          "description": "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration."
+        }
+      },
+      "additionalProperties": false
+    },
     "InitialCapacityConfigMap": {
       "type": "array",
       "uniqueItems": true,
@@ -221,6 +235,25 @@
       "minLength": 1,
       "maxLength": 15,
       "pattern": "^[1-9][0-9]*(\\s)?(GB|gb|gB|Gb)$"
+    },
+    "WorkerTypeSpecificationInput": {
+      "type": "object",
+      "description": "The specifications for a worker type.",
+      "properties": {
+        "ImageConfiguration": {
+          "$ref": "#/definitions/ImageConfigurationInput"
+        }
+      },
+      "additionalProperties": false
+    },
+    "WorkerTypeSpecificationInputMap": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/WorkerTypeSpecificationInput"
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -270,6 +303,9 @@
       "description": "Configuration for Auto Stop of Application.",
       "$ref": "#/definitions/AutoStopConfiguration"
     },
+    "ImageConfiguration": {
+      "$ref": "#/definitions/ImageConfigurationInput"
+    },
     "NetworkConfiguration": {
       "description": "Network Configuration for customer VPC connectivity.",
       "$ref": "#/definitions/NetworkConfiguration"
@@ -283,6 +319,9 @@
       "type": "string",
       "minLength": 1,
       "maxLength": 64
+    },
+    "WorkerTypeSpecifications": {
+      "$ref": "#/definitions/WorkerTypeSpecificationInputMap"
     }
   },
   "additionalProperties": false,

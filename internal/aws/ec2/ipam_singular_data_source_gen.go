@@ -34,6 +34,28 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the IPAM.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DefaultResourceDiscoveryAssociationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Id of the default association to the default resource discovery, created with this IPAM.",
+		//	  "type": "string"
+		//	}
+		"default_resource_discovery_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the default association to the default resource discovery, created with this IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultResourceDiscoveryId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Id of the default resource discovery, created with this IPAM.",
+		//	  "type": "string"
+		//	}
+		"default_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the default resource discovery, created with this IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -111,6 +133,17 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"public_default_scope_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Id of the default scope for publicly routable IP space, created with this IPAM.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceDiscoveryAssociationCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The count of resource discoveries associated with this IPAM.",
+		//	  "type": "integer"
+		//	}
+		"resource_discovery_association_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The count of resource discoveries associated with this IPAM.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ScopeCount
@@ -191,17 +224,20 @@ func iPAMDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::IPAM").WithTerraformTypeName("awscc_ec2_ipam")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                      "Arn",
-		"description":              "Description",
-		"ipam_id":                  "IpamId",
-		"key":                      "Key",
-		"operating_regions":        "OperatingRegions",
-		"private_default_scope_id": "PrivateDefaultScopeId",
-		"public_default_scope_id":  "PublicDefaultScopeId",
-		"region_name":              "RegionName",
-		"scope_count":              "ScopeCount",
-		"tags":                     "Tags",
-		"value":                    "Value",
+		"arn": "Arn",
+		"default_resource_discovery_association_id": "DefaultResourceDiscoveryAssociationId",
+		"default_resource_discovery_id":             "DefaultResourceDiscoveryId",
+		"description":                               "Description",
+		"ipam_id":                                   "IpamId",
+		"key":                                       "Key",
+		"operating_regions":                         "OperatingRegions",
+		"private_default_scope_id":                  "PrivateDefaultScopeId",
+		"public_default_scope_id":                   "PublicDefaultScopeId",
+		"region_name":                               "RegionName",
+		"resource_discovery_association_count":      "ResourceDiscoveryAssociationCount",
+		"scope_count":                               "ScopeCount",
+		"tags":                                      "Tags",
+		"value":                                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

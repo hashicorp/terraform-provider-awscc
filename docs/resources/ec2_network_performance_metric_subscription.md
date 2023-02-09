@@ -3,12 +3,12 @@
 page_title: "awscc_ec2_network_performance_metric_subscription Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  An example resource schema demonstrating some basic constructs and validation rules.
+  Resource Type definition for AWS::EC2::NetworkPerformanceMetricSubscription
 ---
 
 # awscc_ec2_network_performance_metric_subscription (Resource)
 
-An example resource schema demonstrating some basic constructs and validation rules.
+Resource Type definition for AWS::EC2::NetworkPerformanceMetricSubscription
 
 
 
@@ -17,10 +17,10 @@ An example resource schema demonstrating some basic constructs and validation ru
 
 ### Required
 
-- `destination` (String) The destination is a mandatory element for the metric subscription.
-- `metric` (String) The metric type for the metric subscription.
-- `source` (String) The source is a mandatory element for the metric subscription.
-- `statistic` (String) The statistic type for the metric subscription.
+- `destination` (String) The target Region or Availability Zone for the metric to subscribe to.
+- `metric` (String) The metric type to subscribe to.
+- `source` (String) The starting Region or Availability Zone for metric to subscribe to.
+- `statistic` (String) The statistic to subscribe to.
 
 ### Read-Only
 

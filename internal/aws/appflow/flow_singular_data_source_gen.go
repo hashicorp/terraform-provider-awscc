@@ -62,6 +62,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "enum": [
 		//	          "SAPOData",
 		//	          "Salesforce",
+		//	          "Pardot",
 		//	          "Singular",
 		//	          "Slack",
 		//	          "Redshift",
@@ -1268,6 +1269,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "enum": [
 		//	        "SAPOData",
 		//	        "Salesforce",
+		//	        "Pardot",
 		//	        "Singular",
 		//	        "Slack",
 		//	        "Redshift",
@@ -1403,6 +1405,20 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          "type": "object"
 		//	        },
 		//	        "Marketo": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "Object": {
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Object"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "Pardot": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "Object": {
@@ -1699,6 +1715,16 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Marketo
 						"marketo": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: Object
+								"object": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Computed: true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 								// Property: Object
 								"object": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2026,6 +2052,25 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            ],
 		//	            "type": "string"
 		//	          },
+		//	          "Pardot": {
+		//	            "enum": [
+		//	              "PROJECTION",
+		//	              "EQUAL_TO",
+		//	              "NO_OP",
+		//	              "ADDITION",
+		//	              "MULTIPLICATION",
+		//	              "DIVISION",
+		//	              "SUBTRACTION",
+		//	              "MASK_ALL",
+		//	              "MASK_FIRST_N",
+		//	              "MASK_LAST_N",
+		//	              "VALIDATE_NON_NULL",
+		//	              "VALIDATE_NON_ZERO",
+		//	              "VALIDATE_NON_NEGATIVE",
+		//	              "VALIDATE_NUMERIC"
+		//	            ],
+		//	            "type": "string"
+		//	          },
 		//	          "S3": {
 		//	            "enum": [
 		//	              "PROJECTION",
@@ -2348,6 +2393,10 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"marketo": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
 							}, /*END ATTRIBUTE*/
+							// Property: Pardot
+							"pardot": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
 							// Property: S3
 							"s3": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Computed: true,
@@ -2609,6 +2658,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"metadata_catalog_config":           "MetadataCatalogConfig",
 		"object":                            "Object",
 		"object_path":                       "ObjectPath",
+		"pardot":                            "Pardot",
 		"path_prefix_hierarchy":             "PathPrefixHierarchy",
 		"prefix_config":                     "PrefixConfig",
 		"prefix_format":                     "PrefixFormat",

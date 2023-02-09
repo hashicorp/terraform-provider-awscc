@@ -93,10 +93,8 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 		//	}
 		"core_network_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of a core network where you're creating a site-to-site VPN attachment.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -342,10 +340,8 @@ func siteToSiteVpnAttachmentResource(ctx context.Context) (resource.Resource, er
 		//	}
 		"vpn_connection_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ARN of the site-to-site VPN attachment.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// VpnConnectionArn is a write-only property.

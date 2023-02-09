@@ -21,7 +21,7 @@ Data Source schema for AWS::Logs::LogStream
 
 ### Read-Only
 
-- `log_group_name` (String) The name of the log group where the log stream is created.
-- `log_stream_name` (String) The name of the log stream. The name must be unique wihtin the log group.
+- `log_group_name` (String)
+- `log_stream_name` (String)
 
 

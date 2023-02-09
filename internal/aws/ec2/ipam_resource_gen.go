@@ -43,6 +43,36 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DefaultResourceDiscoveryAssociationId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Id of the default association to the default resource discovery, created with this IPAM.",
+		//	  "type": "string"
+		//	}
+		"default_resource_discovery_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the default association to the default resource discovery, created with this IPAM.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultResourceDiscoveryId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The Id of the default resource discovery, created with this IPAM.",
+		//	  "type": "string"
+		//	}
+		"default_resource_discovery_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The Id of the default resource discovery, created with this IPAM.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -137,6 +167,21 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ResourceDiscoveryAssociationCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The count of resource discoveries associated with this IPAM.",
+		//	  "type": "integer"
+		//	}
+		"resource_discovery_association_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The count of resource discoveries associated with this IPAM.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ScopeCount
@@ -235,17 +280,20 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                      "Arn",
-		"description":              "Description",
-		"ipam_id":                  "IpamId",
-		"key":                      "Key",
-		"operating_regions":        "OperatingRegions",
-		"private_default_scope_id": "PrivateDefaultScopeId",
-		"public_default_scope_id":  "PublicDefaultScopeId",
-		"region_name":              "RegionName",
-		"scope_count":              "ScopeCount",
-		"tags":                     "Tags",
-		"value":                    "Value",
+		"arn": "Arn",
+		"default_resource_discovery_association_id": "DefaultResourceDiscoveryAssociationId",
+		"default_resource_discovery_id":             "DefaultResourceDiscoveryId",
+		"description":                               "Description",
+		"ipam_id":                                   "IpamId",
+		"key":                                       "Key",
+		"operating_regions":                         "OperatingRegions",
+		"private_default_scope_id":                  "PrivateDefaultScopeId",
+		"public_default_scope_id":                   "PublicDefaultScopeId",
+		"region_name":                               "RegionName",
+		"resource_discovery_association_count":      "ResourceDiscoveryAssociationCount",
+		"scope_count":                               "ScopeCount",
+		"tags":                                      "Tags",
+		"value":                                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

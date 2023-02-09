@@ -149,6 +149,7 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// RenderingEngine is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RobotSoftwareSuite
 		// CloudFormation resource type schema:
@@ -212,6 +213,7 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Version is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The robot software suite used by the simulation application.",
@@ -285,6 +287,7 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Version is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The simulation software suite used by the simulation application.",
@@ -370,6 +373,7 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Sources is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -408,7 +412,7 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 	}
 
 	schema := schema.Schema{
-		Description: "AWS::RoboMaker::SimulationApplication resource creates an AWS RoboMaker SimulationApplication. Simulation application can be used in AWS RoboMaker Simulation Jobs.",
+		Description: "This schema is for testing purpose only.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -434,6 +438,12 @@ func simulationApplicationResource(ctx context.Context) (resource.Resource, erro
 		"version":                   "Version",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RenderingEngine",
+		"/properties/RobotSoftwareSuite/Version",
+		"/properties/Sources",
+		"/properties/SimulationSoftwareSuite/Version",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

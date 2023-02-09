@@ -73,10 +73,6 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 		//	      "SecretArn": {
 		//	        "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
 		//	        "type": "string"
-		//	      },
-		//	      "UserName": {
-		//	        "description": "The name of the database user to which the proxy connects.",
-		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -146,15 +142,6 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 					// Property: SecretArn
 					"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
-						Optional:    true,
-						Computed:    true,
-						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-							stringplanmodifier.UseStateForUnknown(),
-						}, /*END PLAN MODIFIERS*/
-					}, /*END ATTRIBUTE*/
-					// Property: UserName
-					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the database user to which the proxy connects.",
 						Optional:    true,
 						Computed:    true,
 						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -464,7 +451,6 @@ func dBProxyResource(ctx context.Context) (resource.Resource, error) {
 		"role_arn":                  "RoleArn",
 		"secret_arn":                "SecretArn",
 		"tags":                      "Tags",
-		"user_name":                 "UserName",
 		"value":                     "Value",
 		"vpc_id":                    "VpcId",
 		"vpc_security_group_ids":    "VpcSecurityGroupIds",

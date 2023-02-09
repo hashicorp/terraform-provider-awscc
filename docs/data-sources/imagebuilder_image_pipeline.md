@@ -27,12 +27,31 @@ Data Source schema for AWS::ImageBuilder::ImagePipeline
 - `distribution_configuration_arn` (String) The Amazon Resource Name (ARN) of the distribution configuration associated with this image pipeline.
 - `enhanced_image_metadata_enabled` (Boolean) Collects additional information about the image being created, including the operating system (OS) version and package list.
 - `image_recipe_arn` (String) The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.
+- `image_scanning_configuration` (Attributes) Contains settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration))
 - `image_tests_configuration` (Attributes) The image tests configuration of the image pipeline. (see [below for nested schema](#nestedatt--image_tests_configuration))
 - `infrastructure_configuration_arn` (String) The Amazon Resource Name (ARN) of the infrastructure configuration associated with this image pipeline.
 - `name` (String) The name of the image pipeline.
 - `schedule` (Attributes) The schedule of the image pipeline. (see [below for nested schema](#nestedatt--schedule))
 - `status` (String) The status of the image pipeline.
 - `tags` (Map of String) The tags of this image pipeline.
+
+<a id="nestedatt--image_scanning_configuration"></a>
+### Nested Schema for `image_scanning_configuration`
+
+Read-Only:
+
+- `ecr_configuration` (Attributes) Contains ECR settings for vulnerability scans. (see [below for nested schema](#nestedatt--image_scanning_configuration--ecr_configuration))
+- `image_scanning_enabled` (Boolean) This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.
+
+<a id="nestedatt--image_scanning_configuration--ecr_configuration"></a>
+### Nested Schema for `image_scanning_configuration.ecr_configuration`
+
+Read-Only:
+
+- `container_tags` (List of String) Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.
+- `repository_name` (String) The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don?t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.
+
+
 
 <a id="nestedatt--image_tests_configuration"></a>
 ### Nested Schema for `image_tests_configuration`

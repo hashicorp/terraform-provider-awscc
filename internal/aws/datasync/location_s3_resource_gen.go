@@ -73,12 +73,14 @@ func locationS3Resource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"s3_bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The Amazon Resource Name (ARN) of the Amazon S3 bucket.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthAtMost(156),
 				stringvalidator.RegexMatches(regexp.MustCompile("^arn:(aws|aws-cn|aws-us-gov|aws-iso|aws-iso-b):s3:[a-z\\-0-9]*:[0-9]*:.*$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// S3BucketArn is a write-only property.

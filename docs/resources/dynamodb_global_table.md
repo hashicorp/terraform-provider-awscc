@@ -68,6 +68,7 @@ Optional:
 
 - `contributor_insights_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--contributor_insights_specification))
 - `global_secondary_indexes` (Attributes Set) (see [below for nested schema](#nestedatt--replicas--global_secondary_indexes))
+- `kinesis_stream_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--kinesis_stream_specification))
 - `point_in_time_recovery_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--point_in_time_recovery_specification))
 - `read_provisioned_throughput_settings` (Attributes) (see [below for nested schema](#nestedatt--replicas--read_provisioned_throughput_settings))
 - `sse_specification` (Attributes) (see [below for nested schema](#nestedatt--replicas--sse_specification))
@@ -138,6 +139,14 @@ Optional:
 
 
 
+
+
+<a id="nestedatt--replicas--kinesis_stream_specification"></a>
+### Nested Schema for `replicas.kinesis_stream_specification`
+
+Required:
+
+- `stream_arn` (String)
 
 
 <a id="nestedatt--replicas--point_in_time_recovery_specification"></a>

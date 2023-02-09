@@ -8,12 +8,16 @@ package ec2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-
+	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -54,6 +58,20 @@ func natGatewayResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaxDrainDurationSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"max_drain_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// MaxDrainDurationSeconds is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -78,6 +96,67 @@ func natGatewayResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryAllocationIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"secondary_allocation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryPrivateIpAddressCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.AtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryPrivateIpAddresses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"secondary_private_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.UniqueValues(),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
@@ -158,16 +237,23 @@ func natGatewayResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_id":      "AllocationId",
-		"connectivity_type":  "ConnectivityType",
-		"key":                "Key",
-		"nat_gateway_id":     "NatGatewayId",
-		"private_ip_address": "PrivateIpAddress",
-		"subnet_id":          "SubnetId",
-		"tags":               "Tags",
-		"value":              "Value",
+		"allocation_id":                      "AllocationId",
+		"connectivity_type":                  "ConnectivityType",
+		"key":                                "Key",
+		"max_drain_duration_seconds":         "MaxDrainDurationSeconds",
+		"nat_gateway_id":                     "NatGatewayId",
+		"private_ip_address":                 "PrivateIpAddress",
+		"secondary_allocation_ids":           "SecondaryAllocationIds",
+		"secondary_private_ip_address_count": "SecondaryPrivateIpAddressCount",
+		"secondary_private_ip_addresses":     "SecondaryPrivateIpAddresses",
+		"subnet_id":                          "SubnetId",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/MaxDrainDurationSeconds",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -26,6 +26,7 @@ Data Source schema for AWS::EMRServerless::Application
 - `arn` (String) The Amazon Resource Name (ARN) of the EMR Serverless Application.
 - `auto_start_configuration` (Attributes) Configuration for Auto Start of Application. (see [below for nested schema](#nestedatt--auto_start_configuration))
 - `auto_stop_configuration` (Attributes) Configuration for Auto Stop of Application. (see [below for nested schema](#nestedatt--auto_stop_configuration))
+- `image_configuration` (Attributes) The image configuration. (see [below for nested schema](#nestedatt--image_configuration))
 - `initial_capacity` (Attributes Set) Initial capacity initialized when an Application is started. (see [below for nested schema](#nestedatt--initial_capacity))
 - `maximum_capacity` (Attributes) Maximum allowed cumulative resources for an Application. No new resources will be created once the limit is hit. (see [below for nested schema](#nestedatt--maximum_capacity))
 - `name` (String) User friendly Application name.
@@ -33,6 +34,7 @@ Data Source schema for AWS::EMRServerless::Application
 - `release_label` (String) EMR release label.
 - `tags` (Attributes Set) Tag map with key and value (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of the application
+- `worker_type_specifications` (Attributes Map) (see [below for nested schema](#nestedatt--worker_type_specifications))
 
 <a id="nestedatt--auto_start_configuration"></a>
 ### Nested Schema for `auto_start_configuration`
@@ -49,6 +51,14 @@ Read-Only:
 
 - `enabled` (Boolean) If set to true, the Application will automatically stop after being idle. Defaults to true.
 - `idle_timeout_minutes` (Number) The amount of time [in minutes] to wait before auto stopping the Application when idle. Defaults to 15 minutes.
+
+
+<a id="nestedatt--image_configuration"></a>
+### Nested Schema for `image_configuration`
+
+Read-Only:
+
+- `image_uri` (String) The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.
 
 
 <a id="nestedatt--initial_capacity"></a>
@@ -105,5 +115,20 @@ Read-Only:
 
 - `key` (String) The value for the tag. You can specify a value that is 1 to 128 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+
+<a id="nestedatt--worker_type_specifications"></a>
+### Nested Schema for `worker_type_specifications`
+
+Read-Only:
+
+- `image_configuration` (Attributes) The image configuration. (see [below for nested schema](#nestedatt--worker_type_specifications--image_configuration))
+
+<a id="nestedatt--worker_type_specifications--image_configuration"></a>
+### Nested Schema for `worker_type_specifications.image_configuration`
+
+Read-Only:
+
+- `image_uri` (String) The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.
 
 

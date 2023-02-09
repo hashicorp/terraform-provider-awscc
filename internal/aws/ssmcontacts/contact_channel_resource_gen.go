@@ -143,6 +143,7 @@ func contactChannelResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// DeferActivation is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -174,6 +175,9 @@ func contactChannelResource(ctx context.Context) (resource.Resource, error) {
 		"defer_activation": "DeferActivation",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/DeferActivation",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -22,6 +22,7 @@ Data Source schema for AWS::RUM::AppMonitor
 ### Read-Only
 
 - `app_monitor_configuration` (Attributes) AppMonitor configuration (see [below for nested schema](#nestedatt--app_monitor_configuration))
+- `custom_events` (Attributes) AppMonitor custom events configuration (see [below for nested schema](#nestedatt--custom_events))
 - `cw_log_enabled` (Boolean) Data collected by RUM is kept by RUM for 30 days and then deleted. This parameter specifies whether RUM sends a copy of this telemetry data to CWLlong in your account. This enables you to keep the telemetry data for more than 30 days, but it does incur CWLlong charges. If you omit this parameter, the default is false
 - `domain` (String) The top-level internet domain name for which your application has administrative authority.
 - `name` (String) A name for the app monitor
@@ -121,6 +122,14 @@ If you omit this field, a hardcoded value of 1 is pushed as the metric value. Th
 If this metric is sent to Evidently, this field will be passed to Evidently raw and Evidently will handle data extraction from the event.
 
 
+
+
+<a id="nestedatt--custom_events"></a>
+### Nested Schema for `custom_events`
+
+Read-Only:
+
+- `status` (String) Indicates whether AppMonitor accepts custom events.
 
 
 <a id="nestedatt--tags"></a>

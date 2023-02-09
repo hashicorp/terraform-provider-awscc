@@ -649,6 +649,63 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RuntimeManagementConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "RuntimeManagementConfig",
+		//	  "properties": {
+		//	    "RuntimeVersionArn": {
+		//	      "description": "Unique identifier for a runtime version arn",
+		//	      "type": "string"
+		//	    },
+		//	    "UpdateRuntimeOn": {
+		//	      "description": "Trigger for runtime update",
+		//	      "enum": [
+		//	        "Auto",
+		//	        "FunctionUpdate",
+		//	        "Manual"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "UpdateRuntimeOn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"runtime_management_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RuntimeVersionArn
+				"runtime_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Unique identifier for a runtime version arn",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UpdateRuntimeOn
+				"update_runtime_on": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Trigger for runtime update",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"Auto",
+							"FunctionUpdate",
+							"Manual",
+						),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "RuntimeManagementConfig",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SnapStart
 		// CloudFormation resource type schema:
 		//
@@ -973,6 +1030,8 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"reserved_concurrent_executions": "ReservedConcurrentExecutions",
 		"role":                           "Role",
 		"runtime":                        "Runtime",
+		"runtime_management_config":      "RuntimeManagementConfig",
+		"runtime_version_arn":            "RuntimeVersionArn",
 		"s3_bucket":                      "S3Bucket",
 		"s3_key":                         "S3Key",
 		"s3_object_version":              "S3ObjectVersion",
@@ -985,6 +1044,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 		"target_arn":                     "TargetArn",
 		"timeout":                        "Timeout",
 		"tracing_config":                 "TracingConfig",
+		"update_runtime_on":              "UpdateRuntimeOn",
 		"value":                          "Value",
 		"variables":                      "Variables",
 		"vpc_config":                     "VpcConfig",

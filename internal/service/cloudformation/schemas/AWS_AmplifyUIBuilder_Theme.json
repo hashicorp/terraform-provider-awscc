@@ -46,19 +46,11 @@
     "AppId": {
       "type": "string"
     },
-    "CreatedAt": {
-      "type": "string",
-      "format": "date-time"
-    },
     "EnvironmentName": {
       "type": "string"
     },
     "Id": {
       "type": "string"
-    },
-    "ModifiedAt": {
-      "type": "string",
-      "format": "date-time"
     },
     "Name": {
       "type": "string",
@@ -88,11 +80,7 @@
     "Values"
   ],
   "readOnlyProperties": [
-    "/properties/AppId",
-    "/properties/CreatedAt",
-    "/properties/EnvironmentName",
-    "/properties/Id",
-    "/properties/ModifiedAt"
+    "/properties/Id"
   ],
   "createOnlyProperties": [
     "/properties/Tags"

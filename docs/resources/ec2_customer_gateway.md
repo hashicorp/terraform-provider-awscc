@@ -23,6 +23,7 @@ Resource Type definition for AWS::EC2::CustomerGateway
 ### Optional
 
 - `bgp_asn` (Number) For devices that support BGP, the customer gateway's BGP ASN.
+- `device_name` (String) A name for the customer gateway device.
 - `tags` (Attributes List) One or more tags for the customer gateway. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

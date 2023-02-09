@@ -107,15 +107,15 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: DefaultUserSettings
+		// Property: DefaultSpaceSettings
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The default user settings.",
+		//	  "description": "The default space settings.",
 		//	  "properties": {
 		//	    "ExecutionRole": {
-		//	      "description": "The user profile Amazon Resource Name (ARN).",
+		//	      "description": "The execution role for the space.",
 		//	      "maxLength": 2048,
 		//	      "minLength": 20,
 		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
@@ -162,7 +162,32 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g4dn.4xlarge",
 		//	                "ml.g4dn.8xlarge",
 		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -268,7 +293,32 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g4dn.4xlarge",
 		//	                "ml.g4dn.8xlarge",
 		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -292,134 +342,6 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	            }
 		//	          },
 		//	          "type": "object"
-		//	        }
-		//	      },
-		//	      "type": "object"
-		//	    },
-		//	    "RSessionAppSettings": {
-		//	      "additionalProperties": false,
-		//	      "description": "A collection of settings that apply to an RSessionGateway app.",
-		//	      "properties": {
-		//	        "CustomImages": {
-		//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
-		//	          "insertionOrder": false,
-		//	          "items": {
-		//	            "additionalProperties": false,
-		//	            "description": "A custom SageMaker image.",
-		//	            "properties": {
-		//	              "AppImageConfigName": {
-		//	                "description": "The Name of the AppImageConfig.",
-		//	                "maxLength": 63,
-		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-		//	                "type": "string"
-		//	              },
-		//	              "ImageName": {
-		//	                "description": "The name of the CustomImage. Must be unique to your account.",
-		//	                "maxLength": 63,
-		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
-		//	                "type": "string"
-		//	              },
-		//	              "ImageVersionNumber": {
-		//	                "description": "The version number of the CustomImage.",
-		//	                "minimum": 0,
-		//	                "type": "integer"
-		//	              }
-		//	            },
-		//	            "required": [
-		//	              "AppImageConfigName",
-		//	              "ImageName"
-		//	            ],
-		//	            "type": "object"
-		//	          },
-		//	          "maxItems": 30,
-		//	          "minItems": 0,
-		//	          "type": "array",
-		//	          "uniqueItems": false
-		//	        },
-		//	        "DefaultResourceSpec": {
-		//	          "additionalProperties": false,
-		//	          "properties": {
-		//	            "InstanceType": {
-		//	              "description": "The instance type that the image version runs on.",
-		//	              "enum": [
-		//	                "system",
-		//	                "ml.t3.micro",
-		//	                "ml.t3.small",
-		//	                "ml.t3.medium",
-		//	                "ml.t3.large",
-		//	                "ml.t3.xlarge",
-		//	                "ml.t3.2xlarge",
-		//	                "ml.m5.large",
-		//	                "ml.m5.xlarge",
-		//	                "ml.m5.2xlarge",
-		//	                "ml.m5.4xlarge",
-		//	                "ml.m5.8xlarge",
-		//	                "ml.m5.12xlarge",
-		//	                "ml.m5.16xlarge",
-		//	                "ml.m5.24xlarge",
-		//	                "ml.c5.large",
-		//	                "ml.c5.xlarge",
-		//	                "ml.c5.2xlarge",
-		//	                "ml.c5.4xlarge",
-		//	                "ml.c5.9xlarge",
-		//	                "ml.c5.12xlarge",
-		//	                "ml.c5.18xlarge",
-		//	                "ml.c5.24xlarge",
-		//	                "ml.p3.2xlarge",
-		//	                "ml.p3.8xlarge",
-		//	                "ml.p3.16xlarge",
-		//	                "ml.g4dn.xlarge",
-		//	                "ml.g4dn.2xlarge",
-		//	                "ml.g4dn.4xlarge",
-		//	                "ml.g4dn.8xlarge",
-		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
-		//	              ],
-		//	              "type": "string"
-		//	            },
-		//	            "LifecycleConfigArn": {
-		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
-		//	              "maxLength": 256,
-		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
-		//	              "type": "string"
-		//	            },
-		//	            "SageMakerImageArn": {
-		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
-		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
-		//	              "type": "string"
-		//	            },
-		//	            "SageMakerImageVersionArn": {
-		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
-		//	              "maxLength": 256,
-		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
-		//	              "type": "string"
-		//	            }
-		//	          },
-		//	          "type": "object"
-		//	        }
-		//	      },
-		//	      "type": "object"
-		//	    },
-		//	    "RStudioServerProAppSettings": {
-		//	      "additionalProperties": false,
-		//	      "description": "A collection of settings that configure user interaction with the RStudioServerPro app.",
-		//	      "properties": {
-		//	        "AccessStatus": {
-		//	          "description": "Indicates whether the current user has access to the RStudioServerPro app.",
-		//	          "enum": [
-		//	            "ENABLED",
-		//	            "DISABLED"
-		//	          ],
-		//	          "type": "string"
-		//	        },
-		//	        "UserGroup": {
-		//	          "description": "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
-		//	          "enum": [
-		//	            "R_STUDIO_ADMIN",
-		//	            "R_STUDIO_USER"
-		//	          ],
-		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "type": "object"
@@ -436,42 +358,15 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	      "minItems": 0,
 		//	      "type": "array",
 		//	      "uniqueItems": false
-		//	    },
-		//	    "SharingSettings": {
-		//	      "additionalProperties": false,
-		//	      "description": "The sharing settings.",
-		//	      "properties": {
-		//	        "NotebookOutputOption": {
-		//	          "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
-		//	          "enum": [
-		//	            "Allowed",
-		//	            "Disabled"
-		//	          ],
-		//	          "type": "string"
-		//	        },
-		//	        "S3KmsKeyId": {
-		//	          "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
-		//	          "maxLength": 2048,
-		//	          "pattern": ".*",
-		//	          "type": "string"
-		//	        },
-		//	        "S3OutputPath": {
-		//	          "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
-		//	          "maxLength": 1024,
-		//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-		//	          "type": "string"
-		//	        }
-		//	      },
-		//	      "type": "object"
 		//	    }
 		//	  },
 		//	  "type": "object"
 		//	}
-		"default_user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+		"default_space_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The user profile Amazon Resource Name (ARN).",
+					Description: "The execution role for the space.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
@@ -527,6 +422,31 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g4dn.8xlarge",
 											"ml.g4dn.12xlarge",
 											"ml.g4dn.16xlarge",
+											"ml.r5.large",
+											"ml.r5.xlarge",
+											"ml.r5.2xlarge",
+											"ml.r5.4xlarge",
+											"ml.r5.8xlarge",
+											"ml.r5.12xlarge",
+											"ml.r5.16xlarge",
+											"ml.r5.24xlarge",
+											"ml.p3dn.24xlarge",
+											"ml.m5d.large",
+											"ml.m5d.xlarge",
+											"ml.m5d.2xlarge",
+											"ml.m5d.4xlarge",
+											"ml.m5d.8xlarge",
+											"ml.m5d.12xlarge",
+											"ml.m5d.16xlarge",
+											"ml.m5d.24xlarge",
+											"ml.g5.xlarge",
+											"ml.g5.2xlarge",
+											"ml.g5.4xlarge",
+											"ml.g5.8xlarge",
+											"ml.g5.12xlarge",
+											"ml.g5.16xlarge",
+											"ml.g5.24xlarge",
+											"ml.g5.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -679,6 +599,815 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g4dn.8xlarge",
 											"ml.g4dn.12xlarge",
 											"ml.g4dn.16xlarge",
+											"ml.r5.large",
+											"ml.r5.xlarge",
+											"ml.r5.2xlarge",
+											"ml.r5.4xlarge",
+											"ml.r5.8xlarge",
+											"ml.r5.12xlarge",
+											"ml.r5.16xlarge",
+											"ml.r5.24xlarge",
+											"ml.p3dn.24xlarge",
+											"ml.m5d.large",
+											"ml.m5d.xlarge",
+											"ml.m5d.2xlarge",
+											"ml.m5d.4xlarge",
+											"ml.m5d.8xlarge",
+											"ml.m5d.12xlarge",
+											"ml.m5d.16xlarge",
+											"ml.m5d.24xlarge",
+											"ml.g5.xlarge",
+											"ml.g5.2xlarge",
+											"ml.g5.4xlarge",
+											"ml.g5.8xlarge",
+											"ml.g5.12xlarge",
+											"ml.g5.16xlarge",
+											"ml.g5.24xlarge",
+											"ml.g5.48xlarge",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+							Optional:    true,
+							Computed:    true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The kernel gateway app settings.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroups
+				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeBetween(0, 5),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthAtMost(32),
+							stringvalidator.RegexMatches(regexp.MustCompile("[-0-9a-zA-Z]+"), ""),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The default space settings.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultUserSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The default user settings.",
+		//	  "properties": {
+		//	    "ExecutionRole": {
+		//	      "description": "The execution role for the user.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "JupyterServerAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Jupyter server's app settings.",
+		//	      "properties": {
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "KernelGatewayAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The kernel gateway app settings.",
+		//	      "properties": {
+		//	        "CustomImages": {
+		//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A custom SageMaker image.",
+		//	            "properties": {
+		//	              "AppImageConfigName": {
+		//	                "description": "The Name of the AppImageConfig.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageName": {
+		//	                "description": "The name of the CustomImage. Must be unique to your account.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageVersionNumber": {
+		//	                "description": "The version number of the CustomImage.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AppImageConfigName",
+		//	              "ImageName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RSessionAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "A collection of settings that apply to an RSessionGateway app.",
+		//	      "properties": {
+		//	        "CustomImages": {
+		//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A custom SageMaker image.",
+		//	            "properties": {
+		//	              "AppImageConfigName": {
+		//	                "description": "The Name of the AppImageConfig.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageName": {
+		//	                "description": "The name of the CustomImage. Must be unique to your account.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageVersionNumber": {
+		//	                "description": "The version number of the CustomImage.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AppImageConfigName",
+		//	              "ImageName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "RStudioServerProAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "A collection of settings that configure user interaction with the RStudioServerPro app.",
+		//	      "properties": {
+		//	        "AccessStatus": {
+		//	          "description": "Indicates whether the current user has access to the RStudioServerPro app.",
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "UserGroup": {
+		//	          "description": "The level of permissions that the user has within the RStudioServerPro app. This value defaults to User. The Admin value allows the user access to the RStudio Administrative Dashboard.",
+		//	          "enum": [
+		//	            "R_STUDIO_ADMIN",
+		//	            "R_STUDIO_USER"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SecurityGroups": {
+		//	      "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "maxLength": 32,
+		//	        "pattern": "[-0-9a-zA-Z]+",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "SharingSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The sharing settings.",
+		//	      "properties": {
+		//	        "NotebookOutputOption": {
+		//	          "description": "Whether to include the notebook cell output when sharing the notebook. The default is Disabled.",
+		//	          "enum": [
+		//	            "Allowed",
+		//	            "Disabled"
+		//	          ],
+		//	          "type": "string"
+		//	        },
+		//	        "S3KmsKeyId": {
+		//	          "description": "When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.",
+		//	          "maxLength": 2048,
+		//	          "pattern": ".*",
+		//	          "type": "string"
+		//	        },
+		//	        "S3OutputPath": {
+		//	          "description": "When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.",
+		//	          "maxLength": 1024,
+		//	          "pattern": "^(https|s3)://([^/]+)/?(.*)$",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"default_user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The execution role for the user.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(20, 2048),
+						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: JupyterServerAppSettings
+				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"system",
+											"ml.t3.micro",
+											"ml.t3.small",
+											"ml.t3.medium",
+											"ml.t3.large",
+											"ml.t3.xlarge",
+											"ml.t3.2xlarge",
+											"ml.m5.large",
+											"ml.m5.xlarge",
+											"ml.m5.2xlarge",
+											"ml.m5.4xlarge",
+											"ml.m5.8xlarge",
+											"ml.m5.12xlarge",
+											"ml.m5.16xlarge",
+											"ml.m5.24xlarge",
+											"ml.c5.large",
+											"ml.c5.xlarge",
+											"ml.c5.2xlarge",
+											"ml.c5.4xlarge",
+											"ml.c5.9xlarge",
+											"ml.c5.12xlarge",
+											"ml.c5.18xlarge",
+											"ml.c5.24xlarge",
+											"ml.p3.2xlarge",
+											"ml.p3.8xlarge",
+											"ml.p3.16xlarge",
+											"ml.g4dn.xlarge",
+											"ml.g4dn.2xlarge",
+											"ml.g4dn.4xlarge",
+											"ml.g4dn.8xlarge",
+											"ml.g4dn.12xlarge",
+											"ml.g4dn.16xlarge",
+											"ml.r5.large",
+											"ml.r5.xlarge",
+											"ml.r5.2xlarge",
+											"ml.r5.4xlarge",
+											"ml.r5.8xlarge",
+											"ml.r5.12xlarge",
+											"ml.r5.16xlarge",
+											"ml.r5.24xlarge",
+											"ml.p3dn.24xlarge",
+											"ml.m5d.large",
+											"ml.m5d.xlarge",
+											"ml.m5d.2xlarge",
+											"ml.m5d.4xlarge",
+											"ml.m5d.8xlarge",
+											"ml.m5d.12xlarge",
+											"ml.m5d.16xlarge",
+											"ml.m5d.24xlarge",
+											"ml.g5.xlarge",
+											"ml.g5.2xlarge",
+											"ml.g5.4xlarge",
+											"ml.g5.8xlarge",
+											"ml.g5.12xlarge",
+											"ml.g5.16xlarge",
+											"ml.g5.24xlarge",
+											"ml.g5.48xlarge",
+										),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Jupyter server's app settings.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KernelGatewayAppSettings
+				"kernel_gateway_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomImages
+						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AppImageConfigName
+									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Name of the AppImageConfig.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(63),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ImageName
+									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CustomImage. Must be unique to your account.",
+										Required:    true,
+										Validators: []validator.String{ /*START VALIDATORS*/
+											stringvalidator.LengthAtMost(63),
+											stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$"), ""),
+										}, /*END VALIDATORS*/
+									}, /*END ATTRIBUTE*/
+									// Property: ImageVersionNumber
+									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The version number of the CustomImage.",
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.Int64{ /*START VALIDATORS*/
+											int64validator.AtLeast(0),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+											int64planmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.List{ /*START VALIDATORS*/
+								listvalidator.SizeBetween(0, 30),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.OneOf(
+											"system",
+											"ml.t3.micro",
+											"ml.t3.small",
+											"ml.t3.medium",
+											"ml.t3.large",
+											"ml.t3.xlarge",
+											"ml.t3.2xlarge",
+											"ml.m5.large",
+											"ml.m5.xlarge",
+											"ml.m5.2xlarge",
+											"ml.m5.4xlarge",
+											"ml.m5.8xlarge",
+											"ml.m5.12xlarge",
+											"ml.m5.16xlarge",
+											"ml.m5.24xlarge",
+											"ml.c5.large",
+											"ml.c5.xlarge",
+											"ml.c5.2xlarge",
+											"ml.c5.4xlarge",
+											"ml.c5.9xlarge",
+											"ml.c5.12xlarge",
+											"ml.c5.18xlarge",
+											"ml.c5.24xlarge",
+											"ml.p3.2xlarge",
+											"ml.p3.8xlarge",
+											"ml.p3.16xlarge",
+											"ml.g4dn.xlarge",
+											"ml.g4dn.2xlarge",
+											"ml.g4dn.4xlarge",
+											"ml.g4dn.8xlarge",
+											"ml.g4dn.12xlarge",
+											"ml.g4dn.16xlarge",
+											"ml.r5.large",
+											"ml.r5.xlarge",
+											"ml.r5.2xlarge",
+											"ml.r5.4xlarge",
+											"ml.r5.8xlarge",
+											"ml.r5.12xlarge",
+											"ml.r5.16xlarge",
+											"ml.r5.24xlarge",
+											"ml.p3dn.24xlarge",
+											"ml.m5d.large",
+											"ml.m5d.xlarge",
+											"ml.m5d.2xlarge",
+											"ml.m5d.4xlarge",
+											"ml.m5d.8xlarge",
+											"ml.m5d.12xlarge",
+											"ml.m5d.16xlarge",
+											"ml.m5d.24xlarge",
+											"ml.g5.xlarge",
+											"ml.g5.2xlarge",
+											"ml.g5.4xlarge",
+											"ml.g5.8xlarge",
+											"ml.g5.12xlarge",
+											"ml.g5.16xlarge",
+											"ml.g5.24xlarge",
+											"ml.g5.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -832,6 +1561,31 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g4dn.8xlarge",
 											"ml.g4dn.12xlarge",
 											"ml.g4dn.16xlarge",
+											"ml.r5.large",
+											"ml.r5.xlarge",
+											"ml.r5.2xlarge",
+											"ml.r5.4xlarge",
+											"ml.r5.8xlarge",
+											"ml.r5.12xlarge",
+											"ml.r5.16xlarge",
+											"ml.r5.24xlarge",
+											"ml.p3dn.24xlarge",
+											"ml.m5d.large",
+											"ml.m5d.xlarge",
+											"ml.m5d.2xlarge",
+											"ml.m5d.4xlarge",
+											"ml.m5d.8xlarge",
+											"ml.m5d.12xlarge",
+											"ml.m5d.16xlarge",
+											"ml.m5d.24xlarge",
+											"ml.g5.xlarge",
+											"ml.g5.2xlarge",
+											"ml.g5.4xlarge",
+											"ml.g5.8xlarge",
+											"ml.g5.12xlarge",
+											"ml.g5.16xlarge",
+											"ml.g5.24xlarge",
+											"ml.g5.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1107,7 +1861,32 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g4dn.4xlarge",
 		//	                "ml.g4dn.8xlarge",
 		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1218,6 +1997,31 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g4dn.8xlarge",
 											"ml.g4dn.12xlarge",
 											"ml.g4dn.16xlarge",
+											"ml.r5.large",
+											"ml.r5.xlarge",
+											"ml.r5.2xlarge",
+											"ml.r5.4xlarge",
+											"ml.r5.8xlarge",
+											"ml.r5.12xlarge",
+											"ml.r5.16xlarge",
+											"ml.r5.24xlarge",
+											"ml.p3dn.24xlarge",
+											"ml.m5d.large",
+											"ml.m5d.xlarge",
+											"ml.m5d.2xlarge",
+											"ml.m5d.4xlarge",
+											"ml.m5d.8xlarge",
+											"ml.m5d.12xlarge",
+											"ml.m5d.16xlarge",
+											"ml.m5d.24xlarge",
+											"ml.g5.xlarge",
+											"ml.g5.2xlarge",
+											"ml.g5.4xlarge",
+											"ml.g5.8xlarge",
+											"ml.g5.12xlarge",
+											"ml.g5.16xlarge",
+											"ml.g5.24xlarge",
+											"ml.g5.48xlarge",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1565,6 +2369,7 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		"auth_mode":                                      "AuthMode",
 		"custom_images":                                  "CustomImages",
 		"default_resource_spec":                          "DefaultResourceSpec",
+		"default_space_settings":                         "DefaultSpaceSettings",
 		"default_user_settings":                          "DefaultUserSettings",
 		"domain_arn":                                     "DomainArn",
 		"domain_execution_role_arn":                      "DomainExecutionRoleArn",

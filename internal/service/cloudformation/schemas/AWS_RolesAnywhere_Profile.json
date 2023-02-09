@@ -72,12 +72,15 @@
     }
   },
   "readOnlyProperties": [
-    "/properties/Profile",
     "/properties/ProfileId",
     "/properties/ProfileArn"
   ],
   "primaryIdentifier": [
     "/properties/ProfileId"
+  ],
+  "required": [
+    "Name",
+    "RoleArns"
   ],
   "handlers": {
     "create": {

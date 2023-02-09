@@ -30,10 +30,6 @@
           "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
           "type": "string"
         },
-        "UserName": {
-          "description": "The name of the database user to which the proxy connects.",
-          "type": "string"
-        },
         "ClientPasswordAuthType": {
           "description": "The type of authentication the proxy uses for connections from clients.",
           "type": "string",

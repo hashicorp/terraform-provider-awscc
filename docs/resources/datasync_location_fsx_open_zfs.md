@@ -17,12 +17,12 @@ Resource schema for AWS::DataSync::LocationFSxOpenZFS.
 
 ### Required
 
-- `fsx_filesystem_arn` (String) The Amazon Resource Name (ARN) for the FSx OpenZFS file system.
 - `protocol` (Attributes) Configuration settings for an NFS or SMB protocol, currently only support NFS (see [below for nested schema](#nestedatt--protocol))
 - `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx OpenZFS file system.
 
 ### Optional
 
+- `fsx_filesystem_arn` (String) The Amazon Resource Name (ARN) for the FSx OpenZFS file system.
 - `subdirectory` (String) A subdirectory in the location's path.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

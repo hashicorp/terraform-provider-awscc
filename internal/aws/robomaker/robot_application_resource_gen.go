@@ -158,6 +158,7 @@ func robotApplicationResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
+					// Version is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The robot software suite used by the robot application.",
@@ -236,6 +237,7 @@ func robotApplicationResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Sources is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -274,7 +276,7 @@ func robotApplicationResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "AWS::RoboMaker::RobotApplication resource creates an AWS RoboMaker RobotApplication. Robot application can be used in AWS RoboMaker Simulation Jobs.",
+		Description: "This schema is for testing purpose only.",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -298,6 +300,10 @@ func robotApplicationResource(ctx context.Context) (resource.Resource, error) {
 		"version":              "Version",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/RobotSoftwareSuite/Version",
+		"/properties/Sources",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -188,17 +188,9 @@ func dBProxyEndpointResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"target_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A value that indicates whether the DB proxy endpoint can be used for read/write or read-only operations.",
-			Optional:    true,
 			Computed:    true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"READ_WRITE",
-					"READ_ONLY",
-				),
-			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId

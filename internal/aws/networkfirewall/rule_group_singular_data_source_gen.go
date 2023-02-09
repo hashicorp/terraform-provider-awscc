@@ -180,7 +180,8 @@ func ruleGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "enum": [
 		//	                  "PASS",
 		//	                  "DROP",
-		//	                  "ALERT"
+		//	                  "ALERT",
+		//	                  "REJECT"
 		//	                ],
 		//	                "type": "string"
 		//	              },

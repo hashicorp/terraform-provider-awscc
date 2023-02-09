@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 661 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 678 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -507,8 +507,17 @@ resource_schema "aws_cloudfront_response_headers_policy" {
   cloudformation_type_name = "AWS::CloudFront::ResponseHeadersPolicy"
 }
 
+resource_schema "aws_cloudtrail_channel" {
+  cloudformation_type_name = "AWS::CloudTrail::Channel"
+}
+
 resource_schema "aws_cloudtrail_event_data_store" {
   cloudformation_type_name = "AWS::CloudTrail::EventDataStore"
+}
+
+resource_schema "aws_cloudtrail_resource_policy" {
+  cloudformation_type_name               = "AWS::CloudTrail::ResourcePolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_cloudtrail_trail" {
@@ -582,6 +591,11 @@ resource_schema "aws_config_stored_query" {
   cloudformation_type_name = "AWS::Config::StoredQuery"
 }
 
+resource_schema "aws_connect_approved_origin" {
+  cloudformation_type_name               = "AWS::Connect::ApprovedOrigin"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_contact_flow" {
   cloudformation_type_name               = "AWS::Connect::ContactFlow"
   suppress_plural_data_source_generation = true
@@ -611,6 +625,11 @@ resource_schema "aws_connect_instance_storage_config" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_integration_association" {
+  cloudformation_type_name               = "AWS::Connect::IntegrationAssociation"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_phone_number" {
   cloudformation_type_name               = "AWS::Connect::PhoneNumber"
   suppress_plural_data_source_generation = true
@@ -632,6 +651,11 @@ resource_schema "aws_connect_quick_connect" {
 
 resource_schema "aws_connect_task_template" {
   cloudformation_type_name               = "AWS::Connect::TaskTemplate"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_security_key" {
+  cloudformation_type_name               = "AWS::Connect::SecurityKey"
   suppress_plural_data_source_generation = true
 }
 
@@ -846,6 +870,19 @@ resource_schema "aws_ec2_ipam_allocation" {
 
 resource_schema "aws_ec2_ipam_pool" {
   cloudformation_type_name = "AWS::EC2::IPAMPool"
+}
+
+resource_schema "aws_ec2_ipam_pool_cidr" {
+  cloudformation_type_name               = "AWS::EC2::IPAMPoolCidr"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ec2_ipam_resource_discovery" {
+  cloudformation_type_name = "AWS::EC2::IPAMResourceDiscovery"
+}
+
+resource_schema "aws_ec2_ipam_resource_discovery_association" {
+  cloudformation_type_name = "AWS::EC2::IPAMResourceDiscoveryAssociation"
 }
 
 resource_schema "aws_ec2_ipam_scope" {
@@ -1113,11 +1150,11 @@ resource_schema "aws_elasticache_user_group" {
 }
 
 resource_schema "aws_elasticbeanstalk_application" {
- cloudformation_type_name = "AWS::ElasticBeanstalk::Application"
+  cloudformation_type_name = "AWS::ElasticBeanstalk::Application"
 }
 
 resource_schema "aws_elasticbeanstalk_application_version" {
- cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
+  cloudformation_type_name = "AWS::ElasticBeanstalk::ApplicationVersion"
 }
 
 resource_schema "aws_elasticbeanstalk_configuration_template" {
@@ -1147,7 +1184,7 @@ resource_schema "aws_elasticloadbalancingv2_listener_rule" {
 }
 
 resource_schema "aws_elasticloadbalancingv2_target_group" {
- cloudformation_type_name = "AWS::ElasticLoadBalancingV2::TargetGroup"
+  cloudformation_type_name = "AWS::ElasticLoadBalancingV2::TargetGroup"
 }
 
 resource_schema "aws_emrserverless_application" {
@@ -2163,6 +2200,40 @@ resource_schema "aws_oam_sink" {
   cloudformation_type_name = "AWS::Oam::Sink"
 }
 
+resource_schema "aws_omics_annotation_store" {
+  cloudformation_type_name = "AWS::Omics::AnnotationStore"
+
+  # "StoreOptions/TsvStoreOptions/Schema is of unsupported type: list of key-value map".
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_omics_reference_store" {
+  cloudformation_type_name = "AWS::Omics::ReferenceStore"
+}
+
+resource_schema "aws_omics_run_group" {
+  cloudformation_type_name = "AWS::Omics::RunGroup"
+}
+
+resource_schema "aws_omics_sequence_store" {
+  cloudformation_type_name = "AWS::Omics::SequenceStore"
+}
+
+resource_schema "aws_omics_variant_store" {
+  cloudformation_type_name = "AWS::Omics::VariantStore"
+
+  # "top-level property Id is not a primary identifier".
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_omics_workflow" {
+  cloudformation_type_name = "AWS::Omics::Workflow"
+}
+
 resource_schema "aws_opensearchserverless_access_policy" {
   cloudformation_type_name = "AWS::OpenSearchServerless::AccessPolicy"
 }
@@ -2684,8 +2755,7 @@ resource_schema "aws_ssm_resource_policy" {
 }
 
 resource_schema "aws_ssmcontacts_contact" {
-  cloudformation_type_name               = "AWS::SSMContacts::Contact"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::SSMContacts::Contact"
 }
 
 resource_schema "aws_ssmcontacts_contact_channel" {
@@ -2765,6 +2835,15 @@ resource_schema "aws_sagemaker_model_bias_job_definition" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_sagemaker_model_card" {
+  cloudformation_type_name = "AWS::SageMaker::ModelCard"
+
+  # "Content/EvaluationDetails/MetricGroups/MetricData is of unsupported type: list of ".
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_sagemaker_model_explainability_job_definition" {
   cloudformation_type_name               = "AWS::SageMaker::ModelExplainabilityJobDefinition"
   suppress_plural_data_source_generation = true
@@ -2793,6 +2872,10 @@ resource_schema "aws_sagemaker_pipeline" {
 
 resource_schema "aws_sagemaker_project" {
   cloudformation_type_name = "AWS::SageMaker::Project"
+}
+
+resource_schema "aws_sagemaker_space" {
+  cloudformation_type_name = "AWS::SageMaker::Space"
 }
 
 resource_schema "aws_sagemaker_user_profile" {
@@ -2842,6 +2925,10 @@ resource_schema "aws_servicecatalogappregistry_attribute_group_association" {
 resource_schema "aws_servicecatalogappregistry_resource_association" {
   cloudformation_type_name               = "AWS::ServiceCatalogAppRegistry::ResourceAssociation"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_simspaceweaver_simulation" {
+  cloudformation_type_name = "AWS::SimSpaceWeaver::Simulation"
 }
 
 resource_schema "aws_signer_profile_permission" {

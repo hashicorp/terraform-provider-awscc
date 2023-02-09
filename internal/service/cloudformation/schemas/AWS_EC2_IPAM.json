@@ -51,6 +51,18 @@
       "description": "The Amazon Resource Name (ARN) of the IPAM.",
       "type": "string"
     },
+    "DefaultResourceDiscoveryId": {
+      "description": "The Id of the default resource discovery, created with this IPAM.",
+      "type": "string"
+    },
+    "DefaultResourceDiscoveryAssociationId": {
+      "description": "The Id of the default association to the default resource discovery, created with this IPAM.",
+      "type": "string"
+    },
+    "ResourceDiscoveryAssociationCount": {
+      "description": "The count of resource discoveries associated with this IPAM.",
+      "type": "integer"
+    },
     "Description": {
       "type": "string"
     },

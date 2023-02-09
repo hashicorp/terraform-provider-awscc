@@ -317,6 +317,35 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "AppMonitor configuration",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CustomEvents
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "AppMonitor custom events configuration",
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "Indicates whether AppMonitor accepts custom events.",
+		//	      "enum": [
+		//	        "ENABLED",
+		//	        "DISABLED"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"custom_events": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Indicates whether AppMonitor accepts custom events.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "AppMonitor custom events configuration",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: CwLogEnabled
 		// CloudFormation resource type schema:
 		//
@@ -426,6 +455,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"allow_cookies":             "AllowCookies",
 		"app_monitor_configuration": "AppMonitorConfiguration",
+		"custom_events":             "CustomEvents",
 		"cw_log_enabled":            "CwLogEnabled",
 		"destination":               "Destination",
 		"destination_arn":           "DestinationArn",
@@ -444,6 +474,7 @@ func appMonitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"metric_destinations":       "MetricDestinations",
 		"name":                      "Name",
 		"session_sample_rate":       "SessionSampleRate",
+		"status":                    "Status",
 		"tags":                      "Tags",
 		"telemetries":               "Telemetries",
 		"unit_label":                "UnitLabel",

@@ -68,15 +68,15 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The mode of authentication that members use to access the domain.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: DefaultUserSettings
+		// Property: DefaultSpaceSettings
 		// CloudFormation resource type schema:
 		//
 		//	{
 		//	  "additionalProperties": false,
-		//	  "description": "The default user settings.",
+		//	  "description": "The default space settings.",
 		//	  "properties": {
 		//	    "ExecutionRole": {
-		//	      "description": "The user profile Amazon Resource Name (ARN).",
+		//	      "description": "The execution role for the space.",
 		//	      "maxLength": 2048,
 		//	      "minLength": 20,
 		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
@@ -123,7 +123,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g4dn.4xlarge",
 		//	                "ml.g4dn.8xlarge",
 		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -229,7 +254,395 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g4dn.4xlarge",
 		//	                "ml.g4dn.8xlarge",
 		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SecurityGroups": {
+		//	      "description": "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "maxLength": 32,
+		//	        "pattern": "[-0-9a-zA-Z]+",
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"default_space_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The execution role for the space.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: JupyterServerAppSettings
+				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The Jupyter server's app settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: KernelGatewayAppSettings
+				"kernel_gateway_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: CustomImages
+						"custom_images": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: AppImageConfigName
+									"app_image_config_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The Name of the AppImageConfig.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageName
+									"image_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+										Description: "The name of the CustomImage. Must be unique to your account.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+									// Property: ImageVersionNumber
+									"image_version_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
+										Description: "The version number of the CustomImage.",
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Description: "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: DefaultResourceSpec
+						"default_resource_spec": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: InstanceType
+								"instance_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The instance type that the image version runs on.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: LifecycleConfigArn
+								"lifecycle_config_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageArn
+								"sage_maker_image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: SageMakerImageVersionArn
+								"sage_maker_image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon Resource Name (ARN) of the image version created on the instance.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The kernel gateway app settings.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: SecurityGroups
+				"security_groups": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The default space settings.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DefaultUserSettings
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The default user settings.",
+		//	  "properties": {
+		//	    "ExecutionRole": {
+		//	      "description": "The execution role for the user.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 20,
+		//	      "pattern": "^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$",
+		//	      "type": "string"
+		//	    },
+		//	    "JupyterServerAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The Jupyter server's app settings.",
+		//	      "properties": {
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
+		//	              ],
+		//	              "type": "string"
+		//	            },
+		//	            "LifecycleConfigArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the Lifecycle Configuration to attach to the Resource.",
+		//	              "maxLength": 256,
+		//	              "pattern": "arn:aws[a-z\\-]*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:studio-lifecycle-config/.*",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the SageMaker image that the image version belongs to.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	              "type": "string"
+		//	            },
+		//	            "SageMakerImageVersionArn": {
+		//	              "description": "The Amazon Resource Name (ARN) of the image version created on the instance.",
+		//	              "maxLength": 256,
+		//	              "pattern": "^arn:aws(-[\\w]+)*:sagemaker:.+:[0-9]{12}:image-version/[a-z0-9]([-.]?[a-z0-9])*/[0-9]+$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "KernelGatewayAppSettings": {
+		//	      "additionalProperties": false,
+		//	      "description": "The kernel gateway app settings.",
+		//	      "properties": {
+		//	        "CustomImages": {
+		//	          "description": "A list of custom SageMaker images that are configured to run as a KernelGateway app.",
+		//	          "insertionOrder": false,
+		//	          "items": {
+		//	            "additionalProperties": false,
+		//	            "description": "A custom SageMaker image.",
+		//	            "properties": {
+		//	              "AppImageConfigName": {
+		//	                "description": "The Name of the AppImageConfig.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageName": {
+		//	                "description": "The name of the CustomImage. Must be unique to your account.",
+		//	                "maxLength": 63,
+		//	                "pattern": "^[a-zA-Z0-9]([-.]?[a-zA-Z0-9]){0,62}$",
+		//	                "type": "string"
+		//	              },
+		//	              "ImageVersionNumber": {
+		//	                "description": "The version number of the CustomImage.",
+		//	                "minimum": 0,
+		//	                "type": "integer"
+		//	              }
+		//	            },
+		//	            "required": [
+		//	              "AppImageConfigName",
+		//	              "ImageName"
+		//	            ],
+		//	            "type": "object"
+		//	          },
+		//	          "maxItems": 30,
+		//	          "minItems": 0,
+		//	          "type": "array",
+		//	          "uniqueItems": false
+		//	        },
+		//	        "DefaultResourceSpec": {
+		//	          "additionalProperties": false,
+		//	          "description": "The default instance type and the Amazon Resource Name (ARN) of the default SageMaker image used by the KernelGateway app.",
+		//	          "properties": {
+		//	            "InstanceType": {
+		//	              "description": "The instance type that the image version runs on.",
+		//	              "enum": [
+		//	                "system",
+		//	                "ml.t3.micro",
+		//	                "ml.t3.small",
+		//	                "ml.t3.medium",
+		//	                "ml.t3.large",
+		//	                "ml.t3.xlarge",
+		//	                "ml.t3.2xlarge",
+		//	                "ml.m5.large",
+		//	                "ml.m5.xlarge",
+		//	                "ml.m5.2xlarge",
+		//	                "ml.m5.4xlarge",
+		//	                "ml.m5.8xlarge",
+		//	                "ml.m5.12xlarge",
+		//	                "ml.m5.16xlarge",
+		//	                "ml.m5.24xlarge",
+		//	                "ml.c5.large",
+		//	                "ml.c5.xlarge",
+		//	                "ml.c5.2xlarge",
+		//	                "ml.c5.4xlarge",
+		//	                "ml.c5.9xlarge",
+		//	                "ml.c5.12xlarge",
+		//	                "ml.c5.18xlarge",
+		//	                "ml.c5.24xlarge",
+		//	                "ml.p3.2xlarge",
+		//	                "ml.p3.8xlarge",
+		//	                "ml.p3.16xlarge",
+		//	                "ml.g4dn.xlarge",
+		//	                "ml.g4dn.2xlarge",
+		//	                "ml.g4dn.4xlarge",
+		//	                "ml.g4dn.8xlarge",
+		//	                "ml.g4dn.12xlarge",
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -334,7 +747,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g4dn.4xlarge",
 		//	                "ml.g4dn.8xlarge",
 		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -432,7 +870,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The user profile Amazon Resource Name (ARN).",
+					Description: "The execution role for the user.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: JupyterServerAppSettings
@@ -719,7 +1157,32 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g4dn.4xlarge",
 		//	                "ml.g4dn.8xlarge",
 		//	                "ml.g4dn.12xlarge",
-		//	                "ml.g4dn.16xlarge"
+		//	                "ml.g4dn.16xlarge",
+		//	                "ml.r5.large",
+		//	                "ml.r5.xlarge",
+		//	                "ml.r5.2xlarge",
+		//	                "ml.r5.4xlarge",
+		//	                "ml.r5.8xlarge",
+		//	                "ml.r5.12xlarge",
+		//	                "ml.r5.16xlarge",
+		//	                "ml.r5.24xlarge",
+		//	                "ml.p3dn.24xlarge",
+		//	                "ml.m5d.large",
+		//	                "ml.m5d.xlarge",
+		//	                "ml.m5d.2xlarge",
+		//	                "ml.m5d.4xlarge",
+		//	                "ml.m5d.8xlarge",
+		//	                "ml.m5d.12xlarge",
+		//	                "ml.m5d.16xlarge",
+		//	                "ml.m5d.24xlarge",
+		//	                "ml.g5.xlarge",
+		//	                "ml.g5.2xlarge",
+		//	                "ml.g5.4xlarge",
+		//	                "ml.g5.8xlarge",
+		//	                "ml.g5.12xlarge",
+		//	                "ml.g5.16xlarge",
+		//	                "ml.g5.24xlarge",
+		//	                "ml.g5.48xlarge"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1010,6 +1473,7 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auth_mode":                                      "AuthMode",
 		"custom_images":                                  "CustomImages",
 		"default_resource_spec":                          "DefaultResourceSpec",
+		"default_space_settings":                         "DefaultSpaceSettings",
 		"default_user_settings":                          "DefaultUserSettings",
 		"domain_arn":                                     "DomainArn",
 		"domain_execution_role_arn":                      "DomainExecutionRoleArn",

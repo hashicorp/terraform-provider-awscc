@@ -389,6 +389,7 @@ Optional:
 - `google_analytics` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--google_analytics))
 - `infor_nexus` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--infor_nexus))
 - `marketo` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--marketo))
+- `pardot` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--pardot))
 - `s3` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--s3))
 - `salesforce` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--salesforce))
 - `sapo_data` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--sapo_data))
@@ -453,6 +454,14 @@ Required:
 
 <a id="nestedatt--source_flow_config--source_connector_properties--marketo"></a>
 ### Nested Schema for `source_flow_config.source_connector_properties.marketo`
+
+Required:
+
+- `object` (String)
+
+
+<a id="nestedatt--source_flow_config--source_connector_properties--pardot"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.pardot`
 
 Required:
 
@@ -593,6 +602,7 @@ Optional:
 - `google_analytics` (String)
 - `infor_nexus` (String)
 - `marketo` (String)
+- `pardot` (String)
 - `s3` (String)
 - `salesforce` (String)
 - `sapo_data` (String)

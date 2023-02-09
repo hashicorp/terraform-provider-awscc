@@ -31,6 +31,7 @@ Resource Schema of AWS::EC2::IPAMPool Type
 - `description` (String)
 - `locale` (String) The region of this pool. If not set, this will default to "None" which will disable non-custom allocations. If the locale has been specified for the source pool, this value must match.
 - `provisioned_cidrs` (Attributes Set) A list of cidrs representing the address space available for allocation in this pool. (see [below for nested schema](#nestedatt--provisioned_cidrs))
+- `public_ip_source` (String) The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.
 - `publicly_advertisable` (Boolean) Determines whether or not address space from this pool is publicly advertised. Must be set if and only if the pool is IPv6.
 - `source_ipam_pool_id` (String) The Id of this pool's source. If set, all space provisioned in this pool must be free space provisioned in the parent pool.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))

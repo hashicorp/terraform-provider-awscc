@@ -136,6 +136,9 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	          "CloudwatchLogs": {
 		//	            "additionalProperties": false,
 		//	            "properties": {
+		//	              "BatchMode": {
+		//	                "type": "boolean"
+		//	              },
 		//	              "LogGroupName": {
 		//	                "type": "string"
 		//	              },
@@ -875,6 +878,9 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "CloudwatchLogs": {
 		//	          "additionalProperties": false,
 		//	          "properties": {
+		//	            "BatchMode": {
+		//	              "type": "boolean"
+		//	            },
 		//	            "LogGroupName": {
 		//	              "type": "string"
 		//	            },
@@ -1624,6 +1630,14 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 							// Property: CloudwatchLogs
 							"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: BatchMode
+									"batch_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+											boolplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: LogGroupName
 									"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 										Required: true,
@@ -2625,6 +2639,14 @@ func topicRuleResource(ctx context.Context) (resource.Resource, error) {
 						// Property: CloudwatchLogs
 						"cloudwatch_logs": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BatchMode
+								"batch_mode": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
 								// Property: LogGroupName
 								"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 									Required: true,

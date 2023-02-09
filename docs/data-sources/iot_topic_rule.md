@@ -91,6 +91,7 @@ Read-Only:
 
 Read-Only:
 
+- `batch_mode` (Boolean)
 - `log_group_name` (String)
 - `role_arn` (String)
 
@@ -487,6 +488,7 @@ Read-Only:
 
 Read-Only:
 
+- `batch_mode` (Boolean)
 - `log_group_name` (String)
 - `role_arn` (String)
 

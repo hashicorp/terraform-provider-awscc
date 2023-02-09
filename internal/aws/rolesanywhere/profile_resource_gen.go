@@ -87,11 +87,7 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
+			Required: true,
 		}, /*END ATTRIBUTE*/
 		// Property: ProfileArn
 		// CloudFormation resource type schema:
@@ -144,16 +140,12 @@ func profileResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.ValueStringsAre(
 					stringvalidator.LengthBetween(1, 1011),
 				),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SessionPolicy
 		// CloudFormation resource type schema:

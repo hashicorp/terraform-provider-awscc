@@ -91,6 +91,10 @@ Required:
 - `log_group_name` (String)
 - `role_arn` (String)
 
+Optional:
+
+- `batch_mode` (Boolean)
+
 
 <a id="nestedatt--topic_rule_payload--actions--cloudwatch_metric"></a>
 ### Nested Schema for `topic_rule_payload.actions.cloudwatch_metric`
@@ -543,6 +547,10 @@ Required:
 
 - `log_group_name` (String)
 - `role_arn` (String)
+
+Optional:
+
+- `batch_mode` (Boolean)
 
 
 <a id="nestedatt--topic_rule_payload--error_action--cloudwatch_metric"></a>

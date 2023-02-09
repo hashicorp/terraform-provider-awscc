@@ -53,6 +53,7 @@ Optional:
 - `google_analytics` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--google_analytics))
 - `infor_nexus` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--infor_nexus))
 - `marketo` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--marketo))
+- `pardot` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--pardot))
 - `redshift` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--redshift))
 - `salesforce` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--salesforce))
 - `sapo_data` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--sapo_data))
@@ -211,6 +212,27 @@ Optional:
 
 <a id="nestedatt--connector_profile_config--connector_profile_credentials--marketo--connector_o_auth_request"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_credentials.marketo.connector_o_auth_request`
+
+Optional:
+
+- `auth_code` (String) The code provided by the connector when it has been authenticated via the connected app.
+- `redirect_uri` (String) The URL to which the authentication server redirects the browser after authorization has been
+granted.
+
+
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--pardot"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.pardot`
+
+Optional:
+
+- `access_token` (String) The credentials used to access protected resources.
+- `client_credentials_arn` (String) The client credentials to fetch access token and refresh token.
+- `connector_o_auth_request` (Attributes) The oauth needed to request security tokens from the connector endpoint. (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_credentials--pardot--connector_o_auth_request))
+- `refresh_token` (String) The credentials used to acquire new access tokens.
+
+<a id="nestedatt--connector_profile_config--connector_profile_credentials--pardot--connector_o_auth_request"></a>
+### Nested Schema for `connector_profile_config.connector_profile_credentials.pardot.refresh_token`
 
 Optional:
 
@@ -392,6 +414,7 @@ Optional:
 - `dynatrace` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--dynatrace))
 - `infor_nexus` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--infor_nexus))
 - `marketo` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--marketo))
+- `pardot` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--pardot))
 - `redshift` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--redshift))
 - `salesforce` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--salesforce))
 - `sapo_data` (Attributes) (see [below for nested schema](#nestedatt--connector_profile_config--connector_profile_properties--sapo_data))
@@ -452,6 +475,19 @@ Required:
 - `instance_url` (String) The location of the Marketo resource
 
 
+<a id="nestedatt--connector_profile_config--connector_profile_properties--pardot"></a>
+### Nested Schema for `connector_profile_config.connector_profile_properties.pardot`
+
+Required:
+
+- `business_unit_id` (String) The Business unit id of Salesforce Pardot instance to be connected
+
+Optional:
+
+- `instance_url` (String) The location of the Salesforce Pardot resource
+- `is_sandbox_environment` (Boolean) Indicates whether the connector profile applies to a demo or production environment
+
+
 <a id="nestedatt--connector_profile_config--connector_profile_properties--redshift"></a>
 ### Nested Schema for `connector_profile_config.connector_profile_properties.redshift`
 
@@ -477,7 +513,7 @@ Optional:
 Optional:
 
 - `instance_url` (String) The location of the Salesforce resource
-- `is_sandbox_environment` (Boolean)
+- `is_sandbox_environment` (Boolean) Indicates whether the connector profile applies to a sandbox or production environment
 
 
 <a id="nestedatt--connector_profile_config--connector_profile_properties--sapo_data"></a>

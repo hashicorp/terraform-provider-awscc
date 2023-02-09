@@ -25,8 +25,6 @@ Resource schema for a Redshift-managed VPC endpoint.
 ### Optional
 
 - `resource_owner` (String) The AWS account ID of the owner of the cluster.
-- `vpc_endpoint` (Attributes) The connection endpoint for connecting to an Amazon Redshift cluster through the proxy. (see [below for nested schema](#nestedatt--vpc_endpoint))
-- `vpc_security_groups` (Attributes List) A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint. (see [below for nested schema](#nestedatt--vpc_security_groups))
 
 ### Read-Only
 
@@ -35,23 +33,22 @@ Resource schema for a Redshift-managed VPC endpoint.
 - `endpoint_status` (String) The status of the endpoint.
 - `id` (String) Uniquely identifies the resource.
 - `port` (Number) The port number on which the cluster accepts incoming connections.
+- `vpc_endpoint` (Attributes) The connection endpoint for connecting to an Amazon Redshift cluster through the proxy. (see [below for nested schema](#nestedatt--vpc_endpoint))
+- `vpc_security_groups` (Attributes List) A list of Virtual Private Cloud (VPC) security groups to be associated with the endpoint. (see [below for nested schema](#nestedatt--vpc_security_groups))
 
 <a id="nestedatt--vpc_endpoint"></a>
 ### Nested Schema for `vpc_endpoint`
 
-Optional:
-
-- `network_interfaces` (Attributes List) One or more network interfaces of the endpoint. Also known as an interface endpoint. (see [below for nested schema](#nestedatt--vpc_endpoint--network_interfaces))
-
 Read-Only:
 
+- `network_interfaces` (Attributes List) One or more network interfaces of the endpoint. Also known as an interface endpoint. (see [below for nested schema](#nestedatt--vpc_endpoint--network_interfaces))
 - `vpc_endpoint_id` (String) The connection endpoint ID for connecting an Amazon Redshift cluster through the proxy.
 - `vpc_id` (String) The VPC identifier that the endpoint is associated.
 
 <a id="nestedatt--vpc_endpoint--network_interfaces"></a>
 ### Nested Schema for `vpc_endpoint.network_interfaces`
 
-Optional:
+Read-Only:
 
 - `availability_zone` (String) The Availability Zone.
 - `network_interface_id` (String) The network interface identifier.
@@ -63,7 +60,7 @@ Optional:
 <a id="nestedatt--vpc_security_groups"></a>
 ### Nested Schema for `vpc_security_groups`
 
-Optional:
+Read-Only:
 
 - `status` (String) The status of the VPC security group.
 - `vpc_security_group_id` (String) The identifier of the VPC security group.

@@ -27,6 +27,7 @@ Data Source schema for AWS::DataSync::LocationObjectStorage
 - `location_arn` (String) The Amazon Resource Name (ARN) of the location that is created.
 - `location_uri` (String) The URL of the object storage location that was described.
 - `secret_key` (String) Optional. The secret key is used if credentials are required to access the self-managed object storage server.
+- `server_certificate` (String) X.509 PEM content containing a certificate authority or chain to trust.
 - `server_hostname` (String) The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.
 - `server_port` (Number) The port that your self-managed server accepts inbound network traffic on.
 - `server_protocol` (String) The protocol that the object storage server uses to communicate.

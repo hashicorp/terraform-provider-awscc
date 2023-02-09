@@ -32,6 +32,24 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ContactPostPassDurationSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"contact_post_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: ContactPrePassDurationSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"contact_pre_pass_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: EndpointDetails
 		// CloudFormation resource type schema:
 		//
@@ -211,21 +229,23 @@ func dataflowEndpointGroupDataSource(ctx context.Context) (datasource.DataSource
 	opts = opts.WithCloudFormationTypeName("AWS::GroundStation::DataflowEndpointGroup").WithTerraformTypeName("awscc_groundstation_dataflow_endpoint_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"address":            "Address",
-		"arn":                "Arn",
-		"endpoint":           "Endpoint",
-		"endpoint_details":   "EndpointDetails",
-		"id":                 "Id",
-		"key":                "Key",
-		"mtu":                "Mtu",
-		"name":               "Name",
-		"port":               "Port",
-		"role_arn":           "RoleArn",
-		"security_details":   "SecurityDetails",
-		"security_group_ids": "SecurityGroupIds",
-		"subnet_ids":         "SubnetIds",
-		"tags":               "Tags",
-		"value":              "Value",
+		"address":                            "Address",
+		"arn":                                "Arn",
+		"contact_post_pass_duration_seconds": "ContactPostPassDurationSeconds",
+		"contact_pre_pass_duration_seconds":  "ContactPrePassDurationSeconds",
+		"endpoint":                           "Endpoint",
+		"endpoint_details":                   "EndpointDetails",
+		"id":                                 "Id",
+		"key":                                "Key",
+		"mtu":                                "Mtu",
+		"name":                               "Name",
+		"port":                               "Port",
+		"role_arn":                           "RoleArn",
+		"security_details":                   "SecurityDetails",
+		"security_group_ids":                 "SecurityGroupIds",
+		"subnet_ids":                         "SubnetIds",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

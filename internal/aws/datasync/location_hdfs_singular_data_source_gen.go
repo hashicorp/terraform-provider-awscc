@@ -77,6 +77,7 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The Base64 string representation of the Keytab file.",
+		//	  "maxLength": 87384,
 		//	  "type": "string"
 		//	}
 		"kerberos_keytab": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -88,6 +89,7 @@ func locationHDFSDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//
 		//	{
 		//	  "description": "The string representation of the Krb5Conf file, or the presigned URL to access the Krb5.conf file within an S3 bucket.",
+		//	  "maxLength": 174764,
 		//	  "type": "string"
 		//	}
 		"kerberos_krb_5_conf": schema.StringAttribute{ /*START ATTRIBUTE*/

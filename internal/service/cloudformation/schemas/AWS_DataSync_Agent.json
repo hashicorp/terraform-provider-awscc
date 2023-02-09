@@ -102,9 +102,7 @@
     "tagProperty": "/properties/Tags"
   },
   "additionalProperties": false,
-  "required": [
-    "ActivationKey"
-  ],
+  "required": [],
   "readOnlyProperties": [
     "/properties/AgentArn",
     "/properties/EndpointType"

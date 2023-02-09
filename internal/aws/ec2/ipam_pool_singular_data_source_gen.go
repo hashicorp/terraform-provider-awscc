@@ -279,6 +279,21 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "A list of cidrs representing the address space available for allocation in this pool.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: PublicIpSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.",
+		//	  "enum": [
+		//	    "byoip",
+		//	    "amazon"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"public_ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAdvertisable
 		// CloudFormation resource type schema:
 		//
@@ -417,6 +432,7 @@ func iPAMPoolDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"locale":                            "Locale",
 		"pool_depth":                        "PoolDepth",
 		"provisioned_cidrs":                 "ProvisionedCidrs",
+		"public_ip_source":                  "PublicIpSource",
 		"publicly_advertisable":             "PubliclyAdvertisable",
 		"source_ipam_pool_id":               "SourceIpamPoolId",
 		"state":                             "State",

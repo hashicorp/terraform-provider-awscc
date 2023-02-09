@@ -45,7 +45,7 @@ func originAccessControlDataSource(ctx context.Context) (datasource.DataSource, 
 		//	      "type": "string"
 		//	    },
 		//	    "OriginAccessControlOriginType": {
-		//	      "pattern": "^(s3)$",
+		//	      "pattern": "^(s3|mediastore)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SigningBehavior": {
