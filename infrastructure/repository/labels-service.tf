@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 #
 # For future consideration, this list could be automatically generated
 # via the AWS SDK service list.
