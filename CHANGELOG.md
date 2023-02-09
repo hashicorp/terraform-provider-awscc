@@ -1,4 +1,46 @@
 ## 0.46.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudtrail_channel`
+* **New Data Source:** `awscc_cloudtrail_channels`
+* **New Data Source:** `awscc_cloudtrail_resource_policy`
+* **New Data Source:** `awscc_connect_approved_origin`
+* **New Data Source:** `awscc_connect_integration_association`
+* **New Data Source:** `awscc_connect_security_key`
+* **New Data Source:** `awscc_ec2_ipam_pool_cidr`
+* **New Data Source:** `awscc_ec2_ipam_resource_discoveries`
+* **New Data Source:** `awscc_ec2_ipam_resource_discovery`
+* **New Data Source:** `awscc_ec2_ipam_resource_discovery_association`
+* **New Data Source:** `awscc_ec2_ipam_resource_discovery_associations`
+* **New Data Source:** `awscc_omics_reference_store`
+* **New Data Source:** `awscc_omics_reference_stores`
+* **New Data Source:** `awscc_omics_run_group`
+* **New Data Source:** `awscc_omics_run_groups`
+* **New Data Source:** `awscc_omics_sequence_store`
+* **New Data Source:** `awscc_omics_sequence_stores`
+* **New Data Source:** `awscc_omics_workflow`
+* **New Data Source:** `awscc_omics_workflows`
+* **New Data Source:** `awscc_sagemaker_space`
+* **New Data Source:** `awscc_sagemaker_spaces`
+* **New Data Source:** `awscc_simspaceweaver_simulation`
+* **New Data Source:** `awscc_simspaceweaver_simulations`
+* **New Data Source:** `awscc_ssmcontacts_contacts`
+* **New Resource:** `awscc_cloudtrail_channel`
+* **New Resource:** `awscc_cloudtrail_resource_policy`
+* **New Resource:** `awscc_connect_approved_origin`
+* **New Resource:** `awscc_connect_integration_association`
+* **New Resource:** `awscc_connect_security_key`
+* **New Resource:** `awscc_ec2_ipam_pool_cidr`
+* **New Resource:** `awscc_ec2_ipam_resource_discovery`
+* **New Resource:** `awscc_ec2_ipam_resource_discovery_association`
+* **New Resource:** `awscc_omics_reference_store`
+* **New Resource:** `awscc_omics_run_group`
+* **New Resource:** `awscc_omics_sequence_store`
+* **New Resource:** `awscc_omics_workflow`
+* **New Resource:** `awscc_sagemaker_space`
+* **New Resource:** `awscc_simspaceweaver_simulation`
+
 ## 0.45.0 (January 19, 2023)
 
 FEATURES:
