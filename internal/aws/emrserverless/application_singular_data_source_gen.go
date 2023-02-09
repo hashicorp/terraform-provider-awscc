@@ -123,6 +123,34 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Configuration for Auto Stop of Application.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ImageConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The image configuration.",
+		//	  "properties": {
+		//	    "ImageUri": {
+		//	      "description": "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.",
+		//	      "maxLength": 1024,
+		//	      "minLength": 1,
+		//	      "pattern": "^([a-z0-9]+[a-z0-9-.]*)\\/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?:\\:([a-zA-Z0-9_][a-zA-Z0-9-._]{0,299})|@(sha256:[0-9a-f]{64}))$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ImageUri
+				"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The image configuration.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: InitialCapacity
 		// CloudFormation resource type schema:
 		//
@@ -447,6 +475,56 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The type of the application",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: WorkerTypeSpecifications
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "additionalProperties": false,
+		//	      "description": "The specifications for a worker type.",
+		//	      "properties": {
+		//	        "ImageConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "The image configuration.",
+		//	          "properties": {
+		//	            "ImageUri": {
+		//	              "description": "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.",
+		//	              "maxLength": 1024,
+		//	              "minLength": 1,
+		//	              "pattern": "^([a-z0-9]+[a-z0-9-.]*)\\/((?:[a-z0-9]+(?:[._-][a-z0-9]+)*\\/)*[a-z0-9]+(?:[._-][a-z0-9]+)*)(?:\\:([a-zA-Z0-9_][a-zA-Z0-9-._]{0,299})|@(sha256:[0-9a-f]{64}))$",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"worker_type_specifications": // Pattern: ""
+		schema.MapNestedAttribute{    /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: ImageConfiguration
+					"image_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ImageUri
+							"image_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The URI of an image in the Amazon ECR registry. This field is required when you create a new application. If you leave this field blank in an update, Amazon EMR will remove the image configuration.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Description: "The image configuration.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -464,29 +542,32 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EMRServerless::Application").WithTerraformTypeName("awscc_emrserverless_application")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"application_id":           "ApplicationId",
-		"architecture":             "Architecture",
-		"arn":                      "Arn",
-		"auto_start_configuration": "AutoStartConfiguration",
-		"auto_stop_configuration":  "AutoStopConfiguration",
-		"cpu":                      "Cpu",
-		"disk":                     "Disk",
-		"enabled":                  "Enabled",
-		"idle_timeout_minutes":     "IdleTimeoutMinutes",
-		"initial_capacity":         "InitialCapacity",
-		"key":                      "Key",
-		"maximum_capacity":         "MaximumCapacity",
-		"memory":                   "Memory",
-		"name":                     "Name",
-		"network_configuration":    "NetworkConfiguration",
-		"release_label":            "ReleaseLabel",
-		"security_group_ids":       "SecurityGroupIds",
-		"subnet_ids":               "SubnetIds",
-		"tags":                     "Tags",
-		"type":                     "Type",
-		"value":                    "Value",
-		"worker_configuration":     "WorkerConfiguration",
-		"worker_count":             "WorkerCount",
+		"application_id":             "ApplicationId",
+		"architecture":               "Architecture",
+		"arn":                        "Arn",
+		"auto_start_configuration":   "AutoStartConfiguration",
+		"auto_stop_configuration":    "AutoStopConfiguration",
+		"cpu":                        "Cpu",
+		"disk":                       "Disk",
+		"enabled":                    "Enabled",
+		"idle_timeout_minutes":       "IdleTimeoutMinutes",
+		"image_configuration":        "ImageConfiguration",
+		"image_uri":                  "ImageUri",
+		"initial_capacity":           "InitialCapacity",
+		"key":                        "Key",
+		"maximum_capacity":           "MaximumCapacity",
+		"memory":                     "Memory",
+		"name":                       "Name",
+		"network_configuration":      "NetworkConfiguration",
+		"release_label":              "ReleaseLabel",
+		"security_group_ids":         "SecurityGroupIds",
+		"subnet_ids":                 "SubnetIds",
+		"tags":                       "Tags",
+		"type":                       "Type",
+		"value":                      "Value",
+		"worker_configuration":       "WorkerConfiguration",
+		"worker_count":               "WorkerCount",
+		"worker_type_specifications": "WorkerTypeSpecifications",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

@@ -55,7 +55,20 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "The possible types of dialer config parameters",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "ProgressiveDialerConfig"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "PredictiveDialerConfig"
+		//	      ]
+		//	    }
+		//	  ],
 		//	  "properties": {
 		//	    "PredictiveDialerConfig": {
 		//	      "additionalProperties": false,
@@ -142,6 +155,20 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The configuration used for outbound calls.",
 		//	  "properties": {
+		//	    "AnswerMachineDetectionConfig": {
+		//	      "additionalProperties": false,
+		//	      "description": "The configuration used for answering machine detection during outbound calls",
+		//	      "properties": {
+		//	        "EnableAnswerMachineDetection": {
+		//	          "description": "Flag to decided whether outbound calls should have answering machine detection enabled or not",
+		//	          "type": "boolean"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "EnableAnswerMachineDetection"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "ConnectContactFlowArn": {
 		//	      "description": "The identifier of the contact flow for the outbound call.",
 		//	      "maxLength": 500,
@@ -168,6 +195,18 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"outbound_call_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AnswerMachineDetectionConfig
+				"answer_machine_detection_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: EnableAnswerMachineDetection
+						"enable_answer_machine_detection": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Description: "Flag to decided whether outbound calls should have answering machine detection enabled or not",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The configuration used for answering machine detection during outbound calls",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: ConnectContactFlowArn
 				"connect_contact_flow_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The identifier of the contact flow for the outbound call.",
@@ -256,20 +295,22 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::ConnectCampaigns::Campaign").WithTerraformTypeName("awscc_connectcampaigns_campaign")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                         "Arn",
-		"bandwidth_allocation":        "BandwidthAllocation",
-		"connect_contact_flow_arn":    "ConnectContactFlowArn",
-		"connect_instance_arn":        "ConnectInstanceArn",
-		"connect_queue_arn":           "ConnectQueueArn",
-		"connect_source_phone_number": "ConnectSourcePhoneNumber",
-		"dialer_config":               "DialerConfig",
-		"key":                         "Key",
-		"name":                        "Name",
-		"outbound_call_config":        "OutboundCallConfig",
-		"predictive_dialer_config":    "PredictiveDialerConfig",
-		"progressive_dialer_config":   "ProgressiveDialerConfig",
-		"tags":                        "Tags",
-		"value":                       "Value",
+		"answer_machine_detection_config": "AnswerMachineDetectionConfig",
+		"arn":                             "Arn",
+		"bandwidth_allocation":            "BandwidthAllocation",
+		"connect_contact_flow_arn":        "ConnectContactFlowArn",
+		"connect_instance_arn":            "ConnectInstanceArn",
+		"connect_queue_arn":               "ConnectQueueArn",
+		"connect_source_phone_number":     "ConnectSourcePhoneNumber",
+		"dialer_config":                   "DialerConfig",
+		"enable_answer_machine_detection": "EnableAnswerMachineDetection",
+		"key":                             "Key",
+		"name":                            "Name",
+		"outbound_call_config":            "OutboundCallConfig",
+		"predictive_dialer_config":        "PredictiveDialerConfig",
+		"progressive_dialer_config":       "ProgressiveDialerConfig",
+		"tags":                            "Tags",
+		"value":                           "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

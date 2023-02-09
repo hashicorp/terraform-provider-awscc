@@ -89,6 +89,68 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the image recipe that defines how images are configured, tested, and assessed.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ImageScanningConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains settings for vulnerability scans.",
+		//	  "properties": {
+		//	    "EcrConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Contains ECR settings for vulnerability scans.",
+		//	      "properties": {
+		//	        "ContainerTags": {
+		//	          "description": "Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.",
+		//	          "insertionOrder": true,
+		//	          "items": {
+		//	            "type": "string"
+		//	          },
+		//	          "type": "array"
+		//	        },
+		//	        "RepositoryName": {
+		//	          "description": "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don?t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "ImageScanningEnabled": {
+		//	      "description": "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+		//	      "type": "boolean"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"image_scanning_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: EcrConfiguration
+				"ecr_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: ContainerTags
+						"container_tags": schema.ListAttribute{ /*START ATTRIBUTE*/
+							ElementType: types.StringType,
+							Description: "Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RepositoryName
+						"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don?t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Contains ECR settings for vulnerability scans.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ImageScanningEnabled
+				"image_scanning_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "This sets whether Image Builder keeps a snapshot of the vulnerability scans that Amazon Inspector runs against the build instance when you create a new image.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains settings for vulnerability scans.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ImageTestsConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -196,15 +258,20 @@ func imageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                              "Arn",
 		"container_recipe_arn":             "ContainerRecipeArn",
+		"container_tags":                   "ContainerTags",
 		"distribution_configuration_arn":   "DistributionConfigurationArn",
+		"ecr_configuration":                "EcrConfiguration",
 		"enhanced_image_metadata_enabled":  "EnhancedImageMetadataEnabled",
 		"image_id":                         "ImageId",
 		"image_recipe_arn":                 "ImageRecipeArn",
+		"image_scanning_configuration":     "ImageScanningConfiguration",
+		"image_scanning_enabled":           "ImageScanningEnabled",
 		"image_tests_configuration":        "ImageTestsConfiguration",
 		"image_tests_enabled":              "ImageTestsEnabled",
 		"image_uri":                        "ImageUri",
 		"infrastructure_configuration_arn": "InfrastructureConfigurationArn",
 		"name":                             "Name",
+		"repository_name":                  "RepositoryName",
 		"tags":                             "Tags",
 		"timeout_minutes":                  "TimeoutMinutes",
 	})

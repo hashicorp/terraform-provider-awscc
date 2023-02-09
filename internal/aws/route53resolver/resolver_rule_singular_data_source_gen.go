@@ -162,6 +162,10 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "description": "One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses. ",
 		//	        "type": "string"
 		//	      },
+		//	      "Ipv6": {
+		//	        "description": "One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses. ",
+		//	        "type": "string"
+		//	      },
 		//	      "Port": {
 		//	        "description": "The port at Ip that you want to forward DNS queries to. ",
 		//	        "maxLength": 65535,
@@ -169,9 +173,6 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "Ip"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
@@ -183,6 +184,11 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 					// Property: Ip
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses. ",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Ipv6
+					"ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses. ",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Port
@@ -215,6 +221,7 @@ func resolverRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"arn":                  "Arn",
 		"domain_name":          "DomainName",
 		"ip":                   "Ip",
+		"ipv_6":                "Ipv6",
 		"key":                  "Key",
 		"name":                 "Name",
 		"port":                 "Port",

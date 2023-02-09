@@ -46,6 +46,17 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 			Description: "CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeviceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the customer gateway device.",
+		//	  "type": "string"
+		//	}
+		"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the customer gateway device.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// CloudFormation resource type schema:
 		//
@@ -128,6 +139,7 @@ func customerGatewayDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bgp_asn":             "BgpAsn",
 		"customer_gateway_id": "CustomerGatewayId",
+		"device_name":         "DeviceName",
 		"ip_address":          "IpAddress",
 		"key":                 "Key",
 		"tags":                "Tags",

@@ -96,6 +96,8 @@ func locationSMBDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The specific SMB version that you want DataSync to use to mount your SMB share.",
 		//	      "enum": [
 		//	        "AUTOMATIC",
+		//	        "SMB1",
+		//	        "SMB2_0",
 		//	        "SMB2",
 		//	        "SMB3"
 		//	      ],

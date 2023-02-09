@@ -547,6 +547,18 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
+		//	      "KinesisStreamSpecification": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "StreamArn": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "StreamArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "PointInTimeRecoverySpecification": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -745,6 +757,16 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: KinesisStreamSpecification
+					"kinesis_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: StreamArn
+							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: PointInTimeRecoverySpecification
@@ -1089,6 +1111,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key":                                  "Key",
 		"key_schema":                           "KeySchema",
 		"key_type":                             "KeyType",
+		"kinesis_stream_specification":         "KinesisStreamSpecification",
 		"kms_master_key_id":                    "KMSMasterKeyId",
 		"local_secondary_indexes":              "LocalSecondaryIndexes",
 		"max_capacity":                         "MaxCapacity",

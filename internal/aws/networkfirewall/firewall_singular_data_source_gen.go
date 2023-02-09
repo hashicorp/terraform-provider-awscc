@@ -136,6 +136,10 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "IPAddressType": {
+		//	        "description": "A IPAddressType",
+		//	        "type": "string"
+		//	      },
 		//	      "SubnetId": {
 		//	        "description": "A SubnetId.",
 		//	        "type": "string"
@@ -153,6 +157,11 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: IPAddressType
+					"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A IPAddressType",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A SubnetId.",
@@ -242,6 +251,7 @@ func firewallDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"firewall_name":                     "FirewallName",
 		"firewall_policy_arn":               "FirewallPolicyArn",
 		"firewall_policy_change_protection": "FirewallPolicyChangeProtection",
+		"ip_address_type":                   "IPAddressType",
 		"key":                               "Key",
 		"subnet_change_protection":          "SubnetChangeProtection",
 		"subnet_id":                         "SubnetId",

@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -41,6 +41,15 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"connectivity_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaxDrainDurationSeconds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "integer"
+		//	}
+		"max_drain_duration_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: NatGatewayId
 		// CloudFormation resource type schema:
 		//
@@ -58,6 +67,46 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"private_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryAllocationIds
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"secondary_allocation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryPrivateIpAddressCount
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"secondary_private_ip_address_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: SecondaryPrivateIpAddresses
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": true,
+		//	  "items": {
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"secondary_private_ip_addresses": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetId
 		// CloudFormation resource type schema:
@@ -124,14 +173,18 @@ func natGatewayDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::EC2::NatGateway").WithTerraformTypeName("awscc_ec2_nat_gateway")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"allocation_id":      "AllocationId",
-		"connectivity_type":  "ConnectivityType",
-		"key":                "Key",
-		"nat_gateway_id":     "NatGatewayId",
-		"private_ip_address": "PrivateIpAddress",
-		"subnet_id":          "SubnetId",
-		"tags":               "Tags",
-		"value":              "Value",
+		"allocation_id":                      "AllocationId",
+		"connectivity_type":                  "ConnectivityType",
+		"key":                                "Key",
+		"max_drain_duration_seconds":         "MaxDrainDurationSeconds",
+		"nat_gateway_id":                     "NatGatewayId",
+		"private_ip_address":                 "PrivateIpAddress",
+		"secondary_allocation_ids":           "SecondaryAllocationIds",
+		"secondary_private_ip_address_count": "SecondaryPrivateIpAddressCount",
+		"secondary_private_ip_addresses":     "SecondaryPrivateIpAddresses",
+		"subnet_id":                          "SubnetId",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

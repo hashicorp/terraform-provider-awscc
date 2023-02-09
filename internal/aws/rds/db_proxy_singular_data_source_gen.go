@@ -65,10 +65,6 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "SecretArn": {
 		//	        "description": "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
 		//	        "type": "string"
-		//	      },
-		//	      "UserName": {
-		//	        "description": "The name of the database user to which the proxy connects.",
-		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "type": "object"
@@ -102,11 +98,6 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: SecretArn
 					"secret_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "The Amazon Resource Name (ARN) representing the secret that the proxy uses to authenticate to the RDS DB instance or Aurora DB cluster. These secrets are stored within Amazon Secrets Manager. ",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: UserName
-					"user_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the database user to which the proxy connects.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -327,7 +318,6 @@ func dBProxyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"role_arn":                  "RoleArn",
 		"secret_arn":                "SecretArn",
 		"tags":                      "Tags",
-		"user_name":                 "UserName",
 		"value":                     "Value",
 		"vpc_id":                    "VpcId",
 		"vpc_security_group_ids":    "VpcSecurityGroupIds",

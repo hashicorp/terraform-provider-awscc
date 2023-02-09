@@ -375,6 +375,43 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "Pardot": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientCredentialsArn": {
+		//	              "description": "The client credentials to fetch access token and refresh token.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshToken": {
+		//	              "description": "The credentials used to acquire new access tokens.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Redshift": {
 		//	          "properties": {
 		//	            "Password": {
@@ -780,6 +817,30 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "Pardot": {
+		//	          "properties": {
+		//	            "BusinessUnitId": {
+		//	              "description": "The Business unit id of Salesforce Pardot instance to be connected",
+		//	              "maxLength": 18,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Salesforce Pardot resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "IsSandboxEnvironment": {
+		//	              "description": "Indicates whether the connector profile applies to a demo or production environment",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BusinessUnitId"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "Redshift": {
 		//	          "properties": {
 		//	            "BucketName": {
@@ -909,7 +970,8 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	              "pattern": "\\S+",
 		//	              "type": "string"
 		//	            },
-		//	            "isSandboxEnvironment": {
+		//	            "IsSandboxEnvironment": {
+		//	              "description": "Indicates whether the connector profile applies to a sandbox or production environment",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
@@ -1276,6 +1338,44 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCredentialsArn
+								"client_credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client credentials to fetch access token and refresh token.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Computed:    true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Redshift
 						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1619,6 +1719,27 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 							}, /*END SCHEMA*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BusinessUnitId
+								"business_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Business unit id of Salesforce Pardot instance to be connected",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Salesforce Pardot resource",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: IsSandboxEnvironment
+								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether the connector profile applies to a demo or production environment",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: Redshift
 						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -1727,9 +1848,10 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 									Description: "The location of the Salesforce resource",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
-								// Property: isSandboxEnvironment
+								// Property: IsSandboxEnvironment
 								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Computed: true,
+									Description: "Indicates whether the connector profile applies to a sandbox or production environment",
+									Computed:    true,
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Computed: true,
@@ -1847,6 +1969,7 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "List of Saas providers that need connector profile to be created",
 		//	  "enum": [
 		//	    "Salesforce",
+		//	    "Pardot",
 		//	    "Singular",
 		//	    "Slack",
 		//	    "Redshift",
@@ -1931,6 +2054,7 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		"basic_auth_credentials":        "BasicAuthCredentials",
 		"bucket_name":                   "BucketName",
 		"bucket_prefix":                 "BucketPrefix",
+		"business_unit_id":              "BusinessUnitId",
 		"client_credentials_arn":        "ClientCredentialsArn",
 		"client_id":                     "ClientId",
 		"client_number":                 "ClientNumber",
@@ -1960,7 +2084,7 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		"infor_nexus":                   "InforNexus",
 		"instance_url":                  "InstanceUrl",
 		"is_redshift_serverless":        "IsRedshiftServerless",
-		"is_sandbox_environment":        "isSandboxEnvironment",
+		"is_sandbox_environment":        "IsSandboxEnvironment",
 		"kms_arn":                       "KMSArn",
 		"logon_language":                "LogonLanguage",
 		"marketo":                       "Marketo",
@@ -1971,6 +2095,7 @@ func connectorProfileDataSource(ctx context.Context) (datasource.DataSource, err
 		"o_auth_request":                "OAuthRequest",
 		"o_auth_scopes":                 "OAuthScopes",
 		"oauth_2":                       "Oauth2",
+		"pardot":                        "Pardot",
 		"password":                      "Password",
 		"port_number":                   "PortNumber",
 		"private_link_service_name":     "PrivateLinkServiceName",
