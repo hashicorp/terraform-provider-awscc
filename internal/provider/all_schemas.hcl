@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 defaults {
   schema_cache_directory     = "../service/cloudformation/schemas"
   terraform_type_name_prefix = "awscc"

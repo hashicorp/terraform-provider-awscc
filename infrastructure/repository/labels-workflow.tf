@@ -1,3 +1,6 @@
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 locals {
   workflow_labels = {
     "provider"                       = "844fba", # color:terraform (main)
