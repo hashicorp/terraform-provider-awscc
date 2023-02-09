@@ -128,6 +128,8 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The specific SMB version that you want DataSync to use to mount your SMB share.",
 		//	      "enum": [
 		//	        "AUTOMATIC",
+		//	        "SMB1",
+		//	        "SMB2_0",
 		//	        "SMB2",
 		//	        "SMB3"
 		//	      ],
@@ -146,6 +148,8 @@ func locationSMBResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"AUTOMATIC",
+							"SMB1",
+							"SMB2_0",
 							"SMB2",
 							"SMB3",
 						),

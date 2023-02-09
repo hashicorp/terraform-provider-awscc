@@ -185,6 +185,10 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "IPAddressType": {
+		//	        "description": "A IPAddressType",
+		//	        "type": "string"
+		//	      },
 		//	      "SubnetId": {
 		//	        "description": "A SubnetId.",
 		//	        "type": "string"
@@ -202,6 +206,15 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_mappings": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: IPAddressType
+					"ip_address_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "A IPAddressType",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: SubnetId
 					"subnet_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "A SubnetId.",
@@ -316,6 +329,7 @@ func firewallResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_name":                     "FirewallName",
 		"firewall_policy_arn":               "FirewallPolicyArn",
 		"firewall_policy_change_protection": "FirewallPolicyChangeProtection",
+		"ip_address_type":                   "IPAddressType",
 		"key":                               "Key",
 		"subnet_change_protection":          "SubnetChangeProtection",
 		"subnet_id":                         "SubnetId",

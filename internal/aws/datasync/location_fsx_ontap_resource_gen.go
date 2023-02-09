@@ -267,10 +267,13 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration settings for NFS or SMB protocol.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Protocol is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupArns
 		// CloudFormation resource type schema:
@@ -457,6 +460,7 @@ func locationFSxONTAPResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Protocol",
 		"/properties/Subdirectory",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

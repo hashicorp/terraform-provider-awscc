@@ -672,6 +672,18 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array",
 		//	        "uniqueItems": true
 		//	      },
+		//	      "KinesisStreamSpecification": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "StreamArn": {
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "StreamArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
 		//	      "PointInTimeRecoverySpecification": {
 		//	        "additionalProperties": false,
 		//	        "properties": {
@@ -931,6 +943,20 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 							setplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: KinesisStreamSpecification
+					"kinesis_stream_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: StreamArn
+							"stream_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Required: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+							objectplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: PointInTimeRecoverySpecification
@@ -1419,6 +1445,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"key":                                  "Key",
 		"key_schema":                           "KeySchema",
 		"key_type":                             "KeyType",
+		"kinesis_stream_specification":         "KinesisStreamSpecification",
 		"kms_master_key_id":                    "KMSMasterKeyId",
 		"local_secondary_indexes":              "LocalSecondaryIndexes",
 		"max_capacity":                         "MaxCapacity",

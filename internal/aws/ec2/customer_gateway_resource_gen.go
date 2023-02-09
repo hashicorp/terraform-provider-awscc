@@ -59,6 +59,22 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeviceName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A name for the customer gateway device.",
+		//	  "type": "string"
+		//	}
+		"device_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A name for the customer gateway device.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: IpAddress
 		// CloudFormation resource type schema:
 		//
@@ -157,6 +173,7 @@ func customerGatewayResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"bgp_asn":             "BgpAsn",
 		"customer_gateway_id": "CustomerGatewayId",
+		"device_name":         "DeviceName",
 		"ip_address":          "IpAddress",
 		"key":                 "Key",
 		"tags":                "Tags",

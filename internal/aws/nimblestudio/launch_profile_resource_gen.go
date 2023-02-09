@@ -183,10 +183,31 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "MaxStoppedSessionLengthInMinutes": {
 		//	      "default": 0,
-		//	      "description": "\u003cp\u003eInteger that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.\u003c/p\u003e\n         \u003cp\u003eIf the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e, the session fails. If the time that a session\n            stays in the READY state exceeds the \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the\n            session will automatically be terminated (instead of stopped).\u003c/p\u003e\n         \u003cp\u003eIf the value is set to a positive number, the session can be stopped. You can call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the session will automatically be\n            stopped (instead of terminated).\u003c/p\u003e",
+		//	      "description": "\u003cp\u003eInteger that determines if you can start and stop your sessions and how long a session\n            can stay in the \u003ccode\u003eSTOPPED\u003c/code\u003e state. The default value is 0. The maximum value is\n            5760.\u003c/p\u003e\n         \u003cp\u003eThis field is allowed only when \u003ccode\u003esessionPersistenceMode\u003c/code\u003e is\n                \u003ccode\u003eACTIVATED\u003c/code\u003e and \u003ccode\u003eautomaticTerminationMode\u003c/code\u003e is\n                \u003ccode\u003eACTIVATED\u003c/code\u003e.\u003c/p\u003e\n         \u003cp\u003eIf the value is set to 0, your sessions can?t be \u003ccode\u003eSTOPPED\u003c/code\u003e. If you then\n            call \u003ccode\u003eStopStreamingSession\u003c/code\u003e, the session fails. If the time that a session\n            stays in the \u003ccode\u003eREADY\u003c/code\u003e state exceeds the \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e\n            value, the session will automatically be terminated (instead of\n            \u003ccode\u003eSTOPPED\u003c/code\u003e).\u003c/p\u003e\n         \u003cp\u003eIf the value is set to a positive number, the session can be stopped. You can call\n                \u003ccode\u003eStopStreamingSession\u003c/code\u003e to stop sessions in the \u003ccode\u003eREADY\u003c/code\u003e state.\n            If the time that a session stays in the \u003ccode\u003eREADY\u003c/code\u003e state exceeds the\n                \u003ccode\u003emaxSessionLengthInMinutes\u003c/code\u003e value, the session will automatically be\n            stopped (instead of terminated).\u003c/p\u003e",
 		//	      "maximum": 5760,
 		//	      "minimum": 0,
 		//	      "type": "number"
+		//	    },
+		//	    "SessionBackup": {
+		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eConfigures how streaming sessions are backed up when launched from this launch\n            profile.\u003c/p\u003e",
+		//	      "properties": {
+		//	        "MaxBackupsToRetain": {
+		//	          "default": 0,
+		//	          "description": "\u003cp\u003eThe maximum number of backups that each streaming session created from this launch\n            profile can have.\u003c/p\u003e",
+		//	          "maximum": 10,
+		//	          "minimum": 0,
+		//	          "type": "number"
+		//	        },
+		//	        "Mode": {
+		//	          "enum": [
+		//	            "AUTOMATIC",
+		//	            "DEACTIVATED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    },
 		//	    "SessionPersistenceMode": {
 		//	      "enum": [
@@ -251,21 +272,25 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "VolumeConfiguration": {
 		//	      "additionalProperties": false,
+		//	      "description": "\u003cp\u003eCustom volume configuration for the root volumes that are attached to streaming\n            sessions.\u003c/p\u003e\n         \u003cp\u003eThis parameter is only allowed when \u003ccode\u003esessionPersistenceMode\u003c/code\u003e is\n                \u003ccode\u003eACTIVATED\u003c/code\u003e.\u003c/p\u003e",
 		//	      "properties": {
 		//	        "Iops": {
 		//	          "default": 3000,
+		//	          "description": "\u003cp\u003eThe number of I/O operations per second for the root volume that is attached to\n            streaming session.\u003c/p\u003e",
 		//	          "maximum": 16000,
 		//	          "minimum": 3000,
 		//	          "type": "number"
 		//	        },
 		//	        "Size": {
 		//	          "default": 500,
+		//	          "description": "\u003cp\u003eThe size of the root volume that is attached to the streaming session. The root volume\n            size is measured in GiBs.\u003c/p\u003e",
 		//	          "maximum": 16000,
 		//	          "minimum": 100,
 		//	          "type": "number"
 		//	        },
 		//	        "Throughput": {
 		//	          "default": 125,
+		//	          "description": "\u003cp\u003eThe throughput to provision for the root volume that is attached to the streaming\n            session. The throughput is measured in MiB/s.\u003c/p\u003e",
 		//	          "maximum": 1000,
 		//	          "minimum": 125,
 		//	          "type": "number"
@@ -348,7 +373,7 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: MaxStoppedSessionLengthInMinutes
 				"max_stopped_session_length_in_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
-					Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>\n         <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call\n                <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the\n            session will automatically be terminated (instead of stopped).</p>\n         <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time\n            that a session stays in the READY state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
+					Description: "<p>Integer that determines if you can start and stop your sessions and how long a session\n            can stay in the <code>STOPPED</code> state. The default value is 0. The maximum value is\n            5760.</p>\n         <p>This field is allowed only when <code>sessionPersistenceMode</code> is\n                <code>ACTIVATED</code> and <code>automaticTerminationMode</code> is\n                <code>ACTIVATED</code>.</p>\n         <p>If the value is set to 0, your sessions can?t be <code>STOPPED</code>. If you then\n            call <code>StopStreamingSession</code>, the session fails. If the time that a session\n            stays in the <code>READY</code> state exceeds the <code>maxSessionLengthInMinutes</code>\n            value, the session will automatically be terminated (instead of\n            <code>STOPPED</code>).</p>\n         <p>If the value is set to a positive number, the session can be stopped. You can call\n                <code>StopStreamingSession</code> to stop sessions in the <code>READY</code> state.\n            If the time that a session stays in the <code>READY</code> state exceeds the\n                <code>maxSessionLengthInMinutes</code> value, the session will automatically be\n            stopped (instead of terminated).</p>",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Float64{ /*START VALIDATORS*/
@@ -357,6 +382,44 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						generic.Float64DefaultValue(0.000000),
 						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SessionBackup
+				"session_backup": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: MaxBackupsToRetain
+						"max_backups_to_retain": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Description: "<p>The maximum number of backups that each streaming session created from this launch\n            profile can have.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 10.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								generic.Float64DefaultValue(0.000000),
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Mode
+						"mode": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"AUTOMATIC",
+									"DEACTIVATED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "<p>Configures how streaming sessions are backed up when launched from this launch\n            profile.</p>",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SessionPersistenceMode
@@ -453,8 +516,9 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Iops
 						"iops": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "<p>The number of I/O operations per second for the root volume that is attached to\n            streaming session.</p>",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(3000.000000, 16000.000000),
 							}, /*END VALIDATORS*/
@@ -465,8 +529,9 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Size
 						"size": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "<p>The size of the root volume that is attached to the streaming session. The root volume\n            size is measured in GiBs.</p>",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(100.000000, 16000.000000),
 							}, /*END VALIDATORS*/
@@ -477,8 +542,9 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: Throughput
 						"throughput": schema.Float64Attribute{ /*START ATTRIBUTE*/
-							Optional: true,
-							Computed: true,
+							Description: "<p>The throughput to provision for the root volume that is attached to the streaming\n            session. The throughput is measured in MiB/s.</p>",
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.Float64{ /*START VALIDATORS*/
 								float64validator.Between(125.000000, 1000.000000),
 							}, /*END VALIDATORS*/
@@ -488,8 +554,9 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Optional: true,
-					Computed: true,
+					Description: "<p>Custom volume configuration for the root volumes that are attached to streaming\n            sessions.</p>\n         <p>This parameter is only allowed when <code>sessionPersistenceMode</code> is\n                <code>ACTIVATED</code>.</p>",
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
@@ -585,11 +652,13 @@ func launchProfileResource(ctx context.Context) (resource.Resource, error) {
 		"launch_profile_id":                     "LaunchProfileId",
 		"launch_profile_protocol_versions":      "LaunchProfileProtocolVersions",
 		"linux":                                 "Linux",
+		"max_backups_to_retain":                 "MaxBackupsToRetain",
 		"max_session_length_in_minutes":         "MaxSessionLengthInMinutes",
 		"max_stopped_session_length_in_minutes": "MaxStoppedSessionLengthInMinutes",
 		"mode":                                  "Mode",
 		"name":                                  "Name",
 		"root":                                  "Root",
+		"session_backup":                        "SessionBackup",
 		"session_persistence_mode":              "SessionPersistenceMode",
 		"session_storage":                       "SessionStorage",
 		"size":                                  "Size",

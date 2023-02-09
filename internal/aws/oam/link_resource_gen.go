@@ -63,11 +63,13 @@ func linkResource(ctx context.Context) (resource.Resource, error) {
 		//	  "type": "string"
 		//	}
 		"label_template": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 64),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 			// LabelTemplate is a write-only property.

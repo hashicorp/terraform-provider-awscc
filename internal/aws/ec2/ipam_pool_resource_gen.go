@@ -359,6 +359,32 @@ func iPAMPoolResource(ctx context.Context) (resource.Resource, error) {
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PublicIpSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.",
+		//	  "enum": [
+		//	    "byoip",
+		//	    "amazon"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"public_ip_source": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address source for pools in the public scope. Only used for provisioning IP address CIDRs to pools in the public scope. Default is `byoip`.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"byoip",
+					"amazon",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PubliclyAdvertisable
 		// CloudFormation resource type schema:
 		//
@@ -528,6 +554,7 @@ func iPAMPoolResource(ctx context.Context) (resource.Resource, error) {
 		"locale":                            "Locale",
 		"pool_depth":                        "PoolDepth",
 		"provisioned_cidrs":                 "ProvisionedCidrs",
+		"public_ip_source":                  "PublicIpSource",
 		"publicly_advertisable":             "PubliclyAdvertisable",
 		"source_ipam_pool_id":               "SourceIpamPoolId",
 		"state":                             "State",

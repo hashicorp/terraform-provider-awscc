@@ -202,7 +202,8 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	                "enum": [
 		//	                  "PASS",
 		//	                  "DROP",
-		//	                  "ALERT"
+		//	                  "ALERT",
+		//	                  "REJECT"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -766,6 +767,7 @@ func ruleGroupResource(ctx context.Context) (resource.Resource, error) {
 												"PASS",
 												"DROP",
 												"ALERT",
+												"REJECT",
 											),
 										}, /*END VALIDATORS*/
 									}, /*END ATTRIBUTE*/

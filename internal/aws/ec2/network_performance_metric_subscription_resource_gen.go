@@ -29,11 +29,11 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The destination is a mandatory element for the metric subscription.",
+		//	  "description": "The target Region or Availability Zone for the metric to subscribe to.",
 		//	  "type": "string"
 		//	}
 		"destination": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The destination is a mandatory element for the metric subscription.",
+			Description: "The target Region or Availability Zone for the metric to subscribe to.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -43,11 +43,11 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The metric type for the metric subscription.",
+		//	  "description": "The metric type to subscribe to.",
 		//	  "type": "string"
 		//	}
 		"metric": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The metric type for the metric subscription.",
+			Description: "The metric type to subscribe to.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -57,11 +57,11 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The source is a mandatory element for the metric subscription.",
+		//	  "description": "The starting Region or Availability Zone for metric to subscribe to.",
 		//	  "type": "string"
 		//	}
 		"source": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The source is a mandatory element for the metric subscription.",
+			Description: "The starting Region or Availability Zone for metric to subscribe to.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -71,11 +71,11 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The statistic type for the metric subscription.",
+		//	  "description": "The statistic to subscribe to.",
 		//	  "type": "string"
 		//	}
 		"statistic": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The statistic type for the metric subscription.",
+			Description: "The statistic to subscribe to.",
 			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -92,7 +92,7 @@ func networkPerformanceMetricSubscriptionResource(ctx context.Context) (resource
 	}
 
 	schema := schema.Schema{
-		Description: "An example resource schema demonstrating some basic constructs and validation rules.",
+		Description: "Resource Type definition for AWS::EC2::NetworkPerformanceMetricSubscription",
 		Version:     1,
 		Attributes:  attributes,
 	}

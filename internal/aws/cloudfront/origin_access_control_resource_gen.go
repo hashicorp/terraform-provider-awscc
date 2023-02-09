@@ -52,7 +52,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 		//	      "type": "string"
 		//	    },
 		//	    "OriginAccessControlOriginType": {
-		//	      "pattern": "^(s3)$",
+		//	      "pattern": "^(s3|mediastore)$",
 		//	      "type": "string"
 		//	    },
 		//	    "SigningBehavior": {
@@ -90,7 +90,7 @@ func originAccessControlResource(ctx context.Context) (resource.Resource, error)
 				"origin_access_control_origin_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Required: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("^(s3)$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(s3|mediastore)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SigningBehavior

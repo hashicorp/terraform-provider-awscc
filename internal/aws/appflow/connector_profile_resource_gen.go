@@ -403,6 +403,43 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "Pardot": {
+		//	          "properties": {
+		//	            "AccessToken": {
+		//	              "description": "The credentials used to access protected resources.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "ClientCredentialsArn": {
+		//	              "description": "The client credentials to fetch access token and refresh token.",
+		//	              "maxLength": 2048,
+		//	              "pattern": "arn:aws:secretsmanager:.*:[0-9]+:.*",
+		//	              "type": "string"
+		//	            },
+		//	            "ConnectorOAuthRequest": {
+		//	              "description": "The oauth needed to request security tokens from the connector endpoint.",
+		//	              "properties": {
+		//	                "AuthCode": {
+		//	                  "description": "The code provided by the connector when it has been authenticated via the connected app.",
+		//	                  "type": "string"
+		//	                },
+		//	                "RedirectUri": {
+		//	                  "description": "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            },
+		//	            "RefreshToken": {
+		//	              "description": "The credentials used to acquire new access tokens.",
+		//	              "maxLength": 512,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        },
 		//	        "Redshift": {
 		//	          "properties": {
 		//	            "Password": {
@@ -808,6 +845,30 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "Pardot": {
+		//	          "properties": {
+		//	            "BusinessUnitId": {
+		//	              "description": "The Business unit id of Salesforce Pardot instance to be connected",
+		//	              "maxLength": 18,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "InstanceUrl": {
+		//	              "description": "The location of the Salesforce Pardot resource",
+		//	              "maxLength": 256,
+		//	              "pattern": "\\S+",
+		//	              "type": "string"
+		//	            },
+		//	            "IsSandboxEnvironment": {
+		//	              "description": "Indicates whether the connector profile applies to a demo or production environment",
+		//	              "type": "boolean"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "BusinessUnitId"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "Redshift": {
 		//	          "properties": {
 		//	            "BucketName": {
@@ -937,7 +998,8 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	              "pattern": "\\S+",
 		//	              "type": "string"
 		//	            },
-		//	            "isSandboxEnvironment": {
+		//	            "IsSandboxEnvironment": {
+		//	              "description": "Indicates whether the connector profile applies to a sandbox or production environment",
 		//	              "type": "boolean"
 		//	            }
 		//	          },
@@ -1519,6 +1581,84 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: AccessToken
+								"access_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to access protected resources.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ClientCredentialsArn
+								"client_credentials_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The client credentials to fetch access token and refresh token.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(2048),
+										stringvalidator.RegexMatches(regexp.MustCompile("arn:aws:secretsmanager:.*:[0-9]+:.*"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: ConnectorOAuthRequest
+								"connector_o_auth_request": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: AuthCode
+										"auth_code": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The code provided by the connector when it has been authenticated via the connected app.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+										// Property: RedirectUri
+										"redirect_uri": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Description: "The URL to which the authentication server redirects the browser after authorization has been\ngranted.",
+											Optional:    true,
+											Computed:    true,
+											PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+												stringplanmodifier.UseStateForUnknown(),
+											}, /*END PLAN MODIFIERS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Description: "The oauth needed to request security tokens from the connector endpoint.",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: RefreshToken
+								"refresh_token": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The credentials used to acquire new access tokens.",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(512),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
@@ -2181,6 +2321,47 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 								objectplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
+						// Property: Pardot
+						"pardot": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: BusinessUnitId
+								"business_unit_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Business unit id of Salesforce Pardot instance to be connected",
+									Required:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(18),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+								}, /*END ATTRIBUTE*/
+								// Property: InstanceUrl
+								"instance_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The location of the Salesforce Pardot resource",
+									Optional:    true,
+									Computed:    true,
+									Validators: []validator.String{ /*START VALIDATORS*/
+										stringvalidator.LengthAtMost(256),
+										stringvalidator.RegexMatches(regexp.MustCompile("\\S+"), ""),
+									}, /*END VALIDATORS*/
+									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+										stringplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: IsSandboxEnvironment
+								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
+									Description: "Indicates whether the connector profile applies to a demo or production environment",
+									Optional:    true,
+									Computed:    true,
+									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+										boolplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+								objectplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: Redshift
 						"redshift": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2442,10 +2623,11 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 										stringplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
-								// Property: isSandboxEnvironment
+								// Property: IsSandboxEnvironment
 								"is_sandbox_environment": schema.BoolAttribute{ /*START ATTRIBUTE*/
-									Optional: true,
-									Computed: true,
+									Description: "Indicates whether the connector profile applies to a sandbox or production environment",
+									Optional:    true,
+									Computed:    true,
 									PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 										boolplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
@@ -2665,6 +2847,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "List of Saas providers that need connector profile to be created",
 		//	  "enum": [
 		//	    "Salesforce",
+		//	    "Pardot",
 		//	    "Singular",
 		//	    "Slack",
 		//	    "Redshift",
@@ -2690,6 +2873,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"Salesforce",
+					"Pardot",
 					"Singular",
 					"Slack",
 					"Redshift",
@@ -2790,6 +2974,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		"basic_auth_credentials":        "BasicAuthCredentials",
 		"bucket_name":                   "BucketName",
 		"bucket_prefix":                 "BucketPrefix",
+		"business_unit_id":              "BusinessUnitId",
 		"client_credentials_arn":        "ClientCredentialsArn",
 		"client_id":                     "ClientId",
 		"client_number":                 "ClientNumber",
@@ -2819,7 +3004,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		"infor_nexus":                   "InforNexus",
 		"instance_url":                  "InstanceUrl",
 		"is_redshift_serverless":        "IsRedshiftServerless",
-		"is_sandbox_environment":        "isSandboxEnvironment",
+		"is_sandbox_environment":        "IsSandboxEnvironment",
 		"kms_arn":                       "KMSArn",
 		"logon_language":                "LogonLanguage",
 		"marketo":                       "Marketo",
@@ -2830,6 +3015,7 @@ func connectorProfileResource(ctx context.Context) (resource.Resource, error) {
 		"o_auth_request":                "OAuthRequest",
 		"o_auth_scopes":                 "OAuthScopes",
 		"oauth_2":                       "Oauth2",
+		"pardot":                        "Pardot",
 		"password":                      "Password",
 		"port_number":                   "PortNumber",
 		"private_link_service_name":     "PrivateLinkServiceName",

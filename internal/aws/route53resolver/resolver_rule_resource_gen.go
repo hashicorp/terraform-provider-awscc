@@ -57,9 +57,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 256),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
@@ -214,6 +211,10 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses. ",
 		//	        "type": "string"
 		//	      },
+		//	      "Ipv6": {
+		//	        "description": "One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses. ",
+		//	        "type": "string"
+		//	      },
 		//	      "Port": {
 		//	        "description": "The port at Ip that you want to forward DNS queries to. ",
 		//	        "maxLength": 65535,
@@ -221,9 +222,6 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "Ip"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
@@ -235,7 +233,20 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 					// Property: Ip
 					"ip": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses. ",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Ipv6
+					"ipv_6": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses. ",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Port
 					"port": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -284,6 +295,7 @@ func resolverRuleResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                  "Arn",
 		"domain_name":          "DomainName",
 		"ip":                   "Ip",
+		"ipv_6":                "Ipv6",
 		"key":                  "Key",
 		"name":                 "Name",
 		"port":                 "Port",
