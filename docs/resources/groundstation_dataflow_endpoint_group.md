@@ -21,6 +21,8 @@ AWS Ground Station DataflowEndpointGroup schema for CloudFormation
 
 ### Optional
 
+- `contact_post_pass_duration_seconds` (Number)
+- `contact_pre_pass_duration_seconds` (Number)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

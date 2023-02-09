@@ -39,6 +39,7 @@ Data Source schema for AWS::NetworkFirewall::Firewall
 
 Read-Only:
 
+- `ip_address_type` (String) A IPAddressType
 - `subnet_id` (String) A SubnetId.
 
 

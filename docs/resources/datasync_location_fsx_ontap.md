@@ -17,12 +17,12 @@ Resource schema for AWS::DataSync::LocationFSxONTAP.
 
 ### Required
 
-- `protocol` (Attributes) Configuration settings for NFS or SMB protocol. (see [below for nested schema](#nestedatt--protocol))
 - `security_group_arns` (List of String) The ARNs of the security groups that are to use to configure the FSx ONTAP file system.
 - `storage_virtual_machine_arn` (String) The Amazon Resource Name (ARN) for the FSx ONTAP SVM.
 
 ### Optional
 
+- `protocol` (Attributes) Configuration settings for NFS or SMB protocol. (see [below for nested schema](#nestedatt--protocol))
 - `subdirectory` (String) A subdirectory in the location's path.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

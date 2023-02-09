@@ -58,9 +58,18 @@ Read-Only:
 
 Read-Only:
 
+- `answer_machine_detection_config` (Attributes) The configuration used for answering machine detection during outbound calls (see [below for nested schema](#nestedatt--outbound_call_config--answer_machine_detection_config))
 - `connect_contact_flow_arn` (String) The identifier of the contact flow for the outbound call.
 - `connect_queue_arn` (String) The queue for the call. If you specify a queue, the phone displayed for caller ID is the phone number specified in the queue. If you do not specify a queue, the queue defined in the contact flow is used. If you do not specify a queue, you must specify a source phone number.
 - `connect_source_phone_number` (String) The phone number associated with the Amazon Connect instance, in E.164 format. If you do not specify a source phone number, you must specify a queue.
+
+<a id="nestedatt--outbound_call_config--answer_machine_detection_config"></a>
+### Nested Schema for `outbound_call_config.answer_machine_detection_config`
+
+Read-Only:
+
+- `enable_answer_machine_detection` (Boolean) Flag to decided whether outbound calls should have answering machine detection enabled or not
+
 
 
 <a id="nestedatt--tags"></a>

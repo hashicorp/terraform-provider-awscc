@@ -38,6 +38,7 @@ Resource Type definition for AWS::Lambda::Function
 - `package_type` (String) PackageType.
 - `reserved_concurrent_executions` (Number) The number of simultaneous executions to reserve for the function.
 - `runtime` (String) The identifier of the function's runtime.
+- `runtime_management_config` (Attributes) RuntimeManagementConfig (see [below for nested schema](#nestedatt--runtime_management_config))
 - `snap_start` (Attributes) The SnapStart setting of your function (see [below for nested schema](#nestedatt--snap_start))
 - `tags` (Attributes Set) A list of tags to apply to the function. (see [below for nested schema](#nestedatt--tags))
 - `timeout` (Number) The amount of time that Lambda allows a function to run before stopping it. The default is 3 seconds. The maximum allowed value is 900 seconds.
@@ -103,6 +104,18 @@ Optional:
 - `command` (List of String) Command.
 - `entry_point` (List of String) EntryPoint.
 - `working_directory` (String) WorkingDirectory.
+
+
+<a id="nestedatt--runtime_management_config"></a>
+### Nested Schema for `runtime_management_config`
+
+Required:
+
+- `update_runtime_on` (String) Trigger for runtime update
+
+Optional:
+
+- `runtime_version_arn` (String) Unique identifier for a runtime version arn
 
 
 <a id="nestedatt--snap_start"></a>

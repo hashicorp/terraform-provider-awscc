@@ -45,12 +45,10 @@ Required:
 <a id="nestedatt--target_ips"></a>
 ### Nested Schema for `target_ips`
 
-Required:
-
-- `ip` (String) One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
-
 Optional:
 
+- `ip` (String) One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
+- `ipv_6` (String) One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses.
 - `port` (String) The port at Ip that you want to forward DNS queries to.
 
 ## Import

@@ -23,8 +23,12 @@ Data Source schema for AWS::EC2::NatGateway
 
 - `allocation_id` (String)
 - `connectivity_type` (String)
+- `max_drain_duration_seconds` (Number)
 - `nat_gateway_id` (String)
 - `private_ip_address` (String)
+- `secondary_allocation_ids` (List of String)
+- `secondary_private_ip_address_count` (Number)
+- `secondary_private_ip_addresses` (List of String)
 - `subnet_id` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

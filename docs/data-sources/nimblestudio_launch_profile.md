@@ -48,21 +48,41 @@ Read-Only:
             stops the session. The default length of time is 690 minutes, and the maximum length of
             time is 30 days.</p>
 - `max_stopped_session_length_in_minutes` (Number) <p>Integer that determines if you can start and stop your sessions and how long a session
-            can stay in the STOPPED state. The default value is 0. The maximum value is 5760.</p>
-         <p>If the value is missing or set to 0, your sessions can?t be stopped. If you then call
-                <code>StopStreamingSession</code>, the session fails. If the time that a session
-            stays in the READY state exceeds the <code>maxSessionLengthInMinutes</code> value, the
-            session will automatically be terminated (instead of stopped).</p>
+            can stay in the <code>STOPPED</code> state. The default value is 0. The maximum value is
+            5760.</p>
+         <p>This field is allowed only when <code>sessionPersistenceMode</code> is
+                <code>ACTIVATED</code> and <code>automaticTerminationMode</code> is
+                <code>ACTIVATED</code>.</p>
+         <p>If the value is set to 0, your sessions can?t be <code>STOPPED</code>. If you then
+            call <code>StopStreamingSession</code>, the session fails. If the time that a session
+            stays in the <code>READY</code> state exceeds the <code>maxSessionLengthInMinutes</code>
+            value, the session will automatically be terminated (instead of
+            <code>STOPPED</code>).</p>
          <p>If the value is set to a positive number, the session can be stopped. You can call
-                <code>StopStreamingSession</code> to stop sessions in the READY state. If the time
-            that a session stays in the READY state exceeds the
+                <code>StopStreamingSession</code> to stop sessions in the <code>READY</code> state.
+            If the time that a session stays in the <code>READY</code> state exceeds the
                 <code>maxSessionLengthInMinutes</code> value, the session will automatically be
             stopped (instead of terminated).</p>
+- `session_backup` (Attributes) <p>Configures how streaming sessions are backed up when launched from this launch
+            profile.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_backup))
 - `session_persistence_mode` (String)
 - `session_storage` (Attributes) <p>The configuration for a streaming session?s upload storage.</p> (see [below for nested schema](#nestedatt--stream_configuration--session_storage))
 - `streaming_image_ids` (List of String) <p>The streaming images that users can select from when launching a streaming session
             with this launch profile.</p>
-- `volume_configuration` (Attributes) (see [below for nested schema](#nestedatt--stream_configuration--volume_configuration))
+- `volume_configuration` (Attributes) <p>Custom volume configuration for the root volumes that are attached to streaming
+            sessions.</p>
+         <p>This parameter is only allowed when <code>sessionPersistenceMode</code> is
+                <code>ACTIVATED</code>.</p> (see [below for nested schema](#nestedatt--stream_configuration--volume_configuration))
+
+<a id="nestedatt--stream_configuration--session_backup"></a>
+### Nested Schema for `stream_configuration.session_backup`
+
+Read-Only:
+
+- `max_backups_to_retain` (Number) <p>The maximum number of backups that each streaming session created from this launch
+            profile can have.</p>
+- `mode` (String)
+
 
 <a id="nestedatt--stream_configuration--session_storage"></a>
 ### Nested Schema for `stream_configuration.session_storage`
@@ -89,8 +109,11 @@ Read-Only:
 
 Read-Only:
 
-- `iops` (Number)
-- `size` (Number)
-- `throughput` (Number)
+- `iops` (Number) <p>The number of I/O operations per second for the root volume that is attached to
+            streaming session.</p>
+- `size` (Number) <p>The size of the root volume that is attached to the streaming session. The root volume
+            size is measured in GiBs.</p>
+- `throughput` (Number) <p>The throughput to provision for the root volume that is attached to the streaming
+            session. The throughput is measured in MiB/s.</p>
 
 

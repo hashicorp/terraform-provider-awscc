@@ -22,11 +22,14 @@ Data Source schema for AWS::EC2::IPAM
 ### Read-Only
 
 - `arn` (String) The Amazon Resource Name (ARN) of the IPAM.
+- `default_resource_discovery_association_id` (String) The Id of the default association to the default resource discovery, created with this IPAM.
+- `default_resource_discovery_id` (String) The Id of the default resource discovery, created with this IPAM.
 - `description` (String)
 - `ipam_id` (String) Id of the IPAM.
 - `operating_regions` (Attributes Set) The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
 - `private_default_scope_id` (String) The Id of the default scope for publicly routable IP space, created with this IPAM.
 - `public_default_scope_id` (String) The Id of the default scope for publicly routable IP space, created with this IPAM.
+- `resource_discovery_association_count` (Number) The count of resource discoveries associated with this IPAM.
 - `scope_count` (Number) The number of scopes that currently exist in this IPAM.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 

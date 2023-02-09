@@ -17,12 +17,12 @@ Definition of AWS::Oam::Link Resource Type
 
 ### Required
 
-- `label_template` (String)
 - `resource_types` (Set of String)
 - `sink_identifier` (String)
 
 ### Optional
 
+- `label_template` (String)
 - `tags` (Map of String) Tags to apply to the link
 
 ### Read-Only

@@ -17,15 +17,15 @@ Resource Type definition for AWS::Logs::LogStream
 
 ### Required
 
-- `log_group_name` (String) The name of the log group where the log stream is created.
+- `log_group_name` (String)
 
 ### Optional
 
-- `log_stream_name` (String) The name of the log stream. The name must be unique wihtin the log group.
+- `log_stream_name` (String)
 
 ### Read-Only
 
-- `id` (String) Uniquely identifies the resource.
+- `id` (String) The ID of this resource.
 
 ## Import
 

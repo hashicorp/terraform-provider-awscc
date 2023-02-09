@@ -24,6 +24,7 @@ Resource schema for AWS::DataSync::LocationObjectStorage.
 - `access_key` (String) Optional. The access key is used if credentials are required to access the self-managed object storage server.
 - `bucket_name` (String) The name of the bucket on the self-managed object storage server.
 - `secret_key` (String) Optional. The secret key is used if credentials are required to access the self-managed object storage server.
+- `server_certificate` (String) X.509 PEM content containing a certificate authority or chain to trust.
 - `server_hostname` (String) The name of the self-managed object storage server. This value is the IP address or Domain Name Service (DNS) name of the object storage server.
 - `server_port` (Number) The port that your self-managed server accepts inbound network traffic on.
 - `server_protocol` (String) The protocol that the object storage server uses to communicate.

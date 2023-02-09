@@ -25,6 +25,7 @@ Data Source schema for AWS::RedshiftServerless::Workgroup
 - `config_parameters` (Attributes Set) (see [below for nested schema](#nestedatt--config_parameters))
 - `enhanced_vpc_routing` (Boolean)
 - `namespace_name` (String)
+- `port` (Number)
 - `publicly_accessible` (Boolean)
 - `security_group_ids` (List of String)
 - `subnet_ids` (List of String)

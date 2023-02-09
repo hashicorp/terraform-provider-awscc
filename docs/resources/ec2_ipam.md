@@ -17,8 +17,11 @@ Resource Schema of AWS::EC2::IPAM Type
 
 ### Optional
 
+- `default_resource_discovery_association_id` (String) The Id of the default association to the default resource discovery, created with this IPAM.
+- `default_resource_discovery_id` (String) The Id of the default resource discovery, created with this IPAM.
 - `description` (String)
 - `operating_regions` (Attributes Set) The regions IPAM is enabled for. Allows pools to be created in these regions, as well as enabling monitoring (see [below for nested schema](#nestedatt--operating_regions))
+- `resource_discovery_association_count` (Number) The count of resource discoveries associated with this IPAM.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

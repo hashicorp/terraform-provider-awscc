@@ -22,6 +22,8 @@ Data Source schema for AWS::GroundStation::DataflowEndpointGroup
 ### Read-Only
 
 - `arn` (String)
+- `contact_post_pass_duration_seconds` (Number)
+- `contact_pre_pass_duration_seconds` (Number)
 - `endpoint_details` (Attributes List) (see [below for nested schema](#nestedatt--endpoint_details))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 

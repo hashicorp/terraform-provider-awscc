@@ -23,6 +23,7 @@ Data Source schema for AWS::EC2::CustomerGateway
 
 - `bgp_asn` (Number) For devices that support BGP, the customer gateway's BGP ASN.
 - `customer_gateway_id` (String) CustomerGateway ID generated after customer gateway is created. Each customer gateway has a unique ID.
+- `device_name` (String) A name for the customer gateway device.
 - `ip_address` (String) The internet-routable IP address for the customer gateway's outside interface. The address must be static.
 - `tags` (Attributes List) One or more tags for the customer gateway. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The type of VPN connection that this customer gateway supports.

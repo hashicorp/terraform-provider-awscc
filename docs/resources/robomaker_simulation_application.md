@@ -3,12 +3,12 @@
 page_title: "awscc_robomaker_simulation_application Resource - terraform-provider-awscc"
 subcategory: ""
 description: |-
-  AWS::RoboMaker::SimulationApplication resource creates an AWS RoboMaker SimulationApplication. Simulation application can be used in AWS RoboMaker Simulation Jobs.
+  This schema is for testing purpose only.
 ---
 
 # awscc_robomaker_simulation_application (Resource)
 
-AWS::RoboMaker::SimulationApplication resource creates an AWS RoboMaker SimulationApplication. Simulation application can be used in AWS RoboMaker Simulation Jobs.
+This schema is for testing purpose only.
 
 
 

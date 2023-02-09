@@ -1,0 +1,1 @@
+$ terraform import awscc_omics_reference_store.example <resource ID>
