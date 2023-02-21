@@ -26,8 +26,9 @@ github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310 h1:BUAU3CGlLvorLI26
 github.com/armon/go-radix v0.0.0-20180808171621-7fddfc383310/go.mod h1:ufUuZ+zHj4x4TnLV4JWEpy2hxWSpsRywHrMgIH9cCH8=
 github.com/armon/go-socks5 v0.0.0-20160902184237-e75332964ef5/go.mod h1:wHh0iHkYZB8zMSxRWpUBQtwG5a7fFgvEO+odwuTv2gs=
 github.com/aws/aws-sdk-go-v2 v1.16.3/go.mod h1:ytwTPBG6fXTZLxxeeCCWj2/EMYp/xDUgX+OET6TLNNU=
-github.com/aws/aws-sdk-go-v2 v1.17.4 h1:wyC6p9Yfq6V2y98wfDsj6OnNQa4w2BLGCLIxzNhwOGY=
 github.com/aws/aws-sdk-go-v2 v1.17.4/go.mod h1:uzbQtefpm44goOPmdKyAlXSNcwlRgF3ePWVW6EtJvvw=
+github.com/aws/aws-sdk-go-v2 v1.17.5 h1:TzCUW1Nq4H8Xscph5M/skINUitxM5UBAyvm2s7XBzL4=
+github.com/aws/aws-sdk-go-v2 v1.17.5/go.mod h1:uzbQtefpm44goOPmdKyAlXSNcwlRgF3ePWVW6EtJvvw=
 github.com/aws/aws-sdk-go-v2/config v1.18.13 h1:v0xlYqbO6/EVlM8tUn2QEOA7btQxcgidEq2JRDBPTho=
 github.com/aws/aws-sdk-go-v2/config v1.18.13/go.mod h1:r39wGSZB7wPDW1i54JyQXUpc5KsWjh5z/3S5D9eCqDg=
 github.com/aws/aws-sdk-go-v2/credentials v1.13.13 h1:zw1KAc1kl00NYd3ofVmFrb09qnYlSQMeh+fmlQRAihI=
