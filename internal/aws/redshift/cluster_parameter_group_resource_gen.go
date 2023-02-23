@@ -66,9 +66,14 @@ func clusterParameterGroupResource(ctx context.Context) (resource.Resource, erro
 		//	}
 		"parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the cluster parameter group.",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtMost(255),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Parameters

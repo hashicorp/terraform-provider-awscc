@@ -119,8 +119,7 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Description: "The ID of one or more subnets in which to create an endpoint network interface",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.List{ /*START VALIDATORS*/
 				listvalidator.SizeBetween(1, 6),
 				listvalidator.ValueStringsAre(
@@ -130,7 +129,6 @@ func vpcEndpointResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcId
