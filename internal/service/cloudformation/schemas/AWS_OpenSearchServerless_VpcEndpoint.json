@@ -58,7 +58,8 @@
   },
   "required": [
     "Name",
-    "VpcId"
+    "VpcId",
+    "SubnetIds"
   ],
   "readOnlyProperties": [
     "/properties/Id"

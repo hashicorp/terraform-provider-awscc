@@ -246,10 +246,7 @@
     "create": {
       "permissions": [
         "sagemaker:CreateSpace",
-        "sagemaker:DescribeSpace",
-        "sagemaker:DescribeImage",
-        "sagemaker:DescribeImageVersion",
-        "iam:PassRole"
+        "sagemaker:DescribeSpace"
       ]
     },
     "read": {
@@ -260,10 +257,7 @@
     "update": {
       "permissions": [
         "sagemaker:UpdateSpace",
-        "sagemaker:DescribeSpace",
-        "sagemaker:DescribeImage",
-        "sagemaker:DescribeImageVersion",
-        "iam:PassRole"
+        "sagemaker:DescribeSpace"
       ]
     },
     "delete": {

@@ -1,4 +1,39 @@
 ## 0.47.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigateway_vpc_link`
+* **New Data Source:** `awscc_apigateway_vpc_links`
+* **New Data Source:** `awscc_ec2_local_gateway_route_table`
+* **New Data Source:** `awscc_ec2_local_gateway_route_table_virtual_interface_group_association`
+* **New Data Source:** `awscc_ec2_local_gateway_route_table_virtual_interface_group_associations`
+* **New Data Source:** `awscc_ec2_local_gateway_route_tables`
+* **New Data Source:** `awscc_ec2_vpc_endpoint_service`
+* **New Data Source:** `awscc_ec2_vpc_endpoint_services`
+* **New Data Source:** `awscc_ec2_vpn_connection_route`
+* **New Data Source:** `awscc_ec2_vpn_connection_routes`
+* **New Data Source:** `awscc_fms_resource_set`
+* **New Data Source:** `awscc_internetmonitor_monitor`
+* **New Data Source:** `awscc_internetmonitor_monitors`
+* **New Data Source:** `awscc_networkmanager_transit_gateway_peering`
+* **New Data Source:** `awscc_networkmanager_transit_gateway_peerings`
+* **New Data Source:** `awscc_networkmanager_transit_gateway_route_table_attachment`
+* **New Data Source:** `awscc_networkmanager_transit_gateway_route_table_attachments`
+* **New Data Source:** `awscc_organizations_resource_policy`
+* **New Data Source:** `awscc_systemsmanagersap_application`
+* **New Data Source:** `awscc_systemsmanagersap_applications`
+* **New Resource:** `awscc_apigateway_vpc_link`
+* **New Resource:** `awscc_ec2_local_gateway_route_table`
+* **New Resource:** `awscc_ec2_local_gateway_route_table_virtual_interface_group_association`
+* **New Resource:** `awscc_ec2_vpc_endpoint_service`
+* **New Resource:** `awscc_ec2_vpn_connection_route`
+* **New Resource:** `awscc_fms_resource_set`
+* **New Resource:** `awscc_internetmonitor_monitor`
+* **New Resource:** `awscc_networkmanager_transit_gateway_peering`
+* **New Resource:** `awscc_networkmanager_transit_gateway_route_table_attachment`
+* **New Resource:** `awscc_organizations_resource_policy`
+* **New Resource:** `awscc_systemsmanagersap_application`
+
 ## 0.46.0 (February  9, 2023)
 
 FEATURES:

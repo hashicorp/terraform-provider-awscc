@@ -65,7 +65,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "CookieBehavior": {
-		//	          "pattern": "^(none|whitelist|all)$",
+		//	          "pattern": "^(none|whitelist|all|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Cookies": {
@@ -85,7 +85,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "HeaderBehavior": {
-		//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
+		//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Headers": {
@@ -108,7 +108,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "QueryStringBehavior": {
-		//	          "pattern": "^(none|whitelist|all)$",
+		//	          "pattern": "^(none|whitelist|all|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "QueryStrings": {
@@ -150,7 +150,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 						"cookie_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|all)$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|all|allExcept)$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Cookies
@@ -172,7 +172,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 						"header_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront|allExcept)$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: Headers
@@ -198,7 +198,7 @@ func originRequestPolicyResource(ctx context.Context) (resource.Resource, error)
 						"query_string_behavior": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Required: true,
 							Validators: []validator.String{ /*START VALIDATORS*/
-								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|all)$"), ""),
+								stringvalidator.RegexMatches(regexp.MustCompile("^(none|whitelist|all|allExcept)$"), ""),
 							}, /*END VALIDATORS*/
 						}, /*END ATTRIBUTE*/
 						// Property: QueryStrings

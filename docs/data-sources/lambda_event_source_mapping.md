@@ -25,6 +25,7 @@ Data Source schema for AWS::Lambda::EventSourceMapping
 - `batch_size` (Number) The maximum number of items to retrieve in a single batch.
 - `bisect_batch_on_function_error` (Boolean) (Streams) If the function returns an error, split the batch in two and retry.
 - `destination_config` (Attributes) (Streams) An Amazon SQS queue or Amazon SNS topic destination for discarded records. (see [below for nested schema](#nestedatt--destination_config))
+- `document_db_event_source_config` (Attributes) Document db event source config. (see [below for nested schema](#nestedatt--document_db_event_source_config))
 - `enabled` (Boolean) Disables the event source mapping to pause polling and invocation.
 - `event_source_arn` (String) The Amazon Resource Name (ARN) of the event source.
 - `filter_criteria` (Attributes) The filter criteria to control event filtering. (see [below for nested schema](#nestedatt--filter_criteria))
@@ -66,6 +67,16 @@ Read-Only:
 
 - `destination` (String) The Amazon Resource Name (ARN) of the destination resource.
 
+
+
+<a id="nestedatt--document_db_event_source_config"></a>
+### Nested Schema for `document_db_event_source_config`
+
+Read-Only:
+
+- `collection_name` (String) The collection name to connect to.
+- `database_name` (String) The database name to connect to.
+- `full_document` (String) Include full document in change stream response. The default option will only send the changes made to documents to Lambda. If you want the complete document sent to Lambda, set this to UpdateLookup.
 
 
 <a id="nestedatt--filter_criteria"></a>

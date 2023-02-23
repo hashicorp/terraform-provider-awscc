@@ -185,7 +185,6 @@
   },
   "additionalProperties": false,
   "required": [
-    "Name",
     "RoutingConfig",
     "EventBuses"
   ],

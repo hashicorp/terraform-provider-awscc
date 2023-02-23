@@ -1,0 +1,1 @@
+$ terraform import awscc_systemsmanagersap_application.example <resource ID>

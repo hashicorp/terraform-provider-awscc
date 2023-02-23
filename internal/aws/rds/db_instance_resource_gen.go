@@ -67,6 +67,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AllowMajorVersionUpgrade is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: AssociatedRoles
 		// CloudFormation resource type schema:
@@ -504,6 +505,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// DeleteAutomatedBackups is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: DeletionProtection
 		// CloudFormation resource type schema:
@@ -1534,7 +1536,10 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/AllowMajorVersionUpgrade",
+		"/properties/CertificateRotationRestart",
 		"/properties/DBSnapshotIdentifier",
+		"/properties/DeleteAutomatedBackups",
 		"/properties/MasterUserPassword",
 		"/properties/Port",
 		"/properties/RestoreTime",
@@ -1544,7 +1549,6 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SourceRegion",
 		"/properties/TdeCredentialPassword",
 		"/properties/UseLatestRestorableTime",
-		"/properties/CertificateRotationRestart",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)
 

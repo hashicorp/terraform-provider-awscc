@@ -6,6 +6,7 @@
 package route53recoverycontrol_test
 
 import (
+	"regexp"
 	"testing"
 
 	"github.com/hashicorp/terraform-plugin-testing/helper/resource"
@@ -17,30 +18,8 @@ func TestAccAWSRoute53RecoveryControlCluster_basic(t *testing.T) {
 
 	td.ResourceTest(t, []resource.TestStep{
 		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInAWS(),
-			),
-		},
-		{
-			ResourceName:      td.ResourceName,
-			ImportState:       true,
-			ImportStateVerify: true,
-		},
-	})
-}
-
-func TestAccAWSRoute53RecoveryControlCluster_disappears(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::Route53RecoveryControl::Cluster", "awscc_route53recoverycontrol_cluster", "test")
-
-	td.ResourceTest(t, []resource.TestStep{
-		{
-			Config: td.EmptyConfig(),
-			Check: resource.ComposeTestCheckFunc(
-				td.CheckExistsInAWS(),
-				td.DeleteResource(),
-			),
-			ExpectNonEmptyPlan: true,
+			Config:      td.EmptyConfig(),
+			ExpectError: regexp.MustCompile("Missing required argument"),
 		},
 	})
 }

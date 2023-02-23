@@ -80,6 +80,9 @@
       "insertionOrder": false
     }
   },
+  "required": [
+    "Name"
+  ],
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/Name",
@@ -89,8 +92,9 @@
     "/properties/Tags"
   ],
   "readOnlyProperties": [
-    "/properties/Status",
-    "/properties/ClusterArn"
+    "/properties/ClusterArn",
+    "/properties/ClusterEndpoints",
+    "/properties/Status"
   ],
   "primaryIdentifier": [
     "/properties/ClusterArn"

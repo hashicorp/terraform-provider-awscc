@@ -21,13 +21,13 @@ Resource Type definition for AWS::Events::Archive
 
 ### Optional
 
+- `archive_name` (String)
 - `description` (String)
 - `event_pattern` (Map of String)
 - `retention_days` (Number)
 
 ### Read-Only
 
-- `archive_name` (String)
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
 

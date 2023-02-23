@@ -84,13 +84,11 @@
     "ParameterGroupFamily"
   ],
   "createOnlyProperties": [
+    "/properties/ParameterGroupName",
     "/properties/ParameterGroupFamily",
     "/properties/Description"
   ],
   "primaryIdentifier": [
-    "/properties/ParameterGroupName"
-  ],
-  "readOnlyProperties": [
     "/properties/ParameterGroupName"
   ],
   "writeOnlyProperties": [

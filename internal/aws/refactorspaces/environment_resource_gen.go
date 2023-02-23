@@ -106,7 +106,8 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "TRANSIT_GATEWAY"
+		//	    "TRANSIT_GATEWAY",
+		//	    "NONE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -116,6 +117,7 @@ func environmentResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"TRANSIT_GATEWAY",
+					"NONE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

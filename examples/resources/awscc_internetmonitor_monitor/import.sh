@@ -1,0 +1,1 @@
+$ terraform import awscc_internetmonitor_monitor.example <resource ID>

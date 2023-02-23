@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 678 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 689 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -167,6 +167,10 @@ resource_schema "aws_apigateway_usage_plan" {
 resource_schema "aws_apigateway_usage_plan_key" {
   cloudformation_type_name               = "AWS::ApiGateway::UsagePlanKey"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_apigateway_vpc_link" {
+  cloudformation_type_name = "AWS::ApiGateway::VpcLink"
 }
 
 resource_schema "aws_apigatewayv2_api" {
@@ -893,6 +897,14 @@ resource_schema "aws_ec2_local_gateway_route" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRoute"
 }
 
+resource_schema "aws_ec2_local_gateway_route_table" {
+  cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTable"
+}
+
+resource_schema "aws_ec2_local_gateway_route_table_virtual_interface_group_association" {
+  cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVirtualInterfaceGroupAssociation"
+}
+
 resource_schema "aws_ec2_local_gateway_route_table_vpc_association" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRouteTableVPCAssociation"
 }
@@ -1014,12 +1026,20 @@ resource_schema "aws_ec2_vpc_endpoint" {
   cloudformation_type_name = "AWS::EC2::VPCEndpoint"
 }
 
+resource_schema "aws_ec2_vpc_endpoint_service" {
+  cloudformation_type_name = "AWS::EC2::VPCEndpointService"
+}
+
 resource_schema "aws_ec2_vpc_peering_connection" {
   cloudformation_type_name = "AWS::EC2::VPCPeeringConnection"
 }
 
 resource_schema "aws_ec2_vpn_connection" {
   cloudformation_type_name = "AWS::EC2::VPNConnection"
+}
+
+resource_schema "aws_ec2_vpn_connection_route" {
+  cloudformation_type_name = "AWS::EC2::VPNConnectionRoute"
 }
 
 resource_schema "aws_ec2_vpn_gateway" {
@@ -1263,6 +1283,11 @@ resource_schema "aws_fms_policy" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_fms_resource_set" {
+  cloudformation_type_name               = "AWS::FMS::ResourceSet"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_fsx_data_repository_association" {
   cloudformation_type_name = "AWS::FSx::DataRepositoryAssociation"
 }
@@ -1470,6 +1495,10 @@ resource_schema "aws_imagebuilder_infrastructure_configuration" {
 
 resource_schema "aws_inspectorv2_filter" {
   cloudformation_type_name = "AWS::InspectorV2::Filter"
+}
+
+resource_schema "aws_internetmonitor_monitor" {
+  cloudformation_type_name = "AWS::InternetMonitor::Monitor"
 }
 
 resource_schema "aws_iot_account_audit_configuration" {
@@ -2164,9 +2193,17 @@ resource_schema "aws_networkmanager_site_to_site_vpn_attachment" {
   cloudformation_type_name = "AWS::NetworkManager::SiteToSiteVpnAttachment"
 }
 
+resource_schema "aws_networkmanager_transit_gateway_peering" {
+  cloudformation_type_name = "AWS::NetworkManager::TransitGatewayPeering"
+}
+
 resource_schema "aws_networkmanager_transit_gateway_registration" {
   cloudformation_type_name               = "AWS::NetworkManager::TransitGatewayRegistration"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_networkmanager_transit_gateway_route_table_attachment" {
+  cloudformation_type_name = "AWS::NetworkManager::TransitGatewayRouteTableAttachment"
 }
 
 resource_schema "aws_networkmanager_vpc_attachment" {
@@ -2285,6 +2322,11 @@ resource_schema "aws_organizations_organizational_unit" {
 
 resource_schema "aws_organizations_policy" {
   cloudformation_type_name               = "AWS::Organizations::Policy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_organizations_resource_policy" {
+  cloudformation_type_name               = "AWS::Organizations::ResourcePolicy"
   suppress_plural_data_source_generation = true
 }
 
@@ -2977,6 +3019,10 @@ resource_schema "aws_synthetics_group" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_systemsmanagersap_application" {
+  cloudformation_type_name = "AWS::SystemsManagerSAP::Application"
 }
 
 resource_schema "aws_timestream_database" {

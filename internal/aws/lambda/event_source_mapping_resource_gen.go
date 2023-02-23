@@ -168,6 +168,85 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DocumentDBEventSourceConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Document db event source config.",
+		//	  "properties": {
+		//	    "CollectionName": {
+		//	      "description": "The collection name to connect to.",
+		//	      "maxLength": 57,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "DatabaseName": {
+		//	      "description": "The database name to connect to.",
+		//	      "maxLength": 63,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    },
+		//	    "FullDocument": {
+		//	      "description": "Include full document in change stream response. The default option will only send the changes made to documents to Lambda. If you want the complete document sent to Lambda, set this to UpdateLookup.",
+		//	      "enum": [
+		//	        "UpdateLookup",
+		//	        "Default"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"document_db_event_source_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CollectionName
+				"collection_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The collection name to connect to.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 57),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DatabaseName
+				"database_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The database name to connect to.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 63),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: FullDocument
+				"full_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Include full document in change stream response. The default option will only send the changes made to documents to Lambda. If you want the complete document sent to Lambda, set this to UpdateLookup.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"UpdateLookup",
+							"Default",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Document db event source config.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Enabled
 		// CloudFormation resource type schema:
 		//
@@ -805,14 +884,18 @@ func eventSourceMappingResource(ctx context.Context) (resource.Resource, error) 
 		"amazon_managed_kafka_event_source_config": "AmazonManagedKafkaEventSourceConfig",
 		"batch_size":                             "BatchSize",
 		"bisect_batch_on_function_error":         "BisectBatchOnFunctionError",
+		"collection_name":                        "CollectionName",
 		"consumer_group_id":                      "ConsumerGroupId",
+		"database_name":                          "DatabaseName",
 		"destination":                            "Destination",
 		"destination_config":                     "DestinationConfig",
+		"document_db_event_source_config":        "DocumentDBEventSourceConfig",
 		"enabled":                                "Enabled",
 		"endpoints":                              "Endpoints",
 		"event_source_arn":                       "EventSourceArn",
 		"filter_criteria":                        "FilterCriteria",
 		"filters":                                "Filters",
+		"full_document":                          "FullDocument",
 		"function_name":                          "FunctionName",
 		"function_response_types":                "FunctionResponseTypes",
 		"id":                                     "Id",

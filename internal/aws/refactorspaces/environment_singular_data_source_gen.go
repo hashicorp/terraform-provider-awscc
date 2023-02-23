@@ -76,7 +76,8 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "enum": [
-		//	    "TRANSIT_GATEWAY"
+		//	    "TRANSIT_GATEWAY",
+		//	    "NONE"
 		//	  ],
 		//	  "type": "string"
 		//	}
