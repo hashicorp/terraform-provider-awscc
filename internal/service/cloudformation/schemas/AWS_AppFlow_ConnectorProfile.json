@@ -509,7 +509,7 @@
           "description": "The location of the Salesforce resource",
           "$ref": "#/definitions/InstanceUrl"
         },
-        "isSandboxEnvironment": {
+        "IsSandboxEnvironment": {
           "description": "Indicates whether the connector profile applies to a sandbox or production environment",
           "type": "boolean"
         }
