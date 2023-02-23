@@ -497,7 +497,7 @@ func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Cl
 		config.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
-	cfg, err := awsbase.GetAwsConfig(ctx, &config)
+	ctx, cfg, err := awsbase.GetAwsConfig(ctx, &config)
 
 	if err != nil {
 		return nil, "", err
