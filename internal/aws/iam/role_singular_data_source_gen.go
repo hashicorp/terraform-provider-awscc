@@ -50,7 +50,6 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A description of the role that you provide.",
-		//	  "maxLength": 1000,
 		//	  "type": "string"
 		//	}
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -79,8 +78,6 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "The maximum session duration (in seconds) that you want to set for the specified role. If you do not specify a value for this setting, the default maximum of one hour is applied. This setting can have a value from 1 hour to 12 hours. ",
-		//	  "maximum": 43200,
-		//	  "minimum": 3600,
 		//	  "type": "integer"
 		//	}
 		"max_session_duration": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -125,8 +122,6 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "PolicyName": {
 		//	        "description": "The friendly name (not ARN) identifying the policy.",
-		//	        "maxLength": 128,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -173,7 +168,6 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A name for the IAM role, up to 64 characters in length.",
-		//	  "maxLength": 64,
 		//	  "type": "string"
 		//	}
 		"role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -192,14 +186,10 @@ func roleDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		//	        "maxLength": 128,
-		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
 		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-		//	        "maxLength": 256,
-		//	        "minLength": 0,
 		//	        "type": "string"
 		//	      }
 		//	    },

@@ -54,7 +54,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "CookieBehavior": {
-		//	          "pattern": "^(none|whitelist|all)$",
+		//	          "pattern": "^(none|whitelist|all|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Cookies": {
@@ -74,7 +74,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "HeaderBehavior": {
-		//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront)$",
+		//	          "pattern": "^(none|whitelist|allViewer|allViewerAndWhitelistCloudFront|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "Headers": {
@@ -97,7 +97,7 @@ func originRequestPolicyDataSource(ctx context.Context) (datasource.DataSource, 
 		//	      "additionalProperties": false,
 		//	      "properties": {
 		//	        "QueryStringBehavior": {
-		//	          "pattern": "^(none|whitelist|all)$",
+		//	          "pattern": "^(none|whitelist|all|allExcept)$",
 		//	          "type": "string"
 		//	        },
 		//	        "QueryStrings": {
