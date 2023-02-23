@@ -162,7 +162,7 @@
     },
     "DefaultSpaceSettings": {
       "type": "object",
-      "description": "A collection of settings that apply to spaces of Amazon SageMaker Studio. These settings are specified when the CreateDomain API is called.",
+      "description": "A collection of settings that apply to spaces of Amazon SageMaker Studio. These settings are specified when the Create/Update Domain API is called.",
       "additionalProperties": false,
       "properties": {
         "ExecutionRole": {

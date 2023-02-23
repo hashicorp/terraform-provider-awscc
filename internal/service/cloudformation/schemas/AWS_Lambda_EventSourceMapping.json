@@ -151,6 +151,10 @@
     "ScalingConfig": {
       "description": "The scaling configuration for the event source.",
       "$ref": "#/definitions/ScalingConfig"
+    },
+    "DocumentDBEventSourceConfig": {
+      "description": "Document db event source config.",
+      "$ref": "#/definitions/DocumentDBEventSourceConfig"
     }
   },
   "definitions": {
@@ -313,6 +317,33 @@
         "MaximumConcurrency": {
           "description": "The maximum number of concurrent functions that the event source can invoke.",
           "$ref": "#/definitions/MaximumConcurrency"
+        }
+      }
+    },
+    "DocumentDBEventSourceConfig": {
+      "description": "Document db event source config.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DatabaseName": {
+          "description": "The database name to connect to.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 63
+        },
+        "CollectionName": {
+          "description": "The collection name to connect to.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 57
+        },
+        "FullDocument": {
+          "description": "Include full document in change stream response. The default option will only send the changes made to documents to Lambda. If you want the complete document sent to Lambda, set this to UpdateLookup.",
+          "type": "string",
+          "enum": [
+            "UpdateLookup",
+            "Default"
+          ]
         }
       }
     }

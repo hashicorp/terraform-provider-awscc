@@ -311,21 +311,32 @@
         },
         "Error": {
           "type": "object",
-          "properties": {
-            "Message": {
-              "type": "string",
-              "minLength": 0,
-              "maxLength": 2048
+          "anyOf": [
+            {
+              "description": "Empty Error object.",
+              "type": "object",
+              "additionalProperties": false
             },
-            "Code": {
-              "type": "string",
-              "enum": [
-                "VALIDATION_ERROR",
-                "INTERNAL_FAILURE"
-              ]
+            {
+              "description": "Error object with Message and Code.",
+              "type": "object",
+              "properties": {
+                "Message": {
+                  "type": "string",
+                  "minLength": 0,
+                  "maxLength": 2048
+                },
+                "Code": {
+                  "type": "string",
+                  "enum": [
+                    "VALIDATION_ERROR",
+                    "INTERNAL_FAILURE"
+                  ]
+                }
+              },
+              "additionalProperties": false
             }
-          },
-          "additionalProperties": false
+          ]
         }
       },
       "additionalProperties": false
