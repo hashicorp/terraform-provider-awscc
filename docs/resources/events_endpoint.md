@@ -18,12 +18,12 @@ Resource Type definition for AWS::Events::Endpoint.
 ### Required
 
 - `event_buses` (Attributes List) (see [below for nested schema](#nestedatt--event_buses))
-- `name` (String)
 - `routing_config` (Attributes) (see [below for nested schema](#nestedatt--routing_config))
 
 ### Optional
 
 - `description` (String)
+- `name` (String)
 - `replication_config` (Attributes) (see [below for nested schema](#nestedatt--replication_config))
 - `role_arn` (String)
 

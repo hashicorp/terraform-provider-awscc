@@ -17,12 +17,12 @@ Resource schema for AWS::EC2::NetworkInsightsPath
 
 ### Required
 
-- `destination` (String)
 - `protocol` (String)
 - `source` (String)
 
 ### Optional
 
+- `destination` (String)
 - `destination_ip` (String)
 - `destination_port` (Number)
 - `source_ip` (String)

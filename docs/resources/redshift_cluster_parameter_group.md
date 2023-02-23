@@ -22,13 +22,13 @@ Resource Type definition for AWS::Redshift::ClusterParameterGroup
 
 ### Optional
 
+- `parameter_group_name` (String) The name of the cluster parameter group.
 - `parameters` (Attributes List) An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request. (see [below for nested schema](#nestedatt--parameters))
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
-- `parameter_group_name` (String) The name of the cluster parameter group.
 
 <a id="nestedatt--parameters"></a>
 ### Nested Schema for `parameters`
