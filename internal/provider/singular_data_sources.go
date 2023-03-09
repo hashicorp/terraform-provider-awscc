@@ -165,6 +165,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_devopsguru_notification_channel -cfschema ../service/cloudformation/schemas/AWS_DevOpsGuru_NotificationChannel.json -package devopsguru ../aws/devopsguru/notification_channel_singular_data_source_gen.go ../aws/devopsguru/notification_channel_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_devopsguru_resource_collection -cfschema ../service/cloudformation/schemas/AWS_DevOpsGuru_ResourceCollection.json -package devopsguru ../aws/devopsguru/resource_collection_singular_data_source_gen.go ../aws/devopsguru/resource_collection_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_directoryservice_simple_ad -cfschema ../service/cloudformation/schemas/AWS_DirectoryService_SimpleAD.json -package directoryservice ../aws/directoryservice/simple_ad_singular_data_source_gen.go ../aws/directoryservice/simple_ad_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_docdbelastic_cluster -cfschema ../service/cloudformation/schemas/AWS_DocDBElastic_Cluster.json -package docdbelastic ../aws/docdbelastic/cluster_singular_data_source_gen.go ../aws/docdbelastic/cluster_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_dynamodb_global_table -cfschema ../service/cloudformation/schemas/AWS_DynamoDB_GlobalTable.json -package dynamodb ../aws/dynamodb/global_table_singular_data_source_gen.go ../aws/dynamodb/global_table_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_dynamodb_table -cfschema ../service/cloudformation/schemas/AWS_DynamoDB_Table.json -package dynamodb ../aws/dynamodb/table_singular_data_source_gen.go ../aws/dynamodb/table_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_ec2_capacity_reservation -cfschema ../service/cloudformation/schemas/AWS_EC2_CapacityReservation.json -package ec2 ../aws/ec2/capacity_reservation_singular_data_source_gen.go ../aws/ec2/capacity_reservation_singular_data_source_gen_test.go
@@ -700,6 +701,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/detective"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/devopsguru"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/directoryservice"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/docdbelastic"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/dynamodb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ec2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ecr"

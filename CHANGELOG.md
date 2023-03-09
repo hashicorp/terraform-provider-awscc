@@ -1,4 +1,11 @@
 ## 0.48.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_docdbelastic_cluster`
+* **New Data Source:** `awscc_docdbelastic_clusters`
+* **New Resource:** `awscc_docdbelastic_cluster`
+
 ## 0.47.0 (February 22, 2023)
 
 FEATURES:
