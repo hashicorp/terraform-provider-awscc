@@ -801,6 +801,10 @@ resource_schema "aws_directoryservice_simple_ad" {
   cloudformation_type_name = "AWS::DirectoryService::SimpleAD"
 }
 
+resource_schema "aws_docdbelastic_cluster" {
+  cloudformation_type_name = "AWS::DocDBElastic::Cluster"
+}
+
 resource_schema "aws_dynamodb_global_table" {
   cloudformation_type_name = "AWS::DynamoDB::GlobalTable"
 }
