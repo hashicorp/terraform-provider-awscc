@@ -3,8 +3,11 @@
 FEATURES:
 
 * **New Data Source:** `awscc_docdbelastic_cluster`
+* **New Data Source:** `awscc_managedblockchain_accessor`
 * **New Data Source:** `awscc_docdbelastic_clusters`
+* **New Data Source:** `awscc_managedblockchain_accessors`
 * **New Resource:** `awscc_docdbelastic_cluster`
+* **New Resource:** `awscc_managedblockchain_accessor`
 
 ## 0.47.0 (February 22, 2023)
 
