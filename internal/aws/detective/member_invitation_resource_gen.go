@@ -44,6 +44,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 				generic.BoolDefaultValue(false),
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// DisableEmailNotification is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GraphArn
 		// CloudFormation resource type schema:
@@ -115,6 +116,7 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Message is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -145,6 +147,10 @@ func memberInvitationResource(ctx context.Context) (resource.Resource, error) {
 		"message":                    "Message",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Message",
+		"/properties/DisableEmailNotification",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

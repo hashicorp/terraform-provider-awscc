@@ -38,7 +38,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 		//	{
 		//	  "description": "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 		//	  "maxLength": 200,
-		//	  "minLength": 8,
+		//	  "minLength": 1,
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}
@@ -47,7 +47,7 @@ func locationObjectStorageResource(ctx context.Context) (resource.Resource, erro
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(8, 200),
+				stringvalidator.LengthBetween(1, 200),
 				stringvalidator.RegexMatches(regexp.MustCompile("^.+$"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

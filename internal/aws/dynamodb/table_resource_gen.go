@@ -128,6 +128,19 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtectionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalSecondaryIndexes
 		// CloudFormation resource type schema:
 		//
@@ -891,6 +904,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"billing_mode":                         "BillingMode",
 		"contributor_insights_specification":   "ContributorInsightsSpecification",
 		"csv":                                  "Csv",
+		"deletion_protection_enabled":          "DeletionProtectionEnabled",
 		"delimiter":                            "Delimiter",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",

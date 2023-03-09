@@ -178,9 +178,16 @@ func notificationRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "type": "string"
+		//	    }
+		//	  },
 		//	  "type": "object"
 		//	}
-		"tags": schema.MapAttribute{ /*START ATTRIBUTE*/
+		"tags":              // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
 			Optional:    true,
 			Computed:    true,
