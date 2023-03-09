@@ -23,120 +23,6 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::AppIntegrations::EventIntegration resource.
 func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: Associations
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "The associations with the event integration.",
-		//	  "items": {
-		//	    "additionalProperties": false,
-		//	    "properties": {
-		//	      "ClientAssociationMetadata": {
-		//	        "description": "The metadata associated with the client.",
-		//	        "items": {
-		//	          "additionalProperties": false,
-		//	          "properties": {
-		//	            "Key": {
-		//	              "description": "A key to identify the metadata.",
-		//	              "maxLength": 255,
-		//	              "minLength": 1,
-		//	              "pattern": ".*\\S.*",
-		//	              "type": "string"
-		//	            },
-		//	            "Value": {
-		//	              "description": "Corresponding metadata value for the key.",
-		//	              "maxLength": 255,
-		//	              "minLength": 1,
-		//	              "pattern": ".*\\S.*",
-		//	              "type": "string"
-		//	            }
-		//	          },
-		//	          "required": [
-		//	            "Key",
-		//	            "Value"
-		//	          ],
-		//	          "type": "object"
-		//	        },
-		//	        "type": "array"
-		//	      },
-		//	      "ClientId": {
-		//	        "description": "The identifier for the client that is associated with the event integration.",
-		//	        "maxLength": 255,
-		//	        "minLength": 1,
-		//	        "type": "string"
-		//	      },
-		//	      "EventBridgeRuleName": {
-		//	        "description": "The name of the Eventbridge rule.",
-		//	        "maxLength": 2048,
-		//	        "minLength": 1,
-		//	        "pattern": "^[a-zA-Z0-9/\\._\\-]+$",
-		//	        "type": "string"
-		//	      },
-		//	      "EventIntegrationAssociationArn": {
-		//	        "description": "The Amazon Resource Name (ARN) for the event integration association.",
-		//	        "maxLength": 2048,
-		//	        "minLength": 1,
-		//	        "pattern": "",
-		//	        "type": "string"
-		//	      },
-		//	      "EventIntegrationAssociationId": {
-		//	        "description": "The identifier for the event integration association.",
-		//	        "pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}",
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "type": "object"
-		//	  },
-		//	  "minItems": 0,
-		//	  "type": "array"
-		//	}
-		"associations": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: ClientAssociationMetadata
-					"client_association_metadata": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-								// Property: Key
-								"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "A key to identify the metadata.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-								// Property: Value
-								"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "Corresponding metadata value for the key.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
-							}, /*END SCHEMA*/
-						}, /*END NESTED OBJECT*/
-						Description: "The metadata associated with the client.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: ClientId
-					"client_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier for the client that is associated with the event integration.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EventBridgeRuleName
-					"event_bridge_rule_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The name of the Eventbridge rule.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EventIntegrationAssociationArn
-					"event_integration_association_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The Amazon Resource Name (ARN) for the event integration association.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-					// Property: EventIntegrationAssociationId
-					"event_integration_association_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "The identifier for the event integration association.",
-						Computed:    true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "The associations with the event integration.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -290,21 +176,15 @@ func eventIntegrationDataSource(ctx context.Context) (datasource.DataSource, err
 	opts = opts.WithCloudFormationTypeName("AWS::AppIntegrations::EventIntegration").WithTerraformTypeName("awscc_appintegrations_event_integration")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"associations":                      "Associations",
-		"client_association_metadata":       "ClientAssociationMetadata",
-		"client_id":                         "ClientId",
-		"description":                       "Description",
-		"event_bridge_bus":                  "EventBridgeBus",
-		"event_bridge_rule_name":            "EventBridgeRuleName",
-		"event_filter":                      "EventFilter",
-		"event_integration_arn":             "EventIntegrationArn",
-		"event_integration_association_arn": "EventIntegrationAssociationArn",
-		"event_integration_association_id":  "EventIntegrationAssociationId",
-		"key":                               "Key",
-		"name":                              "Name",
-		"source":                            "Source",
-		"tags":                              "Tags",
-		"value":                             "Value",
+		"description":           "Description",
+		"event_bridge_bus":      "EventBridgeBus",
+		"event_filter":          "EventFilter",
+		"event_integration_arn": "EventIntegrationArn",
+		"key":                   "Key",
+		"name":                  "Name",
+		"source":                "Source",
+		"tags":                  "Tags",
+		"value":                 "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

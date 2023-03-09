@@ -50,14 +50,14 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The Policy text content",
+		//	  "description": "The Policy text content. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.",
 		//	  "maxLength": 1000000,
 		//	  "minLength": 1,
 		//	  "pattern": "[\\s\\S]*",
 		//	  "type": "string"
 		//	}
 		"content": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The Policy text content",
+			Description: "The Policy text content. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Description

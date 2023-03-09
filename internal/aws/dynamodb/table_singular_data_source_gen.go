@@ -103,6 +103,15 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DeletionProtectionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "boolean"
+		//	}
+		"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: GlobalSecondaryIndexes
 		// CloudFormation resource type schema:
 		//
@@ -734,6 +743,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"billing_mode":                         "BillingMode",
 		"contributor_insights_specification":   "ContributorInsightsSpecification",
 		"csv":                                  "Csv",
+		"deletion_protection_enabled":          "DeletionProtectionEnabled",
 		"delimiter":                            "Delimiter",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",

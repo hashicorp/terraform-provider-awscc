@@ -337,6 +337,45 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"job_template_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaintenanceWindows
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Specifies a start time and duration for a scheduled Job.",
+		//	    "properties": {
+		//	      "DurationInMinutes": {
+		//	        "maximum": 1430,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "StartTime": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"maintenance_windows": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DurationInMinutes
+					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: StartTime
+					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: PresignedUrlConfig
 		// CloudFormation resource type schema:
 		//
@@ -484,6 +523,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"description":                    "Description",
 		"document":                       "Document",
 		"document_source":                "DocumentSource",
+		"duration_in_minutes":            "DurationInMinutes",
 		"expires_in_sec":                 "ExpiresInSec",
 		"exponential_rollout_rate":       "ExponentialRolloutRate",
 		"failure_type":                   "FailureType",
@@ -494,6 +534,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"job_executions_rollout_config":  "JobExecutionsRolloutConfig",
 		"job_template_id":                "JobTemplateId",
 		"key":                            "Key",
+		"maintenance_windows":            "MaintenanceWindows",
 		"maximum_per_minute":             "MaximumPerMinute",
 		"min_number_of_executed_things":  "MinNumberOfExecutedThings",
 		"number_of_notified_things":      "NumberOfNotifiedThings",
@@ -503,6 +544,7 @@ func jobTemplateDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"rate_increase_criteria":         "RateIncreaseCriteria",
 		"retry_criteria_list":            "RetryCriteriaList",
 		"role_arn":                       "RoleArn",
+		"start_time":                     "StartTime",
 		"tags":                           "Tags",
 		"threshold_percentage":           "ThresholdPercentage",
 		"timeout_config":                 "TimeoutConfig",

@@ -29,7 +29,7 @@ func locationObjectStorageDataSource(ctx context.Context) (datasource.DataSource
 		//	{
 		//	  "description": "Optional. The access key is used if credentials are required to access the self-managed object storage server.",
 		//	  "maxLength": 200,
-		//	  "minLength": 8,
+		//	  "minLength": 1,
 		//	  "pattern": "^.+$",
 		//	  "type": "string"
 		//	}

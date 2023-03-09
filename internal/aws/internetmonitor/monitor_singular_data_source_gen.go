@@ -35,6 +35,17 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaxCityNetworksToMonitor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 500000,
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"max_city_networks_to_monitor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
 		// CloudFormation resource type schema:
 		//
@@ -213,19 +224,20 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::InternetMonitor::Monitor").WithTerraformTypeName("awscc_internetmonitor_monitor")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":             "CreatedAt",
-		"key":                    "Key",
-		"modified_at":            "ModifiedAt",
-		"monitor_arn":            "MonitorArn",
-		"monitor_name":           "MonitorName",
-		"processing_status":      "ProcessingStatus",
-		"processing_status_info": "ProcessingStatusInfo",
-		"resources":              "Resources",
-		"resources_to_add":       "ResourcesToAdd",
-		"resources_to_remove":    "ResourcesToRemove",
-		"status":                 "Status",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"created_at":                   "CreatedAt",
+		"key":                          "Key",
+		"max_city_networks_to_monitor": "MaxCityNetworksToMonitor",
+		"modified_at":                  "ModifiedAt",
+		"monitor_arn":                  "MonitorArn",
+		"monitor_name":                 "MonitorName",
+		"processing_status":            "ProcessingStatus",
+		"processing_status_info":       "ProcessingStatusInfo",
+		"resources":                    "Resources",
+		"resources_to_add":             "ResourcesToAdd",
+		"resources_to_remove":          "ResourcesToRemove",
+		"status":                       "Status",
+		"tags":                         "Tags",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
