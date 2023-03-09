@@ -599,6 +599,7 @@ Read-Only:
 
 Read-Only:
 
+- `activate_flow_on_create` (Boolean) Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.
 - `trigger_properties` (Attributes) Details required based on the type of trigger (see [below for nested schema](#nestedatt--trigger_config--trigger_properties))
 - `trigger_type` (String) Trigger type of the flow
 

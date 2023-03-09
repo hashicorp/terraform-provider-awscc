@@ -24,7 +24,16 @@ Data Source schema for AWS::ElastiCache::UserGroup
 - `arn` (String) The Amazon Resource Name (ARN) of the user account.
 - `engine` (String) Must be redis.
 - `status` (String) Indicates user group status. Can be "creating", "active", "modifying", "deleting".
+- `tags` (Attributes Set) An array of key-value pairs to apply to this user. (see [below for nested schema](#nestedatt--tags))
 - `user_group_id` (String) The ID of the user group.
-- `user_ids` (List of String) List of users associated to this user group.
+- `user_ids` (Set of String) List of users associated to this user group.
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

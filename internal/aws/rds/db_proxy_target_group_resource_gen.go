@@ -184,6 +184,9 @@ func dBProxyTargetGroupResource(ctx context.Context) (resource.Resource, error) 
 				stringvalidator.LengthAtMost(64),
 				stringvalidator.RegexMatches(regexp.MustCompile("[A-z][0-z]*"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TargetGroupArn
 		// CloudFormation resource type schema:

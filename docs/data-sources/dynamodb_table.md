@@ -25,6 +25,7 @@ Data Source schema for AWS::DynamoDB::Table
 - `attribute_definitions` (Attributes List) (see [below for nested schema](#nestedatt--attribute_definitions))
 - `billing_mode` (String)
 - `contributor_insights_specification` (Attributes) (see [below for nested schema](#nestedatt--contributor_insights_specification))
+- `deletion_protection_enabled` (Boolean)
 - `global_secondary_indexes` (Attributes List) (see [below for nested schema](#nestedatt--global_secondary_indexes))
 - `import_source_specification` (Attributes) (see [below for nested schema](#nestedatt--import_source_specification))
 - `key_schema` (Map of String)

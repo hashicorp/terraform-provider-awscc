@@ -7,10 +7,12 @@ package internetmonitor
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
@@ -42,6 +44,24 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: MaxCityNetworksToMonitor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 500000,
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"max_city_networks_to_monitor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(1, 500000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ModifiedAt
@@ -306,19 +326,20 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":             "CreatedAt",
-		"key":                    "Key",
-		"modified_at":            "ModifiedAt",
-		"monitor_arn":            "MonitorArn",
-		"monitor_name":           "MonitorName",
-		"processing_status":      "ProcessingStatus",
-		"processing_status_info": "ProcessingStatusInfo",
-		"resources":              "Resources",
-		"resources_to_add":       "ResourcesToAdd",
-		"resources_to_remove":    "ResourcesToRemove",
-		"status":                 "Status",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"created_at":                   "CreatedAt",
+		"key":                          "Key",
+		"max_city_networks_to_monitor": "MaxCityNetworksToMonitor",
+		"modified_at":                  "ModifiedAt",
+		"monitor_arn":                  "MonitorArn",
+		"monitor_name":                 "MonitorName",
+		"processing_status":            "ProcessingStatus",
+		"processing_status_info":       "ProcessingStatusInfo",
+		"resources":                    "Resources",
+		"resources_to_add":             "ResourcesToAdd",
+		"resources_to_remove":          "ResourcesToRemove",
+		"status":                       "Status",
+		"tags":                         "Tags",
+		"value":                        "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

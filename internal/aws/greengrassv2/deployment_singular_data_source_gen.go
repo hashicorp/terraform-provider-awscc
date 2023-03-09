@@ -448,6 +448,16 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ParentTargetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+",
+		//	  "type": "string"
+		//	}
+		"parent_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -519,6 +529,7 @@ func deploymentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"min_number_of_executed_things":   "MinNumberOfExecutedThings",
 		"number_of_notified_things":       "NumberOfNotifiedThings",
 		"number_of_succeeded_things":      "NumberOfSucceededThings",
+		"parent_target_arn":               "ParentTargetArn",
 		"posix_user":                      "PosixUser",
 		"rate_increase_criteria":          "RateIncreaseCriteria",
 		"reset":                           "Reset",

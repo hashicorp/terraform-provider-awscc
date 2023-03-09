@@ -27,6 +27,7 @@ Resource Type definition for AWS::ElastiCache::User
 - `authentication_mode` (Attributes) (see [below for nested schema](#nestedatt--authentication_mode))
 - `no_password_required` (Boolean) Indicates a password is not required for this user account.
 - `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
+- `tags` (Attributes Set) An array of key-value pairs to apply to this user. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -44,6 +45,18 @@ Required:
 Optional:
 
 - `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
+Optional:
+
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

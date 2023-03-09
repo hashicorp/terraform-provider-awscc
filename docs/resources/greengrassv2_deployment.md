@@ -25,6 +25,7 @@ Resource for Greengrass V2 deployment.
 - `deployment_name` (String)
 - `deployment_policies` (Attributes) (see [below for nested schema](#nestedatt--deployment_policies))
 - `iot_job_configuration` (Attributes) (see [below for nested schema](#nestedatt--iot_job_configuration))
+- `parent_target_arn` (String)
 - `tags` (Map of String)
 
 ### Read-Only

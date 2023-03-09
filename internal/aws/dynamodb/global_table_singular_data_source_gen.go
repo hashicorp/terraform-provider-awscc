@@ -459,6 +459,9 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "DeletionProtectionEnabled": {
+		//	        "type": "boolean"
+		//	      },
 		//	      "GlobalSecondaryIndexes": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -685,6 +688,10 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 								Computed: true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: DeletionProtectionEnabled
+					"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: GlobalSecondaryIndexes
@@ -1104,6 +1111,7 @@ func globalTableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"attribute_type":                       "AttributeType",
 		"billing_mode":                         "BillingMode",
 		"contributor_insights_specification":   "ContributorInsightsSpecification",
+		"deletion_protection_enabled":          "DeletionProtectionEnabled",
 		"disable_scale_in":                     "DisableScaleIn",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",

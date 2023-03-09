@@ -2482,6 +2482,10 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Trigger settings of the flow.",
 		//	  "properties": {
+		//	    "ActivateFlowOnCreate": {
+		//	      "description": "Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "TriggerProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Details required based on the type of trigger",
@@ -2544,6 +2548,11 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"trigger_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ActivateFlowOnCreate
+				"activate_flow_on_create": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: TriggerProperties
 				"trigger_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2609,6 +2618,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::Flow").WithTerraformTypeName("awscc_appflow_flow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"activate_flow_on_create":           "ActivateFlowOnCreate",
 		"aggregation_config":                "AggregationConfig",
 		"aggregation_type":                  "AggregationType",
 		"amplitude":                         "Amplitude",

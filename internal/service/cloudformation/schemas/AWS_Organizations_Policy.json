@@ -21,8 +21,11 @@
       ]
     },
     "Content": {
-      "description": "The Policy text content",
-      "type": "string",
+      "description": "The Policy text content. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.",
+      "type": [
+        "object",
+        "string"
+      ],
       "pattern": "[\\s\\S]*",
       "minLength": 1,
       "maxLength": 1000000

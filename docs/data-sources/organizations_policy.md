@@ -23,7 +23,7 @@ Data Source schema for AWS::Organizations::Policy
 
 - `arn` (String) ARN of the Policy
 - `aws_managed` (Boolean) A boolean value that indicates whether the specified policy is an AWS managed policy. If true, then you can attach the policy to roots, OUs, or accounts, but you cannot edit it.
-- `content` (String) The Policy text content
+- `content` (String) The Policy text content. For AWS CloudFormation templates formatted in YAML, you can provide the policy in JSON or YAML format. AWS CloudFormation always converts a YAML policy to JSON format before submitting it.
 - `description` (String) Human readable description of the policy
 - `name` (String) Name of the Policy
 - `tags` (Attributes Set) A list of tags that you want to attach to the newly created policy. For each tag in the list, you must specify both a tag key and a value. You can set the value to an empty string, but you can't set it to null. (see [below for nested schema](#nestedatt--tags))

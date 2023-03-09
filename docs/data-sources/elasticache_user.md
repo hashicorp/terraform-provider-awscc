@@ -28,6 +28,7 @@ Data Source schema for AWS::ElastiCache::User
 - `no_password_required` (Boolean) Indicates a password is not required for this user account.
 - `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
 - `status` (String) Indicates the user status. Can be "active", "modifying" or "deleting".
+- `tags` (Attributes Set) An array of key-value pairs to apply to this user. (see [below for nested schema](#nestedatt--tags))
 - `user_id` (String) The ID of the user.
 - `user_name` (String) The username of the user.
 
@@ -38,5 +39,14 @@ Read-Only:
 
 - `passwords` (List of String) Passwords used for this user account. You can create up to two passwords for each user.
 - `type` (String) Authentication Type
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Read-Only:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with 'aws:'. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 

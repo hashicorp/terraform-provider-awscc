@@ -22,6 +22,7 @@ Data Source schema for AWS::InternetMonitor::Monitor
 ### Read-Only
 
 - `created_at` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
+- `max_city_networks_to_monitor` (Number)
 - `modified_at` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
 - `monitor_arn` (String)
 - `monitor_name` (String)

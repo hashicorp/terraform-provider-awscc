@@ -484,6 +484,64 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaintenanceWindows
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Specifies a start time and duration for a scheduled Job.",
+		//	    "properties": {
+		//	      "DurationInMinutes": {
+		//	        "maximum": 1430,
+		//	        "minimum": 1,
+		//	        "type": "integer"
+		//	      },
+		//	      "StartTime": {
+		//	        "maxLength": 256,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"maintenance_windows": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: DurationInMinutes
+					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.Int64{ /*START VALIDATORS*/
+							int64validator.Between(1, 1430),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: StartTime
+					"start_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(1, 256),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: PresignedUrlConfig
 		// CloudFormation resource type schema:
 		//
@@ -674,6 +732,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"description":                    "Description",
 		"document":                       "Document",
 		"document_source":                "DocumentSource",
+		"duration_in_minutes":            "DurationInMinutes",
 		"expires_in_sec":                 "ExpiresInSec",
 		"exponential_rollout_rate":       "ExponentialRolloutRate",
 		"failure_type":                   "FailureType",
@@ -684,6 +743,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"job_executions_rollout_config":  "JobExecutionsRolloutConfig",
 		"job_template_id":                "JobTemplateId",
 		"key":                            "Key",
+		"maintenance_windows":            "MaintenanceWindows",
 		"maximum_per_minute":             "MaximumPerMinute",
 		"min_number_of_executed_things":  "MinNumberOfExecutedThings",
 		"number_of_notified_things":      "NumberOfNotifiedThings",
@@ -693,6 +753,7 @@ func jobTemplateResource(ctx context.Context) (resource.Resource, error) {
 		"rate_increase_criteria":         "RateIncreaseCriteria",
 		"retry_criteria_list":            "RetryCriteriaList",
 		"role_arn":                       "RoleArn",
+		"start_time":                     "StartTime",
 		"tags":                           "Tags",
 		"threshold_percentage":           "ThresholdPercentage",
 		"timeout_config":                 "TimeoutConfig",

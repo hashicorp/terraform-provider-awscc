@@ -667,6 +667,24 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ParentTargetArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+",
+		//	  "type": "string"
+		//	}
+		"parent_target_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.RegexMatches(regexp.MustCompile("arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+"), ""),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -753,6 +771,7 @@ func deploymentResource(ctx context.Context) (resource.Resource, error) {
 		"min_number_of_executed_things":   "MinNumberOfExecutedThings",
 		"number_of_notified_things":       "NumberOfNotifiedThings",
 		"number_of_succeeded_things":      "NumberOfSucceededThings",
+		"parent_target_arn":               "ParentTargetArn",
 		"posix_user":                      "PosixUser",
 		"rate_increase_criteria":          "RateIncreaseCriteria",
 		"reset":                           "Reset",

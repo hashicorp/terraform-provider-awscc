@@ -584,6 +584,9 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
+		//	      "DeletionProtectionEnabled": {
+		//	        "type": "boolean"
+		//	      },
 		//	      "GlobalSecondaryIndexes": {
 		//	        "insertionOrder": false,
 		//	        "items": {
@@ -814,6 +817,14 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 						Computed: true,
 						PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 							objectplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: DeletionProtectionEnabled
+					"deletion_protection_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+							boolplanmodifier.UseStateForUnknown(),
 						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: GlobalSecondaryIndexes
@@ -1438,6 +1449,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"attribute_type":                       "AttributeType",
 		"billing_mode":                         "BillingMode",
 		"contributor_insights_specification":   "ContributorInsightsSpecification",
+		"deletion_protection_enabled":          "DeletionProtectionEnabled",
 		"disable_scale_in":                     "DisableScaleIn",
 		"enabled":                              "Enabled",
 		"global_secondary_indexes":             "GlobalSecondaryIndexes",

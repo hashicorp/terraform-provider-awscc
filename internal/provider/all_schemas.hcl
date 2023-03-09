@@ -1445,6 +1445,24 @@ resource_schema "aws_ivs_stream_key" {
   cloudformation_type_name = "AWS::IVS::StreamKey"
 }
 
+resource_schema "aws_ivschat_logging_configuration" {
+  cloudformation_type_name = "AWS::IVSChat::LoggingConfiguration"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_ivschat_room" {
+  cloudformation_type_name = "AWS::IVSChat::Room"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_identitystore_group" {
   cloudformation_type_name               = "AWS::IdentityStore::Group"
   suppress_plural_data_source_generation = true
@@ -2054,6 +2072,10 @@ resource_schema "aws_macie_findings_filter" {
 
 resource_schema "aws_macie_session" {
   cloudformation_type_name = "AWS::Macie::Session"
+}
+
+resource_schema "aws_managedblockchain_accessor" {
+  cloudformation_type_name = "AWS::ManagedBlockchain::Accessor"
 }
 
 resource_schema "aws_mediaconnect_flow" {

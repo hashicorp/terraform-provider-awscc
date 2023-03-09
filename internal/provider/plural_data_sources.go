@@ -318,6 +318,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_serverless_clusters -cftype AWS::MSK::ServerlessCluster -package msk ../aws/msk/serverless_cluster_plural_data_source_gen.go ../aws/msk/serverless_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mwaa_environments -cftype AWS::MWAA::Environment -package mwaa ../aws/mwaa/environment_plural_data_source_gen.go ../aws/mwaa/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_macie_sessions -cftype AWS::Macie::Session -package macie ../aws/macie/session_plural_data_source_gen.go ../aws/macie/session_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_managedblockchain_accessors -cftype AWS::ManagedBlockchain::Accessor -package managedblockchain ../aws/managedblockchain/accessor_plural_data_source_gen.go ../aws/managedblockchain/accessor_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mediaconnect_flows -cftype AWS::MediaConnect::Flow -package mediaconnect ../aws/mediaconnect/flow_plural_data_source_gen.go ../aws/mediaconnect/flow_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mediapackage_channels -cftype AWS::MediaPackage::Channel -package mediapackage ../aws/mediapackage/channel_plural_data_source_gen.go ../aws/mediapackage/channel_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mediapackage_origin_endpoints -cftype AWS::MediaPackage::OriginEndpoint -package mediapackage ../aws/mediapackage/origin_endpoint_plural_data_source_gen.go ../aws/mediapackage/origin_endpoint_plural_data_source_gen_test.go
@@ -560,6 +561,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lookoutvision"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/m2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/macie"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/managedblockchain"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediaconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediapackage"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/memorydb"
