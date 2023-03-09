@@ -435,6 +435,7 @@
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_macie_custom_data_identifier -cfschema ../service/cloudformation/schemas/AWS_Macie_CustomDataIdentifier.json -package macie ../aws/macie/custom_data_identifier_singular_data_source_gen.go ../aws/macie/custom_data_identifier_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_macie_findings_filter -cfschema ../service/cloudformation/schemas/AWS_Macie_FindingsFilter.json -package macie ../aws/macie/findings_filter_singular_data_source_gen.go ../aws/macie/findings_filter_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_macie_session -cfschema ../service/cloudformation/schemas/AWS_Macie_Session.json -package macie ../aws/macie/session_singular_data_source_gen.go ../aws/macie/session_singular_data_source_gen_test.go
+//go:generate go run generators/singular-data-source/main.go -data-source awscc_managedblockchain_accessor -cfschema ../service/cloudformation/schemas/AWS_ManagedBlockchain_Accessor.json -package managedblockchain ../aws/managedblockchain/accessor_singular_data_source_gen.go ../aws/managedblockchain/accessor_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_mediaconnect_flow -cfschema ../service/cloudformation/schemas/AWS_MediaConnect_Flow.json -package mediaconnect ../aws/mediaconnect/flow_singular_data_source_gen.go ../aws/mediaconnect/flow_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_mediaconnect_flow_entitlement -cfschema ../service/cloudformation/schemas/AWS_MediaConnect_FlowEntitlement.json -package mediaconnect ../aws/mediaconnect/flow_entitlement_singular_data_source_gen.go ../aws/mediaconnect/flow_entitlement_singular_data_source_gen_test.go
 //go:generate go run generators/singular-data-source/main.go -data-source awscc_mediaconnect_flow_output -cfschema ../service/cloudformation/schemas/AWS_MediaConnect_FlowOutput.json -package mediaconnect ../aws/mediaconnect/flow_output_singular_data_source_gen.go ../aws/mediaconnect/flow_output_singular_data_source_gen_test.go
@@ -762,6 +763,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/lookoutvision"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/m2"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/macie"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/managedblockchain"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediaconnect"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mediapackage"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/memorydb"
