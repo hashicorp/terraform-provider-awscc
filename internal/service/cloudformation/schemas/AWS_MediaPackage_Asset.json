@@ -94,7 +94,8 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/CreatedAt",
-    "/properties/EgressEndpoints"
+    "/properties/EgressEndpoints/*/PackagingConfigurationId",
+    "/properties/EgressEndpoints/*/Url"
   ],
   "primaryIdentifier": [
     "/properties/Id"

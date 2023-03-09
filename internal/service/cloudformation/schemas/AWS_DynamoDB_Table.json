@@ -19,6 +19,9 @@
     "BillingMode": {
       "type": "string"
     },
+    "DeletionProtectionEnabled": {
+      "type": "boolean"
+    },
     "GlobalSecondaryIndexes": {
       "type": "array",
       "uniqueItems": false,

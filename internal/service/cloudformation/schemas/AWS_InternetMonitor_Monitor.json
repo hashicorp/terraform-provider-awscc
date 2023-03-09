@@ -103,6 +103,11 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "MaxCityNetworksToMonitor": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 500000
     }
   },
   "readOnlyProperties": [
@@ -139,7 +144,8 @@
     },
     "read": {
       "permissions": [
-        "internetmonitor:GetMonitor"
+        "internetmonitor:GetMonitor",
+        "internetmonitor:ListTagsForResource"
       ]
     },
     "update": {

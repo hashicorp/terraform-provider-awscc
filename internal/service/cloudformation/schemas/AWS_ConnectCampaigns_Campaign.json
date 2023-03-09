@@ -49,18 +49,7 @@
           "pattern": "^arn:aws[-a-z0-9]*:connect:[-a-z0-9]*:[0-9]{12}:instance/[-a-zA-Z0-9]*/queue/[-a-zA-Z0-9]*$"
         },
         "AnswerMachineDetectionConfig": {
-          "type": "object",
-          "description": "The configuration used for answering machine detection during outbound calls",
-          "properties": {
-            "EnableAnswerMachineDetection": {
-              "type": "boolean",
-              "description": "Flag to decided whether outbound calls should have answering machine detection enabled or not"
-            }
-          },
-          "required": [
-            "EnableAnswerMachineDetection"
-          ],
-          "additionalProperties": false
+          "$ref": "#/definitions/AnswerMachineDetectionConfig"
         }
       },
       "required": [
@@ -98,6 +87,20 @@
       },
       "required": [
         "BandwidthAllocation"
+      ],
+      "additionalProperties": false
+    },
+    "AnswerMachineDetectionConfig": {
+      "type": "object",
+      "description": "The configuration used for answering machine detection during outbound calls",
+      "properties": {
+        "EnableAnswerMachineDetection": {
+          "type": "boolean",
+          "description": "Flag to decided whether outbound calls should have answering machine detection enabled or not"
+        }
+      },
+      "required": [
+        "EnableAnswerMachineDetection"
       ],
       "additionalProperties": false
     },

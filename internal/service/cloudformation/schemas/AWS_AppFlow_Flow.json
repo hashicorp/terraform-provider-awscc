@@ -76,6 +76,10 @@
         "TriggerProperties": {
           "description": "Details required based on the type of trigger",
           "$ref": "#/definitions/ScheduledTriggerProperties"
+        },
+        "ActivateFlowOnCreate": {
+          "description": "Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -1624,7 +1628,8 @@
   ],
   "createOnlyProperties": [
     "/properties/FlowName",
-    "/properties/KMSArn"
+    "/properties/KMSArn",
+    "/properties/TriggerConfig/ActivateFlowOnCreate"
   ],
   "readOnlyProperties": [
     "/properties/FlowArn"
@@ -1636,6 +1641,7 @@
     "create": {
       "permissions": [
         "appflow:CreateFlow",
+        "appflow:StartFlow",
         "appflow:TagResource",
         "appflow:ListTagsForResource",
         "appflow:UseConnectorProfile",

@@ -272,6 +272,10 @@
       "type": "string",
       "pattern": "arn:[^:]*:iot:[^:]*:[0-9]+:(thing|thinggroup)/.+"
     },
+    "ParentTargetArn": {
+      "type": "string",
+      "pattern": "arn:[^:]*:iot:[^:]*:[0-9]+:thinggroup/.+"
+    },
     "DeploymentId": {
       "type": "string",
       "pattern": ".+"
@@ -320,6 +324,7 @@
   ],
   "createOnlyProperties": [
     "/properties/TargetArn",
+    "/properties/ParentTargetArn",
     "/properties/DeploymentName",
     "/properties/Components",
     "/properties/IotJobConfiguration",

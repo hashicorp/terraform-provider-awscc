@@ -83,10 +83,11 @@
     "/properties/TargetGroupArn"
   ],
   "createOnlyProperties": [
+    "/properties/DBProxyName",
     "/properties/TargetGroupName"
   ],
   "primaryIdentifier": [
-    "/properties/DBProxyName"
+    "/properties/TargetGroupArn"
   ],
   "handlers": {
     "create": {

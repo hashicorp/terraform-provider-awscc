@@ -442,7 +442,7 @@
     "/properties/DBClusterSnapshotIdentifier": "$lowercase(DBClusterSnapshotIdentifier)",
     "/properties/DBInstanceIdentifier": "$lowercase(DBInstanceIdentifier)",
     "/properties/DBParameterGroupName": "$lowercase(DBParameterGroupName)",
-    "/properties/DBName": "$lowercase(DBName)",
+    "/properties/DBName": "$lowercase(DBName) $OR $uppercase(DBName)",
     "/properties/DBSnapshotIdentifier": "$lowercase(DBSnapshotIdentifier)",
     "/properties/DBSubnetGroupName": "$lowercase(DBSubnetGroupName)",
     "/properties/Engine": "$lowercase(Engine)",
@@ -451,6 +451,7 @@
     "/properties/MasterUserSecret/KmsKeyId": "$join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:kms:[a-z]{2}[-]{1}[a-z]{3,10}[-]{0,1}[a-z]{0,10}[-]{1}[1-3]{1}:[0-9]{12}[:]{1}key\\/\", MasterUserSecret.KmsKeyId])",
     "/properties/OptionGroupName": "$lowercase(OptionGroupName)",
     "/properties/PerformanceInsightsKMSKeyId": "$join([\"arn:(aws)[-]{0,1}[a-z]{0,2}[-]{0,1}[a-z]{0,3}:kms:[a-z]{2}[-]{1}[a-z]{3,10}[-]{0,1}[a-z]{0,10}[-]{1}[1-3]{1}:[0-9]{12}[:]{1}key\\/\", PerformanceInsightsKMSKeyId])",
+    "/properties/PreferredMaintenanceWindow": "$lowercase(PreferredMaintenanceWindow)",
     "/properties/SourceDBInstanceAutomatedBackupsArn": "$lowercase(SourceDBInstanceAutomatedBackupsArn)",
     "/properties/SourceDBInstanceIdentifier": "$lowercase(SourceDBInstanceIdentifier)"
   },

@@ -246,6 +246,13 @@
     }
   },
   "properties": {
+    "Id": {
+      "description": "The unique ID of the new app monitor.",
+      "type": "string",
+      "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
+      "minLength": 36,
+      "maxLength": 36
+    },
     "Name": {
       "description": "A name for the app monitor",
       "type": "string",
@@ -278,8 +285,16 @@
   "createOnlyProperties": [
     "/properties/Name"
   ],
+  "readOnlyProperties": [
+    "/properties/Id"
+  ],
   "primaryIdentifier": [
     "/properties/Name"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/Id"
+    ]
   ],
   "required": [
     "Name",
