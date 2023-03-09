@@ -1,0 +1,1 @@
+$ terraform import awscc_managedblockchain_accessor.example <resource ID>

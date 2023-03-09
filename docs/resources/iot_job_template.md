@@ -28,6 +28,7 @@ Job templates enable you to preconfigure jobs so that you can deploy them to mul
 - `job_arn` (String) Optional for copying a JobTemplate from a pre-existing Job configuration.
 - `job_executions_retry_config` (Attributes) (see [below for nested schema](#nestedatt--job_executions_retry_config))
 - `job_executions_rollout_config` (Attributes) Allows you to create a staged rollout of a job. (see [below for nested schema](#nestedatt--job_executions_rollout_config))
+- `maintenance_windows` (Attributes List) (see [below for nested schema](#nestedatt--maintenance_windows))
 - `presigned_url_config` (Attributes) Configuration for pre-signed S3 URLs. (see [below for nested schema](#nestedatt--presigned_url_config))
 - `tags` (Attributes Set) Metadata that can be used to manage the JobTemplate. (see [below for nested schema](#nestedatt--tags))
 - `timeout_config` (Attributes) Specifies the amount of time each device has to finish its execution of the job. (see [below for nested schema](#nestedatt--timeout_config))
@@ -99,6 +100,15 @@ Optional:
 - `number_of_succeeded_things` (Number)
 
 
+
+
+<a id="nestedatt--maintenance_windows"></a>
+### Nested Schema for `maintenance_windows`
+
+Optional:
+
+- `duration_in_minutes` (Number)
+- `start_time` (String)
 
 
 <a id="nestedatt--presigned_url_config"></a>

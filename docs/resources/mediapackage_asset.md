@@ -24,6 +24,7 @@ Resource schema for AWS::MediaPackage::Asset
 
 ### Optional
 
+- `egress_endpoints` (Attributes List) The list of egress endpoints available for the Asset. (see [below for nested schema](#nestedatt--egress_endpoints))
 - `resource_id` (String) The resource ID to include in SPEKE key requests.
 - `tags` (Attributes List) A collection of tags associated with a resource (see [below for nested schema](#nestedatt--tags))
 
@@ -31,7 +32,15 @@ Resource schema for AWS::MediaPackage::Asset
 
 - `arn` (String) The ARN of the Asset.
 - `created_at` (String) The time the Asset was initially submitted for Ingest.
-- `egress_endpoints` (Attributes List) The list of egress endpoints available for the Asset. (see [below for nested schema](#nestedatt--egress_endpoints))
+
+<a id="nestedatt--egress_endpoints"></a>
+### Nested Schema for `egress_endpoints`
+
+Required:
+
+- `packaging_configuration_id` (String) The ID of the PackagingConfiguration being applied to the Asset.
+- `url` (String) The URL of the parent manifest for the repackaged Asset.
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
@@ -40,15 +49,6 @@ Required:
 
 - `key` (String)
 - `value` (String)
-
-
-<a id="nestedatt--egress_endpoints"></a>
-### Nested Schema for `egress_endpoints`
-
-Read-Only:
-
-- `packaging_configuration_id` (String) The ID of the PackagingConfiguration being applied to the Asset.
-- `url` (String) The URL of the parent manifest for the repackaged Asset.
 
 ## Import
 

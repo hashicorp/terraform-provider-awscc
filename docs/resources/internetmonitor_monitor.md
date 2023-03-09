@@ -17,6 +17,7 @@ Represents a monitor, which defines the monitoring boundaries for measurements t
 
 ### Optional
 
+- `max_city_networks_to_monitor` (Number)
 - `monitor_name` (String)
 - `resources` (List of String)
 - `resources_to_add` (List of String)
