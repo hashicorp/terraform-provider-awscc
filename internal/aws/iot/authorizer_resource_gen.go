@@ -126,6 +126,7 @@ func authorizerResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": true,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {

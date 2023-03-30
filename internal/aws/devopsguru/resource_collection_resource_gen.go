@@ -43,6 +43,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 		//	      "properties": {
 		//	        "StackNames": {
 		//	          "description": "An array of CloudFormation stack names.",
+		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
@@ -58,6 +59,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 		//	    },
 		//	    "Tags": {
 		//	      "description": "Tagged resources for DevOps Guru to monitor",
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "description": "Tagged resource for DevOps Guru to monitor",
@@ -70,6 +72,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 		//	          },
 		//	          "TagValues": {
 		//	            "description": "Tag values of DevOps Guru app boundary.",
+		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
@@ -106,6 +109,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+								generic.Multiset(),
 								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
@@ -146,6 +150,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 									),
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+									generic.Multiset(),
 									listplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
@@ -155,6 +160,7 @@ func resourceCollectionResource(ctx context.Context) (resource.Resource, error) 
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
 						listplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/

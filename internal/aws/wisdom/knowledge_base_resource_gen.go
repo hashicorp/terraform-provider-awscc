@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -218,8 +219,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "AppIntegrationArn",
-		//	        "ObjectFields"
+		//	        "AppIntegrationArn"
 		//	      ],
 		//	      "type": "object"
 		//	    }
@@ -242,7 +242,8 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 						// Property: ObjectFields
 						"object_fields": schema.ListAttribute{ /*START ATTRIBUTE*/
 							ElementType: types.StringType,
-							Required:    true,
+							Optional:    true,
+							Computed:    true,
 							Validators: []validator.List{ /*START VALIDATORS*/
 								listvalidator.SizeBetween(1, 100),
 								listvalidator.ValueStringsAre(
@@ -251,6 +252,7 @@ func knowledgeBaseResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 								generic.Multiset(),
+								listplanmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

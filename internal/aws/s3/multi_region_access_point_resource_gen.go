@@ -169,6 +169,12 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 		//	        "minLength": 3,
 		//	        "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 		//	        "type": "string"
+		//	      },
+		//	      "BucketAccountId": {
+		//	        "maxLength": 12,
+		//	        "minLength": 12,
+		//	        "pattern": "^[0-9]{12}$",
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -190,6 +196,18 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 							stringvalidator.LengthBetween(3, 63),
 							stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$"), ""),
 						}, /*END VALIDATORS*/
+					}, /*END ATTRIBUTE*/
+					// Property: BucketAccountId
+					"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						Validators: []validator.String{ /*START VALIDATORS*/
+							stringvalidator.LengthBetween(12, 12),
+							stringvalidator.RegexMatches(regexp.MustCompile("^[0-9]{12}$"), ""),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -229,6 +247,7 @@ func multiRegionAccessPointResource(ctx context.Context) (resource.Resource, err
 		"block_public_acls":                 "BlockPublicAcls",
 		"block_public_policy":               "BlockPublicPolicy",
 		"bucket":                            "Bucket",
+		"bucket_account_id":                 "BucketAccountId",
 		"created_at":                        "CreatedAt",
 		"ignore_public_acls":                "IgnorePublicAcls",
 		"name":                              "Name",

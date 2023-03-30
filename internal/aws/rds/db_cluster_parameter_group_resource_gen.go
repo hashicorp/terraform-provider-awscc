@@ -86,7 +86,6 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 			ElementType: types.StringType,
 			Description: "An array of parameters to be modified. A maximum of 20 parameters can be modified in a single request.",
 			Required:    true,
-			// Parameters is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -186,9 +185,6 @@ func dBClusterParameterGroupResource(ctx context.Context) (resource.Resource, er
 		"value":                           "Value",
 	})
 
-	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/Parameters",
-	})
 	opts = opts.WithCreateTimeoutInMinutes(180).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(180)

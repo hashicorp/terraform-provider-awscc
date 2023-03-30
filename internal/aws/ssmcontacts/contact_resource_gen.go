@@ -230,7 +230,11 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
 			Description: "The stages that an escalation plan or engagement plan engages contacts and contact methods in.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				listplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 			// Plan is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Type
