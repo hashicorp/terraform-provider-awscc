@@ -18,14 +18,14 @@ Definition of AWS::RefactorSpaces::Service Resource Type
 ### Required
 
 - `application_identifier` (String)
+- `endpoint_type` (String)
 - `environment_identifier` (String)
+- `name` (String)
 
 ### Optional
 
 - `description` (String)
-- `endpoint_type` (String)
 - `lambda_endpoint` (Attributes) (see [below for nested schema](#nestedatt--lambda_endpoint))
-- `name` (String)
 - `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
 - `url_endpoint` (Attributes) (see [below for nested schema](#nestedatt--url_endpoint))
 - `vpc_id` (String)

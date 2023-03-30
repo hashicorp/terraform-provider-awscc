@@ -19,12 +19,12 @@ Definition of AWS::RefactorSpaces::Route Resource Type
 
 - `application_identifier` (String)
 - `environment_identifier` (String)
+- `route_type` (String)
 - `service_identifier` (String)
 
 ### Optional
 
 - `default_route` (Attributes) (see [below for nested schema](#nestedatt--default_route))
-- `route_type` (String)
 - `tags` (Attributes List) Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair. (see [below for nested schema](#nestedatt--tags))
 - `uri_path_route` (Attributes) (see [below for nested schema](#nestedatt--uri_path_route))
 

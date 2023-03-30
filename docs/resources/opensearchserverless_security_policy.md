@@ -17,13 +17,13 @@ Amazon OpenSearchServerless security policy resource
 
 ### Required
 
+- `name` (String) The name of the policy
 - `policy` (String) The JSON policy document that is the content for the policy
+- `type` (String) The possible types for the network policy
 
 ### Optional
 
 - `description` (String) The description of the policy
-- `name` (String) The name of the policy
-- `type` (String) The possible types for the network policy
 
 ### Read-Only
 

@@ -23,6 +23,7 @@ Resource schema for AWS::Cassandra::Table
 ### Optional
 
 - `billing_mode` (Attributes) (see [below for nested schema](#nestedatt--billing_mode))
+- `client_side_timestamps_enabled` (Boolean) Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.
 - `clustering_key_columns` (Attributes List) Clustering key columns of the table (see [below for nested schema](#nestedatt--clustering_key_columns))
 - `default_time_to_live` (Number) Default TTL (Time To Live) in seconds, where zero is disabled. If the value is greater than zero, TTL is enabled for the entire table and an expiration timestamp is added to each column.
 - `encryption_specification` (Attributes) Represents the settings used to enable server-side encryption (see [below for nested schema](#nestedatt--encryption_specification))

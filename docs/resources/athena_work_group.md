@@ -47,12 +47,23 @@ Required:
 
 Optional:
 
+- `additional_configuration` (String) Additional Configuration that are passed to Athena Spark Calculations running in this workgroup
 - `bytes_scanned_cutoff_per_query` (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
+- `customer_content_encryption_configuration` (Attributes) Indicates the KMS key for encrypting notebook content. (see [below for nested schema](#nestedatt--work_group_configuration--customer_content_encryption_configuration))
 - `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
 - `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration--engine_version))
+- `execution_role` (String) Execution Role ARN required to run Athena Spark Calculations
 - `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 - `requester_pays_enabled` (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
 - `result_configuration` (Attributes) The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as "client-side settings". If workgroup settings override client-side settings, then the query uses the workgroup settings. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration))
+
+<a id="nestedatt--work_group_configuration--customer_content_encryption_configuration"></a>
+### Nested Schema for `work_group_configuration.customer_content_encryption_configuration`
+
+Required:
+
+- `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
 
 <a id="nestedatt--work_group_configuration--engine_version"></a>
 ### Nested Schema for `work_group_configuration.engine_version`
@@ -71,8 +82,18 @@ Read-Only:
 
 Optional:
 
+- `acl_configuration` (Attributes) Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration--acl_configuration))
 - `encryption_configuration` (Attributes) If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. (see [below for nested schema](#nestedatt--work_group_configuration--result_configuration--encryption_configuration))
+- `expected_bucket_owner` (String) The AWS account ID of the owner of S3 bucket where query results are stored
 - `output_location` (String) The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration
+
+<a id="nestedatt--work_group_configuration--result_configuration--acl_configuration"></a>
+### Nested Schema for `work_group_configuration.result_configuration.acl_configuration`
+
+Required:
+
+- `s3_acl_option` (String) The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL
+
 
 <a id="nestedatt--work_group_configuration--result_configuration--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration.result_configuration.encryption_configuration`
@@ -93,13 +114,25 @@ Optional:
 
 Optional:
 
+- `additional_configuration` (String) Additional Configuration that are passed to Athena Spark Calculations running in this workgroup
 - `bytes_scanned_cutoff_per_query` (Number) The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.
+- `customer_content_encryption_configuration` (Attributes) Indicates the KMS key for encrypting notebook content. (see [below for nested schema](#nestedatt--work_group_configuration_updates--customer_content_encryption_configuration))
 - `enforce_work_group_configuration` (Boolean) If set to "true", the settings for the workgroup override client-side settings. If set to "false", client-side settings are used
 - `engine_version` (Attributes) The Athena engine version for running queries. (see [below for nested schema](#nestedatt--work_group_configuration_updates--engine_version))
+- `execution_role` (String) Execution Role ARN required to run Athena Spark Calculations
 - `publish_cloudwatch_metrics_enabled` (Boolean) Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.
 - `remove_bytes_scanned_cutoff_per_query` (Boolean) Indicates that the data usage control limit per query is removed.
+- `remove_customer_content_encryption_configuration` (Boolean)
 - `requester_pays_enabled` (Boolean) If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error.
 - `result_configuration_updates` (Attributes) The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. (see [below for nested schema](#nestedatt--work_group_configuration_updates--result_configuration_updates))
+
+<a id="nestedatt--work_group_configuration_updates--customer_content_encryption_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.customer_content_encryption_configuration`
+
+Required:
+
+- `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
+
 
 <a id="nestedatt--work_group_configuration_updates--engine_version"></a>
 ### Nested Schema for `work_group_configuration_updates.engine_version`
@@ -118,10 +151,22 @@ Read-Only:
 
 Optional:
 
+- `acl_configuration` (Attributes) Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results (see [below for nested schema](#nestedatt--work_group_configuration_updates--result_configuration_updates--acl_configuration))
 - `encryption_configuration` (Attributes) If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information. (see [below for nested schema](#nestedatt--work_group_configuration_updates--result_configuration_updates--encryption_configuration))
+- `expected_bucket_owner` (String) The AWS account ID of the owner of S3 bucket where query results are stored
 - `output_location` (String) The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration
+- `remove_acl_configuration` (Boolean)
 - `remove_encryption_configuration` (Boolean)
+- `remove_expected_bucket_owner` (Boolean)
 - `remove_output_location` (Boolean)
+
+<a id="nestedatt--work_group_configuration_updates--result_configuration_updates--acl_configuration"></a>
+### Nested Schema for `work_group_configuration_updates.result_configuration_updates.acl_configuration`
+
+Required:
+
+- `s3_acl_option` (String) The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL
+
 
 <a id="nestedatt--work_group_configuration_updates--result_configuration_updates--encryption_configuration"></a>
 ### Nested Schema for `work_group_configuration_updates.result_configuration_updates.encryption_configuration`
