@@ -138,9 +138,6 @@
         "iam:CreateRole",
         "iam:PutRolePolicy",
         "iam:AttachRolePolicy",
-        "iam:GetRole",
-        "iam:ListAttachedRolePolicies",
-        "iam:ListRolePolicies",
         "iam:GetRolePolicy"
       ]
     },
@@ -164,11 +161,7 @@
         "iam:DeleteRolePolicy",
         "iam:PutRolePolicy",
         "iam:TagRole",
-        "iam:UntagRole",
-        "iam:GetRole",
-        "iam:ListAttachedRolePolicies",
-        "iam:ListRolePolicies",
-        "iam:GetRolePolicy"
+        "iam:UntagRole"
       ]
     },
     "delete": {

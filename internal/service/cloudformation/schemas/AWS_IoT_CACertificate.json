@@ -35,14 +35,12 @@
         "Key": {
           "type": "string",
           "description": "The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
           "minLength": 1,
           "maxLength": 127
         },
         "Value": {
           "type": "string",
           "description": "The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-          "pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$",
           "minLength": 1,
           "maxLength": 255
         }
@@ -103,7 +101,6 @@
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
       "type": "array",
-      "uniqueItems": true,
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -111,10 +108,11 @@
     }
   },
   "tagging": {
-    "taggable": false,
-    "tagOnCreate": false,
-    "tagUpdatable": false,
-    "cloudFormationSystemTags": true
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": true,
+    "tagProperty": "/properties/Tags"
   },
   "additionalProperties": false,
   "required": [
@@ -131,7 +129,8 @@
     "/properties/CACertificatePem"
   ],
   "writeOnlyProperties": [
-    "/properties/VerificationCertificatePem"
+    "/properties/VerificationCertificatePem",
+    "/properties/RemoveAutoRegistration"
   ],
   "primaryIdentifier": [
     "/properties/Id"
@@ -141,25 +140,33 @@
       "permissions": [
         "iam:GetRole",
         "iam:PassRole",
-        "iot:RegisterCACertificate"
+        "iot:RegisterCACertificate",
+        "iot:DescribeCACertificate",
+        "iot:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
-        "iot:DescribeCACertificate"
+        "iot:DescribeCACertificate",
+        "iot:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
         "iam:GetRole",
         "iam:PassRole",
-        "iot:UpdateCACertificate"
+        "iot:UpdateCACertificate",
+        "iot:DescribeCACertificate",
+        "iot:TagResource",
+        "iot:UntagResource",
+        "iot:ListTagsForResource"
       ]
     },
     "delete": {
       "permissions": [
         "iot:UpdateCACertificate",
-        "iot:DeleteCACertificate"
+        "iot:DeleteCACertificate",
+        "iot:DescribeCACertificate"
       ]
     },
     "list": {

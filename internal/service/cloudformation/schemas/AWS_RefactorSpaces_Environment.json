@@ -77,6 +77,10 @@
       "description": "Metadata that you can assign to help organize the frameworks that you create. Each tag is a key-value pair."
     }
   },
+  "required": [
+    "Name",
+    "NetworkFabricType"
+  ],
   "readOnlyProperties": [
     "/properties/EnvironmentIdentifier",
     "/properties/Arn",

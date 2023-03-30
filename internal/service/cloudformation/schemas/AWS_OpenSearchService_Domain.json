@@ -305,6 +305,56 @@
           "type": "boolean"
         }
       }
+    },
+    "WindowStartTime": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Hours": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 23
+        },
+        "Minutes": {
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 59
+        }
+      },
+      "required": [
+        "Hours",
+        "Minutes"
+      ]
+    },
+    "OffPeakWindow": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "WindowStartTime": {
+          "$ref": "#/definitions/WindowStartTime"
+        }
+      }
+    },
+    "OffPeakWindowOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Enabled": {
+          "type": "boolean"
+        },
+        "OffPeakWindow": {
+          "$ref": "#/definitions/OffPeakWindow"
+        }
+      }
+    },
+    "SoftwareUpdateOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "AutoSoftwareUpdateEnabled": {
+          "type": "boolean"
+        }
+      }
     }
   },
   "properties": {
@@ -393,6 +443,12 @@
     },
     "ServiceSoftwareOptions": {
       "$ref": "#/definitions/ServiceSoftwareOptions"
+    },
+    "OffPeakWindowOptions": {
+      "$ref": "#/definitions/OffPeakWindowOptions"
+    },
+    "SoftwareUpdateOptions": {
+      "$ref": "#/definitions/SoftwareUpdateOptions"
     }
   },
   "additionalProperties": false,

@@ -129,8 +129,7 @@
   "required": [
     "Alias",
     "DisplayName",
-    "Type",
-    "Plan"
+    "Type"
   ],
   "primaryIdentifier": [
     "/properties/Arn"

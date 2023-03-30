@@ -41,6 +41,11 @@
       "description": "The JSON policy document that is the content for the policy"
     }
   },
+  "required": [
+    "Type",
+    "Name",
+    "Policy"
+  ],
   "createOnlyProperties": [
     "/properties/Type",
     "/properties/Name"
