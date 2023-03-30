@@ -449,6 +449,28 @@
     "PackagingGroupId",
     "Id"
   ],
+  "oneOf": [
+    {
+      "required": [
+        "HlsPackage"
+      ]
+    },
+    {
+      "required": [
+        "DashPackage"
+      ]
+    },
+    {
+      "required": [
+        "MssPackage"
+      ]
+    },
+    {
+      "required": [
+        "CmafPackage"
+      ]
+    }
+  ],
   "readOnlyProperties": [
     "/properties/Arn"
   ],
@@ -457,6 +479,12 @@
   ],
   "createOnlyProperties": [
     "/properties/Id"
+  ],
+  "deprecatedProperties": [
+    "/properties/HlsPackage/Encryption/SpekeKeyProvider/EncryptionContractConfiguration/PresetSpeke20Audio",
+    "/properties/HlsPackage/Encryption/SpekeKeyProvider/EncryptionContractConfiguration/PresetSpeke20Video",
+    "/properties/MssPackage/Encryption/SpekeKeyProvider/EncryptionContractConfiguration/PresetSpeke20Audio",
+    "/properties/MssPackage/Encryption/SpekeKeyProvider/EncryptionContractConfiguration/PresetSpeke20Video"
   ],
   "handlers": {
     "create": {

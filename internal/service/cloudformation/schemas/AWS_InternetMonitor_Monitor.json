@@ -167,5 +167,8 @@
       ]
     }
   },
-  "additionalProperties": false
+  "additionalProperties": false,
+  "required": [
+    "MonitorName"
+  ]
 }

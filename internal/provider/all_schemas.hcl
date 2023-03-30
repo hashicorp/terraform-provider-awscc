@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 689 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 707 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -192,6 +192,11 @@ resource_schema "aws_apigatewayv2_model" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apigatewayv2_route" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::Route"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_apigatewayv2_vpc_link" {
   cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
 }
@@ -324,18 +329,15 @@ resource_schema "aws_autoscaling_warm_pool" {
 }
 
 resource_schema "aws_backup_backup_plan" {
-  cloudformation_type_name               = "AWS::Backup::BackupPlan"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Backup::BackupPlan"
 }
 
 resource_schema "aws_backup_backup_selection" {
-  cloudformation_type_name               = "AWS::Backup::BackupSelection"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Backup::BackupSelection"
 }
 
 resource_schema "aws_backup_backup_vault" {
-  cloudformation_type_name               = "AWS::Backup::BackupVault"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Backup::BackupVault"
 }
 
 resource_schema "aws_backup_framework" {
@@ -405,6 +407,11 @@ resource_schema "aws_cassandra_table" {
 
 resource_schema "aws_certificatemanager_account" {
   cloudformation_type_name               = "AWS::CertificateManager::Account"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_chatbot_microsoft_teams_channel_configuration" {
+  cloudformation_type_name               = "AWS::Chatbot::MicrosoftTeamsChannelConfiguration"
   suppress_plural_data_source_generation = true
 }
 
@@ -573,6 +580,10 @@ resource_schema "aws_codestarconnections_connection" {
 
 resource_schema "aws_codestarnotifications_notification_rule" {
   cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
+}
+
+resource_schema "aws_comprehend_flywheel" {
+  cloudformation_type_name = "AWS::Comprehend::Flywheel"
 }
 
 resource_schema "aws_config_aggregation_authorization" {
@@ -793,8 +804,7 @@ resource_schema "aws_devopsguru_notification_channel" {
 }
 
 resource_schema "aws_devopsguru_resource_collection" {
-  cloudformation_type_name               = "AWS::DevOpsGuru::ResourceCollection"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::DevOpsGuru::ResourceCollection"
 }
 
 resource_schema "aws_directoryservice_simple_ad" {
@@ -2898,6 +2908,10 @@ resource_schema "aws_sagemaker_image_version" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_sagemaker_inference_experiment" {
+  cloudformation_type_name = "AWS::SageMaker::InferenceExperiment"
+}
+
 resource_schema "aws_sagemaker_model_bias_job_definition" {
   cloudformation_type_name               = "AWS::SageMaker::ModelBiasJobDefinition"
   suppress_plural_data_source_generation = true
@@ -3087,6 +3101,56 @@ resource_schema "aws_transfer_workflow" {
 resource_schema "aws_voiceid_domain" {
   cloudformation_type_name = "AWS::VoiceID::Domain"
 }
+
+# VPC Lattice still in preview.
+/*
+resource_schema "aws_vpclattice_access_log_subscription" {
+  cloudformation_type_name               = "AWS::VpcLattice::AccessLogSubscription"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_auth_policy" {
+  cloudformation_type_name               = "AWS::VpcLattice::AuthPolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_listener" {
+  cloudformation_type_name               = "AWS::VpcLattice::Listener"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_resource_policy" {
+  cloudformation_type_name               = "AWS::VpcLattice::ResourcePolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_rule" {
+  cloudformation_type_name               = "AWS::VpcLattice::Rule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_service" {
+  cloudformation_type_name = "AWS::VpcLattice::Service"
+}
+
+resource_schema "aws_vpclattice_service_network" {
+  cloudformation_type_name = "AWS::VpcLattice::ServiceNetwork"
+}
+
+resource_schema "aws_vpclattice_service_network_service_association" {
+  cloudformation_type_name               = "AWS::VpcLattice::ServiceNetworkServiceAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_service_network_vpc_association" {
+  cloudformation_type_name               = "AWS::VpcLattice::ServiceNetworkVpcAssociation"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_target_group" {
+  cloudformation_type_name = "AWS::VpcLattice::TargetGroup"
+}
+*/
 
 resource_schema "aws_wafv2_ip_set" {
   cloudformation_type_name               = "AWS::WAFv2::IPSet"

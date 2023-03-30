@@ -8,13 +8,13 @@ package ec2
 import (
 	"context"
 
-	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -46,6 +46,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -56,6 +57,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -75,6 +77,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -85,6 +88,7 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 			ElementType: types.StringType,
 			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -92,25 +96,28 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "type": "object"
+		//	  "description": "A policy to attach to the endpoint that controls access to the service.",
+		//	  "type": "string"
 		//	}
-		"policy_document": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A policy to attach to the endpoint that controls access to the service.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateDnsEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicate whether to associate a private hosted zone with the specified VPC.",
 		//	  "type": "boolean"
 		//	}
 		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "Indicate whether to associate a private hosted zone with the specified VPC.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -119,52 +126,54 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "One or more route table IDs.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"route_table_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"route_table_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "One or more route table IDs.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of one or more security groups to associate with the endpoint network interface.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The ID of one or more security groups to associate with the endpoint network interface.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The service name.",
 		//	  "type": "string"
 		//	}
 		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The service name.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -173,32 +182,44 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of one or more subnets in which to create an endpoint network interface.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The ID of one or more subnets in which to create an endpoint network interface.",
 			Optional:    true,
 			Computed:    true,
-			Validators: []validator.List{ /*START VALIDATORS*/
-				listvalidator.UniqueValues(),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointType
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "enum": [
+		//	    "Interface",
+		//	    "Gateway",
+		//	    "GatewayLoadBalancer"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"vpc_endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Optional: true,
 			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Interface",
+					"Gateway",
+					"GatewayLoadBalancer",
+				),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -208,10 +229,12 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the VPC in which the endpoint will be used.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The ID of the VPC in which the endpoint will be used.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -244,9 +267,9 @@ func vPCEndpointResource(ctx context.Context) (resource.Resource, error) {
 		"vpc_id":                "VpcId",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(210).WithDeleteTimeoutInMinutes(210)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(210)
 
 	v, err := generic.NewResource(ctx, opts...)
 

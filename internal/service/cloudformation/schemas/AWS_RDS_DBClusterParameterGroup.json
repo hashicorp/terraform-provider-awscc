@@ -67,9 +67,6 @@
     "/properties/Description",
     "/properties/Family"
   ],
-  "writeOnlyProperties": [
-    "/properties/Parameters"
-  ],
   "primaryIdentifier": [
     "/properties/DBClusterParameterGroupName"
   ],
@@ -80,6 +77,7 @@
         "rds:CreateDBClusterParameterGroup",
         "rds:DescribeDBClusterParameterGroups",
         "rds:DescribeDBClusterParameters",
+        "rds:DescribeDBClusters",
         "rds:DescribeEngineDefaultClusterParameters",
         "rds:ListTagsForResource",
         "rds:ModifyDBClusterParameterGroup"
@@ -89,6 +87,8 @@
     "read": {
       "permissions": [
         "rds:DescribeDBClusterParameterGroups",
+        "rds:DescribeDBClusterParameters",
+        "rds:DescribeEngineDefaultClusterParameters",
         "rds:ListTagsForResource"
       ]
     },

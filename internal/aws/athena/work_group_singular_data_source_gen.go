@@ -136,11 +136,29 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The workgroup configuration",
 		//	  "properties": {
+		//	    "AdditionalConfiguration": {
+		//	      "description": "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
+		//	      "type": "string"
+		//	    },
 		//	    "BytesScannedCutoffPerQuery": {
 		//	      "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 		//	      "format": "int64",
 		//	      "minimum": 10000000,
 		//	      "type": "integer"
+		//	    },
+		//	    "CustomerContentEncryptionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Indicates the KMS key for encrypting notebook content.",
+		//	      "properties": {
+		//	        "KmsKey": {
+		//	          "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "KmsKey"
+		//	      ],
+		//	      "type": "object"
 		//	    },
 		//	    "EnforceWorkGroupConfiguration": {
 		//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
@@ -161,6 +179,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "ExecutionRole": {
+		//	      "description": "Execution Role ARN required to run Athena Spark Calculations",
+		//	      "type": "string"
+		//	    },
 		//	    "PublishCloudWatchMetricsEnabled": {
 		//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 		//	      "type": "boolean"
@@ -173,6 +195,23 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The location in Amazon S3 where query results are stored and the encryption option, if any, used for query results. These are known as \"client-side settings\". If workgroup settings override client-side settings, then the query uses the workgroup settings.\n",
 		//	      "properties": {
+		//	        "AclConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
+		//	          "properties": {
+		//	            "S3AclOption": {
+		//	              "description": "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
+		//	              "enum": [
+		//	                "BUCKET_OWNER_FULL_CONTROL"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3AclOption"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "EncryptionConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
@@ -196,6 +235,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "ExpectedBucketOwner": {
+		//	          "description": "The AWS account ID of the owner of S3 bucket where query results are stored",
+		//	          "type": "string"
+		//	        },
 		//	        "OutputLocation": {
 		//	          "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
 		//	          "type": "string"
@@ -208,9 +251,26 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"work_group_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdditionalConfiguration
+				"additional_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: BytesScannedCutoffPerQuery
 				"bytes_scanned_cutoff_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomerContentEncryptionConfiguration
+				"customer_content_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKey
+						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Indicates the KMS key for encrypting notebook content.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnforceWorkGroupConfiguration
@@ -235,6 +295,11 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The Athena engine version for running queries.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Execution Role ARN required to run Athena Spark Calculations",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: PublishCloudWatchMetricsEnabled
 				"publish_cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
@@ -248,6 +313,18 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ResultConfiguration
 				"result_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AclConfiguration
+						"acl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3AclOption
+								"s3_acl_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: EncryptionConfiguration
 						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -263,6 +340,11 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 							Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: ExpectedBucketOwner
+						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS account ID of the owner of S3 bucket where query results are stored",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: OutputLocation
@@ -285,11 +367,29 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "The workgroup configuration update object",
 		//	  "properties": {
+		//	    "AdditionalConfiguration": {
+		//	      "description": "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
+		//	      "type": "string"
+		//	    },
 		//	    "BytesScannedCutoffPerQuery": {
 		//	      "description": "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
 		//	      "format": "int64",
 		//	      "minimum": 10000000,
 		//	      "type": "integer"
+		//	    },
+		//	    "CustomerContentEncryptionConfiguration": {
+		//	      "additionalProperties": false,
+		//	      "description": "Indicates the KMS key for encrypting notebook content.",
+		//	      "properties": {
+		//	        "KmsKey": {
+		//	          "description": "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "KmsKey"
+		//	      ],
+		//	      "type": "object"
 		//	    },
 		//	    "EnforceWorkGroupConfiguration": {
 		//	      "description": "If set to \"true\", the settings for the workgroup override client-side settings. If set to \"false\", client-side settings are used",
@@ -310,12 +410,19 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "ExecutionRole": {
+		//	      "description": "Execution Role ARN required to run Athena Spark Calculations",
+		//	      "type": "string"
+		//	    },
 		//	    "PublishCloudWatchMetricsEnabled": {
 		//	      "description": "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
 		//	      "type": "boolean"
 		//	    },
 		//	    "RemoveBytesScannedCutoffPerQuery": {
 		//	      "description": "Indicates that the data usage control limit per query is removed.",
+		//	      "type": "boolean"
+		//	    },
+		//	    "RemoveCustomerContentEncryptionConfiguration": {
 		//	      "type": "boolean"
 		//	    },
 		//	    "RequesterPaysEnabled": {
@@ -326,6 +433,23 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "additionalProperties": false,
 		//	      "description": "The result configuration information about the queries in this workgroup that will be updated. Includes the updated results location and an updated option for encrypting query results. ",
 		//	      "properties": {
+		//	        "AclConfiguration": {
+		//	          "additionalProperties": false,
+		//	          "description": "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
+		//	          "properties": {
+		//	            "S3AclOption": {
+		//	              "description": "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
+		//	              "enum": [
+		//	                "BUCKET_OWNER_FULL_CONTROL"
+		//	              ],
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "S3AclOption"
+		//	          ],
+		//	          "type": "object"
+		//	        },
 		//	        "EncryptionConfiguration": {
 		//	          "additionalProperties": false,
 		//	          "description": "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
@@ -349,11 +473,21 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	          ],
 		//	          "type": "object"
 		//	        },
+		//	        "ExpectedBucketOwner": {
+		//	          "description": "The AWS account ID of the owner of S3 bucket where query results are stored",
+		//	          "type": "string"
+		//	        },
 		//	        "OutputLocation": {
 		//	          "description": "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
 		//	          "type": "string"
 		//	        },
+		//	        "RemoveAclConfiguration": {
+		//	          "type": "boolean"
+		//	        },
 		//	        "RemoveEncryptionConfiguration": {
+		//	          "type": "boolean"
+		//	        },
+		//	        "RemoveExpectedBucketOwner": {
 		//	          "type": "boolean"
 		//	        },
 		//	        "RemoveOutputLocation": {
@@ -367,9 +501,26 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"work_group_configuration_updates": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AdditionalConfiguration
+				"additional_configuration": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Additional Configuration that are passed to Athena Spark Calculations running in this workgroup",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: BytesScannedCutoffPerQuery
 				"bytes_scanned_cutoff_per_query": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The upper data usage limit (cutoff) for the amount of bytes a single query in a workgroup is allowed to scan.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: CustomerContentEncryptionConfiguration
+				"customer_content_encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: KmsKey
+						"kms_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID. ",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "Indicates the KMS key for encrypting notebook content.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: EnforceWorkGroupConfiguration
@@ -394,6 +545,11 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "The Athena engine version for running queries.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: ExecutionRole
+				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Execution Role ARN required to run Athena Spark Calculations",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: PublishCloudWatchMetricsEnabled
 				"publish_cloudwatch_metrics_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "Indicates that the Amazon CloudWatch metrics are enabled for the workgroup.",
@@ -404,6 +560,10 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Description: "Indicates that the data usage control limit per query is removed.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: RemoveCustomerContentEncryptionConfiguration
+				"remove_customer_content_encryption_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: RequesterPaysEnabled
 				"requester_pays_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Description: "If set to true, allows members assigned to a workgroup to reference Amazon S3 Requester Pays buckets in queries. If set to false, workgroup members cannot query data from Requester Pays buckets, and queries that retrieve data from Requester Pays buckets cause an error. ",
@@ -412,6 +572,18 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: ResultConfigurationUpdates
 				"result_configuration_updates": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: AclConfiguration
+						"acl_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: S3AclOption
+								"s3_acl_option": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The Amazon S3 canned ACL that Athena should specify when storing query results. Currently the only supported canned ACL is BUCKET_OWNER_FULL_CONTROL",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "Indicates that an Amazon S3 canned ACL should be set to control ownership of stored query results",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: EncryptionConfiguration
 						"encryption_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -429,13 +601,26 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Description: "If query results are encrypted in Amazon S3, indicates the encryption option used (for example, SSE-KMS or CSE-KMS) and key information.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: ExpectedBucketOwner
+						"expected_bucket_owner": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The AWS account ID of the owner of S3 bucket where query results are stored",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
 						// Property: OutputLocation
 						"output_location": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "The location in Amazon S3 where your query results are stored, such as s3://path/to/query/bucket/. To run the query, you must specify the query results location using one of the ways: either for individual queries using either this setting (client-side), or in the workgroup, using WorkGroupConfiguration",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
+						// Property: RemoveAclConfiguration
+						"remove_acl_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
 						// Property: RemoveEncryptionConfiguration
 						"remove_encryption_configuration": schema.BoolAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: RemoveExpectedBucketOwner
+						"remove_expected_bucket_owner": schema.BoolAttribute{ /*START ATTRIBUTE*/
 							Computed: true,
 						}, /*END ATTRIBUTE*/
 						// Property: RemoveOutputLocation
@@ -467,32 +652,41 @@ func workGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Athena::WorkGroup").WithTerraformTypeName("awscc_athena_work_group")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bytes_scanned_cutoff_per_query":        "BytesScannedCutoffPerQuery",
-		"creation_time":                         "CreationTime",
-		"description":                           "Description",
-		"effective_engine_version":              "EffectiveEngineVersion",
-		"encryption_configuration":              "EncryptionConfiguration",
-		"encryption_option":                     "EncryptionOption",
-		"enforce_work_group_configuration":      "EnforceWorkGroupConfiguration",
-		"engine_version":                        "EngineVersion",
-		"key":                                   "Key",
-		"kms_key":                               "KmsKey",
-		"name":                                  "Name",
-		"output_location":                       "OutputLocation",
-		"publish_cloudwatch_metrics_enabled":    "PublishCloudWatchMetricsEnabled",
-		"recursive_delete_option":               "RecursiveDeleteOption",
-		"remove_bytes_scanned_cutoff_per_query": "RemoveBytesScannedCutoffPerQuery",
-		"remove_encryption_configuration":       "RemoveEncryptionConfiguration",
-		"remove_output_location":                "RemoveOutputLocation",
-		"requester_pays_enabled":                "RequesterPaysEnabled",
-		"result_configuration":                  "ResultConfiguration",
-		"result_configuration_updates":          "ResultConfigurationUpdates",
-		"selected_engine_version":               "SelectedEngineVersion",
-		"state":                                 "State",
-		"tags":                                  "Tags",
-		"value":                                 "Value",
-		"work_group_configuration":              "WorkGroupConfiguration",
-		"work_group_configuration_updates":      "WorkGroupConfigurationUpdates",
+		"acl_configuration":                         "AclConfiguration",
+		"additional_configuration":                  "AdditionalConfiguration",
+		"bytes_scanned_cutoff_per_query":            "BytesScannedCutoffPerQuery",
+		"creation_time":                             "CreationTime",
+		"customer_content_encryption_configuration": "CustomerContentEncryptionConfiguration",
+		"description":                               "Description",
+		"effective_engine_version":                  "EffectiveEngineVersion",
+		"encryption_configuration":                  "EncryptionConfiguration",
+		"encryption_option":                         "EncryptionOption",
+		"enforce_work_group_configuration":          "EnforceWorkGroupConfiguration",
+		"engine_version":                            "EngineVersion",
+		"execution_role":                            "ExecutionRole",
+		"expected_bucket_owner":                     "ExpectedBucketOwner",
+		"key":                                       "Key",
+		"kms_key":                                   "KmsKey",
+		"name":                                      "Name",
+		"output_location":                           "OutputLocation",
+		"publish_cloudwatch_metrics_enabled":        "PublishCloudWatchMetricsEnabled",
+		"recursive_delete_option":                   "RecursiveDeleteOption",
+		"remove_acl_configuration":                  "RemoveAclConfiguration",
+		"remove_bytes_scanned_cutoff_per_query":     "RemoveBytesScannedCutoffPerQuery",
+		"remove_customer_content_encryption_configuration": "RemoveCustomerContentEncryptionConfiguration",
+		"remove_encryption_configuration":                  "RemoveEncryptionConfiguration",
+		"remove_expected_bucket_owner":                     "RemoveExpectedBucketOwner",
+		"remove_output_location":                           "RemoveOutputLocation",
+		"requester_pays_enabled":                           "RequesterPaysEnabled",
+		"result_configuration":                             "ResultConfiguration",
+		"result_configuration_updates":                     "ResultConfigurationUpdates",
+		"s3_acl_option":                                    "S3AclOption",
+		"selected_engine_version":                          "SelectedEngineVersion",
+		"state":                                            "State",
+		"tags":                                             "Tags",
+		"value":                                            "Value",
+		"work_group_configuration":                         "WorkGroupConfiguration",
+		"work_group_configuration_updates":                 "WorkGroupConfigurationUpdates",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

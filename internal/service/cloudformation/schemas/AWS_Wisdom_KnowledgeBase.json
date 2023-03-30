@@ -24,8 +24,7 @@
         }
       },
       "required": [
-        "AppIntegrationArn",
-        "ObjectFields"
+        "AppIntegrationArn"
       ],
       "additionalProperties": false
     },
@@ -168,6 +167,9 @@
       "permissions": [
         "wisdom:CreateKnowledgeBase"
       ]
+    },
+    "update": {
+      "permissions": []
     },
     "delete": {
       "permissions": [

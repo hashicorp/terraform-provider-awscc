@@ -63,6 +63,9 @@ Optional:
 Required:
 
 - `app_integration_arn` (String)
+
+Optional:
+
 - `object_fields` (List of String)
 
 

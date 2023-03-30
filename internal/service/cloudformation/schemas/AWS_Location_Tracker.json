@@ -74,9 +74,12 @@
   "createOnlyProperties": [
     "/properties/KmsKeyId",
     "/properties/TrackerName",
-    "/properties/PricingPlan",
     "/properties/Description",
     "/properties/PositionFiltering"
+  ],
+  "deprecatedProperties": [
+    "/properties/PricingPlan",
+    "/properties/PricingPlanDataSource"
   ],
   "required": [
     "TrackerName"

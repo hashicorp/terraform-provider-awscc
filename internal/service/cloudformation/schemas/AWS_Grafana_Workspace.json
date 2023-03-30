@@ -392,7 +392,9 @@
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "sso:ListApplicationInstances",
+        "sso:GetApplicationInstance"
       ]
     },
     "read": {
@@ -411,7 +413,9 @@
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "sso:ListApplicationInstances",
+        "sso:GetApplicationInstance"
       ]
     },
     "delete": {

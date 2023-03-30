@@ -125,6 +125,12 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		//	        "minLength": 3,
 		//	        "pattern": "^[a-z0-9][a-z0-9//.//-]*[a-z0-9]$",
 		//	        "type": "string"
+		//	      },
+		//	      "BucketAccountId": {
+		//	        "maxLength": 12,
+		//	        "minLength": 12,
+		//	        "pattern": "^[0-9]{12}$",
+		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
@@ -141,6 +147,10 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Bucket
 					"bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: BucketAccountId
+					"bucket_account_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -169,6 +179,7 @@ func multiRegionAccessPointDataSource(ctx context.Context) (datasource.DataSourc
 		"block_public_acls":                 "BlockPublicAcls",
 		"block_public_policy":               "BlockPublicPolicy",
 		"bucket":                            "Bucket",
+		"bucket_account_id":                 "BucketAccountId",
 		"created_at":                        "CreatedAt",
 		"ignore_public_acls":                "IgnorePublicAcls",
 		"name":                              "Name",

@@ -25,6 +25,7 @@ The AWS::S3ObjectLambda::AccessPoint resource is an Amazon S3ObjectLambda resour
 
 ### Read-Only
 
+- `alias` (Attributes) (see [below for nested schema](#nestedatt--alias))
 - `arn` (String)
 - `creation_date` (String) The date and time when the Object lambda Access Point was created.
 - `id` (String) Uniquely identifies the resource.
@@ -72,6 +73,15 @@ Optional:
 
 
 
+
+
+<a id="nestedatt--alias"></a>
+### Nested Schema for `alias`
+
+Read-Only:
+
+- `status` (String) The status of the Object Lambda alias.
+- `value` (String) The value of the Object Lambda alias.
 
 
 <a id="nestedatt--policy_status"></a>

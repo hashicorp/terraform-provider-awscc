@@ -148,7 +148,8 @@
   "required": [
     "EnvironmentIdentifier",
     "ApplicationIdentifier",
-    "ServiceIdentifier"
+    "ServiceIdentifier",
+    "RouteType"
   ],
   "readOnlyProperties": [
     "/properties/RouteIdentifier",

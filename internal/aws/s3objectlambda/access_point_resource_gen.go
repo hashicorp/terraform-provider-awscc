@@ -30,6 +30,43 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::S3ObjectLambda::AccessPoint resource.
 func accessPointResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Alias
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "Status": {
+		//	      "description": "The status of the Object Lambda alias.",
+		//	      "pattern": "^[A-Z]*$",
+		//	      "type": "string"
+		//	    },
+		//	    "Value": {
+		//	      "description": "The value of the Object Lambda alias.",
+		//	      "pattern": "^[a-z0-9\\-]*$",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"alias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: Status
+				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The status of the Object Lambda alias.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Value
+				"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The value of the Object Lambda alias.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -334,6 +371,7 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"actions":                           "Actions",
+		"alias":                             "Alias",
 		"allowed_features":                  "AllowedFeatures",
 		"arn":                               "Arn",
 		"aws_lambda":                        "AwsLambda",
@@ -351,8 +389,10 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 		"policy_status":                     "PolicyStatus",
 		"public_access_block_configuration": "PublicAccessBlockConfiguration",
 		"restrict_public_buckets":           "RestrictPublicBuckets",
+		"status":                            "Status",
 		"supporting_access_point":           "SupportingAccessPoint",
 		"transformation_configurations":     "TransformationConfigurations",
+		"value":                             "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

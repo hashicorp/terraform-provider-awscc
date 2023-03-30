@@ -19,8 +19,11 @@ Resource Type definition for AWS::SSMContacts::Contact
 
 - `alias` (String) Alias of the contact. String value with 20 to 256 characters. Only alphabetical, numeric characters, dash, or underscore allowed.
 - `display_name` (String) Name of the contact. String value with 3 to 256 characters. Only alphabetical, space, numeric characters, dash, or underscore allowed.
-- `plan` (Attributes List) The stages that an escalation plan or engagement plan engages contacts and contact methods in. (see [below for nested schema](#nestedatt--plan))
 - `type` (String) Contact type, which specify type of contact. Currently supported values: ?PERSONAL?, ?SHARED?, ?OTHER?.
+
+### Optional
+
+- `plan` (Attributes List) The stages that an escalation plan or engagement plan engages contacts and contact methods in. (see [below for nested schema](#nestedatt--plan))
 
 ### Read-Only
 
