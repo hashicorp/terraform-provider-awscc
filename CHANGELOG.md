@@ -1,4 +1,22 @@
 ## 0.49.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_route`
+* **New Data Source:** `awscc_backup_backup_plans`
+* **New Data Source:** `awscc_backup_backup_selections`
+* **New Data Source:** `awscc_backup_backup_vaults`
+* **New Data Source:** `awscc_chatbot_microsoft_teams_channel_configuration`
+* **New Data Source:** `awscc_comprehend_flywheel`
+* **New Data Source:** `awscc_comprehend_flywheels`
+* **New Data Source:** `awscc_devopsguru_resource_collections`
+* **New Data Source:** `awscc_sagemaker_inference_experiment`
+* **New Data Source:** `awscc_sagemaker_inference_experiments`
+* **New Resource:** `awscc_apigatewayv2_route`
+* **New Resource:** `awscc_chatbot_microsoft_teams_channel_configuration`
+* **New Resource:** `awscc_comprehend_flywheel`
+* **New Resource:** `awscc_sagemaker_inference_experiment`
+
 ## 0.48.0 (March  9, 2023)
 
 FEATURES:
