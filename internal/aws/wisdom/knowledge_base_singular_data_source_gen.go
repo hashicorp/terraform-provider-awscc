@@ -159,8 +159,7 @@ func knowledgeBaseDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "AppIntegrationArn",
-		//	        "ObjectFields"
+		//	        "AppIntegrationArn"
 		//	      ],
 		//	      "type": "object"
 		//	    }

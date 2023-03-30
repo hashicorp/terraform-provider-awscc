@@ -88,6 +88,17 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END SCHEMA*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: ClientSideTimestampsEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.",
+		//	  "type": "boolean"
+		//	}
+		"client_side_timestamps_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether client side timestamps are enabled (true) or disabled (false) on the table. False by default, once it is enabled it cannot be disabled again.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: ClusteringKeyColumns
 		// CloudFormation resource type schema:
 		//
@@ -396,6 +407,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"billing_mode":                   "BillingMode",
+		"client_side_timestamps_enabled": "ClientSideTimestampsEnabled",
 		"clustering_key_columns":         "ClusteringKeyColumns",
 		"column":                         "Column",
 		"column_name":                    "ColumnName",

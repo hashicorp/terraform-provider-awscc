@@ -36,6 +36,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -59,6 +60,7 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
@@ -73,76 +75,95 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "type": "object"
+		//	  "description": "A policy to attach to the endpoint that controls access to the service.",
+		//	  "type": "string"
 		//	}
-		"policy_document": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A policy to attach to the endpoint that controls access to the service.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: PrivateDnsEnabled
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "Indicate whether to associate a private hosted zone with the specified VPC.",
 		//	  "type": "boolean"
 		//	}
 		"private_dns_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "Indicate whether to associate a private hosted zone with the specified VPC.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteTableIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "One or more route table IDs.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"route_table_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"route_table_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "One or more route table IDs.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SecurityGroupIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of one or more security groups to associate with the endpoint network interface.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"security_group_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"security_group_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The ID of one or more security groups to associate with the endpoint network interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ServiceName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The service name.",
 		//	  "type": "string"
 		//	}
 		"service_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The service name.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SubnetIds
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of one or more subnets in which to create an endpoint network interface.",
+		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "type": "string"
 		//	  },
 		//	  "type": "array",
 		//	  "uniqueItems": true
 		//	}
-		"subnet_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+		"subnet_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 			ElementType: types.StringType,
+			Description: "The ID of one or more subnets in which to create an endpoint network interface.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: VpcEndpointType
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "enum": [
+		//	    "Interface",
+		//	    "Gateway",
+		//	    "GatewayLoadBalancer"
+		//	  ],
 		//	  "type": "string"
 		//	}
 		"vpc_endpoint_type": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -152,10 +173,12 @@ func vPCEndpointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The ID of the VPC in which the endpoint will be used.",
 		//	  "type": "string"
 		//	}
 		"vpc_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The ID of the VPC in which the endpoint will be used.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

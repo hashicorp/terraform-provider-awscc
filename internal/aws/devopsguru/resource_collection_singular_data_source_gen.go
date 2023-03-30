@@ -36,6 +36,7 @@ func resourceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	      "properties": {
 		//	        "StackNames": {
 		//	          "description": "An array of CloudFormation stack names.",
+		//	          "insertionOrder": false,
 		//	          "items": {
 		//	            "maxLength": 128,
 		//	            "minLength": 1,
@@ -51,6 +52,7 @@ func resourceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	    },
 		//	    "Tags": {
 		//	      "description": "Tagged resources for DevOps Guru to monitor",
+		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "description": "Tagged resource for DevOps Guru to monitor",
@@ -63,6 +65,7 @@ func resourceCollectionDataSource(ctx context.Context) (datasource.DataSource, e
 		//	          },
 		//	          "TagValues": {
 		//	            "description": "Tag values of DevOps Guru app boundary.",
+		//	            "insertionOrder": false,
 		//	            "items": {
 		//	              "maxLength": 256,
 		//	              "minLength": 1,
