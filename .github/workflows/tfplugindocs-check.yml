@@ -29,7 +29,7 @@ jobs:
         with:
           path: ./.go-version
 
-      - uses: actions/setup-go@v3
+      - uses: actions/setup-go@v4
         with:
           # TODO: Replace with go-version-from-file when it is supported
           # https://github.com/actions/setup-go/pull/62
