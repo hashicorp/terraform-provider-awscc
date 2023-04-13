@@ -1,0 +1,1 @@
+$ terraform import awscc_iotwireless_wireless_device_import_task.example <resource ID>

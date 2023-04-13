@@ -19,7 +19,7 @@ Resource-specific logging allows you to specify a logging level for a specific t
 
 - `log_level` (String) The log level for a specific target. Valid values are: ERROR, WARN, INFO, DEBUG, or DISABLED.
 - `target_name` (String) The target name.
-- `target_type` (String) The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.
+- `target_type` (String) The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, or EVENT_TYPE.
 
 ### Read-Only
 
