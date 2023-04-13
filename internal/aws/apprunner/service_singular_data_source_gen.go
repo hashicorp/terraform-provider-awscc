@@ -157,9 +157,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "Cpu": {
 		//	      "description": "CPU",
-		//	      "maxLength": 6,
-		//	      "minLength": 4,
-		//	      "pattern": "1024|2048|(1|2) vCPU",
+		//	      "maxLength": 9,
+		//	      "minLength": 3,
+		//	      "pattern": "256|512|1024|2048|4096|(0.25|0.5|1|2|4) vCPU",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceRoleArn": {
@@ -171,9 +171,9 @@ func serviceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "Memory": {
 		//	      "description": "Memory",
-		//	      "maxLength": 4,
-		//	      "minLength": 4,
-		//	      "pattern": "2048|3072|4096|(2|3|4) GB",
+		//	      "maxLength": 6,
+		//	      "minLength": 3,
+		//	      "pattern": "512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB",
 		//	      "type": "string"
 		//	    }
 		//	  },

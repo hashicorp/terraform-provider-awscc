@@ -127,6 +127,17 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "type": "integer"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "FixedRate",
+		//	    "Host",
+		//	    "HTTPMethod",
+		//	    "Priority",
+		//	    "ReservoirSize",
+		//	    "ResourceARN",
+		//	    "ServiceName",
+		//	    "ServiceType",
+		//	    "URLPath"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"sampling_rule": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -292,6 +303,17 @@ func samplingRuleDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          "type": "integer"
 		//	        }
 		//	      },
+		//	      "required": [
+		//	        "FixedRate",
+		//	        "Host",
+		//	        "HTTPMethod",
+		//	        "Priority",
+		//	        "ReservoirSize",
+		//	        "ResourceARN",
+		//	        "ServiceName",
+		//	        "ServiceType",
+		//	        "URLPath"
+		//	      ],
 		//	      "type": "object"
 		//	    }
 		//	  },
