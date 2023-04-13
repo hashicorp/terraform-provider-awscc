@@ -39,6 +39,35 @@
       "description": "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
       "type": "string",
       "pattern": "^([0-2]\\d{3})-(0[0-9]|1[0-2])-([0-2]\\d|3[01])T([01]\\d|2[0-4]):([0-5]\\d):([0-6]\\d)((\\.\\d{3})?)Z$"
+    },
+    "InternetMeasurementsLogDelivery": {
+      "type": "object",
+      "properties": {
+        "S3Config": {
+          "$ref": "#/definitions/S3Config"
+        }
+      },
+      "additionalProperties": false
+    },
+    "S3Config": {
+      "type": "object",
+      "properties": {
+        "BucketName": {
+          "type": "string",
+          "minLength": 3
+        },
+        "BucketPrefix": {
+          "type": "string"
+        },
+        "LogDeliveryStatus": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -108,6 +137,9 @@
       "type": "integer",
       "minimum": 1,
       "maximum": 500000
+    },
+    "InternetMeasurementsLogDelivery": {
+      "$ref": "#/definitions/InternetMeasurementsLogDelivery"
     }
   },
   "readOnlyProperties": [
