@@ -1,4 +1,9 @@
 ## 0.50.0 (Unreleased)
+
+NOTES:
+
+* provider: The `skip_medatadata_api_check` argument is being deprecated in favor of `skip_metadata_api_check` ([#908](https://github.com/hashicorp/terraform-provider-awscc/issues/908))
+
 ## 0.49.0 (March 30, 2023)
 
 FEATURES:
