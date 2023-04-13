@@ -9,18 +9,19 @@ description: |-
 
 {{ .Description | trimspace }}
 
-{{ if .HasExample -}}
 ## Example Usage
 
 ### Single Account Analyzer
+
 To use {{.Name}} on single AWS account:
+
 {{ tffile (printf "examples/resources/%s/account_analyzer.tf" .Name)}}
 
 ### Organization Analyzer
-To enable {{.Name}} at the organization level, modify example below to match your AWS organization configuration.
-{{ tffile (printf "examples/resources/%s/organization_analyzer.tf" .Name)}}
 
-{{- end }}
+To enable {{.Name}} at the organization level, modify example below to match your AWS organization configuration.
+
+{{ tffile (printf "examples/resources/%s/organization_analyzer.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
