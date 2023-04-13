@@ -226,9 +226,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "Cpu": {
 		//	      "description": "CPU",
-		//	      "maxLength": 6,
-		//	      "minLength": 4,
-		//	      "pattern": "1024|2048|(1|2) vCPU",
+		//	      "maxLength": 9,
+		//	      "minLength": 3,
+		//	      "pattern": "256|512|1024|2048|4096|(0.25|0.5|1|2|4) vCPU",
 		//	      "type": "string"
 		//	    },
 		//	    "InstanceRoleArn": {
@@ -240,9 +240,9 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Memory": {
 		//	      "description": "Memory",
-		//	      "maxLength": 4,
-		//	      "minLength": 4,
-		//	      "pattern": "2048|3072|4096|(2|3|4) GB",
+		//	      "maxLength": 6,
+		//	      "minLength": 3,
+		//	      "pattern": "512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -256,8 +256,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(4, 6),
-						stringvalidator.RegexMatches(regexp.MustCompile("1024|2048|(1|2) vCPU"), ""),
+						stringvalidator.LengthBetween(3, 9),
+						stringvalidator.RegexMatches(regexp.MustCompile("256|512|1024|2048|4096|(0.25|0.5|1|2|4) vCPU"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -282,8 +282,8 @@ func serviceResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(4, 4),
-						stringvalidator.RegexMatches(regexp.MustCompile("2048|3072|4096|(2|3|4) GB"), ""),
+						stringvalidator.LengthBetween(3, 6),
+						stringvalidator.RegexMatches(regexp.MustCompile("512|1024|2048|3072|4096|6144|8192|10240|12288|(0.5|1|2|3|4|6|8|10|12) GB"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
