@@ -1,4 +1,5 @@
-## 0.50.0 (Unreleased)
+## 0.51.0 (Unreleased)
+## 0.50.0 (April 13, 2023)
 
 NOTES:
 
