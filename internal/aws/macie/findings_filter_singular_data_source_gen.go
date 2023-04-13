@@ -64,12 +64,15 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "Findings filter criteria.",
 		//	  "properties": {
 		//	    "Criterion": {
+		//	      "additionalProperties": false,
 		//	      "description": "Map of filter criteria.",
 		//	      "patternProperties": {
 		//	        "": {
+		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "eq": {
 		//	              "items": {
@@ -150,41 +153,6 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "Findings filter criteria.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: FindingsFilterListItems
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "Findings filters list.",
-		//	  "items": {
-		//	    "description": "Returned by ListHandler representing filter name and ID.",
-		//	    "properties": {
-		//	      "Id": {
-		//	        "type": "string"
-		//	      },
-		//	      "Name": {
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array"
-		//	}
-		"findings_filter_list_items": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Findings filters list.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -235,21 +203,20 @@ func findingsFilterDataSource(ctx context.Context) (datasource.DataSource, error
 	opts = opts.WithCloudFormationTypeName("AWS::Macie::FindingsFilter").WithTerraformTypeName("awscc_macie_findings_filter")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                     "Action",
-		"arn":                        "Arn",
-		"criterion":                  "Criterion",
-		"description":                "Description",
-		"eq":                         "eq",
-		"finding_criteria":           "FindingCriteria",
-		"findings_filter_list_items": "FindingsFilterListItems",
-		"gt":                         "gt",
-		"gte":                        "gte",
-		"id":                         "Id",
-		"lt":                         "lt",
-		"lte":                        "lte",
-		"name":                       "Name",
-		"neq":                        "neq",
-		"position":                   "Position",
+		"action":           "Action",
+		"arn":              "Arn",
+		"criterion":        "Criterion",
+		"description":      "Description",
+		"eq":               "eq",
+		"finding_criteria": "FindingCriteria",
+		"gt":               "gt",
+		"gte":              "gte",
+		"id":               "Id",
+		"lt":               "lt",
+		"lte":              "lte",
+		"name":             "Name",
+		"neq":              "neq",
+		"position":         "Position",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

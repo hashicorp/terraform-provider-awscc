@@ -96,7 +96,18 @@
           "type": "integer",
           "minimum": 1
         }
-      }
+      },
+      "required": [
+        "FixedRate",
+        "Host",
+        "HTTPMethod",
+        "Priority",
+        "ReservoirSize",
+        "ResourceARN",
+        "ServiceName",
+        "ServiceType",
+        "URLPath"
+      ]
     },
     "SamplingRuleRecord": {
       "type": "object",

@@ -631,6 +631,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: RestoreToTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The date and time to restore the DB cluster to. Value must be a time in Universal Coordinated Time (UTC) format. An example: 2015-03-07T23:45:00Z",
+		//	  "type": "string"
+		//	}
+		"restore_to_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The date and time to restore the DB cluster to. Value must be a time in Universal Coordinated Time (UTC) format. An example: 2015-03-07T23:45:00Z",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RestoreType
 		// CloudFormation resource type schema:
 		//
@@ -951,6 +962,7 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"publicly_accessible":                   "PubliclyAccessible",
 		"read_endpoint":                         "ReadEndpoint",
 		"replication_source_identifier":         "ReplicationSourceIdentifier",
+		"restore_to_time":                       "RestoreToTime",
 		"restore_type":                          "RestoreType",
 		"role_arn":                              "RoleArn",
 		"scaling_configuration":                 "ScalingConfiguration",

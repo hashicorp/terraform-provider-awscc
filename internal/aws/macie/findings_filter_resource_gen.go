@@ -88,12 +88,15 @@ func findingsFilterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "Findings filter criteria.",
 		//	  "properties": {
 		//	    "Criterion": {
+		//	      "additionalProperties": false,
 		//	      "description": "Map of filter criteria.",
 		//	      "patternProperties": {
 		//	        "": {
+		//	          "additionalProperties": false,
 		//	          "properties": {
 		//	            "eq": {
 		//	              "items": {
@@ -202,44 +205,6 @@ func findingsFilterResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Findings filter criteria.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: FindingsFilterListItems
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "description": "Findings filters list.",
-		//	  "items": {
-		//	    "description": "Returned by ListHandler representing filter name and ID.",
-		//	    "properties": {
-		//	      "Id": {
-		//	        "type": "string"
-		//	      },
-		//	      "Name": {
-		//	        "type": "string"
-		//	      }
-		//	    },
-		//	    "type": "object"
-		//	  },
-		//	  "type": "array"
-		//	}
-		"findings_filter_list_items": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-					// Property: Id
-					"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-					// Property: Name
-					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
-					}, /*END ATTRIBUTE*/
-				}, /*END SCHEMA*/
-			}, /*END NESTED OBJECT*/
-			Description: "Findings filters list.",
-			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				listplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Id
 		// CloudFormation resource type schema:
 		//
@@ -294,21 +259,20 @@ func findingsFilterResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"action":                     "Action",
-		"arn":                        "Arn",
-		"criterion":                  "Criterion",
-		"description":                "Description",
-		"eq":                         "eq",
-		"finding_criteria":           "FindingCriteria",
-		"findings_filter_list_items": "FindingsFilterListItems",
-		"gt":                         "gt",
-		"gte":                        "gte",
-		"id":                         "Id",
-		"lt":                         "lt",
-		"lte":                        "lte",
-		"name":                       "Name",
-		"neq":                        "neq",
-		"position":                   "Position",
+		"action":           "Action",
+		"arn":              "Arn",
+		"criterion":        "Criterion",
+		"description":      "Description",
+		"eq":               "eq",
+		"finding_criteria": "FindingCriteria",
+		"gt":               "gt",
+		"gte":              "gte",
+		"id":               "Id",
+		"lt":               "lt",
+		"lte":              "lte",
+		"name":             "Name",
+		"neq":              "neq",
+		"position":         "Position",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

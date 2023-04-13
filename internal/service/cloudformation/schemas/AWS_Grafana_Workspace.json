@@ -353,6 +353,11 @@
       "description": "IAM Role that will be used to grant the Grafana workspace access to a customers AWS resources."
     }
   },
+  "required": [
+    "AuthenticationProviders",
+    "PermissionType",
+    "AccountAccessType"
+  ],
   "readOnlyProperties": [
     "/properties/Id",
     "/properties/SsoClientId",

@@ -370,6 +370,10 @@
       "type": "string",
       "format": "date-time"
     },
+    "SourceDBClusterIdentifier": {
+      "description": "The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.",
+      "type": "string"
+    },
     "SourceDbiResourceId": {
       "type": "string",
       "description": "The resource ID of the source DB instance from which to restore."
@@ -471,17 +475,18 @@
     "/properties/Timezone"
   ],
   "conditionalCreateOnlyProperties": [
-    "/properties/DBClusterSnapshotIdentifier",
-    "/properties/DBSnapshotIdentifier",
     "/properties/AutoMinorVersionUpgrade",
     "/properties/AvailabilityZone",
     "/properties/BackupRetentionPeriod",
+    "/properties/DBClusterSnapshotIdentifier",
     "/properties/DBParameterGroupName",
+    "/properties/DBSnapshotIdentifier",
     "/properties/Engine",
     "/properties/MultiAZ",
     "/properties/PerformanceInsightsKMSKeyId",
     "/properties/PreferredMaintenanceWindow",
     "/properties/RestoreTime",
+    "/properties/SourceDBClusterIdentifier",
     "/properties/SourceDBInstanceAutomatedBackupsArn",
     "/properties/SourceDBInstanceIdentifier",
     "/properties/SourceDbiResourceId",

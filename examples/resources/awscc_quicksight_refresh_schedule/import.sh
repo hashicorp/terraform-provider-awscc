@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_refresh_schedule.example <resource ID>

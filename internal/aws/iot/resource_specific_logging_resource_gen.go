@@ -61,7 +61,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "Unique Id for a Target (TargetType:TargetName), this will be internally built to serve as primary identifier for a log target.",
 		//	  "maxLength": 140,
 		//	  "minLength": 13,
-		//	  "pattern": "[a-zA-Z0-9.:_-]+",
+		//	  "pattern": "[a-zA-Z0-9.:\\s_\\-]+",
 		//	  "type": "string"
 		//	}
 		"target_id": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -78,7 +78,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		//	  "description": "The target name.",
 		//	  "maxLength": 128,
 		//	  "minLength": 1,
-		//	  "pattern": "[a-zA-Z0-9.:_-]+",
+		//	  "pattern": "[a-zA-Z0-9.:\\s_\\-]+",
 		//	  "type": "string"
 		//	}
 		"target_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -86,7 +86,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 128),
-				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.:_-]+"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9.:\\s_\\-]+"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
@@ -96,17 +96,18 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
+		//	  "description": "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, or EVENT_TYPE.",
 		//	  "enum": [
 		//	    "THING_GROUP",
 		//	    "CLIENT_ID",
 		//	    "SOURCE_IP",
-		//	    "PRINCIPAL_ID"
+		//	    "PRINCIPAL_ID",
+		//	    "EVENT_TYPE"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"target_type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID.",
+			Description: "The target type. Value must be THING_GROUP, CLIENT_ID, SOURCE_IP, PRINCIPAL_ID, or EVENT_TYPE.",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
@@ -114,6 +115,7 @@ func resourceSpecificLoggingResource(ctx context.Context) (resource.Resource, er
 					"CLIENT_ID",
 					"SOURCE_IP",
 					"PRINCIPAL_ID",
+					"EVENT_TYPE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

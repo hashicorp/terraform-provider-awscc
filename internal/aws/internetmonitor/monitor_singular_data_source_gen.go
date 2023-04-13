@@ -35,6 +35,58 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InternetMeasurementsLogDelivery
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "S3Config": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "BucketName": {
+		//	          "minLength": 3,
+		//	          "type": "string"
+		//	        },
+		//	        "BucketPrefix": {
+		//	          "type": "string"
+		//	        },
+		//	        "LogDeliveryStatus": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"internet_measurements_log_delivery": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: S3Config
+				"s3_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BucketName
+						"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: BucketPrefix
+						"bucket_prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+						// Property: LogDeliveryStatus
+						"log_delivery_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxCityNetworksToMonitor
 		// CloudFormation resource type schema:
 		//
@@ -224,20 +276,25 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::InternetMonitor::Monitor").WithTerraformTypeName("awscc_internetmonitor_monitor")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"created_at":                   "CreatedAt",
-		"key":                          "Key",
-		"max_city_networks_to_monitor": "MaxCityNetworksToMonitor",
-		"modified_at":                  "ModifiedAt",
-		"monitor_arn":                  "MonitorArn",
-		"monitor_name":                 "MonitorName",
-		"processing_status":            "ProcessingStatus",
-		"processing_status_info":       "ProcessingStatusInfo",
-		"resources":                    "Resources",
-		"resources_to_add":             "ResourcesToAdd",
-		"resources_to_remove":          "ResourcesToRemove",
-		"status":                       "Status",
-		"tags":                         "Tags",
-		"value":                        "Value",
+		"bucket_name":                        "BucketName",
+		"bucket_prefix":                      "BucketPrefix",
+		"created_at":                         "CreatedAt",
+		"internet_measurements_log_delivery": "InternetMeasurementsLogDelivery",
+		"key":                                "Key",
+		"log_delivery_status":                "LogDeliveryStatus",
+		"max_city_networks_to_monitor":       "MaxCityNetworksToMonitor",
+		"modified_at":                        "ModifiedAt",
+		"monitor_arn":                        "MonitorArn",
+		"monitor_name":                       "MonitorName",
+		"processing_status":                  "ProcessingStatus",
+		"processing_status_info":             "ProcessingStatusInfo",
+		"resources":                          "Resources",
+		"resources_to_add":                   "ResourcesToAdd",
+		"resources_to_remove":                "ResourcesToRemove",
+		"s3_config":                          "S3Config",
+		"status":                             "Status",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

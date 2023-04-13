@@ -14,6 +14,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigateway_vpc_links -cftype AWS::ApiGateway::VpcLink -package apigateway ../aws/apigateway/vpc_link_plural_data_source_gen.go ../aws/apigateway/vpc_link_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigatewayv2_apis -cftype AWS::ApiGatewayV2::Api -package apigatewayv2 ../aws/apigatewayv2/api_plural_data_source_gen.go ../aws/apigatewayv2/api_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apigatewayv2_vpc_links -cftype AWS::ApiGatewayV2::VpcLink -package apigatewayv2 ../aws/apigatewayv2/vpc_link_plural_data_source_gen.go ../aws/apigatewayv2/vpc_link_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_appconfig_extension_associations -cftype AWS::AppConfig::ExtensionAssociation -package appconfig ../aws/appconfig/extension_association_plural_data_source_gen.go ../aws/appconfig/extension_association_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_connectors -cftype AWS::AppFlow::Connector -package appflow ../aws/appflow/connector_plural_data_source_gen.go ../aws/appflow/connector_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_connector_profiles -cftype AWS::AppFlow::ConnectorProfile -package appflow ../aws/appflow/connector_profile_plural_data_source_gen.go ../aws/appflow/connector_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_flows -cftype AWS::AppFlow::Flow -package appflow ../aws/appflow/flow_plural_data_source_gen.go ../aws/appflow/flow_plural_data_source_gen_test.go
@@ -103,6 +104,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_datasync_tasks -cftype AWS::DataSync::Task -package datasync ../aws/datasync/task_plural_data_source_gen.go ../aws/datasync/task_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_graphs -cftype AWS::Detective::Graph -package detective ../aws/detective/graph_plural_data_source_gen.go ../aws/detective/graph_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_detective_member_invitations -cftype AWS::Detective::MemberInvitation -package detective ../aws/detective/member_invitation_plural_data_source_gen.go ../aws/detective/member_invitation_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_devopsguru_log_anomaly_detection_integrations -cftype AWS::DevOpsGuru::LogAnomalyDetectionIntegration -package devopsguru ../aws/devopsguru/log_anomaly_detection_integration_plural_data_source_gen.go ../aws/devopsguru/log_anomaly_detection_integration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_devopsguru_notification_channels -cftype AWS::DevOpsGuru::NotificationChannel -package devopsguru ../aws/devopsguru/notification_channel_plural_data_source_gen.go ../aws/devopsguru/notification_channel_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_devopsguru_resource_collections -cftype AWS::DevOpsGuru::ResourceCollection -package devopsguru ../aws/devopsguru/resource_collection_plural_data_source_gen.go ../aws/devopsguru/resource_collection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_directoryservice_simple_ads -cftype AWS::DirectoryService::SimpleAD -package directoryservice ../aws/directoryservice/simple_ad_plural_data_source_gen.go ../aws/directoryservice/simple_ad_plural_data_source_gen_test.go
@@ -274,6 +276,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_partner_accounts -cftype AWS::IoTWireless::PartnerAccount -package iotwireless ../aws/iotwireless/partner_account_plural_data_source_gen.go ../aws/iotwireless/partner_account_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_service_profiles -cftype AWS::IoTWireless::ServiceProfile -package iotwireless ../aws/iotwireless/service_profile_plural_data_source_gen.go ../aws/iotwireless/service_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_wireless_devices -cftype AWS::IoTWireless::WirelessDevice -package iotwireless ../aws/iotwireless/wireless_device_plural_data_source_gen.go ../aws/iotwireless/wireless_device_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_wireless_device_import_tasks -cftype AWS::IoTWireless::WirelessDeviceImportTask -package iotwireless ../aws/iotwireless/wireless_device_import_task_plural_data_source_gen.go ../aws/iotwireless/wireless_device_import_task_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_iotwireless_wireless_gateways -cftype AWS::IoTWireless::WirelessGateway -package iotwireless ../aws/iotwireless/wireless_gateway_plural_data_source_gen.go ../aws/iotwireless/wireless_gateway_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kms_aliases -cftype AWS::KMS::Alias -package kms ../aws/kms/alias_plural_data_source_gen.go ../aws/kms/alias_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_kms_keys -cftype AWS::KMS::Key -package kms ../aws/kms/key_plural_data_source_gen.go ../aws/kms/key_plural_data_source_gen_test.go
@@ -333,6 +336,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_parameter_groups -cftype AWS::MemoryDB::ParameterGroup -package memorydb ../aws/memorydb/parameter_group_plural_data_source_gen.go ../aws/memorydb/parameter_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_subnet_groups -cftype AWS::MemoryDB::SubnetGroup -package memorydb ../aws/memorydb/subnet_group_plural_data_source_gen.go ../aws/memorydb/subnet_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_memorydb_users -cftype AWS::MemoryDB::User -package memorydb ../aws/memorydb/user_plural_data_source_gen.go ../aws/memorydb/user_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_neptune_db_clusters -cftype AWS::Neptune::DBCluster -package neptune ../aws/neptune/db_cluster_plural_data_source_gen.go ../aws/neptune/db_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkfirewall_firewalls -cftype AWS::NetworkFirewall::Firewall -package networkfirewall ../aws/networkfirewall/firewall_plural_data_source_gen.go ../aws/networkfirewall/firewall_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkfirewall_firewall_policies -cftype AWS::NetworkFirewall::FirewallPolicy -package networkfirewall ../aws/networkfirewall/firewall_policy_plural_data_source_gen.go ../aws/networkfirewall/firewall_policy_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_networkfirewall_rule_groups -cftype AWS::NetworkFirewall::RuleGroup -package networkfirewall ../aws/networkfirewall/rule_group_plural_data_source_gen.go ../aws/networkfirewall/rule_group_plural_data_source_gen_test.go
@@ -475,6 +479,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/amplify"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigateway"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apigatewayv2"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appconfig"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appflow"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appintegrations"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationinsights"
@@ -574,6 +579,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/memorydb"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/msk"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/mwaa"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/neptune"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkfirewall"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/networkmanager"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/nimblestudio"

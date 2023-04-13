@@ -28,6 +28,8 @@ Data Source schema for AWS::GroundStation::MissionProfile
 - `minimum_viable_contact_duration_seconds` (Number) Visibilities with shorter duration than the specified minimum viable contact duration will be ignored when searching for available contacts.
 - `name` (String) A name used to identify a mission profile.
 - `region` (String)
+- `streams_kms_key` (Attributes) The ARN of a KMS Key used for encrypting data during transmission from the source to destination locations. (see [below for nested schema](#nestedatt--streams_kms_key))
+- `streams_kms_role` (String) The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `tracking_config_arn` (String)
 
@@ -38,6 +40,15 @@ Read-Only:
 
 - `destination` (String)
 - `source` (String)
+
+
+<a id="nestedatt--streams_kms_key"></a>
+### Nested Schema for `streams_kms_key`
+
+Read-Only:
+
+- `kms_alias_arn` (String)
+- `kms_key_arn` (String)
 
 
 <a id="nestedatt--tags"></a>

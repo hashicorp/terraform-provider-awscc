@@ -31,6 +31,10 @@
     "OutpostArn": {
       "description": "The Amazon Resource Name (ARN) of the Amazon Web Services Outpost on which to allocate the Dedicated Host.",
       "type": "string"
+    },
+    "HostMaintenance": {
+      "description": "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+      "type": "string"
     }
   },
   "required": [

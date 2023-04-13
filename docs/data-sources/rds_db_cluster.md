@@ -68,6 +68,7 @@ If you aren't configuring a global database cluster, don't specify this property
 - `publicly_accessible` (Boolean) A value that indicates whether the DB cluster is publicly accessible.
 - `read_endpoint` (Attributes) (see [below for nested schema](#nestedatt--read_endpoint))
 - `replication_source_identifier` (String) The Amazon Resource Name (ARN) of the source DB instance or DB cluster if this DB cluster is created as a Read Replica.
+- `restore_to_time` (String) The date and time to restore the DB cluster to. Value must be a time in Universal Coordinated Time (UTC) format. An example: 2015-03-07T23:45:00Z
 - `restore_type` (String) The type of restore to be performed. You can specify one of the following values:
 full-copy - The new DB cluster is restored as a full copy of the source DB cluster.
 copy-on-write - The new DB cluster is restored as a clone of the source DB cluster.

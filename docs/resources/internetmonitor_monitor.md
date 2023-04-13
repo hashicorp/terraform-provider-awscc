@@ -21,6 +21,7 @@ Represents a monitor, which defines the monitoring boundaries for measurements t
 
 ### Optional
 
+- `internet_measurements_log_delivery` (Attributes) (see [below for nested schema](#nestedatt--internet_measurements_log_delivery))
 - `max_city_networks_to_monitor` (Number)
 - `resources` (List of String)
 - `resources_to_add` (List of String)
@@ -36,6 +37,24 @@ Represents a monitor, which defines the monitoring boundaries for measurements t
 - `monitor_arn` (String)
 - `processing_status` (String)
 - `processing_status_info` (String)
+
+<a id="nestedatt--internet_measurements_log_delivery"></a>
+### Nested Schema for `internet_measurements_log_delivery`
+
+Optional:
+
+- `s3_config` (Attributes) (see [below for nested schema](#nestedatt--internet_measurements_log_delivery--s3_config))
+
+<a id="nestedatt--internet_measurements_log_delivery--s3_config"></a>
+### Nested Schema for `internet_measurements_log_delivery.s3_config`
+
+Optional:
+
+- `bucket_name` (String)
+- `bucket_prefix` (String)
+- `log_delivery_status` (String)
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

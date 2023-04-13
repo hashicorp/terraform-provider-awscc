@@ -1153,6 +1153,21 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// RestoreTime is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: SourceDBClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.",
+		//	  "type": "string"
+		//	}
+		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDBInstanceAutomatedBackupsArn
 		// CloudFormation resource type schema:
 		//
@@ -1517,6 +1532,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"restore_time":                             "RestoreTime",
 		"role_arn":                                 "RoleArn",
 		"secret_arn":                               "SecretArn",
+		"source_db_cluster_identifier":             "SourceDBClusterIdentifier",
 		"source_db_instance_automated_backups_arn": "SourceDBInstanceAutomatedBackupsArn",
 		"source_db_instance_identifier":            "SourceDBInstanceIdentifier",
 		"source_dbi_resource_id":                   "SourceDbiResourceId",

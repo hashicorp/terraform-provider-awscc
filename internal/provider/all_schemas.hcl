@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 707 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 715 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -199,6 +199,19 @@ resource_schema "aws_apigatewayv2_route" {
 
 resource_schema "aws_apigatewayv2_vpc_link" {
   cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
+}
+
+resource_schema "aws_appconfig_extension" {
+  cloudformation_type_name = "AWS::AppConfig::Extension"
+
+  # Actions is of unsupported type: key-value map of set of object.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_appconfig_extension_association" {
+  cloudformation_type_name = "AWS::AppConfig::ExtensionAssociation"
 }
 
 resource_schema "aws_appflow_connector" {
@@ -797,6 +810,10 @@ resource_schema "aws_detective_graph" {
 
 resource_schema "aws_detective_member_invitation" {
   cloudformation_type_name = "AWS::Detective::MemberInvitation"
+}
+
+resource_schema "aws_devopsguru_log_anomaly_detection_integration" {
+  cloudformation_type_name = "AWS::DevOpsGuru::LogAnomalyDetectionIntegration"
 }
 
 resource_schema "aws_devopsguru_notification_channel" {
@@ -1803,6 +1820,10 @@ resource_schema "aws_iotwireless_wireless_device" {
   cloudformation_type_name = "AWS::IoTWireless::WirelessDevice"
 }
 
+resource_schema "aws_iotwireless_wireless_device_import_task" {
+  cloudformation_type_name = "AWS::IoTWireless::WirelessDeviceImportTask"
+}
+
 resource_schema "aws_iotwireless_wireless_gateway" {
   cloudformation_type_name = "AWS::IoTWireless::WirelessGateway"
 }
@@ -2163,6 +2184,10 @@ resource_schema "aws_memorydb_user" {
   cloudformation_type_name = "AWS::MemoryDB::User"
 }
 
+resource_schema "aws_neptune_db_cluster" {
+  cloudformation_type_name = "AWS::Neptune::DBCluster"
+}
+
 resource_schema "aws_networkfirewall_firewall" {
   cloudformation_type_name = "AWS::NetworkFirewall::Firewall"
 }
@@ -2426,6 +2451,11 @@ resource_schema "aws_quicksight_data_set" {
 
 resource_schema "aws_quicksight_data_source" {
   cloudformation_type_name               = "AWS::QuickSight::DataSource"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_quicksight_refresh_schedule" {
+  cloudformation_type_name               = "AWS::QuickSight::RefreshSchedule"
   suppress_plural_data_source_generation = true
 }
 
@@ -2838,6 +2868,16 @@ resource_schema "aws_ssmcontacts_contact" {
 
 resource_schema "aws_ssmcontacts_contact_channel" {
   cloudformation_type_name               = "AWS::SSMContacts::ContactChannel"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ssmcontacts_plan" {
+  cloudformation_type_name               = "AWS::SSMContacts::Plan"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ssmcontacts_rotation" {
+  cloudformation_type_name               = "AWS::SSMContacts::Rotation"
   suppress_plural_data_source_generation = true
 }
 

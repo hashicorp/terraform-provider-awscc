@@ -29,7 +29,6 @@ Macie FindingsFilter resource schema.
 ### Read-Only
 
 - `arn` (String) Findings filter ARN.
-- `findings_filter_list_items` (Attributes List) Findings filters list. (see [below for nested schema](#nestedatt--findings_filter_list_items))
 - `id` (String) Findings filter ID.
 
 <a id="nestedatt--finding_criteria"></a>
@@ -50,16 +49,6 @@ Optional:
 - `lt` (Number)
 - `lte` (Number)
 - `neq` (List of String)
-
-
-
-<a id="nestedatt--findings_filter_list_items"></a>
-### Nested Schema for `findings_filter_list_items`
-
-Read-Only:
-
-- `id` (String)
-- `name` (String)
 
 ## Import
 

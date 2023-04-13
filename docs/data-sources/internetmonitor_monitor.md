@@ -22,6 +22,7 @@ Data Source schema for AWS::InternetMonitor::Monitor
 ### Read-Only
 
 - `created_at` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
+- `internet_measurements_log_delivery` (Attributes) (see [below for nested schema](#nestedatt--internet_measurements_log_delivery))
 - `max_city_networks_to_monitor` (Number)
 - `modified_at` (String) The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)
 - `monitor_arn` (String)
@@ -33,6 +34,24 @@ Data Source schema for AWS::InternetMonitor::Monitor
 - `resources_to_remove` (List of String)
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+
+<a id="nestedatt--internet_measurements_log_delivery"></a>
+### Nested Schema for `internet_measurements_log_delivery`
+
+Read-Only:
+
+- `s3_config` (Attributes) (see [below for nested schema](#nestedatt--internet_measurements_log_delivery--s3_config))
+
+<a id="nestedatt--internet_measurements_log_delivery--s3_config"></a>
+### Nested Schema for `internet_measurements_log_delivery.s3_config`
+
+Read-Only:
+
+- `bucket_name` (String)
+- `bucket_prefix` (String)
+- `log_delivery_status` (String)
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

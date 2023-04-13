@@ -1,4 +1,5 @@
 {
+  "$schema": "https://schema.cloudformation.us-east-1.amazonaws.com/provider.definition.schema.v1.json",
   "typeName": "AWS::GameLift::GameServerGroup",
   "description": "The AWS::GameLift::GameServerGroup resource creates an Amazon GameLift (GameLift) GameServerGroup.",
   "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-gamelift.git",
@@ -345,7 +346,6 @@
   "required": [
     "GameServerGroupName",
     "InstanceDefinitions",
-    "LaunchTemplate",
     "RoleArn"
   ],
   "additionalProperties": false,
@@ -354,7 +354,13 @@
     "/properties/AutoScalingGroupArn"
   ],
   "writeOnlyProperties": [
-    "/properties/DeleteOption"
+    "/properties/DeleteOption",
+    "/properties/LaunchTemplate",
+    "/properties/MinSize",
+    "/properties/MaxSize",
+    "/properties/AutoScalingPolicy",
+    "/properties/VpcSubnets",
+    "/properties/Tags"
   ],
   "primaryIdentifier": [
     "/properties/GameServerGroupArn"

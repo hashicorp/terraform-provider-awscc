@@ -110,6 +110,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AutoScalingPolicy is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: BalancingStrategy
 		// CloudFormation resource type schema:
@@ -336,7 +337,12 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// LaunchTemplate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MaxSize
 		// CloudFormation resource type schema:
@@ -356,6 +362,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// MaxSize is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MinSize
 		// CloudFormation resource type schema:
@@ -375,6 +382,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// MinSize is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: RoleArn
 		// CloudFormation resource type schema:
@@ -451,6 +459,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: VpcSubnets
 		// CloudFormation resource type schema:
@@ -484,6 +493,7 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// VpcSubnets is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -535,6 +545,12 @@ func gameServerGroupResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DeleteOption",
+		"/properties/LaunchTemplate",
+		"/properties/MinSize",
+		"/properties/MaxSize",
+		"/properties/AutoScalingPolicy",
+		"/properties/VpcSubnets",
+		"/properties/Tags",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
