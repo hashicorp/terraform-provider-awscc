@@ -203,6 +203,11 @@ resource_schema "aws_apigatewayv2_vpc_link" {
 
 resource_schema "aws_appconfig_extension" {
   cloudformation_type_name = "AWS::AppConfig::Extension"
+
+  # Actions is of unsupported type: key-value map of set of object.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appconfig_extension_association" {
