@@ -828,6 +828,17 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The date and time to restore from.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SourceDBClusterIdentifier
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.",
+		//	  "type": "string"
+		//	}
+		"source_db_cluster_identifier": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SourceDBInstanceAutomatedBackupsArn
 		// CloudFormation resource type schema:
 		//
@@ -1108,6 +1119,7 @@ func dBInstanceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"restore_time":                             "RestoreTime",
 		"role_arn":                                 "RoleArn",
 		"secret_arn":                               "SecretArn",
+		"source_db_cluster_identifier":             "SourceDBClusterIdentifier",
 		"source_db_instance_automated_backups_arn": "SourceDBInstanceAutomatedBackupsArn",
 		"source_db_instance_identifier":            "SourceDBInstanceIdentifier",
 		"source_dbi_resource_id":                   "SourceDbiResourceId",

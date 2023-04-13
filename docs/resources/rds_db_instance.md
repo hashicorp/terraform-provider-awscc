@@ -89,6 +89,7 @@ Constraints:
 - `publicly_accessible` (Boolean) Indicates whether the DB instance is an internet-facing instance. If you specify true, AWS CloudFormation creates an instance with a publicly resolvable DNS name, which resolves to a public IP address. If you specify false, AWS CloudFormation creates an internal instance with a DNS name that resolves to a private IP address.
 - `replica_mode` (String) The open mode of an Oracle read replica. The default is open-read-only.
 - `restore_time` (String) The date and time to restore from.
+- `source_db_cluster_identifier` (String) The identifier of the Multi-AZ DB cluster that will act as the source for the read replica. Each DB cluster can have up to 15 read replicas.
 - `source_db_instance_automated_backups_arn` (String) The Amazon Resource Name (ARN) of the replicated automated backups from which to restore.
 - `source_db_instance_identifier` (String) If you want to create a Read Replica DB instance, specify the ID of the source DB instance. Each DB instance can have a limited number of Read Replicas.
 - `source_dbi_resource_id` (String) The resource ID of the source DB instance from which to restore.

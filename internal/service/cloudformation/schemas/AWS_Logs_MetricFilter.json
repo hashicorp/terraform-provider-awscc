@@ -12,6 +12,7 @@
   "tagging": {
     "taggable": false
   },
+  "replacementStrategy": "delete_then_create",
   "definitions": {
     "Dimension": {
       "description": "the key-value pairs that further define a metric.",

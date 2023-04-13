@@ -68,6 +68,21 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: HostMaintenance
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+		//	  "type": "string"
+		//	}
+		"host_maintenance": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: HostRecovery
 		// CloudFormation resource type schema:
 		//
@@ -156,6 +171,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 		"auto_placement":    "AutoPlacement",
 		"availability_zone": "AvailabilityZone",
 		"host_id":           "HostId",
+		"host_maintenance":  "HostMaintenance",
 		"host_recovery":     "HostRecovery",
 		"instance_family":   "InstanceFamily",
 		"instance_type":     "InstanceType",

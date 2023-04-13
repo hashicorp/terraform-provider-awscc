@@ -1,4 +1,30 @@
 ## 0.50.0 (Unreleased)
+
+NOTES:
+
+* provider: The `skip_medatadata_api_check` argument is being deprecated in favor of `skip_metadata_api_check` ([#908](https://github.com/hashicorp/terraform-provider-awscc/issues/908))
+
+FEATURES:
+
+* **New Data Source:** `awscc_appconfig_extension_association`
+* **New Data Source:** `awscc_appconfig_extension_associations`
+* **New Data Source:** `awscc_devopsguru_log_anomaly_detection_integration`
+* **New Data Source:** `awscc_devopsguru_log_anomaly_detection_integrations`
+* **New Data Source:** `awscc_iotwireless_wireless_device_import_task`
+* **New Data Source:** `awscc_iotwireless_wireless_device_import_tasks`
+* **New Data Source:** `awscc_neptune_db_cluster`
+* **New Data Source:** `awscc_neptune_db_clusters`
+* **New Data Source:** `awscc_quicksight_refresh_schedule`
+* **New Data Source:** `awscc_ssmcontacts_plan`
+* **New Data Source:** `awscc_ssmcontacts_rotation`
+* **New Resource:** `awscc_appconfig_extension_association`
+* **New Resource:** `awscc_devopsguru_log_anomaly_detection_integration`
+* **New Resource:** `awscc_iotwireless_wireless_device_import_task`
+* **New Resource:** `awscc_neptune_db_cluster`
+* **New Resource:** `awscc_quicksight_refresh_schedule`
+* **New Resource:** `awscc_ssmcontacts_plan`
+* **New Resource:** `awscc_ssmcontacts_rotation`
+
 ## 0.49.0 (March 30, 2023)
 
 FEATURES:

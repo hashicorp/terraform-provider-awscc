@@ -56,6 +56,17 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Id of the host created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HostMaintenance
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+		//	  "type": "string"
+		//	}
+		"host_maintenance": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: HostRecovery
 		// CloudFormation resource type schema:
 		//
@@ -120,6 +131,7 @@ func hostDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"auto_placement":    "AutoPlacement",
 		"availability_zone": "AvailabilityZone",
 		"host_id":           "HostId",
+		"host_maintenance":  "HostMaintenance",
 		"host_recovery":     "HostRecovery",
 		"instance_family":   "InstanceFamily",
 		"instance_type":     "InstanceType",

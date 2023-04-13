@@ -15,6 +15,105 @@
       },
       "additionalProperties": false
     },
+    "AgentStatus": {
+      "description": "The status of AgentEndpoint.",
+      "type": "string",
+      "enum": [
+        "SUCCESS",
+        "FAILED",
+        "ACTIVE",
+        "INACTIVE"
+      ]
+    },
+    "AuditResults": {
+      "description": "The results of the audit.",
+      "type": "string",
+      "enum": [
+        "HEALTHY",
+        "UNHEALTHY"
+      ]
+    },
+    "IntegerRange": {
+      "description": "An integer range that has a minimum and maximum value.",
+      "type": "object",
+      "properties": {
+        "Minimum": {
+          "description": "A minimum value.",
+          "type": "integer"
+        },
+        "Maximum": {
+          "description": "A maximum value.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RangedSocketAddress": {
+      "description": "A socket address with a port range.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "IPv4 socket address.",
+          "type": "string"
+        },
+        "PortRange": {
+          "description": "Port range of a socket address.",
+          "$ref": "#/definitions/IntegerRange"
+        }
+      },
+      "additionalProperties": false
+    },
+    "ConnectionDetails": {
+      "description": "Egress address of AgentEndpoint with an optional mtu.",
+      "type": "object",
+      "properties": {
+        "SocketAddress": {
+          "$ref": "#/definitions/SocketAddress"
+        },
+        "Mtu": {
+          "description": "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RangedConnectionDetails": {
+      "description": "Ingress address of AgentEndpoint with a port range and an optional mtu.",
+      "type": "object",
+      "properties": {
+        "SocketAddress": {
+          "$ref": "#/definitions/RangedSocketAddress"
+        },
+        "Mtu": {
+          "description": "Maximum transmission unit (MTU) size in bytes of a dataflow endpoint.",
+          "type": "integer"
+        }
+      },
+      "additionalProperties": false
+    },
+    "AwsGroundStationAgentEndpoint": {
+      "description": "Information about AwsGroundStationAgentEndpoint.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string",
+          "pattern": "^[ a-zA-Z0-9_:-]{1,256}$"
+        },
+        "EgressAddress": {
+          "$ref": "#/definitions/ConnectionDetails"
+        },
+        "IngressAddress": {
+          "$ref": "#/definitions/RangedConnectionDetails"
+        },
+        "AgentStatus": {
+          "$ref": "#/definitions/AgentStatus"
+        },
+        "AuditResults": {
+          "$ref": "#/definitions/AuditResults"
+        }
+      },
+      "additionalProperties": false
+    },
     "DataflowEndpoint": {
       "type": "object",
       "properties": {
@@ -60,8 +159,24 @@
         },
         "Endpoint": {
           "$ref": "#/definitions/DataflowEndpoint"
+        },
+        "AwsGroundStationAgentEndpoint": {
+          "$ref": "#/definitions/AwsGroundStationAgentEndpoint"
         }
       },
+      "oneOf": [
+        {
+          "required": [
+            "Endpoint",
+            "SecurityDetails"
+          ]
+        },
+        {
+          "required": [
+            "AwsGroundStationAgentEndpoint"
+          ]
+        }
+      ],
       "additionalProperties": false
     },
     "Tag": {
@@ -98,10 +213,12 @@
       }
     },
     "ContactPrePassDurationSeconds": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Amount of time, in seconds, before a contact starts that the Ground Station Dataflow Endpoint Group will be in a PREPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the PREPASS state."
     },
     "ContactPostPassDurationSeconds": {
-      "type": "integer"
+      "type": "integer",
+      "description": "Amount of time, in seconds, after a contact ends that the Ground Station Dataflow Endpoint Group will be in a POSTPASS state. A Ground Station Dataflow Endpoint Group State Change event will be emitted when the Dataflow Endpoint Group enters and exits the POSTPASS state."
     },
     "Tags": {
       "type": "array",
@@ -126,7 +243,10 @@
         "groundstation:CreateDataflowEndpointGroup",
         "groundstation:GetDataflowEndpointGroup",
         "groundstation:TagResource",
-        "iam:PassRole"
+        "iam:PassRole",
+        "ec2:describeAddresses",
+        "ec2:describeNetworkInterfaces",
+        "iam:createServiceLinkedRole"
       ]
     },
     "read": {

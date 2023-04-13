@@ -225,6 +225,11 @@ func (p *ccProvider) Schema(ctx context.Context, request provider.SchemaRequest,
 				Optional:    true,
 			},
 			"skip_medatadata_api_check": schema.BoolAttribute{
+				Description:        "Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.",
+				Optional:           true,
+				DeprecationMessage: `Use "skip_metadata_api_check" instead`,
+			},
+			"skip_metadata_api_check": schema.BoolAttribute{
 				Description: "Skip the AWS Metadata API check. Useful for AWS API implementations that do not have a metadata API endpoint.  Setting to `true` prevents Terraform from authenticating via the Metadata API. You may need to use other authentication methods like static credentials, configuration variables, or environment variables.",
 				Optional:    true,
 			},
@@ -267,7 +272,8 @@ type config struct {
 	SecretKey                 types.String                   `tfsdk:"secret_key"`
 	SharedConfigFiles         types.List                     `tfsdk:"shared_config_files"`
 	SharedCredentialsFiles    types.List                     `tfsdk:"shared_credentials_files"`
-	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_medatadata_api_check"`
+	SkipMedatadataApiCheck    types.Bool                     `tfsdk:"skip_medatadata_api_check"`
+	SkipMetadataApiCheck      types.Bool                     `tfsdk:"skip_metadata_api_check"`
 	Token                     types.String                   `tfsdk:"token"`
 	AssumeRole                *assumeRoleData                `tfsdk:"assume_role"`
 	AssumeRoleWithWebIdentity *assumeRoleWithWebIdentityData `tfsdk:"assume_role_with_web_identity"`
@@ -490,8 +496,14 @@ func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Cl
 	}
 
 	if pd.SkipMetadataApiCheck.IsNull() {
-		config.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
-	} else if pd.SkipMetadataApiCheck.IsNull() {
+		if pd.SkipMedatadataApiCheck.IsNull() {
+			config.EC2MetadataServiceEnableState = imds.ClientDefaultEnableState
+		} else if !pd.SkipMedatadataApiCheck.ValueBool() {
+			config.EC2MetadataServiceEnableState = imds.ClientDisabled
+		} else {
+			config.EC2MetadataServiceEnableState = imds.ClientEnabled
+		}
+	} else if !pd.SkipMetadataApiCheck.ValueBool() {
 		config.EC2MetadataServiceEnableState = imds.ClientDisabled
 	} else {
 		config.EC2MetadataServiceEnableState = imds.ClientEnabled

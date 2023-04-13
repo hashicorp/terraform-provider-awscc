@@ -19,7 +19,6 @@ The AWS::GameLift::GameServerGroup resource creates an Amazon GameLift (GameLift
 
 - `game_server_group_name` (String) An identifier for the new game server group.
 - `instance_definitions` (Attributes List) A set of EC2 instance types to use when creating instances in the group. (see [below for nested schema](#nestedatt--instance_definitions))
-- `launch_template` (Attributes) The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. (see [below for nested schema](#nestedatt--launch_template))
 - `role_arn` (String) The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access your EC2 Auto Scaling groups.
 
 ### Optional
@@ -28,6 +27,7 @@ The AWS::GameLift::GameServerGroup resource creates an Amazon GameLift (GameLift
 - `balancing_strategy` (String) The fallback balancing method to use for the game server group when Spot Instances in a Region become unavailable or are not viable for game hosting.
 - `delete_option` (String) The type of delete to perform.
 - `game_server_protection_policy` (String) A flag that indicates whether instances in the game server group are protected from early termination.
+- `launch_template` (Attributes) The EC2 launch template that contains configuration settings and game server code to be deployed to all instances in the game server group. (see [below for nested schema](#nestedatt--launch_template))
 - `max_size` (Number) The maximum number of instances allowed in the EC2 Auto Scaling group.
 - `min_size` (Number) The minimum number of instances allowed in the EC2 Auto Scaling group.
 - `tags` (Attributes List) A list of labels to assign to the new game server group resource. (see [below for nested schema](#nestedatt--tags))
@@ -51,16 +51,6 @@ Optional:
 - `weighted_capacity` (String) Instance weighting that indicates how much this instance type contributes to the total capacity of a game server group.
 
 
-<a id="nestedatt--launch_template"></a>
-### Nested Schema for `launch_template`
-
-Optional:
-
-- `launch_template_id` (String) A unique identifier for an existing EC2 launch template.
-- `launch_template_name` (String) A readable identifier for an existing EC2 launch template.
-- `version` (String) The version of the EC2 launch template to use.
-
-
 <a id="nestedatt--auto_scaling_policy"></a>
 ### Nested Schema for `auto_scaling_policy`
 
@@ -79,6 +69,16 @@ Required:
 
 - `target_value` (Number) Desired value to use with a game server group target-based scaling policy.
 
+
+
+<a id="nestedatt--launch_template"></a>
+### Nested Schema for `launch_template`
+
+Optional:
+
+- `launch_template_id` (String) A unique identifier for an existing EC2 launch template.
+- `launch_template_name` (String) A readable identifier for an existing EC2 launch template.
+- `version` (String) The version of the EC2 launch template to use.
 
 
 <a id="nestedatt--tags"></a>

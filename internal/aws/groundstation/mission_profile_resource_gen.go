@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -169,6 +170,75 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: StreamsKmsKey
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The ARN of a KMS Key used for encrypting data during transmission from the source to destination locations.",
+		//	  "oneOf": [
+		//	    {
+		//	      "required": [
+		//	        "KmsKeyArn"
+		//	      ]
+		//	    },
+		//	    {
+		//	      "required": [
+		//	        "KmsAliasArn"
+		//	      ]
+		//	    }
+		//	  ],
+		//	  "properties": {
+		//	    "KmsAliasArn": {
+		//	      "type": "string"
+		//	    },
+		//	    "KmsKeyArn": {
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"streams_kms_key": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: KmsAliasArn
+				"kms_alias_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: KmsKeyArn
+				"kms_key_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The ARN of a KMS Key used for encrypting data during transmission from the source to destination locations.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: StreamsKmsRole
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.",
+		//	  "type": "string"
+		//	}
+		"streams_kms_role": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ARN of the KMS Key or Alias Key role used to define permissions on KMS Key usage.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -248,10 +318,14 @@ func missionProfileResource(ctx context.Context) (resource.Resource, error) {
 		"destination":                        "Destination",
 		"id":                                 "Id",
 		"key":                                "Key",
+		"kms_alias_arn":                      "KmsAliasArn",
+		"kms_key_arn":                        "KmsKeyArn",
 		"minimum_viable_contact_duration_seconds": "MinimumViableContactDurationSeconds",
 		"name":                "Name",
 		"region":              "Region",
 		"source":              "Source",
+		"streams_kms_key":     "StreamsKmsKey",
+		"streams_kms_role":    "StreamsKmsRole",
 		"tags":                "Tags",
 		"tracking_config_arn": "TrackingConfigArn",
 		"value":               "Value",
