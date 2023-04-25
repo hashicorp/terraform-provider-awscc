@@ -12,26 +12,26 @@ The AWS::KMS::Alias resource specifies a display name for an AWS KMS key in AWS 
 ## Example Usage
 
 ### KMS Alias
-To use awscc_kms_alias:
+To use `awscc_kms_alias` with sample `awscc_kms_key`:
 
 ```terraform
 resource "awscc_kms_key" "this" {
   key_policy = jsonencode({
-    Id = "example_kms_policy"
-    Statement = [
+    "Version" : "2012-10-17",
+    "Id" : "KMS-Key-Policy",
+    "Statement" : [
       {
-        Action = "kms:*"
-        Effect = "Allow"
-        Principal = {
-          AWS = "*"
-        }
-
-        Resource = "*"
-        Sid      = "Enable IAM User Permissions"
+        "Sid" : "Enable IAM User Permissions",
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : "arn:aws:iam::111122223333:root"
+        },
+        "Action" : "kms:*",
+        "Resource" : "*"
       },
-    ]
-    Version = "2012-10-17"
-  })
+    ],
+    }
+  )
 }
 
 resource "awscc_kms_alias" "this" {

@@ -1,20 +1,20 @@
 resource "awscc_kms_key" "this" {
   key_policy = jsonencode({
-    Id = "example_kms_policy"
-    Statement = [
+    "Version" : "2012-10-17",
+    "Id" : "KMS-Key-Policy",
+    "Statement" : [
       {
-        Action = "kms:*"
-        Effect = "Allow"
-        Principal = {
-          AWS = "*"
-        }
-
-        Resource = "*"
-        Sid      = "Enable IAM User Permissions"
+        "Sid" : "Enable IAM User Permissions",
+        "Effect" : "Allow",
+        "Principal" : {
+          "AWS" : "arn:aws:iam::111122223333:root"
+        },
+        "Action" : "kms:*",
+        "Resource" : "*"
       },
-    ]
-    Version = "2012-10-17"
-  })
+    ],
+    }
+  )
 }
 
 resource "awscc_kms_alias" "this" {
