@@ -24,7 +24,7 @@ In order to include multiple examples, a new template must be provided to config
 
 ## Customize the Position of a Single Example
 
-In order to change the position of a single example, you will need to add a new template file for the resource as described [above](adding-multiple-examples-to-a-resource-or-data-source). Then move the following stanza to change its location:
+In order to change the position of a single example, you will need to add a new template file for the resource as described [above](#adding-multiple-examples-to-a-resource-or-data-source). Then move the following stanza to change its location:
 
 ```go
 {{ if .HasExample -}}
