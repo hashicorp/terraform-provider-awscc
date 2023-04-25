@@ -12,5 +12,6 @@ in order to make it happen. Doing your best to follow it will speed up our
 ability to merge PRs and respond to issues.
 
 - [Development Environment Setup](DEVELOPMENT.md)
+- [Adding Examples to Generated Documentation](add-examples-to-documentation.md)
 - [Issue Reporting and Lifecycle](issue-reporting-and-lifecycle.md)
 - [Pull Request Submission and Lifecycle](pullrequest-submission-and-lifecycle.md)

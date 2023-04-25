@@ -9,6 +9,8 @@ project {
   header_ignore = [
     "internal/provider/generators/allschemas/*.hcl",
     "examples/resources/*/import.sh",
+    "examples/resources/*/*.tf",
+    "examples/data-sources/*/*.tf",
     ".github/ISSUE_TEMPLATE/*.yml",
   ]
 }
