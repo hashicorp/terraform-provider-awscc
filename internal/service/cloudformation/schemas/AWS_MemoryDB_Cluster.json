@@ -203,8 +203,14 @@
     "/properties/DataTiering",
     "/properties/KmsKeyId",
     "/properties/Port",
+    "/properties/SubnetGroupName",
     "/properties/SnapshotArns",
     "/properties/SnapshotName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/SnapshotArns",
+    "/properties/SnapshotName",
+    "/properties/FinalSnapshotName"
   ],
   "primaryIdentifier": [
     "/properties/ClusterName"

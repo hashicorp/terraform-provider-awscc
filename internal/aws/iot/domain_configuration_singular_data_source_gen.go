@@ -232,6 +232,28 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TlsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "SecurityPolicy": {
+		//	      "maxLength": 128,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityPolicy
+				"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: ValidationCertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -268,6 +290,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"domain_name":                      "DomainName",
 		"domain_type":                      "DomainType",
 		"key":                              "Key",
+		"security_policy":                  "SecurityPolicy",
 		"server_certificate_arn":           "ServerCertificateArn",
 		"server_certificate_arns":          "ServerCertificateArns",
 		"server_certificate_status":        "ServerCertificateStatus",
@@ -275,6 +298,7 @@ func domainConfigurationDataSource(ctx context.Context) (datasource.DataSource, 
 		"server_certificates":              "ServerCertificates",
 		"service_type":                     "ServiceType",
 		"tags":                             "Tags",
+		"tls_config":                       "TlsConfig",
 		"validation_certificate_arn":       "ValidationCertificateArn",
 		"value":                            "Value",
 	})

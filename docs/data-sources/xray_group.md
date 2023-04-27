@@ -25,7 +25,7 @@ Data Source schema for AWS::XRay::Group
 - `group_arn` (String) The ARN of the group that was generated on creation.
 - `group_name` (String) The case-sensitive name of the new group. Names must be unique.
 - `insights_configuration` (Attributes) (see [below for nested schema](#nestedatt--insights_configuration))
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--insights_configuration"></a>
 ### Nested Schema for `insights_configuration`
@@ -41,7 +41,7 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 

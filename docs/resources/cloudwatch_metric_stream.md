@@ -45,6 +45,10 @@ Required:
 
 - `namespace` (String) Only metrics with Namespace matching this value will be streamed.
 
+Optional:
+
+- `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
+
 
 <a id="nestedatt--include_filters"></a>
 ### Nested Schema for `include_filters`
@@ -52,6 +56,10 @@ Required:
 Required:
 
 - `namespace` (String) Only metrics with Namespace matching this value will be streamed.
+
+Optional:
+
+- `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
 
 
 <a id="nestedatt--statistics_configurations"></a>

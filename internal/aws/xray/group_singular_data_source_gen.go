@@ -96,14 +96,17 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key name of the tag.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -120,15 +123,18 @@ func groupDataSource(ctx context.Context) (datasource.DataSource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The key name of the tag.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Computed: true,
+						Description: "The value for the tag.",
+						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Computed: true,
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 

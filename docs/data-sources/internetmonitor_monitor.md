@@ -34,6 +34,7 @@ Data Source schema for AWS::InternetMonitor::Monitor
 - `resources_to_remove` (List of String)
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `traffic_percentage_to_monitor` (Number)
 
 <a id="nestedatt--internet_measurements_log_delivery"></a>
 ### Nested Schema for `internet_measurements_log_delivery`

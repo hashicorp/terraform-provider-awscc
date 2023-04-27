@@ -25,12 +25,14 @@ Resource schema for AWS::IoTTwinMaker::Scene
 
 - `capabilities` (Set of String) A list of capabilities that the scene uses to render.
 - `description` (String) The description of the scene.
+- `scene_metadata` (Map of String) A key-value pair of scene metadata for the scene.
 - `tags` (Map of String) A key-value pair to associate with a resource.
 
 ### Read-Only
 
 - `arn` (String) The ARN of the scene.
 - `creation_date_time` (String) The date and time when the scene was created.
+- `generated_scene_metadata` (Map of String) A key-value pair of generated scene metadata for the scene.
 - `id` (String) Uniquely identifies the resource.
 - `update_date_time` (String) The date and time of the current update.
 

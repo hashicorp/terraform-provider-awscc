@@ -18,6 +18,7 @@ Resource Type definition for AWS::IVS::Channel
 ### Optional
 
 - `authorized` (Boolean) Whether the channel is authorized.
+- `insecure_ingest` (Boolean) Whether the channel allows insecure ingest.
 - `latency_mode` (String) Channel latency mode.
 - `name` (String) Channel
 - `recording_configuration_arn` (String) Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (recording is disabled).

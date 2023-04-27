@@ -60,6 +60,16 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    "additionalProperties": false,
 		//	    "description": "This structure defines the metrics that will be streamed.",
 		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 999,
+		//	        "type": "array"
+		//	      },
 		//	      "Namespace": {
 		//	        "description": "Only metrics with Namespace matching this value will be streamed.",
 		//	        "maxLength": 255,
@@ -79,6 +89,12 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"exclude_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Only metrics with Namespace matching this value will be streamed.",
@@ -111,6 +127,16 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	    "additionalProperties": false,
 		//	    "description": "This structure defines the metrics that will be streamed.",
 		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 999,
+		//	        "type": "array"
+		//	      },
 		//	      "Namespace": {
 		//	        "description": "Only metrics with Namespace matching this value will be streamed.",
 		//	        "maxLength": 255,
@@ -130,6 +156,12 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"include_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Only metrics with Namespace matching this value will be streamed.",
@@ -386,6 +418,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"key":                             "Key",
 		"last_update_date":                "LastUpdateDate",
 		"metric_name":                     "MetricName",
+		"metric_names":                    "MetricNames",
 		"name":                            "Name",
 		"namespace":                       "Namespace",
 		"output_format":                   "OutputFormat",
