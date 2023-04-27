@@ -45,6 +45,11 @@
       "type": "boolean",
       "default": false
     },
+    "InsecureIngest": {
+      "description": "Whether the channel allows insecure ingest.",
+      "type": "boolean",
+      "default": false
+    },
     "LatencyMode": {
       "description": "Channel latency mode.",
       "type": "string",

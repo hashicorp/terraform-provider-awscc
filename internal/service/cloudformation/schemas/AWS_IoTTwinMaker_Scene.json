@@ -75,6 +75,34 @@
         "maxLength": 256,
         "pattern": ".*"
       }
+    },
+    "SceneMetadata": {
+      "description": "A key-value pair of scene metadata for the scene.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        }
+      },
+      "minLength": 0,
+      "maxLength": 50,
+      "additionalProperties": false
+    },
+    "GeneratedSceneMetadata": {
+      "description": "A key-value pair of generated scene metadata for the scene.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "string",
+          "minLength": 0,
+          "maxLength": 2048
+        }
+      },
+      "minLength": 0,
+      "maxLength": 50,
+      "additionalProperties": false
     }
   },
   "additionalProperties": false,
@@ -93,7 +121,8 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/CreationDateTime",
-    "/properties/UpdateDateTime"
+    "/properties/UpdateDateTime",
+    "/properties/GeneratedSceneMetadata"
   ],
   "createOnlyProperties": [
     "/properties/SceneId",

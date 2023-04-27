@@ -62,9 +62,6 @@
       "permissions": [
         "athena:DeleteNamedQuery"
       ]
-    },
-    "update": {
-      "permissions": []
     }
   },
   "readOnlyProperties": [
@@ -80,5 +77,6 @@
   "primaryIdentifier": [
     "/properties/NamedQueryId"
   ],
-  "additionalProperties": false
+  "additionalProperties": false,
+  "taggable": false
 }
