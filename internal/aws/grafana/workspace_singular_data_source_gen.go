@@ -187,6 +187,60 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The user friendly name of a workspace.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: NetworkAccessControl
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The configuration settings for Network Access Control.",
+		//	  "properties": {
+		//	    "PrefixListIds": {
+		//	      "description": "The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "Prefix List Ids",
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "VpceIds": {
+		//	      "description": "The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "VPCE Ids",
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 5,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"network_access_control": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PrefixListIds
+				"prefix_list_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpceIds
+				"vpce_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The configuration settings for Network Access Control.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: NotificationDestinations
 		// CloudFormation resource type schema:
 		//
@@ -630,11 +684,13 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"login_validity_duration":   "LoginValidityDuration",
 		"modification_timestamp":    "ModificationTimestamp",
 		"name":                      "Name",
+		"network_access_control":    "NetworkAccessControl",
 		"notification_destinations": "NotificationDestinations",
 		"org":                       "Org",
 		"organization_role_name":    "OrganizationRoleName",
 		"organizational_units":      "OrganizationalUnits",
 		"permission_type":           "PermissionType",
+		"prefix_list_ids":           "PrefixListIds",
 		"role":                      "Role",
 		"role_arn":                  "RoleArn",
 		"role_values":               "RoleValues",
@@ -647,6 +703,7 @@ func workspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"subnet_ids":                "SubnetIds",
 		"url":                       "Url",
 		"vpc_configuration":         "VpcConfiguration",
+		"vpce_ids":                  "VpceIds",
 		"xml":                       "Xml",
 	})
 

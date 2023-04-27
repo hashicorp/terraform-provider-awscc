@@ -259,6 +259,17 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			}, /*END NESTED OBJECT*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: TrafficPercentageToMonitor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 100,
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"traffic_percentage_to_monitor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -294,6 +305,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"s3_config":                          "S3Config",
 		"status":                             "Status",
 		"tags":                               "Tags",
+		"traffic_percentage_to_monitor":      "TrafficPercentageToMonitor",
 		"value":                              "Value",
 	})
 
