@@ -16,6 +16,9 @@ The AWS::AccessAnalyzer::Analyzer type specifies an analyzer of the user's accou
 To use awscc_accessanalyzer_analyzer on single AWS account:
 
 ```terraform
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 resource "awscc_accessanalyzer_analyzer" "this" {
   analyzer_name = "example"
   type          = ACCOUNT
@@ -27,6 +30,9 @@ resource "awscc_accessanalyzer_analyzer" "this" {
 To enable awscc_accessanalyzer_analyzer at the organization level, modify example below to match your AWS organization configuration.
 
 ```terraform
+# Copyright (c) HashiCorp, Inc.
+# SPDX-License-Identifier: MPL-2.0
+
 resource "aws_organizations_organization" "this" {
   aws_service_access_principals = ["access-analyzer.amazonaws.com"]
 }
