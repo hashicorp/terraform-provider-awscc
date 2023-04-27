@@ -10,15 +10,16 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -90,10 +91,30 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.",
+		//	    "oneOf": [
+		//	      {
+		//	        "required": [
+		//	          "DurationInMinutes"
+		//	        ]
+		//	      },
+		//	      {
+		//	        "required": [
+		//	          "RotationIds"
+		//	        ]
+		//	      }
+		//	    ],
 		//	    "properties": {
 		//	      "DurationInMinutes": {
 		//	        "description": "The time to wait until beginning the next stage.",
 		//	        "type": "integer"
+		//	      },
+		//	      "RotationIds": {
+		//	        "description": "List of Rotation Ids to associate with Contact",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
 		//	      },
 		//	      "Targets": {
 		//	        "description": "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
@@ -157,9 +178,6 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "array"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "DurationInMinutes"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -170,7 +188,22 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 					// Property: DurationInMinutes
 					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The time to wait until beginning the next stage.",
-						Required:    true,
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+							int64planmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: RotationIds
+					"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "List of Rotation Ids to associate with Contact",
+						Optional:    true,
+						Computed:    true,
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							generic.Multiset(),
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: Targets
 					"targets": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
@@ -246,7 +279,8 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 		//	    "PERSONAL",
 		//	    "CUSTOM",
 		//	    "SERVICE",
-		//	    "ESCALATION"
+		//	    "ESCALATION",
+		//	    "ONCALL_SCHEDULE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -259,6 +293,7 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 					"CUSTOM",
 					"SERVICE",
 					"ESCALATION",
+					"ONCALL_SCHEDULE",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -298,6 +333,7 @@ func contactResource(ctx context.Context) (resource.Resource, error) {
 		"is_essential":              "IsEssential",
 		"plan":                      "Plan",
 		"retry_interval_in_minutes": "RetryIntervalInMinutes",
+		"rotation_ids":              "RotationIds",
 		"targets":                   "Targets",
 		"type":                      "Type",
 	})

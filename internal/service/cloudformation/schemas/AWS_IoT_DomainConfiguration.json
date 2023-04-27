@@ -40,6 +40,16 @@
       },
       "additionalProperties": false
     },
+    "TlsConfig": {
+      "type": "object",
+      "properties": {
+        "SecurityPolicy": {
+          "type": "string",
+          "maxLength": 128
+        }
+      },
+      "additionalProperties": false
+    },
     "Tag": {
       "type": "object",
       "properties": {
@@ -120,6 +130,9 @@
       "items": {
         "$ref": "#/definitions/ServerCertificateSummary"
       }
+    },
+    "TlsConfig": {
+      "$ref": "#/definitions/TlsConfig"
     },
     "Tags": {
       "type": "array",

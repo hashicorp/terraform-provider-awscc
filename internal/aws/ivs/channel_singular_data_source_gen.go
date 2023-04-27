@@ -60,6 +60,18 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: InsecureIngest
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Whether the channel allows insecure ingest.",
+		//	  "type": "boolean"
+		//	}
+		"insecure_ingest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the channel allows insecure ingest.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: LatencyMode
 		// CloudFormation resource type schema:
 		//
@@ -199,6 +211,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn":                         "Arn",
 		"authorized":                  "Authorized",
 		"ingest_endpoint":             "IngestEndpoint",
+		"insecure_ingest":             "InsecureIngest",
 		"key":                         "Key",
 		"latency_mode":                "LatencyMode",
 		"name":                        "Name",

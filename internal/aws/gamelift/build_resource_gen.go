@@ -65,7 +65,8 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "AMAZON_LINUX",
 		//	    "AMAZON_LINUX_2",
-		//	    "WINDOWS_2012"
+		//	    "WINDOWS_2012",
+		//	    "WINDOWS_2016"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -78,6 +79,7 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 					"AMAZON_LINUX",
 					"AMAZON_LINUX_2",
 					"WINDOWS_2012",
+					"WINDOWS_2016",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

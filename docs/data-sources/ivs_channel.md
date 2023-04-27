@@ -24,6 +24,7 @@ Data Source schema for AWS::IVS::Channel
 - `arn` (String) Channel ARN is automatically generated on creation and assigned as the unique identifier.
 - `authorized` (Boolean) Whether the channel is authorized.
 - `ingest_endpoint` (String) Channel ingest endpoint, part of the definition of an ingest server, used when you set up streaming software.
+- `insecure_ingest` (Boolean) Whether the channel allows insecure ingest.
 - `latency_mode` (String) Channel latency mode.
 - `name` (String) Channel
 - `playback_url` (String) Channel Playback URL.

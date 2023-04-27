@@ -21,7 +21,7 @@ This schema provides construct and validation rules for AWS-XRay SamplingRule re
 - `sampling_rule` (Attributes) (see [below for nested schema](#nestedatt--sampling_rule))
 - `sampling_rule_record` (Attributes) (see [below for nested schema](#nestedatt--sampling_rule_record))
 - `sampling_rule_update` (Attributes) (see [below for nested schema](#nestedatt--sampling_rule_update))
-- `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -108,8 +108,8 @@ Optional:
 
 Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag.
+- `value` (String) The value for the tag.
 
 ## Import
 

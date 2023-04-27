@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 715 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 720 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1061,6 +1061,10 @@ resource_schema "aws_ec2_vpc_endpoint_service" {
   cloudformation_type_name = "AWS::EC2::VPCEndpointService"
 }
 
+resource_schema "aws_ec2_vpc_endpoint_service_permissions" {
+  cloudformation_type_name = "AWS::EC2::VPCEndpointServicePermissions"
+}
+
 resource_schema "aws_ec2_vpc_peering_connection" {
   cloudformation_type_name = "AWS::EC2::VPCPeeringConnection"
 }
@@ -1341,6 +1345,10 @@ resource_schema "aws_frauddetector_event_type" {
 
 resource_schema "aws_frauddetector_label" {
   cloudformation_type_name = "AWS::FraudDetector::Label"
+}
+
+resource_schema "aws_frauddetector_list" {
+  cloudformation_type_name = "AWS::FraudDetector::List"
 }
 
 resource_schema "aws_frauddetector_outcome" {
@@ -2074,12 +2082,21 @@ resource_schema "aws_msk_cluster" {
   cloudformation_type_name = "AWS::MSK::Cluster"
 }
 
+resource_schema "aws_msk_cluster_policy" {
+  cloudformation_type_name               = "AWS::MSK::ClusterPolicy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_msk_configuration" {
   cloudformation_type_name = "AWS::MSK::Configuration"
 }
 
 resource_schema "aws_msk_serverless_cluster" {
   cloudformation_type_name = "AWS::MSK::ServerlessCluster"
+}
+
+resource_schema "aws_msk_vpc_connection" {
+  cloudformation_type_name = "AWS::MSK::VpcConnection"
 }
 
 resource_schema "aws_mwaa_environment" {
@@ -2467,6 +2484,10 @@ resource_schema "aws_quicksight_template" {
 resource_schema "aws_quicksight_theme" {
   cloudformation_type_name               = "AWS::QuickSight::Theme"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ram_permission" {
+  cloudformation_type_name = "AWS::RAM::Permission"
 }
 
 resource_schema "aws_rds_db_cluster" {
@@ -3257,6 +3278,5 @@ resource_schema "aws_xray_resource_policy" {
 }
 
 resource_schema "aws_xray_sampling_rule" {
-  cloudformation_type_name               = "AWS::XRay::SamplingRule"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::XRay::SamplingRule"
 }

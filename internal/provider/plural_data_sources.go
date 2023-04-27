@@ -154,6 +154,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_vpcs -cftype AWS::EC2::VPC -package ec2 ../aws/ec2/vpc_plural_data_source_gen.go ../aws/ec2/vpc_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_vpc_endpoints -cftype AWS::EC2::VPCEndpoint -package ec2 ../aws/ec2/vpc_endpoint_plural_data_source_gen.go ../aws/ec2/vpc_endpoint_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_vpc_endpoint_services -cftype AWS::EC2::VPCEndpointService -package ec2 ../aws/ec2/vpc_endpoint_service_plural_data_source_gen.go ../aws/ec2/vpc_endpoint_service_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_vpc_endpoint_service_permissions_plural -cftype AWS::EC2::VPCEndpointServicePermissions -package ec2 ../aws/ec2/vpc_endpoint_service_permissions_plural_data_source_gen.go ../aws/ec2/vpc_endpoint_service_permissions_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_vpc_peering_connections -cftype AWS::EC2::VPCPeeringConnection -package ec2 ../aws/ec2/vpc_peering_connection_plural_data_source_gen.go ../aws/ec2/vpc_peering_connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_vpn_connections -cftype AWS::EC2::VPNConnection -package ec2 ../aws/ec2/vpn_connection_plural_data_source_gen.go ../aws/ec2/vpn_connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_ec2_vpn_connection_routes -cftype AWS::EC2::VPNConnectionRoute -package ec2 ../aws/ec2/vpn_connection_route_plural_data_source_gen.go ../aws/ec2/vpn_connection_route_plural_data_source_gen_test.go
@@ -199,6 +200,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_entity_types -cftype AWS::FraudDetector::EntityType -package frauddetector ../aws/frauddetector/entity_type_plural_data_source_gen.go ../aws/frauddetector/entity_type_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_event_types -cftype AWS::FraudDetector::EventType -package frauddetector ../aws/frauddetector/event_type_plural_data_source_gen.go ../aws/frauddetector/event_type_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_labels -cftype AWS::FraudDetector::Label -package frauddetector ../aws/frauddetector/label_plural_data_source_gen.go ../aws/frauddetector/label_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_lists -cftype AWS::FraudDetector::List -package frauddetector ../aws/frauddetector/list_plural_data_source_gen.go ../aws/frauddetector/list_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_outcomes -cftype AWS::FraudDetector::Outcome -package frauddetector ../aws/frauddetector/outcome_plural_data_source_gen.go ../aws/frauddetector/outcome_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_frauddetector_variables -cftype AWS::FraudDetector::Variable -package frauddetector ../aws/frauddetector/variable_plural_data_source_gen.go ../aws/frauddetector/variable_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_gamelift_aliases -cftype AWS::GameLift::Alias -package gamelift ../aws/gamelift/alias_plural_data_source_gen.go ../aws/gamelift/alias_plural_data_source_gen_test.go
@@ -324,6 +326,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_clusters -cftype AWS::MSK::Cluster -package msk ../aws/msk/cluster_plural_data_source_gen.go ../aws/msk/cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_configurations -cftype AWS::MSK::Configuration -package msk ../aws/msk/configuration_plural_data_source_gen.go ../aws/msk/configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_serverless_clusters -cftype AWS::MSK::ServerlessCluster -package msk ../aws/msk/serverless_cluster_plural_data_source_gen.go ../aws/msk/serverless_cluster_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_msk_vpc_connections -cftype AWS::MSK::VpcConnection -package msk ../aws/msk/vpc_connection_plural_data_source_gen.go ../aws/msk/vpc_connection_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_mwaa_environments -cftype AWS::MWAA::Environment -package mwaa ../aws/mwaa/environment_plural_data_source_gen.go ../aws/mwaa/environment_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_macie_sessions -cftype AWS::Macie::Session -package macie ../aws/macie/session_plural_data_source_gen.go ../aws/macie/session_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_managedblockchain_accessors -cftype AWS::ManagedBlockchain::Accessor -package managedblockchain ../aws/managedblockchain/accessor_plural_data_source_gen.go ../aws/managedblockchain/accessor_plural_data_source_gen_test.go
@@ -367,6 +370,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_schemas -cftype AWS::Personalize::Schema -package personalize ../aws/personalize/schema_plural_data_source_gen.go ../aws/personalize/schema_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_personalize_solutions -cftype AWS::Personalize::Solution -package personalize ../aws/personalize/solution_plural_data_source_gen.go ../aws/personalize/solution_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_pinpoint_in_app_templates -cftype AWS::Pinpoint::InAppTemplate -package pinpoint ../aws/pinpoint/in_app_template_plural_data_source_gen.go ../aws/pinpoint/in_app_template_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_ram_permissions -cftype AWS::RAM::Permission -package ram ../aws/ram/permission_plural_data_source_gen.go ../aws/ram/permission_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_clusters -cftype AWS::RDS::DBCluster -package rds ../aws/rds/db_cluster_plural_data_source_gen.go ../aws/rds/db_cluster_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_cluster_parameter_groups -cftype AWS::RDS::DBClusterParameterGroup -package rds ../aws/rds/db_cluster_parameter_group_plural_data_source_gen.go ../aws/rds/db_cluster_parameter_group_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_rds_db_instances -cftype AWS::RDS::DBInstance -package rds ../aws/rds/db_instance_plural_data_source_gen.go ../aws/rds/db_instance_plural_data_source_gen_test.go
@@ -470,6 +474,7 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_assistants -cftype AWS::Wisdom::Assistant -package wisdom ../aws/wisdom/assistant_plural_data_source_gen.go ../aws/wisdom/assistant_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_wisdom_knowledge_bases -cftype AWS::Wisdom::KnowledgeBase -package wisdom ../aws/wisdom/knowledge_base_plural_data_source_gen.go ../aws/wisdom/knowledge_base_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_xray_resource_policies -cftype AWS::XRay::ResourcePolicy -package xray ../aws/xray/resource_policy_plural_data_source_gen.go ../aws/xray/resource_policy_plural_data_source_gen_test.go
+//go:generate go run generators/plural-data-source/main.go -data-source awscc_xray_sampling_rules -cftype AWS::XRay::SamplingRule -package xray ../aws/xray/sampling_rule_plural_data_source_gen.go ../aws/xray/sampling_rule_plural_data_source_gen_test.go
 
 package provider
 
@@ -589,6 +594,7 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/panorama"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/personalize"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/pinpoint"
+	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/ram"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/rds"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/redshift"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/redshiftserverless"

@@ -22,14 +22,14 @@ jobs:
     name: tfplugindocs check
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@8e5e7e5ab8b370d6c329ec480221332ada57f0ab # v3.5.2
 
       - id: go-version
-        uses: juliangruber/read-file-action@v1
+        uses: juliangruber/read-file-action@02bbba9876a8f870efd4ad64e3b9088d3fb94d4b # v1.1.6
         with:
           path: ./.go-version
 
-      - uses: actions/setup-go@v4
+      - uses: actions/setup-go@4d34df0c2316fe8122ab82dc22947d607c0c91f9 # v4.0.0
         with:
           # TODO: Replace with go-version-from-file when it is supported
           # https://github.com/actions/setup-go/pull/62
@@ -39,7 +39,7 @@ jobs:
         run: |
           echo "GOCACHE=$(go env GOCACHE)" >> $GITHUB_ENV
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
         continue-on-error: true
         timeout-minutes: 2
         with:
@@ -48,7 +48,7 @@ jobs:
           path: ${{ env.GOCACHE }}
           key: ${{ runner.os }}-GOCACHE-${{ hashFiles('go.sum') }}-${{ hashFiles('internal/**') }}
 
-      - uses: actions/cache@v3
+      - uses: actions/cache@88522ab9f39a2ea568f7027eddc7d8d8bc9d59c8 # v3.3.1
         continue-on-error: true
         timeout-minutes: 2
         with:

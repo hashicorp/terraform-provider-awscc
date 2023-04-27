@@ -27,6 +27,7 @@ Definition of AWS::Grafana::Workspace Resource Type
 - `data_sources` (List of String) List of data sources on the service managed IAM role.
 - `description` (String) Description of a workspace.
 - `name` (String) The user friendly name of a workspace.
+- `network_access_control` (Attributes) The configuration settings for Network Access Control. (see [below for nested schema](#nestedatt--network_access_control))
 - `notification_destinations` (List of String) List of notification destinations on the customers service managed IAM role that the Grafana workspace can query.
 - `organization_role_name` (String) The name of an IAM role that already exists to use with AWS Organizations to access AWS data sources and notification channels in other accounts in an organization.
 - `organizational_units` (List of String) List of Organizational Units containing AWS accounts the Grafana workspace can pull data from.
@@ -45,6 +46,15 @@ Definition of AWS::Grafana::Workspace Resource Type
 - `saml_configuration_status` (String) Valid SAML configuration statuses.
 - `sso_client_id` (String) The client ID of the AWS SSO Managed Application.
 - `status` (String) These enums represent the status of a workspace.
+
+<a id="nestedatt--network_access_control"></a>
+### Nested Schema for `network_access_control`
+
+Optional:
+
+- `prefix_list_ids` (Set of String) The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace.
+- `vpce_ids` (Set of String) The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace.
+
 
 <a id="nestedatt--saml_configuration"></a>
 ### Nested Schema for `saml_configuration`

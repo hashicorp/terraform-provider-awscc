@@ -1,4 +1,23 @@
 ## 0.51.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_ec2_vpc_endpoint_service_permissions`
+* **New Data Source:** `awscc_ec2_vpc_endpoint_service_permissions_plural`
+* **New Data Source:** `awscc_frauddetector_list`
+* **New Data Source:** `awscc_frauddetector_lists`
+* **New Data Source:** `awscc_msk_cluster_policy`
+* **New Data Source:** `awscc_msk_vpc_connection`
+* **New Data Source:** `awscc_msk_vpc_connections`
+* **New Data Source:** `awscc_ram_permission`
+* **New Data Source:** `awscc_ram_permissions`
+* **New Data Source:** `awscc_xray_sampling_rules`
+* **New Resource:** `awscc_ec2_vpc_endpoint_service_permissions`
+* **New Resource:** `awscc_frauddetector_list`
+* **New Resource:** `awscc_msk_cluster_policy`
+* **New Resource:** `awscc_msk_vpc_connection`
+* **New Resource:** `awscc_ram_permission`
+
 ## 0.50.0 (April 13, 2023)
 
 NOTES:

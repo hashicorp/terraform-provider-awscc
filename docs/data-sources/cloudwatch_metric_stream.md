@@ -40,6 +40,7 @@ Data Source schema for AWS::CloudWatch::MetricStream
 
 Read-Only:
 
+- `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
 - `namespace` (String) Only metrics with Namespace matching this value will be streamed.
 
 
@@ -48,6 +49,7 @@ Read-Only:
 
 Read-Only:
 
+- `metric_names` (List of String) Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.
 - `namespace` (String) Only metrics with Namespace matching this value will be streamed.
 
 

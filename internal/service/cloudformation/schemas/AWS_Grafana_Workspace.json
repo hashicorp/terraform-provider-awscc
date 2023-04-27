@@ -125,6 +125,39 @@
       ],
       "additionalProperties": false
     },
+    "NetworkAccessControl": {
+      "type": "object",
+      "description": "The configuration settings for Network Access Control.",
+      "properties": {
+        "PrefixListIds": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Prefix List Ids"
+          },
+          "description": "The list of prefix list IDs. A prefix list is a list of CIDR ranges of IP addresses. The IP addresses specified are allowed to access your workspace. If the list is not included in the configuration then no IP addresses will be allowed to access the workspace."
+        },
+        "VpceIds": {
+          "type": "array",
+          "insertionOrder": false,
+          "uniqueItems": true,
+          "minItems": 0,
+          "maxItems": 5,
+          "items": {
+            "type": "string",
+            "minLength": 1,
+            "description": "VPCE Ids"
+          },
+          "description": "The list of Amazon VPC endpoint IDs for the workspace. If a NetworkAccessConfiguration is specified then only VPC endpoints specified here will be allowed to access the workspace."
+        }
+      },
+      "additionalProperties": false
+    },
     "VpcConfiguration": {
       "type": "object",
       "description": "The configuration settings for an Amazon VPC that contains data sources for your Grafana workspace to connect to.",
@@ -252,6 +285,9 @@
     },
     "SamlConfiguration": {
       "$ref": "#/definitions/SamlConfiguration"
+    },
+    "NetworkAccessControl": {
+      "$ref": "#/definitions/NetworkAccessControl"
     },
     "VpcConfiguration": {
       "$ref": "#/definitions/VpcConfiguration"
@@ -394,6 +430,7 @@
         "organizations:DescribeOrganization",
         "sso:GetSharedSsoConfiguration",
         "iam:PassRole",
+        "ec2:GetManagedPrefixListEntries",
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
@@ -414,6 +451,7 @@
         "grafana:UpdateWorkspaceAuthentication",
         "sso:DescribeRegisteredRegions",
         "sso:CreateManagedApplicationInstance",
+        "ec2:GetManagedPrefixListEntries",
         "iam:PassRole",
         "ec2:DescribeSecurityGroups",
         "ec2:DescribeSubnets",

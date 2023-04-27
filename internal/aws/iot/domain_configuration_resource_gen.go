@@ -321,6 +321,39 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TlsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "SecurityPolicy": {
+		//	      "maxLength": 128,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"tls_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: SecurityPolicy
+				"security_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(128),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: ValidationCertificateArn
 		// CloudFormation resource type schema:
 		//
@@ -371,6 +404,7 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		"domain_name":                      "DomainName",
 		"domain_type":                      "DomainType",
 		"key":                              "Key",
+		"security_policy":                  "SecurityPolicy",
 		"server_certificate_arn":           "ServerCertificateArn",
 		"server_certificate_arns":          "ServerCertificateArns",
 		"server_certificate_status":        "ServerCertificateStatus",
@@ -378,6 +412,7 @@ func domainConfigurationResource(ctx context.Context) (resource.Resource, error)
 		"server_certificates":              "ServerCertificates",
 		"service_type":                     "ServiceType",
 		"tags":                             "Tags",
+		"tls_config":                       "TlsConfig",
 		"validation_certificate_arn":       "ValidationCertificateArn",
 		"value":                            "Value",
 	})
