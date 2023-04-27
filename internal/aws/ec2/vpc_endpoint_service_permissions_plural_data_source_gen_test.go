@@ -13,8 +13,8 @@ import (
 	"github.com/hashicorp/terraform-provider-awscc/internal/acctest"
 )
 
-func TestAccAWSEC2VPCEndpointServicePermissionsDataSource_basic(t *testing.T) {
-	td := acctest.NewTestData(t, "AWS::EC2::VPCEndpointServicePermissions", "awscc_ec2_vpc_endpoint_service_permissions", "test")
+func TestAccAWSEC2VPCEndpointServicePermissionsPluralDataSource_basic(t *testing.T) {
+	td := acctest.NewTestData(t, "AWS::EC2::VPCEndpointServicePermissions", "awscc_ec2_vpc_endpoint_service_permissions_plural", "test")
 
 	td.DataSourceTest(t, []resource.TestStep{
 		{

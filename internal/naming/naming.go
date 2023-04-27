@@ -148,9 +148,10 @@ func isCapitalLetter(ch byte) bool {
 func isCustomName(name string) bool {
 	re1 := regexp.MustCompile(`((e|hd|n|z)fs|(E|HD|N|Z)FS)$`)
 	re2 := regexp.MustCompile(`tions$`)
-	re3 := regexp.MustCompile(`(W|w)indows$`)
+	re3 := regexp.MustCompile(`issions$`)
+	re4 := regexp.MustCompile(`(W|w)indows$`)
 
-	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name)
+	return re1.MatchString(name) || re2.MatchString(name) || re3.MatchString(name) || re4.MatchString(name)
 }
 
 func isLowercaseLetter(ch byte) bool {

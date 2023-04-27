@@ -16,12 +16,12 @@ import (
 )
 
 func init() {
-	registry.AddDataSourceFactory("awscc_ec2_vpc_endpoint_service_permissions", vPCEndpointServicePermissionsDataSource)
+	registry.AddDataSourceFactory("awscc_ec2_vpc_endpoint_service_permissions_plural", vPCEndpointServicePermissionsPluralDataSource)
 }
 
-// vPCEndpointServicePermissionsDataSource returns the Terraform awscc_ec2_vpc_endpoint_service_permissions data source.
+// vPCEndpointServicePermissionsPluralDataSource returns the Terraform awscc_ec2_vpc_endpoint_service_permissions_plural data source.
 // This Terraform data source corresponds to the CloudFormation AWS::EC2::VPCEndpointServicePermissions resource.
-func vPCEndpointServicePermissionsDataSource(ctx context.Context) (datasource.DataSource, error) {
+func vPCEndpointServicePermissionsPluralDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{
 		"id": schema.StringAttribute{
 			Description: "Uniquely identifies the data source.",
@@ -41,7 +41,7 @@ func vPCEndpointServicePermissionsDataSource(ctx context.Context) (datasource.Da
 
 	var opts generic.DataSourceOptions
 
-	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCEndpointServicePermissions").WithTerraformTypeName("awscc_ec2_vpc_endpoint_service_permissions")
+	opts = opts.WithCloudFormationTypeName("AWS::EC2::VPCEndpointServicePermissions").WithTerraformTypeName("awscc_ec2_vpc_endpoint_service_permissions_plural")
 	opts = opts.WithTerraformSchema(schema)
 
 	v, err := generic.NewPluralDataSource(ctx, opts...)
