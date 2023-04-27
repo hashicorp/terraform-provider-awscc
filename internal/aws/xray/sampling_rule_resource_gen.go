@@ -776,14 +776,17 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "properties": {
 		//	      "Key": {
+		//	        "description": "The key name of the tag.",
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
+		//	        "description": "The value for the tag.",
 		//	        "type": "string"
 		//	      }
 		//	    },
@@ -800,16 +803,19 @@ func samplingRuleResource(ctx context.Context) (resource.Resource, error) {
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
 					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The key name of the tag.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Description: "The value for the tag.",
+						Required:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Optional: true,
-			Computed: true,
+			Description: "An array of key-value pairs to apply to this resource.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),

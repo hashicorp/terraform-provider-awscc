@@ -133,6 +133,32 @@ func sceneResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: GeneratedSceneMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair of generated scene metadata for the scene.",
+		//	  "maxLength": 50,
+		//	  "minLength": 0,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"generated_scene_metadata": // Pattern: ""
+		schema.MapAttribute{        /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair of generated scene metadata for the scene.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SceneId
 		// CloudFormation resource type schema:
 		//
@@ -152,6 +178,33 @@ func sceneResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SceneMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair of scene metadata for the scene.",
+		//	  "maxLength": 50,
+		//	  "minLength": 0,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"scene_metadata":    // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair of scene metadata for the scene.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+				mapplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -237,15 +290,17 @@ func sceneResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"capabilities":       "Capabilities",
-		"content_location":   "ContentLocation",
-		"creation_date_time": "CreationDateTime",
-		"description":        "Description",
-		"scene_id":           "SceneId",
-		"tags":               "Tags",
-		"update_date_time":   "UpdateDateTime",
-		"workspace_id":       "WorkspaceId",
+		"arn":                      "Arn",
+		"capabilities":             "Capabilities",
+		"content_location":         "ContentLocation",
+		"creation_date_time":       "CreationDateTime",
+		"description":              "Description",
+		"generated_scene_metadata": "GeneratedSceneMetadata",
+		"scene_id":                 "SceneId",
+		"scene_metadata":           "SceneMetadata",
+		"tags":                     "Tags",
+		"update_date_time":         "UpdateDateTime",
+		"workspace_id":             "WorkspaceId",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
