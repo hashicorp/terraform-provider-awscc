@@ -26,7 +26,9 @@ Data Source schema for AWS::IoTTwinMaker::Scene
 - `content_location` (String) The relative path that specifies the location of the content definition file.
 - `creation_date_time` (String) The date and time when the scene was created.
 - `description` (String) The description of the scene.
+- `generated_scene_metadata` (Map of String) A key-value pair of generated scene metadata for the scene.
 - `scene_id` (String) The ID of the scene.
+- `scene_metadata` (Map of String) A key-value pair of scene metadata for the scene.
 - `tags` (Map of String) A key-value pair to associate with a resource.
 - `update_date_time` (String) The date and time of the current update.
 - `workspace_id` (String) The ID of the scene.

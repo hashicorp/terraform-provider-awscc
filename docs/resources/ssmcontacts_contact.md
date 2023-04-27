@@ -33,12 +33,10 @@ Resource Type definition for AWS::SSMContacts::Contact
 <a id="nestedatt--plan"></a>
 ### Nested Schema for `plan`
 
-Required:
-
-- `duration_in_minutes` (Number) The time to wait until beginning the next stage.
-
 Optional:
 
+- `duration_in_minutes` (Number) The time to wait until beginning the next stage.
+- `rotation_ids` (List of String) List of Rotation Ids to associate with Contact
 - `targets` (Attributes List) The contacts or contact methods that the escalation plan or engagement plan is engaging. (see [below for nested schema](#nestedatt--plan--targets))
 
 <a id="nestedatt--plan--targets"></a>

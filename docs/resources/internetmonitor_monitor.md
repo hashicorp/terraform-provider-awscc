@@ -28,6 +28,7 @@ Represents a monitor, which defines the monitoring boundaries for measurements t
 - `resources_to_remove` (List of String)
 - `status` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
+- `traffic_percentage_to_monitor` (Number)
 
 ### Read-Only
 

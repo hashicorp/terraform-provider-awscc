@@ -59,6 +59,8 @@ Data Source schema for AWS::MWAA::Environment
 - `requirements_s3_path` (String) Represents an S3 prefix relative to the root of an S3 bucket.
 - `schedulers` (Number) Scheduler compute units.
 - `source_bucket_arn` (String) ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.
+- `startup_script_s3_object_version` (String) Represents an version ID for an S3 object.
+- `startup_script_s3_path` (String) Represents an S3 prefix relative to the root of an S3 bucket.
 - `tags` (Map of String) A map of tags for the environment.
 - `webserver_access_mode` (String) Choice for mode of webserver access including over public internet or via private VPC endpoint.
 - `webserver_url` (String) Url endpoint for the environment's Airflow UI.
