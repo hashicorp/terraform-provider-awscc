@@ -78,6 +78,23 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: InsecureIngest
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Whether the channel allows insecure ingest.",
+		//	  "type": "boolean"
+		//	}
+		"insecure_ingest": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Whether the channel allows insecure ingest.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				generic.BoolDefaultValue(false),
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: LatencyMode
 		// CloudFormation resource type schema:
 		//
@@ -278,6 +295,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"arn":                         "Arn",
 		"authorized":                  "Authorized",
 		"ingest_endpoint":             "IngestEndpoint",
+		"insecure_ingest":             "InsecureIngest",
 		"key":                         "Key",
 		"latency_mode":                "LatencyMode",
 		"name":                        "Name",

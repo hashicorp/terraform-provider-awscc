@@ -549,6 +549,31 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "ARN for the AWS S3 bucket to use as the source of DAGs and plugins for the environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: StartupScriptS3ObjectVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Represents an version ID for an S3 object.",
+		//	  "maxLength": 1024,
+		//	  "type": "string"
+		//	}
+		"startup_script_s3_object_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an version ID for an S3 object.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: StartupScriptS3Path
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Represents an S3 prefix relative to the root of an S3 bucket.",
+		//	  "maxLength": 1024,
+		//	  "pattern": ".*",
+		//	  "type": "string"
+		//	}
+		"startup_script_s3_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Represents an S3 prefix relative to the root of an S3 bucket.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -620,38 +645,40 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::MWAA::Environment").WithTerraformTypeName("awscc_mwaa_environment")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"airflow_configuration_options":   "AirflowConfigurationOptions",
-		"airflow_version":                 "AirflowVersion",
-		"arn":                             "Arn",
-		"cloudwatch_log_group_arn":        "CloudWatchLogGroupArn",
-		"dag_processing_logs":             "DagProcessingLogs",
-		"dag_s3_path":                     "DagS3Path",
-		"enabled":                         "Enabled",
-		"environment_class":               "EnvironmentClass",
-		"execution_role_arn":              "ExecutionRoleArn",
-		"kms_key":                         "KmsKey",
-		"log_level":                       "LogLevel",
-		"logging_configuration":           "LoggingConfiguration",
-		"max_workers":                     "MaxWorkers",
-		"min_workers":                     "MinWorkers",
-		"name":                            "Name",
-		"network_configuration":           "NetworkConfiguration",
-		"plugins_s3_object_version":       "PluginsS3ObjectVersion",
-		"plugins_s3_path":                 "PluginsS3Path",
-		"requirements_s3_object_version":  "RequirementsS3ObjectVersion",
-		"requirements_s3_path":            "RequirementsS3Path",
-		"scheduler_logs":                  "SchedulerLogs",
-		"schedulers":                      "Schedulers",
-		"security_group_ids":              "SecurityGroupIds",
-		"source_bucket_arn":               "SourceBucketArn",
-		"subnet_ids":                      "SubnetIds",
-		"tags":                            "Tags",
-		"task_logs":                       "TaskLogs",
-		"webserver_access_mode":           "WebserverAccessMode",
-		"webserver_logs":                  "WebserverLogs",
-		"webserver_url":                   "WebserverUrl",
-		"weekly_maintenance_window_start": "WeeklyMaintenanceWindowStart",
-		"worker_logs":                     "WorkerLogs",
+		"airflow_configuration_options":    "AirflowConfigurationOptions",
+		"airflow_version":                  "AirflowVersion",
+		"arn":                              "Arn",
+		"cloudwatch_log_group_arn":         "CloudWatchLogGroupArn",
+		"dag_processing_logs":              "DagProcessingLogs",
+		"dag_s3_path":                      "DagS3Path",
+		"enabled":                          "Enabled",
+		"environment_class":                "EnvironmentClass",
+		"execution_role_arn":               "ExecutionRoleArn",
+		"kms_key":                          "KmsKey",
+		"log_level":                        "LogLevel",
+		"logging_configuration":            "LoggingConfiguration",
+		"max_workers":                      "MaxWorkers",
+		"min_workers":                      "MinWorkers",
+		"name":                             "Name",
+		"network_configuration":            "NetworkConfiguration",
+		"plugins_s3_object_version":        "PluginsS3ObjectVersion",
+		"plugins_s3_path":                  "PluginsS3Path",
+		"requirements_s3_object_version":   "RequirementsS3ObjectVersion",
+		"requirements_s3_path":             "RequirementsS3Path",
+		"scheduler_logs":                   "SchedulerLogs",
+		"schedulers":                       "Schedulers",
+		"security_group_ids":               "SecurityGroupIds",
+		"source_bucket_arn":                "SourceBucketArn",
+		"startup_script_s3_object_version": "StartupScriptS3ObjectVersion",
+		"startup_script_s3_path":           "StartupScriptS3Path",
+		"subnet_ids":                       "SubnetIds",
+		"tags":                             "Tags",
+		"task_logs":                        "TaskLogs",
+		"webserver_access_mode":            "WebserverAccessMode",
+		"webserver_logs":                   "WebserverLogs",
+		"webserver_url":                    "WebserverUrl",
+		"weekly_maintenance_window_start":  "WeeklyMaintenanceWindowStart",
+		"worker_logs":                      "WorkerLogs",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

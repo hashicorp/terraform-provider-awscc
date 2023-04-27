@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -70,10 +70,30 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A set amount of time that an escalation plan or engagement plan engages the specified contacts or contact methods.",
+		//	    "oneOf": [
+		//	      {
+		//	        "required": [
+		//	          "DurationInMinutes"
+		//	        ]
+		//	      },
+		//	      {
+		//	        "required": [
+		//	          "RotationIds"
+		//	        ]
+		//	      }
+		//	    ],
 		//	    "properties": {
 		//	      "DurationInMinutes": {
 		//	        "description": "The time to wait until beginning the next stage.",
 		//	        "type": "integer"
+		//	      },
+		//	      "RotationIds": {
+		//	        "description": "List of Rotation Ids to associate with Contact",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "type": "string"
+		//	        },
+		//	        "type": "array"
 		//	      },
 		//	      "Targets": {
 		//	        "description": "The contacts or contact methods that the escalation plan or engagement plan is engaging.",
@@ -137,9 +157,6 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	        "type": "array"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "DurationInMinutes"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array"
@@ -150,6 +167,12 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 					// Property: DurationInMinutes
 					"duration_in_minutes": schema.Int64Attribute{ /*START ATTRIBUTE*/
 						Description: "The time to wait until beginning the next stage.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: RotationIds
+					"rotation_ids": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "List of Rotation Ids to associate with Contact",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Targets
@@ -209,7 +232,8 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "PERSONAL",
 		//	    "CUSTOM",
 		//	    "SERVICE",
-		//	    "ESCALATION"
+		//	    "ESCALATION",
+		//	    "ONCALL_SCHEDULE"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -245,6 +269,7 @@ func contactDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"is_essential":              "IsEssential",
 		"plan":                      "Plan",
 		"retry_interval_in_minutes": "RetryIntervalInMinutes",
+		"rotation_ids":              "RotationIds",
 		"targets":                   "Targets",
 		"type":                      "Type",
 	})

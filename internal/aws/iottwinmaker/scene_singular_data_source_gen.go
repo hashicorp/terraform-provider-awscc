@@ -98,6 +98,29 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The description of the scene.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GeneratedSceneMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair of generated scene metadata for the scene.",
+		//	  "maxLength": 50,
+		//	  "minLength": 0,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"generated_scene_metadata": // Pattern: ""
+		schema.MapAttribute{        /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair of generated scene metadata for the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SceneId
 		// CloudFormation resource type schema:
 		//
@@ -110,6 +133,29 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"scene_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The ID of the scene.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SceneMetadata
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A key-value pair of scene metadata for the scene.",
+		//	  "maxLength": 50,
+		//	  "minLength": 0,
+		//	  "patternProperties": {
+		//	    "": {
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"scene_metadata":    // Pattern: ""
+		schema.MapAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "A key-value pair of scene metadata for the scene.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -176,15 +222,17 @@ func sceneDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::IoTTwinMaker::Scene").WithTerraformTypeName("awscc_iottwinmaker_scene")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                "Arn",
-		"capabilities":       "Capabilities",
-		"content_location":   "ContentLocation",
-		"creation_date_time": "CreationDateTime",
-		"description":        "Description",
-		"scene_id":           "SceneId",
-		"tags":               "Tags",
-		"update_date_time":   "UpdateDateTime",
-		"workspace_id":       "WorkspaceId",
+		"arn":                      "Arn",
+		"capabilities":             "Capabilities",
+		"content_location":         "ContentLocation",
+		"creation_date_time":       "CreationDateTime",
+		"description":              "Description",
+		"generated_scene_metadata": "GeneratedSceneMetadata",
+		"scene_id":                 "SceneId",
+		"scene_metadata":           "SceneMetadata",
+		"tags":                     "Tags",
+		"update_date_time":         "UpdateDateTime",
+		"workspace_id":             "WorkspaceId",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

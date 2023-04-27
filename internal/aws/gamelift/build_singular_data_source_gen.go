@@ -53,7 +53,8 @@ func buildDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "enum": [
 		//	    "AMAZON_LINUX",
 		//	    "AMAZON_LINUX_2",
-		//	    "WINDOWS_2012"
+		//	    "WINDOWS_2012",
+		//	    "WINDOWS_2016"
 		//	  ],
 		//	  "type": "string"
 		//	}

@@ -138,6 +138,11 @@
       "minimum": 1,
       "maximum": 500000
     },
+    "TrafficPercentageToMonitor": {
+      "type": "integer",
+      "minimum": 1,
+      "maximum": 100
+    },
     "InternetMeasurementsLogDelivery": {
       "$ref": "#/definitions/InternetMeasurementsLogDelivery"
     }

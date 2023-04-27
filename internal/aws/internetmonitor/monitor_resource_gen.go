@@ -384,6 +384,24 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: TrafficPercentageToMonitor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 100,
+		//	  "minimum": 1,
+		//	  "type": "integer"
+		//	}
+		"traffic_percentage_to_monitor": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Int64{ /*START VALIDATORS*/
+				int64validator.Between(1, 100),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -424,6 +442,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		"s3_config":                          "S3Config",
 		"status":                             "Status",
 		"tags":                               "Tags",
+		"traffic_percentage_to_monitor":      "TrafficPercentageToMonitor",
 		"value":                              "Value",
 	})
 

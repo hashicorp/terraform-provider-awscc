@@ -209,6 +209,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// FinalSnapshotName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
@@ -371,6 +372,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// SnapshotArns is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotName
 		// CloudFormation resource type schema:
@@ -387,6 +389,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// SnapshotName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SnapshotRetentionLimit
 		// CloudFormation resource type schema:
@@ -475,6 +478,7 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TLSEnabled
@@ -614,6 +618,11 @@ func clusterResource(ctx context.Context) (resource.Resource, error) {
 		"value":                      "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/SnapshotArns",
+		"/properties/SnapshotName",
+		"/properties/FinalSnapshotName",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

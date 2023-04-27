@@ -33,6 +33,7 @@ Data Source schema for AWS::SSMContacts::Contact
 Read-Only:
 
 - `duration_in_minutes` (Number) The time to wait until beginning the next stage.
+- `rotation_ids` (List of String) List of Rotation Ids to associate with Contact
 - `targets` (Attributes List) The contacts or contact methods that the escalation plan or engagement plan is engaging. (see [below for nested schema](#nestedatt--plan--targets))
 
 <a id="nestedatt--plan--targets"></a>

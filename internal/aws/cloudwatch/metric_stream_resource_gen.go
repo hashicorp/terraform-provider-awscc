@@ -73,6 +73,16 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "This structure defines the metrics that will be streamed.",
 		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 999,
+		//	        "type": "array"
+		//	      },
 		//	      "Namespace": {
 		//	        "description": "Only metrics with Namespace matching this value will be streamed.",
 		//	        "maxLength": 255,
@@ -92,6 +102,22 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		"exclude_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtMost(999),
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 255),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Only metrics with Namespace matching this value will be streamed.",
@@ -138,6 +164,16 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "This structure defines the metrics that will be streamed.",
 		//	    "properties": {
+		//	      "MetricNames": {
+		//	        "description": "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+		//	        "items": {
+		//	          "maxLength": 255,
+		//	          "minLength": 1,
+		//	          "type": "string"
+		//	        },
+		//	        "maxItems": 999,
+		//	        "type": "array"
+		//	      },
 		//	      "Namespace": {
 		//	        "description": "Only metrics with Namespace matching this value will be streamed.",
 		//	        "maxLength": 255,
@@ -157,6 +193,22 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		"include_filters": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: MetricNames
+					"metric_names": schema.ListAttribute{ /*START ATTRIBUTE*/
+						ElementType: types.StringType,
+						Description: "Only metrics with MetricNames matching these values will be streamed. Must be set together with Namespace.",
+						Optional:    true,
+						Computed:    true,
+						Validators: []validator.List{ /*START VALIDATORS*/
+							listvalidator.SizeAtMost(999),
+							listvalidator.ValueStringsAre(
+								stringvalidator.LengthBetween(1, 255),
+							),
+						}, /*END VALIDATORS*/
+						PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+							listplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: Namespace
 					"namespace": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Description: "Only metrics with Namespace matching this value will be streamed.",
@@ -494,6 +546,7 @@ func metricStreamResource(ctx context.Context) (resource.Resource, error) {
 		"key":                             "Key",
 		"last_update_date":                "LastUpdateDate",
 		"metric_name":                     "MetricName",
+		"metric_names":                    "MetricNames",
 		"name":                            "Name",
 		"namespace":                       "Namespace",
 		"output_format":                   "OutputFormat",
