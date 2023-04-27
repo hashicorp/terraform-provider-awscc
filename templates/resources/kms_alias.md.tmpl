@@ -1,0 +1,28 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### KMS Alias
+To use `awscc_kms_alias` with `awscc_kms_key`:
+
+{{ tffile (printf "examples/resources/%s/kms_alias.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
