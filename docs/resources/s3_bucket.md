@@ -13,9 +13,6 @@ Resource Type definition for AWS::S3::Bucket
 ### Create a s3 bucket 
 To create a s3 bucket
 ```terraform
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 resource "awscc_s3_bucket" "example" {
   bucket_name = "example-bucket"
 
@@ -29,9 +26,6 @@ resource "awscc_s3_bucket" "example" {
 ### Create a s3 bucket with public access restricted 
 To create a s3 bucket with public access restricted
 ```terraform
-# Copyright (c) HashiCorp, Inc.
-# SPDX-License-Identifier: MPL-2.0
-
 resource "awscc_s3_bucket" "example" {
   bucket_name = "example-bucket"
 
