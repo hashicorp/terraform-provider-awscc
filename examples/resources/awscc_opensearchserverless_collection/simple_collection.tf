@@ -12,12 +12,14 @@ resource "awscc_opensearchserverless_security_policy" "security_policy" {
     description = "created via awscc"
     type = "encryption"
   policy = jsonencode({
-    Rules = [
+    "Rules" = [
       {
-        ResourceType = "collection",
-        Resource     = "collection/awscc-collection"
+        "ResourceType" = "collection",
+        "Resource" = [
+          "collection/awscc-collection"
+        ]
       }
     ],
-    AWSOwnedKey = true
+    "AWSOwnedKey" = true
   })
 }
