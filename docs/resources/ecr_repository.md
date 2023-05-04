@@ -16,7 +16,7 @@ To create ECR Repository with scan on push:
 
 ```terraform
 resource "awscc_ecr_repository" "this" {
-  repository_name      = "example-ecr-repositry"
+  repository_name      = "example-ecr-repository"
   image_tag_mutability = "MUTABLE"
   image_scanning_configuration = {
     scan_on_push = true
@@ -31,7 +31,7 @@ The following example shows the lifecycle policy syntax for a policy that expire
 
 ```terraform
 resource "awscc_ecr_repository" "lifecycle_policy_example" {
-  repository_name      = "example-ecr-repositry-lifecycle"
+  repository_name      = "example-ecr-repository-lifecycle"
   image_tag_mutability = "MUTABLE"
 
   lifecycle_policy = {
@@ -64,7 +64,7 @@ The following repository policy denies all users in all accounts the ability to 
 
 ```terraform
 resource "awscc_ecr_repository" "repo_policy_example" {
-  repository_name      = "example-ecr-repositry-repo"
+  repository_name      = "example-ecr-repository-repo"
   image_tag_mutability = "MUTABLE"
 
   repository_policy_text = jsonencode(
