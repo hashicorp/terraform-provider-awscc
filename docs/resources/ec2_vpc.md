@@ -11,7 +11,7 @@ Resource Type definition for AWS::EC2::VPC
 
 ## Example Usage
 
-### Basic Usage
+### Basic usage
 To create a VPC
 ```terraform
 resource "awscc_ec2_vpc" "main" {
@@ -19,7 +19,7 @@ resource "awscc_ec2_vpc" "main" {
 }
 ```
 
-### Basic Usage with tags
+### Basic usage with tags
 To create a VPC with tags
 ```terraform
 resource "awscc_ec2_vpc" "main" {
@@ -32,7 +32,7 @@ resource "awscc_ec2_vpc" "main" {
 }
 ```
 
-### Advanced Usage 
+### Advanced usage 
 To create a VPC with CIDR from AWS IPAM
 ```terraform
 resource "awscc_ec2_ipam" "main" {
