@@ -37,13 +37,13 @@ To create a VPC with CIDR from AWS IPAM
 ```terraform
 resource "awscc_ec2_ipam" "main" {
   operating_regions = [{
-    region_name = "us-east-1",
+    region_name = "us-east-1"
   }]
 }
 
 resource "awscc_ec2_ipam_pool" "main" {
   address_family = "ipv4"
-  ipam_scope_id  = awscc_ec2_ipam.main.private_default_scope_id
+  ipam_scope_id  = awscc_ec2_ipam.main.private_default_scope_id 
   locale         = "us-east-1"
 }
 
