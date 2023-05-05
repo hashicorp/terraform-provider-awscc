@@ -11,12 +11,12 @@ The AWS::ECR::Repository resource specifies an Amazon Elastic Container Registry
 
 ## Example Usage
 
-### ECR Repository
+### ECR Repository with scan on push
 To create ECR Repository with scan on push:
 
 ```terraform
 resource "awscc_ecr_repository" "this" {
-  repository_name      = "example-ecr-repository"
+  repository_name      = "example-ecr"
   image_tag_mutability = "MUTABLE"
   image_scanning_configuration = {
     scan_on_push = true
@@ -25,13 +25,12 @@ resource "awscc_ecr_repository" "this" {
 }
 ```
 
-### ECR Repository
-To create ECR Repository with lifecycle policy:
-The following example shows the lifecycle policy syntax for a policy that expires untagged images older than 14 days:
+### ECR Repository with lifecycle policy
+To create ECR Repository with lifecycle policy that expires untagged images older than 14 days:
 
 ```terraform
 resource "awscc_ecr_repository" "lifecycle_policy_example" {
-  repository_name      = "example-ecr-repository-lifecycle"
+  repository_name      = "example-ecr-lifecycle-policy"
   image_tag_mutability = "MUTABLE"
 
   lifecycle_policy = {
@@ -58,13 +57,12 @@ resource "awscc_ecr_repository" "lifecycle_policy_example" {
 }
 ```
 
-### ECR Repository
-To create ECR Repository with repository policy:
-The following repository policy denies all users in all accounts the ability to pull images:
+### ECR Repository with repository policy
+To create ECR Repository with repository policy that allows AWS CodeBuild access to the Amazon ECR API actions:
 
 ```terraform
 resource "awscc_ecr_repository" "repo_policy_example" {
-  repository_name      = "example-ecr-repository-repo"
+  repository_name      = "example-ecr-repository-policy"
   image_tag_mutability = "MUTABLE"
 
   repository_policy_text = jsonencode(
@@ -72,13 +70,23 @@ resource "awscc_ecr_repository" "repo_policy_example" {
       "Version" : "2012-10-17",
       "Statement" : [
         {
-          "Sid" : "DenyPull",
-          "Effect" : "Deny",
-          "Principal" : "*",
+          "Sid" : "CodeBuildAccess",
+          "Effect" : "Allow",
+          "Principal" : {
+            "Service" : "codebuild.amazonaws.com"
+          },
           "Action" : [
             "ecr:BatchGetImage",
             "ecr:GetDownloadUrlForLayer"
-          ]
+          ],
+          "Condition" : {
+            "ArnLike" : {
+              "aws:SourceArn" : "arn:aws:codebuild:region:123456789012:project/project-name"
+            },
+            "StringEquals" : {
+              "aws:SourceAccount" : "123456789012"
+            }
+          }
         }
       ]
     }

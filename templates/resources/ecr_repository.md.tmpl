@@ -11,20 +11,18 @@ description: |-
 
 ## Example Usage
 
-### ECR Repository
+### ECR Repository with scan on push
 To create ECR Repository with scan on push:
 
 {{ tffile (printf "examples/resources/%s/ecr_repository.tf" .Name)}}
 
-### ECR Repository
-To create ECR Repository with lifecycle policy:
-The following example shows the lifecycle policy syntax for a policy that expires untagged images older than 14 days:
+### ECR Repository with lifecycle policy
+To create ECR Repository with lifecycle policy that expires untagged images older than 14 days:
 
 {{ tffile (printf "examples/resources/%s/ecr_repository_lifecycle_policy.tf" .Name)}}
 
-### ECR Repository
-To create ECR Repository with repository policy:
-The following repository policy denies all users in all accounts the ability to pull images:
+### ECR Repository with repository policy
+To create ECR Repository with repository policy that allows AWS CodeBuild access to the Amazon ECR API actions:
 
 {{ tffile (printf "examples/resources/%s/ecr_repository_repository_policy.tf" .Name)}}
 

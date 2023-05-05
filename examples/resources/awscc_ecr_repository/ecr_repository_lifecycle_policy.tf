@@ -1,5 +1,5 @@
 resource "awscc_ecr_repository" "lifecycle_policy_example" {
-  repository_name      = "example-ecr-repository-lifecycle"
+  repository_name      = "example-ecr-lifecycle-policy"
   image_tag_mutability = "MUTABLE"
 
   lifecycle_policy = {
