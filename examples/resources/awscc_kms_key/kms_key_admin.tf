@@ -1,4 +1,4 @@
-resource "awscc_kms_key" "this2" {
+resource "awscc_kms_key" "this" {
   description = "KMS Key for administrators"
   key_policy = jsonencode({
     "Version" : "2012-10-17",

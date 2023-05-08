@@ -1,4 +1,4 @@
-resource "awscc_kms_key" "this3" {
+resource "awscc_kms_key" "this" {
   description = "KMS Key for users"
   key_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -17,7 +17,7 @@ resource "awscc_kms_key" "this3" {
         "Sid" : "Allow use of the key",
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : "arn:aws:iam::111122223333:user/ExampleUserRole"
+          "AWS" : "arn:aws:iam::111122223333:role/ExampleUserRole"
         },
         "Action" : [
           "kms:Encrypt",

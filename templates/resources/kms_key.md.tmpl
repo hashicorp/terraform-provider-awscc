@@ -11,19 +11,21 @@ description: |-
 
 ## Example Usage
 
-### To create a Simple KMS Key
+### Basic Usage
+To create a simple KMS key
 {{ tffile (printf "examples/resources/%s/kms_key.tf" .Name)}}
 
-### To create a KMS Key with tags
+To create a KMS key with tags
 {{ tffile (printf "examples/resources/%s/kms_key_tags.tf" .Name)}}
 
-### To create a KMS Key for Admin
+### Advanced Usage
+To create a KMS key for administrators role
 {{ tffile (printf "examples/resources/%s/kms_key_admin.tf" .Name)}}
 
-### To create a KMS key for Users
+To create a KMS key for users role
 {{ tffile (printf "examples/resources/%s/kms_key_user.tf" .Name)}}
 
-### To create a KMS Key for Users with grants
+To create a KMS key for users role with grants
 {{ tffile (printf "examples/resources/%s/kms_key_user_grants.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}

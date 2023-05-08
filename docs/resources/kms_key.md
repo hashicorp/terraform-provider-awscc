@@ -11,7 +11,8 @@ The AWS::KMS::Key resource specifies an AWS KMS key in AWS Key Management Servic
 
 ## Example Usage
 
-### To create a Simple KMS Key
+### Basic Usage
+To create a simple KMS key
 ```terraform
 resource "awscc_kms_key" "this" {
   description = "KMS Key for root"
@@ -34,9 +35,9 @@ resource "awscc_kms_key" "this" {
 }
 ```
 
-### To create a KMS Key with tags
+To create a KMS key with tags
 ```terraform
-resource "awscc_kms_key" "this1" {
+resource "awscc_kms_key" "this" {
   description            = "KMS Key for root"
   enabled                = "true"
   enable_key_rotation    = "false"
@@ -64,9 +65,10 @@ resource "awscc_kms_key" "this1" {
 }
 ```
 
-### To create a KMS Key for Admin
+### Advanced Usage
+To create a KMS key for administrators role
 ```terraform
-resource "awscc_kms_key" "this2" {
+resource "awscc_kms_key" "this" {
   description = "KMS Key for administrators"
   key_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -102,9 +104,9 @@ resource "awscc_kms_key" "this2" {
 }
 ```
 
-### To create a KMS key for Users
+To create a KMS key for users role
 ```terraform
-resource "awscc_kms_key" "this3" {
+resource "awscc_kms_key" "this" {
   description = "KMS Key for users"
   key_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -123,7 +125,7 @@ resource "awscc_kms_key" "this3" {
         "Sid" : "Allow use of the key",
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : "arn:aws:iam::111122223333:user/ExampleUserRole"
+          "AWS" : "arn:aws:iam::111122223333:role/ExampleUserRole"
         },
         "Action" : [
           "kms:Encrypt",
@@ -140,9 +142,9 @@ resource "awscc_kms_key" "this3" {
 }
 ```
 
-### To create a KMS Key for Users with grants
+To create a KMS key for users role with grants
 ```terraform
-resource "awscc_kms_key" "this4" {
+resource "awscc_kms_key" "this" {
   description = "KMS Key for users"
   key_policy = jsonencode({
     "Version" : "2012-10-17",
@@ -161,7 +163,7 @@ resource "awscc_kms_key" "this4" {
         "Sid" : "Allow attachment of persistent resources",
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : "arn:aws:iam::111122223333:user/ExampleUserRole"
+          "AWS" : "arn:aws:iam::111122223333:role/ExampleUserRole"
         },
         "Action" : [
           "kms:CreateGrant",

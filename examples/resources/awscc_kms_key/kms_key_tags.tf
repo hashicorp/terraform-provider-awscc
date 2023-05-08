@@ -1,4 +1,4 @@
-resource "awscc_kms_key" "this1" {
+resource "awscc_kms_key" "this" {
   description            = "KMS Key for root"
   enabled                = "true"
   enable_key_rotation    = "false"
