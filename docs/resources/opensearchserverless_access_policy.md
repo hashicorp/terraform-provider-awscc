@@ -15,7 +15,9 @@ Amazon OpenSearchServerless access policy resource
 The following example specifies an OpenSearch Serverless access policy that provides full access to the resources within my-collection to the user test-user.
 ```terraform
 resource "awscc_opensearchserverless_access_policy" "os" {
-  name = "test-os-security-policy"
+  name        = "test-os-security-policy"
+  type        = "data"
+  description = "Access for test-user"
   policy = jsonencode([{
     "Description" = "Access for test-user",
     "Rules" = [
@@ -27,7 +29,8 @@ resource "awscc_opensearchserverless_access_policy" "os" {
         "Permission" = [
           "aoss:*"
         ]
-        }, {
+      },
+      {
         "ResourceType" = "collection",
         "Resource" = [
           "collection/my-collection"
@@ -40,8 +43,6 @@ resource "awscc_opensearchserverless_access_policy" "os" {
       "arn:aws:iam::111122223333:user/test-user"
     ]
   }])
-  type        = "data"
-  description = "Access for test-user"
 }
 ```
 
