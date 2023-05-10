@@ -12,7 +12,7 @@ Amazon OpenSearchServerless security config resource
 ## Example Usage
 
 ### Create a security configuration that specifies a SAML provider
-The following example specifies an OpenSearch Serverless SAML provider named my-provider with a custom group attribute ALLGroups.
+The following example specifies an OpenSearch Serverless SAML provider with a custom group attribute ALLGroups.
 ```terraform
 resource "awscc_opensearchserverless_security_config" "config" {
   name        = "awscc-security-config"
