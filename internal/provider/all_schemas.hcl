@@ -233,6 +233,11 @@ resource_schema "aws_appflow_flow" {
 
 resource_schema "aws_appintegrations_data_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::DataIntegration"
+
+  # ObjectConfiguration is of unsupported type: key-value map of key-value map.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appintegrations_event_integration" {
@@ -645,7 +650,11 @@ resource_schema "aws_connect_contact_flow_module" {
 
 resource_schema "aws_connect_evaluation_form" {
   cloudformation_type_name               = "AWS::Connect::EvaluationForm"
-  suppress_plural_data_source_generation = true
+
+  # Infinite recursion.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_connect_hours_of_operation" {
@@ -1602,6 +1611,11 @@ resource_schema "aws_iot_authorizer" {
 
 resource_schema "aws_iot_billing_group" {
   cloudformation_type_name = "AWS::IoT::BillingGroup"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_ca_certificate" {
@@ -1675,11 +1689,20 @@ resource_schema "aws_iot_thing" {
 
 resource_schema "aws_iot_thing_group" {
   cloudformation_type_name = "AWS::IoT::ThingGroup"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_thing_type" {
   cloudformation_type_name               = "AWS::IoT::ThingType"
-  suppress_plural_data_source_generation = true
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_iot_topic_rule" {
@@ -2499,6 +2522,11 @@ resource_schema "aws_pipes_pipe" {
 
 resource_schema "aws_proton_environment_account_connection" {
   cloudformation_type_name = "AWS::Proton::EnvironmentAccountConnection"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_proton_environment_template" {
