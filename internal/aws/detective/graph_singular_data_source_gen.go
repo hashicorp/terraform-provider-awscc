@@ -34,6 +34,18 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Detective graph ARN",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: AutoEnableMembers
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.",
+		//	  "type": "boolean"
+		//	}
+		"auto_enable_members": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -93,10 +105,11 @@ func graphDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Detective::Graph").WithTerraformTypeName("awscc_detective_graph")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":   "Arn",
-		"key":   "Key",
-		"tags":  "Tags",
-		"value": "Value",
+		"arn":                 "Arn",
+		"auto_enable_members": "AutoEnableMembers",
+		"key":                 "Key",
+		"tags":                "Tags",
+		"value":               "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

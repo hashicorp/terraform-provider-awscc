@@ -78,7 +78,7 @@ func featureDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 2500,
 		//	  "minItems": 0,
 		//	  "type": "array",
 		//	  "uniqueItems": true

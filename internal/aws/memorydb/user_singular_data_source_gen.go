@@ -66,7 +66,8 @@ func userDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "Type": {
 		//	      "description": "Type of authentication strategy for this user.",
 		//	      "enum": [
-		//	        "password"
+		//	        "password",
+		//	        "iam"
 		//	      ],
 		//	      "type": "string"
 		//	    }

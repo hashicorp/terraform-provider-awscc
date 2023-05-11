@@ -62,6 +62,17 @@ func buildDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build. If your game build contains multiple executables, they all must run on the same operating system. If an operating system is not specified when creating a build, Amazon GameLift uses the default value (WINDOWS_2012). This value cannot be changed later.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ServerSdkVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A server SDK version you used when integrating your game server build with Amazon GameLift. By default Amazon GameLift sets this value to 4.0.2.",
+		//	  "type": "string"
+		//	}
+		"server_sdk_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A server SDK version you used when integrating your game server build with Amazon GameLift. By default Amazon GameLift sets this value to 4.0.2.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: StorageLocation
 		// CloudFormation resource type schema:
 		//
@@ -148,15 +159,16 @@ func buildDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::GameLift::Build").WithTerraformTypeName("awscc_gamelift_build")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bucket":           "Bucket",
-		"build_id":         "BuildId",
-		"key":              "Key",
-		"name":             "Name",
-		"object_version":   "ObjectVersion",
-		"operating_system": "OperatingSystem",
-		"role_arn":         "RoleArn",
-		"storage_location": "StorageLocation",
-		"version":          "Version",
+		"bucket":             "Bucket",
+		"build_id":           "BuildId",
+		"key":                "Key",
+		"name":               "Name",
+		"object_version":     "ObjectVersion",
+		"operating_system":   "OperatingSystem",
+		"role_arn":           "RoleArn",
+		"server_sdk_version": "ServerSdkVersion",
+		"storage_location":   "StorageLocation",
+		"version":            "Version",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
