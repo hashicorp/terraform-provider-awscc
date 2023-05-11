@@ -24,6 +24,7 @@ Resource Type definition for AWS::Lightsail::Disk
 
 - `add_ons` (Attributes List) An array of objects representing the add-ons to enable for the new instance. (see [below for nested schema](#nestedatt--add_ons))
 - `availability_zone` (String) The Availability Zone in which to create your instance. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
+- `location` (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -34,7 +35,6 @@ Resource Type definition for AWS::Lightsail::Disk
 - `id` (String) Uniquely identifies the resource.
 - `iops` (Number) Iops of the Lightsail disk
 - `is_attached` (Boolean) Check is Disk is attached state
-- `location` (Attributes) Location of a resource. (see [below for nested schema](#nestedatt--location))
 - `path` (String) Path of the  attached Disk
 - `resource_type` (String) Resource type of Lightsail instance.
 - `state` (String) State of the Lightsail disk
@@ -61,6 +61,15 @@ Optional:
 
 
 
+<a id="nestedatt--location"></a>
+### Nested Schema for `location`
+
+Read-Only:
+
+- `availability_zone` (String) The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
+- `region_name` (String) The Region Name in which to create your disk.
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -71,15 +80,6 @@ Required:
 Optional:
 
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-
-<a id="nestedatt--location"></a>
-### Nested Schema for `location`
-
-Read-Only:
-
-- `availability_zone` (String) The Availability Zone in which to create your disk. Use the following format: us-east-2a (case sensitive). Be sure to add the include Availability Zones parameter to your request.
-- `region_name` (String) The Region Name in which to create your disk.
 
 ## Import
 

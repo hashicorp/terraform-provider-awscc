@@ -1,0 +1,1 @@
+$ terraform import awscc_proton_environment_template.example <resource ID>

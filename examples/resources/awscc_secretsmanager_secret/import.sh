@@ -1,0 +1,1 @@
+$ terraform import awscc_secretsmanager_secret.example <resource ID>

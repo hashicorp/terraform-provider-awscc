@@ -22,6 +22,7 @@ Data Source schema for AWS::Detective::Graph
 ### Read-Only
 
 - `arn` (String) The Detective graph ARN
+- `auto_enable_members` (Boolean) Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--tags"></a>

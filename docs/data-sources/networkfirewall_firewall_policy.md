@@ -33,6 +33,7 @@ Data Source schema for AWS::NetworkFirewall::FirewallPolicy
 
 Read-Only:
 
+- `policy_variables` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables))
 - `stateful_default_actions` (List of String)
 - `stateful_engine_options` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
 - `stateful_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
@@ -40,6 +41,22 @@ Read-Only:
 - `stateless_default_actions` (List of String)
 - `stateless_fragment_default_actions` (List of String)
 - `stateless_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
+
+<a id="nestedatt--firewall_policy--policy_variables"></a>
+### Nested Schema for `firewall_policy.policy_variables`
+
+Read-Only:
+
+- `rule_variables` (Attributes Map) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables--rule_variables))
+
+<a id="nestedatt--firewall_policy--policy_variables--rule_variables"></a>
+### Nested Schema for `firewall_policy.policy_variables.rule_variables`
+
+Read-Only:
+
+- `definition` (List of String)
+
+
 
 <a id="nestedatt--firewall_policy--stateful_engine_options"></a>
 ### Nested Schema for `firewall_policy.stateful_engine_options`
