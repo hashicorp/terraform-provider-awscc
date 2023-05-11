@@ -1,0 +1,38 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### ECR Repository with scan on push
+To create ECR Repository with scan on push:
+
+{{ tffile (printf "examples/resources/%s/ecr_repository.tf" .Name)}}
+
+### ECR Repository with lifecycle policy
+To create ECR Repository with lifecycle policy that expires untagged images older than 14 days:
+
+{{ tffile (printf "examples/resources/%s/ecr_repository_lifecycle_policy.tf" .Name)}}
+
+### ECR Repository with repository policy
+To create ECR Repository with repository policy that allows AWS CodeBuild access to the Amazon ECR API actions:
+
+{{ tffile (printf "examples/resources/%s/ecr_repository_repository_policy.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
