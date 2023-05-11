@@ -187,7 +187,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -318,7 +321,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -360,6 +366,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	      "uniqueItems": false
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "ExecutionRole"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"default_space_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -367,15 +376,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The execution role for the space.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(20, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: JupyterServerAppSettings
 				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -447,6 +452,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -624,6 +632,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -791,7 +802,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -922,7 +936,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1052,7 +1069,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -1144,6 +1164,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "ExecutionRole"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"default_user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1151,15 +1174,11 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ExecutionRole
 				"execution_role": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The execution role for the user.",
-					Optional:    true,
-					Computed:    true,
+					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(20, 2048),
 						stringvalidator.RegexMatches(regexp.MustCompile("^arn:aws[a-z\\-]*:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"), ""),
 					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: JupyterServerAppSettings
 				"jupyter_server_app_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1231,6 +1250,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1408,6 +1430,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1586,6 +1611,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -1886,7 +1914,10 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -2022,6 +2053,9 @@ func domainResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

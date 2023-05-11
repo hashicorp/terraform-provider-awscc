@@ -8,11 +8,13 @@ package networkfirewall
 import (
 	"context"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -58,6 +60,34 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "PolicyVariables": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RuleVariables": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Definition": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "StatefulDefaultActions": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -79,7 +109,8 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	        "StreamExceptionPolicy": {
 		//	          "enum": [
 		//	            "DROP",
-		//	            "CONTINUE"
+		//	            "CONTINUE",
+		//	            "REJECT"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -232,6 +263,44 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PolicyVariables
+				"policy_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RuleVariables
+						"rule_variables":          // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Optional:    true,
+										Computed:    true,
+										Validators: []validator.List{ /*START VALIDATORS*/
+											listvalidator.ValueStringsAre(
+												stringvalidator.LengthAtLeast(1),
+												stringvalidator.RegexMatches(regexp.MustCompile("^.*$"), ""),
+											),
+										}, /*END VALIDATORS*/
+										PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+											listplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
+								mapplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: StatefulDefaultActions
 				"stateful_default_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -266,6 +335,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 								stringvalidator.OneOf(
 									"DROP",
 									"CONTINUE",
+									"REJECT",
 								),
 							}, /*END VALIDATORS*/
 							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -560,6 +630,7 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",
 		"action_name":                        "ActionName",
+		"definition":                         "Definition",
 		"description":                        "Description",
 		"dimensions":                         "Dimensions",
 		"firewall_policy":                    "FirewallPolicy",
@@ -568,10 +639,12 @@ func firewallPolicyResource(ctx context.Context) (resource.Resource, error) {
 		"firewall_policy_name":               "FirewallPolicyName",
 		"key":                                "Key",
 		"override":                           "Override",
+		"policy_variables":                   "PolicyVariables",
 		"priority":                           "Priority",
 		"publish_metric_action":              "PublishMetricAction",
 		"resource_arn":                       "ResourceArn",
 		"rule_order":                         "RuleOrder",
+		"rule_variables":                     "RuleVariables",
 		"stateful_default_actions":           "StatefulDefaultActions",
 		"stateful_engine_options":            "StatefulEngineOptions",
 		"stateful_rule_group_references":     "StatefulRuleGroupReferences",

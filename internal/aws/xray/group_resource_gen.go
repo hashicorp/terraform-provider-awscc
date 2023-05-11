@@ -72,14 +72,10 @@ func groupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The case-sensitive name of the new group. Names must be unique.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 32),
 			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InsightsConfiguration
 		// CloudFormation resource type schema:

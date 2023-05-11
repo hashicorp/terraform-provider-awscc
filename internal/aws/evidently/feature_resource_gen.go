@@ -105,7 +105,7 @@ func featureResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "type": "object"
 		//	  },
-		//	  "maxItems": 20,
+		//	  "maxItems": 2500,
 		//	  "minItems": 0,
 		//	  "type": "array",
 		//	  "uniqueItems": true
@@ -138,7 +138,7 @@ func featureResource(ctx context.Context) (resource.Resource, error) {
 			Optional: true,
 			Computed: true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
-				setvalidator.SizeBetween(0, 20),
+				setvalidator.SizeBetween(0, 2500),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),

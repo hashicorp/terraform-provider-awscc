@@ -47,6 +47,10 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "Status",
+		//	    "Value"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"alias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

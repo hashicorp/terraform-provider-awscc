@@ -44,6 +44,9 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 				stringvalidator.LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ApplicationArn
 		// CloudFormation resource type schema:
@@ -75,6 +78,9 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 				stringvalidator.LengthBetween(1, 256),
 				stringvalidator.RegexMatches(regexp.MustCompile("\\w+|[a-z0-9]{12}"), ""),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: AttributeGroupArn
 		// CloudFormation resource type schema:
@@ -122,9 +128,9 @@ func attributeGroupAssociationResource(ctx context.Context) (resource.Resource, 
 		"id":                  "Id",
 	})
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.IsImmutableType(true)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)
 
