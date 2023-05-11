@@ -28,7 +28,8 @@
           "type": "string",
           "enum": [
             "speke",
-            "static-key"
+            "static-key",
+            "srt-password"
           ],
           "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
           "default": "static-key"
@@ -56,7 +57,6 @@
       },
       "additionalProperties": false,
       "required": [
-        "Algorithm",
         "RoleArn"
       ]
     }
@@ -99,6 +99,11 @@
       "description": "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
       "default": 2000
     },
+    "MinLatency": {
+      "type": "integer",
+      "description": "The minimum latency in milliseconds.",
+      "default": 2000
+    },
     "Name": {
       "type": "string",
       "description": "The name of the source."
@@ -109,9 +114,19 @@
         "zixi-push",
         "rtp-fec",
         "rtp",
-        "rist"
+        "rist",
+        "srt-listener",
+        "srt-caller"
       ],
       "description": "The protocol that is used by the source."
+    },
+    "SenderIpAddress": {
+      "type": "string",
+      "description": "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol."
+    },
+    "SenderControlPort": {
+      "type": "integer",
+      "description": "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol."
     },
     "StreamId": {
       "type": "string",
@@ -120,6 +135,14 @@
     "SourceIngestPort": {
       "type": "string",
       "description": "The port that the flow will be listening on for incoming content.(ReadOnly)"
+    },
+    "SourceListenerAddress": {
+      "type": "string",
+      "description": "Source IP or domain name for SRT-caller protocol."
+    },
+    "SourceListenerPort": {
+      "type": "integer",
+      "description": "Source port for SRT-caller protocol."
     },
     "VpcInterfaceName": {
       "type": "string",

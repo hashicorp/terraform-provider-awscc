@@ -50,7 +50,8 @@
           "type": "string",
           "description": "Type of authentication strategy for this user.",
           "enum": [
-            "password"
+            "password",
+            "iam"
           ]
         },
         "Passwords": {

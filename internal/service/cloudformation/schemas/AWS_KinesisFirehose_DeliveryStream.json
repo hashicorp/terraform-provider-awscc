@@ -231,6 +231,22 @@
         "SecurityGroupIds"
       ]
     },
+    "DocumentIdOptions": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "DefaultDocumentIdFormat": {
+          "type": "string",
+          "enum": [
+            "FIREHOSE_DEFAULT",
+            "NO_DOCUMENT_ID"
+          ]
+        }
+      },
+      "required": [
+        "DefaultDocumentIdFormat"
+      ]
+    },
     "ExtendedS3DestinationConfiguration": {
       "type": "object",
       "additionalProperties": false,
@@ -478,6 +494,9 @@
         },
         "VpcConfiguration": {
           "$ref": "#/definitions/VpcConfiguration"
+        },
+        "DocumentIdOptions": {
+          "$ref": "#/definitions/DocumentIdOptions"
         }
       },
       "required": [
@@ -552,6 +571,9 @@
         },
         "VpcConfiguration": {
           "$ref": "#/definitions/VpcConfiguration"
+        },
+        "DocumentIdOptions": {
+          "$ref": "#/definitions/DocumentIdOptions"
         }
       },
       "required": [

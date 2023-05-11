@@ -58,6 +58,10 @@
     "Version": {
       "description": "Version information that is associated with this build. Version strings do not need to be unique.",
       "type": "string"
+    },
+    "ServerSdkVersion": {
+      "description": "A server SDK version you used when integrating your game server build with Amazon GameLift. By default Amazon GameLift sets this value to 4.0.2.",
+      "type": "string"
     }
   },
   "additionalProperties": false,
@@ -70,10 +74,12 @@
   "required": [],
   "createOnlyProperties": [
     "/properties/StorageLocation",
-    "/properties/OperatingSystem"
+    "/properties/OperatingSystem",
+    "/properties/ServerSdkVersion"
   ],
   "writeOnlyProperties": [
-    "/properties/StorageLocation"
+    "/properties/StorageLocation",
+    "/properties/ServerSdkVersion"
   ],
   "readOnlyProperties": [
     "/properties/BuildId"

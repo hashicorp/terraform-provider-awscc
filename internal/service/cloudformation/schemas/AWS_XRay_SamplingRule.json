@@ -267,10 +267,14 @@
   "primaryIdentifier": [
     "/properties/RuleARN"
   ],
+  "createOnlyProperties": [
+    "/properties/SamplingRule/Version"
+  ],
   "readOnlyProperties": [
     "/properties/RuleARN"
   ],
   "deprecatedProperties": [
+    "/properties/RuleName",
     "/properties/SamplingRuleRecord",
     "/properties/SamplingRuleUpdate"
   ]
