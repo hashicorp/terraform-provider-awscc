@@ -33,6 +33,11 @@
       "items": {
         "$ref": "#/definitions/Tag"
       }
+    },
+    "AutoEnableMembers": {
+      "type": "boolean",
+      "default": false,
+      "description": "Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph."
     }
   },
   "additionalProperties": false,

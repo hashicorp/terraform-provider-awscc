@@ -52,7 +52,8 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 		//	      "enum": [
 		//	        "speke",
-		//	        "static-key"
+		//	        "static-key",
+		//	        "srt-password"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -78,7 +79,6 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Algorithm",
 		//	    "RoleArn"
 		//	  ],
 		//	  "type": "object"
@@ -212,6 +212,18 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MinLatency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 2000,
+		//	  "description": "The minimum latency in milliseconds.",
+		//	  "type": "integer"
+		//	}
+		"min_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum latency in milliseconds.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -232,12 +244,36 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "zixi-push",
 		//	    "rtp-fec",
 		//	    "rtp",
-		//	    "rist"
+		//	    "rist",
+		//	    "srt-listener",
+		//	    "srt-caller"
 		//	  ],
 		//	  "type": "string"
 		//	}
 		"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The protocol that is used by the source.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SenderControlPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+		//	  "type": "integer"
+		//	}
+		"sender_control_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SenderIpAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
+		//	  "type": "string"
+		//	}
+		"sender_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: SourceArn
@@ -260,6 +296,28 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"source_ingest_port": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The port that the flow will be listening on for incoming content.(ReadOnly)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceListenerAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Source IP or domain name for SRT-caller protocol.",
+		//	  "type": "string"
+		//	}
+		"source_listener_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Source IP or domain name for SRT-caller protocol.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: SourceListenerPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Source port for SRT-caller protocol.",
+		//	  "type": "integer"
+		//	}
+		"source_listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Source port for SRT-caller protocol.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: StreamId
@@ -324,14 +382,19 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_type":                       "KeyType",
 		"max_bitrate":                    "MaxBitrate",
 		"max_latency":                    "MaxLatency",
+		"min_latency":                    "MinLatency",
 		"name":                           "Name",
 		"protocol":                       "Protocol",
 		"region":                         "Region",
 		"resource_id":                    "ResourceId",
 		"role_arn":                       "RoleArn",
 		"secret_arn":                     "SecretArn",
+		"sender_control_port":            "SenderControlPort",
+		"sender_ip_address":              "SenderIpAddress",
 		"source_arn":                     "SourceArn",
 		"source_ingest_port":             "SourceIngestPort",
+		"source_listener_address":        "SourceListenerAddress",
+		"source_listener_port":           "SourceListenerPort",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",
 		"vpc_interface_name":             "VpcInterfaceName",

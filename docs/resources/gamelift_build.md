@@ -19,6 +19,7 @@ Resource Type definition for AWS::GameLift::Build
 
 - `name` (String) A descriptive label that is associated with a build. Build names do not need to be unique.
 - `operating_system` (String) The operating system that the game server binaries are built to run on. This value determines the type of fleet resources that you can use for this build. If your game build contains multiple executables, they all must run on the same operating system. If an operating system is not specified when creating a build, Amazon GameLift uses the default value (WINDOWS_2012). This value cannot be changed later.
+- `server_sdk_version` (String) A server SDK version you used when integrating your game server build with Amazon GameLift. By default Amazon GameLift sets this value to 4.0.2.
 - `storage_location` (Attributes) Information indicating where your game build files are stored. Use this parameter only when creating a build with files stored in an Amazon S3 bucket that you own. The storage location must specify an Amazon S3 bucket name and key. The location must also specify a role ARN that you set up to allow Amazon GameLift to access your Amazon S3 bucket. The S3 bucket and your new build must be in the same Region. (see [below for nested schema](#nestedatt--storage_location))
 - `version` (String) Version information that is associated with this build. Version strings do not need to be unique.
 

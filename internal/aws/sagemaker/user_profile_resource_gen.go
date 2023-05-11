@@ -268,7 +268,10 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -392,7 +395,10 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -564,6 +570,9 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -727,6 +736,9 @@ func userProfileResource(ctx context.Context) (resource.Resource, error) {
 											"ml.g5.16xlarge",
 											"ml.g5.24xlarge",
 											"ml.g5.48xlarge",
+											"ml.p4d.24xlarge",
+											"ml.p4de.24xlarge",
+											"ml.geospatial.interactive",
 										),
 									}, /*END VALIDATORS*/
 									PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

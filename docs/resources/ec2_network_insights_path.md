@@ -25,6 +25,8 @@ Resource schema for AWS::EC2::NetworkInsightsPath
 - `destination` (String)
 - `destination_ip` (String)
 - `destination_port` (Number)
+- `filter_at_destination` (Attributes) (see [below for nested schema](#nestedatt--filter_at_destination))
+- `filter_at_source` (Attributes) (see [below for nested schema](#nestedatt--filter_at_source))
 - `source_ip` (String)
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
@@ -36,6 +38,64 @@ Resource schema for AWS::EC2::NetworkInsightsPath
 - `network_insights_path_arn` (String)
 - `network_insights_path_id` (String)
 - `source_arn` (String)
+
+<a id="nestedatt--filter_at_destination"></a>
+### Nested Schema for `filter_at_destination`
+
+Optional:
+
+- `destination_address` (String)
+- `destination_port_range` (Attributes) (see [below for nested schema](#nestedatt--filter_at_destination--destination_port_range))
+- `source_address` (String)
+- `source_port_range` (Attributes) (see [below for nested schema](#nestedatt--filter_at_destination--source_port_range))
+
+<a id="nestedatt--filter_at_destination--destination_port_range"></a>
+### Nested Schema for `filter_at_destination.destination_port_range`
+
+Optional:
+
+- `from_port` (Number)
+- `to_port` (Number)
+
+
+<a id="nestedatt--filter_at_destination--source_port_range"></a>
+### Nested Schema for `filter_at_destination.source_port_range`
+
+Optional:
+
+- `from_port` (Number)
+- `to_port` (Number)
+
+
+
+<a id="nestedatt--filter_at_source"></a>
+### Nested Schema for `filter_at_source`
+
+Optional:
+
+- `destination_address` (String)
+- `destination_port_range` (Attributes) (see [below for nested schema](#nestedatt--filter_at_source--destination_port_range))
+- `source_address` (String)
+- `source_port_range` (Attributes) (see [below for nested schema](#nestedatt--filter_at_source--source_port_range))
+
+<a id="nestedatt--filter_at_source--destination_port_range"></a>
+### Nested Schema for `filter_at_source.destination_port_range`
+
+Optional:
+
+- `from_port` (Number)
+- `to_port` (Number)
+
+
+<a id="nestedatt--filter_at_source--source_port_range"></a>
+### Nested Schema for `filter_at_source.source_port_range`
+
+Optional:
+
+- `from_port` (Number)
+- `to_port` (Number)
+
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

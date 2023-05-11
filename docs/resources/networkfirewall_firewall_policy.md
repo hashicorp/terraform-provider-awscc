@@ -41,11 +41,28 @@ Required:
 
 Optional:
 
+- `policy_variables` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables))
 - `stateful_default_actions` (List of String)
 - `stateful_engine_options` (Attributes) (see [below for nested schema](#nestedatt--firewall_policy--stateful_engine_options))
 - `stateful_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateful_rule_group_references))
 - `stateless_custom_actions` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_custom_actions))
 - `stateless_rule_group_references` (Attributes List) (see [below for nested schema](#nestedatt--firewall_policy--stateless_rule_group_references))
+
+<a id="nestedatt--firewall_policy--policy_variables"></a>
+### Nested Schema for `firewall_policy.policy_variables`
+
+Optional:
+
+- `rule_variables` (Attributes Map) (see [below for nested schema](#nestedatt--firewall_policy--policy_variables--rule_variables))
+
+<a id="nestedatt--firewall_policy--policy_variables--rule_variables"></a>
+### Nested Schema for `firewall_policy.policy_variables.rule_variables`
+
+Optional:
+
+- `definition` (List of String)
+
+
 
 <a id="nestedatt--firewall_policy--stateful_engine_options"></a>
 ### Nested Schema for `firewall_policy.stateful_engine_options`

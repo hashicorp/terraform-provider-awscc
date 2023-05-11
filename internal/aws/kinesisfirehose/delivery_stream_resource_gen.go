@@ -728,6 +728,22 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      "pattern": "https:.*",
 		//	      "type": "string"
 		//	    },
+		//	    "DocumentIdOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DefaultDocumentIdFormat": {
+		//	          "enum": [
+		//	            "FIREHOSE_DEFAULT",
+		//	            "NO_DOCUMENT_ID"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DefaultDocumentIdFormat"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "DomainARN": {
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
@@ -1039,6 +1055,26 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DocumentIdOptions
+				"document_id_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultDocumentIdFormat
+						"default_document_id_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"FIREHOSE_DEFAULT",
+									"NO_DOCUMENT_ID",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DomainARN
@@ -1556,6 +1592,22 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		//	      "pattern": "https:.*",
 		//	      "type": "string"
 		//	    },
+		//	    "DocumentIdOptions": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "DefaultDocumentIdFormat": {
+		//	          "enum": [
+		//	            "FIREHOSE_DEFAULT",
+		//	            "NO_DOCUMENT_ID"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "DefaultDocumentIdFormat"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "DomainARN": {
 		//	      "maxLength": 512,
 		//	      "minLength": 1,
@@ -1867,6 +1919,26 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DocumentIdOptions
+				"document_id_options": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: DefaultDocumentIdFormat
+						"default_document_id_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"FIREHOSE_DEFAULT",
+									"NO_DOCUMENT_ID",
+								),
+							}, /*END VALIDATORS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: DomainARN
@@ -5908,31 +5980,33 @@ func deliveryStreamResource(ctx context.Context) (resource.Resource, error) {
 		"block_size_bytes":     "BlockSizeBytes",
 		"bloom_filter_columns": "BloomFilterColumns",
 		"bloom_filter_false_positive_probability": "BloomFilterFalsePositiveProbability",
-		"bucket_arn":                               "BucketARN",
-		"buffering_hints":                          "BufferingHints",
-		"case_insensitive":                         "CaseInsensitive",
-		"catalog_id":                               "CatalogId",
-		"cloudwatch_logging_options":               "CloudWatchLoggingOptions",
-		"cluster_endpoint":                         "ClusterEndpoint",
-		"cluster_jdbcurl":                          "ClusterJDBCURL",
-		"collection_endpoint":                      "CollectionEndpoint",
-		"column_to_json_key_mappings":              "ColumnToJsonKeyMappings",
-		"common_attributes":                        "CommonAttributes",
-		"compression":                              "Compression",
-		"compression_format":                       "CompressionFormat",
-		"content_encoding":                         "ContentEncoding",
-		"convert_dots_in_json_keys_to_underscores": "ConvertDotsInJsonKeysToUnderscores",
-		"copy_command":                             "CopyCommand",
-		"copy_options":                             "CopyOptions",
-		"data_format_conversion_configuration":     "DataFormatConversionConfiguration",
-		"data_table_columns":                       "DataTableColumns",
-		"data_table_name":                          "DataTableName",
-		"database_name":                            "DatabaseName",
+		"bucket_arn":                                     "BucketARN",
+		"buffering_hints":                                "BufferingHints",
+		"case_insensitive":                               "CaseInsensitive",
+		"catalog_id":                                     "CatalogId",
+		"cloudwatch_logging_options":                     "CloudWatchLoggingOptions",
+		"cluster_endpoint":                               "ClusterEndpoint",
+		"cluster_jdbcurl":                                "ClusterJDBCURL",
+		"collection_endpoint":                            "CollectionEndpoint",
+		"column_to_json_key_mappings":                    "ColumnToJsonKeyMappings",
+		"common_attributes":                              "CommonAttributes",
+		"compression":                                    "Compression",
+		"compression_format":                             "CompressionFormat",
+		"content_encoding":                               "ContentEncoding",
+		"convert_dots_in_json_keys_to_underscores":       "ConvertDotsInJsonKeysToUnderscores",
+		"copy_command":                                   "CopyCommand",
+		"copy_options":                                   "CopyOptions",
+		"data_format_conversion_configuration":           "DataFormatConversionConfiguration",
+		"data_table_columns":                             "DataTableColumns",
+		"data_table_name":                                "DataTableName",
+		"database_name":                                  "DatabaseName",
+		"default_document_id_format":                     "DefaultDocumentIdFormat",
 		"delivery_stream_encryption_configuration_input": "DeliveryStreamEncryptionConfigurationInput",
 		"delivery_stream_name":                           "DeliveryStreamName",
 		"delivery_stream_type":                           "DeliveryStreamType",
 		"deserializer":                                   "Deserializer",
 		"dictionary_key_threshold":                       "DictionaryKeyThreshold",
+		"document_id_options":                            "DocumentIdOptions",
 		"domain_arn":                                     "DomainARN",
 		"duration_in_seconds":                            "DurationInSeconds",
 		"dynamic_partitioning_configuration":             "DynamicPartitioningConfiguration",

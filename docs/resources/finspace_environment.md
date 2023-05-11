@@ -27,6 +27,7 @@ An example resource schema demonstrating some basic constructs and validation ru
 - `federation_parameters` (Attributes) Additional parameters to identify Federation mode (see [below for nested schema](#nestedatt--federation_parameters))
 - `kms_key_id` (String) KMS key used to encrypt customer data within FinSpace Environment infrastructure
 - `superuser_parameters` (Attributes) Parameters of the first Superuser for the FinSpace Environment (see [below for nested schema](#nestedatt--superuser_parameters))
+- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -45,11 +46,20 @@ An example resource schema demonstrating some basic constructs and validation ru
 Optional:
 
 - `application_call_back_url` (String) SAML metadata URL to link with the Environment
-- `attribute_map` (Map of String) Attribute map for SAML configuration
+- `attribute_map` (Attributes List) Attribute map for SAML configuration (see [below for nested schema](#nestedatt--federation_parameters--attribute_map))
 - `federation_provider_name` (String) Federation provider name to link with the Environment
 - `federation_urn` (String) SAML metadata URL to link with the Environment
 - `saml_metadata_document` (String) SAML metadata document to link the federation provider to the Environment
 - `saml_metadata_url` (String) SAML metadata URL to link with the Environment
+
+<a id="nestedatt--federation_parameters--attribute_map"></a>
+### Nested Schema for `federation_parameters.attribute_map`
+
+Optional:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+
 
 
 <a id="nestedatt--superuser_parameters"></a>
@@ -60,6 +70,15 @@ Optional:
 - `email_address` (String) Email address
 - `first_name` (String) First name
 - `last_name` (String) Last name
+
+
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
+
+Required:
+
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

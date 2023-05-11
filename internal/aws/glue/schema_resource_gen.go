@@ -38,7 +38,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Amazon Resource Name for the Schema.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
+		//	  "pattern": "arn:aws(-(cn|us-gov|iso(-[bef])?))?:glue:.*",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -221,7 +221,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "Arn": {
 		//	      "description": "Amazon Resource Name for the Registry.",
-		//	      "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
+		//	      "pattern": "arn:aws(-(cn|us-gov|iso(-[bef])?))?:glue:.*",
 		//	      "type": "string"
 		//	    },
 		//	    "Name": {
@@ -241,7 +241,7 @@ func schemaResource(ctx context.Context) (resource.Resource, error) {
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.RegexMatches(regexp.MustCompile("arn:(aws|aws-us-gov|aws-cn):glue:.*"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("arn:aws(-(cn|us-gov|iso(-[bef])?))?:glue:.*"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),

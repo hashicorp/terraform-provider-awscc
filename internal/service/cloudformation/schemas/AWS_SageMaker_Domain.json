@@ -158,7 +158,10 @@
           "$ref": "#/definitions/SharingSettings",
           "description": "The sharing settings."
         }
-      }
+      },
+      "required": [
+        "ExecutionRole"
+      ]
     },
     "DefaultSpaceSettings": {
       "type": "object",
@@ -193,7 +196,10 @@
             "pattern": "[-0-9a-zA-Z]+"
           }
         }
-      }
+      },
+      "required": [
+        "ExecutionRole"
+      ]
     },
     "JupyterServerAppSettings": {
       "type": "object",
@@ -269,7 +275,10 @@
             "ml.g5.12xlarge",
             "ml.g5.16xlarge",
             "ml.g5.24xlarge",
-            "ml.g5.48xlarge"
+            "ml.g5.48xlarge",
+            "ml.p4d.24xlarge",
+            "ml.p4de.24xlarge",
+            "ml.geospatial.interactive"
           ]
         },
         "SageMakerImageArn": {

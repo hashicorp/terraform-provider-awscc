@@ -34,6 +34,19 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Json object with all simulation details",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaximumDuration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum running time of the simulation.",
+		//	  "maxLength": 6,
+		//	  "minLength": 2,
+		//	  "type": "string"
+		//	}
+		"maximum_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maximum running time of the simulation.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -67,16 +80,15 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "BucketName": {
 		//	      "description": "The Schema S3 bucket name.",
-		//	      "maxLength": 255,
+		//	      "maxLength": 63,
 		//	      "minLength": 3,
-		//	      "pattern": "[a-zA-Z0-9_\\-]{3,255}$",
+		//	      "pattern": "[a-zA-Z0-9_\\-]{3,63}$",
 		//	      "type": "string"
 		//	    },
 		//	    "ObjectKey": {
 		//	      "description": "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
 		//	      "maxLength": 255,
 		//	      "minLength": 3,
-		//	      "pattern": "([\\-a-zA-Z0-9_-]+\\/)*[a-zA-Z0-9_-]+\\.(json|yaml)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -87,6 +99,47 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "type": "object"
 		//	}
 		"schema_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Schema S3 bucket name.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectKey
+				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotS3Location
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BucketName": {
+		//	      "description": "The Schema S3 bucket name.",
+		//	      "maxLength": 63,
+		//	      "minLength": 3,
+		//	      "pattern": "[a-zA-Z0-9_\\-]{3,63}$",
+		//	      "type": "string"
+		//	    },
+		//	    "ObjectKey": {
+		//	      "description": "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
+		//	      "maxLength": 255,
+		//	      "minLength": 3,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BucketName",
+		//	    "ObjectKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"snapshot_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: BucketName
 				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -118,12 +171,14 @@ func simulationDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::SimSpaceWeaver::Simulation").WithTerraformTypeName("awscc_simspaceweaver_simulation")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bucket_name":        "BucketName",
-		"describe_payload":   "DescribePayload",
-		"name":               "Name",
-		"object_key":         "ObjectKey",
-		"role_arn":           "RoleArn",
-		"schema_s3_location": "SchemaS3Location",
+		"bucket_name":          "BucketName",
+		"describe_payload":     "DescribePayload",
+		"maximum_duration":     "MaximumDuration",
+		"name":                 "Name",
+		"object_key":           "ObjectKey",
+		"role_arn":             "RoleArn",
+		"schema_s3_location":   "SchemaS3Location",
+		"snapshot_s3_location": "SnapshotS3Location",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

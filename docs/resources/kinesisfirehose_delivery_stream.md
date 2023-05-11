@@ -191,6 +191,7 @@ Optional:
 - `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--cloudwatch_logging_options))
 - `cluster_endpoint` (String)
+- `document_id_options` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--document_id_options))
 - `domain_arn` (String)
 - `index_rotation_period` (String)
 - `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--amazonopensearchservice_destination_configuration--processing_configuration))
@@ -272,6 +273,14 @@ Optional:
 - `log_stream_name` (String)
 
 
+<a id="nestedatt--amazonopensearchservice_destination_configuration--document_id_options"></a>
+### Nested Schema for `amazonopensearchservice_destination_configuration.document_id_options`
+
+Required:
+
+- `default_document_id_format` (String)
+
+
 <a id="nestedatt--amazonopensearchservice_destination_configuration--processing_configuration"></a>
 ### Nested Schema for `amazonopensearchservice_destination_configuration.processing_configuration`
 
@@ -347,6 +356,7 @@ Optional:
 - `buffering_hints` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--buffering_hints))
 - `cloudwatch_logging_options` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--cloudwatch_logging_options))
 - `cluster_endpoint` (String)
+- `document_id_options` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--document_id_options))
 - `domain_arn` (String)
 - `index_rotation_period` (String)
 - `processing_configuration` (Attributes) (see [below for nested schema](#nestedatt--elasticsearch_destination_configuration--processing_configuration))
@@ -426,6 +436,14 @@ Optional:
 - `enabled` (Boolean)
 - `log_group_name` (String)
 - `log_stream_name` (String)
+
+
+<a id="nestedatt--elasticsearch_destination_configuration--document_id_options"></a>
+### Nested Schema for `elasticsearch_destination_configuration.document_id_options`
+
+Required:
+
+- `default_document_id_format` (String)
 
 
 <a id="nestedatt--elasticsearch_destination_configuration--processing_configuration"></a>

@@ -83,7 +83,8 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 		//	    "Type": {
 		//	      "description": "Type of authentication strategy for this user.",
 		//	      "enum": [
-		//	        "password"
+		//	        "password",
+		//	        "iam"
 		//	      ],
 		//	      "type": "string"
 		//	    }
@@ -114,6 +115,7 @@ func userResource(ctx context.Context) (resource.Resource, error) {
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"password",
+							"iam",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

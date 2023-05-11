@@ -29,10 +29,15 @@ Data Source schema for AWS::MediaConnect::FlowSource
 - `ingest_port` (Number) The port that the flow will be listening on for incoming content.
 - `max_bitrate` (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
+- `min_latency` (Number) The minimum latency in milliseconds.
 - `name` (String) The name of the source.
 - `protocol` (String) The protocol that is used by the source.
+- `sender_control_port` (Number) The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.
+- `sender_ip_address` (String) The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.
 - `source_arn` (String) The ARN of the source.
 - `source_ingest_port` (String) The port that the flow will be listening on for incoming content.(ReadOnly)
+- `source_listener_address` (String) Source IP or domain name for SRT-caller protocol.
+- `source_listener_port` (Number) Source port for SRT-caller protocol.
 - `stream_id` (String) The stream ID that you want to use for this transport. This parameter applies only to Zixi-based streams.
 - `vpc_interface_name` (String) The name of the VPC Interface this Source is configured with.
 - `whitelist_cidr` (String) The range of IP addresses that should be allowed to contribute content to your source. These IP addresses should be in the form of a Classless Inter-Domain Routing (CIDR) block; for example, 10.0.0.0/16.

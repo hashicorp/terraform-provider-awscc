@@ -58,7 +58,8 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "description": "The type of key that is used for the encryption. If no keyType is provided, the service will use the default setting (static-key).",
 		//	      "enum": [
 		//	        "speke",
-		//	        "static-key"
+		//	        "static-key",
+		//	        "srt-password"
 		//	      ],
 		//	      "type": "string"
 		//	    },
@@ -84,7 +85,6 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Algorithm",
 		//	    "RoleArn"
 		//	  ],
 		//	  "type": "object"
@@ -94,7 +94,8 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: Algorithm
 				"algorithm": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The type of algorithm that is used for the encryption (such as aes128, aes192, or aes256).",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"aes128",
@@ -102,6 +103,9 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 							"aes256",
 						),
 					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ConstantInitializationVector
 				"constant_initialization_vector": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -130,6 +134,7 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 						stringvalidator.OneOf(
 							"speke",
 							"static-key",
+							"srt-password",
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -288,6 +293,23 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MinLatency
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": 2000,
+		//	  "description": "The minimum latency in milliseconds.",
+		//	  "type": "integer"
+		//	}
+		"min_latency": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The minimum latency in milliseconds.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				generic.Int64DefaultValue(2000),
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -311,7 +333,9 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "zixi-push",
 		//	    "rtp-fec",
 		//	    "rtp",
-		//	    "rist"
+		//	    "rist",
+		//	    "srt-listener",
+		//	    "srt-caller"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -325,8 +349,40 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 					"rtp-fec",
 					"rtp",
 					"rist",
+					"srt-listener",
+					"srt-caller",
 				),
 			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SenderControlPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+		//	  "type": "integer"
+		//	}
+		"sender_control_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port that the flow uses to send outbound requests to initiate connection with the sender for fujitsu-qos protocol.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SenderIpAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
+		//	  "type": "string"
+		//	}
+		"sender_ip_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The IP address that the flow communicates with to initiate connection with the sender for fujitsu-qos protocol.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
@@ -357,6 +413,36 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceListenerAddress
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Source IP or domain name for SRT-caller protocol.",
+		//	  "type": "string"
+		//	}
+		"source_listener_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Source IP or domain name for SRT-caller protocol.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SourceListenerPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Source port for SRT-caller protocol.",
+		//	  "type": "integer"
+		//	}
+		"source_listener_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "Source port for SRT-caller protocol.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: StreamId
@@ -438,14 +524,19 @@ func flowSourceResource(ctx context.Context) (resource.Resource, error) {
 		"key_type":                       "KeyType",
 		"max_bitrate":                    "MaxBitrate",
 		"max_latency":                    "MaxLatency",
+		"min_latency":                    "MinLatency",
 		"name":                           "Name",
 		"protocol":                       "Protocol",
 		"region":                         "Region",
 		"resource_id":                    "ResourceId",
 		"role_arn":                       "RoleArn",
 		"secret_arn":                     "SecretArn",
+		"sender_control_port":            "SenderControlPort",
+		"sender_ip_address":              "SenderIpAddress",
 		"source_arn":                     "SourceArn",
 		"source_ingest_port":             "SourceIngestPort",
+		"source_listener_address":        "SourceListenerAddress",
+		"source_listener_port":           "SourceListenerPort",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",
 		"vpc_interface_name":             "VpcInterfaceName",

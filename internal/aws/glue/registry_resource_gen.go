@@ -34,7 +34,7 @@ func registryResource(ctx context.Context) (resource.Resource, error) {
 		//
 		//	{
 		//	  "description": "Amazon Resource Name for the created Registry.",
-		//	  "pattern": "arn:(aws|aws-us-gov|aws-cn):glue:.*",
+		//	  "pattern": "arn:aws(-(cn|us-gov|iso(-[bef])?))?:glue:.*",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/

@@ -68,6 +68,9 @@
       }
     }
   },
+  "required": [
+    "GroupName"
+  ],
   "handlers": {
     "create": {
       "permissions": [

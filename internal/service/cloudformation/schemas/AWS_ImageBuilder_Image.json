@@ -145,6 +145,9 @@
     "/properties/EnhancedImageMetadataEnabled",
     "/properties/Tags"
   ],
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

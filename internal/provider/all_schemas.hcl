@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 720 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 737 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -187,6 +187,11 @@ resource_schema "aws_apigatewayv2_deployment" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apigatewayv2_integration_response" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::IntegrationResponse"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_apigatewayv2_model" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::Model"
   suppress_plural_data_source_generation = true
@@ -228,6 +233,11 @@ resource_schema "aws_appflow_flow" {
 
 resource_schema "aws_appintegrations_data_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::DataIntegration"
+
+  # ObjectConfiguration is of unsupported type: key-value map of key-value map.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_appintegrations_event_integration" {
@@ -359,6 +369,10 @@ resource_schema "aws_backup_framework" {
 
 resource_schema "aws_backup_report_plan" {
   cloudformation_type_name = "AWS::Backup::ReportPlan"
+}
+
+resource_schema "aws_backupgateway_hypervisor" {
+  cloudformation_type_name = "AWS::BackupGateway::Hypervisor"
 }
 
 resource_schema "aws_batch_compute_environment" {
@@ -634,6 +648,15 @@ resource_schema "aws_connect_contact_flow_module" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_evaluation_form" {
+  cloudformation_type_name               = "AWS::Connect::EvaluationForm"
+
+  # Infinite recursion.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_connect_hours_of_operation" {
   cloudformation_type_name               = "AWS::Connect::HoursOfOperation"
   suppress_plural_data_source_generation = true
@@ -798,6 +821,10 @@ resource_schema "aws_datasync_location_s3" {
 
 resource_schema "aws_datasync_location_smb" {
   cloudformation_type_name = "AWS::DataSync::LocationSMB"
+}
+
+resource_schema "aws_datasync_storage_system" {
+  cloudformation_type_name = "AWS::DataSync::StorageSystem"
 }
 
 resource_schema "aws_datasync_task" {
@@ -1079,6 +1106,22 @@ resource_schema "aws_ec2_vpn_connection_route" {
 
 resource_schema "aws_ec2_vpn_gateway" {
   cloudformation_type_name = "AWS::EC2::VPNGateway"
+}
+
+resource_schema "aws_ec2_verified_access_endpoint" {
+  cloudformation_type_name = "AWS::EC2::VerifiedAccessEndpoint"
+}
+
+resource_schema "aws_ec2_verified_access_group" {
+  cloudformation_type_name = "AWS::EC2::VerifiedAccessGroup"
+}
+
+resource_schema "aws_ec2_verified_access_instance" {
+  cloudformation_type_name = "AWS::EC2::VerifiedAccessInstance"
+}
+
+resource_schema "aws_ec2_verified_access_trust_provider" {
+  cloudformation_type_name = "AWS::EC2::VerifiedAccessTrustProvider"
 }
 
 resource_schema "aws_ec2_volume" {
@@ -1566,6 +1609,15 @@ resource_schema "aws_iot_authorizer" {
   cloudformation_type_name = "AWS::IoT::Authorizer"
 }
 
+resource_schema "aws_iot_billing_group" {
+  cloudformation_type_name = "AWS::IoT::BillingGroup"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
 resource_schema "aws_iot_ca_certificate" {
   cloudformation_type_name = "AWS::IoT::CACertificate"
 }
@@ -1628,6 +1680,24 @@ resource_schema "aws_iot_security_profile" {
 
 resource_schema "aws_iot_thing" {
   cloudformation_type_name = "AWS::IoT::Thing"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_iot_thing_group" {
+  cloudformation_type_name = "AWS::IoT::ThingGroup"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_iot_thing_type" {
+  cloudformation_type_name               = "AWS::IoT::ThingType"
 
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
@@ -2307,6 +2377,10 @@ resource_schema "aws_nimblestudio_studio_component" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_osis_pipeline" {
+  cloudformation_type_name = "AWS::OSIS::Pipeline"
+}
+
 resource_schema "aws_oam_link" {
   cloudformation_type_name = "AWS::Oam::Link"
 }
@@ -2446,6 +2520,23 @@ resource_schema "aws_pipes_pipe" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_proton_environment_account_connection" {
+  cloudformation_type_name = "AWS::Proton::EnvironmentAccountConnection"
+
+  # Top-level "Id" property is not a primary identifier.
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_proton_environment_template" {
+  cloudformation_type_name = "AWS::Proton::EnvironmentTemplate"
+}
+
+resource_schema "aws_proton_service_template" {
+  cloudformation_type_name = "AWS::Proton::ServiceTemplate"
+}
+
 resource_schema "aws_qldb_stream" {
   cloudformation_type_name               = "AWS::QLDB::Stream"
   suppress_plural_data_source_generation = true
@@ -2483,6 +2574,11 @@ resource_schema "aws_quicksight_template" {
 
 resource_schema "aws_quicksight_theme" {
   cloudformation_type_name               = "AWS::QuickSight::Theme"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_quicksight_vpc_connection" {
+  cloudformation_type_name               = "AWS::QuickSight::VPCConnection"
   suppress_plural_data_source_generation = true
 }
 
@@ -3036,6 +3132,10 @@ resource_schema "aws_scheduler_schedule" {
 
 resource_schema "aws_scheduler_schedule_group" {
   cloudformation_type_name = "AWS::Scheduler::ScheduleGroup"
+}
+
+resource_schema "aws_secretsmanager_secret" {
+  cloudformation_type_name = "AWS::SecretsManager::Secret"
 }
 
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {

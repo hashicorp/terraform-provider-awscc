@@ -86,12 +86,30 @@
         },
         "StatefulEngineOptions": {
           "$ref": "#/definitions/StatefulEngineOptions"
+        },
+        "PolicyVariables": {
+          "type": "object",
+          "properties": {
+            "RuleVariables": {
+              "$ref": "#/definitions/RuleVariables"
+            }
+          },
+          "additionalProperties": false
         }
       },
       "required": [
         "StatelessDefaultActions",
         "StatelessFragmentDefaultActions"
       ],
+      "additionalProperties": false
+    },
+    "RuleVariables": {
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/IPSet"
+        }
+      },
       "additionalProperties": false
     },
     "CustomAction": {
@@ -193,6 +211,25 @@
       "minimum": 1,
       "maximum": 65535
     },
+    "VariableDefinition": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "^.*$"
+    },
+    "IPSet": {
+      "type": "object",
+      "properties": {
+        "Definition": {
+          "type": "array",
+          "insertionOrder": true,
+          "uniqueItems": false,
+          "items": {
+            "$ref": "#/definitions/VariableDefinition"
+          }
+        }
+      },
+      "additionalProperties": false
+    },
     "StatefulRuleGroupOverride": {
       "type": "object",
       "properties": {
@@ -231,7 +268,8 @@
       "type": "string",
       "enum": [
         "DROP",
-        "CONTINUE"
+        "CONTINUE",
+        "REJECT"
       ]
     }
   },

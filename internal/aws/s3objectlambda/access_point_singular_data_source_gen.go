@@ -40,6 +40,10 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "string"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "Status",
+		//	    "Value"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"alias": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/

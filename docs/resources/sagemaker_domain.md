@@ -45,9 +45,12 @@ Resource Type definition for AWS::SageMaker::Domain
 <a id="nestedatt--default_user_settings"></a>
 ### Nested Schema for `default_user_settings`
 
-Optional:
+Required:
 
 - `execution_role` (String) The execution role for the user.
+
+Optional:
+
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_user_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_user_settings--kernel_gateway_app_settings))
 - `r_session_app_settings` (Attributes) A collection of settings that apply to an RSessionGateway app. (see [below for nested schema](#nestedatt--default_user_settings--r_session_app_settings))
@@ -163,9 +166,12 @@ Optional:
 <a id="nestedatt--default_space_settings"></a>
 ### Nested Schema for `default_space_settings`
 
-Optional:
+Required:
 
 - `execution_role` (String) The execution role for the space.
+
+Optional:
+
 - `jupyter_server_app_settings` (Attributes) The Jupyter server's app settings. (see [below for nested schema](#nestedatt--default_space_settings--jupyter_server_app_settings))
 - `kernel_gateway_app_settings` (Attributes) The kernel gateway app settings. (see [below for nested schema](#nestedatt--default_space_settings--kernel_gateway_app_settings))
 - `security_groups` (List of String) The security groups for the Amazon Virtual Private Cloud (VPC) that Studio uses for communication.

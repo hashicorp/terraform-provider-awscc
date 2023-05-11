@@ -30,8 +30,6 @@
       },
       "additionalProperties": false,
       "required": [
-        "FirstExecutionFrom",
-        "Object",
         "ScheduleExpression"
       ]
     },
@@ -58,6 +56,68 @@
         "Key",
         "Value"
       ]
+    },
+    "FileConfiguration": {
+      "description": "The configuration for what files should be pulled from the source.",
+      "type": "object",
+      "properties": {
+        "Folders": {
+          "description": "Identifiers for the source folders to pull all files from recursively.",
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string",
+            "pattern": ".*\\S.*",
+            "minLength": 1,
+            "maxLength": 200
+          }
+        },
+        "Filters": {
+          "description": "Restrictions for what files should be pulled from the source.",
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 2048,
+              "items": {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "Folders"
+      ]
+    },
+    "ObjectConfiguration": {
+      "description": "The configuration for what data should be pulled from the source.",
+      "type": "object",
+      "patternProperties": {
+        "": {
+          "type": "object",
+          "patternProperties": {
+            "": {
+              "type": "array",
+              "minItems": 1,
+              "maxItems": 2048,
+              "items": {
+                "type": "string",
+                "maxLength": 255,
+                "minLength": 1
+              }
+            }
+          },
+          "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -102,9 +162,9 @@
     "SourceURI": {
       "description": "The URI of the data source.",
       "type": "string",
-      "pattern": "^\\w+\\:\\/\\/\\w+\\/[\\w/!@#+=.-]+$",
+      "pattern": "^(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+$)|(\\w+\\:\\/\\/[\\w.-]+[\\w/!@#+=.-]+[\\w/!@#+=.-]+[\\w/!@#+=.,-]+$)",
       "minLength": 1,
-      "maxLength": 255
+      "maxLength": 1000
     },
     "Tags": {
       "description": "The tags (keys and values) associated with the data integration.",
@@ -114,6 +174,14 @@
       },
       "minItems": 0,
       "maxItems": 200
+    },
+    "FileConfiguration": {
+      "description": "The configuration for what files should be pulled from the source.",
+      "$ref": "#/definitions/FileConfiguration"
+    },
+    "ObjectConfiguration": {
+      "description": "The configuration for what data should be pulled from the source.",
+      "$ref": "#/definitions/ObjectConfiguration"
     }
   },
   "tagging": {
