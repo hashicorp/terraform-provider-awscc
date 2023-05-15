@@ -13,10 +13,10 @@ The AWS::RDS::DBInstance resource creates an Amazon RDS DB instance.
 
 ## Example Usage
 
-### Basic Usage
+### Basic example
 
 ```
-resource "awscc_rds_db_instance" "default" {
+resource "awscc_rds_db_instance" "this" {
   allocated_storage       = 10
   db_name                 = "mydb"
   engine                  = "mysql"
@@ -27,23 +27,29 @@ resource "awscc_rds_db_instance" "default" {
   db_parameter_group_name = "default.mysql5.7"
 }
 ```
-### Storage Autoscaling
+### Storage Autoscaling example
 To enable Storage Autoscaling with instances that support the feature, define the max_allocated_storage argument higher than the allocated_storage argument. Terraform will automatically hide differences with the allocated_storage argument value if autoscaling occurs.
 
 ```
-resource "awscc_rds_db_instance" "example" {
+resource "awscc_rds_db_instance" "this" {
   # ... other configuration ...
-
+  db_name                 = "mydb"
+  engine                  = "mysql"
+  engine_version          = "5.7"
+  db_instance_class       = "db.t3.micro"
+  master_username         = "foo"
+  master_user_password    = "foobarbaz"
+  db_parameter_group_name = "default.mysql5.7"
   allocated_storage     = 50
   max_allocated_storage = 100
 }
 ```
 
-### Managed Master Passwords via Secrets Manager, default KMS Key
+### Managed Master Passwords via Secrets Manager, default KMS Key example
 You can specify the manage_master_user_password attribute to enable managing the master password with Secrets Manager. You can also update an existing cluster to use Secrets Manager by specify the manage_master_user_password attribute and removing the password attribute (removal is required).
 
 ```
-resource "awscc_rds_db_instance" "default" {
+resource "awscc_rds_db_instance" "this" {
   allocated_storage           = 10
   db_name                     = "mydb"
   engine                      = "mysql"
@@ -54,15 +60,15 @@ resource "awscc_rds_db_instance" "default" {
   db_parameter_group_name     = "default.mysql5.7"
 }
 ```
-### Managed Master Passwords via Secrets Manager, specific KMS Key
+### Managed Master Passwords via Secrets Manager, specific KMS Key example
 You can specify the kms_key_id attribute under nested block master_user_secret to specify a specific KMS Key.
 
 ```
-resource "aws_kms_key" "example" {
+resource "aws_kms_key" "this" {
   description = "Example KMS Key"
 }
 
-resource "awscc_rds_db_instance" "default" {
+resource "awscc_rds_db_instance" "this" {
   allocated_storage           = 10
   db_name                     = "mydb"
   engine                      = "mysql"
@@ -71,9 +77,36 @@ resource "awscc_rds_db_instance" "default" {
   manage_master_user_password = true
   master_username             = "foo"
   master_user_secret = {
-    kms_key_id = aws_kms_key.example.key_id
+    kms_key_id = aws_kms_key.this.key_id
   }
   db_parameter_group_name = "default.mysql5.7"
+}
+
+```
+### DB Instance creation with custom subnet group example
+You can create RDS DB instance by using custom db subnet group
+
+```
+resource "awscc_rds_db_subnet_group" "this" {
+  db_subnet_group_name = "example"
+  db_subnet_group_description = "example subnet group"
+  subnet_ids = ["subnet-006182af0254ccbc4", "subnet-0c40688dd8ca51435"]
+}
+
+resource "awscc_rds_db_instance" "this" {
+  allocated_storage       = 10
+  db_name                 = "mydb"
+  engine                  = "mysql"
+  engine_version          = "5.7"
+  db_instance_class       = "db.t3.micro"
+  master_username         = "foo"
+  master_user_password    = "foobarbaz"
+  db_parameter_group_name = "default.mysql5.7"
+  db_subnet_group_name = awscc_rds_db_subnet_group.this.id
+  tags = [{
+    key   = "Name"
+    value = "this"
+  }]
 }
 
 ```
