@@ -7,6 +7,6 @@ resource "awscc_rds_db_instance" "this" {
   master_username         = "foo"
   master_user_password    = "foobarbaz"
   db_parameter_group_name = "default.mysql5.7"
-  allocated_storage     = 50
-  max_allocated_storage = 100
+  allocated_storage       = 50
+  max_allocated_storage   = 100
 }
