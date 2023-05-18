@@ -14,19 +14,18 @@ Resource Type definition for AWS::EC2::RouteTable
 ### Basic usage - create custom route table in VPC
 ```terraform
 resource "awscc_ec2_vpc" "vpc" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+  cidr_block = "10.0.0.0/16"
   tags = [{
-    key   = "Name"
-    value = "demovpc"
+    key   = "Managed By"
+    value = "AWSCC"
   }]
 }
 
 resource "awscc_ec2_route_table" "custom_route_table" {
   vpc_id = awscc_ec2_vpc.vpc.id
   tags = [{
-    key   = "Name"
-    value = "Custom Route Table"
+    key   = "Managed By"
+    value = "AWSCC"
   }]
 }
 ```
@@ -34,19 +33,18 @@ resource "awscc_ec2_route_table" "custom_route_table" {
 ### Advanced usage - create custom route table in VPC with subnet associations
 ```terraform
 resource "awscc_ec2_vpc" "vpc" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+  cidr_block = "10.0.0.0/16"
   tags = [{
-    key   = "Name"
-    value = "demovpc"
+    key   = "Managed By"
+    value = "AWSCC"
   }]
 }
 
 resource "awscc_ec2_route_table" "custom_route_table" {
   vpc_id = awscc_ec2_vpc.vpc.id
   tags = [{
-    key   = "Name"
-    value = "Custom Route Table"
+    key   = "Managed By"
+    value = "AWSCC"
   }]
 }
 
@@ -57,8 +55,8 @@ resource "awscc_ec2_subnet" "subnet1" {
   availability_zone = "us-east-1a"
 
   tags = [{
-    key   = "Name"
-    value = "Demo Subnet"
+    key   = "Managed By"
+    value = "AWSCC"
   }]
 }
 
@@ -71,19 +69,15 @@ resource "awscc_ec2_subnet_route_table_association" "subnet_route_table_associat
 ### Advanced usage - create custom route table with public route to internet gateway using aws and awscc providers
 ```terraform
 resource "awscc_ec2_vpc" "vpc" {
-  cidr_block       = "10.0.0.0/16"
-  instance_tenancy = "default"
+  cidr_block = "10.0.0.0/16"
   tags = [{
-    key   = "Name"
-    value = "demovpc"
+    key   = "Managed By"
+    value = "AWSCC"
   }]
 }
 
 resource "aws_internet_gateway" "internet_gateway" {
   vpc_id = awscc_ec2_vpc.vpc.id
-  tags = {
-    Name = "Demo Internet Gateway"
-  }
 }
 
 resource "aws_route_table" "public_route_table" {
@@ -92,10 +86,6 @@ resource "aws_route_table" "public_route_table" {
   route {
     cidr_block = "0.0.0.0/0"
     gateway_id = aws_internet_gateway.internet_gateway.id
-  }
-
-  tags = {
-    Name = "PublicRouteTable"
   }
 }
 ```
