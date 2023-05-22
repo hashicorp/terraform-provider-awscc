@@ -16,8 +16,12 @@ To create a VPC
 {{ tffile (printf "examples/resources/%s/vpc_endpoint_basic.tf" .Name)}}
 
 ### Interface Endpoint Type
-To create a VPC with tags
+To create a VPC Endpoint with Interface type
 {{ tffile (printf "examples/resources/%s/vpc_endpoint_interface_type.tf" .Name)}}
+
+### Gateway Endpoint Type
+To create a VPC Endpoint with Gateway LB
+{{ tffile (printf "examples/resources/%s/vpc_endpoint_gateway_type.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
