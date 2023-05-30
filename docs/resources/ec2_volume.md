@@ -12,15 +12,18 @@ Resource Type definition for AWS::EC2::Volume
 ## Example Usage
 
 ### usage
-To create a volume with tags
+To create ec2 volume with tags
 ```terraform
 resource "awscc_ec2_volume" "example" {
   availability_zone = "us-west-2a"
   size              = 40
 
-  tags = {
-    Name = "HelloWorld"
-  }
+  tags = [
+    {
+      key =  "Name"
+      value = "HelloWorld"
+    }
+  ]
 }
 ```
 
