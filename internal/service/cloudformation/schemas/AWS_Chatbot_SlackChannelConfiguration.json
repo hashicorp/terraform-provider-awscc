@@ -13,7 +13,7 @@
     "SlackChannelId": {
       "description": "The id of the Slack channel",
       "type": "string",
-      "pattern": "^[A-Za-z0-9]+$",
+      "pattern": "^[A-Za-z0-9-]+$",
       "minLength": 1,
       "maxLength": 256
     },
