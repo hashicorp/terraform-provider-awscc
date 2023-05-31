@@ -11,8 +11,7 @@ Resource Type definition for AWS::EC2::VPCEndpoint
 
 ## Example Usage
 
-### Basic usage
-To create a VPC
+To create a VPC endpoint for S3
 ```terraform
 #Basic
 
@@ -76,7 +75,7 @@ resource "awscc_ec2_vpc_endpoint" "ec2" {
 }
 ```
 
-### Gateway Endpoint Type
+### Gateway Load Balancer Endpoint Type
 To create a VPC Endpoint with Gateway LB
 ```terraform
 data "aws_caller_identity" "current" {}
