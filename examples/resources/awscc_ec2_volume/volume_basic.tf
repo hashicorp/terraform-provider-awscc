@@ -4,8 +4,8 @@ resource "awscc_ec2_volume" "example" {
 
   tags = [
     {
-      key =  "Name"
-      value = "HelloWorld"
+      key =  "Modified By"
+      value = "AWSCC"
     }
   ]
 }
