@@ -11,7 +11,6 @@ Resource Type definition for AWS::EC2::Volume
 
 ## Example Usage
 
-### usage
 To create ec2 volume with tags
 ```terraform
 resource "awscc_ec2_volume" "example" {
