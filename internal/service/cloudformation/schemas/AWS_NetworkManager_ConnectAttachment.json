@@ -50,6 +50,7 @@
     "Tags": {
       "description": "Tags for the attachment.",
       "type": "array",
+      "uniqueItems": true,
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -74,23 +75,24 @@
   },
   "definitions": {
     "ProposedSegmentChange": {
-      "description": "A key-value pair to associate with a resource.",
+      "description": "The attachment to move from one segment to another.",
       "type": "object",
       "properties": {
         "Tags": {
-          "description": "Proposed tags for the Segment.",
+          "description": "The list of key-value tags that changed for the segment.",
           "type": "array",
+          "uniqueItems": true,
           "insertionOrder": false,
           "items": {
             "$ref": "#/definitions/Tag"
           }
         },
         "AttachmentPolicyRuleNumber": {
-          "description": "New policy rule number of the attachment",
+          "description": "The rule number in the policy document that applies to this change.",
           "type": "integer"
         },
         "SegmentName": {
-          "description": "Proposed segment name",
+          "description": "The name of the segment to change.",
           "type": "string"
         }
       },
@@ -132,7 +134,8 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   },
   "readOnlyProperties": [
     "/properties/CoreNetworkArn",
@@ -144,7 +147,6 @@
     "/properties/AttachmentId",
     "/properties/OwnerAccountId",
     "/properties/AttachmentPolicyRuleNumber",
-    "/properties/ProposedSegmentChange",
     "/properties/SegmentName"
   ],
   "createOnlyProperties": [

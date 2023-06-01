@@ -16,7 +16,9 @@
   },
   "additionalProperties": false,
   "createOnlyProperties": [
-    "/properties/PoolName",
+    "/properties/PoolName"
+  ],
+  "conditionalCreateOnlyProperties": [
     "/properties/ScalingMode"
   ],
   "primaryIdentifier": [
@@ -34,6 +36,12 @@
       "permissions": [
         "ses:GetDedicatedIpPool",
         "ses:GetDedicatedIps"
+      ]
+    },
+    "update": {
+      "permissions": [
+        "ses:PutDedicatedIpPoolScalingAttributes",
+        "ses:GetDedicatedIpPool"
       ]
     },
     "delete": {

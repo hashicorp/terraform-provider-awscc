@@ -108,7 +108,8 @@
     "/properties/Arn",
     "/properties/PublicDefaultScopeId",
     "/properties/PrivateDefaultScopeId",
-    "/properties/ScopeCount"
+    "/properties/ScopeCount",
+    "/properties/ResourceDiscoveryAssociationCount"
   ],
   "handlers": {
     "create": {

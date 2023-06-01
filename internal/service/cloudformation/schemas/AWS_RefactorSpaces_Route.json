@@ -47,7 +47,7 @@
           "type": "string",
           "maxLength": 2048,
           "minLength": 1,
-          "pattern": "^(/[a-zA-Z0-9._-]+)+$"
+          "pattern": "^(\/([a-zA-Z0-9._:-]+|\\{[a-zA-Z0-9._:-]+\\}))+$"
         },
         "ActivationState": {
           "$ref": "#/definitions/RouteActivationState"
@@ -60,6 +60,9 @@
           }
         },
         "IncludeChildPaths": {
+          "type": "boolean"
+        },
+        "AppendSourcePath": {
           "type": "boolean"
         }
       },
@@ -169,7 +172,8 @@
     "/properties/ServiceIdentifier",
     "/properties/UriPathRoute/SourcePath",
     "/properties/UriPathRoute/Methods",
-    "/properties/UriPathRoute/IncludeChildPaths"
+    "/properties/UriPathRoute/IncludeChildPaths",
+    "/properties/UriPathRoute/AppendSourcePath"
   ],
   "primaryIdentifier": [
     "/properties/EnvironmentIdentifier",

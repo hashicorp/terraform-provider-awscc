@@ -10,6 +10,85 @@
       ],
       "default": "OFF"
     },
+    "DataDestinationConfig": {
+      "oneOf": [
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "S3Config",
+          "properties": {
+            "S3Config": {
+              "$ref": "#/definitions/S3Config"
+            }
+          },
+          "required": [
+            "S3Config"
+          ]
+        },
+        {
+          "additionalProperties": false,
+          "type": "object",
+          "title": "TimestreamConfig",
+          "properties": {
+            "TimestreamConfig": {
+              "$ref": "#/definitions/TimestreamConfig"
+            }
+          },
+          "required": [
+            "TimestreamConfig"
+          ]
+        }
+      ]
+    },
+    "S3Config": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "BucketArn": {
+          "maxLength": 100,
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z0-9-]*):s3:::.+$",
+          "minLength": 16
+        },
+        "DataFormat": {
+          "$ref": "#/definitions/DataFormat"
+        },
+        "StorageCompressionFormat": {
+          "$ref": "#/definitions/StorageCompressionFormat"
+        },
+        "Prefix": {
+          "maxLength": 512,
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9-_:./!*'()]+$",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "BucketArn"
+      ]
+    },
+    "TimestreamConfig": {
+      "additionalProperties": false,
+      "type": "object",
+      "properties": {
+        "TimestreamTableArn": {
+          "maxLength": 2048,
+          "type": "string",
+          "pattern": "^arn:(aws[a-zA-Z0-9-]*):timestream:[a-zA-Z0-9-]+:[0-9]{12}:database\\/[a-zA-Z0-9_.-]+\\/table\\/[a-zA-Z0-9_.-]+$",
+          "minLength": 20
+        },
+        "ExecutionRoleArn": {
+          "maxLength": 2048,
+          "type": "string",
+          "pattern": "",
+          "minLength": 20
+        }
+      },
+      "required": [
+        "TimestreamTableArn",
+        "ExecutionRoleArn"
+      ]
+    },
     "UpdateCampaignAction": {
       "type": "string",
       "enum": [
@@ -88,6 +167,20 @@
       "enum": [
         "ALWAYS",
         "RISING_EDGE"
+      ]
+    },
+    "DataFormat": {
+      "type": "string",
+      "enum": [
+        "JSON",
+        "PARQUET"
+      ]
+    },
+    "StorageCompressionFormat": {
+      "type": "string",
+      "enum": [
+        "NONE",
+        "GZIP"
       ]
     },
     "CollectionScheme": {
@@ -199,6 +292,15 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/SignalInformation"
+      }
+    },
+    "DataDestinationConfigs": {
+      "minItems": 1,
+      "maxItems": 1,
+      "insertionOrder": false,
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/DataDestinationConfig"
       }
     },
     "StartTime": {

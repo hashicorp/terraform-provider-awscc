@@ -85,6 +85,10 @@
       "type": "string",
       "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
     },
+    "RoleArn": {
+      "type": "string",
+      "pattern": ""
+    },
     "Tags": {
       "$ref": "#/definitions/TagMap"
     }
@@ -110,7 +114,8 @@
   "createOnlyProperties": [
     "/properties/EngineType",
     "/properties/Name",
-    "/properties/KmsKeyId"
+    "/properties/KmsKeyId",
+    "/properties/RoleArn"
   ],
   "primaryIdentifier": [
     "/properties/ApplicationArn"
