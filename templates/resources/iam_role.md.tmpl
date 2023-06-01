@@ -1,0 +1,48 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic example
+To create an AWS IAM Role with basic details
+{{ tffile (printf "examples/resources/%s/iam_role.tf" .Name)}}
+
+
+### IAM Role with Assume role policy as Data source
+To create an AWS IAM role referring Assume role policy Terraform data source
+{{ tffile (printf "examples/resources/%s/iam_role_with_assume_role.tf" .Name)}}
+
+
+### IAM Role with Inline Policy
+To create an AWS IAM role with inline policy attached to the role
+{{ tffile (printf "examples/resources/%s/iam_role_with_inline.tf" .Name)}}
+
+
+### IAM Role with Managed Policy
+To create an AWS IAM role which has a managed policy attached to the role
+{{ tffile (printf "examples/resources/%s/iam_role_with_managed.tf" .Name)}}
+
+
+### IAM Role with Permission boundary
+To create an AWS IAM role which has a Permission boundary policy attached to the role
+{{ tffile (printf "examples/resources/%s/iam_role_with_permission_boundary.tf" .Name)}}
+
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
