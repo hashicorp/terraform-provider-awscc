@@ -172,6 +172,21 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -225,6 +240,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"engine_type":     "EngineType",
 		"kms_key_id":      "KmsKeyId",
 		"name":            "Name",
+		"role_arn":        "RoleArn",
 		"s3_location":     "S3Location",
 		"tags":            "Tags",
 	})

@@ -168,15 +168,28 @@ func projectResource(ctx context.Context) (resource.Resource, error) {
 				// Property: ProvisionedProductId
 				"provisioned_product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The identifier of the provisioning artifact (also known as a version).",
+					Optional:    true,
 					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthAtMost(100),
+						stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"), ""),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ProvisionedProductStatusMessage
 				"provisioned_product_status_message": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Provisioned Product Status Message",
+					Optional:    true,
 					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Provisioned ServiceCatalog  Details",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),

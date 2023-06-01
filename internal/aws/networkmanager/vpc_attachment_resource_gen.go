@@ -12,9 +12,9 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -212,7 +212,6 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "description": "A key-value pair to associate with a resource.",
-		//	        "insertionOrder": false,
 		//	        "properties": {
 		//	          "Key": {
 		//	            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -229,7 +228,8 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -239,37 +239,47 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AttachmentPolicyRuleNumber
 				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
 					Description: "The rule number in the policy document that applies to this change.",
+					Optional:    true,
 					Computed:    true,
+					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						int64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SegmentName
 				"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The name of the segment to change.",
+					Optional:    true,
 					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
-				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
 							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Computed:    true,
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: Value
 							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
-								Computed:    true,
+								Required:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "The key-value tags that changed for the segment.",
+					Optional:    true,
 					Computed:    true,
-					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-						generic.Multiset(),
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The attachment to move from one segment to another.",
+			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
@@ -345,7 +355,6 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a resource.",
-		//	    "insertionOrder": false,
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -362,9 +371,10 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
@@ -382,9 +392,8 @@ func vpcAttachmentResource(ctx context.Context) (resource.Resource, error) {
 			Description: "Tags for the attachment.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: UpdatedAt

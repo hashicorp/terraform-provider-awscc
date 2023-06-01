@@ -334,6 +334,21 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: IngestionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the event data store is ingesting events.",
+		//	  "type": "boolean"
+		//	}
+		"ingestion_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the event data store is ingesting events.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -413,11 +428,11 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The status of an event data store. Values are ENABLED and PENDING_DELETION.",
+		//	  "description": "The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of an event data store. Values are ENABLED and PENDING_DELETION.",
+			Description: "The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -530,6 +545,7 @@ func eventDataStoreResource(ctx context.Context) (resource.Resource, error) {
 		"event_data_store_arn":           "EventDataStoreArn",
 		"field":                          "Field",
 		"field_selectors":                "FieldSelectors",
+		"ingestion_enabled":              "IngestionEnabled",
 		"key":                            "Key",
 		"kms_key_id":                     "KmsKeyId",
 		"multi_region_enabled":           "MultiRegionEnabled",
