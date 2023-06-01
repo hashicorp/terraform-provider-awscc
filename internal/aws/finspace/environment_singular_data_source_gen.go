@@ -131,6 +131,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "Additional parameters to identify Federation mode",
 		//	  "properties": {
 		//	    "ApplicationCallBackURL": {
@@ -140,7 +141,27 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "AttributeMap": {
 		//	      "description": "Attribute map for SAML configuration",
-		//	      "type": "object"
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "Key": {
+		//	            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	            "maxLength": 128,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Value": {
+		//	            "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	            "maxLength": 256,
+		//	            "minLength": 0,
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "type": "object"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
 		//	    },
 		//	    "FederationProviderName": {
 		//	      "description": "Federation provider name to link with the Environment",
@@ -151,7 +172,6 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    },
 		//	    "FederationURN": {
 		//	      "description": "SAML metadata URL to link with the Environment",
-		//	      "pattern": "",
 		//	      "type": "string"
 		//	    },
 		//	    "SamlMetadataDocument": {
@@ -177,8 +197,21 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: AttributeMap
-				"attribute_map": schema.MapAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
+				"attribute_map": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: Key
+							"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: Value
+							"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
 					Description: "Attribute map for SAML configuration",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
@@ -269,6 +302,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "additionalProperties": false,
 		//	  "description": "Parameters of the first Superuser for the FinSpace Environment",
 		//	  "properties": {
 		//	    "EmailAddress": {
@@ -316,6 +350,56 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Parameters of the first Superuser for the FinSpace Environment",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Tags
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An array of key-value pairs to apply to this resource.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "A list of all tags for a resource.",
+		//	    "properties": {
+		//	      "Key": {
+		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 128,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "description": "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+		//	        "maxLength": 256,
+		//	        "minLength": 0,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Key",
+		//	      "Value"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "An array of key-value pairs to apply to this resource.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
 	attributes["id"] = schema.StringAttribute{
@@ -348,6 +432,7 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"federation_provider_name":     "FederationProviderName",
 		"federation_urn":               "FederationURN",
 		"first_name":                   "FirstName",
+		"key":                          "Key",
 		"kms_key_id":                   "KmsKeyId",
 		"last_name":                    "LastName",
 		"name":                         "Name",
@@ -356,6 +441,8 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"saml_metadata_url":            "SamlMetadataURL",
 		"status":                       "Status",
 		"superuser_parameters":         "SuperuserParameters",
+		"tags":                         "Tags",
+		"value":                        "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

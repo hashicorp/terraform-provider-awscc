@@ -41,6 +41,34 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "PolicyVariables": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "RuleVariables": {
+		//	          "additionalProperties": false,
+		//	          "patternProperties": {
+		//	            "": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Definition": {
+		//	                  "insertionOrder": true,
+		//	                  "items": {
+		//	                    "minLength": 1,
+		//	                    "pattern": "^.*$",
+		//	                    "type": "string"
+		//	                  },
+		//	                  "type": "array",
+		//	                  "uniqueItems": false
+		//	                }
+		//	              },
+		//	              "type": "object"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "StatefulDefaultActions": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -62,7 +90,8 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	        "StreamExceptionPolicy": {
 		//	          "enum": [
 		//	            "DROP",
-		//	            "CONTINUE"
+		//	            "CONTINUE",
+		//	            "REJECT"
 		//	          ],
 		//	          "type": "string"
 		//	        }
@@ -215,6 +244,26 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		//	}
 		"firewall_policy": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: PolicyVariables
+				"policy_variables": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RuleVariables
+						"rule_variables":          // Pattern: ""
+						schema.MapNestedAttribute{ /*START ATTRIBUTE*/
+							NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+									// Property: Definition
+									"definition": schema.ListAttribute{ /*START ATTRIBUTE*/
+										ElementType: types.StringType,
+										Computed:    true,
+									}, /*END ATTRIBUTE*/
+								}, /*END SCHEMA*/
+							}, /*END NESTED OBJECT*/
+							Computed: true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: StatefulDefaultActions
 				"stateful_default_actions": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -430,6 +479,7 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"action":                             "Action",
 		"action_definition":                  "ActionDefinition",
 		"action_name":                        "ActionName",
+		"definition":                         "Definition",
 		"description":                        "Description",
 		"dimensions":                         "Dimensions",
 		"firewall_policy":                    "FirewallPolicy",
@@ -438,10 +488,12 @@ func firewallPolicyDataSource(ctx context.Context) (datasource.DataSource, error
 		"firewall_policy_name":               "FirewallPolicyName",
 		"key":                                "Key",
 		"override":                           "Override",
+		"policy_variables":                   "PolicyVariables",
 		"priority":                           "Priority",
 		"publish_metric_action":              "PublishMetricAction",
 		"resource_arn":                       "ResourceArn",
 		"rule_order":                         "RuleOrder",
+		"rule_variables":                     "RuleVariables",
 		"stateful_default_actions":           "StatefulDefaultActions",
 		"stateful_engine_options":            "StatefulEngineOptions",
 		"stateful_rule_group_references":     "StatefulRuleGroupReferences",

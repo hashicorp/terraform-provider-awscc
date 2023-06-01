@@ -1,4 +1,43 @@
-## 0.52.0 (Unreleased)
+## 0.53.0 (Unreleased)
+## 0.52.0 (May 11, 2023)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_integration_response`
+* **New Data Source:** `awscc_backupgateway_hypervisor`
+* **New Data Source:** `awscc_backupgateway_hypervisors`
+* **New Data Source:** `awscc_datasync_storage_system`
+* **New Data Source:** `awscc_datasync_storage_systems`
+* **New Data Source:** `awscc_ec2_verified_access_endpoint`
+* **New Data Source:** `awscc_ec2_verified_access_endpoints`
+* **New Data Source:** `awscc_ec2_verified_access_group`
+* **New Data Source:** `awscc_ec2_verified_access_groups`
+* **New Data Source:** `awscc_ec2_verified_access_instance`
+* **New Data Source:** `awscc_ec2_verified_access_instances`
+* **New Data Source:** `awscc_ec2_verified_access_trust_provider`
+* **New Data Source:** `awscc_ec2_verified_access_trust_providers`
+* **New Data Source:** `awscc_osis_pipeline`
+* **New Data Source:** `awscc_osis_pipelines`
+* **New Data Source:** `awscc_proton_environment_template`
+* **New Data Source:** `awscc_proton_environment_templates`
+* **New Data Source:** `awscc_proton_service_template`
+* **New Data Source:** `awscc_proton_service_templates`
+* **New Data Source:** `awscc_quicksight_vpc_connection`
+* **New Data Source:** `awscc_secretsmanager_secret`
+* **New Data Source:** `awscc_secretsmanager_secrets`
+* **New Resource:** `awscc_apigatewayv2_integration_response`
+* **New Resource:** `awscc_backupgateway_hypervisor`
+* **New Resource:** `awscc_datasync_storage_system`
+* **New Resource:** `awscc_ec2_verified_access_endpoint`
+* **New Resource:** `awscc_ec2_verified_access_group`
+* **New Resource:** `awscc_ec2_verified_access_instance`
+* **New Resource:** `awscc_ec2_verified_access_trust_provider`
+* **New Resource:** `awscc_osis_pipeline`
+* **New Resource:** `awscc_proton_environment_template`
+* **New Resource:** `awscc_proton_service_template`
+* **New Resource:** `awscc_quicksight_vpc_connection`
+* **New Resource:** `awscc_secretsmanager_secret`
+
 ## 0.51.0 (April 27, 2023)
 
 FEATURES:

@@ -148,7 +148,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -279,7 +282,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -321,6 +327,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "uniqueItems": false
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "ExecutionRole"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"default_space_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -511,7 +520,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -642,7 +654,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -772,7 +787,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },
@@ -864,6 +882,9 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "type": "object"
 		//	    }
 		//	  },
+		//	  "required": [
+		//	    "ExecutionRole"
+		//	  ],
 		//	  "type": "object"
 		//	}
 		"default_user_settings": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1182,7 +1203,10 @@ func domainDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                "ml.g5.12xlarge",
 		//	                "ml.g5.16xlarge",
 		//	                "ml.g5.24xlarge",
-		//	                "ml.g5.48xlarge"
+		//	                "ml.g5.48xlarge",
+		//	                "ml.p4d.24xlarge",
+		//	                "ml.p4de.24xlarge",
+		//	                "ml.geospatial.interactive"
 		//	              ],
 		//	              "type": "string"
 		//	            },

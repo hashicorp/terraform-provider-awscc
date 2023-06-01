@@ -290,6 +290,9 @@
     "/properties/DockerfileTemplateData",
     "/properties/DockerfileTemplateUri"
   ],
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

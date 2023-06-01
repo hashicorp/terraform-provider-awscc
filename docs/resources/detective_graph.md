@@ -17,6 +17,7 @@ Resource schema for AWS::Detective::Graph
 
 ### Optional
 
+- `auto_enable_members` (Boolean) Indicates whether to automatically enable new organization accounts as member accounts in the organization behavior graph.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

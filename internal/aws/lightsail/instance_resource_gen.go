@@ -888,6 +888,7 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// UserData is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: UserName
 		// CloudFormation resource type schema:
@@ -979,6 +980,9 @@ func instanceResource(ctx context.Context) (resource.Resource, error) {
 		"value":                        "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/UserData",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(2160)

@@ -115,32 +115,6 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The Access Point Policy you want to apply to this access point.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: PolicyStatus
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "properties": {
-		//	    "IsPublic": {
-		//	      "description": "Specifies whether the policy is public or not.",
-		//	      "enum": [
-		//	        "true",
-		//	        "false"
-		//	      ],
-		//	      "type": "string"
-		//	    }
-		//	  },
-		//	  "type": "object"
-		//	}
-		"policy_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IsPublic
-				"is_public": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether the policy is public or not.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: PublicAccessBlockConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -242,11 +216,9 @@ func accessPointDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"bucket":                            "Bucket",
 		"bucket_account_id":                 "BucketAccountId",
 		"ignore_public_acls":                "IgnorePublicAcls",
-		"is_public":                         "IsPublic",
 		"name":                              "Name",
 		"network_origin":                    "NetworkOrigin",
 		"policy":                            "Policy",
-		"policy_status":                     "PolicyStatus",
 		"public_access_block_configuration": "PublicAccessBlockConfiguration",
 		"restrict_public_buckets":           "RestrictPublicBuckets",
 		"vpc_configuration":                 "VpcConfiguration",

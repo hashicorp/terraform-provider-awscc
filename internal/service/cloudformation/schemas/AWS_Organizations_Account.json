@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::Organizations::Account",
   "description": "You can use AWS::Organizations::Account to manage accounts in organization.",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-organizations.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-organizations",
   "properties": {
     "AccountName": {
       "description": "The friendly name of the member account.",

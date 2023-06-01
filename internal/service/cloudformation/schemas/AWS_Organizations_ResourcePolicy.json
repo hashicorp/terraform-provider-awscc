@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::Organizations::ResourcePolicy",
   "description": "You can use AWS::Organizations::ResourcePolicy to delegate policy management for AWS Organizations to specified member accounts to perform policy actions that are by default available only to the management account.",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-organizations.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-organizations",
   "properties": {
     "Id": {
       "description": "The unique identifier (ID) associated with this resource policy.",

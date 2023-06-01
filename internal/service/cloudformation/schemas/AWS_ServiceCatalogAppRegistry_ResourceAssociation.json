@@ -46,6 +46,11 @@
     "/properties/ResourceArn",
     "/properties/Id"
   ],
+  "createOnlyProperties": [
+    "/properties/Application",
+    "/properties/Resource",
+    "/properties/ResourceType"
+  ],
   "primaryIdentifier": [
     "/properties/Id"
   ],

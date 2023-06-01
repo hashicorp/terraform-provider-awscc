@@ -13,6 +13,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
@@ -93,6 +94,240 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FilterAtDestination
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "DestinationAddress": {
+		//	      "type": "string"
+		//	    },
+		//	    "DestinationPortRange": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "FromPort": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ToPort": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SourceAddress": {
+		//	      "type": "string"
+		//	    },
+		//	    "SourcePortRange": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "FromPort": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ToPort": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"filter_at_destination": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationAddress
+				"destination_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DestinationPortRange
+				"destination_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FromPort
+						"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ToPort
+						"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SourceAddress
+				"source_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SourcePortRange
+				"source_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FromPort
+						"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ToPort
+						"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FilterAtSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "DestinationAddress": {
+		//	      "type": "string"
+		//	    },
+		//	    "DestinationPortRange": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "FromPort": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ToPort": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
+		//	    "SourceAddress": {
+		//	      "type": "string"
+		//	    },
+		//	    "SourcePortRange": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "FromPort": {
+		//	          "type": "integer"
+		//	        },
+		//	        "ToPort": {
+		//	          "type": "integer"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"filter_at_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: DestinationAddress
+				"destination_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: DestinationPortRange
+				"destination_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FromPort
+						"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ToPort
+						"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SourceAddress
+				"source_address": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: SourcePortRange
+				"source_port_range": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: FromPort
+						"from_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: ToPort
+						"to_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+								int64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: NetworkInsightsPathArn
@@ -249,17 +484,25 @@ func networkInsightsPathResource(ctx context.Context) (resource.Resource, error)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"created_date":              "CreatedDate",
 		"destination":               "Destination",
+		"destination_address":       "DestinationAddress",
 		"destination_arn":           "DestinationArn",
 		"destination_ip":            "DestinationIp",
 		"destination_port":          "DestinationPort",
+		"destination_port_range":    "DestinationPortRange",
+		"filter_at_destination":     "FilterAtDestination",
+		"filter_at_source":          "FilterAtSource",
+		"from_port":                 "FromPort",
 		"key":                       "Key",
 		"network_insights_path_arn": "NetworkInsightsPathArn",
 		"network_insights_path_id":  "NetworkInsightsPathId",
 		"protocol":                  "Protocol",
 		"source":                    "Source",
+		"source_address":            "SourceAddress",
 		"source_arn":                "SourceArn",
 		"source_ip":                 "SourceIp",
+		"source_port_range":         "SourcePortRange",
 		"tags":                      "Tags",
+		"to_port":                   "ToPort",
 		"value":                     "Value",
 	})
 

@@ -42,6 +42,27 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaximumDuration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maximum running time of the simulation.",
+		//	  "maxLength": 6,
+		//	  "minLength": 2,
+		//	  "type": "string"
+		//	}
+		"maximum_duration": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maximum running time of the simulation.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(2, 6),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -54,13 +75,11 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name of the simulation.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.LengthBetween(1, 2048),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -73,10 +92,9 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Role ARN.",
-			Optional:    true,
-			Computed:    true,
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: SchemaS3Location
@@ -87,16 +105,15 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "BucketName": {
 		//	      "description": "The Schema S3 bucket name.",
-		//	      "maxLength": 255,
+		//	      "maxLength": 63,
 		//	      "minLength": 3,
-		//	      "pattern": "[a-zA-Z0-9_\\-]{3,255}$",
+		//	      "pattern": "[a-zA-Z0-9_\\-]{3,63}$",
 		//	      "type": "string"
 		//	    },
 		//	    "ObjectKey": {
 		//	      "description": "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
 		//	      "maxLength": 255,
 		//	      "minLength": 3,
-		//	      "pattern": "([\\-a-zA-Z0-9_-]+\\/)*[a-zA-Z0-9_-]+\\.(json|yaml)$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -113,8 +130,8 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The Schema S3 bucket name.",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(3, 255),
-						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_\\-]{3,255}$"), ""),
+						stringvalidator.LengthBetween(3, 63),
+						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_\\-]{3,63}$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ObjectKey
@@ -123,7 +140,6 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(3, 255),
-						stringvalidator.RegexMatches(regexp.MustCompile("([\\-a-zA-Z0-9_-]+\\/)*[a-zA-Z0-9_-]+\\.(json|yaml)$"), ""),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -131,6 +147,60 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: SnapshotS3Location
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "BucketName": {
+		//	      "description": "The Schema S3 bucket name.",
+		//	      "maxLength": 63,
+		//	      "minLength": 3,
+		//	      "pattern": "[a-zA-Z0-9_\\-]{3,63}$",
+		//	      "type": "string"
+		//	    },
+		//	    "ObjectKey": {
+		//	      "description": "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
+		//	      "maxLength": 255,
+		//	      "minLength": 3,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BucketName",
+		//	    "ObjectKey"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"snapshot_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BucketName
+				"bucket_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Schema S3 bucket name.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(3, 63),
+						stringvalidator.RegexMatches(regexp.MustCompile("[a-zA-Z0-9_\\-]{3,63}$"), ""),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ObjectKey
+				"object_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "This is the schema S3 object key, which includes the full path of \"folders\" from the bucket root to the schema.",
+					Required:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(3, 255),
+					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -155,12 +225,14 @@ func simulationResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bucket_name":        "BucketName",
-		"describe_payload":   "DescribePayload",
-		"name":               "Name",
-		"object_key":         "ObjectKey",
-		"role_arn":           "RoleArn",
-		"schema_s3_location": "SchemaS3Location",
+		"bucket_name":          "BucketName",
+		"describe_payload":     "DescribePayload",
+		"maximum_duration":     "MaximumDuration",
+		"name":                 "Name",
+		"object_key":           "ObjectKey",
+		"role_arn":             "RoleArn",
+		"schema_s3_location":   "SchemaS3Location",
+		"snapshot_s3_location": "SnapshotS3Location",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)

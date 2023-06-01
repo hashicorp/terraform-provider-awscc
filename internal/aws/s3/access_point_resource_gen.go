@@ -114,7 +114,12 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The name you want to assign to this Access Point. If you don't specify a name, AWS CloudFormation generates a unique ID and uses that ID for the access point name.",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(3, 50),
+				stringvalidator.RegexMatches(regexp.MustCompile("^[a-z0-9]([a-z0-9\\-]*[a-z0-9])?$"), ""),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
@@ -152,46 +157,6 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 				mapplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: PolicyStatus
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "properties": {
-		//	    "IsPublic": {
-		//	      "description": "Specifies whether the policy is public or not.",
-		//	      "enum": [
-		//	        "true",
-		//	        "false"
-		//	      ],
-		//	      "type": "string"
-		//	    }
-		//	  },
-		//	  "type": "object"
-		//	}
-		"policy_status": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: IsPublic
-				"is_public": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Specifies whether the policy is public or not.",
-					Optional:    true,
-					Computed:    true,
-					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.OneOf(
-							"true",
-							"false",
-						),
-					}, /*END VALIDATORS*/
-					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-						stringplanmodifier.UseStateForUnknown(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Optional: true,
-			Computed: true,
-			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
-				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PublicAccessBlockConfiguration
@@ -263,7 +228,6 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
-				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VpcConfiguration
@@ -333,11 +297,9 @@ func accessPointResource(ctx context.Context) (resource.Resource, error) {
 		"bucket":                            "Bucket",
 		"bucket_account_id":                 "BucketAccountId",
 		"ignore_public_acls":                "IgnorePublicAcls",
-		"is_public":                         "IsPublic",
 		"name":                              "Name",
 		"network_origin":                    "NetworkOrigin",
 		"policy":                            "Policy",
-		"policy_status":                     "PolicyStatus",
 		"public_access_block_configuration": "PublicAccessBlockConfiguration",
 		"restrict_public_buckets":           "RestrictPublicBuckets",
 		"vpc_configuration":                 "VpcConfiguration",

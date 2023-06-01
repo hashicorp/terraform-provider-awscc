@@ -87,6 +87,23 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: ServerSdkVersion
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A server SDK version you used when integrating your game server build with Amazon GameLift. By default Amazon GameLift sets this value to 4.0.2.",
+		//	  "type": "string"
+		//	}
+		"server_sdk_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A server SDK version you used when integrating your game server build with Amazon GameLift. By default Amazon GameLift sets this value to 4.0.2.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+			// ServerSdkVersion is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: StorageLocation
 		// CloudFormation resource type schema:
 		//
@@ -192,19 +209,21 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"bucket":           "Bucket",
-		"build_id":         "BuildId",
-		"key":              "Key",
-		"name":             "Name",
-		"object_version":   "ObjectVersion",
-		"operating_system": "OperatingSystem",
-		"role_arn":         "RoleArn",
-		"storage_location": "StorageLocation",
-		"version":          "Version",
+		"bucket":             "Bucket",
+		"build_id":           "BuildId",
+		"key":                "Key",
+		"name":               "Name",
+		"object_version":     "ObjectVersion",
+		"operating_system":   "OperatingSystem",
+		"role_arn":           "RoleArn",
+		"server_sdk_version": "ServerSdkVersion",
+		"storage_location":   "StorageLocation",
+		"version":            "Version",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/StorageLocation",
+		"/properties/ServerSdkVersion",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
