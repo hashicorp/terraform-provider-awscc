@@ -1,0 +1,43 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic example
+To create a AWS RDS DB instance with basic details
+{{ tffile (printf "examples/resources/%s/rds_db_instance.tf" .Name)}}
+
+### Storage Autoscaling example
+To enable Storage Autoscaling with instances that support the feature, define the max_allocated_storage argument higher than the allocated_storage argument. Terraform will automatically hide differences with the allocated_storage argument value if autoscaling occurs.
+{{ tffile (printf "examples/resources/%s/rds_db_instance_storage_autoscaling.tf" .Name)}}
+
+### Managed Master Passwords via Secrets Manager, default KMS Key example
+You can specify the manage_master_user_password attribute to enable managing the master password with Secrets Manager. You can also update an existing cluster to use Secrets Manager by specify the manage_master_user_password attribute and removing the password attribute (removal is required).
+{{ tffile (printf "examples/resources/%s/rds_db_instance_secret_manager.tf" .Name)}}
+
+### Managed Master Passwords via Secrets Manager, specific KMS Key example
+You can specify the kms_key_id attribute under nested block master_user_secret to specify a specific KMS Key.
+{{ tffile (printf "examples/resources/%s/rds_db_instance_secret_manager_cmk.tf" .Name)}}
+
+### DB Instance creation with custom subnet group example
+You can create RDS DB instance by using custom db subnet group
+{{ tffile (printf "examples/resources/%s/rds_db_instance_db_subnet_group.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
