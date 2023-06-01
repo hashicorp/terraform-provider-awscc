@@ -18,6 +18,7 @@ A storage lake of event data against which you can run complex SQL-based queries
 ### Optional
 
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
+- `ingestion_enabled` (Boolean) Indicates whether the event data store is ingesting events.
 - `kms_key_id` (String) Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
 - `multi_region_enabled` (Boolean) Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
 - `name` (String) The name of the event data store.
@@ -31,7 +32,7 @@ A storage lake of event data against which you can run complex SQL-based queries
 - `created_timestamp` (String) The timestamp of the event data store's creation.
 - `event_data_store_arn` (String) The ARN of the event data store.
 - `id` (String) Uniquely identifies the resource.
-- `status` (String) The status of an event data store. Values are ENABLED and PENDING_DELETION.
+- `status` (String) The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.
 - `updated_timestamp` (String) The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.
 
 <a id="nestedatt--advanced_event_selectors"></a>

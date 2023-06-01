@@ -24,12 +24,13 @@ Data Source schema for AWS::CloudTrail::EventDataStore
 - `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
 - `created_timestamp` (String) The timestamp of the event data store's creation.
 - `event_data_store_arn` (String) The ARN of the event data store.
+- `ingestion_enabled` (Boolean) Indicates whether the event data store is ingesting events.
 - `kms_key_id` (String) Specifies the KMS key ID to use to encrypt the events delivered by CloudTrail. The value can be an alias name prefixed by 'alias/', a fully specified ARN to an alias, a fully specified ARN to a key, or a globally unique identifier.
 - `multi_region_enabled` (Boolean) Indicates whether the event data store includes events from all regions, or only from the region in which it was created.
 - `name` (String) The name of the event data store.
 - `organization_enabled` (Boolean) Indicates that an event data store is collecting logged events for an organization.
 - `retention_period` (Number) The retention period, in days.
-- `status` (String) The status of an event data store. Values are ENABLED and PENDING_DELETION.
+- `status` (String) The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 - `termination_protection_enabled` (Boolean) Indicates whether the event data store is protected from termination.
 - `updated_timestamp` (String) The timestamp showing when an event data store was updated, if applicable. UpdatedTimestamp is always either the same or newer than the time shown in CreatedTimestamp.

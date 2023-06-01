@@ -1,0 +1,1 @@
+$ terraform import awscc_shield_proactive_engagement.example <resource ID>

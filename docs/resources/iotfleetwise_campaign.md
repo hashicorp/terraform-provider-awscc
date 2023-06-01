@@ -26,6 +26,7 @@ Definition of AWS::IoTFleetWise::Campaign Resource Type
 ### Optional
 
 - `compression` (String)
+- `data_destination_configs` (Attributes List) (see [below for nested schema](#nestedatt--data_destination_configs))
 - `data_extra_dimensions` (List of String)
 - `description` (String)
 - `diagnostics_mode` (String)
@@ -73,6 +74,38 @@ Optional:
 Required:
 
 - `period_ms` (Number)
+
+
+
+<a id="nestedatt--data_destination_configs"></a>
+### Nested Schema for `data_destination_configs`
+
+Optional:
+
+- `s3_config` (Attributes) (see [below for nested schema](#nestedatt--data_destination_configs--s3_config))
+- `timestream_config` (Attributes) (see [below for nested schema](#nestedatt--data_destination_configs--timestream_config))
+
+<a id="nestedatt--data_destination_configs--s3_config"></a>
+### Nested Schema for `data_destination_configs.s3_config`
+
+Required:
+
+- `bucket_arn` (String)
+
+Optional:
+
+- `data_format` (String)
+- `prefix` (String)
+- `storage_compression_format` (String)
+
+
+<a id="nestedatt--data_destination_configs--timestream_config"></a>
+### Nested Schema for `data_destination_configs.timestream_config`
+
+Required:
+
+- `execution_role_arn` (String)
+- `timestream_table_arn` (String)
 
 
 

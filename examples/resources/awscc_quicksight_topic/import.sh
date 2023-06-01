@@ -1,0 +1,1 @@
+$ terraform import awscc_quicksight_topic.example <resource ID>

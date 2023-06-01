@@ -25,7 +25,7 @@ AWS::NetworkManager::ConnectPeer Resource Type Definition.
 
 - `bgp_options` (Attributes) Bgp options for connect peer. (see [below for nested schema](#nestedatt--bgp_options))
 - `core_network_address` (String) The IP address of a core network.
-- `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -60,9 +60,9 @@ Required:
 Read-Only:
 
 - `bgp_configurations` (Attributes List) (see [below for nested schema](#nestedatt--configuration--bgp_configurations))
-- `core_network_address` (String)
-- `inside_cidr_blocks` (List of String)
-- `peer_address` (String)
+- `core_network_address` (String) The IP address of a core network.
+- `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
+- `peer_address` (String) The IP address of the Connect peer.
 - `protocol` (String) Tunnel protocol type (Only support GRE for now)
 
 <a id="nestedatt--configuration--bgp_configurations"></a>
@@ -70,10 +70,10 @@ Read-Only:
 
 Read-Only:
 
-- `core_network_address` (String)
-- `core_network_asn` (Number)
-- `peer_address` (String)
-- `peer_asn` (Number)
+- `core_network_address` (String) The address of a core network.
+- `core_network_asn` (Number) The ASN of the Coret Network.
+- `peer_address` (String) The address of a core network Connect peer.
+- `peer_asn` (Number) The ASN of the Connect peer.
 
 ## Import
 

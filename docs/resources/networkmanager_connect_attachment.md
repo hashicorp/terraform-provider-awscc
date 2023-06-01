@@ -24,7 +24,8 @@ AWS::NetworkManager::ConnectAttachment Resource Type Definition
 
 ### Optional
 
-- `tags` (Attributes List) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
+- `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
+- `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
@@ -35,7 +36,6 @@ AWS::NetworkManager::ConnectAttachment Resource Type Definition
 - `created_at` (String) Creation time of the attachment.
 - `id` (String) Uniquely identifies the resource.
 - `owner_account_id` (String) The ID of the attachment account owner.
-- `proposed_segment_change` (Attributes) The attachment to move from one segment to another. (see [below for nested schema](#nestedatt--proposed_segment_change))
 - `resource_arn` (String) The attachment resource ARN.
 - `segment_name` (String) The name of the segment attachment.
 - `state` (String) State of the attachment.
@@ -49,8 +49,17 @@ Optional:
 - `protocol` (String) Tunnel protocol for connect attachment
 
 
-<a id="nestedatt--tags"></a>
-### Nested Schema for `tags`
+<a id="nestedatt--proposed_segment_change"></a>
+### Nested Schema for `proposed_segment_change`
+
+Optional:
+
+- `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
+- `segment_name` (String) The name of the segment to change.
+- `tags` (Attributes Set) The list of key-value tags that changed for the segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
+
+<a id="nestedatt--proposed_segment_change--tags"></a>
+### Nested Schema for `proposed_segment_change.tags`
 
 Required:
 
@@ -58,19 +67,11 @@ Required:
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 
-<a id="nestedatt--proposed_segment_change"></a>
-### Nested Schema for `proposed_segment_change`
 
-Read-Only:
+<a id="nestedatt--tags"></a>
+### Nested Schema for `tags`
 
-- `attachment_policy_rule_number` (Number) New policy rule number of the attachment
-- `segment_name` (String) Proposed segment name
-- `tags` (Attributes List) Proposed tags for the Segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
-
-<a id="nestedatt--proposed_segment_change--tags"></a>
-### Nested Schema for `proposed_segment_change.tags`
-
-Read-Only:
+Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

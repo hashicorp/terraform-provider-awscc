@@ -55,6 +55,7 @@ Read-Only:
 Read-Only:
 
 - `activation_state` (String)
+- `append_source_path` (Boolean)
 - `include_child_paths` (Boolean)
 - `methods` (List of String)
 - `source_path` (String)

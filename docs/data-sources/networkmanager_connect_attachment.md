@@ -34,7 +34,7 @@ Data Source schema for AWS::NetworkManager::ConnectAttachment
 - `resource_arn` (String) The attachment resource ARN.
 - `segment_name` (String) The name of the segment attachment.
 - `state` (String) State of the attachment.
-- `tags` (Attributes List) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 - `transport_attachment_id` (String) Id of transport attachment
 - `updated_at` (String) Last update time of the attachment.
 
@@ -51,9 +51,9 @@ Read-Only:
 
 Read-Only:
 
-- `attachment_policy_rule_number` (Number) New policy rule number of the attachment
-- `segment_name` (String) Proposed segment name
-- `tags` (Attributes List) Proposed tags for the Segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
+- `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
+- `segment_name` (String) The name of the segment to change.
+- `tags` (Attributes Set) The list of key-value tags that changed for the segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
 
 <a id="nestedatt--proposed_segment_change--tags"></a>
 ### Nested Schema for `proposed_segment_change.tags`

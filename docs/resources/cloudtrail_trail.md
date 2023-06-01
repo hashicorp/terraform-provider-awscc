@@ -22,6 +22,7 @@ Creates a trail that specifies the settings for delivery of log data to an Amazo
 
 ### Optional
 
+- `advanced_event_selectors` (Attributes Set) The advanced event selectors that were used to select events for the data store. (see [below for nested schema](#nestedatt--advanced_event_selectors))
 - `cloudwatch_logs_log_group_arn` (String) Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.
 - `cloudwatch_logs_role_arn` (String) Specifies the role for the CloudWatch Logs endpoint to assume to write to a user's log group.
 - `enable_log_file_validation` (Boolean) Specifies whether log file validation is enabled. The default is false.
@@ -41,6 +42,35 @@ Creates a trail that specifies the settings for delivery of log data to an Amazo
 - `arn` (String)
 - `id` (String) Uniquely identifies the resource.
 - `sns_topic_arn` (String)
+
+<a id="nestedatt--advanced_event_selectors"></a>
+### Nested Schema for `advanced_event_selectors`
+
+Required:
+
+- `field_selectors` (Attributes Set) Contains all selector statements in an advanced event selector. (see [below for nested schema](#nestedatt--advanced_event_selectors--field_selectors))
+
+Optional:
+
+- `name` (String) An optional, descriptive name for an advanced event selector, such as "Log data events for only two S3 buckets".
+
+<a id="nestedatt--advanced_event_selectors--field_selectors"></a>
+### Nested Schema for `advanced_event_selectors.field_selectors`
+
+Required:
+
+- `field` (String) A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.
+
+Optional:
+
+- `ends_with` (Set of String) An operator that includes events that match the last few characters of the event record field specified as the value of Field.
+- `equals` (Set of String) An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.
+- `not_ends_with` (Set of String) An operator that excludes events that match the last few characters of the event record field specified as the value of Field.
+- `not_equals` (Set of String) An operator that excludes events that match the exact value of the event record field specified as the value of Field.
+- `not_starts_with` (Set of String) An operator that excludes events that match the first few characters of the event record field specified as the value of Field.
+- `starts_with` (Set of String) An operator that includes events that match the first few characters of the event record field specified as the value of Field.
+
+
 
 <a id="nestedatt--event_selectors"></a>
 ### Nested Schema for `event_selectors`

@@ -33,7 +33,7 @@ Data Source schema for AWS::NetworkManager::SiteToSiteVpnAttachment
 - `resource_arn` (String) The ARN of the Resource.
 - `segment_name` (String) The name of the segment that attachment is in.
 - `state` (String) The state of the attachment.
-- `tags` (Attributes List) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) Tags for the attachment. (see [below for nested schema](#nestedatt--tags))
 - `updated_at` (String) Last update time of the attachment.
 - `vpn_connection_arn` (String) The ARN of the site-to-site VPN attachment.
 
@@ -44,7 +44,7 @@ Read-Only:
 
 - `attachment_policy_rule_number` (Number) The rule number in the policy document that applies to this change.
 - `segment_name` (String) The name of the segment to change.
-- `tags` (Attributes List) The key-value tags that changed for the segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
+- `tags` (Attributes Set) The key-value tags that changed for the segment. (see [below for nested schema](#nestedatt--proposed_segment_change--tags))
 
 <a id="nestedatt--proposed_segment_change--tags"></a>
 ### Nested Schema for `proposed_segment_change.tags`

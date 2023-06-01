@@ -1,0 +1,1 @@
+$ terraform import awscc_shield_protection_group.example <resource ID>
