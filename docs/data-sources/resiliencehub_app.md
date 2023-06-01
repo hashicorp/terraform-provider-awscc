@@ -35,6 +35,7 @@ Data Source schema for AWS::ResilienceHub::App
 
 Read-Only:
 
+- `eks_source_name` (String)
 - `logical_stack_name` (String)
 - `mapping_type` (String)
 - `physical_resource_id` (Attributes) (see [below for nested schema](#nestedatt--resource_mappings--physical_resource_id))

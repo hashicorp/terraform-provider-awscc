@@ -50,6 +50,7 @@
     "Tags": {
       "description": "Tags for the attachment.",
       "type": "array",
+      "uniqueItems": true,
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -77,6 +78,7 @@
           "description": "The key-value tags that changed for the segment.",
           "type": "array",
           "insertionOrder": false,
+          "uniqueItems": true,
           "items": {
             "$ref": "#/definitions/Tag"
           }
@@ -95,7 +97,6 @@
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
-      "insertionOrder": false,
       "properties": {
         "Key": {
           "type": "string",
@@ -117,14 +118,12 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   },
   "additionalProperties": false,
   "createOnlyProperties": [
     "/properties/CoreNetworkId",
-    "/properties/VpnConnectionArn"
-  ],
-  "writeOnlyProperties": [
     "/properties/VpnConnectionArn"
   ],
   "readOnlyProperties": [
@@ -138,11 +137,16 @@
     "/properties/OwnerAccountId",
     "/properties/EdgeLocation",
     "/properties/AttachmentPolicyRuleNumber",
-    "/properties/ProposedSegmentChange",
     "/properties/SegmentName"
   ],
   "primaryIdentifier": [
     "/properties/AttachmentId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/CoreNetworkId",
+      "/properties/VpnConnectionArn"
+    ]
   ],
   "required": [
     "CoreNetworkId",

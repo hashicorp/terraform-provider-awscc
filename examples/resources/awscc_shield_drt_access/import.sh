@@ -1,0 +1,1 @@
+$ terraform import awscc_shield_drt_access.example <resource ID>

@@ -45,6 +45,9 @@
         },
         "DedicatedMasterType": {
           "type": "string"
+        },
+        "MultiAZWithStandbyEnabled": {
+          "type": "boolean"
         }
       }
     },
@@ -158,7 +161,7 @@
       "properties": {
         "MetadataContent": {
           "type": "string",
-          "maxLength": 20480,
+          "maxLength": 1048576,
           "minLength": 1
         },
         "EntityId": {
@@ -498,7 +501,8 @@
         "es:DescribeDomain",
         "es:AddTags",
         "es:RemoveTags",
-        "es:ListTags"
+        "es:ListTags",
+        "es:DescribeDomainChangeProgress"
       ]
     },
     "delete": {

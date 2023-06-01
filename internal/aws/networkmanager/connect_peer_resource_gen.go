@@ -14,6 +14,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
@@ -75,15 +76,19 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	        "description": "Bgp configuration for connect peer",
 		//	        "properties": {
 		//	          "CoreNetworkAddress": {
+		//	            "description": "The address of a core network.",
 		//	            "type": "string"
 		//	          },
 		//	          "CoreNetworkAsn": {
+		//	            "description": "The ASN of the Coret Network.",
 		//	            "type": "number"
 		//	          },
 		//	          "PeerAddress": {
+		//	            "description": "The address of a core network Connect peer.",
 		//	            "type": "string"
 		//	          },
 		//	          "PeerAsn": {
+		//	            "description": "The ASN of the Connect peer.",
 		//	            "type": "number"
 		//	          }
 		//	        },
@@ -92,9 +97,11 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array"
 		//	    },
 		//	    "CoreNetworkAddress": {
+		//	      "description": "The IP address of a core network.",
 		//	      "type": "string"
 		//	    },
 		//	    "InsideCidrBlocks": {
+		//	      "description": "The inside IP addresses used for a Connect peer configuration.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "type": "string"
@@ -102,6 +109,7 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	      "type": "array"
 		//	    },
 		//	    "PeerAddress": {
+		//	      "description": "The IP address of the Connect peer.",
 		//	      "type": "string"
 		//	    },
 		//	    "Protocol": {
@@ -119,19 +127,23 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: CoreNetworkAddress
 							"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The address of a core network.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: CoreNetworkAsn
 							"core_network_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The ASN of the Coret Network.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: PeerAddress
 							"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The address of a core network Connect peer.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: PeerAsn
 							"peer_asn": schema.Float64Attribute{ /*START ATTRIBUTE*/
-								Computed: true,
+								Description: "The ASN of the Connect peer.",
+								Computed:    true,
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
@@ -142,11 +154,13 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: CoreNetworkAddress
 				"core_network_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The IP address of a core network.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: InsideCidrBlocks
 				"inside_cidr_blocks": schema.ListAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
+					Description: "The inside IP addresses used for a Connect peer configuration.",
 					Computed:    true,
 					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 						generic.Multiset(),
@@ -154,7 +168,8 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: PeerAddress
 				"peer_address": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Computed: true,
+					Description: "The IP address of the Connect peer.",
+					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Protocol
 				"protocol": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -274,7 +289,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// InsideCidrBlocks is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PeerAddress
 		// CloudFormation resource type schema:
@@ -289,7 +303,6 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
-			// PeerAddress is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: State
 		// CloudFormation resource type schema:
@@ -330,9 +343,10 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key
@@ -350,9 +364,8 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 			Description: "An array of key-value pairs to apply to this resource.",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
-				generic.Multiset(),
-				listplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
@@ -398,10 +411,8 @@ func connectPeerResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
-		"/properties/PeerAddress",
 		"/properties/CoreNetworkAddress",
 		"/properties/BgpOptions",
-		"/properties/InsideCidrBlocks",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -28,7 +28,7 @@ Data Source schema for AWS::Grafana::Workspace
 - `data_sources` (List of String) List of data sources on the service managed IAM role.
 - `description` (String) Description of a workspace.
 - `endpoint` (String) Endpoint for the Grafana workspace.
-- `grafana_version` (String) Version of Grafana the workspace is currently using.
+- `grafana_version` (String) The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.
 - `modification_timestamp` (String) Timestamp when the workspace was last modified
 - `name` (String) The user friendly name of a workspace.
 - `network_access_control` (Attributes) The configuration settings for Network Access Control. (see [below for nested schema](#nestedatt--network_access_control))

@@ -74,6 +74,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	      "AthenaParameters": {
 		//	        "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 		//	        "properties": {
+		//	          "RoleArn": {
+		//	            "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "type": "string"
+		//	          },
 		//	          "WorkGroup": {
 		//	            "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
 		//	            "maxLength": 128,
@@ -390,6 +396,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "Key"
 		//	            ],
 		//	            "type": "object"
+		//	          },
+		//	          "RoleArn": {
+		//	            "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.\u003c/p\u003e",
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "type": "string"
 		//	          }
 		//	        },
 		//	        "required": [
@@ -557,6 +569,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 					// Property: AthenaParameters
 					"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(20, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: WorkGroup
 							"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 								Description: "<p>The workgroup that Amazon Athena uses.</p>",
@@ -961,6 +985,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 								Description: "<p>Amazon S3 manifest file location.</p>",
 								Required:    true,
 							}, /*END ATTRIBUTE*/
+							// Property: RoleArn
+							"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(20, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 						Description: "<p>S3 parameters.</p>",
 						Optional:    true,
@@ -1215,6 +1251,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	              "AthenaParameters": {
 		//	                "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 		//	                "properties": {
+		//	                  "RoleArn": {
+		//	                    "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 20,
+		//	                    "type": "string"
+		//	                  },
 		//	                  "WorkGroup": {
 		//	                    "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
 		//	                    "maxLength": 128,
@@ -1531,6 +1573,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "Key"
 		//	                    ],
 		//	                    "type": "object"
+		//	                  },
+		//	                  "RoleArn": {
+		//	                    "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.\u003c/p\u003e",
+		//	                    "maxLength": 2048,
+		//	                    "minLength": 20,
+		//	                    "type": "string"
 		//	                  }
 		//	                },
 		//	                "required": [
@@ -1745,6 +1793,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 									// Property: AthenaParameters
 									"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: RoleArn
+											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(20, 2048),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: WorkGroup
 											"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 												Description: "<p>The workgroup that Amazon Athena uses.</p>",
@@ -2149,6 +2209,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 												Description: "<p>Amazon S3 manifest file location.</p>",
 												Required:    true,
 											}, /*END ATTRIBUTE*/
+											// Property: RoleArn
+											"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+												Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.String{ /*START VALIDATORS*/
+													stringvalidator.LengthBetween(20, 2048),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+													stringplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 										}, /*END SCHEMA*/
 										Description: "<p>S3 parameters.</p>",
 										Optional:    true,
@@ -2400,6 +2472,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	    "AthenaParameters": {
 		//	      "description": "\u003cp\u003eAmazon Athena parameters.\u003c/p\u003e",
 		//	      "properties": {
+		//	        "RoleArn": {
+		//	          "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.\u003c/p\u003e",
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "type": "string"
+		//	        },
 		//	        "WorkGroup": {
 		//	          "description": "\u003cp\u003eThe workgroup that Amazon Athena uses.\u003c/p\u003e",
 		//	          "maxLength": 128,
@@ -2716,6 +2794,12 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		//	            "Key"
 		//	          ],
 		//	          "type": "object"
+		//	        },
+		//	        "RoleArn": {
+		//	          "description": "\u003cp\u003eUse the \u003ccode\u003eRoleArn\u003c/code\u003e structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use \u003ccode\u003eRoleArn\u003c/code\u003e to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.\u003c/p\u003e",
+		//	          "maxLength": 2048,
+		//	          "minLength": 20,
+		//	          "type": "string"
 		//	        }
 		//	      },
 		//	      "required": [
@@ -2878,6 +2962,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 				// Property: AthenaParameters
 				"athena_parameters": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific Athena data source. For example, say an account administrator has turned off all Athena access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow Athena access for the single Athena data source that is specified in the structure, even if the account-wide role forbidding Athena access is still active.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(20, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
 						// Property: WorkGroup
 						"work_group": schema.StringAttribute{ /*START ATTRIBUTE*/
 							Description: "<p>The workgroup that Amazon Athena uses.</p>",
@@ -3281,6 +3377,18 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 							}, /*END SCHEMA*/
 							Description: "<p>Amazon S3 manifest file location.</p>",
 							Required:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: RoleArn
+						"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "<p>Use the <code>RoleArn</code> structure to override an account-wide role for a specific S3 data source. For example, say an account administrator has turned off all S3 access with an account-wide role. The administrator can then use <code>RoleArn</code> to bypass the account-wide role and allow S3 access for the single S3 data source that is specified in the structure, even if the account-wide role forbidding S3 access is still active.</p>",
+							Optional:    true,
+							Computed:    true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.LengthBetween(20, 2048),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "<p>S3 parameters.</p>",
@@ -3875,6 +3983,7 @@ func dataSourceResource(ctx context.Context) (resource.Resource, error) {
 		"principal":                        "Principal",
 		"rds_parameters":                   "RdsParameters",
 		"redshift_parameters":              "RedshiftParameters",
+		"role_arn":                         "RoleArn",
 		"s3_parameters":                    "S3Parameters",
 		"secret_arn":                       "SecretArn",
 		"snowflake_parameters":             "SnowflakeParameters",

@@ -178,7 +178,6 @@ func iPAMResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"resource_discovery_association_count": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "The count of resource discoveries associated with this IPAM.",
-			Optional:    true,
 			Computed:    true,
 			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 				int64planmodifier.UseStateForUnknown(),

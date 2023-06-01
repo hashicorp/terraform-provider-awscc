@@ -25,6 +25,7 @@ Data Source schema for AWS::AppFlow::Flow
 - `destination_flow_config_list` (Attributes List) List of Destination connectors of the flow. (see [below for nested schema](#nestedatt--destination_flow_config_list))
 - `flow_arn` (String) ARN identifier of the flow.
 - `flow_name` (String) Name of the flow.
+- `flow_status` (String) Flow activation status for Scheduled- and Event-triggered flows
 - `kms_arn` (String) The ARN of the AWS Key Management Service (AWS KMS) key that's used to encrypt your function's environment variables. If it's not provided, AWS Lambda uses a default service key.
 - `metadata_catalog_config` (Attributes) Configurations of metadata catalog of the flow. (see [below for nested schema](#nestedatt--metadata_catalog_config))
 - `source_flow_config` (Attributes) Configurations of Source connector of the flow. (see [below for nested schema](#nestedatt--source_flow_config))
@@ -599,7 +600,6 @@ Read-Only:
 
 Read-Only:
 
-- `activate_flow_on_create` (Boolean) Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.
 - `trigger_properties` (Attributes) Details required based on the type of trigger (see [below for nested schema](#nestedatt--trigger_config--trigger_properties))
 - `trigger_type` (String) Trigger type of the flow
 

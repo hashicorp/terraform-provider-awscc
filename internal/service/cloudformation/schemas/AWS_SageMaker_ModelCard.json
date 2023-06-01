@@ -774,8 +774,7 @@
                 "minItems": 2,
                 "maxItems": 2
               },
-              "minItems": 1,
-              "maxItems": 20
+              "minItems": 1
             }
           ]
         },
@@ -818,8 +817,7 @@
               "items": {
                 "type": "number"
               },
-              "minItems": 1,
-              "maxItems": 20
+              "minItems": 1
             }
           ]
         },

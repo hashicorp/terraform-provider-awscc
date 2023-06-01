@@ -267,6 +267,9 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "AppendSourcePath": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "IncludeChildPaths": {
 		//	      "type": "boolean"
 		//	    },
@@ -289,7 +292,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 		//	    "SourcePath": {
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
-		//	      "pattern": "^(/[a-zA-Z0-9._-]+)+$",
+		//	      "pattern": "^(/([a-zA-Z0-9._:-]+|\\{[a-zA-Z0-9._:-]+\\}))+$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -309,6 +312,15 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 							"ACTIVE",
 						),
 					}, /*END VALIDATORS*/
+				}, /*END ATTRIBUTE*/
+				// Property: AppendSourcePath
+				"append_source_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+						boolplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeChildPaths
 				"include_child_paths": schema.BoolAttribute{ /*START ATTRIBUTE*/
@@ -349,7 +361,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 					Computed: true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.LengthBetween(1, 2048),
-						stringvalidator.RegexMatches(regexp.MustCompile("^(/[a-zA-Z0-9._-]+)+$"), ""),
+						stringvalidator.RegexMatches(regexp.MustCompile("^(/([a-zA-Z0-9._:-]+|\\{[a-zA-Z0-9._:-]+\\}))+$"), ""),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 						stringplanmodifier.UseStateForUnknown(),
@@ -387,6 +399,7 @@ func routeResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"activation_state":       "ActivationState",
+		"append_source_path":     "AppendSourcePath",
 		"application_identifier": "ApplicationIdentifier",
 		"arn":                    "Arn",
 		"default_route":          "DefaultRoute",

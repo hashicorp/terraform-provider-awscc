@@ -196,6 +196,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "AppendSourcePath": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "IncludeChildPaths": {
 		//	      "type": "boolean"
 		//	    },
@@ -218,7 +221,7 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "SourcePath": {
 		//	      "maxLength": 2048,
 		//	      "minLength": 1,
-		//	      "pattern": "^(/[a-zA-Z0-9._-]+)+$",
+		//	      "pattern": "^(/([a-zA-Z0-9._:-]+|\\{[a-zA-Z0-9._:-]+\\}))+$",
 		//	      "type": "string"
 		//	    }
 		//	  },
@@ -231,6 +234,10 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: ActivationState
 				"activation_state": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: AppendSourcePath
+				"append_source_path": schema.BoolAttribute{ /*START ATTRIBUTE*/
 					Computed: true,
 				}, /*END ATTRIBUTE*/
 				// Property: IncludeChildPaths
@@ -267,6 +274,7 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"activation_state":       "ActivationState",
+		"append_source_path":     "AppendSourcePath",
 		"application_identifier": "ApplicationIdentifier",
 		"arn":                    "Arn",
 		"default_route":          "DefaultRoute",

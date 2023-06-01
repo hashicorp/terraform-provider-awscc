@@ -54,6 +54,7 @@
     "Tags": {
       "description": "An array of key-value pairs to apply to this resource.",
       "type": "array",
+      "uniqueItems": true,
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -65,12 +66,15 @@
       "type": "object",
       "properties": {
         "CoreNetworkAddress": {
+          "description": "The IP address of a core network.",
           "type": "string"
         },
         "PeerAddress": {
+          "description": "The IP address of the Connect peer.",
           "type": "string"
         },
         "InsideCidrBlocks": {
+          "description": "The inside IP addresses used for a Connect peer configuration.",
           "type": "array",
           "insertionOrder": false,
           "items": {
@@ -109,15 +113,19 @@
       "type": "object",
       "properties": {
         "CoreNetworkAsn": {
+          "description": "The ASN of the Coret Network.",
           "type": "number"
         },
         "PeerAsn": {
+          "description": "The ASN of the Connect peer.",
           "type": "number"
         },
         "CoreNetworkAddress": {
+          "description": "The address of a core network.",
           "type": "string"
         },
         "PeerAddress": {
+          "description": "The address of a core network Connect peer.",
           "type": "string"
         }
       },
@@ -147,7 +155,8 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   },
   "required": [
     "ConnectAttachmentId",
@@ -163,10 +172,8 @@
     "/properties/ConnectAttachmentId"
   ],
   "writeOnlyProperties": [
-    "/properties/PeerAddress",
     "/properties/CoreNetworkAddress",
-    "/properties/BgpOptions",
-    "/properties/InsideCidrBlocks"
+    "/properties/BgpOptions"
   ],
   "readOnlyProperties": [
     "/properties/ConnectPeerId",
@@ -178,6 +185,13 @@
   ],
   "primaryIdentifier": [
     "/properties/ConnectPeerId"
+  ],
+  "additionalIdentifiers": [
+    [
+      "/properties/ConnectAttachmentId",
+      "/properties/CoreNetworkAddress",
+      "/properties/InsideCidrBlocks"
+    ]
   ],
   "handlers": {
     "create": {

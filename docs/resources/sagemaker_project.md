@@ -23,6 +23,7 @@ Resource Type definition for AWS::SageMaker::Project
 ### Optional
 
 - `project_description` (String) The description of the project.
+- `service_catalog_provisioned_product_details` (Attributes) Provisioned ServiceCatalog  Details (see [below for nested schema](#nestedatt--service_catalog_provisioned_product_details))
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -32,7 +33,6 @@ Resource Type definition for AWS::SageMaker::Project
 - `project_arn` (String) The Amazon Resource Name (ARN) of the Project.
 - `project_id` (String) Project Id.
 - `project_status` (String) The status of a project.
-- `service_catalog_provisioned_product_details` (Attributes) Provisioned ServiceCatalog  Details (see [below for nested schema](#nestedatt--service_catalog_provisioned_product_details))
 
 <a id="nestedatt--service_catalog_provisioning_details"></a>
 ### Nested Schema for `service_catalog_provisioning_details`
@@ -57,6 +57,15 @@ Required:
 
 
 
+<a id="nestedatt--service_catalog_provisioned_product_details"></a>
+### Nested Schema for `service_catalog_provisioned_product_details`
+
+Optional:
+
+- `provisioned_product_id` (String) The identifier of the provisioning artifact (also known as a version).
+- `provisioned_product_status_message` (String) Provisioned Product Status Message
+
+
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
@@ -64,15 +73,6 @@ Required:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 127 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 - `value` (String) The value for the tag. You can specify a value that is 1 to 255 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
-
-
-<a id="nestedatt--service_catalog_provisioned_product_details"></a>
-### Nested Schema for `service_catalog_provisioned_product_details`
-
-Read-Only:
-
-- `provisioned_product_id` (String) The identifier of the provisioning artifact (also known as a version).
-- `provisioned_product_status_message` (String) Provisioned Product Status Message
 
 ## Import
 

@@ -1785,6 +1785,31 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FlowStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Flow activation status for Scheduled- and Event-triggered flows",
+		//	  "enum": [
+		//	    "Active",
+		//	    "Suspended"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"flow_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Flow activation status for Scheduled- and Event-triggered flows",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"Active",
+					"Suspended",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: KMSArn
 		// CloudFormation resource type schema:
 		//
@@ -3842,10 +3867,6 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Trigger settings of the flow.",
 		//	  "properties": {
-		//	    "ActivateFlowOnCreate": {
-		//	      "description": "Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.",
-		//	      "type": "boolean"
-		//	    },
 		//	    "TriggerProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Details required based on the type of trigger",
@@ -3908,16 +3929,6 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"trigger_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ActivateFlowOnCreate
-				"activate_flow_on_create": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.",
-					Optional:    true,
-					Computed:    true,
-					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
-						boolplanmodifier.UseStateForUnknown(),
-						boolplanmodifier.RequiresReplace(),
-					}, /*END PLAN MODIFIERS*/
-				}, /*END ATTRIBUTE*/
 				// Property: TriggerProperties
 				"trigger_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -4045,7 +4056,6 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"activate_flow_on_create":           "ActivateFlowOnCreate",
 		"aggregation_config":                "AggregationConfig",
 		"aggregation_type":                  "AggregationType",
 		"amplitude":                         "Amplitude",
@@ -4078,6 +4088,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"flow_arn":                          "FlowArn",
 		"flow_error_deactivation_threshold": "FlowErrorDeactivationThreshold",
 		"flow_name":                         "FlowName",
+		"flow_status":                       "FlowStatus",
 		"glue_data_catalog":                 "GlueDataCatalog",
 		"google_analytics":                  "GoogleAnalytics",
 		"id_field_names":                    "IdFieldNames",

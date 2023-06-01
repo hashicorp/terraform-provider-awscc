@@ -208,14 +208,18 @@ func workspaceResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Version of Grafana the workspace is currently using.",
+		//	  "description": "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
 		//	  "maxLength": 255,
 		//	  "minLength": 1,
 		//	  "type": "string"
 		//	}
 		"grafana_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Version of Grafana the workspace is currently using.",
+			Description: "The version of Grafana to support in your workspace. For region ap-northeast-2, only version 8.4 is supported.",
+			Optional:    true,
 			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 255),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/

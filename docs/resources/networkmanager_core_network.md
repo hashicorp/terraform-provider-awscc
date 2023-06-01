@@ -23,7 +23,7 @@ AWS::NetworkManager::CoreNetwork Resource Type Definition.
 
 - `description` (String) The description of core network
 - `policy_document` (String) Live policy document for the core network, you must provide PolicyDocument in Json Format
-- `tags` (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 

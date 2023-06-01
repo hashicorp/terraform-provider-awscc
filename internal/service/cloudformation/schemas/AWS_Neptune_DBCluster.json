@@ -39,6 +39,10 @@
       "minimum": 1,
       "type": "integer"
     },
+    "CopyTagsToSnapshot": {
+      "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
+      "type": "boolean"
+    },
     "DBClusterIdentifier": {
       "description": "The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.",
       "type": "string",
@@ -48,6 +52,10 @@
     },
     "DBClusterParameterGroupName": {
       "description": "Provides the name of the DB cluster parameter group.",
+      "type": "string"
+    },
+    "DBInstanceParameterGroupName": {
+      "description": "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
       "type": "string"
     },
     "DBSubnetGroupName": {
@@ -99,6 +107,10 @@
       "description": "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
       "type": "string",
       "default": "full-copy"
+    },
+    "ServerlessScalingConfiguration": {
+      "description": "Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster.",
+      "$ref": "#/definitions/ServerlessScalingConfiguration"
     },
     "SnapshotIdentifier": {
       "description": "Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.\n\nAfter you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.\n\nHowever, if you don't specify the SnapshotIdentifier, an empty DB cluster is created, and the original DB cluster is deleted. If you specify a property that is different from the previous snapshot restore property, the DB cluster is restored from the snapshot specified by the SnapshotIdentifier, and the original DB cluster is deleted.",
@@ -155,6 +167,29 @@
         "RoleArn"
       ]
     },
+    "ServerlessScalingConfiguration": {
+      "description": "Contains the scaling configuration of an Neptune Serverless DB cluster.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "MinCapacity": {
+          "description": "The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.",
+          "type": "number",
+          "minimum": 1,
+          "maximum": 128
+        },
+        "MaxCapacity": {
+          "description": "The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.",
+          "type": "number",
+          "minimum": 2.5,
+          "maximum": 128
+        }
+      },
+      "required": [
+        "MinCapacity",
+        "MaxCapacity"
+      ]
+    },
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
       "type": "object",
@@ -196,7 +231,6 @@
     "/properties/AvailabilityZones",
     "/properties/DBClusterIdentifier",
     "/properties/DBSubnetGroupName",
-    "/properties/EngineVersion",
     "/properties/KmsKeyId",
     "/properties/RestoreToTime",
     "/properties/RestoreType",
@@ -209,6 +243,7 @@
     "/properties/DBClusterIdentifier"
   ],
   "writeOnlyProperties": [
+    "/properties/DBInstanceParameterGroupName",
     "/properties/RestoreToTime",
     "/properties/RestoreType",
     "/properties/SnapshotIdentifier",
@@ -242,7 +277,8 @@
       "permissions": [
         "rds:DescribeDBClusters",
         "rds:ListTagsForResource"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     },
     "update": {
       "permissions": [
@@ -251,6 +287,7 @@
         "rds:AddRoleToDBCluster",
         "rds:AddTagsToResource",
         "rds:DescribeDBClusters",
+        "rds:DescribeDBInstances",
         "rds:DescribeDBSubnetGroups",
         "rds:DescribeGlobalClusters",
         "rds:ListTagsForResource",
@@ -270,13 +307,15 @@
         "rds:DescribeGlobalClusters",
         "rds:ListTagsForResource",
         "rds:RemoveFromGlobalCluster"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     },
     "list": {
       "permissions": [
         "rds:DescribeDBClusters",
         "rds:ListTagsForResource"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     }
   }
 }

@@ -1404,6 +1404,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// UseDefaultProcessorFeatures is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: UseLatestRestorableTime
 		// CloudFormation resource type schema:
@@ -1564,6 +1565,7 @@ func dBInstanceResource(ctx context.Context) (resource.Resource, error) {
 		"/properties/SourceDbiResourceId",
 		"/properties/SourceRegion",
 		"/properties/TdeCredentialPassword",
+		"/properties/UseDefaultProcessorFeatures",
 		"/properties/UseLatestRestorableTime",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)

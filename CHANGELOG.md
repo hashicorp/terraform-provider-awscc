@@ -1,4 +1,27 @@
 ## 0.53.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_detective_organization_admin`
+* **New Data Source:** `awscc_ec2_subnet_cidr_block`
+* **New Data Source:** `awscc_ec2_subnet_cidr_blocks`
+* **New Data Source:** `awscc_quicksight_topic`
+* **New Data Source:** `awscc_shield_drt_access`
+* **New Data Source:** `awscc_shield_drt_accesses`
+* **New Data Source:** `awscc_shield_proactive_engagement`
+* **New Data Source:** `awscc_shield_proactive_engagements`
+* **New Data Source:** `awscc_shield_protection`
+* **New Data Source:** `awscc_shield_protection_group`
+* **New Data Source:** `awscc_shield_protection_groups`
+* **New Data Source:** `awscc_shield_protections`
+* **New Resource:** `awscc_detective_organization_admin`
+* **New Resource:** `awscc_ec2_subnet_cidr_block`
+* **New Resource:** `awscc_quicksight_topic`
+* **New Resource:** `awscc_shield_drt_access`
+* **New Resource:** `awscc_shield_proactive_engagement`
+* **New Resource:** `awscc_shield_protection`
+* **New Resource:** `awscc_shield_protection_group`
+
 ## 0.52.0 (May 11, 2023)
 
 FEATURES:

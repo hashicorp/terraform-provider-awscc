@@ -23,6 +23,196 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::CloudTrail::Trail resource.
 func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AdvancedEventSelectors
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The advanced event selectors that were used to select events for the data store.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Advanced event selectors let you create fine-grained selectors for the following AWS CloudTrail event record ?elds. They help you control costs by logging only those events that are important to you.",
+		//	    "properties": {
+		//	      "FieldSelectors": {
+		//	        "description": "Contains all selector statements in an advanced event selector.",
+		//	        "insertionOrder": false,
+		//	        "items": {
+		//	          "additionalProperties": false,
+		//	          "description": "A single selector statement in an advanced event selector.",
+		//	          "properties": {
+		//	            "EndsWith": {
+		//	              "description": "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "(.+)",
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "Equals": {
+		//	              "description": "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "(.+)",
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "Field": {
+		//	              "description": "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
+		//	              "maxLength": 1000,
+		//	              "minLength": 1,
+		//	              "pattern": "([\\w|\\d|\\.|_]+)",
+		//	              "type": "string"
+		//	            },
+		//	            "NotEndsWith": {
+		//	              "description": "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "(.+)",
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "NotEquals": {
+		//	              "description": "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "(.+)",
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "NotStartsWith": {
+		//	              "description": "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "(.+)",
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            },
+		//	            "StartsWith": {
+		//	              "description": "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+		//	              "insertionOrder": false,
+		//	              "items": {
+		//	                "maxLength": 2048,
+		//	                "minLength": 1,
+		//	                "pattern": "(.+)",
+		//	                "type": "string"
+		//	              },
+		//	              "minItems": 1,
+		//	              "type": "array",
+		//	              "uniqueItems": true
+		//	            }
+		//	          },
+		//	          "required": [
+		//	            "Field"
+		//	          ],
+		//	          "type": "object"
+		//	        },
+		//	        "minItems": 1,
+		//	        "type": "array",
+		//	        "uniqueItems": true
+		//	      },
+		//	      "Name": {
+		//	        "description": "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
+		//	        "maxLength": 1000,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "FieldSelectors"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": true
+		//	}
+		"advanced_event_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: FieldSelectors
+					"field_selectors": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
+						NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: EndsWith
+								"ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that includes events that match the last few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Equals
+								"equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that includes events that match the exact value of the event record field specified as the value of Field. This is the only valid operator that you can use with the readOnly, eventCategory, and resources.type fields.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: Field
+								"field": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "A field in an event record on which to filter events to be logged. Supported fields include readOnly, eventCategory, eventSource (for management events), eventName, resources.type, and resources.ARN.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotEndsWith
+								"not_ends_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that excludes events that match the last few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotEquals
+								"not_equals": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that excludes events that match the exact value of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: NotStartsWith
+								"not_starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that excludes events that match the first few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: StartsWith
+								"starts_with": schema.SetAttribute{ /*START ATTRIBUTE*/
+									ElementType: types.StringType,
+									Description: "An operator that includes events that match the first few characters of the event record field specified as the value of Field.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+						}, /*END NESTED OBJECT*/
+						Description: "Contains all selector statements in an advanced event selector.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "An optional, descriptive name for an advanced event selector, such as \"Log data events for only two S3 buckets\".",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The advanced event selectors that were used to select events for the data store.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -380,13 +570,18 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::CloudTrail::Trail").WithTerraformTypeName("awscc_cloudtrail_trail")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"advanced_event_selectors":         "AdvancedEventSelectors",
 		"arn":                              "Arn",
 		"cloudwatch_logs_log_group_arn":    "CloudWatchLogsLogGroupArn",
 		"cloudwatch_logs_role_arn":         "CloudWatchLogsRoleArn",
 		"data_resources":                   "DataResources",
 		"enable_log_file_validation":       "EnableLogFileValidation",
+		"ends_with":                        "EndsWith",
+		"equals":                           "Equals",
 		"event_selectors":                  "EventSelectors",
 		"exclude_management_event_sources": "ExcludeManagementEventSources",
+		"field":                            "Field",
+		"field_selectors":                  "FieldSelectors",
 		"include_global_service_events":    "IncludeGlobalServiceEvents",
 		"include_management_events":        "IncludeManagementEvents",
 		"insight_selectors":                "InsightSelectors",
@@ -396,11 +591,16 @@ func trailDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"is_organization_trail":            "IsOrganizationTrail",
 		"key":                              "Key",
 		"kms_key_id":                       "KMSKeyId",
+		"name":                             "Name",
+		"not_ends_with":                    "NotEndsWith",
+		"not_equals":                       "NotEquals",
+		"not_starts_with":                  "NotStartsWith",
 		"read_write_type":                  "ReadWriteType",
 		"s3_bucket_name":                   "S3BucketName",
 		"s3_key_prefix":                    "S3KeyPrefix",
 		"sns_topic_arn":                    "SnsTopicArn",
 		"sns_topic_name":                   "SnsTopicName",
+		"starts_with":                      "StartsWith",
 		"tags":                             "Tags",
 		"trail_name":                       "TrailName",
 		"type":                             "Type",

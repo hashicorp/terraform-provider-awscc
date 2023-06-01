@@ -25,8 +25,10 @@ Data Source schema for AWS::Neptune::DBCluster
 - `availability_zones` (List of String) Provides the list of EC2 Availability Zones that instances in the DB cluster can be created in.
 - `backup_retention_period` (Number) Specifies the number of days for which automatic DB snapshots are retained.
 - `cluster_resource_id` (String) The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.
+- `copy_tags_to_snapshot` (Boolean) A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.
 - `db_cluster_identifier` (String) The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.
 - `db_cluster_parameter_group_name` (String) Provides the name of the DB cluster parameter group.
+- `db_instance_parameter_group_name` (String) The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.
 - `db_subnet_group_name` (String) Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.
 - `deletion_protection` (Boolean) Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
 - `enable_cloudwatch_logs_exports` (List of String) Specifies a list of log types that are enabled for export to CloudWatch Logs.
@@ -48,6 +50,7 @@ If a DB cluster snapshot is specified, the target DB cluster is created from the
 If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.
 
 If a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.
+- `serverless_scaling_configuration` (Attributes) Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster. (see [below for nested schema](#nestedatt--serverless_scaling_configuration))
 - `snapshot_identifier` (String) Specifies the identifier for a DB cluster snapshot. Must match the identifier of an existing snapshot.
 
 After you restore a DB cluster using a SnapshotIdentifier, you must specify the same SnapshotIdentifier for any future updates to the DB cluster. When you specify this property for an update, the DB cluster is not restored from the snapshot again, and the data in the database is not changed.
@@ -78,6 +81,15 @@ Read-Only:
 
 - `feature_name` (String) The name of the feature associated with the AWS Identity and Access Management (IAM) role. For the list of supported feature names, see DBEngineVersion in the Amazon Neptune API Reference.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role that is associated with the DB cluster.
+
+
+<a id="nestedatt--serverless_scaling_configuration"></a>
+### Nested Schema for `serverless_scaling_configuration`
+
+Read-Only:
+
+- `max_capacity` (Number) The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.
+- `min_capacity` (Number) The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.
 
 
 <a id="nestedatt--tags"></a>

@@ -186,7 +186,6 @@
     "/properties/ProjectArn",
     "/properties/CreationTime",
     "/properties/ProjectId",
-    "/properties/ServiceCatalogProvisionedProductDetails",
     "/properties/ProjectStatus"
   ],
   "createOnlyProperties": [

@@ -874,7 +874,7 @@
     "/properties/TaskDefinitionArn"
   ],
   "propertyTransform": {
-    "/properties/TaskRoleArn": "$split(TaskRoleArn, \"role\/\")[-1]"
+    "/properties/TaskRoleArn": "TaskRoleArn $OR $split(TaskRoleArn, \"role\/\")[-1]"
   },
   "handlers": {
     "create": {

@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 737 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 748 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -302,6 +302,12 @@ resource_schema "aws_appsync_domain_name_api_association" {
   cloudformation_type_name               = "AWS::AppSync::DomainNameApiAssociation"
   suppress_plural_data_source_generation = true
 }
+
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_appsync_source_api_association" {
+#   cloudformation_type_name               = "AWS::AppSync::SourceApiAssociation"
+#   suppress_plural_data_source_generation = true
+# }
 
 resource_schema "aws_applicationinsights_application" {
   cloudformation_type_name = "AWS::ApplicationInsights::Application"
@@ -609,6 +615,12 @@ resource_schema "aws_codestarnotifications_notification_rule" {
   cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
 }
 
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_cognito_identity_pool_principal_tag" {
+#   cloudformation_type_name               = "AWS::Cognito::IdentityPoolPrincipalTag"
+#   suppress_plural_data_source_generation = true
+# }
+
 resource_schema "aws_comprehend_flywheel" {
   cloudformation_type_name = "AWS::Comprehend::Flywheel"
 }
@@ -685,6 +697,12 @@ resource_schema "aws_connect_phone_number" {
   cloudformation_type_name               = "AWS::Connect::PhoneNumber"
   suppress_plural_data_source_generation = true
 }
+
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_connect_prompt" {
+#   cloudformation_type_name               = "AWS::Connect::Prompt"
+#   suppress_plural_data_source_generation = true
+# }
 
 resource_schema "aws_connect_rule" {
   cloudformation_type_name = "AWS::Connect::Rule"
@@ -837,6 +855,11 @@ resource_schema "aws_detective_graph" {
 
 resource_schema "aws_detective_member_invitation" {
   cloudformation_type_name = "AWS::Detective::MemberInvitation"
+}
+
+resource_schema "aws_detective_organization_admin" {
+  cloudformation_type_name               = "AWS::Detective::OrganizationAdmin"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_devopsguru_log_anomaly_detection_integration" {
@@ -1018,6 +1041,10 @@ resource_schema "aws_ec2_spot_fleet" {
 resource_schema "aws_ec2_subnet" {
   cloudformation_type_name               = "AWS::EC2::Subnet"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_ec2_subnet_cidr_block" {
+  cloudformation_type_name = "AWS::EC2::SubnetCidrBlock"
 }
 
 resource_schema "aws_ec2_subnet_network_acl_association" {
@@ -2577,6 +2604,11 @@ resource_schema "aws_quicksight_theme" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_quicksight_topic" {
+  cloudformation_type_name               = "AWS::QuickSight::Topic"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_quicksight_vpc_connection" {
   cloudformation_type_name               = "AWS::QuickSight::VPCConnection"
   suppress_plural_data_source_generation = true
@@ -3181,6 +3213,22 @@ resource_schema "aws_signer_profile_permission" {
 
 resource_schema "aws_signer_signing_profile" {
   cloudformation_type_name = "AWS::Signer::SigningProfile"
+}
+
+resource_schema "aws_shield_drt_access" {
+  cloudformation_type_name = "AWS::Shield::DRTAccess"
+}
+
+resource_schema "aws_shield_proactive_engagement" {
+  cloudformation_type_name = "AWS::Shield::ProactiveEngagement"
+}
+
+resource_schema "aws_shield_protection" {
+  cloudformation_type_name = "AWS::Shield::Protection"
+}
+
+resource_schema "aws_shield_protection_group" {
+  cloudformation_type_name = "AWS::Shield::ProtectionGroup"
 }
 
 resource_schema "aws_stepfunctions_activity" {

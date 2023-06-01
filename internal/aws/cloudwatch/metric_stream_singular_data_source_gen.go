@@ -357,14 +357,15 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "type": "string"
 		//	      },
 		//	      "Value": {
-		//	        "description": "An optional string, which you can use to describe or define the tag.",
+		//	        "description": "String which you can use to describe or define the tag.",
 		//	        "maxLength": 256,
 		//	        "minLength": 1,
 		//	        "type": "string"
 		//	      }
 		//	    },
 		//	    "required": [
-		//	      "Key"
+		//	      "Key",
+		//	      "Value"
 		//	    ],
 		//	    "type": "object"
 		//	  },
@@ -382,7 +383,7 @@ func metricStreamDataSource(ctx context.Context) (datasource.DataSource, error) 
 					}, /*END ATTRIBUTE*/
 					// Property: Value
 					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Description: "An optional string, which you can use to describe or define the tag.",
+						Description: "String which you can use to describe or define the tag.",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/

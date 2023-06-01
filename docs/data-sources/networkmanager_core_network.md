@@ -31,7 +31,7 @@ Data Source schema for AWS::NetworkManager::CoreNetwork
 - `policy_document` (String) Live policy document for the core network, you must provide PolicyDocument in Json Format
 - `segments` (Attributes List) The segments within a core network. (see [below for nested schema](#nestedatt--segments))
 - `state` (String) The state of core network
-- `tags` (Attributes List) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the global network. (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--edges"></a>
 ### Nested Schema for `edges`

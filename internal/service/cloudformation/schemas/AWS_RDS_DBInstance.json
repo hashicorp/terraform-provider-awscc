@@ -512,6 +512,7 @@
     "/properties/SourceDbiResourceId",
     "/properties/SourceRegion",
     "/properties/TdeCredentialPassword",
+    "/properties/UseDefaultProcessorFeatures",
     "/properties/UseLatestRestorableTime"
   ],
   "readOnlyProperties": [

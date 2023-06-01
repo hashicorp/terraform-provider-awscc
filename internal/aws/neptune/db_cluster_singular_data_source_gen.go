@@ -109,6 +109,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: CopyTagsToSnapshot
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
+		//	  "type": "boolean"
+		//	}
+		"copy_tags_to_snapshot": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "A value that indicates whether to copy all tags from the DB cluster to snapshots of the DB cluster. The default behaviour is not to copy them.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: DBClusterIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -132,6 +143,17 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"db_cluster_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Provides the name of the DB cluster parameter group.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: DBInstanceParameterGroupName
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
+		//	  "type": "string"
+		//	}
+		"db_instance_parameter_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
@@ -284,6 +306,48 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Creates a new DB cluster from a DB snapshot or DB cluster snapshot.\n\nIf a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.\n\nIf a DB cluster snapshot is specified, the target DB cluster is created from the source DB cluster restore point with the same configuration as the original source DB cluster, except that the new DB cluster is created with the default security group.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: ServerlessScalingConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster.",
+		//	  "properties": {
+		//	    "MaxCapacity": {
+		//	      "description": "The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.",
+		//	      "maximum": 128,
+		//	      "minimum": 2.5,
+		//	      "type": "number"
+		//	    },
+		//	    "MinCapacity": {
+		//	      "description": "The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.",
+		//	      "maximum": 128,
+		//	      "minimum": 1,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "MinCapacity",
+		//	    "MaxCapacity"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"serverless_scaling_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: MaxCapacity
+				"max_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The maximum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 40, 40.5, 41, and so on. The smallest value you can use is 2.5, whereas the largest is 128.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: MinCapacity
+				"min_capacity": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Description: "The minimum number of Neptune capacity units (NCUs) for a DB instance in an Neptune Serverless cluster. You can specify NCU values in half-step increments, such as 8, 8.5, 9, and so on. The smallest value you can use is 1, whereas the largest is 128.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Contains the scaling configuration used by the Neptune Serverless Instances within this DB cluster.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: SnapshotIdentifier
 		// CloudFormation resource type schema:
 		//
@@ -412,35 +476,40 @@ func dBClusterDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Neptune::DBCluster").WithTerraformTypeName("awscc_neptune_db_cluster")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"associated_roles":                "AssociatedRoles",
-		"availability_zones":              "AvailabilityZones",
-		"backup_retention_period":         "BackupRetentionPeriod",
-		"cluster_resource_id":             "ClusterResourceId",
-		"db_cluster_identifier":           "DBClusterIdentifier",
-		"db_cluster_parameter_group_name": "DBClusterParameterGroupName",
-		"db_subnet_group_name":            "DBSubnetGroupName",
-		"deletion_protection":             "DeletionProtection",
-		"enable_cloudwatch_logs_exports":  "EnableCloudwatchLogsExports",
-		"endpoint":                        "Endpoint",
-		"engine_version":                  "EngineVersion",
-		"feature_name":                    "FeatureName",
-		"iam_auth_enabled":                "IamAuthEnabled",
-		"key":                             "Key",
-		"kms_key_id":                      "KmsKeyId",
-		"port":                            "Port",
-		"preferred_backup_window":         "PreferredBackupWindow",
-		"preferred_maintenance_window":    "PreferredMaintenanceWindow",
-		"read_endpoint":                   "ReadEndpoint",
-		"restore_to_time":                 "RestoreToTime",
-		"restore_type":                    "RestoreType",
-		"role_arn":                        "RoleArn",
-		"snapshot_identifier":             "SnapshotIdentifier",
-		"source_db_cluster_identifier":    "SourceDBClusterIdentifier",
-		"storage_encrypted":               "StorageEncrypted",
-		"tags":                            "Tags",
-		"use_latest_restorable_time":      "UseLatestRestorableTime",
-		"value":                           "Value",
-		"vpc_security_group_ids":          "VpcSecurityGroupIds",
+		"associated_roles":                 "AssociatedRoles",
+		"availability_zones":               "AvailabilityZones",
+		"backup_retention_period":          "BackupRetentionPeriod",
+		"cluster_resource_id":              "ClusterResourceId",
+		"copy_tags_to_snapshot":            "CopyTagsToSnapshot",
+		"db_cluster_identifier":            "DBClusterIdentifier",
+		"db_cluster_parameter_group_name":  "DBClusterParameterGroupName",
+		"db_instance_parameter_group_name": "DBInstanceParameterGroupName",
+		"db_subnet_group_name":             "DBSubnetGroupName",
+		"deletion_protection":              "DeletionProtection",
+		"enable_cloudwatch_logs_exports":   "EnableCloudwatchLogsExports",
+		"endpoint":                         "Endpoint",
+		"engine_version":                   "EngineVersion",
+		"feature_name":                     "FeatureName",
+		"iam_auth_enabled":                 "IamAuthEnabled",
+		"key":                              "Key",
+		"kms_key_id":                       "KmsKeyId",
+		"max_capacity":                     "MaxCapacity",
+		"min_capacity":                     "MinCapacity",
+		"port":                             "Port",
+		"preferred_backup_window":          "PreferredBackupWindow",
+		"preferred_maintenance_window":     "PreferredMaintenanceWindow",
+		"read_endpoint":                    "ReadEndpoint",
+		"restore_to_time":                  "RestoreToTime",
+		"restore_type":                     "RestoreType",
+		"role_arn":                         "RoleArn",
+		"serverless_scaling_configuration": "ServerlessScalingConfiguration",
+		"snapshot_identifier":              "SnapshotIdentifier",
+		"source_db_cluster_identifier":     "SourceDBClusterIdentifier",
+		"storage_encrypted":                "StorageEncrypted",
+		"tags":                             "Tags",
+		"use_latest_restorable_time":       "UseLatestRestorableTime",
+		"value":                            "Value",
+		"vpc_security_group_ids":           "VpcSecurityGroupIds",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

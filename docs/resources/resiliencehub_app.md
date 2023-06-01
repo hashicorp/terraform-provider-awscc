@@ -43,6 +43,7 @@ Required:
 
 Optional:
 
+- `eks_source_name` (String)
 - `logical_stack_name` (String)
 - `resource_name` (String)
 - `terraform_source_name` (String)

@@ -189,6 +189,7 @@
           "description": "The name of event source.",
           "type": "string",
           "enum": [
+            "OnContactEvaluationSubmit",
             "OnPostCallAnalysisAvailable",
             "OnRealTimeCallAnalysisAvailable",
             "OnPostChatAnalysisAvailable",

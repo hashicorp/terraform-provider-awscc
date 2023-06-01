@@ -26,6 +26,7 @@ Data Source schema for AWS::IoTFleetWise::Campaign
 - `collection_scheme` (Attributes) (see [below for nested schema](#nestedatt--collection_scheme))
 - `compression` (String)
 - `creation_time` (String)
+- `data_destination_configs` (Attributes List) (see [below for nested schema](#nestedatt--data_destination_configs))
 - `data_extra_dimensions` (List of String)
 - `description` (String)
 - `diagnostics_mode` (String)
@@ -67,6 +68,35 @@ Read-Only:
 Read-Only:
 
 - `period_ms` (Number)
+
+
+
+<a id="nestedatt--data_destination_configs"></a>
+### Nested Schema for `data_destination_configs`
+
+Read-Only:
+
+- `s3_config` (Attributes) (see [below for nested schema](#nestedatt--data_destination_configs--s3_config))
+- `timestream_config` (Attributes) (see [below for nested schema](#nestedatt--data_destination_configs--timestream_config))
+
+<a id="nestedatt--data_destination_configs--s3_config"></a>
+### Nested Schema for `data_destination_configs.s3_config`
+
+Read-Only:
+
+- `bucket_arn` (String)
+- `data_format` (String)
+- `prefix` (String)
+- `storage_compression_format` (String)
+
+
+<a id="nestedatt--data_destination_configs--timestream_config"></a>
+### Nested Schema for `data_destination_configs.timestream_config`
+
+Read-Only:
+
+- `execution_role_arn` (String)
+- `timestream_table_arn` (String)
 
 
 

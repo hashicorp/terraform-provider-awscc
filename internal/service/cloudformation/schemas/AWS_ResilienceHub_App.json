@@ -53,13 +53,16 @@
         },
         "MappingType": {
           "type": "string",
-          "pattern": "CfnStack|Resource|Terraform"
+          "pattern": "CfnStack|Resource|Terraform|EKS"
         },
         "ResourceName": {
           "type": "string",
           "pattern": "^[A-Za-z0-9][A-Za-z0-9_\\-]{1,59}$"
         },
         "TerraformSourceName": {
+          "type": "string"
+        },
+        "EksSourceName": {
           "type": "string"
         },
         "PhysicalResourceId": {
@@ -102,7 +105,7 @@
       "type": "string",
       "minLength": 0,
       "maxLength": 5000,
-      "pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$"
+      "pattern": "^[\\w\\s:,-\\.'\\/{}\\[\\]:\"]+$"
     },
     "ResourceMappings": {
       "description": "An array of ResourceMapping objects.",
@@ -156,6 +159,7 @@
         "apigateway:GET",
         "ec2:Describe*",
         "ecs:DescribeServices",
+        "eks:DescribeCluster",
         "elasticfilesystem:DescribeFileSystems",
         "elasticloadbalancing:DescribeLoadBalancers",
         "lambda:GetFunction",
@@ -186,6 +190,7 @@
         "apigateway:GET",
         "ec2:Describe*",
         "ecs:DescribeServices",
+        "eks:DescribeCluster",
         "elasticfilesystem:DescribeFileSystems",
         "elasticloadbalancing:DescribeLoadBalancers",
         "lambda:GetFunction",

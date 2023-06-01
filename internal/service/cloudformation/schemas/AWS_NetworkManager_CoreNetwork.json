@@ -54,6 +54,7 @@
     "Tags": {
       "description": "The tags for the global network.",
       "type": "array",
+      "uniqueItems": true,
       "insertionOrder": false,
       "items": {
         "$ref": "#/definitions/Tag"
@@ -133,7 +134,8 @@
     "taggable": true,
     "tagOnCreate": true,
     "tagUpdatable": true,
-    "cloudFormationSystemTags": false
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   },
   "additionalProperties": false,
   "required": [
@@ -157,6 +159,9 @@
   "additionalIdentifiers": [
     [
       "/properties/CoreNetworkArn"
+    ],
+    [
+      "/properties/GlobalNetworkId"
     ]
   ],
   "handlers": {
@@ -165,7 +170,6 @@
         "networkmanager:CreateCoreNetwork",
         "networkmanager:GetCoreNetwork",
         "networkmanager:GetCoreNetworkPolicy",
-        "networkmanager:TagResource",
         "ec2:DescribeRegions"
       ],
       "timeoutInMinutes": 720
