@@ -119,6 +119,16 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: RoleArn
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -163,6 +173,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"engine_type":     "EngineType",
 		"kms_key_id":      "KmsKeyId",
 		"name":            "Name",
+		"role_arn":        "RoleArn",
 		"s3_location":     "S3Location",
 		"tags":            "Tags",
 	})

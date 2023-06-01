@@ -57,7 +57,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A string containing full ResilienceHub app template body.",
 		//	  "maxLength": 5000,
 		//	  "minLength": 0,
-		//	  "pattern": "^[\\w\\s:,-\\.'{}\\[\\]:\"]+$",
+		//	  "pattern": "^[\\w\\s:,-\\.'\\/{}\\[\\]:\"]+$",
 		//	  "type": "string"
 		//	}
 		"app_template_body": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -111,11 +111,14 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    "additionalProperties": false,
 		//	    "description": "Resource mapping is used to map logical resources from template to physical resource",
 		//	    "properties": {
+		//	      "EksSourceName": {
+		//	        "type": "string"
+		//	      },
 		//	      "LogicalStackName": {
 		//	        "type": "string"
 		//	      },
 		//	      "MappingType": {
-		//	        "pattern": "CfnStack|Resource|Terraform",
+		//	        "pattern": "CfnStack|Resource|Terraform|EKS",
 		//	        "type": "string"
 		//	      },
 		//	      "PhysicalResourceId": {
@@ -165,6 +168,10 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"resource_mappings": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EksSourceName
+					"eks_source_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: LogicalStackName
 					"logical_stack_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
@@ -249,6 +256,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"aws_account_id":          "AwsAccountId",
 		"aws_region":              "AwsRegion",
 		"description":             "Description",
+		"eks_source_name":         "EksSourceName",
 		"identifier":              "Identifier",
 		"logical_stack_name":      "LogicalStackName",
 		"mapping_type":            "MappingType",

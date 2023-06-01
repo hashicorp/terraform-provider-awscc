@@ -144,15 +144,15 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		//	  "description": "The attachment to move from one segment to another.",
 		//	  "properties": {
 		//	    "AttachmentPolicyRuleNumber": {
-		//	      "description": "New policy rule number of the attachment",
+		//	      "description": "The rule number in the policy document that applies to this change.",
 		//	      "type": "integer"
 		//	    },
 		//	    "SegmentName": {
-		//	      "description": "Proposed segment name",
+		//	      "description": "The name of the segment to change.",
 		//	      "type": "string"
 		//	    },
 		//	    "Tags": {
-		//	      "description": "Proposed tags for the Segment.",
+		//	      "description": "The list of key-value tags that changed for the segment.",
 		//	      "insertionOrder": false,
 		//	      "items": {
 		//	        "additionalProperties": false,
@@ -173,7 +173,8 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -182,16 +183,16 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AttachmentPolicyRuleNumber
 				"attachment_policy_rule_number": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "New policy rule number of the attachment",
+					Description: "The rule number in the policy document that applies to this change.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: SegmentName
 				"segment_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "Proposed segment name",
+					Description: "The name of the segment to change.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
-				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
@@ -206,7 +207,7 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
-					Description: "Proposed tags for the Segment.",
+					Description: "The list of key-value tags that changed for the segment.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -271,9 +272,10 @@ func connectAttachmentDataSource(ctx context.Context) (datasource.DataSource, er
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key

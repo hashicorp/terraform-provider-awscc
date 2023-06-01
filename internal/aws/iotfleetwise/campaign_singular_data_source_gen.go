@@ -160,6 +160,120 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: DataDestinationConfigs
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "properties": {
+		//	      "S3Config": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "BucketArn": {
+		//	            "maxLength": 100,
+		//	            "minLength": 16,
+		//	            "pattern": "^arn:(aws[a-zA-Z0-9-]*):s3:::.+$",
+		//	            "type": "string"
+		//	          },
+		//	          "DataFormat": {
+		//	            "enum": [
+		//	              "JSON",
+		//	              "PARQUET"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Prefix": {
+		//	            "maxLength": 512,
+		//	            "minLength": 1,
+		//	            "pattern": "^[a-zA-Z0-9-_:./!*'()]+$",
+		//	            "type": "string"
+		//	          },
+		//	          "StorageCompressionFormat": {
+		//	            "enum": [
+		//	              "NONE",
+		//	              "GZIP"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "BucketArn"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "TimestreamConfig": {
+		//	        "additionalProperties": false,
+		//	        "properties": {
+		//	          "ExecutionRoleArn": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "",
+		//	            "type": "string"
+		//	          },
+		//	          "TimestreamTableArn": {
+		//	            "maxLength": 2048,
+		//	            "minLength": 20,
+		//	            "pattern": "^arn:(aws[a-zA-Z0-9-]*):timestream:[a-zA-Z0-9-]+:[0-9]{12}:database\\/[a-zA-Z0-9_.-]+\\/table\\/[a-zA-Z0-9_.-]+$",
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "TimestreamTableArn",
+		//	          "ExecutionRoleArn"
+		//	        ],
+		//	        "type": "object"
+		//	      }
+		//	    },
+		//	    "type": "object"
+		//	  },
+		//	  "maxItems": 1,
+		//	  "minItems": 1,
+		//	  "type": "array"
+		//	}
+		"data_destination_configs": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: S3Config
+					"s3_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: BucketArn
+							"bucket_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: DataFormat
+							"data_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: Prefix
+							"prefix": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: StorageCompressionFormat
+							"storage_compression_format": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: TimestreamConfig
+					"timestream_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: ExecutionRoleArn
+							"execution_role_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+							// Property: TimestreamTableArn
+							"timestream_table_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Computed: true,
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: DataExtraDimensions
 		// CloudFormation resource type schema:
 		//
@@ -436,14 +550,18 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"action":                            "Action",
 		"arn":                               "Arn",
+		"bucket_arn":                        "BucketArn",
 		"collection_scheme":                 "CollectionScheme",
 		"compression":                       "Compression",
 		"condition_based_collection_scheme": "ConditionBasedCollectionScheme",
 		"condition_language_version":        "ConditionLanguageVersion",
 		"creation_time":                     "CreationTime",
+		"data_destination_configs":          "DataDestinationConfigs",
 		"data_extra_dimensions":             "DataExtraDimensions",
+		"data_format":                       "DataFormat",
 		"description":                       "Description",
 		"diagnostics_mode":                  "DiagnosticsMode",
+		"execution_role_arn":                "ExecutionRoleArn",
 		"expiry_time":                       "ExpiryTime",
 		"expression":                        "Expression",
 		"key":                               "Key",
@@ -454,15 +572,20 @@ func campaignDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"name":                              "Name",
 		"period_ms":                         "PeriodMs",
 		"post_trigger_collection_duration":  "PostTriggerCollectionDuration",
+		"prefix":                            "Prefix",
 		"priority":                          "Priority",
+		"s3_config":                         "S3Config",
 		"signal_catalog_arn":                "SignalCatalogArn",
 		"signals_to_collect":                "SignalsToCollect",
 		"spooling_mode":                     "SpoolingMode",
 		"start_time":                        "StartTime",
 		"status":                            "Status",
+		"storage_compression_format":        "StorageCompressionFormat",
 		"tags":                              "Tags",
 		"target_arn":                        "TargetArn",
 		"time_based_collection_scheme":      "TimeBasedCollectionScheme",
+		"timestream_config":                 "TimestreamConfig",
+		"timestream_table_arn":              "TimestreamTableArn",
 		"trigger_mode":                      "TriggerMode",
 		"value":                             "Value",
 	})

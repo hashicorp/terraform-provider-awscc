@@ -1160,6 +1160,21 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Name of the flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: FlowStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Flow activation status for Scheduled- and Event-triggered flows",
+		//	  "enum": [
+		//	    "Active",
+		//	    "Suspended"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"flow_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Flow activation status for Scheduled- and Event-triggered flows",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KMSArn
 		// CloudFormation resource type schema:
 		//
@@ -2482,10 +2497,6 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Trigger settings of the flow.",
 		//	  "properties": {
-		//	    "ActivateFlowOnCreate": {
-		//	      "description": "Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.",
-		//	      "type": "boolean"
-		//	    },
 		//	    "TriggerProperties": {
 		//	      "additionalProperties": false,
 		//	      "description": "Details required based on the type of trigger",
@@ -2548,11 +2559,6 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"trigger_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ActivateFlowOnCreate
-				"activate_flow_on_create": schema.BoolAttribute{ /*START ATTRIBUTE*/
-					Description: "Active 'Scheduled' or 'Event' flow after creation. Without activation the default state of such flows upon creation is DRAFT.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
 				// Property: TriggerProperties
 				"trigger_properties": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -2618,7 +2624,6 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::AppFlow::Flow").WithTerraformTypeName("awscc_appflow_flow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"activate_flow_on_create":           "ActivateFlowOnCreate",
 		"aggregation_config":                "AggregationConfig",
 		"aggregation_type":                  "AggregationType",
 		"amplitude":                         "Amplitude",
@@ -2651,6 +2656,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"flow_arn":                          "FlowArn",
 		"flow_error_deactivation_threshold": "FlowErrorDeactivationThreshold",
 		"flow_name":                         "FlowName",
+		"flow_status":                       "FlowStatus",
 		"glue_data_catalog":                 "GlueDataCatalog",
 		"google_analytics":                  "GoogleAnalytics",
 		"id_field_names":                    "IdFieldNames",

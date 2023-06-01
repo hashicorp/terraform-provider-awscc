@@ -132,7 +132,6 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	      "items": {
 		//	        "additionalProperties": false,
 		//	        "description": "A key-value pair to associate with a resource.",
-		//	        "insertionOrder": false,
 		//	        "properties": {
 		//	          "Key": {
 		//	            "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -149,7 +148,8 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	        ],
 		//	        "type": "object"
 		//	      },
-		//	      "type": "array"
+		//	      "type": "array",
+		//	      "uniqueItems": true
 		//	    }
 		//	  },
 		//	  "type": "object"
@@ -167,7 +167,7 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: Tags
-				"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+				"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: Key
@@ -231,7 +231,6 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	  "items": {
 		//	    "additionalProperties": false,
 		//	    "description": "A key-value pair to associate with a resource.",
-		//	    "insertionOrder": false,
 		//	    "properties": {
 		//	      "Key": {
 		//	        "description": "The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.",
@@ -248,9 +247,10 @@ func siteToSiteVpnAttachmentDataSource(ctx context.Context) (datasource.DataSour
 		//	    ],
 		//	    "type": "object"
 		//	  },
-		//	  "type": "array"
+		//	  "type": "array",
+		//	  "uniqueItems": true
 		//	}
-		"tags": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 					// Property: Key

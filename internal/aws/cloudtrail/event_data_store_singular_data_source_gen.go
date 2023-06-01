@@ -235,6 +235,17 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 			Description: "The ARN of the event data store.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IngestionEnabled
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates whether the event data store is ingesting events.",
+		//	  "type": "boolean"
+		//	}
+		"ingestion_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates whether the event data store is ingesting events.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: KmsKeyId
 		// CloudFormation resource type schema:
 		//
@@ -294,11 +305,11 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The status of an event data store. Values are ENABLED and PENDING_DELETION.",
+		//	  "description": "The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.",
 		//	  "type": "string"
 		//	}
 		"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The status of an event data store. Values are ENABLED and PENDING_DELETION.",
+			Description: "The status of an event data store. Values are STARTING_INGESTION, ENABLED, STOPPING_INGESTION, STOPPED_INGESTION and PENDING_DELETION.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -391,6 +402,7 @@ func eventDataStoreDataSource(ctx context.Context) (datasource.DataSource, error
 		"event_data_store_arn":           "EventDataStoreArn",
 		"field":                          "Field",
 		"field_selectors":                "FieldSelectors",
+		"ingestion_enabled":              "IngestionEnabled",
 		"key":                            "Key",
 		"kms_key_id":                     "KmsKeyId",
 		"multi_region_enabled":           "MultiRegionEnabled",
