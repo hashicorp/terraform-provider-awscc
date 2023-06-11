@@ -12,15 +12,15 @@ description: |-
 ## Example Usage
 
 ### Basic example
-To create a simple db subnet group
+To create a simple db parameter group
 {{ tffile (printf "examples/resources/%s/awscc_rds_db_parameter_group.tf" .Name)}}
 
-### To create a db subnet group with tags
-To enable Storage Autoscaling with instances that support the feature, define the max_allocated_storage argument higher than the allocated_storage argument. Terraform will automatically hide differences with the allocated_storage argument value if autoscaling occurs.
+### Example with tags
+To create a db parameter group with tags
 {{ tffile (printf "examples/resources/%s/awscc_rds_db_parameter_group_tags.tf" .Name)}}
 
-### To create a db subnet group with `create_before_destroy` Lifecycle Configuration example
-You can specify the manage_master_user_password attribute to enable managing the master password with Secrets Manager. You can also update an existing cluster to use Secrets Manager by specify the manage_master_user_password attribute and removing the password attribute (removal is required).
+### Example with `create_before_destroy` Lifecycle Configuration.
+To create a db parameter group with `create_before_destroy` Lifecycle Configuration example
 {{ tffile (printf "examples/resources/%s/awscc_rds_db_parameter_group_create_before_destroy.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
