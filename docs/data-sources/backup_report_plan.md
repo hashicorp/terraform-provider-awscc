@@ -57,5 +57,3 @@ Read-Only:
 - `organization_units` (Set of String) The list of AWS organization units that a report covers.
 - `regions` (Set of String) The list of AWS regions that a report covers.
 - `report_template` (String) Identifies the report template for the report. Reports are built using a report template. The report templates are: `BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT`
-
-

@@ -30,5 +30,3 @@ Data Source schema for AWS::CloudFront::CloudFrontOriginAccessIdentity
 Read-Only:
 
 - `comment` (String)
-
-

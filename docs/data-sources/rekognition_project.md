@@ -23,5 +23,3 @@ Data Source schema for AWS::Rekognition::Project
 
 - `arn` (String)
 - `project_name` (String) The name of the project
-
-

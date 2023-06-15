@@ -104,5 +104,3 @@ Read-Only:
 - `model` (String)
 - `package_version` (String)
 - `station` (String)
-
-

@@ -73,5 +73,3 @@ Read-Only:
 
 - `burst_limit` (Number) The maximum API request rate limit over a time ranging from one to a few seconds. The maximum API request rate limit depends on whether the underlying token bucket is at its full capacity.
 - `rate_limit` (Number) The API request steady-state rate limit (average requests per second over an extended period of time).
-
-

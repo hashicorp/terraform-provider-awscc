@@ -32,5 +32,3 @@ Data Source schema for AWS::ApiGateway::Authorizer
 - `provider_ar_ns` (Set of String) A list of the Amazon Cognito user pool ARNs for the COGNITO_USER_POOLS authorizer.
 - `rest_api_id` (String) The identifier of the API.
 - `type` (String) The authorizer type.
-
-

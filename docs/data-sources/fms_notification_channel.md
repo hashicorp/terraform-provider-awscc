@@ -23,5 +23,3 @@ Data Source schema for AWS::FMS::NotificationChannel
 
 - `sns_role_name` (String) A resource ARN.
 - `sns_topic_arn` (String) A resource ARN.
-
-

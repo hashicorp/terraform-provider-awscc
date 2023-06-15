@@ -92,5 +92,3 @@ Read-Only:
 Read-Only:
 
 - `optimized_shared_delivery` (String) Whether emails sent with this configuration set have optimized delivery algorithm enabled.
-
-

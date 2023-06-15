@@ -28,5 +28,3 @@ Data Source schema for AWS::Events::ApiDestination
 - `invocation_endpoint` (String) Url endpoint to invoke.
 - `invocation_rate_limit_per_second` (Number)
 - `name` (String) Name of the apiDestination.
-
-

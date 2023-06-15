@@ -32,5 +32,3 @@ Read-Only:
 
 - `s3_bucket` (String) The Amazon S3 bucket where the data is located.
 - `s3_key` (String) The Amazon S3 key where the data is located.
-
-

@@ -37,5 +37,3 @@ Recommended module naming pattern: company_or_organization::service::type::MODUL
 The only allowed value at present is:
 
 PRIVATE: The type is only visible and usable within the account in which it is registered. Currently, AWS CloudFormation marks any types you register as PRIVATE.
-
-

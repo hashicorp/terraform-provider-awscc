@@ -32,5 +32,3 @@ Read-Only:
 
 - `key` (String) The key identifier, or name, of the tag.
 - `value` (String) The string value that's associated with the key of the tag. You can set the value of a tag to an empty string, but you can't set the value of a tag to null.
-
-

@@ -35,5 +35,3 @@ Read-Only:
 
 - `key` (String) The key for the tag. May not be null.
 - `value` (String) The tag's value. May be null.
-
-

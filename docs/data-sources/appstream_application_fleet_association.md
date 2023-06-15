@@ -23,5 +23,3 @@ Data Source schema for AWS::AppStream::ApplicationFleetAssociation
 
 - `application_arn` (String)
 - `fleet_name` (String)
-
-

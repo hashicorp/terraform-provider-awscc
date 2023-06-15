@@ -95,5 +95,3 @@ Read-Only:
 - `feature` (String)
 - `treatment_name` (String)
 - `variation` (String)
-
-

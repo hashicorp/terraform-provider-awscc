@@ -34,5 +34,3 @@ Data Source schema for AWS::Lightsail::Alarm
 - `state` (String) The current state of the alarm.
 - `threshold` (Number) The value against which the specified statistic is compared.
 - `treat_missing_data` (String) Sets how this alarm will handle missing data points.
-
-

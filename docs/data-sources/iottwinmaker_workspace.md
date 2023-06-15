@@ -29,5 +29,3 @@ Data Source schema for AWS::IoTTwinMaker::Workspace
 - `tags` (Map of String) A map of key-value pairs to associate with a resource.
 - `update_date_time` (String) The date and time of the current update.
 - `workspace_id` (String) The ID of the workspace.
-
-

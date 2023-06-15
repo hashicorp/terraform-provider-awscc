@@ -41,5 +41,3 @@ Read-Only:
 Read-Only:
 
 - `untrusted_artifact_on_deployment` (String) Indicates how Lambda operations involve updating the code artifact will operate. Default to Warn if not provided
-
-

@@ -29,5 +29,3 @@ Data Source schema for AWS::ApiGatewayV2::IntegrationResponse
 - `response_parameters` (Map of String) A key-value map specifying response parameters that are passed to the method response from the backend
 - `response_templates` (Map of String) The collection of response templates for the integration response as a string-to-string map of key-value pairs
 - `template_selection_expression` (String) The template selection expression for the integration response. Supported only for WebSocket APIs
-
-

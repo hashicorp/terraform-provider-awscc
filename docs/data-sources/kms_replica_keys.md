@@ -19,5 +19,3 @@ Plural Data Source schema for AWS::KMS::ReplicaKey
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
-
-

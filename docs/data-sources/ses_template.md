@@ -32,5 +32,3 @@ Read-Only:
 - `subject_part` (String) The subject line of the email.
 - `template_name` (String) The name of the template.
 - `text_part` (String) The email body that is visible to recipients whose email clients do not display HTML content.
-
-

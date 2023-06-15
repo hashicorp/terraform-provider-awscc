@@ -27,5 +27,3 @@ Data Source schema for AWS::Events::Archive
 - `event_pattern` (Map of String)
 - `retention_days` (Number)
 - `source_arn` (String)
-
-

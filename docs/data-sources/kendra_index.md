@@ -131,5 +131,3 @@ Read-Only:
 - `secret_manager_arn` (String) Role Arn
 - `url` (String)
 - `user_name_attribute_field` (String)
-
-

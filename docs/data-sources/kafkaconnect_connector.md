@@ -193,5 +193,3 @@ Read-Only:
 
 - `revision` (Number) The revision of the worker configuration to use.
 - `worker_configuration_arn` (String) The Amazon Resource Name (ARN) of the worker configuration to use.
-
-

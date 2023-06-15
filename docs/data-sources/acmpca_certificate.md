@@ -224,5 +224,3 @@ Read-Only:
 
 - `type` (String)
 - `value` (Number)
-
-

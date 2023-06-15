@@ -19,5 +19,3 @@ Plural Data Source schema for AWS::SES::DedicatedIpPool
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
-
-

@@ -24,5 +24,3 @@ Data Source schema for AWS::RoboMaker::Fleet
 - `arn` (String)
 - `name` (String) The name of the fleet.
 - `tags` (Map of String) A key-value pair to associate with a resource.
-
-

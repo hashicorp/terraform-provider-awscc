@@ -53,5 +53,3 @@ Read-Only:
 
 - `day_of_month` (String) <p>The Day Of Month for scheduled refresh.</p>
 - `day_of_week` (String)
-
-

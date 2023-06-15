@@ -47,5 +47,3 @@ Read-Only:
 - `ip` (String) One IP address that you want to forward DNS queries to. You can specify only IPv4 addresses.
 - `ipv_6` (String) One IPv6 address that you want to forward DNS queries to. You can specify only IPv6 addresses.
 - `port` (String) The port at Ip that you want to forward DNS queries to.
-
-

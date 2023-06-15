@@ -33,5 +33,3 @@ Read-Only:
 - `origin_access_control_origin_type` (String)
 - `signing_behavior` (String)
 - `signing_protocol` (String)
-
-

@@ -92,5 +92,3 @@ Read-Only:
 - `condition_key` (String)
 - `condition_type` (String)
 - `condition_value` (String)
-
-

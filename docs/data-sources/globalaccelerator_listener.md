@@ -34,5 +34,3 @@ Read-Only:
 
 - `from_port` (Number) A network port number
 - `to_port` (Number) A network port number
-
-

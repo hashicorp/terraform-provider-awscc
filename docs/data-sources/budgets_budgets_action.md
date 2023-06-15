@@ -87,5 +87,3 @@ Read-Only:
 
 - `address` (String)
 - `type` (String)
-
-

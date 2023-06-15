@@ -41,5 +41,3 @@ Read-Only:
 
 - `description` (String)
 - `optional` (Boolean)
-
-

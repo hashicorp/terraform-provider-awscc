@@ -66,5 +66,3 @@ Read-Only:
 
 - `vpc_id` (String) The ID of an Amazon VPC.
 - `vpc_region` (String) The region that an Amazon VPC was created in. See https://docs.aws.amazon.com/general/latest/gr/rande.html for a list of up to date regions.
-
-

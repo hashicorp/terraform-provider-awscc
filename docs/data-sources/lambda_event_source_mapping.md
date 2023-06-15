@@ -134,5 +134,3 @@ Read-Only:
 
 - `type` (String) The type of source access configuration.
 - `uri` (String) The URI for the source access configuration resource.
-
-

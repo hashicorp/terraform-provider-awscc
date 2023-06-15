@@ -40,5 +40,3 @@ Read-Only:
 - `allow_origins` (List of String) Represents a collection of allowed origins.
 - `expose_headers` (List of String) Represents a collection of exposed headers.
 - `max_age` (Number)
-
-

@@ -23,5 +23,3 @@ Data Source schema for AWS::SES::DedicatedIpPool
 
 - `pool_name` (String) The name of the dedicated IP pool.
 - `scaling_mode` (String) Specifies whether the dedicated IP pool is managed or not. The default value is STANDARD.
-
-

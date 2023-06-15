@@ -331,5 +331,3 @@ Read-Only:
 - `scale_in_cooldown` (Number)
 - `scale_out_cooldown` (Number)
 - `target_value` (Number)
-
-

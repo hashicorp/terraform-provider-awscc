@@ -59,5 +59,3 @@ Read-Only:
 - `include_child_paths` (Boolean)
 - `methods` (List of String)
 - `source_path` (String)
-
-

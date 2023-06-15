@@ -644,5 +644,3 @@ Read-Only:
 - `instance_count` (Number) The number of ML compute instances to use in the transform job. For distributed transform jobs, specify a value greater than 1. The default value is 1.
 - `instance_type` (String) The ML compute instance type for the transform job.
 - `volume_kms_key_id` (String) The AWS Key Management Service (AWS KMS) key that Amazon SageMaker uses to encrypt model data on the storage volume attached to the ML compute instance(s) that run the batch transform job.
-
-

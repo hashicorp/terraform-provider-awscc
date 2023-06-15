@@ -135,5 +135,3 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups to use for the environment.
 - `subnet_ids` (List of String) A list of subnets to use for the environment. These must be private subnets, in the same VPC, in two different availability zones.
-
-

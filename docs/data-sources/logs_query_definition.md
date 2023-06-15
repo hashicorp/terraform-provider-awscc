@@ -25,5 +25,3 @@ Data Source schema for AWS::Logs::QueryDefinition
 - `name` (String) A name for the saved query definition
 - `query_definition_id` (String) Unique identifier of a query definition
 - `query_string` (String) The query string to use for this definition
-
-

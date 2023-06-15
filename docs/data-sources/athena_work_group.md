@@ -163,5 +163,3 @@ Read-Only:
 
 - `encryption_option` (String) Indicates whether Amazon S3 server-side encryption with Amazon S3-managed keys (SSE-S3), server-side encryption with KMS-managed keys (SSE-KMS), or client-side encryption with KMS-managed keys (CSE-KMS) is used.
 - `kms_key` (String) For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
-
-

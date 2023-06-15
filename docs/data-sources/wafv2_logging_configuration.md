@@ -107,5 +107,3 @@ Read-Only:
 Read-Only:
 
 - `name` (String) The name of the query header to inspect.
-
-

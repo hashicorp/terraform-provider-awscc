@@ -555,5 +555,3 @@ Read-Only:
 Read-Only:
 
 - `instance_url` (String) The location of the Zendesk resource
-
-

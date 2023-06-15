@@ -103,5 +103,3 @@ Read-Only:
 
 - `security_group_ids` (Set of String) The list of Amazon EC2 security group IDs attached to the Amazon VPC for your Grafana workspace to connect.
 - `subnet_ids` (Set of String) The list of Amazon EC2 subnet IDs created in the Amazon VPC for your Grafana workspace to connect.
-
-

@@ -37,5 +37,3 @@ Read-Only:
 - `key` (String) The name of the zip file that contains the build files or script files.
 - `object_version` (String) The version of the file, if object versioning is turned on for the bucket. Amazon GameLift uses this information when retrieving files from your S3 bucket. To retrieve a specific version of the file, provide an object version. To retrieve the latest version of the file, do not set this parameter.
 - `role_arn` (String) The Amazon Resource Name (ARN) for an IAM role that allows Amazon GameLift to access the S3 bucket.
-
-

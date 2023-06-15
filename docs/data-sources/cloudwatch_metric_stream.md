@@ -78,5 +78,3 @@ Read-Only:
 
 - `key` (String) A unique identifier for the tag.
 - `value` (String) String which you can use to describe or define the tag.
-
-

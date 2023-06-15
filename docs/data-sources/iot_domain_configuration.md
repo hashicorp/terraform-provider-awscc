@@ -68,5 +68,3 @@ Read-Only:
 Read-Only:
 
 - `security_policy` (String)
-
-

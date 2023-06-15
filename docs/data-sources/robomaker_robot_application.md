@@ -46,5 +46,3 @@ Read-Only:
 - `architecture` (String) The architecture of robot application.
 - `s3_bucket` (String) The Arn of the S3Bucket that stores the robot application source.
 - `s3_key` (String) The s3 key of robot application source.
-
-

@@ -65,5 +65,3 @@ Read-Only:
 
 - `key` (String)
 - `values` (List of String)
-
-

@@ -355,5 +355,3 @@ Read-Only:
 
 - `message` (String) <p>The error message.</p>
 - `type` (String)
-
-

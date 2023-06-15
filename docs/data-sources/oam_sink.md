@@ -25,5 +25,3 @@ Data Source schema for AWS::Oam::Sink
 - `name` (String) The name of the ObservabilityAccessManager Sink.
 - `policy` (Map of String) The policy of this ObservabilityAccessManager Sink.
 - `tags` (Map of String) Tags to apply to the sink
-
-

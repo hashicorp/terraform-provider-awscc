@@ -25,5 +25,3 @@ Data Source schema for AWS::Route53Resolver::ResolverConfig
 - `autodefined_reverse_flag` (String) Represents the desired status of AutodefinedReverse. The only supported value on creation is DISABLE. Deletion of this resource will return AutodefinedReverse to its default value (ENABLED).
 - `owner_id` (String) AccountId
 - `resource_id` (String) ResourceId
-
-

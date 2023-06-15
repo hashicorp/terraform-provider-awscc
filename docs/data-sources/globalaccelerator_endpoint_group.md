@@ -50,5 +50,3 @@ Read-Only:
 
 - `endpoint_port` (Number) A network port number
 - `listener_port` (Number) A network port number
-
-

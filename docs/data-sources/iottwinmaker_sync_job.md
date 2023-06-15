@@ -29,5 +29,3 @@ Data Source schema for AWS::IoTTwinMaker::SyncJob
 - `tags` (Map of String) A key-value pair to associate with a resource.
 - `update_date_time` (String) The date and time when the sync job was updated.
 - `workspace_id` (String) The ID of the workspace.
-
-

@@ -29,5 +29,3 @@ If you specify the SourceDBClusterIdentifier property, don't specify this proper
 - `source_db_cluster_identifier` (String) The Amazon Resource Name (ARN) to use as the primary cluster of the global database. This parameter is optional. This parameter is stored as a lowercase string.
 - `storage_encrypted` (Boolean) The storage encryption setting for the new global database cluster.
 If you specify the SourceDBClusterIdentifier property, don't specify this property. The value is inherited from the cluster.
-
-

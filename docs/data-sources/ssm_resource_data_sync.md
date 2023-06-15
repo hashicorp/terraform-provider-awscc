@@ -60,5 +60,3 @@ Read-Only:
 
 - `organization_source_type` (String)
 - `organizational_units` (List of String)
-
-

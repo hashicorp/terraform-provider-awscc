@@ -39,5 +39,3 @@ Read-Only:
 
 - `branch_name` (String)
 - `prefix` (String)
-
-

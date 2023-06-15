@@ -25,5 +25,3 @@ Data Source schema for AWS::IdentityStore::Group
 - `display_name` (String) A string containing the name of the group. This value is commonly displayed when the group is referenced.
 - `group_id` (String) The unique identifier for a group in the identity store.
 - `identity_store_id` (String) The globally unique identifier for the identity store.
-
-

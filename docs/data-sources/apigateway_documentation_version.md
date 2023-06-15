@@ -24,5 +24,3 @@ Data Source schema for AWS::ApiGateway::DocumentationVersion
 - `description` (String) The description of the API documentation snapshot.
 - `documentation_version` (String) The version identifier of the API documentation snapshot.
 - `rest_api_id` (String) The identifier of the API.
-
-

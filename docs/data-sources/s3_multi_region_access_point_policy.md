@@ -31,5 +31,3 @@ Data Source schema for AWS::S3::MultiRegionAccessPointPolicy
 Read-Only:
 
 - `is_public` (String) Specifies whether the policy is public or not.
-
-

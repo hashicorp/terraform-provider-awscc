@@ -36,5 +36,3 @@ Read-Only:
 
 - `key_arn` (String) An encryption key ARN.
 - `type` (String)
-
-

@@ -59,5 +59,3 @@ Read-Only:
 Read-Only:
 
 - `activated` (Boolean)
-
-

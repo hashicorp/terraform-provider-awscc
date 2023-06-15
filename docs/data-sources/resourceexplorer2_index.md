@@ -25,5 +25,3 @@ Data Source schema for AWS::ResourceExplorer2::Index
 - `index_state` (String)
 - `tags` (Map of String)
 - `type` (String)
-
-

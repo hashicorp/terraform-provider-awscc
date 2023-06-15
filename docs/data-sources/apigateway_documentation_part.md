@@ -36,5 +36,3 @@ Read-Only:
 - `path` (String) The URL path of the target.
 - `status_code` (String) The HTTP status code of a response.
 - `type` (String) The type of API entity that the documentation content applies to.
-
-

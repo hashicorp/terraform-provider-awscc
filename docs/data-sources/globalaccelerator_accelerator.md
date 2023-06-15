@@ -39,5 +39,3 @@ Read-Only:
 
 - `key` (String) Key of the tag. Value can be 1 to 127 characters.
 - `value` (String) Value for the tag. Value can be 1 to 255 characters.
-
-

@@ -23,5 +23,3 @@ Data Source schema for AWS::EC2::SubnetCidrBlock
 
 - `ipv_6_cidr_block` (String) The IPv6 network range for the subnet, in CIDR notation. The subnet size must use a /64 prefix length
 - `subnet_id` (String) The ID of the subnet
-
-

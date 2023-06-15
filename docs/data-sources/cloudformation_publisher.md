@@ -27,5 +27,3 @@ Data Source schema for AWS::CloudFormation::Publisher
 - `publisher_id` (String) The publisher id assigned by CloudFormation for publishing in this region.
 - `publisher_profile` (String) The URL to the publisher's profile with the identity provider.
 - `publisher_status` (String) Whether the publisher is verified.
-
-

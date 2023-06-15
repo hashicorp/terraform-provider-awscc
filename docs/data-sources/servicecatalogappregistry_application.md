@@ -25,5 +25,3 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::Application
 - `description` (String) The description of the application.
 - `name` (String) The name of the application.
 - `tags` (Map of String)
-
-

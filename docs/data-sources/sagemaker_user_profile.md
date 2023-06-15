@@ -114,5 +114,3 @@ Read-Only:
 - `notebook_output_option` (String) Whether to include the notebook cell output when sharing the notebook. The default is Disabled.
 - `s3_kms_key_id` (String) When NotebookOutputOption is Allowed, the AWS Key Management Service (KMS) encryption key ID used to encrypt the notebook cell output in the Amazon S3 bucket.
 - `s3_output_path` (String) When NotebookOutputOption is Allowed, the Amazon S3 bucket used to store the shared notebook snapshots.
-
-

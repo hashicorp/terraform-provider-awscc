@@ -75,5 +75,3 @@ Read-Only:
 
 - `behavior_on_mx_failure` (String) The action to take if the required MX record isn't found when you send an email. When you set this value to UseDefaultValue , the mail is sent using amazonses.com as the MAIL FROM domain. When you set this value to RejectMessage , the Amazon SES API v2 returns a MailFromDomainNotVerified error, and doesn't attempt to deliver the email.
 - `mail_from_domain` (String) The custom MAIL FROM domain that you want the verified identity to use
-
-

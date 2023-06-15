@@ -23,5 +23,3 @@ Data Source schema for AWS::Logs::LogStream
 
 - `log_group_name` (String)
 - `log_stream_name` (String)
-
-

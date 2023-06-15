@@ -24,5 +24,3 @@ Data Source schema for AWS::IoT::Policy
 - `arn` (String)
 - `policy_document` (Map of String)
 - `policy_name` (String)
-
-

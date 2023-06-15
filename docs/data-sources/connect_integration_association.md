@@ -25,5 +25,3 @@ Data Source schema for AWS::Connect::IntegrationAssociation
 - `integration_arn` (String) ARN of Integration being associated with the instance
 - `integration_association_id` (String) Identifier of the association with Connect Instance
 - `integration_type` (String) Specifies the integration type to be associated with the instance
-
-

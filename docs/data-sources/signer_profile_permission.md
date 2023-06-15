@@ -26,5 +26,3 @@ Data Source schema for AWS::Signer::ProfilePermission
 - `profile_name` (String)
 - `profile_version` (String)
 - `statement_id` (String)
-
-

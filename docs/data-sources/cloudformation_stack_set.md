@@ -113,5 +113,3 @@ Read-Only:
 
 - `key` (String) A string used to identify this tag. You can specify a maximum of 127 characters for a tag key.
 - `value` (String) A string containing the value for this tag. You can specify a maximum of 256 characters for a tag value.
-
-

@@ -26,5 +26,3 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::AttributeGroup
 - `description` (String) The description of the attribute group.
 - `name` (String) The name of the attribute group.
 - `tags` (Map of String)
-
-

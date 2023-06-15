@@ -33,5 +33,3 @@ Read-Only:
 - `comment` (String)
 - `encoded_key` (String)
 - `name` (String)
-
-

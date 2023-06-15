@@ -24,5 +24,3 @@ Data Source schema for AWS::AppSync::DomainNameApiAssociation
 - `api_association_identifier` (String)
 - `api_id` (String)
 - `domain_name` (String)
-
-

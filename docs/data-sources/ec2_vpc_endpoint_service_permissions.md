@@ -23,5 +23,3 @@ Data Source schema for AWS::EC2::VPCEndpointServicePermissions
 
 - `allowed_principals` (List of String)
 - `service_id` (String)
-
-
