@@ -28,6 +28,7 @@ Data Source schema for AWS::IVS::Channel
 - `latency_mode` (String) Channel latency mode.
 - `name` (String) Channel
 - `playback_url` (String) Channel Playback URL.
+- `preset` (String) Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string ("").
 - `recording_configuration_arn` (String) Recording Configuration ARN. A value other than an empty string indicates that recording is enabled. Default: "" (recording is disabled).
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.

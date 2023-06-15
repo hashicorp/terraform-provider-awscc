@@ -243,8 +243,11 @@ Required:
 
 Required:
 
-- `attribute_name` (String)
 - `enabled` (Boolean)
+
+Optional:
+
+- `attribute_name` (String)
 
 ## Import
 
