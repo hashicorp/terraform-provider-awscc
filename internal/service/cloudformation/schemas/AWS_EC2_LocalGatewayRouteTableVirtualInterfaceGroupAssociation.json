@@ -92,7 +92,8 @@
     "create": {
       "permissions": [
         "ec2:CreateLocalGatewayRouteTableVirtualInterfaceGroupAssociation",
-        "ec2:DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations"
+        "ec2:DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations",
+        "ec2:CreateTags"
       ]
     },
     "read": {
@@ -110,7 +111,8 @@
     "delete": {
       "permissions": [
         "ec2:DeleteLocalGatewayRouteTableVirtualInterfaceGroupAssociation",
-        "ec2:DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations"
+        "ec2:DescribeLocalGatewayRouteTableVirtualInterfaceGroupAssociations",
+        "ec2:DeleteTags"
       ]
     },
     "list": {

@@ -84,6 +84,27 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: FallbackLocation
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "An S3 URI representing the bucket and folder to store failed read set uploads.",
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"fallback_location": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "An S3 URI representing the bucket and folder to store failed read set uploads.",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthAtLeast(1),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -229,6 +250,7 @@ func sequenceStoreResource(ctx context.Context) (resource.Resource, error) {
 		"arn":               "Arn",
 		"creation_time":     "CreationTime",
 		"description":       "Description",
+		"fallback_location": "FallbackLocation",
 		"key_arn":           "KeyArn",
 		"name":              "Name",
 		"sequence_store_id": "SequenceStoreId",

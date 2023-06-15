@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 748 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 767 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -202,6 +202,15 @@ resource_schema "aws_apigatewayv2_route" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_apigatewayv2_route_response" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::RouteResponse"
+  suppress_plural_data_source_generation = true
+
+  # ResponseParameters is of unsupported type: 
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+}
+
 resource_schema "aws_apigatewayv2_vpc_link" {
   cloudformation_type_name = "AWS::ApiGatewayV2::VpcLink"
 }
@@ -242,6 +251,15 @@ resource_schema "aws_appintegrations_data_integration" {
 
 resource_schema "aws_appintegrations_event_integration" {
   cloudformation_type_name = "AWS::AppIntegrations::EventIntegration"
+}
+
+resource_schema "aws_applicationautoscaling_scalable_target" {
+  cloudformation_type_name = "AWS::ApplicationAutoScaling::ScalableTarget"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apprunner_observability_configuration" {
@@ -311,6 +329,10 @@ resource_schema "aws_appsync_domain_name_api_association" {
 
 resource_schema "aws_applicationinsights_application" {
   cloudformation_type_name = "AWS::ApplicationInsights::Application"
+}
+
+resource_schema "aws_athena_capacity_reservation" {
+  cloudformation_type_name = "AWS::Athena::CapacityReservation"
 }
 
 resource_schema "aws_athena_data_catalog" {
@@ -450,6 +472,24 @@ resource_schema "aws_chatbot_microsoft_teams_channel_configuration" {
 
 resource_schema "aws_chatbot_slack_channel_configuration" {
   cloudformation_type_name = "AWS::Chatbot::SlackChannelConfiguration"
+}
+
+resource_schema "aws_cleanrooms_collaboration" {
+  cloudformation_type_name = "AWS::CleanRooms::Collaboration"
+}
+
+resource_schema "aws_cleanrooms_configured_table" {
+  cloudformation_type_name = "AWS::CleanRooms::ConfiguredTable"
+}
+
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_cleanrooms_configured_table_association" {
+#   cloudformation_type_name               = "AWS::CleanRooms::ConfiguredTableAssociation"
+#   suppress_plural_data_source_generation = true
+# }
+
+resource_schema "aws_cleanrooms_membership" {
+  cloudformation_type_name = "AWS::CleanRooms::Membership"
 }
 
 resource_schema "aws_cloudformation_hook_default_version" {
@@ -661,7 +701,7 @@ resource_schema "aws_connect_contact_flow_module" {
 }
 
 resource_schema "aws_connect_evaluation_form" {
-  cloudformation_type_name               = "AWS::Connect::EvaluationForm"
+  cloudformation_type_name = "AWS::Connect::EvaluationForm"
 
   # Infinite recursion.
   suppress_resource_generation             = true
@@ -751,9 +791,20 @@ resource_schema "aws_cur_report_definition" {
   cloudformation_type_name = "AWS::CUR::ReportDefinition"
 }
 
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_customerprofiles_calculated_attribute_definition" {
+#   cloudformation_type_name = "AWS::CustomerProfiles::CalculatedAttributeDefinition"
+# }
+
 resource_schema "aws_customerprofiles_domain" {
   cloudformation_type_name = "AWS::CustomerProfiles::Domain"
 }
+
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_customerprofiles_event_stream" {
+#   cloudformation_type_name               = "AWS::CustomerProfiles::EventStream"
+#   suppress_plural_data_source_generation = true
+# }
 
 resource_schema "aws_customerprofiles_integration" {
   cloudformation_type_name               = "AWS::CustomerProfiles::Integration"
@@ -1724,7 +1775,7 @@ resource_schema "aws_iot_thing_group" {
 }
 
 resource_schema "aws_iot_thing_type" {
-  cloudformation_type_name               = "AWS::IoT::ThingType"
+  cloudformation_type_name = "AWS::IoT::ThingType"
 
   # Top-level "Id" property is not a primary identifier.
   suppress_resource_generation             = true
@@ -2223,6 +2274,20 @@ resource_schema "aws_managedblockchain_accessor" {
   cloudformation_type_name = "AWS::ManagedBlockchain::Accessor"
 }
 
+resource_schema "aws_mediaconnect_bridge" {
+  cloudformation_type_name = "AWS::MediaConnect::Bridge"
+}
+
+resource_schema "aws_mediaconnect_bridge_output" {
+  cloudformation_type_name               = "AWS::MediaConnect::BridgeOutput"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_mediaconnect_bridge_source" {
+  cloudformation_type_name               = "AWS::MediaConnect::BridgeSource"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_mediaconnect_flow" {
   cloudformation_type_name = "AWS::MediaConnect::Flow"
 }
@@ -2245,6 +2310,10 @@ resource_schema "aws_mediaconnect_flow_source" {
 resource_schema "aws_mediaconnect_flow_vpc_interface" {
   cloudformation_type_name               = "AWS::MediaConnect::FlowVpcInterface"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_mediaconnect_gateway" {
+  cloudformation_type_name = "AWS::MediaConnect::Gateway"
 }
 
 resource_schema "aws_mediapackage_asset" {
@@ -2616,6 +2685,10 @@ resource_schema "aws_quicksight_vpc_connection" {
 
 resource_schema "aws_ram_permission" {
   cloudformation_type_name = "AWS::RAM::Permission"
+}
+
+resource_schema "aws_rds_custom_db_engine_version" {
+  cloudformation_type_name = "AWS::RDS::CustomDBEngineVersion"
 }
 
 resource_schema "aws_rds_db_cluster" {
@@ -3170,6 +3243,20 @@ resource_schema "aws_secretsmanager_secret" {
   cloudformation_type_name = "AWS::SecretsManager::Secret"
 }
 
+resource_schema "aws_securityhub_automation_rule" {
+  cloudformation_type_name               = "AWS::SecurityHub::AutomationRule"
+
+  # Actions/FindingFieldsUpdate/Note/UpdatedBy is of unsupported type: 
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_securityhub_standard" {
+  cloudformation_type_name               = "AWS::SecurityHub::Standard"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_servicecatalog_cloudformation_provisioned_product" {
   cloudformation_type_name               = "AWS::ServiceCatalog::CloudFormationProvisionedProduct"
   suppress_plural_data_source_generation = true
@@ -3239,6 +3326,18 @@ resource_schema "aws_stepfunctions_activity" {
 resource_schema "aws_stepfunctions_state_machine" {
   cloudformation_type_name = "AWS::StepFunctions::StateMachine"
 }
+
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_stepfunctions_state_machine_alias" {
+#   cloudformation_type_name               = "AWS::StepFunctions::StateMachineAlias"
+#   suppress_plural_data_source_generation = true
+# }
+
+# handlers.list: Additional property handlerSchema is not allowed.
+# resource_schema "aws_stepfunctions_state_machine_version" {
+#   cloudformation_type_name               = "AWS::StepFunctions::StateMachineVersion"
+#   suppress_plural_data_source_generation = true
+# }
 
 resource_schema "aws_supportapp_account_alias" {
   cloudformation_type_name = "AWS::SupportApp::AccountAlias"

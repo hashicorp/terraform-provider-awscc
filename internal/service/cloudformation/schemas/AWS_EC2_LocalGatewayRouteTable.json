@@ -91,7 +91,8 @@
     "create": {
       "permissions": [
         "ec2:CreateLocalGatewayRouteTable",
-        "ec2:DescribeLocalGatewayRouteTables"
+        "ec2:DescribeLocalGatewayRouteTables",
+        "ec2:CreateTags"
       ]
     },
     "read": {
@@ -109,7 +110,8 @@
     "delete": {
       "permissions": [
         "ec2:DeleteLocalGatewayRouteTable",
-        "ec2:DescribeLocalGatewayRouteTables"
+        "ec2:DescribeLocalGatewayRouteTables",
+        "ec2:DeleteTags"
       ]
     },
     "list": {

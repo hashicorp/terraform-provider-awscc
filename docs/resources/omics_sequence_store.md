@@ -22,6 +22,7 @@ Definition of AWS::Omics::SequenceStore Resource Type
 ### Optional
 
 - `description` (String) A description for the store.
+- `fallback_location` (String) An S3 URI representing the bucket and folder to store failed read set uploads.
 - `sse_config` (Attributes) Server-side encryption (SSE) settings for a store. (see [below for nested schema](#nestedatt--sse_config))
 - `tags` (Map of String)
 

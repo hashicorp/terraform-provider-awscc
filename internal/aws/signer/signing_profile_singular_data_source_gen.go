@@ -41,7 +41,8 @@ func signingProfileDataSource(ctx context.Context) (datasource.DataSource, error
 		//	{
 		//	  "description": "The ID of the target signing platform.",
 		//	  "enum": [
-		//	    "AWSLambda-SHA384-ECDSA"
+		//	    "AWSLambda-SHA384-ECDSA",
+		//	    "Notation-OCI-SHA384-ECDSA"
 		//	  ],
 		//	  "type": "string"
 		//	}

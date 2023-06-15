@@ -160,6 +160,31 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Preset
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
+		//	  "enum": [
+		//	    "HIGHER_BANDWIDTH_DELIVERY",
+		//	    "CONSTRAINED_BANDWIDTH_DELIVERY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"preset": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
+			Optional:    true,
+			Computed:    true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.OneOf(
+					"HIGHER_BANDWIDTH_DELIVERY",
+					"CONSTRAINED_BANDWIDTH_DELIVERY",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: RecordingConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -251,7 +276,9 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
 		//	  "enum": [
 		//	    "STANDARD",
-		//	    "BASIC"
+		//	    "BASIC",
+		//	    "ADVANCED_SD",
+		//	    "ADVANCED_HD"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -263,6 +290,8 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"STANDARD",
 					"BASIC",
+					"ADVANCED_SD",
+					"ADVANCED_HD",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -300,6 +329,7 @@ func channelResource(ctx context.Context) (resource.Resource, error) {
 		"latency_mode":                "LatencyMode",
 		"name":                        "Name",
 		"playback_url":                "PlaybackUrl",
+		"preset":                      "Preset",
 		"recording_configuration_arn": "RecordingConfigurationArn",
 		"tags":                        "Tags",
 		"type":                        "Type",

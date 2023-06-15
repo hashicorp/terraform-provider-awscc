@@ -64,7 +64,9 @@
       "type": "string",
       "enum": [
         "STANDARD",
-        "BASIC"
+        "BASIC",
+        "ADVANCED_SD",
+        "ADVANCED_HD"
       ],
       "default": "STANDARD"
     },
@@ -93,6 +95,14 @@
       "pattern": "^$|arn:aws:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
       "minLength": 0,
       "maxLength": 128
+    },
+    "Preset": {
+      "description": "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
+      "type": "string",
+      "enum": [
+        "HIGHER_BANDWIDTH_DELIVERY",
+        "CONSTRAINED_BANDWIDTH_DELIVERY"
+      ]
     }
   },
   "additionalProperties": false,
@@ -108,16 +118,19 @@
   "handlers": {
     "create": {
       "permissions": [
-        "ivs:CreateChannel"
+        "ivs:CreateChannel",
+        "ivs:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "ivs:GetChannel"
+        "ivs:GetChannel",
+        "ivs:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
+        "ivs:GetChannel",
         "ivs:UpdateChannel",
         "ivs:TagResource",
         "ivs:UnTagResource",
@@ -126,12 +139,14 @@
     },
     "delete": {
       "permissions": [
-        "ivs:DeleteChannel"
+        "ivs:DeleteChannel",
+        "ivs:UnTagResource"
       ]
     },
     "list": {
       "permissions": [
-        "ivs:ListChannels"
+        "ivs:ListChannels",
+        "ivs:ListTagsForResource"
       ]
     }
   }
