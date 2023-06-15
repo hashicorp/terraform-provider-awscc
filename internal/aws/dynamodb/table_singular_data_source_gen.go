@@ -701,8 +701,7 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Enabled",
-		//	    "AttributeName"
+		//	    "Enabled"
 		//	  ],
 		//	  "type": "object"
 		//	}

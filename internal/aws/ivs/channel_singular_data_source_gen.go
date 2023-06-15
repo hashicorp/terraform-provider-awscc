@@ -114,6 +114,21 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Channel Playback URL.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Preset
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
+		//	  "enum": [
+		//	    "HIGHER_BANDWIDTH_DELIVERY",
+		//	    "CONSTRAINED_BANDWIDTH_DELIVERY"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"preset": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Optional transcode preset for the channel. This is selectable only for ADVANCED_HD and ADVANCED_SD channel types. For those channel types, the default preset is HIGHER_BANDWIDTH_DELIVERY. For other channel types (BASIC and STANDARD), preset is the empty string (\"\").",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: RecordingConfigurationArn
 		// CloudFormation resource type schema:
 		//
@@ -183,7 +198,9 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Channel type, which determines the allowable resolution and bitrate. If you exceed the allowable resolution or bitrate, the stream probably will disconnect immediately.",
 		//	  "enum": [
 		//	    "STANDARD",
-		//	    "BASIC"
+		//	    "BASIC",
+		//	    "ADVANCED_SD",
+		//	    "ADVANCED_HD"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -216,6 +233,7 @@ func channelDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"latency_mode":                "LatencyMode",
 		"name":                        "Name",
 		"playback_url":                "PlaybackUrl",
+		"preset":                      "Preset",
 		"recording_configuration_arn": "RecordingConfigurationArn",
 		"tags":                        "Tags",
 		"type":                        "Type",
