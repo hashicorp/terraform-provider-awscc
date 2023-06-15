@@ -1,4 +1,35 @@
 ## 0.54.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_athena_capacity_reservation`
+* **New Data Source:** `awscc_athena_capacity_reservations`
+* **New Data Source:** `awscc_cleanrooms_collaboration`
+* **New Data Source:** `awscc_cleanrooms_collaborations`
+* **New Data Source:** `awscc_cleanrooms_configured_table`
+* **New Data Source:** `awscc_cleanrooms_configured_tables`
+* **New Data Source:** `awscc_cleanrooms_membership`
+* **New Data Source:** `awscc_cleanrooms_memberships`
+* **New Data Source:** `awscc_mediaconnect_bridge`
+* **New Data Source:** `awscc_mediaconnect_bridge_output`
+* **New Data Source:** `awscc_mediaconnect_bridge_source`
+* **New Data Source:** `awscc_mediaconnect_bridges`
+* **New Data Source:** `awscc_mediaconnect_gateway`
+* **New Data Source:** `awscc_mediaconnect_gateways`
+* **New Data Source:** `awscc_rds_custom_db_engine_version`
+* **New Data Source:** `awscc_rds_custom_db_engine_versions`
+* **New Data Source:** `awscc_securityhub_standard`
+* **New Resource:** `awscc_athena_capacity_reservation`
+* **New Resource:** `awscc_cleanrooms_collaboration`
+* **New Resource:** `awscc_cleanrooms_configured_table`
+* **New Resource:** `awscc_cleanrooms_membership`
+* **New Resource:** `awscc_mediaconnect_bridge`
+* **New Resource:** `awscc_mediaconnect_bridge_output`
+* **New Resource:** `awscc_mediaconnect_bridge_source`
+* **New Resource:** `awscc_mediaconnect_gateway`
+* **New Resource:** `awscc_rds_custom_db_engine_version`
+* **New Resource:** `awscc_securityhub_standard`
+
 ## 0.53.0 (June  1, 2023)
 
 FEATURES:
