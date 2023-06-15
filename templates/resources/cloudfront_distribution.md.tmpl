@@ -19,8 +19,6 @@ description: |-
 
 {{ tffile (printf "examples/resources/%s/cloudfront_with_s3_origin_oai.tf" .Name)}}
 
-## NOTE: After successful resource creation, edit the Cloufront Origin, origin access from default public setting to use either the OAC or OAI which were created
-
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
 
