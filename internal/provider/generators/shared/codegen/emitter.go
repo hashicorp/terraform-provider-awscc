@@ -902,7 +902,7 @@ func setLengthValidator(path []string, property *cfschema.Property) (string, err
 }
 
 // defaultValueAttributePlanModifier returns any AttributePlanModifier for the specified Property.
-func defaultValueAttributePlanModifier(path []string, property *cfschema.Property) (Features, string, error) {
+func defaultValueAttributePlanModifier(path []string, property *cfschema.Property) (Features, string, error) { //nolint:unparam
 	var features Features
 
 	switch v := property.Default.(type) {
