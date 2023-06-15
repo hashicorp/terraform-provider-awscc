@@ -31,5 +31,3 @@ Data Source schema for AWS::CloudFormation::PublicTypeVersion
 
 We recommend that type names adhere to the following pattern: company_or_organization::service::type.
 - `type_version_arn` (String) The Amazon Resource Number (ARN) of the extension with the versionId.
-
-

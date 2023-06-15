@@ -29,5 +29,3 @@ Data Source schema for AWS::Lightsail::LoadBalancerTlsCertificate
 - `load_balancer_name` (String) The name of your load balancer.
 - `load_balancer_tls_certificate_arn` (String)
 - `status` (String) The validation status of the SSL/TLS certificate.
-
-

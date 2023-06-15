@@ -27,5 +27,3 @@ Data Source schema for AWS::CloudFormation::HookDefaultVersion
 We recommend that type names adhere to the following pattern: company_or_organization::service::type.
 - `type_version_arn` (String) The Amazon Resource Name (ARN) of the type version.
 - `version_id` (String) The ID of an existing version of the hook to set as the default.
-
-

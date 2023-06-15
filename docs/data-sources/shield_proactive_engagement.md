@@ -35,5 +35,3 @@ Read-Only:
 - `contact_notes` (String) Additional notes regarding the contact.
 - `email_address` (String) The email address for the contact.
 - `phone_number` (String) The phone number for the contact
-
-

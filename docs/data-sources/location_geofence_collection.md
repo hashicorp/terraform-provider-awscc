@@ -30,5 +30,3 @@ Data Source schema for AWS::Location::GeofenceCollection
 - `pricing_plan` (String)
 - `pricing_plan_data_source` (String)
 - `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-
-

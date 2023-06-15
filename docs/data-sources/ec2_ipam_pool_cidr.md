@@ -26,5 +26,3 @@ Data Source schema for AWS::EC2::IPAMPoolCidr
 - `ipam_pool_id` (String) Id of the IPAM Pool.
 - `netmask_length` (Number) The desired netmask length of the provision. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.
 - `state` (String) Provisioned state of the cidr.
-
-

@@ -59,5 +59,3 @@ Read-Only:
 - `delete_source_from_s3` (Boolean) Set to true to delete a version's source bundle from Amazon S3 when Elastic Beanstalk deletes the application version.
 - `enabled` (Boolean) Specify true to apply the rule, or false to disable it.
 - `max_count` (Number) Specify the maximum number of application versions to retain.
-
-

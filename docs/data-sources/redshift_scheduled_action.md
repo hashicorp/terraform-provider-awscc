@@ -67,5 +67,3 @@ Read-Only:
 Read-Only:
 
 - `cluster_identifier` (String)
-
-

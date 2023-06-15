@@ -34,5 +34,3 @@ Data Source schema for AWS::ImageBuilder::Component
 - `type` (String) The type of the component denotes whether the component is used to build the image or only to test it.
 - `uri` (String) The uri of the component.
 - `version` (String) The version of the component.
-
-

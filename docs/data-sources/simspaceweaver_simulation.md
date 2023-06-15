@@ -44,5 +44,3 @@ Read-Only:
 
 - `bucket_name` (String) The Schema S3 bucket name.
 - `object_key` (String) This is the schema S3 object key, which includes the full path of "folders" from the bucket root to the schema.
-
-

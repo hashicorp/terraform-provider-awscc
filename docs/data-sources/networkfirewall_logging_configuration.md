@@ -40,5 +40,3 @@ Read-Only:
 - `log_destination` (Map of String) A key-value pair to configure the logDestinations.
 - `log_destination_type` (String)
 - `log_type` (String)
-
-

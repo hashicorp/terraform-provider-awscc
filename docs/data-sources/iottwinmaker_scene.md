@@ -32,5 +32,3 @@ Data Source schema for AWS::IoTTwinMaker::Scene
 - `tags` (Map of String) A key-value pair to associate with a resource.
 - `update_date_time` (String) The date and time of the current update.
 - `workspace_id` (String) The ID of the scene.
-
-

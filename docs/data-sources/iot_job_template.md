@@ -132,5 +132,3 @@ Read-Only:
 Read-Only:
 
 - `in_progress_timeout_in_minutes` (Number) Specifies the amount of time, in minutes, this device has to finish execution of this job.
-
-

@@ -23,5 +23,3 @@ Data Source schema for AWS::Location::TrackerConsumer
 
 - `consumer_arn` (String)
 - `tracker_name` (String)
-
-

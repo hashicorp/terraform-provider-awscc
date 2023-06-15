@@ -25,5 +25,3 @@ Data Source schema for AWS::Connect::UserHierarchyGroup
 - `name` (String) The name of the user hierarchy group.
 - `parent_group_arn` (String) The Amazon Resource Name (ARN) for the parent user hierarchy group.
 - `user_hierarchy_group_arn` (String) The Amazon Resource Name (ARN) for the user hierarchy group.
-
-

@@ -98,5 +98,3 @@ Read-Only:
 
 - `repository_name` (String) The name of the container repository where the output container image is stored. This name is prefixed by the repository location.
 - `service` (String) Specifies the service in which this image was registered.
-
-

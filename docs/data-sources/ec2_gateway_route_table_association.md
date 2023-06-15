@@ -24,5 +24,3 @@ Data Source schema for AWS::EC2::GatewayRouteTableAssociation
 - `association_id` (String) The route table association ID.
 - `gateway_id` (String) The ID of the gateway.
 - `route_table_id` (String) The ID of the route table.
-
-

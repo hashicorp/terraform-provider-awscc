@@ -115,5 +115,3 @@ Read-Only:
 
 - `max_number_of_training_jobs` (String) The maximum number of training jobs when you create a solution version. The maximum value for maxNumberOfTrainingJobs is 40.
 - `max_parallel_training_jobs` (String) The maximum number of parallel training jobs when you create a solution version. The maximum value for maxParallelTrainingJobs is 10.
-
-

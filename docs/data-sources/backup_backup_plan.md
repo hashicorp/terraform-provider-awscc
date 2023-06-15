@@ -85,5 +85,3 @@ Read-Only:
 
 - `delete_after_days` (Number)
 - `move_to_cold_storage_after_days` (Number)
-
-

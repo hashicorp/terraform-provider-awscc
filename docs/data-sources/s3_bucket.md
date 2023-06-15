@@ -736,5 +736,3 @@ Read-Only:
 
 - `http_error_code_returned_equals` (String) The HTTP error code when the redirect is applied.
 - `key_prefix_equals` (String) The object key name prefix when the redirect is applied.
-
-

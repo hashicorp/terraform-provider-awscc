@@ -29,5 +29,3 @@ Data Source schema for AWS::Location::RouteCalculator
 - `description` (String)
 - `pricing_plan` (String)
 - `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
-
-

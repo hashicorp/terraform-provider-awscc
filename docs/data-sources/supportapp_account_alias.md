@@ -23,5 +23,3 @@ Data Source schema for AWS::SupportApp::AccountAlias
 
 - `account_alias` (String) An account alias associated with a customer's account.
 - `account_alias_resource_id` (String) Unique identifier representing an alias tied to an account
-
-

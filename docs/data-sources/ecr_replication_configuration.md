@@ -55,5 +55,3 @@ Read-Only:
 
 - `filter` (String) The repository filter to be applied for replication.
 - `filter_type` (String) Type of repository filter
-
-

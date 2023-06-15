@@ -25,5 +25,3 @@ Data Source schema for AWS::EC2::NetworkPerformanceMetricSubscription
 - `metric` (String) The metric type to subscribe to.
 - `source` (String) The starting Region or Availability Zone for metric to subscribe to.
 - `statistic` (String) The statistic to subscribe to.
-
-

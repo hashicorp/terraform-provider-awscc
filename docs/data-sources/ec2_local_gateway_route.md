@@ -27,5 +27,3 @@ Data Source schema for AWS::EC2::LocalGatewayRoute
 - `network_interface_id` (String) The ID of the network interface.
 - `state` (String) The state of the route.
 - `type` (String) The route type.
-
-

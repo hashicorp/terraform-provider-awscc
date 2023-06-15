@@ -23,5 +23,3 @@ Data Source schema for AWS::ControlTower::EnabledControl
 
 - `control_identifier` (String) Arn of the control.
 - `target_identifier` (String) Arn for Organizational unit to which the control needs to be applied
-
-

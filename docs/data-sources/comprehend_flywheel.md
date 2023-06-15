@@ -91,5 +91,3 @@ Read-Only:
 Read-Only:
 
 - `type` (String)
-
-

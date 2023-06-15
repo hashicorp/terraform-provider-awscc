@@ -27,5 +27,3 @@ Data Source schema for AWS::SageMaker::ImageVersion
 - `image_name` (String) The name of the image this version belongs to.
 - `image_version_arn` (String) The Amazon Resource Name (ARN) of the image version.
 - `version` (Number) The version number of the image version.
-
-

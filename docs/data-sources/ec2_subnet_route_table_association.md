@@ -23,5 +23,3 @@ Data Source schema for AWS::EC2::SubnetRouteTableAssociation
 
 - `route_table_id` (String)
 - `subnet_id` (String)
-
-

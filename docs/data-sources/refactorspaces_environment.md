@@ -36,5 +36,3 @@ Read-Only:
 
 - `key` (String) A string used to identify this tag
 - `value` (String) A string containing the value for the tag
-
-

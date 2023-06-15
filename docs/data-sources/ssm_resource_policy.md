@@ -25,5 +25,3 @@ Data Source schema for AWS::SSM::ResourcePolicy
 - `policy_hash` (String) A snapshot identifier for the policy over time.
 - `policy_id` (String) An unique identifier within the policies of a resource.
 - `resource_arn` (String) Arn of OpsItemGroup etc.
-
-

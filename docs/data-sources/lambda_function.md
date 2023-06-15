@@ -153,5 +153,3 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of VPC security groups IDs.
 - `subnet_ids` (List of String) A list of VPC subnet IDs.
-
-

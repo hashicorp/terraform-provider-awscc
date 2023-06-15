@@ -36,5 +36,3 @@ Read-Only:
 
 - `rpo_in_secs` (Number) RPO in seconds.
 - `rto_in_secs` (Number) RTO in seconds.
-
-

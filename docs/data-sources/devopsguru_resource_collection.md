@@ -47,5 +47,3 @@ Read-Only:
 
 - `app_boundary_key` (String) A Tag key for DevOps Guru app boundary.
 - `tag_values` (List of String) Tag values of DevOps Guru app boundary.
-
-

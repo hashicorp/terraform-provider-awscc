@@ -26,5 +26,3 @@ Data Source schema for AWS::Route53RecoveryControl::RoutingControl
 - `name` (String) The name of the routing control. You can use any non-white space character in the name.
 - `routing_control_arn` (String) The Amazon Resource Name (ARN) of the routing control.
 - `status` (String) The deployment status of the routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.
-
-

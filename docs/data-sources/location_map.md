@@ -37,5 +37,3 @@ Data Source schema for AWS::Location::Map
 Read-Only:
 
 - `style` (String)
-
-

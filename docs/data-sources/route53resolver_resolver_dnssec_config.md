@@ -24,5 +24,3 @@ Data Source schema for AWS::Route53Resolver::ResolverDNSSECConfig
 - `owner_id` (String) AccountId
 - `resource_id` (String) ResourceId
 - `validation_status` (String) ResolverDNSSECValidationStatus, possible values are ENABLING, ENABLED, DISABLING AND DISABLED.
-
-

@@ -24,5 +24,3 @@ Data Source schema for AWS::Glue::SchemaVersionMetadata
 - `key` (String) Metadata key
 - `schema_version_id` (String) Represents the version ID associated with the schema version.
 - `value` (String) Metadata value
-
-

@@ -79,5 +79,3 @@ Read-Only:
 
 - `key` (String) The key for a developer-defined key:value pair for tagging an AWS resource.
 - `value` (String) The value for a developer-defined key:value pair for tagging an AWS resource.
-
-

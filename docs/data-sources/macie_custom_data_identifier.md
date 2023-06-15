@@ -28,5 +28,3 @@ Data Source schema for AWS::Macie::CustomDataIdentifier
 - `maximum_match_distance` (Number) Maximum match distance.
 - `name` (String) Name of custom data identifier.
 - `regex` (String) Regular expression for custom data identifier.
-
-

@@ -94,5 +94,3 @@ Read-Only:
 
 - `job_execution_timeout_minutes` (Number)
 - `terminate_jobs_on_update` (Boolean)
-
-

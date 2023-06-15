@@ -30,5 +30,3 @@ Data Source schema for AWS::Chatbot::SlackChannelConfiguration
 - `slack_workspace_id` (String) The id of the Slack workspace
 - `sns_topic_arns` (List of String) ARNs of SNS topics which delivers notifications to AWS Chatbot, for example CloudWatch alarm notifications.
 - `user_role_required` (Boolean) Enables use of a user role requirement in your chat configuration
-
-

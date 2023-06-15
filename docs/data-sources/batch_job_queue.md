@@ -36,5 +36,3 @@ Read-Only:
 
 - `compute_environment` (String)
 - `order` (Number)
-
-

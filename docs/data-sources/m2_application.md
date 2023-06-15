@@ -38,5 +38,3 @@ Read-Only:
 
 - `content` (String)
 - `s3_location` (String)
-
-

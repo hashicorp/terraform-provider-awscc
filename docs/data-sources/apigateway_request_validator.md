@@ -26,5 +26,3 @@ Data Source schema for AWS::ApiGateway::RequestValidator
 - `rest_api_id` (String) The identifier of the targeted API entity.
 - `validate_request_body` (Boolean) Indicates whether to validate the request body according to the configured schema for the targeted API and method.
 - `validate_request_parameters` (Boolean) Indicates whether to validate request parameters.
-
-

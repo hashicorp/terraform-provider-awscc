@@ -24,5 +24,3 @@ Data Source schema for AWS::ApiGateway::UsagePlanKey
 - `key_id` (String) The ID of the usage plan key.
 - `key_type` (String) The type of usage plan key. Currently, the only valid key type is API_KEY.
 - `usage_plan_id` (String) The ID of the usage plan.
-
-

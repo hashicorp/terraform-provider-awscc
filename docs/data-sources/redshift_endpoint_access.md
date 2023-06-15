@@ -61,5 +61,3 @@ Read-Only:
 
 - `status` (String) The status of the VPC security group.
 - `vpc_security_group_id` (String) The identifier of the VPC security group.
-
-

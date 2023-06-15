@@ -159,5 +159,3 @@ Read-Only:
 - `measure_value_type` (String) Value type of the measure value column to be read from the query result.
 - `source_column` (String) Source measure value column in the query result where the attribute value is to be read.
 - `target_multi_measure_attribute_name` (String) Custom name to be used for attribute name in derived table. If not provided, source column name would be used.
-
-

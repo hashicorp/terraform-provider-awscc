@@ -26,5 +26,3 @@ Data Source schema for AWS::Detective::MemberInvitation
 - `member_email_address` (String) The root email address for the account to be invited, for validation. Updating this field has no effect.
 - `member_id` (String) The AWS account ID to be invited to join the graph as a member
 - `message` (String) A message to be included in the email invitation sent to the invited account. Updating this field has no effect.
-
-

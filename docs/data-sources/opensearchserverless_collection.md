@@ -42,5 +42,3 @@ Read-Only:
 
 - `key` (String) The key in the key-value pair
 - `value` (String) The value in the key-value pair
-
-

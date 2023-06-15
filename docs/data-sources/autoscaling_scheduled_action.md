@@ -30,5 +30,3 @@ Data Source schema for AWS::AutoScaling::ScheduledAction
 - `scheduled_action_name` (String) Auto-generated unique identifier
 - `start_time` (String) The earliest scheduled start time to return. If scheduled action names are provided, this parameter is ignored.
 - `time_zone` (String) The time zone for the cron expression.
-
-

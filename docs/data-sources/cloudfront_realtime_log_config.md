@@ -42,5 +42,3 @@ Read-Only:
 
 - `role_arn` (String)
 - `stream_arn` (String)
-
-

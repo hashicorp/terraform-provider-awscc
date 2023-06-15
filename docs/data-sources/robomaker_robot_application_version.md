@@ -25,5 +25,3 @@ Data Source schema for AWS::RoboMaker::RobotApplicationVersion
 - `application_version` (String)
 - `arn` (String)
 - `current_revision_id` (String) The revision ID of robot application.
-
-

@@ -59,5 +59,3 @@ Read-Only:
 
 - `transition_to_ia` (String)
 - `transition_to_primary_storage_class` (String)
-
-

@@ -35,5 +35,3 @@ Read-Only:
 - `metadata` (String) The XML saml provider metadata document that you want to use
 - `session_timeout` (Number) Defines the session timeout in minutes
 - `user_attribute` (String) Custom attribute for this saml integration
-
-

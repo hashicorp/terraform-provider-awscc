@@ -23,5 +23,3 @@ Data Source schema for AWS::ResourceExplorer2::DefaultViewAssociation
 
 - `associated_aws_principal` (String) The AWS principal that the default view is associated with, used as the unique identifier for this resource.
 - `view_arn` (String)
-
-

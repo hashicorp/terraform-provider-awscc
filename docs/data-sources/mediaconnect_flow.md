@@ -86,5 +86,3 @@ Read-Only:
 Read-Only:
 
 - `primary_source` (String) The name of the source you choose as the primary source for this flow.
-
-

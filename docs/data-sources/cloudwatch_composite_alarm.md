@@ -32,5 +32,3 @@ Data Source schema for AWS::CloudWatch::CompositeAlarm
 - `arn` (String) Amazon Resource Name (ARN) of the alarm
 - `insufficient_data_actions` (List of String) The actions to execute when this alarm transitions to the INSUFFICIENT_DATA state from any other state. Each action is specified as an Amazon Resource Name (ARN).
 - `ok_actions` (List of String) The actions to execute when this alarm transitions to the OK state from any other state. Each action is specified as an Amazon Resource Name (ARN).
-
-

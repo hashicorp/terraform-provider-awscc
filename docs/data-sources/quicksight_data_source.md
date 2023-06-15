@@ -766,5 +766,3 @@ Read-Only:
 Read-Only:
 
 - `vpc_connection_arn` (String) <p>The Amazon Resource Name (ARN) for the VPC connection.</p>
-
-

@@ -26,5 +26,3 @@ Data Source schema for AWS::EC2::IPAMAllocation
 - `ipam_pool_allocation_id` (String) Id of the allocation.
 - `ipam_pool_id` (String) Id of the IPAM Pool.
 - `netmask_length` (Number) The desired netmask length of the allocation. If set, IPAM will choose a block of free space with this size and return the CIDR representing it.
-
-

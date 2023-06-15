@@ -84,5 +84,3 @@ Read-Only:
 
 - `security_group_ids` (List of String) A list of security groups associated with the VPC endpoint.
 - `subnet_ids` (List of String) A list of subnet IDs associated with the VPC endpoint.
-
-

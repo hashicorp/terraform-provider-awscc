@@ -29,5 +29,3 @@ Data Source schema for AWS::SupportApp::SlackChannelConfiguration
 - `notify_on_create_or_reopen_case` (Boolean) Whether to notify when a case is created or reopened.
 - `notify_on_resolve_case` (Boolean) Whether to notify when a case is resolved.
 - `team_id` (String) The team ID in Slack, which uniquely identifies a workspace.
-
-

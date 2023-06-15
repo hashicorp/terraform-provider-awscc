@@ -53,5 +53,3 @@ Read-Only:
 
 - `key` (String) Key of the Tag.
 - `value` (String) Value of the Tag.
-
-

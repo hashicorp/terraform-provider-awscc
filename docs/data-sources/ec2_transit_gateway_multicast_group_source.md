@@ -32,5 +32,3 @@ Data Source schema for AWS::EC2::TransitGatewayMulticastGroupSource
 - `subnet_id` (String) The ID of the subnet.
 - `transit_gateway_attachment_id` (String) The ID of the transit gateway attachment.
 - `transit_gateway_multicast_domain_id` (String) The ID of the transit gateway multicast domain.
-
-

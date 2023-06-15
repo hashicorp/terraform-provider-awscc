@@ -24,5 +24,3 @@ Data Source schema for AWS::Connect::SecurityKey
 - `association_id` (String) An associationID is automatically generated when a storage config is associated with an instance
 - `instance_id` (String) Amazon Connect instance identifier
 - `key` (String) A valid security key in PEM format.
-
-

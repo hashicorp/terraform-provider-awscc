@@ -61,5 +61,3 @@ Read-Only:
 
 - `recording_mode` (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
 - `target_interval_seconds` (Number) Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
-
-

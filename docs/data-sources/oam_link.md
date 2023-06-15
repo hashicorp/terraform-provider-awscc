@@ -27,5 +27,3 @@ Data Source schema for AWS::Oam::Link
 - `resource_types` (Set of String)
 - `sink_identifier` (String)
 - `tags` (Map of String) Tags to apply to the link
-
-

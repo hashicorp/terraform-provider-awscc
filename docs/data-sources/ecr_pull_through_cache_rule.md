@@ -23,5 +23,3 @@ Data Source schema for AWS::ECR::PullThroughCacheRule
 
 - `ecr_repository_prefix` (String) The ECRRepositoryPrefix is a custom alias for upstream registry url.
 - `upstream_registry_url` (String) The upstreamRegistryUrl is the endpoint of upstream registry url of the public repository to be cached
-
-

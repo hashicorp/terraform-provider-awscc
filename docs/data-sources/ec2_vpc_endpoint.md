@@ -32,5 +32,3 @@ Data Source schema for AWS::EC2::VPCEndpoint
 - `subnet_ids` (Set of String) The ID of one or more subnets in which to create an endpoint network interface.
 - `vpc_endpoint_type` (String)
 - `vpc_id` (String) The ID of the VPC in which the endpoint will be used.
-
-

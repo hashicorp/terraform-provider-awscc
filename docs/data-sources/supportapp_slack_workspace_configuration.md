@@ -23,5 +23,3 @@ Data Source schema for AWS::SupportApp::SlackWorkspaceConfiguration
 
 - `team_id` (String) The team ID in Slack, which uniquely identifies a workspace.
 - `version_id` (String) An identifier used to update an existing Slack workspace configuration in AWS CloudFormation.
-
-

@@ -32,5 +32,3 @@ Data Source schema for AWS::IdentityStore::GroupMembership
 Read-Only:
 
 - `user_id` (String) The identifier for a user in the identity store.
-
-

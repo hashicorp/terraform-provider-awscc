@@ -27,5 +27,3 @@ Data Source schema for AWS::RoboMaker::Robot
 - `greengrass_group_id` (String) The Greengrass group id.
 - `name` (String) The name for the robot.
 - `tags` (Map of String) A key-value pair to associate with a resource.
-
-

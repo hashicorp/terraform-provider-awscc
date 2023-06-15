@@ -88,5 +88,3 @@ Read-Only:
 - `trust_provider_type` (String) The type of trust provider (user- or device-based).
 - `user_trust_provider_type` (String) The type of user-based trust provider.
 - `verified_access_trust_provider_id` (String) The ID of the trust provider.
-
-

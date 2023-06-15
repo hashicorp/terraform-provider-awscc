@@ -25,5 +25,3 @@ Data Source schema for AWS::Route53Resolver::ResolverRuleAssociation
 - `resolver_rule_association_id` (String) Primary Identifier for Resolver Rule Association
 - `resolver_rule_id` (String) The ID of the Resolver rule that you associated with the VPC that is specified by VPCId.
 - `vpc_id` (String) The ID of the VPC that you associated the Resolver rule with.
-
-

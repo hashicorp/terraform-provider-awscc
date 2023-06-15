@@ -122,5 +122,3 @@ Read-Only:
 
 - `key` (String) <p>A script parameter key.</p>
 - `value` (String) <p>A script parameter value.</p>
-
-

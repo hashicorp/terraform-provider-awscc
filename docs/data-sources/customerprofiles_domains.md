@@ -19,5 +19,3 @@ Plural Data Source schema for AWS::CustomerProfiles::Domain
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
-
-

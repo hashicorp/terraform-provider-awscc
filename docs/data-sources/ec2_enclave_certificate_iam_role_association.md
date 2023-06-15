@@ -26,5 +26,3 @@ Data Source schema for AWS::EC2::EnclaveCertificateIamRoleAssociation
 - `certificate_s3_object_key` (String) The Amazon S3 object key where the certificate, certificate chain, and encrypted private key bundle are stored.
 - `encryption_kms_key_id` (String) The ID of the AWS KMS CMK used to encrypt the private key of the certificate.
 - `role_arn` (String) The Amazon Resource Name (ARN) of the IAM role to associate with the ACM certificate. You can associate up to 16 IAM roles with an ACM certificate.
-
-

@@ -115,5 +115,3 @@ Read-Only:
             size is measured in GiBs.</p>
 - `throughput` (Number) <p>The throughput to provision for the root volume that is attached to the streaming
             session. The throughput is measured in MiB/s.</p>
-
-

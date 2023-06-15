@@ -45,5 +45,3 @@ Read-Only:
 
 - `document_name` (String)
 - `document_version` (String)
-
-

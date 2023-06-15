@@ -41,5 +41,3 @@ Read-Only:
 Read-Only:
 
 - `name` (String)
-
-

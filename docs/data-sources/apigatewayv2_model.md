@@ -27,5 +27,3 @@ Data Source schema for AWS::ApiGatewayV2::Model
 - `model_id` (String)
 - `name` (String)
 - `schema` (Map of String)
-
-

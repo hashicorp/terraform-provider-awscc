@@ -33,5 +33,3 @@ Read-Only:
 - `base` (Number)
 - `capacity_provider` (String) If using ec2 auto-scaling, the name of the associated capacity provider. Otherwise FARGATE, FARGATE_SPOT.
 - `weight` (Number)
-
-

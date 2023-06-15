@@ -124,5 +124,3 @@ Read-Only:
 
 - `attributes` (Map of String)
 - `name` (String)
-
-

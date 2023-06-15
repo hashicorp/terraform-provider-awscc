@@ -32,5 +32,3 @@ Read-Only:
 
 - `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length.
 - `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length.
-
-

@@ -38,5 +38,3 @@ Read-Only:
 
 - `key` (String) <p>The key of the resource tag.</p>
 - `value` (String) <p>The value of the resource tag.</p>
-
-
