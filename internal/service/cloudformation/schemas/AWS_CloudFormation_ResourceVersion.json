@@ -111,7 +111,8 @@
         "s3:GetObject",
         "s3:ListBucket",
         "kms:Decrypt"
-      ]
+      ],
+      "timeoutInMinutes": 2160
     },
     "read": {
       "permissions": [

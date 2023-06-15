@@ -67,6 +67,12 @@
       "pattern": "^[\\p{L}||\\p{M}||\\p{Z}||\\p{S}||\\p{N}||\\p{P}]+$",
       "description": "A name for the store."
     },
+    "FallbackLocation": {
+      "type": "string",
+      "minLength": 1,
+      "pattern": "",
+      "description": "An S3 URI representing the bucket and folder to store failed read set uploads."
+    },
     "SequenceStoreId": {
       "type": "string",
       "maxLength": 36,
@@ -94,6 +100,7 @@
   "createOnlyProperties": [
     "/properties/Description",
     "/properties/Name",
+    "/properties/FallbackLocation",
     "/properties/SseConfig",
     "/properties/Tags"
   ],

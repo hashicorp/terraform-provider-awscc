@@ -124,9 +124,14 @@
     "create": {
       "permissions": [
         "m2:CreateApplication",
+        "m2:GetApplication",
         "m2:ListTagsForResource",
+        "m2:TagResource",
         "s3:GetObject",
-        "s3:ListBucket"
+        "s3:ListBucket",
+        "kms:DescribeKey",
+        "kms:CreateGrant",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -138,6 +143,7 @@
     "update": {
       "permissions": [
         "m2:UpdateApplication",
+        "m2:GetApplication",
         "m2:ListTagsForResource",
         "m2:TagResource",
         "m2:UntagResource",
@@ -149,6 +155,8 @@
       "permissions": [
         "elasticloadbalancing:DeleteListener",
         "elasticloadbalancing:DeleteTargetGroup",
+        "logs:DeleteLogDelivery",
+        "m2:GetApplication",
         "m2:DeleteApplication"
       ]
     },

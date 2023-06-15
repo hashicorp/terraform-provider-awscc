@@ -90,7 +90,9 @@
       "permissions": [
         "iam:PassRole",
         "iottwinmaker:CreateWorkspace",
-        "iottwinmaker:GetWorkspace"
+        "iottwinmaker:GetWorkspace",
+        "iottwinmaker:ListTagsForResource",
+        "iottwinmaker:TagResource"
       ]
     },
     "read": {
