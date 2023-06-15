@@ -205,6 +205,10 @@ resource_schema "aws_apigatewayv2_route" {
 resource_schema "aws_apigatewayv2_route_response" {
   cloudformation_type_name               = "AWS::ApiGatewayV2::RouteResponse"
   suppress_plural_data_source_generation = true
+
+  # ResponseParameters is of unsupported type: 
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
 }
 
 resource_schema "aws_apigatewayv2_vpc_link" {
@@ -251,6 +255,11 @@ resource_schema "aws_appintegrations_event_integration" {
 
 resource_schema "aws_applicationautoscaling_scalable_target" {
   cloudformation_type_name = "AWS::ApplicationAutoScaling::ScalableTarget"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_apprunner_observability_configuration" {
@@ -3236,7 +3245,11 @@ resource_schema "aws_secretsmanager_secret" {
 
 resource_schema "aws_securityhub_automation_rule" {
   cloudformation_type_name               = "AWS::SecurityHub::AutomationRule"
-  suppress_plural_data_source_generation = true
+
+  # Actions/FindingFieldsUpdate/Note/UpdatedBy is of unsupported type: 
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_securityhub_standard" {

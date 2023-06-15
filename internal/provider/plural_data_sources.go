@@ -19,7 +19,6 @@
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_connector_profiles -cftype AWS::AppFlow::ConnectorProfile -package appflow ../aws/appflow/connector_profile_plural_data_source_gen.go ../aws/appflow/connector_profile_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appflow_flows -cftype AWS::AppFlow::Flow -package appflow ../aws/appflow/flow_plural_data_source_gen.go ../aws/appflow/flow_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_appintegrations_event_integrations -cftype AWS::AppIntegrations::EventIntegration -package appintegrations ../aws/appintegrations/event_integration_plural_data_source_gen.go ../aws/appintegrations/event_integration_plural_data_source_gen_test.go
-//go:generate go run generators/plural-data-source/main.go -data-source awscc_applicationautoscaling_scalable_targets -cftype AWS::ApplicationAutoScaling::ScalableTarget -package applicationautoscaling ../aws/applicationautoscaling/scalable_target_plural_data_source_gen.go ../aws/applicationautoscaling/scalable_target_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apprunner_observability_configurations -cftype AWS::AppRunner::ObservabilityConfiguration -package apprunner ../aws/apprunner/observability_configuration_plural_data_source_gen.go ../aws/apprunner/observability_configuration_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apprunner_services -cftype AWS::AppRunner::Service -package apprunner ../aws/apprunner/service_plural_data_source_gen.go ../aws/apprunner/service_plural_data_source_gen_test.go
 //go:generate go run generators/plural-data-source/main.go -data-source awscc_apprunner_vpc_connectors -cftype AWS::AppRunner::VpcConnector -package apprunner ../aws/apprunner/vpc_connector_plural_data_source_gen.go ../aws/apprunner/vpc_connector_plural_data_source_gen_test.go
@@ -509,7 +508,6 @@ import (
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appconfig"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appflow"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appintegrations"
-	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationautoscaling"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/applicationinsights"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/apprunner"
 	_ "github.com/hashicorp/terraform-provider-awscc/internal/aws/appstream"

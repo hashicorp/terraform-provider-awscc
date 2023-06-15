@@ -51,7 +51,8 @@ func signingProfileResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "description": "The ID of the target signing platform.",
 		//	  "enum": [
-		//	    "AWSLambda-SHA384-ECDSA"
+		//	    "AWSLambda-SHA384-ECDSA",
+		//	    "Notation-OCI-SHA384-ECDSA"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -61,6 +62,7 @@ func signingProfileResource(ctx context.Context) (resource.Resource, error) {
 			Validators: []validator.String{ /*START VALIDATORS*/
 				stringvalidator.OneOf(
 					"AWSLambda-SHA384-ECDSA",
+					"Notation-OCI-SHA384-ECDSA",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

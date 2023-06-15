@@ -853,8 +853,7 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "Enabled",
-		//	    "AttributeName"
+		//	    "Enabled"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -862,7 +861,11 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 				// Property: AttributeName
 				"attribute_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: Enabled
 				"enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
