@@ -23,6 +23,12 @@ resource "awscc_eks_fargate_profile" "example" {
   selectors = [{
     namespace = "default"
   }]
+  tags = [
+    {
+      key   = "Managed By"
+      value = "AWSCC"
+    }
+  ]  
 }
 ```
 
@@ -42,6 +48,12 @@ resource "awscc_eks_fargate_profile" "example" {
       value = "dev"
     }]
   }]
+  tags = [
+    {
+      key   = "Managed By"
+      value = "AWSCC"
+    }
+  ]  
 }
 ```
 
@@ -61,6 +73,12 @@ resource "awscc_iam_role" "example" {
     Version = "2012-10-17"
   })
   managed_policy_arns = ["arn:aws:iam::aws:policy/AmazonEKSFargatePodExecutionRolePolicy"]
+  tags = [
+    {
+      key   = "Managed By"
+      value = "AWSCC"
+    }
+  ]
 }
 ```
 

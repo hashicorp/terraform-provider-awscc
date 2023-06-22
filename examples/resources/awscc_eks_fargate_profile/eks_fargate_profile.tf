@@ -7,4 +7,10 @@ resource "awscc_eks_fargate_profile" "example" {
   selectors = [{
     namespace = "default"
   }]
+  tags = [
+    {
+      key   = "Managed By"
+      value = "AWSCC"
+    }
+  ]  
 }

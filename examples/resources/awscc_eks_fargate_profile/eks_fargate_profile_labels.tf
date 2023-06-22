@@ -11,4 +11,10 @@ resource "awscc_eks_fargate_profile" "example" {
       value = "dev"
     }]
   }]
+  tags = [
+    {
+      key   = "Managed By"
+      value = "AWSCC"
+    }
+  ]  
 }
