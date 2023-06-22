@@ -1,0 +1,34 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic Usage
+Fargate profile for defined namespace pods
+{{ tffile (printf "examples/resources/%s/eks_fargate_profile.tf" .Name)}}
+
+### Using namespace and labels in the selector
+Fargate profile for defined namespace and labeled pods
+{{ tffile (printf "examples/resources/%s/eks_fargate_profile_labels.tf" .Name)}}
+
+### Example EKS Pod execution role for EKS Fargate Profile
+{{ tffile (printf "examples/resources/%s/eks_fargate_profile_pod_execution_role.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
