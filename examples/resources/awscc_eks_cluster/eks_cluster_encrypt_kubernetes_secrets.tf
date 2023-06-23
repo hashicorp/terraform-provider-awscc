@@ -21,20 +21,10 @@ resource "awscc_iam_role" "main" {
   ]
   max_session_duration = 7200
   path                 = "/"
-  tags = [
-    {
-      key   = "Name"
-      value = "example-role"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_eks_cluster" "main" {
@@ -49,20 +39,10 @@ resource "awscc_eks_cluster" "main" {
     }
     resources = ["secrets"]
   }]
-  tags = [
-    {
-      key   = "Name"
-      value = "example-cluster"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
   depends_on = [awscc_kms_key.main]
 }
 
@@ -87,18 +67,8 @@ resource "awscc_kms_key" "main" {
     ],
     },
   )
-  tags = [
-    {
-      key   = "Name"
-      value = "example-kms-key"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }

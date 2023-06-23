@@ -19,20 +19,10 @@ resource "awscc_iam_role" "main" {
   ]
   max_session_duration = 7200
   path                 = "/"
-  tags = [
-    {
-      key   = "Name"
-      value = "example-role"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_eks_cluster" "main" {
@@ -41,18 +31,8 @@ resource "awscc_eks_cluster" "main" {
   resources_vpc_config = {
     subnet_ids = ["subnet-xxxx", "subnet-yyyy"] // EKS Cluster Subnet-IDs
   }
-  tags = [
-    {
-      key   = "Name"
-      value = "example-cluster"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }

@@ -19,20 +19,10 @@ resource "awscc_iam_role" "main" {
   ]
   max_session_duration = 7200
   path                 = "/"
-  tags = [
-    {
-      key   = "Name"
-      value = "example-role"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 
 resource "awscc_eks_cluster" "main" {
@@ -56,20 +46,10 @@ resource "awscc_eks_cluster" "main" {
       ]
     }
   }
-  tags = [
-    {
-      key   = "Name"
-      value = "example-cluster"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
   depends_on = [awscc_logs_log_group.main]
 }
 
@@ -78,18 +58,8 @@ resource "awscc_logs_log_group" "main" {
   # Reference: https://docs.aws.amazon.com/eks/latest/userguide/control-plane-logs.html
   log_group_name    = "/aws/eks/example-cluster/cluster"
   retention_in_days = 7
-  tags = [
-    {
-      key   = "Name"
-      value = "/aws/eks/example-cluster/cluster"
-    },
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
