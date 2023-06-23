@@ -98,5 +98,3 @@ require (
 	google.golang.org/grpc v1.54.0 // indirect
 	google.golang.org/protobuf v1.30.0 // indirect
 )
-
-replace github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go => github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.20.1-0.20230623202636-42dce43b007c
