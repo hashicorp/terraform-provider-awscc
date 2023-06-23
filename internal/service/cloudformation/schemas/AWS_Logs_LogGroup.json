@@ -137,7 +137,15 @@
       "permissions": [
         "logs:DescribeLogGroups",
         "logs:ListTagsLogGroup"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "LogGroupName": {
+            "$ref": "resource-schema.json#/properties/LogGroupName"
+          }
+        },
+        "required": []
+      }
     }
   },
   "createOnlyProperties": [

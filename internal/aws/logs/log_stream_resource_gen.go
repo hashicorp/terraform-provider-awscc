@@ -25,26 +25,16 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Logs::LogStream resource.
 func logStreamResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the log group where the log stream is created.",
 		//	  "type": "string"
 		//	}
 		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Required: true,
+			Description: "The name of the log group where the log stream is created.",
+			Required:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
@@ -53,17 +43,27 @@ func logStreamResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the log stream. The name must be unique wihtin the log group.",
 		//	  "type": "string"
 		//	}
 		"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
+			Description: "The name of the log stream. The name must be unique wihtin the log group.",
+			Optional:    true,
+			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
+
+	attributes["id"] = schema.StringAttribute{
+		Description: "Uniquely identifies the resource.",
+		Computed:    true,
+		PlanModifiers: []planmodifier.String{
+			stringplanmodifier.UseStateForUnknown(),
+		},
+	}
 
 	schema := schema.Schema{
 		Description: "Resource Type definition for AWS::Logs::LogStream",
@@ -75,9 +75,8 @@ func logStreamResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogStream").WithTerraformTypeName("awscc_logs_log_stream")
 	opts = opts.WithTerraformSchema(schema)
-	opts = opts.WithSyntheticIDAttribute(false)
+	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":              "Id",
 		"log_group_name":  "LogGroupName",
 		"log_stream_name": "LogStreamName",
 	})
