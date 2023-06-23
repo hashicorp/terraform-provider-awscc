@@ -23,32 +23,27 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Logs::LogStream resource.
 func logStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: Id
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "type": "string"
-		//	}
-		"id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: LogGroupName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the log group where the log stream is created.",
 		//	  "type": "string"
 		//	}
 		"log_group_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the log group where the log stream is created.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LogStreamName
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "description": "The name of the log stream. The name must be unique wihtin the log group.",
 		//	  "type": "string"
 		//	}
 		"log_stream_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
+			Description: "The name of the log stream. The name must be unique wihtin the log group.",
+			Computed:    true,
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -67,7 +62,6 @@ func logStreamDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Logs::LogStream").WithTerraformTypeName("awscc_logs_log_stream")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"id":              "Id",
 		"log_group_name":  "LogGroupName",
 		"log_stream_name": "LogStreamName",
 	})
