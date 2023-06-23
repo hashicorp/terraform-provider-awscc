@@ -1,47 +1,8 @@
-data "aws_partition" "current" {}
-
 data "aws_caller_identity" "current" {}
-
-locals {
-  policy_arn_prefix = "arn:${data.aws_partition.current.partition}:iam::aws:policy"
-  account_id        = data.aws_caller_identity.current.account_id
-}
-
-variable "eks_default_tags" {
-  description = "Default tags to be applied to EKS resources"
-  default = [
-    {
-      key   = "Environment"
-      value = "Development"
-    },
-    {
-      key   = "Modified By"
-      value = "AWSCC"
-    }
-  ]
-}
-
-variable "eks_cluster_name" {
-  description = "EKS Cluster Name"
-  type        = string
-  default     = "example-cluster"
-}
-
-variable "eks_cluster_version" {
-  description = "EKS Cluster Version"
-  type        = string
-  default     = "1.27"
-}
-
-variable "eks_cluster_subnets" {
-  description = "Subnets for EKS Cluster"
-  type        = list(string)
-  default     = ["subnet-xxxx", "subnet-yyyy"] // Provide a list of subnet-ids for Amazon EKS Cluster
-}
 
 resource "awscc_iam_role" "main" {
   description = "IAM Role of EKS Cluster"
-  role_name   = "${var.eks_cluster_name}-role"
+  role_name   = "example-role"
   assume_role_policy_document = jsonencode({
     Statement = [{
       Action = "sts:AssumeRole"
@@ -53,27 +14,34 @@ resource "awscc_iam_role" "main" {
     Version = "2012-10-17"
   })
   managed_policy_arns = [
-    "${local.policy_arn_prefix}/AmazonEKSClusterPolicy",
+    "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy",
     # Optionally, enable Security Groups for Pods
     # Reference: https://docs.aws.amazon.com/eks/latest/userguide/security-groups-for-pods.html
-    "${local.policy_arn_prefix}/AmazonEKSVPCResourceController"
+    "arn:aws:iam::aws:policy/AmazonEKSVPCResourceController"
   ]
   max_session_duration = 7200
   path                 = "/"
-  tags = concat([
+  tags = [
     {
       key   = "Name"
-      value = "${var.eks_cluster_name}-role"
-    }],
-  var.eks_default_tags)
+      value = "example-role"
+    },
+    {
+      key   = "Environment"
+      value = "Development"
+    },
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
 
 resource "awscc_eks_cluster" "main" {
-  name     = var.eks_cluster_name
+  name     = "example-cluster"
   role_arn = awscc_iam_role.main.arn
-  version  = var.eks_cluster_version
   resources_vpc_config = {
-    subnet_ids = var.eks_cluster_subnets
+    subnet_ids = ["subnet-xxxx", "subnet-yyyy"] // EKS Cluster Subnet-IDs
   }
   encryption_config = [{
     provider = {
@@ -81,12 +49,20 @@ resource "awscc_eks_cluster" "main" {
     }
     resources = ["secrets"]
   }]
-  tags = concat([
+  tags = [
     {
       key   = "Name"
-      value = var.eks_cluster_name
-    }],
-  var.eks_default_tags)
+      value = "example-cluster"
+    },
+    {
+      key   = "Environment"
+      value = "Development"
+    },
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
   depends_on = [awscc_kms_key.main]
 }
 
@@ -103,7 +79,7 @@ resource "awscc_kms_key" "main" {
         "Sid" : "Enable IAM User Permissions",
         "Effect" : "Allow",
         "Principal" : {
-          "AWS" : "arn:aws:iam::${local.account_id}:root"
+          "AWS" : "arn:aws:iam::${data.aws_caller_identity.current.account_id}:root"
         },
         "Action" : "kms:*",
         "Resource" : "*"
@@ -111,31 +87,18 @@ resource "awscc_kms_key" "main" {
     ],
     },
   )
-  tags = concat([
+  tags = [
     {
       key   = "Name"
-      value = "${var.eks_cluster_name}-kms-key"
-    }],
-  var.eks_default_tags)
-}
-
-output "eks_cluster_endpoint" {
-  value = awscc_eks_cluster.main.endpoint
-}
-
-output "eks_cluster_arn" {
-  value = awscc_eks_cluster.main.arn
-}
-
-output "eks_cluster_certificate_authority_data" {
-  value = awscc_eks_cluster.main.certificate_authority_data
-}
-
-# Cluster Security Group ID created by Amazon EKS for cluster
-output "eks_cluster_security_group_id" {
-  value = awscc_eks_cluster.main.cluster_security_group_id
-}
-
-output "eks_cluster_encryption_config_key_arn" {
-  value = awscc_eks_cluster.main.encryption_config_key_arn
+      value = "example-kms-key"
+    },
+    {
+      key   = "Environment"
+      value = "Development"
+    },
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
