@@ -11,6 +11,12 @@ description: |-
 
 ## Example Usage
 
+### Example with 2 sub-alarms
+
+Creates a Composite alarm that comprises 2 sub-alarms. Note that the AWS provider resource for [aws_cloudwatch_metric_alarm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) is used.
+
+{{ tffile (printf "examples/resources/%s/with_two_sub_alarms_basic.tf" .Name)}}
+
 ### Example with 2 sub-alarms and various actions
 
 Creates a Composite alarm that comprises 2 sub-alarms. Note that AWS provider resources for [aws_sns_topic](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/sns_topic) and [aws_cloudwatch_metric_alarm](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_metric_alarm) are used. It also uses different SNS topics for the various alarm actions.
