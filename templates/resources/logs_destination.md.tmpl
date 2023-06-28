@@ -1,0 +1,31 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic example
+To create Amazon CloudWatch log destination
+{{ tffile (printf "examples/resources/%s/cloudwatch_log_destination.tf" .Name)}}
+
+### Amazon CloudWatch log destination with destination policy
+To create Amazon CloudWatch log destination with destination policy
+{{ tffile (printf "examples/resources/%s/cloudwatch_log_destination_with_dest_policy.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
