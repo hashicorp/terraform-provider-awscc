@@ -65,6 +65,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AttributesToDelete is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CreatedTime
 		// CloudFormation resource type schema:
@@ -212,19 +213,20 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
 		//	      "TagKey": {
 		//	        "type": "string"
 		//	      },
 		//	      "TagValue": {
 		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "TagKey",
-		//	      "TagValue"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
@@ -233,13 +235,37 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: TagKey
 					"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: TagValue
 					"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -293,6 +319,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"display_name":         "DisplayName",
 		"icon_s3_location":     "IconS3Location",
 		"instance_families":    "InstanceFamilies",
+		"key":                  "Key",
 		"launch_parameters":    "LaunchParameters",
 		"launch_path":          "LaunchPath",
 		"name":                 "Name",
@@ -302,11 +329,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"tag_key":              "TagKey",
 		"tag_value":            "TagValue",
 		"tags":                 "Tags",
+		"value":                "Value",
 		"working_directory":    "WorkingDirectory",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/Tags",
+		"/properties/AttributesToDelete",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

@@ -65,6 +65,7 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 		//	  "enum": [
 		//	    "AMAZON_LINUX",
 		//	    "AMAZON_LINUX_2",
+		//	    "AMAZON_LINUX_2023",
 		//	    "WINDOWS_2012",
 		//	    "WINDOWS_2016"
 		//	  ],
@@ -78,6 +79,7 @@ func buildResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"AMAZON_LINUX",
 					"AMAZON_LINUX_2",
+					"AMAZON_LINUX_2023",
 					"WINDOWS_2012",
 					"WINDOWS_2016",
 				),

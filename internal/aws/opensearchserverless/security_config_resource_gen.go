@@ -105,7 +105,7 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 		//	    },
 		//	    "Metadata": {
 		//	      "description": "The XML saml provider metadata document that you want to use",
-		//	      "maxLength": 20480,
+		//	      "maxLength": 51200,
 		//	      "minLength": 1,
 		//	      "pattern": "",
 		//	      "type": "string"
@@ -147,7 +147,7 @@ func securityConfigResource(ctx context.Context) (resource.Resource, error) {
 					Description: "The XML saml provider metadata document that you want to use",
 					Required:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
-						stringvalidator.LengthBetween(1, 20480),
+						stringvalidator.LengthBetween(1, 51200),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: SessionTimeout

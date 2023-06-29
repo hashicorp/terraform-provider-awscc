@@ -224,6 +224,7 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// UpdatedLatestPatchVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -261,6 +262,9 @@ func packageVersionResource(ctx context.Context) (resource.Resource, error) {
 		"updated_latest_patch_version": "UpdatedLatestPatchVersion",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/UpdatedLatestPatchVersion",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

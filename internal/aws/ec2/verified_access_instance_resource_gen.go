@@ -95,6 +95,10 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "IncludeTrustContext": {
+		//	      "description": "Include claims from trust providers in Verified Access logs.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "KinesisDataFirehose": {
 		//	      "additionalProperties": false,
 		//	      "description": "Sends Verified Access logs to Kinesis.",
@@ -109,6 +113,10 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "LogVersion": {
+		//	      "description": "Select log version for Verified Access logs.",
+		//	      "type": "string"
 		//	    },
 		//	    "S3": {
 		//	      "additionalProperties": false,
@@ -167,6 +175,15 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
+				// Property: IncludeTrustContext
+				"include_trust_context": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Include claims from trust providers in Verified Access logs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: KinesisDataFirehose
 				"kinesis_data_firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -194,6 +211,15 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: LogVersion
+				"log_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Select log version for Verified Access logs.",
+					Optional:    true,
+					Computed:    true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: S3
@@ -470,10 +496,12 @@ func verifiedAccessInstanceResource(ctx context.Context) (resource.Resource, err
 		"description":                        "Description",
 		"device_trust_provider_type":         "DeviceTrustProviderType",
 		"enabled":                            "Enabled",
+		"include_trust_context":              "IncludeTrustContext",
 		"key":                                "Key",
 		"kinesis_data_firehose":              "KinesisDataFirehose",
 		"last_updated_time":                  "LastUpdatedTime",
 		"log_group":                          "LogGroup",
+		"log_version":                        "LogVersion",
 		"logging_configurations":             "LoggingConfigurations",
 		"prefix":                             "Prefix",
 		"s3":                                 "S3",

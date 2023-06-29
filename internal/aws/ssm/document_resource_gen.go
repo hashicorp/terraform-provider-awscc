@@ -134,6 +134,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// Attachments is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Content
 		// CloudFormation resource type schema:
@@ -428,6 +429,7 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 				generic.StringDefaultValue("Replace"),
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// UpdateMethod is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: VersionName
 		// CloudFormation resource type schema:
@@ -486,6 +488,10 @@ func documentResource(ctx context.Context) (resource.Resource, error) {
 		"version_name":    "VersionName",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/UpdateMethod",
+		"/properties/Attachments",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

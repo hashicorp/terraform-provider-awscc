@@ -8,17 +8,20 @@ package cassandra
 import (
 	"context"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -47,6 +50,115 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicationSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "default": {
+		//	    "properties": {
+		//	      "ReplicationStrategy": {
+		//	        "const": "SINGLE_REGION",
+		//	        "type": "string"
+		//	      }
+		//	    }
+		//	  },
+		//	  "properties": {
+		//	    "RegionList": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "ap-northeast-1",
+		//	          "ap-northeast-2",
+		//	          "ap-south-1",
+		//	          "ap-southeast-1",
+		//	          "ap-southeast-2",
+		//	          "ca-central-1",
+		//	          "eu-central-1",
+		//	          "eu-north-1",
+		//	          "eu-west-1",
+		//	          "eu-west-2",
+		//	          "eu-west-3",
+		//	          "sa-east-1",
+		//	          "us-east-1",
+		//	          "us-east-2",
+		//	          "us-west-1",
+		//	          "us-west-2"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 6,
+		//	      "minItems": 2,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "ReplicationStrategy": {
+		//	      "enum": [
+		//	        "SINGLE_REGION",
+		//	        "MULTI_REGION"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"replication_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RegionList
+				"region_list": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(2, 6),
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"ap-northeast-1",
+								"ap-northeast-2",
+								"ap-south-1",
+								"ap-southeast-1",
+								"ap-southeast-2",
+								"ca-central-1",
+								"eu-central-1",
+								"eu-north-1",
+								"eu-west-1",
+								"eu-west-2",
+								"eu-west-3",
+								"sa-east-1",
+								"us-east-1",
+								"us-east-2",
+								"us-west-1",
+								"us-west-2",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ReplicationStrategy
+				"replication_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"SINGLE_REGION",
+							"MULTI_REGION",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				generic.ObjectDefaultValue(),
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
@@ -129,10 +241,13 @@ func keyspaceResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"key":           "Key",
-		"keyspace_name": "KeyspaceName",
-		"tags":          "Tags",
-		"value":         "Value",
+		"key":                       "Key",
+		"keyspace_name":             "KeyspaceName",
+		"region_list":               "RegionList",
+		"replication_specification": "ReplicationSpecification",
+		"replication_strategy":      "ReplicationStrategy",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
