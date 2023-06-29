@@ -1,10 +1,15 @@
 resource "awscc_wafv2_logging_configuration" "awscc_waf_logging" {
   resource_arn            = aws_wafv2_web_acl.example.arn
-  log_destination_configs = [awscc_logs_log_group.example.arn]
+  log_destination_configs = [aws_cloudwatch_log_group.example.arn]
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 
-resource "awscc_logs_log_group" "example" {
-  log_group_name = "aws-waf-logs-awscc"
+resource "aws_cloudwatch_log_group" "example" {
+  name = "example"
 }
 
 resource "aws_wafv2_web_acl" "example" {

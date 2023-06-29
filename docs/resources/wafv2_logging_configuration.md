@@ -13,16 +13,21 @@ A WAFv2 Logging Configuration Resource Provider
 
 ### Basic usage
 
-Creates a WAFv2 Web ACL Logging Configuration resource. Note that AWS Provider resource for [aws_wafv2_web_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl) is used.
+Creates a WAFv2 Web ACL Logging Configuration resource. Note that AWS Provider resources for [aws_wafv2_web_acl](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/wafv2_web_acl) and [aws_cloudwatch_log_group] (https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) are used.
 
 ```terraform
 resource "awscc_wafv2_logging_configuration" "awscc_waf_logging" {
   resource_arn            = aws_wafv2_web_acl.example.arn
-  log_destination_configs = [awscc_logs_log_group.example.arn]
+  log_destination_configs = [aws_cloudwatch_log_group.example.arn]
+
+  tags = [{
+    key   = "Modified By"
+    value = "AWSCC"
+  }]
 }
 
-resource "awscc_logs_log_group" "example" {
-  log_group_name = "aws-waf-logs-awscc"
+resource "aws_cloudwatch_log_group" "example" {
+  name = "example"
 }
 
 resource "aws_wafv2_web_acl" "example" {
@@ -61,6 +66,45 @@ resource "aws_wafv2_web_acl" "example" {
     metric_name                = "ExternalACL"
     sampled_requests_enabled   = true
   }
+}
+```
+
+### With Logging Filter 
+
+```terraform
+resource "awscc_wafv2_logging_configuration" "awscc_waf_logging_filter" {
+  resource_arn            = aws_wafv2_web_acl.example.arn
+  log_destination_configs = [aws_cloudwatch_log_group.example.arn]
+
+  logging_filter = {
+    default_behavior = "KEEP"
+
+    filters = [{
+      behavior = "DROP"
+      conditions = [{
+        action_condition = {
+          action = "BLOCK"
+        }
+      }]
+      
+      requirement = "MEETS_ANY"
+    }]
+  }
+
+}
+```
+
+### With Redacted Fields 
+
+```terraform
+resource "awscc_wafv2_logging_configuration" "awscc_waf_logging_redacted_fields" {
+  resource_arn            = aws_wafv2_web_acl.example.arn
+  log_destination_configs = [aws_cloudwatch_log_group.example.arn]
+  redacted_fields = [{
+    single_header = {
+      name = "authorization"
+    }
+  }]
 }
 ```
 
