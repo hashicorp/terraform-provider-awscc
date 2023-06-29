@@ -174,20 +174,31 @@
     "/properties/Name",
     "/properties/DocumentType"
   ],
+  "writeOnlyProperties": [
+    "/properties/UpdateMethod",
+    "/properties/Attachments"
+  ],
   "primaryIdentifier": [
     "/properties/Name"
   ],
+  "tagging": {
+    "taggable": true
+  },
   "handlers": {
     "create": {
       "permissions": [
         "ssm:CreateDocument",
+        "ssm:GetDocument",
+        "ssm:AddTagsToResource",
+        "ssm:ListTagsForResource",
         "s3:GetObject",
         "iam:PassRole"
       ]
     },
     "read": {
       "permissions": [
-        "ssm:GetDocument"
+        "ssm:GetDocument",
+        "ssm:ListTagsForResource"
       ]
     },
     "update": {
@@ -204,7 +215,8 @@
     },
     "delete": {
       "permissions": [
-        "ssm:DeleteDocument"
+        "ssm:DeleteDocument",
+        "ssm:GetDocument"
       ]
     },
     "list": {

@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::SageMaker::ModelPackage",
   "description": "Resource Type definition for AWS::SageMaker::ModelPackage",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-sagemaker",
   "definitions": {
     "Tag": {
       "description": "A key-value pair to associate with a resource.",
@@ -408,12 +409,6 @@
           "description": "A structure with Model Input details.",
           "pattern": "^(https|s3)://([^/]+)/?(.*)$",
           "maxLength": 1024
-        },
-        "ProductId": {
-          "type": "string",
-          "description": "The AWS Marketplace product ID of the model package.",
-          "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-          "maxLength": 256
         },
         "Framework": {
           "type": "string",
@@ -855,34 +850,9 @@
       "maxLength": 1024,
       "pattern": ".*"
     },
-    "CreatedBy": {
-      "$ref": "#/definitions/UserContext"
-    },
     "CreationTime": {
       "description": "The time at which the model package was created.",
       "type": "string"
-    },
-    "UserContext": {
-      "type": "object",
-      "additionalProperties": false,
-      "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-      "properties": {
-        "DomainId": {
-          "type": "string",
-          "description": "The domain associated with the user."
-        },
-        "UserProfileArn": {
-          "type": "string",
-          "description": "The Amazon Resource Name (ARN) of the user's profile."
-        },
-        "UserProfileName": {
-          "type": "string",
-          "description": "The name of the user's profile."
-        }
-      }
-    },
-    "LastModifiedBy": {
-      "$ref": "#/definitions/UserContext"
     },
     "LastModifiedTime": {
       "description": "The time at which the model package was last modified.",
@@ -903,13 +873,6 @@
       "description": "Details about the current status of the model package.",
       "type": "object",
       "properties": {
-        "ImageScanStatuses": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ModelPackageStatusItem"
-          },
-          "insertionOrder": true
-        },
         "ValidationStatuses": {
           "type": "array",
           "items": {
@@ -918,9 +881,6 @@
           "insertionOrder": true
         }
       },
-      "required": [
-        "ValidationStatuses"
-      ],
       "additionalProperties": false
     },
     "ModelPackageStatusItem": {
@@ -976,9 +936,6 @@
     },
     "AdditionalInferenceSpecifications": {
       "$ref": "#/definitions/AdditionalInferenceSpecifications"
-    },
-    "AdditionalInferenceSpecificationDefinition": {
-      "$ref": "#/definitions/AdditionalInferenceSpecificationDefinition"
     },
     "CertifyForMarketplace": {
       "$ref": "#/definitions/CertifyForMarketplace"
@@ -1037,9 +994,6 @@
     "CreationTime": {
       "$ref": "#/definitions/CreationTime"
     },
-    "LastModifiedBy": {
-      "$ref": "#/definitions/LastModifiedBy"
-    },
     "LastModifiedTime": {
       "$ref": "#/definitions/LastModifiedTime"
     },
@@ -1054,15 +1008,6 @@
     },
     "ModelPackageStatusDetails": {
       "$ref": "#/definitions/ModelPackageStatusDetails"
-    },
-    "ModelPackageStatusItem": {
-      "$ref": "#/definitions/ModelPackageStatusItem"
-    },
-    "CreatedBy": {
-      "$ref": "#/definitions/CreatedBy"
-    },
-    "Environment": {
-      "$ref": "#/definitions/Environment"
     }
   },
   "additionalProperties": false,
@@ -1092,6 +1037,10 @@
     "/properties/Task",
     "/properties/SamplePayloadUrl"
   ],
+  "writeOnlyProperties": [
+    "/properties/ClientToken",
+    "/properties/AdditionalInferenceSpecificationsToAdd"
+  ],
   "primaryIdentifier": [
     "/properties/ModelPackageArn"
   ],
@@ -1108,6 +1057,8 @@
         "sagemaker:CreateTrainingJob",
         "sagemaker:CreateTransformJob",
         "sagemaker:DescribeTransformJob",
+        "sagemaker:DescribeModelPackage",
+        "sagemaker:ListTags",
         "iam:PassRole",
         "s3:GetObject"
       ]
@@ -1134,6 +1085,13 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "ModelPackageGroupName": {
+            "$ref": "resource-schema.json#/properties/ModelPackageGroupName"
+          }
+        }
+      },
       "permissions": [
         "sagemaker:ListModelPackages"
       ]

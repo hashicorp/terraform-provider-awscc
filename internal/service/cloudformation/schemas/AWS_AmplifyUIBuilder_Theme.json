@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::AmplifyUIBuilder::Theme",
   "description": "Definition of AWS::AmplifyUIBuilder::Theme Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplifyuibuilder",
   "definitions": {
     "Tags": {
       "type": "object",
@@ -119,7 +120,21 @@
       "permissions": [
         "amplifyuibuilder:ListThemes",
         "amplify:GetApp"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "AppId": {
+            "$ref": "resource-schema.json#/properties/AppId"
+          },
+          "EnvironmentName": {
+            "$ref": "resource-schema.json#/properties/EnvironmentName"
+          }
+        },
+        "required": [
+          "AppId",
+          "EnvironmentName"
+        ]
+      }
     }
   },
   "additionalProperties": false,

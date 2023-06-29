@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::AmplifyUIBuilder::Component",
   "description": "Definition of AWS::AmplifyUIBuilder::Component Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplifyuibuilder",
   "definitions": {
     "ActionParameters": {
       "type": "object",
@@ -531,7 +532,21 @@
       "permissions": [
         "amplify:GetApp",
         "amplifyuibuilder:ListComponents"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "AppId": {
+            "$ref": "resource-schema.json#/properties/AppId"
+          },
+          "EnvironmentName": {
+            "$ref": "resource-schema.json#/properties/EnvironmentName"
+          }
+        },
+        "required": [
+          "AppId",
+          "EnvironmentName"
+        ]
+      }
     }
   },
   "tagging": {

@@ -128,17 +128,20 @@
   "handlers": {
     "create": {
       "permissions": [
-        "quicksight:CreateRefreshSchedule"
+        "quicksight:CreateRefreshSchedule",
+        "quicksight:DescribeRefreshSchedule"
       ]
     },
     "update": {
       "permissions": [
-        "quicksight:UpdateRefreshSchedule"
+        "quicksight:UpdateRefreshSchedule",
+        "quicksight:DescribeRefreshSchedule"
       ]
     },
     "delete": {
       "permissions": [
-        "quicksight:DeleteRefreshSchedule"
+        "quicksight:DeleteRefreshSchedule",
+        "quicksight:DescribeRefreshSchedule"
       ]
     },
     "list": {

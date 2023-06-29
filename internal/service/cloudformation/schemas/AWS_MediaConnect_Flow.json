@@ -49,6 +49,10 @@
           "type": "string",
           "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow."
         },
+        "GatewayBridgeSource": {
+          "$ref": "#/definitions/GatewayBridgeSource",
+          "description": "The source configuration for cloud flows receiving a stream from a bridge."
+        },
         "IngestIp": {
           "type": "string",
           "description": "The IP address that the flow will be listening on for incoming content."
@@ -216,6 +220,35 @@
             "PrimarySource"
           ],
           "additionalProperties": false
+        }
+      },
+      "additionalProperties": false
+    },
+    "GatewayBridgeSource": {
+      "type": "object",
+      "description": "The source configuration for cloud flows receiving a stream from a bridge.",
+      "properties": {
+        "BridgeArn": {
+          "type": "string",
+          "description": "The ARN of the bridge feeding this flow."
+        },
+        "VpcInterfaceAttachment": {
+          "$ref": "#/definitions/VpcInterfaceAttachment",
+          "description": "The name of the VPC interface attachment to use for this bridge source."
+        }
+      },
+      "additionalProperties": false,
+      "required": [
+        "BridgeArn"
+      ]
+    },
+    "VpcInterfaceAttachment": {
+      "type": "object",
+      "description": "The settings for attaching a VPC interface to an resource.",
+      "properties": {
+        "VpcInterfaceName": {
+          "type": "string",
+          "description": "The name of the VPC interface to use for this resource."
         }
       },
       "additionalProperties": false

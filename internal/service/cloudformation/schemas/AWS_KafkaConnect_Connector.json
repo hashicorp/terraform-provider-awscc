@@ -89,7 +89,7 @@
       ]
     },
     "AutoScaling": {
-      "description": "Details about auto scaling of a connector. ",
+      "description": "Details about auto scaling of a connector.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
@@ -454,6 +454,7 @@
   "readOnlyProperties": [
     "/properties/ConnectorArn"
   ],
+  "replacementStrategy": "delete_then_create",
   "createOnlyProperties": [
     "/properties/ConnectorConfiguration",
     "/properties/ConnectorDescription",

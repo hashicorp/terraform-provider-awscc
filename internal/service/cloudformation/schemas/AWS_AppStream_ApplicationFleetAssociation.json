@@ -31,7 +31,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "appstream:AssociateApplicationFleet"
+        "appstream:AssociateApplicationFleet",
+        "appstream:DescribeApplicationFleetAssociations"
       ]
     },
     "read": {
@@ -41,7 +42,8 @@
     },
     "delete": {
       "permissions": [
-        "appstream:DisassociateApplicationFleet"
+        "appstream:DisassociateApplicationFleet",
+        "appstream:DescribeApplicationFleetAssociations"
       ]
     }
   }

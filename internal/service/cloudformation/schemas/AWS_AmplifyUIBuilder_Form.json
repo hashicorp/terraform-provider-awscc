@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::AmplifyUIBuilder::Form",
   "description": "Definition of AWS::AmplifyUIBuilder::Form Resource Type",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-amplifyuibuilder",
   "definitions": {
     "FieldConfig": {
       "type": "object",
@@ -73,6 +74,9 @@
         },
         "IsArray": {
           "type": "boolean"
+        },
+        "FileUploaderConfig": {
+          "$ref": "#/definitions/FileUploaderFieldConfig"
         }
       },
       "required": [
@@ -157,6 +161,37 @@
           "$ref": "#/definitions/FieldConfig"
         }
       },
+      "additionalProperties": false
+    },
+    "FileUploaderFieldConfig": {
+      "type": "object",
+      "properties": {
+        "AccessLevel": {
+          "$ref": "#/definitions/StorageAccessLevel"
+        },
+        "AcceptedFileTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ShowThumbnails": {
+          "type": "boolean"
+        },
+        "IsResumable": {
+          "type": "boolean"
+        },
+        "MaxFileCount": {
+          "type": "number"
+        },
+        "MaxSize": {
+          "type": "number"
+        }
+      },
+      "required": [
+        "AcceptedFileTypes",
+        "AccessLevel"
+      ],
       "additionalProperties": false
     },
     "FixedPosition": {
@@ -290,6 +325,14 @@
         }
       ]
     },
+    "LabelDecorator": {
+      "type": "string",
+      "enum": [
+        "required",
+        "optional",
+        "none"
+      ]
+    },
     "SectionalElement": {
       "type": "object",
       "properties": {
@@ -325,6 +368,14 @@
         }
       },
       "additionalProperties": false
+    },
+    "StorageAccessLevel": {
+      "type": "string",
+      "enum": [
+        "public",
+        "protected",
+        "private"
+      ]
     },
     "Tags": {
       "type": "object",
@@ -389,6 +440,9 @@
     },
     "Id": {
       "type": "string"
+    },
+    "LabelDecorator": {
+      "$ref": "#/definitions/LabelDecorator"
     },
     "Name": {
       "type": "string",
@@ -457,7 +511,21 @@
       "permissions": [
         "amplify:GetApp",
         "amplifyuibuilder:ListForms"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "AppId": {
+            "$ref": "resource-schema.json#/properties/AppId"
+          },
+          "EnvironmentName": {
+            "$ref": "resource-schema.json#/properties/EnvironmentName"
+          }
+        },
+        "required": [
+          "AppId",
+          "EnvironmentName"
+        ]
+      }
     }
   },
   "tagging": {

@@ -157,6 +157,7 @@
       "permissions": [
         "networkmanager:CreateTransitGatewayRouteTableAttachment",
         "networkmanager:GetTransitGatewayRouteTableAttachment",
+        "networkmanager:TagResource",
         "iam:CreateServiceLinkedRole",
         "ec2:DescribeRegions"
       ]

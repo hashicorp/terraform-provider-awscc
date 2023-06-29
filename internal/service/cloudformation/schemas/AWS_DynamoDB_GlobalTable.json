@@ -458,6 +458,12 @@
       "/properties/StreamArn"
     ]
   ],
+  "writeOnlyProperties": [
+    "/properties/Replicas/*/ReadProvisionedThroughputSettings/ReadCapacityAutoScalingSettings/SeedCapacity",
+    "/properties/Replicas/*/GlobalSecondaryIndexes/*/ReadProvisionedThroughputSettings/ReadCapacityAutoScalingSettings/SeedCapacity",
+    "/properties/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
+    "/properties/GlobalSecondaryIndexes/*/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -496,15 +502,19 @@
         "kms:Describe*",
         "kms:Get*",
         "kms:List*",
+        "kms:Decrypt",
         "kms:RevokeGrant",
-        "cloudwatch:PutMetricData"
+        "cloudwatch:PutMetricData",
+        "iam:CreateServiceLinkedRole"
       ]
     },
     "read": {
       "permissions": [
         "dynamodb:Describe*",
         "application-autoscaling:Describe*",
-        "cloudwatch:PutMetricData"
+        "cloudwatch:PutMetricData",
+        "dynamodb:ListTagsOfResource",
+        "kms:Describe*"
       ]
     },
     "update": {
@@ -555,6 +565,7 @@
     "delete": {
       "permissions": [
         "dynamodb:Describe*",
+        "dynamodb:DeleteTable",
         "application-autoscaling:DeleteScalingPolicy",
         "application-autoscaling:DeleteScheduledAction",
         "application-autoscaling:DeregisterScalableTarget",

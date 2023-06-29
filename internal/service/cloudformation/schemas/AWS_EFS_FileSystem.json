@@ -118,10 +118,14 @@
     "create": {
       "permissions": [
         "elasticfilesystem:CreateFileSystem",
+        "elasticfilesystem:TagResource",
         "elasticfilesystem:DescribeFileSystems",
         "elasticfilesystem:PutBackupPolicy",
         "elasticfilesystem:PutFileSystemPolicy",
-        "elasticfilesystem:PutLifecycleConfiguration"
+        "elasticfilesystem:PutLifecycleConfiguration",
+        "kms:DescribeKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:CreateGrant"
       ]
     },
     "read": {
@@ -146,7 +150,10 @@
         "elasticfilesystem:PutLifecycleConfiguration",
         "elasticfilesystem:TagResource",
         "elasticfilesystem:UntagResource",
-        "elasticfilesystem:UpdateFileSystem"
+        "elasticfilesystem:UpdateFileSystem",
+        "kms:DescribeKey",
+        "kms:GenerateDataKeyWithoutPlaintext",
+        "kms:CreateGrant"
       ]
     },
     "delete": {

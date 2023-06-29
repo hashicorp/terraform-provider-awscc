@@ -1,5 +1,6 @@
 {
   "typeName": "AWS::OpenSearchServerless::SecurityConfig",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchserverless",
   "description": "Amazon OpenSearchServerless security config resource",
   "tagging": {
     "taggable": false,
@@ -15,7 +16,7 @@
         "Metadata": {
           "type": "string",
           "description": "The XML saml provider metadata document that you want to use",
-          "maxLength": 20480,
+          "maxLength": 51200,
           "minLength": 1,
           "pattern": ""
         },
@@ -109,6 +110,7 @@
     },
     "update": {
       "permissions": [
+        "aoss:GetSecurityConfig",
         "aoss:UpdateSecurityConfig"
       ]
     },
@@ -118,6 +120,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "Type": {
+            "$ref": "resource-schema.json#/properties/Type"
+          }
+        },
+        "required": [
+          "Type"
+        ]
+      },
       "permissions": [
         "aoss:ListSecurityConfigs"
       ]

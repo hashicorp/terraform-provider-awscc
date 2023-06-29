@@ -29,8 +29,10 @@
   "handlers": {
     "create": {
       "permissions": [
-        "networkmanager:RegisterTransitGateway"
-      ]
+        "networkmanager:RegisterTransitGateway",
+        "networkmanager:GetTransitGatewayRegistrations"
+      ],
+      "timeoutInMinutes": 30
     },
     "read": {
       "permissions": [
@@ -38,14 +40,26 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "GlobalNetworkId": {
+            "$ref": "resource-schema.json#/properties/GlobalNetworkId"
+          }
+        },
+        "required": [
+          "GlobalNetworkId"
+        ]
+      },
       "permissions": [
         "networkmanager:GetTransitGatewayRegistrations"
       ]
     },
     "delete": {
       "permissions": [
-        "networkmanager:DeregisterTransitGateway"
-      ]
+        "networkmanager:DeregisterTransitGateway",
+        "networkmanager:GetTransitGatewayRegistrations"
+      ],
+      "timeoutInMinutes": 30
     }
   }
 }

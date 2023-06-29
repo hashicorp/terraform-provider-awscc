@@ -288,8 +288,13 @@
   ],
   "writeOnlyProperties": [
     "/properties/DockerfileTemplateData",
-    "/properties/DockerfileTemplateUri"
+    "/properties/DockerfileTemplateUri",
+    "/properties/ImageOsVersionOverride",
+    "/properties/PlatformOverride"
   ],
+  "propertyTransform": {
+    "/properties/InstanceConfiguration/BlockDeviceMappings/*/Ebs/VolumeType": "$uppercase(VolumeType)"
+  },
   "tagging": {
     "taggable": false
   },

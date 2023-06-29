@@ -84,6 +84,7 @@
     "create": {
       "permissions": [
         "aps:CreateRuleGroupsNamespace",
+        "aps:DescribeRuleGroupsNamespace",
         "aps:TagResource"
       ]
     },
@@ -96,6 +97,7 @@
     "update": {
       "permissions": [
         "aps:PutRuleGroupsNamespace",
+        "aps:DescribeRuleGroupsNamespace",
         "aps:TagResource",
         "aps:UntagResource",
         "aps:ListTagsForResource"
@@ -103,7 +105,8 @@
     },
     "delete": {
       "permissions": [
-        "aps:DeleteRuleGroupsNamespace"
+        "aps:DeleteRuleGroupsNamespace",
+        "aps:DescribeRuleGroupsNamespace"
       ]
     },
     "list": {

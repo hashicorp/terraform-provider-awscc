@@ -111,12 +111,14 @@
     },
     "delete": {
       "permissions": [
+        "Batch:DescribeSchedulingPolicies",
         "Batch:DeleteSchedulingPolicy"
       ]
     },
     "list": {
       "permissions": [
-        "Batch:ListSchedulingPolicies"
+        "Batch:ListSchedulingPolicies",
+        "Batch:DescribeSchedulingPolicies"
       ]
     }
   }

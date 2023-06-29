@@ -45,9 +45,9 @@
       "maxLength": 500
     },
     "Type": {
-      "description": "The phone number type, either TOLL_FREE or DID.",
+      "description": "The phone number type",
       "type": "string",
-      "pattern": "TOLL_FREE|DID"
+      "pattern": "TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF"
     },
     "CountryCode": {
       "description": "The phone number country code.",
