@@ -3452,8 +3452,12 @@ resource_schema "aws_verifiedpermissions_policy_template" {
 }
 
 resource_schema "aws_vpclattice_access_log_subscription" {
-  cloudformation_type_name               = "AWS::VpcLattice::AccessLogSubscription"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::AccessLogSubscription"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_auth_policy" {
@@ -3462,8 +3466,12 @@ resource_schema "aws_vpclattice_auth_policy" {
 }
 
 resource_schema "aws_vpclattice_listener" {
-  cloudformation_type_name               = "AWS::VpcLattice::Listener"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::Listener"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_resource_policy" {
@@ -3472,30 +3480,57 @@ resource_schema "aws_vpclattice_resource_policy" {
 }
 
 resource_schema "aws_vpclattice_rule" {
-  cloudformation_type_name               = "AWS::VpcLattice::Rule"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::Rule"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service" {
   cloudformation_type_name = "AWS::VpcLattice::Service"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network" {
   cloudformation_type_name = "AWS::VpcLattice::ServiceNetwork"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network_service_association" {
-  cloudformation_type_name               = "AWS::VpcLattice::ServiceNetworkServiceAssociation"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::ServiceNetworkServiceAssociation"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network_vpc_association" {
-  cloudformation_type_name               = "AWS::VpcLattice::ServiceNetworkVpcAssociation"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::ServiceNetworkVpcAssociation"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_target_group" {
   cloudformation_type_name = "AWS::VpcLattice::TargetGroup"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_wafv2_ip_set" {
