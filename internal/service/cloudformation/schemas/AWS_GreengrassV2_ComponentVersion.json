@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::GreengrassV2::ComponentVersion",
   "description": "Resource for Greengrass component version.",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-greengrassv2",
   "definitions": {
     "LambdaFunctionRecipeSource": {
       "type": "object",
@@ -311,9 +312,26 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "Arn": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "Arn"
+        ]
+      },
       "permissions": [
         "greengrass:ListComponentVersions"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false,
+    "tagProperty": "/properties/Tags"
   }
 }

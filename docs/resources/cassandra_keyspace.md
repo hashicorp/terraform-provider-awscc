@@ -18,11 +18,21 @@ Resource schema for AWS::Cassandra::Keyspace
 ### Optional
 
 - `keyspace_name` (String) Name for Cassandra keyspace
+- `replication_specification` (Attributes) (see [below for nested schema](#nestedatt--replication_specification))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
 
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--replication_specification"></a>
+### Nested Schema for `replication_specification`
+
+Optional:
+
+- `region_list` (Set of String)
+- `replication_strategy` (String)
+
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

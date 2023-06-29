@@ -139,6 +139,31 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	      "description": "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
 		//	      "type": "string"
 		//	    },
+		//	    "GatewayBridgeSource": {
+		//	      "additionalProperties": false,
+		//	      "description": "The source configuration for cloud flows receiving a stream from a bridge.",
+		//	      "properties": {
+		//	        "BridgeArn": {
+		//	          "description": "The ARN of the bridge feeding this flow.",
+		//	          "type": "string"
+		//	        },
+		//	        "VpcInterfaceAttachment": {
+		//	          "additionalProperties": false,
+		//	          "description": "The name of the VPC interface attachment to use for this bridge source.",
+		//	          "properties": {
+		//	            "VpcInterfaceName": {
+		//	              "description": "The name of the VPC interface to use for this resource.",
+		//	              "type": "string"
+		//	            }
+		//	          },
+		//	          "type": "object"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "BridgeArn"
+		//	      ],
+		//	      "type": "object"
+		//	    },
 		//	    "IngestIp": {
 		//	      "description": "The IP address that the flow will be listening on for incoming content.",
 		//	      "type": "string"
@@ -279,6 +304,30 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 				// Property: EntitlementArn
 				"entitlement_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: GatewayBridgeSource
+				"gateway_bridge_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: BridgeArn
+						"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The ARN of the bridge feeding this flow.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+						// Property: VpcInterfaceAttachment
+						"vpc_interface_attachment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+							Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+								// Property: VpcInterfaceName
+								"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+									Description: "The name of the VPC interface to use for this resource.",
+									Computed:    true,
+								}, /*END ATTRIBUTE*/
+							}, /*END SCHEMA*/
+							Description: "The name of the VPC interface attachment to use for this bridge source.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The source configuration for cloud flows receiving a stream from a bridge.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: IngestIp
@@ -459,6 +508,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm":                      "Algorithm",
 		"availability_zone":              "AvailabilityZone",
+		"bridge_arn":                     "BridgeArn",
 		"constant_initialization_vector": "ConstantInitializationVector",
 		"decryption":                     "Decryption",
 		"description":                    "Description",
@@ -467,6 +517,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"failover_mode":                  "FailoverMode",
 		"flow_arn":                       "FlowArn",
 		"flow_availability_zone":         "FlowAvailabilityZone",
+		"gateway_bridge_source":          "GatewayBridgeSource",
 		"ingest_ip":                      "IngestIp",
 		"ingest_port":                    "IngestPort",
 		"key_type":                       "KeyType",
@@ -493,6 +544,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"state":                          "State",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",
+		"vpc_interface_attachment":       "VpcInterfaceAttachment",
 		"vpc_interface_name":             "VpcInterfaceName",
 		"whitelist_cidr":                 "WhitelistCidr",
 	})

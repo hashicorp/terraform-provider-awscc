@@ -78,6 +78,10 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	      },
 		//	      "type": "object"
 		//	    },
+		//	    "IncludeTrustContext": {
+		//	      "description": "Include claims from trust providers in Verified Access logs.",
+		//	      "type": "boolean"
+		//	    },
 		//	    "KinesisDataFirehose": {
 		//	      "additionalProperties": false,
 		//	      "description": "Sends Verified Access logs to Kinesis.",
@@ -92,6 +96,10 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		//	        }
 		//	      },
 		//	      "type": "object"
+		//	    },
+		//	    "LogVersion": {
+		//	      "description": "Select log version for Verified Access logs.",
+		//	      "type": "string"
 		//	    },
 		//	    "S3": {
 		//	      "additionalProperties": false,
@@ -138,6 +146,11 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 					Description: "Sends Verified Access logs to CloudWatch Logs.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: IncludeTrustContext
+				"include_trust_context": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Include claims from trust providers in Verified Access logs.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: KinesisDataFirehose
 				"kinesis_data_firehose": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -153,6 +166,11 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Sends Verified Access logs to Kinesis.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: LogVersion
+				"log_version": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Select log version for Verified Access logs.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: S3
@@ -359,10 +377,12 @@ func verifiedAccessInstanceDataSource(ctx context.Context) (datasource.DataSourc
 		"description":                        "Description",
 		"device_trust_provider_type":         "DeviceTrustProviderType",
 		"enabled":                            "Enabled",
+		"include_trust_context":              "IncludeTrustContext",
 		"key":                                "Key",
 		"kinesis_data_firehose":              "KinesisDataFirehose",
 		"last_updated_time":                  "LastUpdatedTime",
 		"log_group":                          "LogGroup",
+		"log_version":                        "LogVersion",
 		"logging_configurations":             "LoggingConfigurations",
 		"prefix":                             "Prefix",
 		"s3":                                 "S3",

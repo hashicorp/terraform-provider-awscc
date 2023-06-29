@@ -202,15 +202,15 @@ func phoneNumberResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The phone number type, either TOLL_FREE or DID.",
-		//	  "pattern": "TOLL_FREE|DID",
+		//	  "description": "The phone number type",
+		//	  "pattern": "TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF",
 		//	  "type": "string"
 		//	}
 		"type": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The phone number type, either TOLL_FREE or DID.",
+			Description: "The phone number type",
 			Required:    true,
 			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.RegexMatches(regexp.MustCompile("TOLL_FREE|DID"), ""),
+				stringvalidator.RegexMatches(regexp.MustCompile("TOLL_FREE|DID|UIFN|SHARED|THIRD_PARTY_DID|THIRD_PARTY_TF"), ""),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),

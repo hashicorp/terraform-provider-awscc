@@ -1366,6 +1366,7 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 							PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
 								int64planmodifier.UseStateForUnknown(),
 							}, /*END PLAN MODIFIERS*/
+							// SeedCapacity is a write-only property.
 						}, /*END ATTRIBUTE*/
 						// Property: TargetTrackingScalingPolicyConfiguration
 						"target_tracking_scaling_policy_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -1493,6 +1494,12 @@ func globalTableResource(ctx context.Context) (resource.Resource, error) {
 		"write_provisioned_throughput_settings": "WriteProvisionedThroughputSettings",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/Replicas/*/ReadProvisionedThroughputSettings/ReadCapacityAutoScalingSettings/SeedCapacity",
+		"/properties/Replicas/*/GlobalSecondaryIndexes/*/ReadProvisionedThroughputSettings/ReadCapacityAutoScalingSettings/SeedCapacity",
+		"/properties/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
+		"/properties/GlobalSecondaryIndexes/*/WriteProvisionedThroughputSettings/WriteCapacityAutoScalingSettings/SeedCapacity",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(1200)

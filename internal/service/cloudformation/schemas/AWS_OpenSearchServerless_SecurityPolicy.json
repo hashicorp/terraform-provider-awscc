@@ -1,5 +1,6 @@
 {
   "typeName": "AWS::OpenSearchServerless::SecurityPolicy",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchserverless",
   "description": "Amazon OpenSearchServerless security policy resource",
   "tagging": {
     "taggable": false,
@@ -79,6 +80,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "Type": {
+            "$ref": "resource-schema.json#/properties/Type"
+          }
+        },
+        "required": [
+          "Type"
+        ]
+      },
       "permissions": [
         "aoss:ListSecurityPolicies"
       ]

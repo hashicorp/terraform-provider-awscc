@@ -81,7 +81,7 @@ func transitGatewayRegistrationResource(ctx context.Context) (resource.Resource,
 
 	opts = opts.IsImmutableType(true)
 
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(30).WithDeleteTimeoutInMinutes(30)
 
 	v, err := generic.NewResource(ctx, opts...)
 

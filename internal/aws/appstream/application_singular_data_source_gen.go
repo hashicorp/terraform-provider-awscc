@@ -178,19 +178,20 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
 		//	      "TagKey": {
 		//	        "type": "string"
 		//	      },
 		//	      "TagValue": {
 		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "TagKey",
-		//	      "TagValue"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
@@ -199,12 +200,20 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
 					// Property: TagKey
 					"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 					// Property: TagValue
 					"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Computed: true,
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
 						Computed: true,
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
@@ -245,6 +254,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"display_name":         "DisplayName",
 		"icon_s3_location":     "IconS3Location",
 		"instance_families":    "InstanceFamilies",
+		"key":                  "Key",
 		"launch_parameters":    "LaunchParameters",
 		"launch_path":          "LaunchPath",
 		"name":                 "Name",
@@ -254,6 +264,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"tag_key":              "TagKey",
 		"tag_value":            "TagValue",
 		"tags":                 "Tags",
+		"value":                "Value",
 		"working_directory":    "WorkingDirectory",
 	})
 

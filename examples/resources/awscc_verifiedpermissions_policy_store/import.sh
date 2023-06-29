@@ -1,0 +1,1 @@
+$ terraform import awscc_verifiedpermissions_policy_store.example <resource ID>

@@ -103,6 +103,7 @@
     },
     "update": {
       "permissions": [
+        "Batch:DescribeJobQueues",
         "Batch:UpdateJobQueue",
         "Batch:TagResource",
         "Batch:UnTagResource"
@@ -110,6 +111,8 @@
     },
     "delete": {
       "permissions": [
+        "Batch:UpdateJobQueue",
+        "Batch:DescribeJobQueues",
         "Batch:DeleteJobQueue"
       ]
     },

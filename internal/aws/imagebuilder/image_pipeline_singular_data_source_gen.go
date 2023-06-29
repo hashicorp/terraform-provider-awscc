@@ -109,7 +109,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	          "type": "array"
 		//	        },
 		//	        "RepositoryName": {
-		//	          "description": "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don?t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
+		//	          "description": "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don't provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
 		//	          "type": "string"
 		//	        }
 		//	      },
@@ -135,7 +135,7 @@ func imagePipelineDataSource(ctx context.Context) (datasource.DataSource, error)
 						}, /*END ATTRIBUTE*/
 						// Property: RepositoryName
 						"repository_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Description: "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don?t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
+							Description: "The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don't provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/

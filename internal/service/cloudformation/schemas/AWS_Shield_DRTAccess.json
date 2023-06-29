@@ -42,14 +42,25 @@
       "permissions": [
         "shield:DescribeDRTAccess",
         "shield:AssociateDRTLogBucket",
-        "shield:AssociateDRTRole"
+        "shield:AssociateDRTRole",
+        "iam:PassRole",
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy"
       ]
     },
     "delete": {
       "permissions": [
         "shield:DescribeDRTAccess",
         "shield:DisassociateDRTLogBucket",
-        "shield:DisassociateDRTRole"
+        "shield:DisassociateDRTRole",
+        "iam:PassRole",
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:DeleteBucketPolicy"
       ]
     },
     "read": {
@@ -63,7 +74,13 @@
         "shield:AssociateDRTLogBucket",
         "shield:AssociateDRTRole",
         "shield:DisassociateDRTLogBucket",
-        "shield:DisassociateDRTRole"
+        "shield:DisassociateDRTRole",
+        "iam:PassRole",
+        "iam:GetRole",
+        "iam:ListAttachedRolePolicies",
+        "s3:GetBucketPolicy",
+        "s3:PutBucketPolicy",
+        "s3:DeleteBucketPolicy"
       ]
     },
     "list": {

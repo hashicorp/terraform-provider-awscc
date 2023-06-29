@@ -229,6 +229,7 @@ func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ImageOsVersionOverride is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: InstanceConfiguration
 		// CloudFormation resource type schema:
@@ -544,6 +545,7 @@ func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// PlatformOverride is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -717,6 +719,8 @@ func containerRecipeResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/DockerfileTemplateData",
 		"/properties/DockerfileTemplateUri",
+		"/properties/ImageOsVersionOverride",
+		"/properties/PlatformOverride",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

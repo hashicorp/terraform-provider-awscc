@@ -28,7 +28,7 @@ Data Source schema for AWS::Connect::PhoneNumber
 - `prefix` (String) The phone number prefix.
 - `tags` (Attributes Set) One or more tags. (see [below for nested schema](#nestedatt--tags))
 - `target_arn` (String) The ARN of the target the phone number is claimed to.
-- `type` (String) The phone number type, either TOLL_FREE or DID.
+- `type` (String) The phone number type
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`

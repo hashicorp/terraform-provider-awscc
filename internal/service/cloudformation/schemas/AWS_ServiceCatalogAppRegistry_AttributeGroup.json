@@ -61,7 +61,12 @@
       "/properties/Name"
     ]
   ],
-  "taggable": true,
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": true,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [

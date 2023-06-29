@@ -1,5 +1,6 @@
 {
   "typeName": "AWS::OpenSearchServerless::AccessPolicy",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-opensearchserverless",
   "description": "Amazon OpenSearchServerless access policy resource",
   "tagging": {
     "taggable": false,
@@ -79,6 +80,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "Type": {
+            "$ref": "resource-schema.json#/properties/Type"
+          }
+        },
+        "required": [
+          "Type"
+        ]
+      },
       "permissions": [
         "aoss:ListAccessPolicies"
       ]

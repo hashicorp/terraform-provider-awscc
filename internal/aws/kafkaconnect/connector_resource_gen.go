@@ -54,7 +54,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "properties": {
 		//	    "AutoScaling": {
 		//	      "additionalProperties": false,
-		//	      "description": "Details about auto scaling of a connector. ",
+		//	      "description": "Details about auto scaling of a connector.",
 		//	      "properties": {
 		//	        "MaxWorkerCount": {
 		//	          "description": "The maximum number of workers for a connector.",
@@ -202,7 +202,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 							Required:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Details about auto scaling of a connector. ",
+					Description: "Details about auto scaling of a connector.",
 					Optional:    true,
 					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/

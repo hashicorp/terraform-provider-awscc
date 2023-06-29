@@ -65,6 +65,7 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ApplicationInstanceIdToReplace is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
@@ -145,26 +146,6 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
-		// Property: DeviceId
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 255,
-		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-		//	  "type": "string"
-		//	}
-		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.LengthBetween(1, 255),
-				stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9\\-\\_]+$"), ""),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: HealthStatus
@@ -348,37 +329,6 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
-		// Property: StatusFilter
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "enum": [
-		//	    "DEPLOYMENT_SUCCEEDED",
-		//	    "DEPLOYMENT_ERROR",
-		//	    "REMOVAL_SUCCEEDED",
-		//	    "REMOVAL_FAILED",
-		//	    "PROCESSING_DEPLOYMENT",
-		//	    "PROCESSING_REMOVAL"
-		//	  ],
-		//	  "type": "string"
-		//	}
-		"status_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Optional: true,
-			Computed: true,
-			Validators: []validator.String{ /*START VALIDATORS*/
-				stringvalidator.OneOf(
-					"DEPLOYMENT_SUCCEEDED",
-					"DEPLOYMENT_ERROR",
-					"REMOVAL_SUCCEEDED",
-					"REMOVAL_FAILED",
-					"PROCESSING_DEPLOYMENT",
-					"PROCESSING_REMOVAL",
-				),
-			}, /*END VALIDATORS*/
-			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
-				stringplanmodifier.UseStateForUnknown(),
-			}, /*END PLAN MODIFIERS*/
-		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -471,7 +421,6 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		"default_runtime_context_device":      "DefaultRuntimeContextDevice",
 		"default_runtime_context_device_name": "DefaultRuntimeContextDeviceName",
 		"description":                         "Description",
-		"device_id":                           "DeviceId",
 		"health_status":                       "HealthStatus",
 		"key":                                 "Key",
 		"last_updated_time":                   "LastUpdatedTime",
@@ -482,11 +431,13 @@ func applicationInstanceResource(ctx context.Context) (resource.Resource, error)
 		"runtime_role_arn":                    "RuntimeRoleArn",
 		"status":                              "Status",
 		"status_description":                  "StatusDescription",
-		"status_filter":                       "StatusFilter",
 		"tags":                                "Tags",
 		"value":                               "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ApplicationInstanceIdToReplace",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

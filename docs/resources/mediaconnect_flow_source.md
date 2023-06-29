@@ -25,6 +25,7 @@ Resource schema for AWS::MediaConnect::FlowSource
 - `decryption` (Attributes) The type of encryption that is used on the content ingested from this source. (see [below for nested schema](#nestedatt--decryption))
 - `entitlement_arn` (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
 - `flow_arn` (String) The ARN of the flow.
+- `gateway_bridge_source` (Attributes) The source configuration for cloud flows receiving a stream from a bridge. (see [below for nested schema](#nestedatt--gateway_bridge_source))
 - `ingest_port` (Number) The port that the flow will be listening on for incoming content.
 - `max_bitrate` (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
 - `max_latency` (Number) The maximum latency in milliseconds. This parameter applies only to RIST-based and Zixi-based streams.
@@ -62,6 +63,25 @@ Optional:
 - `resource_id` (String) An identifier for the content. The service sends this value to the key server to identify the current endpoint. The resource ID is also known as the content ID. This parameter is required for SPEKE encryption and is not valid for static key encryption.
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+
+
+<a id="nestedatt--gateway_bridge_source"></a>
+### Nested Schema for `gateway_bridge_source`
+
+Required:
+
+- `bridge_arn` (String) The ARN of the bridge feeding this flow.
+
+Optional:
+
+- `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this bridge source. (see [below for nested schema](#nestedatt--gateway_bridge_source--vpc_interface_attachment))
+
+<a id="nestedatt--gateway_bridge_source--vpc_interface_attachment"></a>
+### Nested Schema for `gateway_bridge_source.vpc_interface_attachment`
+
+Optional:
+
+- `vpc_interface_name` (String) The name of the VPC interface to use for this resource.
 
 ## Import
 

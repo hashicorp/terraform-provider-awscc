@@ -91,6 +91,102 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: PackagingType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "type": "string"
+		//	}
+		"packaging_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: PostSetupScriptDetails
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "ExecutableParameters": {
+		//	      "type": "string"
+		//	    },
+		//	    "ExecutablePath": {
+		//	      "type": "string"
+		//	    },
+		//	    "ScriptS3Location": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "S3Bucket": {
+		//	          "type": "string"
+		//	        },
+		//	        "S3Key": {
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "required": [
+		//	        "S3Bucket"
+		//	      ],
+		//	      "type": "object"
+		//	    },
+		//	    "TimeoutInSeconds": {
+		//	      "type": "integer"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "ScriptS3Location",
+		//	    "ExecutablePath",
+		//	    "TimeoutInSeconds"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"post_setup_script_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: ExecutableParameters
+				"executable_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: ExecutablePath
+				"executable_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: ScriptS3Location
+				"script_s3_location": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: S3Bucket
+						"s3_bucket": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Required: true,
+						}, /*END ATTRIBUTE*/
+						// Property: S3Key
+						"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+				// Property: TimeoutInSeconds
+				"timeout_in_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
+					Required: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: SetupScriptDetails
 		// CloudFormation resource type schema:
 		//
@@ -114,8 +210,7 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	        }
 		//	      },
 		//	      "required": [
-		//	        "S3Bucket",
-		//	        "S3Key"
+		//	        "S3Bucket"
 		//	      ],
 		//	      "type": "object"
 		//	    },
@@ -153,7 +248,11 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 						}, /*END ATTRIBUTE*/
 						// Property: S3Key
 						"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-							Required: true,
+							Optional: true,
+							Computed: true,
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Required: true,
@@ -163,8 +262,10 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 					Required: true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
-			Required: true,
+			Optional: true,
+			Computed: true,
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
@@ -182,8 +283,7 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	    }
 		//	  },
 		//	  "required": [
-		//	    "S3Bucket",
-		//	    "S3Key"
+		//	    "S3Bucket"
 		//	  ],
 		//	  "type": "object"
 		//	}
@@ -195,7 +295,11 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 				// Property: S3Key
 				"s3_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Required: true,
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Required: true,
@@ -209,19 +313,20 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "insertionOrder": false,
 		//	  "items": {
-		//	    "additionalProperties": false,
 		//	    "properties": {
+		//	      "Key": {
+		//	        "type": "string"
+		//	      },
 		//	      "TagKey": {
 		//	        "type": "string"
 		//	      },
 		//	      "TagValue": {
 		//	        "type": "string"
+		//	      },
+		//	      "Value": {
+		//	        "type": "string"
 		//	      }
 		//	    },
-		//	    "required": [
-		//	      "TagKey",
-		//	      "TagValue"
-		//	    ],
 		//	    "type": "object"
 		//	  },
 		//	  "type": "array",
@@ -230,13 +335,37 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 		"tags": schema.SetNestedAttribute{ /*START ATTRIBUTE*/
 			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: Key
+					"key": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
 					// Property: TagKey
 					"tag_key": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 					// Property: TagValue
 					"tag_value": schema.StringAttribute{ /*START ATTRIBUTE*/
-						Required: true,
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
+					}, /*END ATTRIBUTE*/
+					// Property: Value
+					"value": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Optional: true,
+						Computed: true,
+						PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+							stringplanmodifier.UseStateForUnknown(),
+						}, /*END PLAN MODIFIERS*/
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
@@ -269,22 +398,26 @@ func appBlockResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                   "Arn",
-		"created_time":          "CreatedTime",
-		"description":           "Description",
-		"display_name":          "DisplayName",
-		"executable_parameters": "ExecutableParameters",
-		"executable_path":       "ExecutablePath",
-		"name":                  "Name",
-		"s3_bucket":             "S3Bucket",
-		"s3_key":                "S3Key",
-		"script_s3_location":    "ScriptS3Location",
-		"setup_script_details":  "SetupScriptDetails",
-		"source_s3_location":    "SourceS3Location",
-		"tag_key":               "TagKey",
-		"tag_value":             "TagValue",
-		"tags":                  "Tags",
-		"timeout_in_seconds":    "TimeoutInSeconds",
+		"arn":                       "Arn",
+		"created_time":              "CreatedTime",
+		"description":               "Description",
+		"display_name":              "DisplayName",
+		"executable_parameters":     "ExecutableParameters",
+		"executable_path":           "ExecutablePath",
+		"key":                       "Key",
+		"name":                      "Name",
+		"packaging_type":            "PackagingType",
+		"post_setup_script_details": "PostSetupScriptDetails",
+		"s3_bucket":                 "S3Bucket",
+		"s3_key":                    "S3Key",
+		"script_s3_location":        "ScriptS3Location",
+		"setup_script_details":      "SetupScriptDetails",
+		"source_s3_location":        "SourceS3Location",
+		"tag_key":                   "TagKey",
+		"tag_value":                 "TagValue",
+		"tags":                      "Tags",
+		"timeout_in_seconds":        "TimeoutInSeconds",
+		"value":                     "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

@@ -23,276 +23,6 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::SageMaker::ModelPackage resource.
 func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
-		// Property: AdditionalInferenceSpecificationDefinition
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-		//	  "properties": {
-		//	    "Containers": {
-		//	      "description": "The Amazon ECR registry path of the Docker image that contains the inference code.",
-		//	      "insertionOrder": true,
-		//	      "items": {
-		//	        "additionalProperties": false,
-		//	        "description": "Describes the Docker container for the model package.",
-		//	        "properties": {
-		//	          "ContainerHostname": {
-		//	            "description": "The DNS host name for the Docker container.",
-		//	            "maxLength": 63,
-		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}",
-		//	            "type": "string"
-		//	          },
-		//	          "Environment": {
-		//	            "additionalProperties": false,
-		//	            "description": "Sets the environment variables in the Docker container",
-		//	            "patternProperties": {
-		//	              "": {
-		//	                "maxLength": 1024,
-		//	                "type": "string"
-		//	              },
-		//	              "[\\S\\s]*": {
-		//	                "maxLength": 1024,
-		//	                "type": "string"
-		//	              }
-		//	            },
-		//	            "type": "object"
-		//	          },
-		//	          "Framework": {
-		//	            "description": "The machine learning framework of the model package container image.",
-		//	            "type": "string"
-		//	          },
-		//	          "FrameworkVersion": {
-		//	            "description": "The framework version of the Model Package Container Image.",
-		//	            "maxLength": 10,
-		//	            "minLength": 3,
-		//	            "pattern": "[0-9]\\.[A-Za-z0-9.]+",
-		//	            "type": "string"
-		//	          },
-		//	          "Image": {
-		//	            "description": "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-		//	            "maxLength": 255,
-		//	            "minLength": 1,
-		//	            "pattern": "[\\S]{1,255}",
-		//	            "type": "string"
-		//	          },
-		//	          "ImageDigest": {
-		//	            "description": "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-		//	            "maxLength": 72,
-		//	            "pattern": "^[Ss][Hh][Aa]256:[0-9a-fA-F]{64}$",
-		//	            "type": "string"
-		//	          },
-		//	          "ModelDataUrl": {
-		//	            "description": "A structure with Model Input details.",
-		//	            "maxLength": 1024,
-		//	            "pattern": "^(https|s3)://([^/]+)/?(.*)$",
-		//	            "type": "string"
-		//	          },
-		//	          "ModelInput": {
-		//	            "additionalProperties": false,
-		//	            "properties": {
-		//	              "DataInputConfig": {
-		//	                "description": "The input configuration object for the model.",
-		//	                "maxLength": 1024,
-		//	                "minLength": 1,
-		//	                "pattern": "[\\S\\s]+",
-		//	                "type": "string"
-		//	              }
-		//	            },
-		//	            "required": [
-		//	              "DataInputConfig"
-		//	            ],
-		//	            "type": "object"
-		//	          },
-		//	          "NearestModelName": {
-		//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-		//	            "type": "string"
-		//	          },
-		//	          "ProductId": {
-		//	            "description": "The AWS Marketplace product ID of the model package.",
-		//	            "maxLength": 256,
-		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
-		//	            "type": "string"
-		//	          }
-		//	        },
-		//	        "required": [
-		//	          "Image"
-		//	        ],
-		//	        "type": "object"
-		//	      },
-		//	      "maxItems": 15,
-		//	      "minItems": 1,
-		//	      "type": "array"
-		//	    },
-		//	    "Description": {
-		//	      "description": "A description of the additional Inference specification.",
-		//	      "maxLength": 1024,
-		//	      "pattern": ".*",
-		//	      "type": "string"
-		//	    },
-		//	    "Name": {
-		//	      "description": "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-		//	      "maxLength": 63,
-		//	      "minLength": 1,
-		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-		//	      "type": "string"
-		//	    },
-		//	    "SupportedContentTypes": {
-		//	      "description": "The supported MIME types for the input data.",
-		//	      "insertionOrder": true,
-		//	      "items": {
-		//	        "description": "The supported MIME type for the input data.",
-		//	        "maxLength": 256,
-		//	        "pattern": ".*",
-		//	        "type": "string"
-		//	      },
-		//	      "type": "array"
-		//	    },
-		//	    "SupportedRealtimeInferenceInstanceTypes": {
-		//	      "description": "A list of the instance types that are used to generate inferences in real-time",
-		//	      "insertionOrder": true,
-		//	      "items": {
-		//	        "description": "Instance type that is used to generate inferences in real-time",
-		//	        "type": "string"
-		//	      },
-		//	      "type": "array"
-		//	    },
-		//	    "SupportedResponseMIMETypes": {
-		//	      "description": "The supported MIME types for the output data.",
-		//	      "insertionOrder": true,
-		//	      "items": {
-		//	        "description": "The supported MIME types for the output data.",
-		//	        "maxLength": 1024,
-		//	        "pattern": "^[-\\w]+\\/.+$",
-		//	        "type": "string"
-		//	      },
-		//	      "type": "array"
-		//	    },
-		//	    "SupportedTransformInstanceTypes": {
-		//	      "description": "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-		//	      "insertionOrder": true,
-		//	      "items": {
-		//	        "description": "Instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-		//	        "type": "string"
-		//	      },
-		//	      "minItems": 1,
-		//	      "type": "array"
-		//	    }
-		//	  },
-		//	  "required": [
-		//	    "Containers",
-		//	    "Name"
-		//	  ],
-		//	  "type": "object"
-		//	}
-		"additional_inference_specification_definition": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: Containers
-				"containers": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: ContainerHostname
-							"container_hostname": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The DNS host name for the Docker container.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Environment
-							"environment":       // Pattern: ""
-							schema.MapAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								// Pattern "[\\S\\s]*" ignored.
-								Description: "Sets the environment variables in the Docker container",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Framework
-							"framework": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The machine learning framework of the model package container image.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: FrameworkVersion
-							"framework_version": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The framework version of the Model Package Container Image.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Image
-							"image": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ImageDigest
-							"image_digest": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "An MD5 hash of the training algorithm that identifies the Docker image used for training.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ModelDataUrl
-							"model_data_url": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "A structure with Model Input details.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ModelInput
-							"model_input": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-									// Property: DataInputConfig
-									"data_input_config": schema.StringAttribute{ /*START ATTRIBUTE*/
-										Description: "The input configuration object for the model.",
-										Computed:    true,
-									}, /*END ATTRIBUTE*/
-								}, /*END SCHEMA*/
-								Computed: true,
-							}, /*END ATTRIBUTE*/
-							// Property: NearestModelName
-							"nearest_model_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: ProductId
-							"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The AWS Marketplace product ID of the model package.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Description
-				"description": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A description of the additional Inference specification.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedContentTypes
-				"supported_content_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The supported MIME types for the input data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedRealtimeInferenceInstanceTypes
-				"supported_realtime_inference_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of the instance types that are used to generate inferences in real-time",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedResponseMIMETypes
-				"supported_response_mime_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "The supported MIME types for the output data.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: SupportedTransformInstanceTypes
-				"supported_transform_instance_types": schema.ListAttribute{ /*START ATTRIBUTE*/
-					ElementType: types.StringType,
-					Description: "A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: AdditionalInferenceSpecifications
 		// CloudFormation resource type schema:
 		//
@@ -379,12 +109,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            },
 		//	            "NearestModelName": {
 		//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-		//	              "type": "string"
-		//	            },
-		//	            "ProductId": {
-		//	              "description": "The AWS Marketplace product ID of the model package.",
-		//	              "maxLength": 256,
-		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -523,11 +247,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
-								// Property: ProductId
-								"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The AWS Marketplace product ID of the model package.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
@@ -658,12 +377,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	            },
 		//	            "NearestModelName": {
 		//	              "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-		//	              "type": "string"
-		//	            },
-		//	            "ProductId": {
-		//	              "description": "The AWS Marketplace product ID of the model package.",
-		//	              "maxLength": 256,
-		//	              "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	              "type": "string"
 		//	            }
 		//	          },
@@ -802,11 +515,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 									Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
 									Computed:    true,
 								}, /*END ATTRIBUTE*/
-								// Property: ProductId
-								"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-									Description: "The AWS Marketplace product ID of the model package.",
-									Computed:    true,
-								}, /*END ATTRIBUTE*/
 							}, /*END SCHEMA*/
 						}, /*END NESTED OBJECT*/
 						Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
@@ -887,49 +595,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"client_token": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "A unique token that guarantees that the call to this API is idempotent.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: CreatedBy
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-		//	  "properties": {
-		//	    "DomainId": {
-		//	      "description": "The domain associated with the user.",
-		//	      "type": "string"
-		//	    },
-		//	    "UserProfileArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
-		//	      "type": "string"
-		//	    },
-		//	    "UserProfileName": {
-		//	      "description": "The name of the user's profile.",
-		//	      "type": "string"
-		//	    }
-		//	  },
-		//	  "type": "object"
-		//	}
-		"created_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DomainId
-				"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The domain associated with the user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserProfileArn
-				"user_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the user's profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserProfileName
-				"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the user's profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: CreationTime
@@ -1510,31 +1175,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "Represents the drift check baselines that can be used when the model monitor is set using the model package.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
-		// Property: Environment
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "Sets the environment variables in the Docker container",
-		//	  "patternProperties": {
-		//	    "": {
-		//	      "maxLength": 1024,
-		//	      "type": "string"
-		//	    },
-		//	    "[\\S\\s]*": {
-		//	      "maxLength": 1024,
-		//	      "type": "string"
-		//	    }
-		//	  },
-		//	  "type": "object"
-		//	}
-		"environment":       // Pattern: ""
-		schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			// Pattern "[\\S\\s]*" ignored.
-			Description: "Sets the environment variables in the Docker container",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
 		// Property: InferenceSpecification
 		// CloudFormation resource type schema:
 		//
@@ -1618,12 +1258,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	          },
 		//	          "NearestModelName": {
 		//	            "description": "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
-		//	            "type": "string"
-		//	          },
-		//	          "ProductId": {
-		//	            "description": "The AWS Marketplace product ID of the model package.",
-		//	            "maxLength": 256,
-		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$",
 		//	            "type": "string"
 		//	          }
 		//	        },
@@ -1746,11 +1380,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 								Description: "The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
-							// Property: ProductId
-							"product_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The AWS Marketplace product ID of the model package.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
 						}, /*END SCHEMA*/
 					}, /*END NESTED OBJECT*/
 					Description: "The Amazon ECR registry path of the Docker image that contains the inference code.",
@@ -1782,49 +1411,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Details about inference jobs that can be run with models based on this model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: LastModifiedBy
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
-		//	  "properties": {
-		//	    "DomainId": {
-		//	      "description": "The domain associated with the user.",
-		//	      "type": "string"
-		//	    },
-		//	    "UserProfileArn": {
-		//	      "description": "The Amazon Resource Name (ARN) of the user's profile.",
-		//	      "type": "string"
-		//	    },
-		//	    "UserProfileName": {
-		//	      "description": "The name of the user's profile.",
-		//	      "type": "string"
-		//	    }
-		//	  },
-		//	  "type": "object"
-		//	}
-		"last_modified_by": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: DomainId
-				"domain_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The domain associated with the user.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserProfileArn
-				"user_profile_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The Amazon Resource Name (ARN) of the user's profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: UserProfileName
-				"user_profile_name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the user's profile.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Information about the user who created or modified an experiment, trial, trial component, lineage group, or project.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: LastModifiedTime
@@ -2471,42 +2057,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "additionalProperties": false,
 		//	  "description": "Details about the current status of the model package.",
 		//	  "properties": {
-		//	    "ImageScanStatuses": {
-		//	      "insertionOrder": true,
-		//	      "items": {
-		//	        "additionalProperties": false,
-		//	        "description": "Represents the overall status of a model package.",
-		//	        "properties": {
-		//	          "FailureReason": {
-		//	            "description": "If the overall status is Failed, the reason for the failure.",
-		//	            "type": "string"
-		//	          },
-		//	          "Name": {
-		//	            "description": "The name of the model package for which the overall status is being reported.",
-		//	            "maxLength": 63,
-		//	            "minLength": 1,
-		//	            "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-		//	            "type": "string"
-		//	          },
-		//	          "Status": {
-		//	            "description": "The current status.",
-		//	            "enum": [
-		//	              "NotStarted",
-		//	              "Failed",
-		//	              "InProgress",
-		//	              "Completed"
-		//	            ],
-		//	            "type": "string"
-		//	          }
-		//	        },
-		//	        "required": [
-		//	          "Name",
-		//	          "Status"
-		//	        ],
-		//	        "type": "object"
-		//	      },
-		//	      "type": "array"
-		//	    },
 		//	    "ValidationStatuses": {
 		//	      "insertionOrder": true,
 		//	      "items": {
@@ -2544,36 +2094,10 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	      "type": "array"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "ValidationStatuses"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"model_package_status_details": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: ImageScanStatuses
-				"image_scan_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
-					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
-						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-							// Property: FailureReason
-							"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "If the overall status is Failed, the reason for the failure.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Name
-							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The name of the model package for which the overall status is being reported.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-							// Property: Status
-							"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-								Description: "The current status.",
-								Computed:    true,
-							}, /*END ATTRIBUTE*/
-						}, /*END SCHEMA*/
-					}, /*END NESTED OBJECT*/
-					Computed: true,
-				}, /*END ATTRIBUTE*/
 				// Property: ValidationStatuses
 				"validation_statuses": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
@@ -2599,62 +2123,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Details about the current status of the model package.",
-			Computed:    true,
-		}, /*END ATTRIBUTE*/
-		// Property: ModelPackageStatusItem
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "additionalProperties": false,
-		//	  "description": "Represents the overall status of a model package.",
-		//	  "properties": {
-		//	    "FailureReason": {
-		//	      "description": "If the overall status is Failed, the reason for the failure.",
-		//	      "type": "string"
-		//	    },
-		//	    "Name": {
-		//	      "description": "The name of the model package for which the overall status is being reported.",
-		//	      "maxLength": 63,
-		//	      "minLength": 1,
-		//	      "pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9]){0,62}$",
-		//	      "type": "string"
-		//	    },
-		//	    "Status": {
-		//	      "description": "The current status.",
-		//	      "enum": [
-		//	        "NotStarted",
-		//	        "Failed",
-		//	        "InProgress",
-		//	        "Completed"
-		//	      ],
-		//	      "type": "string"
-		//	    }
-		//	  },
-		//	  "required": [
-		//	    "Name",
-		//	    "Status"
-		//	  ],
-		//	  "type": "object"
-		//	}
-		"model_package_status_item": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
-			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
-				// Property: FailureReason
-				"failure_reason": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "If the overall status is Failed, the reason for the failure.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Name
-				"name": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The name of the model package for which the overall status is being reported.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-				// Property: Status
-				"status": schema.StringAttribute{ /*START ATTRIBUTE*/
-					Description: "The current status.",
-					Computed:    true,
-				}, /*END ATTRIBUTE*/
-			}, /*END SCHEMA*/
-			Description: "Represents the overall status of a model package.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ModelPackageVersion
@@ -3201,10 +2669,9 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ModelPackage").WithTerraformTypeName("awscc_sagemaker_model_package")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"accept": "Accept",
-		"additional_inference_specification_definition": "AdditionalInferenceSpecificationDefinition",
-		"additional_inference_specifications":           "AdditionalInferenceSpecifications",
-		"additional_inference_specifications_to_add":    "AdditionalInferenceSpecificationsToAdd",
+		"accept":                              "Accept",
+		"additional_inference_specifications": "AdditionalInferenceSpecifications",
+		"additional_inference_specifications_to_add": "AdditionalInferenceSpecificationsToAdd",
 		"algorithm_name":                 "AlgorithmName",
 		"approval_description":           "ApprovalDescription",
 		"assemble_with":                  "AssembleWith",
@@ -3220,14 +2687,12 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"containers":                     "Containers",
 		"content_digest":                 "ContentDigest",
 		"content_type":                   "ContentType",
-		"created_by":                     "CreatedBy",
 		"creation_time":                  "CreationTime",
 		"customer_metadata_properties":   "CustomerMetadataProperties",
 		"data_input_config":              "DataInputConfig",
 		"data_source":                    "DataSource",
 		"description":                    "Description",
 		"domain":                         "Domain",
-		"domain_id":                      "DomainId",
 		"drift_check_baselines":          "DriftCheckBaselines",
 		"environment":                    "Environment",
 		"explainability":                 "Explainability",
@@ -3237,13 +2702,11 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"generated_by":                   "GeneratedBy",
 		"image":                          "Image",
 		"image_digest":                   "ImageDigest",
-		"image_scan_statuses":            "ImageScanStatuses",
 		"inference_specification":        "InferenceSpecification",
 		"instance_count":                 "InstanceCount",
 		"instance_type":                  "InstanceType",
 		"key":                            "Key",
 		"kms_key_id":                     "KmsKeyId",
-		"last_modified_by":               "LastModifiedBy",
 		"last_modified_time":             "LastModifiedTime",
 		"max_concurrent_transforms":      "MaxConcurrentTransforms",
 		"max_payload_in_mb":              "MaxPayloadInMB",
@@ -3259,7 +2722,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"model_package_name":             "ModelPackageName",
 		"model_package_status":           "ModelPackageStatus",
 		"model_package_status_details":   "ModelPackageStatusDetails",
-		"model_package_status_item":      "ModelPackageStatusItem",
 		"model_package_version":          "ModelPackageVersion",
 		"model_quality":                  "ModelQuality",
 		"name":                           "Name",
@@ -3268,7 +2730,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"post_training_report":           "PostTrainingReport",
 		"pre_training_constraints":       "PreTrainingConstraints",
 		"pre_training_report":            "PreTrainingReport",
-		"product_id":                     "ProductId",
 		"profile_name":                   "ProfileName",
 		"project_id":                     "ProjectId",
 		"report":                         "Report",
@@ -3293,8 +2754,6 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		"transform_job_definition":                    "TransformJobDefinition",
 		"transform_output":                            "TransformOutput",
 		"transform_resources":                         "TransformResources",
-		"user_profile_arn":                            "UserProfileArn",
-		"user_profile_name":                           "UserProfileName",
 		"validation_profiles":                         "ValidationProfiles",
 		"validation_role":                             "ValidationRole",
 		"validation_specification":                    "ValidationSpecification",

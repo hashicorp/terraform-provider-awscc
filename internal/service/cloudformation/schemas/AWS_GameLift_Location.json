@@ -72,7 +72,8 @@
     "create": {
       "permissions": [
         "gamelift:CreateLocation",
-        "gamelift:ListLocations"
+        "gamelift:ListLocations",
+        "gamelift:TagResource"
       ]
     },
     "read": {

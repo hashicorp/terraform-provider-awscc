@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::ImageBuilder::Component",
   "description": "Resource schema for AWS::ImageBuilder::Component",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-imagebuilder",
   "properties": {
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of the component.",
@@ -82,6 +82,18 @@
     "Platform",
     "Version"
   ],
+  "oneOf": [
+    {
+      "required": [
+        "Data"
+      ]
+    },
+    {
+      "required": [
+        "Uri"
+      ]
+    }
+  ],
   "primaryIdentifier": [
     "/properties/Arn"
   ],
@@ -141,7 +153,17 @@
     "list": {
       "permissions": [
         "imagebuilder:ListComponents"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "Arn": {
+            "$ref": "resource-schema.json#/properties/Arn"
+          }
+        },
+        "required": [
+          "Arn"
+        ]
+      }
     }
   }
 }

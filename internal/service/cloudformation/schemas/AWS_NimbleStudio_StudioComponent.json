@@ -341,6 +341,7 @@
       "permissions": [
         "iam:PassRole",
         "nimble:CreateStudioComponent",
+        "nimble:GetStudioComponent",
         "nimble:TagResource",
         "ds:AuthorizeApplication",
         "ec2:DescribeSecurityGroups",
@@ -357,6 +358,7 @@
       "permissions": [
         "iam:PassRole",
         "nimble:UpdateStudioComponent",
+        "nimble:GetStudioComponent",
         "ds:AuthorizeApplication",
         "ec2:DescribeSecurityGroups",
         "fsx:DescribeFilesystems",
@@ -366,11 +368,22 @@
     "delete": {
       "permissions": [
         "nimble:DeleteStudioComponent",
+        "nimble:GetStudioComponent",
         "nimble:UntagResource",
         "ds:UnauthorizeApplication"
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "StudioId": {
+            "$ref": "resource-schema.json#/properties/StudioId"
+          }
+        },
+        "required": [
+          "StudioId"
+        ]
+      },
       "permissions": [
         "nimble:ListStudioComponents"
       ]

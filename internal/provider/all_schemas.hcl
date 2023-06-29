@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 767 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 778 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -262,6 +262,10 @@ resource_schema "aws_applicationautoscaling_scalable_target" {
   suppress_plural_data_source_generation   = true
 }
 
+resource_schema "aws_apprunner_auto_scaling_configuration" {
+  cloudformation_type_name = "AWS::AppRunner::AutoScalingConfiguration"
+}
+
 resource_schema "aws_apprunner_observability_configuration" {
   cloudformation_type_name = "AWS::AppRunner::ObservabilityConfiguration"
 }
@@ -280,6 +284,11 @@ resource_schema "aws_apprunner_vpc_ingress_connection" {
 
 resource_schema "aws_appstream_app_block" {
   cloudformation_type_name               = "AWS::AppStream::AppBlock"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_appstream_app_block_builder" {
+  cloudformation_type_name               = "AWS::AppStream::AppBlockBuilder"
   suppress_plural_data_source_generation = true
 }
 
@@ -321,11 +330,10 @@ resource_schema "aws_appsync_domain_name_api_association" {
   suppress_plural_data_source_generation = true
 }
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_appsync_source_api_association" {
-#   cloudformation_type_name               = "AWS::AppSync::SourceApiAssociation"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_appsync_source_api_association" {
+  cloudformation_type_name               = "AWS::AppSync::SourceApiAssociation"
+  suppress_plural_data_source_generation = true
+}
 
 resource_schema "aws_applicationinsights_application" {
   cloudformation_type_name = "AWS::ApplicationInsights::Application"
@@ -482,11 +490,10 @@ resource_schema "aws_cleanrooms_configured_table" {
   cloudformation_type_name = "AWS::CleanRooms::ConfiguredTable"
 }
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_cleanrooms_configured_table_association" {
-#   cloudformation_type_name               = "AWS::CleanRooms::ConfiguredTableAssociation"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_cleanrooms_configured_table_association" {
+  cloudformation_type_name               = "AWS::CleanRooms::ConfiguredTableAssociation"
+  suppress_plural_data_source_generation = true
+}
 
 resource_schema "aws_cleanrooms_membership" {
   cloudformation_type_name = "AWS::CleanRooms::Membership"
@@ -655,11 +662,14 @@ resource_schema "aws_codestarnotifications_notification_rule" {
   cloudformation_type_name = "AWS::CodeStarNotifications::NotificationRule"
 }
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_cognito_identity_pool_principal_tag" {
-#   cloudformation_type_name               = "AWS::Cognito::IdentityPoolPrincipalTag"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_cognito_identity_pool_principal_tag" {
+  cloudformation_type_name               = "AWS::Cognito::IdentityPoolPrincipalTag"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_comprehend_document_classifier" {
+  cloudformation_type_name = "AWS::Comprehend::DocumentClassifier"
+}
 
 resource_schema "aws_comprehend_flywheel" {
   cloudformation_type_name = "AWS::Comprehend::Flywheel"
@@ -738,11 +748,10 @@ resource_schema "aws_connect_phone_number" {
   suppress_plural_data_source_generation = true
 }
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_connect_prompt" {
-#   cloudformation_type_name               = "AWS::Connect::Prompt"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_connect_prompt" {
+  cloudformation_type_name               = "AWS::Connect::Prompt"
+  suppress_plural_data_source_generation = true
+}
 
 resource_schema "aws_connect_rule" {
   cloudformation_type_name = "AWS::Connect::Rule"
@@ -791,20 +800,18 @@ resource_schema "aws_cur_report_definition" {
   cloudformation_type_name = "AWS::CUR::ReportDefinition"
 }
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_customerprofiles_calculated_attribute_definition" {
-#   cloudformation_type_name = "AWS::CustomerProfiles::CalculatedAttributeDefinition"
-# }
+resource_schema "aws_customerprofiles_calculated_attribute_definition" {
+  cloudformation_type_name = "AWS::CustomerProfiles::CalculatedAttributeDefinition"
+}
 
 resource_schema "aws_customerprofiles_domain" {
   cloudformation_type_name = "AWS::CustomerProfiles::Domain"
 }
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_customerprofiles_event_stream" {
-#   cloudformation_type_name               = "AWS::CustomerProfiles::EventStream"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_customerprofiles_event_stream" {
+  cloudformation_type_name               = "AWS::CustomerProfiles::EventStream"
+  suppress_plural_data_source_generation = true
+}
 
 resource_schema "aws_customerprofiles_integration" {
   cloudformation_type_name               = "AWS::CustomerProfiles::Integration"
@@ -1025,6 +1032,10 @@ resource_schema "aws_ec2_ipam_scope" {
   cloudformation_type_name = "AWS::EC2::IPAMScope"
 }
 
+resource_schema "aws_ec2_launch_template" {
+  cloudformation_type_name = "AWS::EC2::LaunchTemplate"
+}
+
 resource_schema "aws_ec2_local_gateway_route" {
   cloudformation_type_name = "AWS::EC2::LocalGatewayRoute"
 }
@@ -1204,6 +1215,10 @@ resource_schema "aws_ec2_verified_access_trust_provider" {
 
 resource_schema "aws_ec2_volume" {
   cloudformation_type_name = "AWS::EC2::Volume"
+}
+
+resource_schema "aws_ec2_volume_attachment" {
+  cloudformation_type_name = "AWS::EC2::VolumeAttachment"
 }
 
 resource_schema "aws_ecr_pull_through_cache_rule" {
@@ -1575,6 +1590,11 @@ resource_schema "aws_iam_role" {
 
 resource_schema "aws_iam_saml_provider" {
   cloudformation_type_name = "AWS::IAM::SAMLProvider"
+}
+
+resource_schema "aws_iam_service_linked_role" {
+  cloudformation_type_name               = "AWS::IAM::ServiceLinkedRole"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_iam_server_certificate" {
@@ -2563,6 +2583,10 @@ resource_schema "aws_organizations_account" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_organizations_organization" {
+  cloudformation_type_name = "AWS::Organizations::Organization"
+}
+
 resource_schema "aws_organizations_organizational_unit" {
   cloudformation_type_name               = "AWS::Organizations::OrganizationalUnit"
   suppress_plural_data_source_generation = true
@@ -3244,7 +3268,7 @@ resource_schema "aws_secretsmanager_secret" {
 }
 
 resource_schema "aws_securityhub_automation_rule" {
-  cloudformation_type_name               = "AWS::SecurityHub::AutomationRule"
+  cloudformation_type_name = "AWS::SecurityHub::AutomationRule"
 
   # Actions/FindingFieldsUpdate/Note/UpdatedBy is of unsupported type: 
   suppress_resource_generation             = true
@@ -3327,17 +3351,15 @@ resource_schema "aws_stepfunctions_state_machine" {
   cloudformation_type_name = "AWS::StepFunctions::StateMachine"
 }
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_stepfunctions_state_machine_alias" {
-#   cloudformation_type_name               = "AWS::StepFunctions::StateMachineAlias"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_stepfunctions_state_machine_alias" {
+  cloudformation_type_name               = "AWS::StepFunctions::StateMachineAlias"
+  suppress_plural_data_source_generation = true
+}
 
-# handlers.list: Additional property handlerSchema is not allowed.
-# resource_schema "aws_stepfunctions_state_machine_version" {
-#   cloudformation_type_name               = "AWS::StepFunctions::StateMachineVersion"
-#   suppress_plural_data_source_generation = true
-# }
+resource_schema "aws_stepfunctions_state_machine_version" {
+  cloudformation_type_name               = "AWS::StepFunctions::StateMachineVersion"
+  suppress_plural_data_source_generation = true
+}
 
 resource_schema "aws_supportapp_account_alias" {
   cloudformation_type_name = "AWS::SupportApp::AccountAlias"
@@ -3410,11 +3432,32 @@ resource_schema "aws_voiceid_domain" {
   cloudformation_type_name = "AWS::VoiceID::Domain"
 }
 
-# VPC Lattice still in preview.
-/*
-resource_schema "aws_vpclattice_access_log_subscription" {
-  cloudformation_type_name               = "AWS::VpcLattice::AccessLogSubscription"
+resource_schema "aws_verifiedpermissions_identity_source" {
+  cloudformation_type_name               = "AWS::VerifiedPermissions::IdentitySource"
   suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_verifiedpermissions_policy" {
+  cloudformation_type_name               = "AWS::VerifiedPermissions::Policy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_verifiedpermissions_policy_store" {
+  cloudformation_type_name = "AWS::VerifiedPermissions::PolicyStore"
+}
+
+resource_schema "aws_verifiedpermissions_policy_template" {
+  cloudformation_type_name               = "AWS::VerifiedPermissions::PolicyTemplate"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_vpclattice_access_log_subscription" {
+  cloudformation_type_name = "AWS::VpcLattice::AccessLogSubscription"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_auth_policy" {
@@ -3423,8 +3466,12 @@ resource_schema "aws_vpclattice_auth_policy" {
 }
 
 resource_schema "aws_vpclattice_listener" {
-  cloudformation_type_name               = "AWS::VpcLattice::Listener"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::Listener"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_resource_policy" {
@@ -3433,32 +3480,58 @@ resource_schema "aws_vpclattice_resource_policy" {
 }
 
 resource_schema "aws_vpclattice_rule" {
-  cloudformation_type_name               = "AWS::VpcLattice::Rule"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::Rule"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service" {
   cloudformation_type_name = "AWS::VpcLattice::Service"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network" {
   cloudformation_type_name = "AWS::VpcLattice::ServiceNetwork"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network_service_association" {
-  cloudformation_type_name               = "AWS::VpcLattice::ServiceNetworkServiceAssociation"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::ServiceNetworkServiceAssociation"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_service_network_vpc_association" {
-  cloudformation_type_name               = "AWS::VpcLattice::ServiceNetworkVpcAssociation"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::VpcLattice::ServiceNetworkVpcAssociation"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
 
 resource_schema "aws_vpclattice_target_group" {
   cloudformation_type_name = "AWS::VpcLattice::TargetGroup"
+
+  # top-level property Id is not a primary identifier
+  suppress_resource_generation             = true
+  suppress_singular_data_source_generation = true
+  suppress_plural_data_source_generation   = true
 }
-*/
 
 resource_schema "aws_wafv2_ip_set" {
   cloudformation_type_name               = "AWS::WAFv2::IPSet"

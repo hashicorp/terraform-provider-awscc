@@ -116,13 +116,15 @@
       "permissions": [
         "globalaccelerator:UpdateAccelerator",
         "globalaccelerator:TagResource",
-        "globalaccelerator:UntagResource"
+        "globalaccelerator:UntagResource",
+        "globalaccelerator:DescribeAccelerator"
       ]
     },
     "delete": {
       "permissions": [
         "globalaccelerator:UpdateAccelerator",
-        "globalaccelerator:DeleteAccelerator"
+        "globalaccelerator:DeleteAccelerator",
+        "globalaccelerator:DescribeAccelerator"
       ]
     },
     "list": {

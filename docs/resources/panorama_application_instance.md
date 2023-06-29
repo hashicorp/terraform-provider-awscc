@@ -24,11 +24,9 @@ Schema for ApplicationInstance CloudFormation Resource
 
 - `application_instance_id_to_replace` (String)
 - `description` (String)
-- `device_id` (String)
 - `manifest_overrides_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
 - `name` (String)
 - `runtime_role_arn` (String)
-- `status_filter` (String)
 - `tags` (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

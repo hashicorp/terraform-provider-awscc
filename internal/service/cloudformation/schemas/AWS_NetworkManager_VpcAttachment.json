@@ -187,6 +187,7 @@
       "permissions": [
         "networkmanager:CreateVpcAttachment",
         "networkmanager:GetVpcAttachment",
+        "networkmanager:TagResource",
         "ec2:DescribeRegions",
         "iam:CreateServiceLinkedRole"
       ],

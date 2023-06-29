@@ -1,0 +1,1 @@
+$ terraform import awscc_customerprofiles_event_stream.example <resource ID>

@@ -1,0 +1,1 @@
+$ terraform import awscc_iam_service_linked_role.example <resource ID>

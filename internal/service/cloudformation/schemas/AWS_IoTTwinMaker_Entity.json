@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::IoTTwinMaker::Entity",
   "description": "Resource schema for AWS::IoTTwinMaker::Entity",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-iottwinmaker",
   "definitions": {
     "DateTimeFormat": {
       "type": "string",
@@ -466,22 +467,24 @@
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:CreateEntity",
         "iottwinmaker:GetEntity",
-        "iotsitewise:ListTagsForResource"
+        "iottwinmaker:ListTagsForResource",
+        "iottwinmaker:TagResource"
       ]
     },
     "read": {
       "permissions": [
-        "iottwinmaker:GetWorkspace",
         "iottwinmaker:GetComponentType",
         "iottwinmaker:GetEntity",
+        "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListEntities",
         "iottwinmaker:ListTagsForResource"
       ]
     },
     "update": {
       "permissions": [
-        "iottwinmaker:GetWorkspace",
         "iottwinmaker:GetComponentType",
+        "iottwinmaker:GetEntity",
+        "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListTagsForResource",
         "iottwinmaker:TagResource",
         "iottwinmaker:UntagResource",
@@ -491,11 +494,23 @@
     },
     "delete": {
       "permissions": [
+        "iottwinmaker:GetEntity",
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:DeleteEntity"
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "WorkspaceId": {
+            "type": "string",
+            "$ref": "resource-schema.json#/properties/WorkspaceId"
+          }
+        },
+        "required": [
+          "WorkspaceId"
+        ]
+      },
       "permissions": [
         "iottwinmaker:GetWorkspace",
         "iottwinmaker:ListTagsForResource",

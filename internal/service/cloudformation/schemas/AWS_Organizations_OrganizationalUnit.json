@@ -1,7 +1,7 @@
 {
   "typeName": "AWS::Organizations::OrganizationalUnit",
   "description": "You can use organizational units (OUs) to group accounts together to administer as a single unit. This greatly simplifies the management of your accounts. For example, you can attach a policy-based control to an OU, and all accounts within the OU automatically inherit the policy. You can create multiple OUs within a single organization, and you can create OUs within other OUs. Each OU can contain multiple accounts, and you can move accounts from one OU to another. However, OU names must be unique within a parent OU or root.",
-  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-organizations.git",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-organizations",
   "properties": {
     "Arn": {
       "description": "The Amazon Resource Name (ARN) of this OU.",
@@ -95,6 +95,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "ParentId": {
+            "$ref": "resource-schema.json#/properties/ParentId"
+          }
+        },
+        "required": [
+          "ParentId"
+        ]
+      },
       "permissions": [
         "organizations:ListOrganizationalUnitsForParent"
       ]

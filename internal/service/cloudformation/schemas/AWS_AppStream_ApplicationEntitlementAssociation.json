@@ -33,7 +33,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "appstream:AssociateApplicationToEntitlement"
+        "appstream:AssociateApplicationToEntitlement",
+        "appstream:ListEntitledApplications"
       ]
     },
     "read": {
@@ -43,7 +44,8 @@
     },
     "delete": {
       "permissions": [
-        "appstream:DisassociateApplicationFromEntitlement"
+        "appstream:DisassociateApplicationFromEntitlement",
+        "appstream:ListEntitledApplications"
       ]
     }
   }

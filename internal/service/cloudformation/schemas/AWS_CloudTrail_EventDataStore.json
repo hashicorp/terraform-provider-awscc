@@ -232,7 +232,9 @@
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
         "organizations:DescribeOrganization",
-        "organizations:ListAWSServiceAccessForOrganization"
+        "organizations:ListAWSServiceAccessForOrganization",
+        "kms:GenerateDataKey",
+        "kms:Decrypt"
       ]
     },
     "read": {
@@ -250,6 +252,7 @@
         "CloudTrail:RemoveTags",
         "CloudTrail:StartEventDataStoreIngestion",
         "CloudTrail:StopEventDataStoreIngestion",
+        "CloudTrail:GetEventDataStore",
         "iam:PassRole",
         "iam:GetRole",
         "iam:CreateServiceLinkedRole",
@@ -259,7 +262,8 @@
     },
     "delete": {
       "permissions": [
-        "CloudTrail:DeleteEventDataStore"
+        "CloudTrail:DeleteEventDataStore",
+        "CloudTrail:GetEventDataStore"
       ]
     },
     "list": {

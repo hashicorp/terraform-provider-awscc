@@ -1,0 +1,1 @@
+$ terraform import awscc_verifiedpermissions_identity_source.example <resource ID>

@@ -314,7 +314,6 @@
           "items": {
             "$ref": "#/definitions/RuleActionOverride"
           },
-          "minItems": 1,
           "maxItems": 100
         }
       },
@@ -754,7 +753,6 @@
           "items": {
             "$ref": "#/definitions/RuleActionOverride"
           },
-          "minItems": 1,
           "maxItems": 100
         }
       },
@@ -1393,6 +1391,48 @@
         "maxLength": 253
       }
     },
+    "AssociationConfig": {
+      "description": "AssociationConfig for body inspection",
+      "type": "object",
+      "properties": {
+        "RequestBody": {
+          "$ref": "#/definitions/RequestBody"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RequestBody": {
+      "type": "object",
+      "description": "Map of AssociatedResourceType and RequestBodyAssociatedResourceTypeConfig",
+      "patternProperties": {
+        "": {
+          "$ref": "#/definitions/RequestBodyAssociatedResourceTypeConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RequestBodyAssociatedResourceTypeConfig": {
+      "description": "Configures the inspection size in the request body.",
+      "type": "object",
+      "properties": {
+        "DefaultSizeInspectionLimit": {
+          "$ref": "#/definitions/SizeInspectionLimit"
+        }
+      },
+      "required": [
+        "DefaultSizeInspectionLimit"
+      ],
+      "additionalProperties": false
+    },
+    "SizeInspectionLimit": {
+      "type": "string",
+      "enum": [
+        "KB_16",
+        "KB_32",
+        "KB_48",
+        "KB_64"
+      ]
+    },
     "FieldIdentifier": {
       "type": "object",
       "properties": {
@@ -1597,6 +1637,9 @@
     },
     "TokenDomains": {
       "$ref": "#/definitions/TokenDomains"
+    },
+    "AssociationConfig": {
+      "$ref": "#/definitions/AssociationConfig"
     }
   },
   "required": [

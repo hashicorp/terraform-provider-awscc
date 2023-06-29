@@ -36,7 +36,9 @@ The AWS::EC2::VerifiedAccessInstance resource creates an AWS EC2 Verified Access
 Optional:
 
 - `cloudwatch_logs` (Attributes) Sends Verified Access logs to CloudWatch Logs. (see [below for nested schema](#nestedatt--logging_configurations--cloudwatch_logs))
+- `include_trust_context` (Boolean) Include claims from trust providers in Verified Access logs.
 - `kinesis_data_firehose` (Attributes) Sends Verified Access logs to Kinesis. (see [below for nested schema](#nestedatt--logging_configurations--kinesis_data_firehose))
+- `log_version` (String) Select log version for Verified Access logs.
 - `s3` (Attributes) Sends Verified Access logs to Amazon S3. (see [below for nested schema](#nestedatt--logging_configurations--s3))
 
 <a id="nestedatt--logging_configurations--cloudwatch_logs"></a>

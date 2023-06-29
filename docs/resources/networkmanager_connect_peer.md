@@ -18,13 +18,13 @@ AWS::NetworkManager::ConnectPeer Resource Type Definition.
 ### Required
 
 - `connect_attachment_id` (String) The ID of the attachment to connect.
-- `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
 - `peer_address` (String) The IP address of the Connect peer.
 
 ### Optional
 
 - `bgp_options` (Attributes) Bgp options for connect peer. (see [below for nested schema](#nestedatt--bgp_options))
 - `core_network_address` (String) The IP address of a core network.
+- `inside_cidr_blocks` (List of String) The inside IP addresses used for a Connect peer configuration.
 - `tags` (Attributes Set) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only

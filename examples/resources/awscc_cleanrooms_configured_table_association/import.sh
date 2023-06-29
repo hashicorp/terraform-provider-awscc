@@ -1,0 +1,1 @@
+$ terraform import awscc_cleanrooms_configured_table_association.example <resource ID>

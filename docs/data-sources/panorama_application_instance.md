@@ -28,7 +28,6 @@ Data Source schema for AWS::Panorama::ApplicationInstance
 - `default_runtime_context_device` (String)
 - `default_runtime_context_device_name` (String)
 - `description` (String)
-- `device_id` (String)
 - `health_status` (String)
 - `last_updated_time` (Number)
 - `manifest_overrides_payload` (Attributes) (see [below for nested schema](#nestedatt--manifest_overrides_payload))
@@ -37,7 +36,6 @@ Data Source schema for AWS::Panorama::ApplicationInstance
 - `runtime_role_arn` (String)
 - `status` (String)
 - `status_description` (String)
-- `status_filter` (String)
 - `tags` (Attributes Set) List of tags (see [below for nested schema](#nestedatt--tags))
 
 <a id="nestedatt--manifest_overrides_payload"></a>

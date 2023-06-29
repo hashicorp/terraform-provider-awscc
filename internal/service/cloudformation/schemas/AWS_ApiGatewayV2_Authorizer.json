@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::ApiGatewayV2::Authorizer",
   "description": "Resource Type definition for AWS::ApiGatewayV2::Authorizer",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-apigatewayv2",
   "additionalProperties": false,
   "properties": {
     "IdentityValidationExpression": {
@@ -86,14 +87,16 @@
   "handlers": {
     "create": {
       "permissions": [
-        "apigateway:POST"
+        "apigateway:POST",
+        "iam:PassRole"
       ]
     },
     "update": {
       "permissions": [
         "apigateway:PATCH",
         "apigateway:GET",
-        "apigateway:PUT"
+        "apigateway:PUT",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -108,6 +111,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "ApiId": {
+            "$ref": "resource-schema.json#/properties/ApiId"
+          }
+        },
+        "required": [
+          "ApiId"
+        ]
+      },
       "permissions": [
         "apigateway:GET"
       ]

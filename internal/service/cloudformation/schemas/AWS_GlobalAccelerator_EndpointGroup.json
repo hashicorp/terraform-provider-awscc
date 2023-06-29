@@ -138,6 +138,7 @@
       "permissions": [
         "globalaccelerator:CreateEndpointGroup",
         "globalaccelerator:DescribeEndpointGroup",
+        "globalaccelerator:DescribeAccelerator",
         "globalaccelerator:DescribeListener",
         "globalaccelerator:ListAccelerators",
         "globalaccelerator:ListListeners"
@@ -152,7 +153,8 @@
       "permissions": [
         "globalaccelerator:UpdateEndpointGroup",
         "globalaccelerator:DescribeEndpointGroup",
-        "globalaccelerator:DescribeListener"
+        "globalaccelerator:DescribeListener",
+        "globalaccelerator:DescribeAccelerator"
       ]
     },
     "delete": {
