@@ -1,4 +1,57 @@
 ## 0.55.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apprunner_auto_scaling_configuration`
+* **New Data Source:** `awscc_apprunner_auto_scaling_configurations`
+* **New Data Source:** `awscc_appstream_app_block_builder`
+* **New Data Source:** `awscc_appsync_source_api_association`
+* **New Data Source:** `awscc_cleanrooms_configured_table_association`
+* **New Data Source:** `awscc_cognito_identity_pool_principal_tag`
+* **New Data Source:** `awscc_comprehend_document_classifier`
+* **New Data Source:** `awscc_comprehend_document_classifiers`
+* **New Data Source:** `awscc_connect_prompt`
+* **New Data Source:** `awscc_customerprofiles_calculated_attribute_definition`
+* **New Data Source:** `awscc_customerprofiles_calculated_attribute_definitions`
+* **New Data Source:** `awscc_customerprofiles_event_stream`
+* **New Data Source:** `awscc_ec2_launch_template`
+* **New Data Source:** `awscc_ec2_launch_templates`
+* **New Data Source:** `awscc_ec2_volume_attachment`
+* **New Data Source:** `awscc_ec2_volume_attachments`
+* **New Data Source:** `awscc_iam_service_linked_role`
+* **New Data Source:** `awscc_organizations_organization`
+* **New Data Source:** `awscc_organizations_organizations`
+* **New Data Source:** `awscc_stepfunctions_state_machine_alias`
+* **New Data Source:** `awscc_stepfunctions_state_machine_version`
+* **New Data Source:** `awscc_verifiedpermissions_identity_source`
+* **New Data Source:** `awscc_verifiedpermissions_policy`
+* **New Data Source:** `awscc_verifiedpermissions_policy_store`
+* **New Data Source:** `awscc_verifiedpermissions_policy_stores`
+* **New Data Source:** `awscc_verifiedpermissions_policy_template`
+* **New Data Source:** `awscc_vpclattice_auth_policy`
+* **New Data Source:** `awscc_vpclattice_resource_policy`
+* **New Resource:** `awscc_apprunner_auto_scaling_configuration`
+* **New Resource:** `awscc_appstream_app_block_builder`
+* **New Resource:** `awscc_appsync_source_api_association`
+* **New Resource:** `awscc_cleanrooms_configured_table_association`
+* **New Resource:** `awscc_cognito_identity_pool_principal_tag`
+* **New Resource:** `awscc_comprehend_document_classifier`
+* **New Resource:** `awscc_connect_prompt`
+* **New Resource:** `awscc_customerprofiles_calculated_attribute_definition`
+* **New Resource:** `awscc_customerprofiles_event_stream`
+* **New Resource:** `awscc_ec2_launch_template`
+* **New Resource:** `awscc_ec2_volume_attachment`
+* **New Resource:** `awscc_iam_service_linked_role`
+* **New Resource:** `awscc_organizations_organization`
+* **New Resource:** `awscc_stepfunctions_state_machine_alias`
+* **New Resource:** `awscc_stepfunctions_state_machine_version`
+* **New Resource:** `awscc_verifiedpermissions_identity_source`
+* **New Resource:** `awscc_verifiedpermissions_policy`
+* **New Resource:** `awscc_verifiedpermissions_policy_store`
+* **New Resource:** `awscc_verifiedpermissions_policy_template`
+* **New Resource:** `awscc_vpclattice_auth_policy`
+* **New Resource:** `awscc_vpclattice_resource_policy`
+
 ## 0.54.0 (June 15, 2023)
 
 FEATURES:
