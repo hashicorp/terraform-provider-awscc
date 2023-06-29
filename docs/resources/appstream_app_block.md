@@ -18,13 +18,15 @@ Resource Type definition for AWS::AppStream::AppBlock
 ### Required
 
 - `name` (String)
-- `setup_script_details` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details))
 - `source_s3_location` (Attributes) (see [below for nested schema](#nestedatt--source_s3_location))
 
 ### Optional
 
 - `description` (String)
 - `display_name` (String)
+- `packaging_type` (String)
+- `post_setup_script_details` (Attributes) (see [below for nested schema](#nestedatt--post_setup_script_details))
+- `setup_script_details` (Attributes) (see [below for nested schema](#nestedatt--setup_script_details))
 - `tags` (Attributes Set) (see [below for nested schema](#nestedatt--tags))
 
 ### Read-Only
@@ -32,6 +34,44 @@ Resource Type definition for AWS::AppStream::AppBlock
 - `arn` (String)
 - `created_time` (String)
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--source_s3_location"></a>
+### Nested Schema for `source_s3_location`
+
+Required:
+
+- `s3_bucket` (String)
+
+Optional:
+
+- `s3_key` (String)
+
+
+<a id="nestedatt--post_setup_script_details"></a>
+### Nested Schema for `post_setup_script_details`
+
+Required:
+
+- `executable_path` (String)
+- `script_s3_location` (Attributes) (see [below for nested schema](#nestedatt--post_setup_script_details--script_s3_location))
+- `timeout_in_seconds` (Number)
+
+Optional:
+
+- `executable_parameters` (String)
+
+<a id="nestedatt--post_setup_script_details--script_s3_location"></a>
+### Nested Schema for `post_setup_script_details.script_s3_location`
+
+Required:
+
+- `s3_bucket` (String)
+
+Optional:
+
+- `s3_key` (String)
+
+
 
 <a id="nestedatt--setup_script_details"></a>
 ### Nested Schema for `setup_script_details`
@@ -52,26 +92,22 @@ Optional:
 Required:
 
 - `s3_bucket` (String)
+
+Optional:
+
 - `s3_key` (String)
 
-
-
-<a id="nestedatt--source_s3_location"></a>
-### Nested Schema for `source_s3_location`
-
-Required:
-
-- `s3_bucket` (String)
-- `s3_key` (String)
 
 
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
+- `key` (String)
 - `tag_key` (String)
 - `tag_value` (String)
+- `value` (String)
 
 ## Import
 

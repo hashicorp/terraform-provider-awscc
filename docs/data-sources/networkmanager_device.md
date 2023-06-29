@@ -21,6 +21,8 @@ Data Source schema for AWS::NetworkManager::Device
 
 ### Read-Only
 
+- `aws_location` (Attributes) The Amazon Web Services location of the device, if applicable. (see [below for nested schema](#nestedatt--aws_location))
+- `created_at` (String) The date and time that the device was created.
 - `description` (String) The description of the device.
 - `device_arn` (String) The Amazon Resource Name (ARN) of the device.
 - `device_id` (String) The ID of the device.
@@ -29,9 +31,18 @@ Data Source schema for AWS::NetworkManager::Device
 - `model` (String) The device model
 - `serial_number` (String) The device serial number.
 - `site_id` (String) The site ID.
-- `tags` (Attributes List) The tags for the device. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the device. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The device type.
 - `vendor` (String) The device vendor.
+
+<a id="nestedatt--aws_location"></a>
+### Nested Schema for `aws_location`
+
+Read-Only:
+
+- `subnet_arn` (String) The Amazon Resource Name (ARN) of the subnet that the device is located in.
+- `zone` (String) The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
 
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
@@ -48,5 +59,5 @@ Read-Only:
 
 Read-Only:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.

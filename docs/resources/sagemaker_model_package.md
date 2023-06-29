@@ -17,19 +17,15 @@ Resource Type definition for AWS::SageMaker::ModelPackage
 
 ### Optional
 
-- `additional_inference_specification_definition` (Attributes) Additional Inference Specification specifies details about inference jobs that can be run with models based on this model package.AdditionalInferenceSpecifications can be added to existing model packages using AdditionalInferenceSpecificationsToAdd. (see [below for nested schema](#nestedatt--additional_inference_specification_definition))
 - `additional_inference_specifications` (Attributes List) An array of additional Inference Specification objects. (see [below for nested schema](#nestedatt--additional_inference_specifications))
 - `additional_inference_specifications_to_add` (Attributes List) An array of additional Inference Specification objects. (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add))
 - `approval_description` (String) A description provided for the model approval.
 - `certify_for_marketplace` (Boolean) Whether to certify the model package for listing on AWS Marketplace.
 - `client_token` (String) A unique token that guarantees that the call to this API is idempotent.
-- `created_by` (Attributes) Information about the user who created or modified an experiment, trial, trial component, lineage group, or project. (see [below for nested schema](#nestedatt--created_by))
 - `customer_metadata_properties` (Map of String) The metadata properties associated with the model package versions.
 - `domain` (String) The machine learning domain of the model package you specified.
 - `drift_check_baselines` (Attributes) Represents the drift check baselines that can be used when the model monitor is set using the model package. (see [below for nested schema](#nestedatt--drift_check_baselines))
-- `environment` (Map of String) Sets the environment variables in the Docker container
 - `inference_specification` (Attributes) Details about inference jobs that can be run with models based on this model package. (see [below for nested schema](#nestedatt--inference_specification))
-- `last_modified_by` (Attributes) Information about the user who created or modified an experiment, trial, trial component, lineage group, or project. (see [below for nested schema](#nestedatt--last_modified_by))
 - `last_modified_time` (String) The time at which the model package was last modified.
 - `metadata_properties` (Attributes) Metadata properties of the tracking entity, trial, or trial component. (see [below for nested schema](#nestedatt--metadata_properties))
 - `model_approval_status` (String) The approval status of the model package.
@@ -38,7 +34,6 @@ Resource Type definition for AWS::SageMaker::ModelPackage
 - `model_package_group_name` (String) The name of the model package group.
 - `model_package_name` (String) The name or arn of the model package.
 - `model_package_status_details` (Attributes) Details about the current status of the model package. (see [below for nested schema](#nestedatt--model_package_status_details))
-- `model_package_status_item` (Attributes) Represents the overall status of a model package. (see [below for nested schema](#nestedatt--model_package_status_item))
 - `model_package_version` (Number) The version of the model package.
 - `sample_payload_url` (String) The Amazon Simple Storage Service (Amazon S3) path where the sample payload are stored pointing to single gzip compressed tar archive.
 - `source_algorithm_specification` (Attributes) Details about the algorithm that was used to create the model package. (see [below for nested schema](#nestedatt--source_algorithm_specification))
@@ -52,51 +47,6 @@ Resource Type definition for AWS::SageMaker::ModelPackage
 - `id` (String) Uniquely identifies the resource.
 - `model_package_arn` (String) The Amazon Resource Name (ARN) of the model package group.
 - `model_package_status` (String) The current status of the model package.
-
-<a id="nestedatt--additional_inference_specification_definition"></a>
-### Nested Schema for `additional_inference_specification_definition`
-
-Required:
-
-- `containers` (Attributes List) The Amazon ECR registry path of the Docker image that contains the inference code. (see [below for nested schema](#nestedatt--additional_inference_specification_definition--containers))
-- `name` (String) A unique name to identify the additional inference specification. The name must be unique within the list of your additional inference specifications for a particular model package.
-
-Optional:
-
-- `description` (String) A description of the additional Inference specification.
-- `supported_content_types` (List of String) The supported MIME types for the input data.
-- `supported_realtime_inference_instance_types` (List of String) A list of the instance types that are used to generate inferences in real-time
-- `supported_response_mime_types` (List of String) The supported MIME types for the output data.
-- `supported_transform_instance_types` (List of String) A list of the instance types on which a transformation job can be run or on which an endpoint can be deployed.
-
-<a id="nestedatt--additional_inference_specification_definition--containers"></a>
-### Nested Schema for `additional_inference_specification_definition.containers`
-
-Required:
-
-- `image` (String) The Amazon EC2 Container Registry (Amazon ECR) path where inference code is stored.
-
-Optional:
-
-- `container_hostname` (String) The DNS host name for the Docker container.
-- `environment` (Map of String) Sets the environment variables in the Docker container
-- `framework` (String) The machine learning framework of the model package container image.
-- `framework_version` (String) The framework version of the Model Package Container Image.
-- `image_digest` (String) An MD5 hash of the training algorithm that identifies the Docker image used for training.
-- `model_data_url` (String) A structure with Model Input details.
-- `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specification_definition--containers--model_input))
-- `nearest_model_name` (String) The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.
-- `product_id` (String) The AWS Marketplace product ID of the model package.
-
-<a id="nestedatt--additional_inference_specification_definition--containers--model_input"></a>
-### Nested Schema for `additional_inference_specification_definition.containers.model_input`
-
-Required:
-
-- `data_input_config` (String) The input configuration object for the model.
-
-
-
 
 <a id="nestedatt--additional_inference_specifications"></a>
 ### Nested Schema for `additional_inference_specifications`
@@ -131,7 +81,6 @@ Optional:
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specifications--containers--model_input))
 - `nearest_model_name` (String) The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.
-- `product_id` (String) The AWS Marketplace product ID of the model package.
 
 <a id="nestedatt--additional_inference_specifications--containers--model_input"></a>
 ### Nested Schema for `additional_inference_specifications.containers.model_input`
@@ -176,7 +125,6 @@ Optional:
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--additional_inference_specifications_to_add--containers--model_input))
 - `nearest_model_name` (String) The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.
-- `product_id` (String) The AWS Marketplace product ID of the model package.
 
 <a id="nestedatt--additional_inference_specifications_to_add--containers--model_input"></a>
 ### Nested Schema for `additional_inference_specifications_to_add.containers.model_input`
@@ -186,16 +134,6 @@ Required:
 - `data_input_config` (String) The input configuration object for the model.
 
 
-
-
-<a id="nestedatt--created_by"></a>
-### Nested Schema for `created_by`
-
-Optional:
-
-- `domain_id` (String) The domain associated with the user.
-- `user_profile_arn` (String) The Amazon Resource Name (ARN) of the user's profile.
-- `user_profile_name` (String) The name of the user's profile.
 
 
 <a id="nestedatt--drift_check_baselines"></a>
@@ -394,7 +332,6 @@ Optional:
 - `model_data_url` (String) A structure with Model Input details.
 - `model_input` (Attributes) (see [below for nested schema](#nestedatt--inference_specification--containers--model_input))
 - `nearest_model_name` (String) The name of a pre-trained machine learning benchmarked by Amazon SageMaker Inference Recommender model that matches your model.
-- `product_id` (String) The AWS Marketplace product ID of the model package.
 
 <a id="nestedatt--inference_specification--containers--model_input"></a>
 ### Nested Schema for `inference_specification.containers.model_input`
@@ -404,16 +341,6 @@ Required:
 - `data_input_config` (String) The input configuration object for the model.
 
 
-
-
-<a id="nestedatt--last_modified_by"></a>
-### Nested Schema for `last_modified_by`
-
-Optional:
-
-- `domain_id` (String) The domain associated with the user.
-- `user_profile_arn` (String) The Amazon Resource Name (ARN) of the user's profile.
-- `user_profile_name` (String) The name of the user's profile.
 
 
 <a id="nestedatt--metadata_properties"></a>
@@ -581,13 +508,9 @@ Optional:
 <a id="nestedatt--model_package_status_details"></a>
 ### Nested Schema for `model_package_status_details`
 
-Required:
-
-- `validation_statuses` (Attributes List) (see [below for nested schema](#nestedatt--model_package_status_details--validation_statuses))
-
 Optional:
 
-- `image_scan_statuses` (Attributes List) (see [below for nested schema](#nestedatt--model_package_status_details--image_scan_statuses))
+- `validation_statuses` (Attributes List) (see [below for nested schema](#nestedatt--model_package_status_details--validation_statuses))
 
 <a id="nestedatt--model_package_status_details--validation_statuses"></a>
 ### Nested Schema for `model_package_status_details.validation_statuses`
@@ -601,32 +524,6 @@ Optional:
 
 - `failure_reason` (String) If the overall status is Failed, the reason for the failure.
 
-
-<a id="nestedatt--model_package_status_details--image_scan_statuses"></a>
-### Nested Schema for `model_package_status_details.image_scan_statuses`
-
-Required:
-
-- `name` (String) The name of the model package for which the overall status is being reported.
-- `status` (String) The current status.
-
-Optional:
-
-- `failure_reason` (String) If the overall status is Failed, the reason for the failure.
-
-
-
-<a id="nestedatt--model_package_status_item"></a>
-### Nested Schema for `model_package_status_item`
-
-Required:
-
-- `name` (String) The name of the model package for which the overall status is being reported.
-- `status` (String) The current status.
-
-Optional:
-
-- `failure_reason` (String) If the overall status is Failed, the reason for the failure.
 
 
 <a id="nestedatt--source_algorithm_specification"></a>

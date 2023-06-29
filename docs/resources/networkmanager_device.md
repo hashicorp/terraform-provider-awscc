@@ -21,20 +21,31 @@ The AWS::NetworkManager::Device type describes a device.
 
 ### Optional
 
+- `aws_location` (Attributes) The Amazon Web Services location of the device, if applicable. (see [below for nested schema](#nestedatt--aws_location))
 - `description` (String) The description of the device.
 - `location` (Attributes) The site location. (see [below for nested schema](#nestedatt--location))
 - `model` (String) The device model
 - `serial_number` (String) The device serial number.
 - `site_id` (String) The site ID.
-- `tags` (Attributes List) The tags for the device. (see [below for nested schema](#nestedatt--tags))
+- `tags` (Attributes Set) The tags for the device. (see [below for nested schema](#nestedatt--tags))
 - `type` (String) The device type.
 - `vendor` (String) The device vendor.
 
 ### Read-Only
 
+- `created_at` (String) The date and time that the device was created.
 - `device_arn` (String) The Amazon Resource Name (ARN) of the device.
 - `device_id` (String) The ID of the device.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--aws_location"></a>
+### Nested Schema for `aws_location`
+
+Optional:
+
+- `subnet_arn` (String) The Amazon Resource Name (ARN) of the subnet that the device is located in.
+- `zone` (String) The Zone that the device is located in. Specify the ID of an Availability Zone, Local Zone, Wavelength Zone, or an Outpost.
+
 
 <a id="nestedatt--location"></a>
 ### Nested Schema for `location`
@@ -49,10 +60,10 @@ Optional:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Optional:
+Required:
 
-- `key` (String)
-- `value` (String)
+- `key` (String) The key name of the tag. You can specify a value that is 1 to 128 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
+- `value` (String) The value for the tag. You can specify a value that is 0 to 256 Unicode characters in length and cannot be prefixed with aws:. You can use any of the following characters: the set of Unicode letters, digits, whitespace, _, ., /, =, +, and -.
 
 ## Import
 

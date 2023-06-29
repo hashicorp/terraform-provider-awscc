@@ -49,7 +49,7 @@ Read-Only:
 Read-Only:
 
 - `container_tags` (List of String) Tags for Image Builder to apply the output container image that is scanned. Tags can help you identify and manage your scanned images.
-- `repository_name` (String) The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don?t provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.
+- `repository_name` (String) The name of the container repository that Amazon Inspector scans to identify findings for your container images. The name includes the path for the repository location. If you don't provide this information, Image Builder creates a repository in your account named image-builder-image-scanning-repository to use for vulnerability scans for your output container images.
 
 
 

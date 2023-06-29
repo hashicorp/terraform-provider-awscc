@@ -1,0 +1,1 @@
+$ terraform import awscc_ec2_volume_attachment.example <resource ID>

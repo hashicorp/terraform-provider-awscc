@@ -50,5 +50,7 @@ Read-Only:
 
 Read-Only:
 
+- `key` (String)
 - `tag_key` (String)
 - `tag_value` (String)
+- `value` (String)

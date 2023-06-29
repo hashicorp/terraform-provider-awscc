@@ -51,10 +51,12 @@ Required:
 <a id="nestedatt--tags"></a>
 ### Nested Schema for `tags`
 
-Required:
+Optional:
 
+- `key` (String)
 - `tag_key` (String)
 - `tag_value` (String)
+- `value` (String)
 
 ## Import
 

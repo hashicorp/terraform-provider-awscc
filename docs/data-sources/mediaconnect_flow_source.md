@@ -25,6 +25,7 @@ Data Source schema for AWS::MediaConnect::FlowSource
 - `description` (String) A description for the source. This value is not used or seen outside of the current AWS Elemental MediaConnect account.
 - `entitlement_arn` (String) The ARN of the entitlement that allows you to subscribe to content that comes from another AWS account. The entitlement is set by the content originator and the ARN is generated as part of the originator's flow.
 - `flow_arn` (String) The ARN of the flow.
+- `gateway_bridge_source` (Attributes) The source configuration for cloud flows receiving a stream from a bridge. (see [below for nested schema](#nestedatt--gateway_bridge_source))
 - `ingest_ip` (String) The IP address that the flow will be listening on for incoming content.
 - `ingest_port` (Number) The port that the flow will be listening on for incoming content.
 - `max_bitrate` (Number) The smoothing max bitrate for RIST, RTP, and RTP-FEC streams.
@@ -56,3 +57,19 @@ Read-Only:
 - `role_arn` (String) The ARN of the role that you created during setup (when you set up AWS Elemental MediaConnect as a trusted entity).
 - `secret_arn` (String) The ARN of the secret that you created in AWS Secrets Manager to store the encryption key. This parameter is required for static key encryption and is not valid for SPEKE encryption.
 - `url` (String) The URL from the API Gateway proxy that you set up to talk to your key server. This parameter is required for SPEKE encryption and is not valid for static key encryption.
+
+
+<a id="nestedatt--gateway_bridge_source"></a>
+### Nested Schema for `gateway_bridge_source`
+
+Read-Only:
+
+- `bridge_arn` (String) The ARN of the bridge feeding this flow.
+- `vpc_interface_attachment` (Attributes) The name of the VPC interface attachment to use for this bridge source. (see [below for nested schema](#nestedatt--gateway_bridge_source--vpc_interface_attachment))
+
+<a id="nestedatt--gateway_bridge_source--vpc_interface_attachment"></a>
+### Nested Schema for `gateway_bridge_source.vpc_interface_attachment`
+
+Read-Only:
+
+- `vpc_interface_name` (String) The name of the VPC interface to use for this resource.

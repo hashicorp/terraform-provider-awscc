@@ -1,0 +1,1 @@
+$ terraform import awscc_cognito_identity_pool_principal_tag.example <resource ID>
