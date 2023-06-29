@@ -499,14 +499,6 @@
         "ClientCredentialsArn": {
           "description": "The client credentials to fetch access token and refresh token.",
           "$ref": "#/definitions/ClientCredentialsArn"
-        },
-        "OAuth2GrantType": {
-          "description": "The grant types to fetch an access token",
-          "$ref": "#/definitions/OAuth2GrantType"
-        },
-        "JwtToken": {
-          "description": "The credentials used to access your Salesforce records",
-          "$ref": "#/definitions/JwtToken"
         }
       }
     },
@@ -517,12 +509,8 @@
           "description": "The location of the Salesforce resource",
           "$ref": "#/definitions/InstanceUrl"
         },
-        "isSandboxEnvironment": {
+        "IsSandboxEnvironment": {
           "description": "Indicates whether the connector profile applies to a sandbox or production environment",
-          "type": "boolean"
-        },
-        "usePrivateLinkForMetadataAndAuthorization": {
-          "description": "Indicates whether to make Metadata And Authorization calls over Pivate Network",
           "type": "boolean"
         }
       }
@@ -943,8 +931,7 @@
       "type": "string",
       "enum": [
         "CLIENT_CREDENTIALS",
-        "AUTHORIZATION_CODE",
-        "JWT_BEARER"
+        "AUTHORIZATION_CODE"
       ]
     },
     "TokenUrlCustomProperties": {
@@ -985,7 +972,7 @@
     "AccessToken": {
       "type": "string",
       "pattern": "\\S+",
-      "maxLength": 4096
+      "maxLength": 512
     },
     "ApiKey": {
       "type": "string",
@@ -1010,7 +997,7 @@
     "AuthCode": {
       "type": "string",
       "pattern": "\\S+",
-      "maxLength": 4096
+      "maxLength": 512
     },
     "BucketName": {
       "type": "string",
@@ -1077,15 +1064,10 @@
       "pattern": "\\S+",
       "maxLength": 512
     },
-    "JwtToken": {
-      "type": "string",
-      "pattern": "^[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_=]+\\.[A-Za-z0-9-_.+/=]*$",
-      "maxLength": 8000
-    },
     "RefreshToken": {
       "type": "string",
       "pattern": "\\S+",
-      "maxLength": 4096
+      "maxLength": 512
     },
     "Region": {
       "type": "string",
@@ -1193,16 +1175,15 @@
   ],
   "createOnlyProperties": [
     "/properties/ConnectorProfileName",
-    "/properties/ConnectorType",
-    "/properties/ConnectorLabel"
+    "/properties/KMSArn",
+    "/properties/ConnectorType"
   ],
   "readOnlyProperties": [
     "/properties/ConnectorProfileArn",
     "/properties/CredentialsArn"
   ],
   "writeOnlyProperties": [
-    "/properties/ConnectorProfileConfig",
-    "/properties/KMSArn"
+    "/properties/ConnectorProfileConfig"
   ],
   "primaryIdentifier": [
     "/properties/ConnectorProfileName"

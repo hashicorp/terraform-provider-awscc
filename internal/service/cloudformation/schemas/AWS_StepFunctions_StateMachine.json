@@ -102,17 +102,7 @@
       "additionalProperties": false,
       "patternProperties": {
         "": {
-          "anyOf": [
-            {
-              "type": "string"
-            },
-            {
-              "type": "integer"
-            },
-            {
-              "type": "boolean"
-            }
-          ]
+          "type": "string"
         }
       },
       "minProperties": 1
@@ -155,11 +145,6 @@
         "EXPRESS"
       ]
     },
-    "StateMachineRevisionId": {
-      "type": "string",
-      "minLength": 1,
-      "maxLength": 256
-    },
     "LoggingConfiguration": {
       "$ref": "#/definitions/LoggingConfiguration"
     },
@@ -197,8 +182,7 @@
   "additionalProperties": false,
   "readOnlyProperties": [
     "/properties/Arn",
-    "/properties/Name",
-    "/properties/StateMachineRevisionId"
+    "/properties/Name"
   ],
   "createOnlyProperties": [
     "/properties/StateMachineName",
@@ -212,17 +196,10 @@
   "primaryIdentifier": [
     "/properties/Arn"
   ],
-  "additionalIdentifiers": [
-    [
-      "/properties/StateMachineName"
-    ]
-  ],
   "handlers": {
     "create": {
       "permissions": [
         "states:CreateStateMachine",
-        "states:DescribeStateMachine",
-        "states:TagResource",
         "iam:PassRole",
         "s3:GetObject"
       ]
@@ -246,11 +223,6 @@
       "permissions": [
         "states:DeleteStateMachine",
         "states:DescribeStateMachine"
-      ]
-    },
-    "list": {
-      "permissions": [
-        "states:ListStateMachines"
       ]
     }
   }
