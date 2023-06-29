@@ -103,18 +103,6 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		"description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: DeviceId
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "maxLength": 255,
-		//	  "minLength": 1,
-		//	  "pattern": "^[a-zA-Z0-9\\-\\_]+$",
-		//	  "type": "string"
-		//	}
-		"device_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: HealthStatus
 		// CloudFormation resource type schema:
 		//
@@ -242,23 +230,6 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		"status_description": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
-		// Property: StatusFilter
-		// CloudFormation resource type schema:
-		//
-		//	{
-		//	  "enum": [
-		//	    "DEPLOYMENT_SUCCEEDED",
-		//	    "DEPLOYMENT_ERROR",
-		//	    "REMOVAL_SUCCEEDED",
-		//	    "REMOVAL_FAILED",
-		//	    "PROCESSING_DEPLOYMENT",
-		//	    "PROCESSING_REMOVAL"
-		//	  ],
-		//	  "type": "string"
-		//	}
-		"status_filter": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Computed: true,
-		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
@@ -334,7 +305,6 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		"default_runtime_context_device":      "DefaultRuntimeContextDevice",
 		"default_runtime_context_device_name": "DefaultRuntimeContextDeviceName",
 		"description":                         "Description",
-		"device_id":                           "DeviceId",
 		"health_status":                       "HealthStatus",
 		"key":                                 "Key",
 		"last_updated_time":                   "LastUpdatedTime",
@@ -345,7 +315,6 @@ func applicationInstanceDataSource(ctx context.Context) (datasource.DataSource, 
 		"runtime_role_arn":                    "RuntimeRoleArn",
 		"status":                              "Status",
 		"status_description":                  "StatusDescription",
-		"status_filter":                       "StatusFilter",
 		"tags":                                "Tags",
 		"value":                               "Value",
 	})

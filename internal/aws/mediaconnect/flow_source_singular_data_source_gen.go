@@ -167,6 +167,57 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The ARN of the flow.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: GatewayBridgeSource
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The source configuration for cloud flows receiving a stream from a bridge.",
+		//	  "properties": {
+		//	    "BridgeArn": {
+		//	      "description": "The ARN of the bridge feeding this flow.",
+		//	      "type": "string"
+		//	    },
+		//	    "VpcInterfaceAttachment": {
+		//	      "additionalProperties": false,
+		//	      "description": "The name of the VPC interface attachment to use for this bridge source.",
+		//	      "properties": {
+		//	        "VpcInterfaceName": {
+		//	          "description": "The name of the VPC interface to use for this resource.",
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "BridgeArn"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"gateway_bridge_source": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BridgeArn
+				"bridge_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The ARN of the bridge feeding this flow.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: VpcInterfaceAttachment
+				"vpc_interface_attachment": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: VpcInterfaceName
+						"vpc_interface_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Description: "The name of the VPC interface to use for this resource.",
+							Computed:    true,
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Description: "The name of the VPC interface attachment to use for this bridge source.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The source configuration for cloud flows receiving a stream from a bridge.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: IngestIp
 		// CloudFormation resource type schema:
 		//
@@ -371,12 +422,14 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"algorithm":                      "Algorithm",
+		"bridge_arn":                     "BridgeArn",
 		"constant_initialization_vector": "ConstantInitializationVector",
 		"decryption":                     "Decryption",
 		"description":                    "Description",
 		"device_id":                      "DeviceId",
 		"entitlement_arn":                "EntitlementArn",
 		"flow_arn":                       "FlowArn",
+		"gateway_bridge_source":          "GatewayBridgeSource",
 		"ingest_ip":                      "IngestIp",
 		"ingest_port":                    "IngestPort",
 		"key_type":                       "KeyType",
@@ -397,6 +450,7 @@ func flowSourceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"source_listener_port":           "SourceListenerPort",
 		"stream_id":                      "StreamId",
 		"url":                            "Url",
+		"vpc_interface_attachment":       "VpcInterfaceAttachment",
 		"vpc_interface_name":             "VpcInterfaceName",
 		"whitelist_cidr":                 "WhitelistCidr",
 	})

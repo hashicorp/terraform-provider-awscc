@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -34,6 +34,72 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"keyspace_name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name for Cassandra keyspace",
 			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReplicationSpecification
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "default": {
+		//	    "properties": {
+		//	      "ReplicationStrategy": {
+		//	        "const": "SINGLE_REGION",
+		//	        "type": "string"
+		//	      }
+		//	    }
+		//	  },
+		//	  "properties": {
+		//	    "RegionList": {
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "ap-northeast-1",
+		//	          "ap-northeast-2",
+		//	          "ap-south-1",
+		//	          "ap-southeast-1",
+		//	          "ap-southeast-2",
+		//	          "ca-central-1",
+		//	          "eu-central-1",
+		//	          "eu-north-1",
+		//	          "eu-west-1",
+		//	          "eu-west-2",
+		//	          "eu-west-3",
+		//	          "sa-east-1",
+		//	          "us-east-1",
+		//	          "us-east-2",
+		//	          "us-west-1",
+		//	          "us-west-2"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 6,
+		//	      "minItems": 2,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
+		//	    "ReplicationStrategy": {
+		//	      "enum": [
+		//	        "SINGLE_REGION",
+		//	        "MULTI_REGION"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"replication_specification": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RegionList
+				"region_list": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: ReplicationStrategy
+				"replication_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
@@ -96,10 +162,13 @@ func keyspaceDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Cassandra::Keyspace").WithTerraformTypeName("awscc_cassandra_keyspace")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"key":           "Key",
-		"keyspace_name": "KeyspaceName",
-		"tags":          "Tags",
-		"value":         "Value",
+		"key":                       "Key",
+		"keyspace_name":             "KeyspaceName",
+		"region_list":               "RegionList",
+		"replication_specification": "ReplicationSpecification",
+		"replication_strategy":      "ReplicationStrategy",
+		"tags":                      "Tags",
+		"value":                     "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)

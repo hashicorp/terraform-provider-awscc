@@ -44,7 +44,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "properties": {
 		//	    "AutoScaling": {
 		//	      "additionalProperties": false,
-		//	      "description": "Details about auto scaling of a connector. ",
+		//	      "description": "Details about auto scaling of a connector.",
 		//	      "properties": {
 		//	        "MaxWorkerCount": {
 		//	          "description": "The maximum number of workers for a connector.",
@@ -178,7 +178,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
-					Description: "Details about auto scaling of a connector. ",
+					Description: "Details about auto scaling of a connector.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 				// Property: ProvisionedCapacity

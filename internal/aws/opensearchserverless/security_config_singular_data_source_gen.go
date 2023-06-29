@@ -79,7 +79,7 @@ func securityConfigDataSource(ctx context.Context) (datasource.DataSource, error
 		//	    },
 		//	    "Metadata": {
 		//	      "description": "The XML saml provider metadata document that you want to use",
-		//	      "maxLength": 20480,
+		//	      "maxLength": 51200,
 		//	      "minLength": 1,
 		//	      "pattern": "",
 		//	      "type": "string"
