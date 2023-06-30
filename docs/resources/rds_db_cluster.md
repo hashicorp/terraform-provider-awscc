@@ -11,14 +11,15 @@ The AWS::RDS::DBCluster resource creates an Amazon Aurora DB cluster.
 
 ## Example Usage
 
-### Basic Example - create AWS RDS cluster that specifies availability zones
+### Managed Master Passwords via Secrets Manager, specify Availability Zones example
+You can specify the manage_master_user_password attribute to enable managing the master password with Secrets Manager. You can also update an existing cluster to use Secrets Manager by specify the manage_master_user_password attribute and removing the password attribute (removal is required).
 ```terraform
 resource "awscc_rds_db_cluster" "example_db_cluster" {
-  availability_zones    = ["us-east-1b", "us-east-1c"]
-  engine                = "aurora-mysql"
-  db_cluster_identifier = "example-dbcluster"
-  master_username       = "foo"
-  master_user_password  = "foobarbaz"
+  availability_zones          = ["us-east-1b", "us-east-1c"]
+  engine                      = "aurora-mysql"
+  db_cluster_identifier       = "example-dbcluster"
+  manage_master_user_password = true
+  master_username             = "foo"
 }
 ```
 

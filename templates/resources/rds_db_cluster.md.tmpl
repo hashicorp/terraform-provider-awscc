@@ -11,8 +11,9 @@ description: |-
 
 ## Example Usage
 
-### Basic Example - create AWS RDS cluster that specifies availability zones
-{{ tffile (printf "examples/resources/%s/rds_db_cluster_create.tf" .Name)}}
+### Managed Master Passwords via Secrets Manager, specify Availability Zones example
+You can specify the manage_master_user_password attribute to enable managing the master password with Secrets Manager. You can also update an existing cluster to use Secrets Manager by specify the manage_master_user_password attribute and removing the password attribute (removal is required).
+{{ tffile (printf "examples/resources/%s/rds_db_cluster.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
