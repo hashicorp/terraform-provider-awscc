@@ -16,7 +16,7 @@ description: |-
 {{ tffile (printf "examples/resources/%s/ec2_vpn_gateway.tf" .Name)}}
 
 ### Second example - create VPN specifying the private Autonomous System Number (ASN) for the Amazon side of a BGP session.
-Description about the second example
+
 {{ tffile (printf "examples/resources/%s/ec2_vpn_gateway_asn.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}

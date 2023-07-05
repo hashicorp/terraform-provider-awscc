@@ -30,7 +30,7 @@ resource "awscc_ec2_vpn_gateway" "example_vpn_gateway" {
 ```
 
 ### Second example - create VPN specifying the private Autonomous System Number (ASN) for the Amazon side of a BGP session.
-Description about the second example
+
 ```terraform
 resource "awscc_ec2_vpn_gateway" "example_vpn_gateway" {
   type            = "ipsec.1"
