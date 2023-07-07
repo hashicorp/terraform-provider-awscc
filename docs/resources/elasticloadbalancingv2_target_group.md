@@ -42,11 +42,11 @@ resource "awscc_ec2_vpc" "main" {
 ### IP Addresses Target Type
 ```terraform
 resource "awscc_elasticloadbalancingv2_target_group" "ip-example" {
-  name     = "ip-example"
-  port     = 80
-  protocol = "HTTP"
+  name        = "ip-example"
+  port        = 80
+  protocol    = "HTTP"
   target_type = "ip"
-  vpc_id   = awscc_ec2_vpc.main.id
+  vpc_id      = awscc_ec2_vpc.main.id
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
@@ -57,7 +57,7 @@ resource "awscc_elasticloadbalancingv2_target_group" "ip-example" {
 ### Lambda Function Target Type
 ```terraform
 resource "awscc_elasticloadbalancingv2_target_group" "lambda-example" {
-  name     = "lambda-example"
+  name        = "lambda-example"
   target_type = "lambda"
   tags = [{
     key   = "Modified By"
@@ -69,11 +69,11 @@ resource "awscc_elasticloadbalancingv2_target_group" "lambda-example" {
 ### Application Load Balancer Target Type
 ```terraform
 resource "awscc_elasticloadbalancingv2_target_group" "alb-example" {
-  name     = "alb-example"
-  port     = 80
-  protocol = "TCP"
+  name        = "alb-example"
+  port        = 80
+  protocol    = "TCP"
   target_type = "alb"
-  vpc_id   = awscc_ec2_vpc.main.id
+  vpc_id      = awscc_ec2_vpc.main.id
   tags = [{
     key   = "Modified By"
     value = "AWSCC"
