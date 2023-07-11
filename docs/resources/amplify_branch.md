@@ -165,5 +165,5 @@ Required:
 Import is supported using the following syntax:
 
 ```shell
-terraform import random_password.password securepassword
+$ terraform import awscc_amplify_branch.example <resource ID>
 ```

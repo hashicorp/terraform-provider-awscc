@@ -23,11 +23,12 @@ To use {{.Name}} to create multiple branches:
 {{ tffile (printf "examples/resources/%s/basic_auth.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
 
 ## Import
 
 Import is supported using the following syntax:
 
-```shell
-terraform import random_password.password securepassword
-```
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
