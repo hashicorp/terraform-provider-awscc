@@ -23,7 +23,7 @@ resource "awscc_amplify_branch" "main" {
 
 resource "awscc_amplify_branch" "dev" {
   app_id      = awscc_amplify_app.example.app_id
-  branch_name = "main"
+  branch_name = "dev"
 
   framework = "React"
   stage     = "DEVELOPMENT"
