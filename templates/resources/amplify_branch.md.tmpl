@@ -20,7 +20,7 @@ To use {{.Name}} to create multiple branches:
 {{ tffile (printf "examples/resources/%s/multi_branch.tf" .Name)}}
 
 ### Basic Authentication
-{{ tffile (printf "examples/resources/%s/basic_auth.tf" .Name)}}
+{{ tffile (printf "examples/resources/%s/amplify_branch.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
 {{- if .HasImport }}
