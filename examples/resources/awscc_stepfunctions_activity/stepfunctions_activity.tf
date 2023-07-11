@@ -3,7 +3,7 @@ resource "awscc_stepfunctions_activity" "sfn_activity" {
 
   tags = [
     {
-      key = "Modified By"
+      key   = "Modified By"
       value = "AWSCC"
     }
   ]
