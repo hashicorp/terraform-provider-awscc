@@ -4,4 +4,11 @@ resource "awscc_amplify_app" "example" {
 
   # GitHub personal access token
   access_token = "..."
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }

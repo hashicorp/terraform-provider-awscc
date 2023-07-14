@@ -13,4 +13,11 @@ resource "awscc_amplify_app" "example" {
       "*/**",
     ]
   }
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }

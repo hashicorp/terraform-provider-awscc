@@ -17,4 +17,11 @@ resource "awscc_amplify_app" "example" {
       target = "/index.html"
     },
   ]
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }

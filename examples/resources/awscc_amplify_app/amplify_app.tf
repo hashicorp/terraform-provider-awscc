@@ -38,4 +38,10 @@ resource "awscc_amplify_app" "example" {
       value = "PROD"
     },
   ]
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
