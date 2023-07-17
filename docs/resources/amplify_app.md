@@ -15,7 +15,7 @@ The AWS::Amplify::App resource creates Apps in the Amplify Console. An App is a 
 To use awscc_amplify_app to create a basic Amplify App:
 ```terraform
 resource "awscc_amplify_app" "example" {
-  name       = "app"
+  name = "app"
   // replace with your repo URL - must also ensure Amplify has permissions to access the repo
   // GitHub instructions: https://docs.aws.amazon.com/amplify/latest/userguide/setting-up-GitHub-access.html
   repository = "https://github.com/example/app"
@@ -43,7 +43,7 @@ resource "awscc_amplify_app" "example" {
   # The default rewrites and redirects added by the Amplify Console.
   custom_rules = [
     {
-      source  = "/<*>"
+      source = "/<*>"
       status = "404"
       target = "/index.html"
     },
@@ -53,6 +53,12 @@ resource "awscc_amplify_app" "example" {
       name  = "Environment"
       value = "PROD"
     },
+  ]
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
   ]
 }
 ```
@@ -68,6 +74,13 @@ resource "awscc_amplify_app" "example" {
 
   # GitHub personal access token
   access_token = "..."
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
 ```
 You can omit `access_token` if you import an existing Amplify App created by the Amplify Console (using OAuth for authentication).
@@ -89,6 +102,13 @@ resource "awscc_amplify_app" "example" {
       "*/**",
     ]
   }
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
 ```
 
@@ -102,6 +122,13 @@ resource "awscc_amplify_app" "example" {
     username          = "your-username"
     password          = "your-password"
   }
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
 ```
 
@@ -125,6 +152,13 @@ resource "awscc_amplify_app" "example" {
       status = "200"
       target = "/index.html"
     },
+  ]
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
   ]
 }
 ```
