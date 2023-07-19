@@ -98,6 +98,13 @@ resource "awscc_sso_permission_set" "example" {
   relay_state_type = "https://s3.console.aws.amazon.com/s3/home?region=us-east-1#"
   // set 2 hour session duration
   session_duration = "PT2H"
+
+  tags = [
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
 
 data "aws_identitystore_group" "example" {
