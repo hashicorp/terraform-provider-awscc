@@ -15,9 +15,9 @@ data "aws_ssoadmin_instances" "example" {} // fetch IAM Identity Center instance
 
 // create new permission set
 resource "awscc_sso_permission_set" "example" {
-  instance_arn = tolist(data.aws_ssoadmin_instances.example.arns)[0] // reference existing IAM IDC instance by arn
-  name         = "ExamplePermissionSet"                              // add desired name for permission set
-  description  = "An example Permission Set"                         // add desired description for permission set
+  instance_arn = data.aws_ssoadmin_instances.example.arns[0] // reference existing IAM IDC instance by arn
+  name         = "ExamplePermissionSet"                      // add desired name for permission set
+  description  = "An example Permission Set"                 // add desired description for permission set
   // add multiple managed policies
   managed_policies = [
     "arn:aws:iam::aws:policy/AdministratorAccess",
@@ -37,7 +37,7 @@ resource "awscc_sso_permission_set" "example" {
 }
 
 data "aws_identitystore_group" "example" {
-  identity_store_id = tolist(data.aws_ssoadmin_instances.example.identity_store_ids)[0]
+  identity_store_id = data.aws_ssoadmin_instances.example.identity_store_ids[0]
 
   alternate_identifier {
     unique_attribute {
@@ -48,7 +48,7 @@ data "aws_identitystore_group" "example" {
 }
 
 resource "awscc_sso_assignment" "example" {
-  instance_arn       = tolist(data.aws_ssoadmin_instances.example.arns)[0]
+  instance_arn       = data.aws_ssoadmin_instances.example.arns[0]
   permission_set_arn = awscc_sso_permission_set.example.permission_set_arn
 
   principal_id   = data.aws_identitystore_group.example.group_id // reference group id that was fetched by the data source
