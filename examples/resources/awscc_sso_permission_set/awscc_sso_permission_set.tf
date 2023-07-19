@@ -15,9 +15,9 @@ data "aws_ssoadmin_instances" "example" {} // fetch IAM Identity Center instance
 
 // create new permission set
 resource "awscc_sso_permission_set" "example" {
-  instance_arn = tolist(data.aws_ssoadmin_instances.example.arns)[0] // reference existing IAM IDC instance by arn
-  name         = "ExamplePermissionSet"                              // add desired name for permission set
-  description  = "An example Permission Set"                         // add desired description for permission set
+  instance_arn = data.aws_ssoadmin_instances.example.arns[0] // reference existing IAM IDC instance by arn
+  name         = "ExamplePermissionSet"                      // add desired name for permission set
+  description  = "An example Permission Set"                 // add desired description for permission set
   // add multiple managed policies
   managed_policies = [
     "arn:aws:iam::aws:policy/AdministratorAccess",
