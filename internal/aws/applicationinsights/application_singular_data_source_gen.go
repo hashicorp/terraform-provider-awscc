@@ -299,7 +299,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "description": "The type of Windows Events to log.",
 		//	                      "maxLength": 260,
 		//	                      "minLength": 1,
-		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "LogGroupName": {
@@ -437,7 +437,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                            "description": "The type of Windows Events to log.",
 		//	                            "maxLength": 260,
 		//	                            "minLength": 1,
-		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "LogGroupName": {
@@ -686,7 +686,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                      "description": "The type of Windows Events to log.",
 		//	                      "maxLength": 260,
 		//	                      "minLength": 1,
-		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "LogGroupName": {
@@ -824,7 +824,7 @@ func applicationDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                            "description": "The type of Windows Events to log.",
 		//	                            "maxLength": 260,
 		//	                            "minLength": 1,
-		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "LogGroupName": {

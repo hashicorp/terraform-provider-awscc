@@ -142,6 +142,68 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 			Description: "The FHIR version. Only R4 version data is supported.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: IdentityProviderConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "The identity provider configuration for the datastore",
+		//	  "properties": {
+		//	    "AuthorizationStrategy": {
+		//	      "description": "Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.",
+		//	      "enum": [
+		//	        "SMART_ON_FHIR_V1",
+		//	        "AWS_AUTH"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "FineGrainedAuthorizationEnabled": {
+		//	      "description": "Flag to indicate if fine-grained authorization will be enabled for the datastore",
+		//	      "type": "boolean"
+		//	    },
+		//	    "IdpLambdaArn": {
+		//	      "description": "The Amazon Resource Name (ARN) of the Lambda function that will be used to decode the access token created by the authorization server.",
+		//	      "maxLength": 256,
+		//	      "minLength": 49,
+		//	      "pattern": "arn:aws[-a-z]*:lambda:[a-z]{2}-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9\\-_\\.]+(:(\\$LATEST|[a-zA-Z0-9\\-_]+))?",
+		//	      "type": "string"
+		//	    },
+		//	    "Metadata": {
+		//	      "description": "The JSON metadata elements for identity provider configuration.",
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "AuthorizationStrategy"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"identity_provider_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AuthorizationStrategy
+				"authorization_strategy": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: FineGrainedAuthorizationEnabled
+				"fine_grained_authorization_enabled": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Description: "Flag to indicate if fine-grained authorization will be enabled for the datastore",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: IdpLambdaArn
+				"idp_lambda_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The Amazon Resource Name (ARN) of the Lambda function that will be used to decode the access token created by the authorization server.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Metadata
+				"metadata": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "The JSON metadata elements for identity provider configuration.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "The identity provider configuration for the datastore",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PreloadDataConfig
 		// CloudFormation resource type schema:
 		//
@@ -298,24 +360,29 @@ func fHIRDatastoreDataSource(ctx context.Context) (datasource.DataSource, error)
 	opts = opts.WithCloudFormationTypeName("AWS::HealthLake::FHIRDatastore").WithTerraformTypeName("awscc_healthlake_fhir_datastore")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"cmk_type":               "CmkType",
-		"created_at":             "CreatedAt",
-		"datastore_arn":          "DatastoreArn",
-		"datastore_endpoint":     "DatastoreEndpoint",
-		"datastore_id":           "DatastoreId",
-		"datastore_name":         "DatastoreName",
-		"datastore_status":       "DatastoreStatus",
-		"datastore_type_version": "DatastoreTypeVersion",
-		"key":                    "Key",
-		"kms_encryption_config":  "KmsEncryptionConfig",
-		"kms_key_id":             "KmsKeyId",
-		"nanos":                  "Nanos",
-		"preload_data_config":    "PreloadDataConfig",
-		"preload_data_type":      "PreloadDataType",
-		"seconds":                "Seconds",
-		"sse_configuration":      "SseConfiguration",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"authorization_strategy":             "AuthorizationStrategy",
+		"cmk_type":                           "CmkType",
+		"created_at":                         "CreatedAt",
+		"datastore_arn":                      "DatastoreArn",
+		"datastore_endpoint":                 "DatastoreEndpoint",
+		"datastore_id":                       "DatastoreId",
+		"datastore_name":                     "DatastoreName",
+		"datastore_status":                   "DatastoreStatus",
+		"datastore_type_version":             "DatastoreTypeVersion",
+		"fine_grained_authorization_enabled": "FineGrainedAuthorizationEnabled",
+		"identity_provider_configuration":    "IdentityProviderConfiguration",
+		"idp_lambda_arn":                     "IdpLambdaArn",
+		"key":                                "Key",
+		"kms_encryption_config":              "KmsEncryptionConfig",
+		"kms_key_id":                         "KmsKeyId",
+		"metadata":                           "Metadata",
+		"nanos":                              "Nanos",
+		"preload_data_config":                "PreloadDataConfig",
+		"preload_data_type":                  "PreloadDataType",
+		"seconds":                            "Seconds",
+		"sse_configuration":                  "SseConfiguration",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	v, err := generic.NewSingularDataSource(ctx, opts...)
