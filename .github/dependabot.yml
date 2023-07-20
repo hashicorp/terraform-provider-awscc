@@ -16,7 +16,7 @@ updates:
       aws-sdk-go:
         patterns:
           - "github.com/aws/aws-sdk-go"
-          - "github.com/aws/aws-sdk-go-v2/service/*"
+          - "github.com/aws/aws-sdk-go-v2/*"
     ignore:
       # terraform-plugin-go should only be updated via terraform-plugin-framework
       - dependency-name: "github.com/hashicorp/terraform-plugin-go"
