@@ -307,6 +307,14 @@
         "imagebuilder:TagResource",
         "imagebuilder:GetContainerRecipe",
         "imagebuilder:CreateContainerRecipe",
+        "imagebuilder:GetImage",
+        "kms:Encrypt",
+        "kms:Decrypt",
+        "kms:ReEncryptFrom",
+        "kms:ReEncryptTo",
+        "kms:GenerateDataKey*",
+        "s3:GetObject",
+        "s3:ListBucket",
         "ecr:DescribeRepositories",
         "ec2:DescribeImages"
       ]

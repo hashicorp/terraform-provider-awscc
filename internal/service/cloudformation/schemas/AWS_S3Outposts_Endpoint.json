@@ -22,6 +22,20 @@
       "required": [
         "NetworkInterfaceId"
       ]
+    },
+    "FailedReason": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "ErrorCode": {
+          "type": "string",
+          "description": "The failure code, if any, for a create or delete endpoint operation."
+        },
+        "Message": {
+          "type": "string",
+          "description": "Additional error details describing the endpoint failure and recommended action."
+        }
+      }
     }
   },
   "properties": {
@@ -75,7 +89,9 @@
       "enum": [
         "Available",
         "Pending",
-        "Deleting"
+        "Deleting",
+        "Create_Failed",
+        "Delete_Failed"
       ]
     },
     "SubnetId": {
@@ -98,6 +114,10 @@
       "description": "The ID of the customer-owned IPv4 pool for the Endpoint. IP addresses will be allocated from this pool for the endpoint.",
       "type": "string",
       "pattern": "^ipv4pool-coip-([0-9a-f]{17})$"
+    },
+    "FailedReason": {
+      "description": "The failure reason, if any, for a create or delete endpoint operation.",
+      "$ref": "#/definitions/FailedReason"
     }
   },
   "taggable": false,

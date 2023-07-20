@@ -106,13 +106,15 @@
         "config:PutOrganizationConformancePack",
         "config:DescribeOrganizationConformancePackStatuses",
         "config:GetOrganizationConformancePackDetailedStatus",
+        "config:DescribeOrganizationConformancePacks",
         "s3:GetObject",
         "s3:GetBucketAcl",
         "iam:CreateServiceLinkedRole",
         "iam:PassRole",
         "organizations:ListDelegatedAdministrators",
         "organizations:EnableAWSServiceAccess"
-      ]
+      ],
+      "timeoutInMinutes": 706
     },
     "read": {
       "permissions": [
@@ -125,7 +127,8 @@
         "config:DescribeOrganizationConformancePackStatuses",
         "config:GetOrganizationConformancePackDetailedStatus",
         "organizations:ListDelegatedAdministrators"
-      ]
+      ],
+      "timeoutInMinutes": 706
     },
     "update": {
       "permissions": [
@@ -138,7 +141,8 @@
         "iam:PassRole",
         "organizations:ListDelegatedAdministrators",
         "organizations:EnableAWSServiceAccess"
-      ]
+      ],
+      "timeoutInMinutes": 706
     },
     "list": {
       "permissions": [

@@ -213,12 +213,15 @@
     "create": {
       "permissions": [
         "cloudwatch:PutMetricStream",
+        "cloudwatch:GetMetricStream",
+        "cloudwatch:TagResource",
         "iam:PassRole"
       ]
     },
     "update": {
       "permissions": [
         "cloudwatch:PutMetricStream",
+        "cloudwatch:GetMetricStream",
         "cloudwatch:TagResource",
         "cloudwatch:UntagResource",
         "iam:PassRole"
@@ -226,7 +229,8 @@
     },
     "delete": {
       "permissions": [
-        "cloudwatch:DeleteMetricStream"
+        "cloudwatch:DeleteMetricStream",
+        "cloudwatch:GetMetricStream"
       ]
     },
     "list": {
