@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 778 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 786 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -175,6 +175,11 @@ resource_schema "aws_apigateway_vpc_link" {
 
 resource_schema "aws_apigatewayv2_api" {
   cloudformation_type_name = "AWS::ApiGatewayV2::Api"
+}
+
+resource_schema "aws_apigatewayv2_api_mapping" {
+  cloudformation_type_name               = "AWS::ApiGatewayV2::ApiMapping"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_apigatewayv2_authorizer" {
@@ -753,6 +758,21 @@ resource_schema "aws_connect_prompt" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_connect_queue" {
+  cloudformation_type_name               = "AWS::Connect::Queue"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_quick_connect" {
+  cloudformation_type_name               = "AWS::Connect::QuickConnect"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_routing_profile" {
+  cloudformation_type_name               = "AWS::Connect::RoutingProfile"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_connect_rule" {
   cloudformation_type_name = "AWS::Connect::Rule"
 
@@ -760,11 +780,6 @@ resource_schema "aws_connect_rule" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
-}
-
-resource_schema "aws_connect_quick_connect" {
-  cloudformation_type_name               = "AWS::Connect::QuickConnect"
-  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_connect_task_template" {
@@ -1580,12 +1595,22 @@ resource_schema "aws_healthlake_fhir_datastore" {
   cloudformation_type_name = "AWS::HealthLake::FHIRDatastore"
 }
 
+resource_schema "aws_iam_group_policy" {
+  cloudformation_type_name               = "AWS::IAM::GroupPolicy"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_iam_oidc_provider" {
   cloudformation_type_name = "AWS::IAM::OIDCProvider"
 }
 
 resource_schema "aws_iam_role" {
   cloudformation_type_name = "AWS::IAM::Role"
+}
+
+resource_schema "aws_iam_role_policy" {
+  cloudformation_type_name               = "AWS::IAM::RolePolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_iam_saml_provider" {
@@ -1599,6 +1624,11 @@ resource_schema "aws_iam_service_linked_role" {
 
 resource_schema "aws_iam_server_certificate" {
   cloudformation_type_name = "AWS::IAM::ServerCertificate"
+}
+
+resource_schema "aws_iam_user_policy" {
+  cloudformation_type_name               = "AWS::IAM::UserPolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_iam_virtual_mfa_device" {
@@ -2189,6 +2219,11 @@ resource_schema "aws_location_tracker" {
 
 resource_schema "aws_location_tracker_consumer" {
   cloudformation_type_name               = "AWS::Location::TrackerConsumer"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_logs_account_policy" {
+  cloudformation_type_name               = "AWS::Logs::AccountPolicy"
   suppress_plural_data_source_generation = true
 }
 
@@ -3089,6 +3124,11 @@ resource_schema "aws_sns_topic" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_sns_topic_policy" {
+  cloudformation_type_name               = "AWS::SNS::TopicPolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ssm_association" {

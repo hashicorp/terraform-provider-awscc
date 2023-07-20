@@ -58,7 +58,7 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) of the parent image.",
 		//	  "maxLength": 256,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-z0-9]([-.]?[a-z0-9])*$",
+		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image\\/[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*$",
 		//	  "type": "string"
 		//	}
 		"image_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -86,7 +86,7 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	  "description": "The Amazon Resource Name (ARN) of the image version.",
 		//	  "maxLength": 256,
 		//	  "minLength": 1,
-		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-z0-9]([-.]?[a-z0-9])*\\/[0-9]+$",
+		//	  "pattern": "^arn:aws(-[\\w]+)*:sagemaker:[a-z0-9\\-]*:[0-9]{12}:image-version\\/[a-zA-Z0-9]([-.]?[a-zA-Z0-9])*\\/[0-9]+$",
 		//	  "type": "string"
 		//	}
 		"image_version_arn": schema.StringAttribute{ /*START ATTRIBUTE*/

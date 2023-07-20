@@ -35,6 +35,38 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "The date value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ssZ)",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: HealthEventsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AvailabilityScoreThreshold": {
+		//	      "maximum": 100.0,
+		//	      "minimum": 0.0,
+		//	      "type": "number"
+		//	    },
+		//	    "PerformanceScoreThreshold": {
+		//	      "maximum": 100.0,
+		//	      "minimum": 0.0,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityScoreThreshold
+				"availability_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+				// Property: PerformanceScoreThreshold
+				"performance_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: InternetMeasurementsLogDelivery
 		// CloudFormation resource type schema:
 		//
@@ -287,9 +319,11 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::InternetMonitor::Monitor").WithTerraformTypeName("awscc_internetmonitor_monitor")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"availability_score_threshold":       "AvailabilityScoreThreshold",
 		"bucket_name":                        "BucketName",
 		"bucket_prefix":                      "BucketPrefix",
 		"created_at":                         "CreatedAt",
+		"health_events_config":               "HealthEventsConfig",
 		"internet_measurements_log_delivery": "InternetMeasurementsLogDelivery",
 		"key":                                "Key",
 		"log_delivery_status":                "LogDeliveryStatus",
@@ -297,6 +331,7 @@ func monitorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"modified_at":                        "ModifiedAt",
 		"monitor_arn":                        "MonitorArn",
 		"monitor_name":                       "MonitorName",
+		"performance_score_threshold":        "PerformanceScoreThreshold",
 		"processing_status":                  "ProcessingStatus",
 		"processing_status_info":             "ProcessingStatusInfo",
 		"resources":                          "Resources",

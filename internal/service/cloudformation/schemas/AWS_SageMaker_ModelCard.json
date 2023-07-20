@@ -976,15 +976,19 @@
     "create": {
       "permissions": [
         "sagemaker:CreateModelCard",
-        "kms:CreateGrant",
         "kms:DescribeKey",
         "kms:GenerateDataKey",
+        "kms:CreateGrant",
+        "sagemaker:DescribeModelPackageGroup",
+        "sagemaker:DescribeModelPackage",
         "sagemaker:AddTags"
       ]
     },
     "read": {
       "permissions": [
         "sagemaker:DescribeModelCard",
+        "sagemaker:DescribeModelPackageGroup",
+        "sagemaker:DescribeModelPackage",
         "kms:Decrypt",
         "sagemaker:ListTags"
       ]
@@ -992,7 +996,11 @@
     "update": {
       "permissions": [
         "sagemaker:UpdateModelCard",
+        "sagemaker:DescribeModelCard",
         "kms:GenerateDataKey",
+        "kms:Decrypt",
+        "sagemaker:DescribeModelPackageGroup",
+        "sagemaker:DescribeModelPackage",
         "sagemaker:ListTags",
         "sagemaker:AddTags",
         "sagemaker:DeleteTags"
@@ -1001,7 +1009,13 @@
     "delete": {
       "permissions": [
         "sagemaker:DescribeModelCard",
-        "sagemaker:DeleteModelCard"
+        "sagemaker:DeleteModelCard",
+        "sagemaker:DescribeModelPackageGroup",
+        "sagemaker:DescribeModelPackage",
+        "kms:RetireGrant",
+        "kms:Decrypt",
+        "sagemaker:ListTags",
+        "sagemaker:DeleteTags"
       ]
     },
     "list": {

@@ -171,8 +171,11 @@
     "create": {
       "permissions": [
         "datasync:AddStorageSystem",
+        "datasync:DescribeStorageSystem",
+        "datasync:ListTagsForResource",
         "datasync:TagResource",
         "secretsmanager:CreateSecret",
+        "secretsmanager:DescribeSecret",
         "iam:CreateServiceLinkedRole"
       ]
     },
@@ -190,6 +193,7 @@
         "datasync:ListTagsForResource",
         "datasync:TagResource",
         "datasync:UntagResource",
+        "secretsmanager:DescribeSecret",
         "secretsmanager:PutSecretValue"
       ]
     },
@@ -197,6 +201,7 @@
       "permissions": [
         "datasync:DescribeStorageSystem",
         "datasync:RemoveStorageSystem",
+        "secretsmanager:DescribeSecret",
         "secretsmanager:DeleteSecret"
       ]
     },

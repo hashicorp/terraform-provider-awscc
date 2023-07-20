@@ -67,6 +67,13 @@
         "COUNT_DISTINCT"
       ]
     },
+    "JoinOperator": {
+      "type": "string",
+      "enum": [
+        "OR",
+        "AND"
+      ]
+    },
     "AnalysisMethod": {
       "type": "string",
       "enum": [
@@ -115,6 +122,14 @@
             "$ref": "#/definitions/AnalysisRuleColumnName"
           }
         },
+        "AllowedJoinOperators": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/JoinOperator"
+          },
+          "maxItems": 2
+        },
         "JoinRequired": {
           "$ref": "#/definitions/JoinRequiredOption"
         },
@@ -160,6 +175,14 @@
             "$ref": "#/definitions/AnalysisRuleColumnName"
           },
           "minItems": 1
+        },
+        "AllowedJoinOperators": {
+          "type": "array",
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/JoinOperator"
+          },
+          "maxItems": 2
         },
         "ListColumns": {
           "type": "array",

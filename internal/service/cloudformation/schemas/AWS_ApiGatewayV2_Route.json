@@ -54,12 +54,15 @@
   "definitions": {
     "ParameterConstraints": {
       "type": "object",
-      "additionalProperties": false,
       "properties": {
         "Required": {
           "type": "boolean"
         }
-      }
+      },
+      "required": [
+        "Required"
+      ],
+      "additionalProperties": false
     }
   },
   "required": [
@@ -108,6 +111,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "ApiId": {
+            "$ref": "resource-schema.json#/properties/ApiId"
+          }
+        },
+        "required": [
+          "ApiId"
+        ]
+      },
       "permissions": [
         "apigateway:GET"
       ]

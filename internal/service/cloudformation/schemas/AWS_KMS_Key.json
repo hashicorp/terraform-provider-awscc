@@ -132,7 +132,8 @@
         "kms:CreateKey",
         "kms:EnableKeyRotation",
         "kms:DisableKey",
-        "kms:TagResource"
+        "kms:TagResource",
+        "kms:PutKeyPolicy"
       ]
     },
     "read": {
@@ -153,7 +154,8 @@
         "kms:PutKeyPolicy",
         "kms:TagResource",
         "kms:UntagResource",
-        "kms:UpdateKeyDescription"
+        "kms:UpdateKeyDescription",
+        "kms:ListResourceTags"
       ]
     },
     "delete": {

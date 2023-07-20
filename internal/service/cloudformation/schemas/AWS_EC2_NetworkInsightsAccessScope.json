@@ -203,6 +203,7 @@
     "create": {
       "permissions": [
         "ec2:CreateNetworkInsightsAccessScope",
+        "ec2:CreateTags",
         "tiros:CreateQuery"
       ]
     },
@@ -222,7 +223,8 @@
     },
     "delete": {
       "permissions": [
-        "ec2:DeleteNetworkInsightsAccessScope"
+        "ec2:DeleteNetworkInsightsAccessScope",
+        "ec2:DeleteTags"
       ]
     },
     "list": {

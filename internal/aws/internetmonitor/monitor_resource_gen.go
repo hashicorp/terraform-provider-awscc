@@ -7,11 +7,13 @@ package internetmonitor
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/float64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/float64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
@@ -45,6 +47,56 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: HealthEventsConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "properties": {
+		//	    "AvailabilityScoreThreshold": {
+		//	      "maximum": 100.0,
+		//	      "minimum": 0.0,
+		//	      "type": "number"
+		//	    },
+		//	    "PerformanceScoreThreshold": {
+		//	      "maximum": 100.0,
+		//	      "minimum": 0.0,
+		//	      "type": "number"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityScoreThreshold
+				"availability_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.Between(0.000000, 100.000000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PerformanceScoreThreshold
+				"performance_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					Validators: []validator.Float64{ /*START VALIDATORS*/
+						float64validator.Between(0.000000, 100.000000),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Optional: true,
+			Computed: true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: InternetMeasurementsLogDelivery
@@ -424,9 +476,11 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"availability_score_threshold":       "AvailabilityScoreThreshold",
 		"bucket_name":                        "BucketName",
 		"bucket_prefix":                      "BucketPrefix",
 		"created_at":                         "CreatedAt",
+		"health_events_config":               "HealthEventsConfig",
 		"internet_measurements_log_delivery": "InternetMeasurementsLogDelivery",
 		"key":                                "Key",
 		"log_delivery_status":                "LogDeliveryStatus",
@@ -434,6 +488,7 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		"modified_at":                        "ModifiedAt",
 		"monitor_arn":                        "MonitorArn",
 		"monitor_name":                       "MonitorName",
+		"performance_score_threshold":        "PerformanceScoreThreshold",
 		"processing_status":                  "ProcessingStatus",
 		"processing_status_info":             "ProcessingStatusInfo",
 		"resources":                          "Resources",

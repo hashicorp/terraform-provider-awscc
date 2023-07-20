@@ -168,6 +168,8 @@
     },
     "create": {
       "permissions": [
+        "backup:GetBackupPlan",
+        "backup:TagResource",
         "backup:CreateBackupPlan"
       ]
     },

@@ -179,6 +179,7 @@ func streamDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
+		//	  "maxItems": 50,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}

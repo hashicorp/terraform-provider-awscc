@@ -1,4 +1,24 @@
 ## 0.56.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_apigatewayv2_api_mapping`
+* **New Data Source:** `awscc_connect_queue`
+* **New Data Source:** `awscc_connect_routing_profile`
+* **New Data Source:** `awscc_iam_group_policy`
+* **New Data Source:** `awscc_iam_role_policy`
+* **New Data Source:** `awscc_iam_user_policy`
+* **New Data Source:** `awscc_logs_account_policy`
+* **New Data Source:** `awscc_sns_topic_policy`
+* **New Resource:** `awscc_apigatewayv2_api_mapping`
+* **New Resource:** `awscc_connect_queue`
+* **New Resource:** `awscc_connect_routing_profile`
+* **New Resource:** `awscc_iam_group_policy`
+* **New Resource:** `awscc_iam_role_policy`
+* **New Resource:** `awscc_iam_user_policy`
+* **New Resource:** `awscc_logs_account_policy`
+* **New Resource:** `awscc_sns_topic_policy`
+
 ## 0.55.0 (June 29, 2023)
 
 FEATURES:

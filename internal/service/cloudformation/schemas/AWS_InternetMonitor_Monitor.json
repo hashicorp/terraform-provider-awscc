@@ -68,6 +68,22 @@
         }
       },
       "additionalProperties": false
+    },
+    "HealthEventsConfig": {
+      "type": "object",
+      "properties": {
+        "AvailabilityScoreThreshold": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "PerformanceScoreThreshold": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        }
+      },
+      "additionalProperties": false
     }
   },
   "properties": {
@@ -145,6 +161,9 @@
     },
     "InternetMeasurementsLogDelivery": {
       "$ref": "#/definitions/InternetMeasurementsLogDelivery"
+    },
+    "HealthEventsConfig": {
+      "$ref": "#/definitions/HealthEventsConfig"
     }
   },
   "readOnlyProperties": [
@@ -182,7 +201,8 @@
         "logs:GetLogDelivery",
         "s3:GetBucketPolicy",
         "s3:PutBucketPolicy",
-        "s3:ListBucket"
+        "s3:ListBucket",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -206,7 +226,8 @@
         "logs:ListLogDeliveries",
         "s3:GetBucketPolicy",
         "s3:PutBucketPolicy",
-        "s3:ListBucket"
+        "s3:ListBucket",
+        "iam:PassRole"
       ]
     },
     "delete": {

@@ -8,6 +8,7 @@ package kinesis
 import (
 	"context"
 	"github.com/hashicorp/terraform-plugin-framework-validators/int64validator"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -236,6 +237,7 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 		//	    ],
 		//	    "type": "object"
 		//	  },
+		//	  "maxItems": 50,
 		//	  "type": "array",
 		//	  "uniqueItems": false
 		//	}
@@ -263,6 +265,9 @@ func streamResource(ctx context.Context) (resource.Resource, error) {
 			Description: "An arbitrary set of tags (key–value pairs) to associate with the Kinesis stream.",
 			Optional:    true,
 			Computed:    true,
+			Validators: []validator.List{ /*START VALIDATORS*/
+				listvalidator.SizeAtMost(50),
+			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				generic.Multiset(),
 				listplanmodifier.UseStateForUnknown(),

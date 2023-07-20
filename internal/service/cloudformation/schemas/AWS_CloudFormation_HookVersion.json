@@ -82,7 +82,6 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/IsDefaultVersion",
-    "/properties/ProvisioningType",
     "/properties/Visibility",
     "/properties/VersionId",
     "/properties/TypeArn"
@@ -99,6 +98,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "cloudformation:DescribeType",
         "cloudformation:DescribeTypeRegistration",
         "cloudformation:RegisterType",
         "iam:PassRole",
@@ -119,6 +119,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "TypeName": {
+            "$ref": "resource-schema.json#/properties/TypeName"
+          },
+          "Arn": {
+            "$ref": "resource-schema.json#/properties/Arn"
+          }
+        }
+      },
       "permissions": [
         "cloudformation:ListTypes"
       ]

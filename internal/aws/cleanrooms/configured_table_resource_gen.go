@@ -133,6 +133,18 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	                    "minItems": 1,
 		//	                    "type": "array"
 		//	                  },
+		//	                  "AllowedJoinOperators": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "enum": [
+		//	                        "OR",
+		//	                        "AND"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "type": "array"
+		//	                  },
 		//	                  "DimensionColumns": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -227,6 +239,18 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	              "List": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
+		//	                  "AllowedJoinOperators": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "enum": [
+		//	                        "OR",
+		//	                        "AND"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "type": "array"
+		//	                  },
 		//	                  "JoinColumns": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -334,6 +358,25 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 												}, /*END VALIDATORS*/
 												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: AllowedJoinOperators
+											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeAtMost(2),
+													listvalidator.ValueStringsAre(
+														stringvalidator.OneOf(
+															"OR",
+															"AND",
+														),
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
 												}, /*END PLAN MODIFIERS*/
 											}, /*END ATTRIBUTE*/
 											// Property: DimensionColumns
@@ -452,6 +495,25 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 									// Property: List
 									"list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AllowedJoinOperators
+											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeAtMost(2),
+													listvalidator.ValueStringsAre(
+														stringvalidator.OneOf(
+															"OR",
+															"AND",
+														),
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -719,6 +781,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		"aggregate_columns":           "AggregateColumns",
 		"aggregation":                 "Aggregation",
 		"allowed_columns":             "AllowedColumns",
+		"allowed_join_operators":      "AllowedJoinOperators",
 		"analysis_method":             "AnalysisMethod",
 		"analysis_rules":              "AnalysisRules",
 		"arn":                         "Arn",

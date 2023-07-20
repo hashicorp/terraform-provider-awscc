@@ -399,7 +399,17 @@ Read-Only:
 Read-Only:
 
 - `custom_properties` (Map of String) A map for properties for custom connector.
+- `data_transfer_api` (Attributes) (see [below for nested schema](#nestedatt--source_flow_config--source_connector_properties--custom_connector--data_transfer_api))
 - `entity_name` (String)
+
+<a id="nestedatt--source_flow_config--source_connector_properties--custom_connector--data_transfer_api"></a>
+### Nested Schema for `source_flow_config.source_connector_properties.custom_connector.entity_name`
+
+Read-Only:
+
+- `name` (String)
+- `type` (String)
+
 
 
 <a id="nestedatt--source_flow_config--source_connector_properties--datadog"></a>

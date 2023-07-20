@@ -105,6 +105,18 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                    "minItems": 1,
 		//	                    "type": "array"
 		//	                  },
+		//	                  "AllowedJoinOperators": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "enum": [
+		//	                        "OR",
+		//	                        "AND"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "type": "array"
+		//	                  },
 		//	                  "DimensionColumns": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -199,6 +211,18 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	              "List": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
+		//	                  "AllowedJoinOperators": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "enum": [
+		//	                        "OR",
+		//	                        "AND"
+		//	                      ],
+		//	                      "type": "string"
+		//	                    },
+		//	                    "maxItems": 2,
+		//	                    "type": "array"
+		//	                  },
 		//	                  "JoinColumns": {
 		//	                    "insertionOrder": false,
 		//	                    "items": {
@@ -283,6 +307,11 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 												}, /*END NESTED OBJECT*/
 												Computed: true,
 											}, /*END ATTRIBUTE*/
+											// Property: AllowedJoinOperators
+											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 											// Property: DimensionColumns
 											"dimension_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -328,6 +357,11 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 									// Property: List
 									"list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AllowedJoinOperators
+											"allowed_join_operators": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
 											// Property: JoinColumns
 											"join_columns": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
@@ -516,6 +550,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"aggregate_columns":           "AggregateColumns",
 		"aggregation":                 "Aggregation",
 		"allowed_columns":             "AllowedColumns",
+		"allowed_join_operators":      "AllowedJoinOperators",
 		"analysis_method":             "AnalysisMethod",
 		"analysis_rules":              "AnalysisRules",
 		"arn":                         "Arn",

@@ -1,0 +1,1 @@
+$ terraform import awscc_iam_user_policy.example <resource ID>

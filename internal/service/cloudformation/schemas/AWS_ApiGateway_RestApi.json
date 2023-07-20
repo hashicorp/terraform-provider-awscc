@@ -162,6 +162,8 @@
       "permissions": [
         "apigateway:GET",
         "apigateway:POST",
+        "apigateway:PUT",
+        "apigateway:PATCH",
         "apigateway:UpdateRestApiPolicy",
         "s3:GetObject",
         "iam:PassRole"

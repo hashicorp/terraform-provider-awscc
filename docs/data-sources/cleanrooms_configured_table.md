@@ -60,6 +60,7 @@ Read-Only:
 Read-Only:
 
 - `aggregate_columns` (Attributes List) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list--aggregate_columns))
+- `allowed_join_operators` (List of String)
 - `dimension_columns` (List of String)
 - `join_columns` (List of String)
 - `join_required` (String)
@@ -91,6 +92,7 @@ Read-Only:
 
 Read-Only:
 
+- `allowed_join_operators` (List of String)
 - `join_columns` (List of String)
 - `list_columns` (List of String)
 

@@ -93,7 +93,9 @@
     "VpcId",
     "TransitGatewayId"
   ],
-  "taggable": true,
+  "tagging": {
+    "taggable": true
+  },
   "readOnlyProperties": [
     "/properties/Id"
   ],

@@ -964,6 +964,29 @@
         },
         "CustomProperties": {
           "$ref": "#/definitions/CustomProperties"
+        },
+        "DataTransferApi": {
+          "type": "object",
+          "properties": {
+            "Name": {
+              "type": "string",
+              "maxLength": 64,
+              "pattern": "[\\w/-]+"
+            },
+            "Type": {
+              "type": "string",
+              "enum": [
+                "SYNC",
+                "ASYNC",
+                "AUTOMATIC"
+              ]
+            }
+          },
+          "required": [
+            "Name",
+            "Type"
+          ],
+          "additionalProperties": false
         }
       },
       "required": [

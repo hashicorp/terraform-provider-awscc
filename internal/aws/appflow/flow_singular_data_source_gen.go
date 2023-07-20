@@ -1352,6 +1352,29 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DataTransferApi": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "maxLength": 64,
+		//	                  "pattern": "[\\w/-]+",
+		//	                  "type": "string"
+		//	                },
+		//	                "Type": {
+		//	                  "enum": [
+		//	                    "SYNC",
+		//	                    "ASYNC",
+		//	                    "AUTOMATIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name",
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "EntityName": {
 		//	              "maxLength": 1024,
 		//	              "pattern": "\\S+",
@@ -1680,6 +1703,20 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 									ElementType: types.StringType,
 									Description: "A map for properties for custom connector.",
 									Computed:    true,
+								}, /*END ATTRIBUTE*/
+								// Property: DataTransferApi
+								"data_transfer_api": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Computed: true,
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Computed: true,
 								}, /*END ATTRIBUTE*/
 								// Property: EntityName
 								"entity_name": schema.StringAttribute{ /*START ATTRIBUTE*/
@@ -2672,6 +2709,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"lookout_metrics":                   "LookoutMetrics",
 		"marketo":                           "Marketo",
 		"metadata_catalog_config":           "MetadataCatalogConfig",
+		"name":                              "Name",
 		"object":                            "Object",
 		"object_path":                       "ObjectPath",
 		"pardot":                            "Pardot",
@@ -2711,6 +2749,7 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"trigger_config":                    "TriggerConfig",
 		"trigger_properties":                "TriggerProperties",
 		"trigger_type":                      "TriggerType",
+		"type":                              "Type",
 		"upsolver":                          "Upsolver",
 		"value":                             "Value",
 		"veeva":                             "Veeva",
