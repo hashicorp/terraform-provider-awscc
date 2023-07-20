@@ -318,7 +318,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "description": "The type of Windows Events to log.",
 		//	                      "maxLength": 260,
 		//	                      "minLength": 1,
-		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "LogGroupName": {
@@ -456,7 +456,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                            "description": "The type of Windows Events to log.",
 		//	                            "maxLength": 260,
 		//	                            "minLength": 1,
-		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "LogGroupName": {
@@ -705,7 +705,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                      "description": "The type of Windows Events to log.",
 		//	                      "maxLength": 260,
 		//	                      "minLength": 1,
-		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                      "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                      "type": "string"
 		//	                    },
 		//	                    "LogGroupName": {
@@ -843,7 +843,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		//	                            "description": "The type of Windows Events to log.",
 		//	                            "maxLength": 260,
 		//	                            "minLength": 1,
-		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]$",
+		//	                            "pattern": "^[a-zA-Z0-9_ \\\\/-]+$",
 		//	                            "type": "string"
 		//	                          },
 		//	                          "LogGroupName": {
@@ -1213,7 +1213,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
-														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
 													}, /*END VALIDATORS*/
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
@@ -1384,7 +1384,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
-																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
 																}, /*END VALIDATORS*/
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
@@ -1716,7 +1716,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 													Required:    true,
 													Validators: []validator.String{ /*START VALIDATORS*/
 														stringvalidator.LengthBetween(1, 260),
-														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
+														stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
 													}, /*END VALIDATORS*/
 												}, /*END ATTRIBUTE*/
 												// Property: LogGroupName
@@ -1887,7 +1887,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 																Required:    true,
 																Validators: []validator.String{ /*START VALIDATORS*/
 																	stringvalidator.LengthBetween(1, 260),
-																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]$"), ""),
+																	stringvalidator.RegexMatches(regexp.MustCompile("^[a-zA-Z0-9_ \\\\/-]+$"), ""),
 																}, /*END VALIDATORS*/
 															}, /*END ATTRIBUTE*/
 															// Property: LogGroupName
@@ -1975,6 +1975,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// ComponentMonitoringSettings is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: CustomComponents
 		// CloudFormation resource type schema:
@@ -2051,6 +2052,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// CustomComponents is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: GroupingType
 		// CloudFormation resource type schema:
@@ -2073,7 +2075,9 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// GroupingType is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LogPatternSets
 		// CloudFormation resource type schema:
@@ -2194,6 +2198,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
 				listplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// LogPatternSets is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: OpsCenterEnabled
 		// CloudFormation resource type schema:
@@ -2231,6 +2236,7 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// OpsItemSNSTopicArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ResourceGroupName
 		// CloudFormation resource type schema:
@@ -2393,6 +2399,13 @@ func applicationResource(ctx context.Context) (resource.Resource, error) {
 		"windows_events":                            "WindowsEvents",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ComponentMonitoringSettings",
+		"/properties/LogPatternSets",
+		"/properties/CustomComponents",
+		"/properties/GroupingType",
+		"/properties/OpsItemSNSTopicArn",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(600).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(600)

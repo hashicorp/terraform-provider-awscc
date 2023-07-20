@@ -632,6 +632,7 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 				setplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// StackInstancesGroup is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: StackSetId
 		// CloudFormation resource type schema:
@@ -835,6 +836,7 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/TemplateURL",
 		"/properties/OperationPreferences",
+		"/properties/StackInstancesGroup",
 		"/properties/CallAs",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(2160).WithDeleteTimeoutInMinutes(2160)

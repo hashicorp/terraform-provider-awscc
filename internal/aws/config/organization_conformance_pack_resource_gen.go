@@ -253,9 +253,9 @@ func organizationConformancePackResource(ctx context.Context) (resource.Resource
 		"/properties/TemplateBody",
 		"/properties/TemplateS3Uri",
 	})
-	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
+	opts = opts.WithCreateTimeoutInMinutes(706).WithDeleteTimeoutInMinutes(706)
 
-	opts = opts.WithUpdateTimeoutInMinutes(0)
+	opts = opts.WithUpdateTimeoutInMinutes(706)
 
 	v, err := generic.NewResource(ctx, opts...)
 

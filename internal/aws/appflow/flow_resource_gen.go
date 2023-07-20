@@ -2014,6 +2014,29 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	              },
 		//	              "type": "object"
 		//	            },
+		//	            "DataTransferApi": {
+		//	              "additionalProperties": false,
+		//	              "properties": {
+		//	                "Name": {
+		//	                  "maxLength": 64,
+		//	                  "pattern": "[\\w/-]+",
+		//	                  "type": "string"
+		//	                },
+		//	                "Type": {
+		//	                  "enum": [
+		//	                    "SYNC",
+		//	                    "ASYNC",
+		//	                    "AUTOMATIC"
+		//	                  ],
+		//	                  "type": "string"
+		//	                }
+		//	              },
+		//	              "required": [
+		//	                "Name",
+		//	                "Type"
+		//	              ],
+		//	              "type": "object"
+		//	            },
 		//	            "EntityName": {
 		//	              "maxLength": 1024,
 		//	              "pattern": "\\S+",
@@ -2406,6 +2429,35 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 									Computed:    true,
 									PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
 										mapplanmodifier.UseStateForUnknown(),
+									}, /*END PLAN MODIFIERS*/
+								}, /*END ATTRIBUTE*/
+								// Property: DataTransferApi
+								"data_transfer_api": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+									Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+										// Property: Name
+										"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.LengthAtMost(64),
+												stringvalidator.RegexMatches(regexp.MustCompile("[\\w/-]+"), ""),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+										// Property: Type
+										"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+											Required: true,
+											Validators: []validator.String{ /*START VALIDATORS*/
+												stringvalidator.OneOf(
+													"SYNC",
+													"ASYNC",
+													"AUTOMATIC",
+												),
+											}, /*END VALIDATORS*/
+										}, /*END ATTRIBUTE*/
+									}, /*END SCHEMA*/
+									Optional: true,
+									Computed: true,
+									PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+										objectplanmodifier.UseStateForUnknown(),
 									}, /*END PLAN MODIFIERS*/
 								}, /*END ATTRIBUTE*/
 								// Property: EntityName
@@ -4104,6 +4156,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"lookout_metrics":                   "LookoutMetrics",
 		"marketo":                           "Marketo",
 		"metadata_catalog_config":           "MetadataCatalogConfig",
+		"name":                              "Name",
 		"object":                            "Object",
 		"object_path":                       "ObjectPath",
 		"pardot":                            "Pardot",
@@ -4143,6 +4196,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		"trigger_config":                    "TriggerConfig",
 		"trigger_properties":                "TriggerProperties",
 		"trigger_type":                      "TriggerType",
+		"type":                              "Type",
 		"upsolver":                          "Upsolver",
 		"value":                             "Value",
 		"veeva":                             "Veeva",
