@@ -22,6 +22,7 @@ HealthLake FHIR Datastore
 ### Optional
 
 - `datastore_name` (String) The user-generated name for the Data Store.
+- `identity_provider_configuration` (Attributes) The identity provider configuration for the datastore (see [below for nested schema](#nestedatt--identity_provider_configuration))
 - `preload_data_config` (Attributes) The preloaded data configuration for the Data Store. Only data preloaded from Synthea is supported. (see [below for nested schema](#nestedatt--preload_data_config))
 - `sse_configuration` (Attributes) The server-side encryption key configuration for a customer provided encryption key. (see [below for nested schema](#nestedatt--sse_configuration))
 - `tags` (Attributes List) (see [below for nested schema](#nestedatt--tags))
@@ -34,6 +35,20 @@ HealthLake FHIR Datastore
 - `datastore_id` (String) The AWS-generated ID number for the Data Store.
 - `datastore_status` (String) The status of the Data Store. Possible statuses are 'CREATING', 'ACTIVE', 'DELETING', or 'DELETED'.
 - `id` (String) Uniquely identifies the resource.
+
+<a id="nestedatt--identity_provider_configuration"></a>
+### Nested Schema for `identity_provider_configuration`
+
+Required:
+
+- `authorization_strategy` (String) Type of Authorization Strategy. The two types of supported Authorization strategies are SMART_ON_FHIR_V1 and AWS_AUTH.
+
+Optional:
+
+- `fine_grained_authorization_enabled` (Boolean) Flag to indicate if fine-grained authorization will be enabled for the datastore
+- `idp_lambda_arn` (String) The Amazon Resource Name (ARN) of the Lambda function that will be used to decode the access token created by the authorization server.
+- `metadata` (String) The JSON metadata elements for identity provider configuration.
+
 
 <a id="nestedatt--preload_data_config"></a>
 ### Nested Schema for `preload_data_config`

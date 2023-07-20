@@ -21,6 +21,7 @@ Represents a monitor, which defines the monitoring boundaries for measurements t
 
 ### Optional
 
+- `health_events_config` (Attributes) (see [below for nested schema](#nestedatt--health_events_config))
 - `internet_measurements_log_delivery` (Attributes) (see [below for nested schema](#nestedatt--internet_measurements_log_delivery))
 - `max_city_networks_to_monitor` (Number)
 - `resources` (List of String)
@@ -38,6 +39,15 @@ Represents a monitor, which defines the monitoring boundaries for measurements t
 - `monitor_arn` (String)
 - `processing_status` (String)
 - `processing_status_info` (String)
+
+<a id="nestedatt--health_events_config"></a>
+### Nested Schema for `health_events_config`
+
+Optional:
+
+- `availability_score_threshold` (Number)
+- `performance_score_threshold` (Number)
+
 
 <a id="nestedatt--internet_measurements_log_delivery"></a>
 ### Nested Schema for `internet_measurements_log_delivery`

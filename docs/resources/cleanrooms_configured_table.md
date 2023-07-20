@@ -87,6 +87,7 @@ Required:
 
 Optional:
 
+- `allowed_join_operators` (List of String)
 - `join_required` (String)
 
 <a id="nestedatt--analysis_rules--policy--v1--list--aggregate_columns"></a>
@@ -116,6 +117,10 @@ Required:
 
 - `join_columns` (List of String)
 - `list_columns` (List of String)
+
+Optional:
+
+- `allowed_join_operators` (List of String)
 
 
 

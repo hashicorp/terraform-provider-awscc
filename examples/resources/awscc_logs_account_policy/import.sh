@@ -1,0 +1,1 @@
+$ terraform import awscc_logs_account_policy.example <resource ID>
