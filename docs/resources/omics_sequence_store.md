@@ -27,8 +27,6 @@ resource "awscc_omics_sequence_store" "example" {
 ### With `fallback_location`
 
 ```terraform
-resource "awscc_s3_bucket" "example" {}
-
 resource "awscc_omics_sequence_store" "example" {
   name        = "example"
   description = "example"
