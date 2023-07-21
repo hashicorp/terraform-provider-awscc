@@ -140,7 +140,7 @@ jobs:
       - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
 
       - name: semgrep
-        uses: returntocorp/semgrep-action@245bf11ddb2f3d4e35f116608cf6e27ae0f9aa04 # v1
+        uses: returntocorp/semgrep-action@5f527831fb11fa698f72b1181080d95a04755a2a # v1
 
   importlint:
     needs: [go_mod_download]
