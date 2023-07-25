@@ -31,8 +31,8 @@ github.com/aws/aws-sdk-go-v2/internal/ini v1.3.36 h1:8r5m1BoAWkn0TDC34lUculryf7n
 github.com/aws/aws-sdk-go-v2/internal/ini v1.3.36/go.mod h1:Rmw2M1hMVTwiUhjwMoIBFWFJMhvJbct06sSidxInkhY=
 github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.11.15 h1:AcgNdEOb91kz/6YuswQcuEiWKGQKXSx20jIUhgHeGNs=
 github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.11.15/go.mod h1:KNYZ+0/nr24D/sXbeG+qPAdAEuHm3TA3UpSmevmnEv4=
-github.com/aws/aws-sdk-go-v2/service/cloudformation v1.31.0 h1:sMN3a5Bhu2H2oDI3FGYW7jg7iI33CIEf5+E5sDNRql4=
-github.com/aws/aws-sdk-go-v2/service/cloudformation v1.31.0/go.mod h1:laKFhtn8EH6gcPl7KEQ4kcuSYcQF1tqUm82ENxMwlMk=
+github.com/aws/aws-sdk-go-v2/service/cloudformation v1.32.0 h1:AwJ39mY7jwiLIbR7FIKT8LH1Zjd432SiWHF7vVqvktA=
+github.com/aws/aws-sdk-go-v2/service/cloudformation v1.32.0/go.mod h1:laKFhtn8EH6gcPl7KEQ4kcuSYcQF1tqUm82ENxMwlMk=
 github.com/aws/aws-sdk-go-v2/service/iam v1.21.1 h1:VTCWgsrromZqnlRgfziqqWWcW7LFkQLwJVYgf/5zgWA=
 github.com/aws/aws-sdk-go-v2/service/iam v1.21.1/go.mod h1:LBsjrFczXiQLASO6FtDGTeHuZh6oHuIH6VKaOozFghg=
 github.com/aws/aws-sdk-go-v2/service/internal/presigned-url v1.9.29 h1:IiDolu/eLmuB18DRZibj77n1hHQT7z12jnGO7Ze3pLc=
