@@ -12,6 +12,8 @@ description: |-
 ## Example Usage
 
 To attach Amazon EBS volume to Amazon EC2 instance
+
+Note: AWS provider resources for [aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) is used.
 {{ tffile (printf "examples/resources/%s/ec2_volume_attachment.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}

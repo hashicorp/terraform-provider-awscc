@@ -12,6 +12,8 @@ Resource Type definition for AWS::EC2::VolumeAttachment
 ## Example Usage
 
 To attach Amazon EBS volume to Amazon EC2 instance
+
+Note: AWS provider resources for [aws_instance](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/instance) is used.
 ```terraform
 resource "awscc_ec2_volume" "example" {
   availability_zone = "us-west-2a"
