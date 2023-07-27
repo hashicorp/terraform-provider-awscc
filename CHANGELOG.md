@@ -1,4 +1,15 @@
 ## 0.57.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_iam_managed_policies`
+* **New Data Source:** `awscc_iam_managed_policy`
+* **New Data Source:** `awscc_lambda_permission`
+* **New Data Source:** `awscc_sns_topic_inline_policy`
+* **New Resource:** `awscc_iam_managed_policy`
+* **New Resource:** `awscc_lambda_permission`
+* **New Resource:** `awscc_sns_topic_inline_policy`
+
 ## 0.56.0 (July 20, 2023)
 
 FEATURES:
