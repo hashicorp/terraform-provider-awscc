@@ -69,7 +69,9 @@
     "create": {
       "permissions": [
         "elasticache:CreateCacheSubnetGroup",
-        "elasticache:DescribeCacheSubnetGroups"
+        "elasticache:AddTagsToResource",
+        "elasticache:DescribeCacheSubnetGroups",
+        "elasticache:ListTagsForResource"
       ]
     },
     "read": {
@@ -81,7 +83,8 @@
     "delete": {
       "permissions": [
         "elasticache:DeleteCacheSubnetGroup",
-        "elasticache:DescribeCacheSubnetGroups"
+        "elasticache:DescribeCacheSubnetGroups",
+        "elasticache:ListTagsForResource"
       ]
     },
     "list": {
@@ -92,6 +95,7 @@
     "update": {
       "permissions": [
         "elasticache:ModifyCacheSubnetGroup",
+        "elasticache:DescribeCacheSubnetGroups",
         "elasticache:AddTagsToResource",
         "elasticache:RemoveTagsFromResource"
       ]

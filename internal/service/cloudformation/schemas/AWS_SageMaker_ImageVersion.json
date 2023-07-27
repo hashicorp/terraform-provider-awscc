@@ -20,6 +20,33 @@
     },
     "Version": {
       "$ref": "#/definitions/Version"
+    },
+    "Alias": {
+      "$ref": "#/definitions/Alias"
+    },
+    "Aliases": {
+      "$ref": "#/definitions/Aliases"
+    },
+    "VendorGuidance": {
+      "$ref": "#/definitions/VendorGuidance"
+    },
+    "JobType": {
+      "$ref": "#/definitions/JobType"
+    },
+    "MLFramework": {
+      "$ref": "#/definitions/MLFramework"
+    },
+    "ProgrammingLang": {
+      "$ref": "#/definitions/ProgrammingLang"
+    },
+    "Processor": {
+      "$ref": "#/definitions/Processor"
+    },
+    "Horovod": {
+      "$ref": "#/definitions/Horovod"
+    },
+    "ReleaseNotes": {
+      "$ref": "#/definitions/ReleaseNotes"
     }
   },
   "definitions": {
@@ -58,10 +85,76 @@
       "maxLength": 255,
       "pattern": ".+"
     },
+    "Alias": {
+      "type": "string",
+      "description": "The alias of the image version.",
+      "minLength": 1,
+      "maxLength": 128,
+      "pattern": ""
+    },
+    "Aliases": {
+      "type": "array",
+      "description": "List of aliases for the image version.",
+      "items": {
+        "$ref": "#/definitions/Alias"
+      }
+    },
     "Version": {
       "type": "integer",
       "description": "The version number of the image version.",
       "minimum": 1
+    },
+    "VendorGuidance": {
+      "type": "string",
+      "description": "The availability of the image version specified by the maintainer.",
+      "enum": [
+        "NOT_PROVIDED",
+        "STABLE",
+        "TO_BE_ARCHIVED",
+        "ARCHIVED"
+      ]
+    },
+    "JobType": {
+      "type": "string",
+      "description": "Indicates SageMaker job type compatibility.",
+      "enum": [
+        "TRAINING",
+        "INFERENCE",
+        "NOTEBOOK_KERNEL"
+      ]
+    },
+    "MLFramework": {
+      "type": "string",
+      "description": "The machine learning framework vended in the image version.",
+      "pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "ProgrammingLang": {
+      "type": "string",
+      "description": "The supported programming language and its version.",
+      "pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$",
+      "minLength": 1,
+      "maxLength": 128
+    },
+    "Processor": {
+      "type": "string",
+      "description": "Indicates CPU or GPU compatibility.",
+      "enum": [
+        "CPU",
+        "GPU"
+      ]
+    },
+    "Horovod": {
+      "type": "boolean",
+      "description": "Indicates Horovod compatibility."
+    },
+    "ReleaseNotes": {
+      "type": "string",
+      "description": "The maintainer description of the image version.",
+      "pattern": ".*",
+      "minLength": 1,
+      "maxLength": 255
     }
   },
   "required": [
@@ -81,6 +174,10 @@
     "/properties/ImageName",
     "/properties/BaseImage"
   ],
+  "writeOnlyProperties": [
+    "/properties/Aliases",
+    "/properties/Alias"
+  ],
   "handlers": {
     "create": {
       "permissions": [
@@ -93,6 +190,13 @@
         "sagemaker:DescribeImageVersion"
       ]
     },
+    "update": {
+      "permissions": [
+        "sagemaker:UpdateImageVersion",
+        "sagemaker:DescribeImageVersion",
+        "sagemaker:ListAliases"
+      ]
+    },
     "delete": {
       "permissions": [
         "sagemaker:DeleteImageVersion",
@@ -102,7 +206,18 @@
     "list": {
       "permissions": [
         "sagemaker:ListImageVersions"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "ImageName": {
+            "$ref": "resource-schema.json#/properties/ImageName"
+          }
+        },
+        "required": [
+          "ImageName"
+        ]
+      }
     }
-  }
+  },
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-sagemaker"
 }

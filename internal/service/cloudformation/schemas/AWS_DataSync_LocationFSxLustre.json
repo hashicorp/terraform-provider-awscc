@@ -111,6 +111,7 @@
         "datasync:CreateLocationFsxLustre",
         "datasync:DescribeLocationFsxLustre",
         "datasync:ListTagsForResource",
+        "datasync:TagResource",
         "fsx:DescribeFileSystems",
         "ec2:DescribeNetworkInterfaces",
         "ec2:DescribeSubnets",
