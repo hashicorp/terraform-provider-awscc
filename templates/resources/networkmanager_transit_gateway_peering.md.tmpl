@@ -1,0 +1,31 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Basic
+
+The Core Network must have an edge location where the Transit Gateway is created for Transit Gateway peering to be established.
+This example uses the AWS provider data source for [aws_networkmanager_core_network_policy_document](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/networkmanager_core_network_policy_document).
+Note that the ARN is not returned by [awscc_ec2_transit_gateway](https://registry.terraform.io/providers/hashicorp/awscc/latest/docs/resources/ec2_transit_gateway) as of 20 July 2023 and is thus formatted manually in the example below.
+
+{{ tffile (printf "examples/resources/%s/basic.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
