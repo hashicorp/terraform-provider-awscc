@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -23,6 +23,39 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::SageMaker::ImageVersion resource.
 func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Alias
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The alias of the image version.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "",
+		//	  "type": "string"
+		//	}
+		"alias": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The alias of the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Aliases
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "List of aliases for the image version.",
+		//	  "items": {
+		//	    "description": "The alias of the image version.",
+		//	    "maxLength": 128,
+		//	    "minLength": 1,
+		//	    "pattern": "",
+		//	    "type": "string"
+		//	  },
+		//	  "type": "array"
+		//	}
+		"aliases": schema.ListAttribute{ /*START ATTRIBUTE*/
+			ElementType: types.StringType,
+			Description: "List of aliases for the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: BaseImage
 		// CloudFormation resource type schema:
 		//
@@ -49,6 +82,17 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"container_image": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The registry path of the container image that contains this image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Horovod
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates Horovod compatibility.",
+		//	  "type": "boolean"
+		//	}
+		"horovod": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates Horovod compatibility.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ImageArn
@@ -93,6 +137,96 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 			Description: "The Amazon Resource Name (ARN) of the image version.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: JobType
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates SageMaker job type compatibility.",
+		//	  "enum": [
+		//	    "TRAINING",
+		//	    "INFERENCE",
+		//	    "NOTEBOOK_KERNEL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"job_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates SageMaker job type compatibility.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: MLFramework
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The machine learning framework vended in the image version.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$",
+		//	  "type": "string"
+		//	}
+		"ml_framework": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The machine learning framework vended in the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: Processor
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates CPU or GPU compatibility.",
+		//	  "enum": [
+		//	    "CPU",
+		//	    "GPU"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"processor": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates CPU or GPU compatibility.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ProgrammingLang
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The supported programming language and its version.",
+		//	  "maxLength": 128,
+		//	  "minLength": 1,
+		//	  "pattern": "^[a-zA-Z]+ ?\\d+\\.\\d+(\\.\\d+)?$",
+		//	  "type": "string"
+		//	}
+		"programming_lang": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The supported programming language and its version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: ReleaseNotes
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The maintainer description of the image version.",
+		//	  "maxLength": 255,
+		//	  "minLength": 1,
+		//	  "pattern": ".*",
+		//	  "type": "string"
+		//	}
+		"release_notes": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The maintainer description of the image version.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: VendorGuidance
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The availability of the image version specified by the maintainer.",
+		//	  "enum": [
+		//	    "NOT_PROVIDED",
+		//	    "STABLE",
+		//	    "TO_BE_ARCHIVED",
+		//	    "ARCHIVED"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"vendor_guidance": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The availability of the image version specified by the maintainer.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Version
 		// CloudFormation resource type schema:
 		//
@@ -122,11 +256,20 @@ func imageVersionDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithCloudFormationTypeName("AWS::SageMaker::ImageVersion").WithTerraformTypeName("awscc_sagemaker_image_version")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"alias":             "Alias",
+		"aliases":           "Aliases",
 		"base_image":        "BaseImage",
 		"container_image":   "ContainerImage",
+		"horovod":           "Horovod",
 		"image_arn":         "ImageArn",
 		"image_name":        "ImageName",
 		"image_version_arn": "ImageVersionArn",
+		"job_type":          "JobType",
+		"ml_framework":      "MLFramework",
+		"processor":         "Processor",
+		"programming_lang":  "ProgrammingLang",
+		"release_notes":     "ReleaseNotes",
+		"vendor_guidance":   "VendorGuidance",
 		"version":           "Version",
 	})
 
