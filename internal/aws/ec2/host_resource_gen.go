@@ -25,6 +25,22 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::EC2::Host resource.
 func hostResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: AssetId
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The ID of the Outpost hardware asset.",
+		//	  "type": "string"
+		//	}
+		"asset_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The ID of the Outpost hardware asset.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: AutoPlacement
 		// CloudFormation resource type schema:
 		//
@@ -58,11 +74,11 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Id of the host created.",
+		//	  "description": "ID of the host created.",
 		//	  "type": "string"
 		//	}
 		"host_id": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Id of the host created.",
+			Description: "ID of the host created.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -168,6 +184,7 @@ func hostResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"asset_id":          "AssetId",
 		"auto_placement":    "AutoPlacement",
 		"availability_zone": "AvailabilityZone",
 		"host_id":           "HostId",

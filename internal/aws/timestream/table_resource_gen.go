@@ -236,6 +236,118 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: Schema
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "A Schema specifies the expected data model of the table.",
+		//	  "properties": {
+		//	    "CompositePartitionKey": {
+		//	      "description": "A list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed.",
+		//	      "insertionOrder": true,
+		//	      "items": {
+		//	        "additionalProperties": false,
+		//	        "description": "An attribute used in partitioning data in a table. There are two types of partition keys: dimension keys and measure keys. A dimension key partitions data on a dimension name, while a measure key partitions data on the measure name.",
+		//	        "properties": {
+		//	          "EnforcementInRecord": {
+		//	            "description": "The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified).",
+		//	            "enum": [
+		//	              "REQUIRED",
+		//	              "OPTIONAL"
+		//	            ],
+		//	            "type": "string"
+		//	          },
+		//	          "Name": {
+		//	            "description": "The name of the attribute used for a dimension key.",
+		//	            "maxLength": 2048,
+		//	            "minLength": 1,
+		//	            "type": "string"
+		//	          },
+		//	          "Type": {
+		//	            "description": "The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key).",
+		//	            "enum": [
+		//	              "DIMENSION",
+		//	              "MEASURE"
+		//	            ],
+		//	            "type": "string"
+		//	          }
+		//	        },
+		//	        "required": [
+		//	          "Type"
+		//	        ],
+		//	        "type": "object"
+		//	      },
+		//	      "minItems": 1,
+		//	      "type": "array"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"schema": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CompositePartitionKey
+				"composite_partition_key": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+							// Property: EnforcementInRecord
+							"enforcement_in_record": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified).",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"REQUIRED",
+										"OPTIONAL",
+									),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Name
+							"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The name of the attribute used for a dimension key.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 2048),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: Type
+							"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key).",
+								Required:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.OneOf(
+										"DIMENSION",
+										"MEASURE",
+									),
+								}, /*END VALIDATORS*/
+							}, /*END ATTRIBUTE*/
+						}, /*END SCHEMA*/
+					}, /*END NESTED OBJECT*/
+					Description: "A list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtLeast(1),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "A Schema specifies the expected data model of the table.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: TableName
 		// CloudFormation resource type schema:
 		//
@@ -344,9 +456,11 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                                   "Arn",
 		"bucket_name":                           "BucketName",
+		"composite_partition_key":               "CompositePartitionKey",
 		"database_name":                         "DatabaseName",
 		"enable_magnetic_store_writes":          "EnableMagneticStoreWrites",
 		"encryption_option":                     "EncryptionOption",
+		"enforcement_in_record":                 "EnforcementInRecord",
 		"key":                                   "Key",
 		"kms_key_id":                            "KmsKeyId",
 		"magnetic_store_rejected_data_location": "MagneticStoreRejectedDataLocation",
@@ -357,8 +471,10 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		"object_key_prefix":                       "ObjectKeyPrefix",
 		"retention_properties":                    "RetentionProperties",
 		"s3_configuration":                        "S3Configuration",
+		"schema":                                  "Schema",
 		"table_name":                              "TableName",
 		"tags":                                    "Tags",
+		"type":                                    "Type",
 		"value":                                   "Value",
 	})
 
