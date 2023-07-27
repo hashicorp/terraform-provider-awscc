@@ -143,6 +143,22 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies whether the AWS KMS key should be Multi-Region. You can't change the MultiRegion value after the AWS KMS key is created.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: Origin
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": "AWS_KMS",
+		//	  "description": "The source of the key material for the KMS key. You cannot change the origin after you create the KMS key. The default is AWS_KMS, which means that AWS KMS creates the key material.",
+		//	  "enum": [
+		//	    "AWS_KMS",
+		//	    "EXTERNAL"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"origin": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The source of the key material for the KMS key. You cannot change the origin after you create the KMS key. The default is AWS_KMS, which means that AWS KMS creates the key material.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: PendingWindowInDays
 		// CloudFormation resource type schema:
 		//
@@ -233,6 +249,7 @@ func keyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"key_spec":               "KeySpec",
 		"key_usage":              "KeyUsage",
 		"multi_region":           "MultiRegion",
+		"origin":                 "Origin",
 		"pending_window_in_days": "PendingWindowInDays",
 		"tags":                   "Tags",
 		"value":                  "Value",

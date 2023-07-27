@@ -38,6 +38,7 @@ resource "awscc_ec2_host" "dedicated_host1" {
 
 ### Optional
 
+- `asset_id` (String) The ID of the Outpost hardware asset.
 - `auto_placement` (String) Indicates whether the host accepts any untargeted instance launches that match its instance type configuration, or if it only accepts Host tenancy instance launches that specify its unique host ID.
 - `host_maintenance` (String) Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.
 - `host_recovery` (String) Indicates whether to enable or disable host recovery for the Dedicated Host. Host recovery is disabled by default.
@@ -47,7 +48,7 @@ resource "awscc_ec2_host" "dedicated_host1" {
 
 ### Read-Only
 
-- `host_id` (String) Id of the host created.
+- `host_id` (String) ID of the host created.
 - `id` (String) Uniquely identifies the resource.
 
 ## Import

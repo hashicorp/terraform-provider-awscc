@@ -59,6 +59,15 @@
         "GENERATE_VERIFY_MAC"
       ]
     },
+    "Origin": {
+      "description": "The source of the key material for the KMS key. You cannot change the origin after you create the KMS key. The default is AWS_KMS, which means that AWS KMS creates the key material.",
+      "type": "string",
+      "default": "AWS_KMS",
+      "enum": [
+        "AWS_KMS",
+        "EXTERNAL"
+      ]
+    },
     "KeySpec": {
       "description": "Specifies the type of AWS KMS key to create. The default value is SYMMETRIC_DEFAULT. This property is required only for asymmetric AWS KMS keys. You can't change the KeySpec value after the AWS KMS key is created.",
       "type": "string",

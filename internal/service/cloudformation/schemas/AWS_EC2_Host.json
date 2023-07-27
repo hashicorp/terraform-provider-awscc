@@ -5,7 +5,7 @@
   "additionalProperties": false,
   "properties": {
     "HostId": {
-      "description": "Id of the host created.",
+      "description": "ID of the host created.",
       "type": "string"
     },
     "AutoPlacement": {
@@ -35,6 +35,10 @@
     "HostMaintenance": {
       "description": "Automatically allocates a new dedicated host and moves your instances on to it if a degradation is detected on your current host.",
       "type": "string"
+    },
+    "AssetId": {
+      "description": "The ID of the Outpost hardware asset.",
+      "type": "string"
     }
   },
   "required": [
@@ -44,7 +48,8 @@
     "/properties/AvailabilityZone",
     "/properties/InstanceType",
     "/properties/InstanceFamily",
-    "/properties/OutpostArn"
+    "/properties/OutpostArn",
+    "/properties/AssetId"
   ],
   "primaryIdentifier": [
     "/properties/HostId"

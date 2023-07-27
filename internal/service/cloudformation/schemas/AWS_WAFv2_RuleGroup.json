@@ -266,8 +266,18 @@
           "type": "string",
           "enum": [
             "IP",
-            "FORWARDED_IP"
+            "FORWARDED_IP",
+            "CUSTOM_KEYS"
           ]
+        },
+        "CustomKeys": {
+          "description": "Specifies the aggregate keys to use in a rate-base rule.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RateBasedStatementCustomKey"
+          },
+          "minItems": 1,
+          "maxItems": 5
         },
         "ScopeDownStatement": {
           "$ref": "#/definitions/Statement"
@@ -279,6 +289,171 @@
       "required": [
         "Limit",
         "AggregateKeyType"
+      ],
+      "additionalProperties": false
+    },
+    "RateBasedStatementCustomKey": {
+      "description": "Specifies a single custom aggregate key for a rate-base rule.",
+      "type": "object",
+      "properties": {
+        "Cookie": {
+          "$ref": "#/definitions/RateLimitCookie"
+        },
+        "ForwardedIP": {
+          "$ref": "#/definitions/RateLimitForwardedIP"
+        },
+        "Header": {
+          "$ref": "#/definitions/RateLimitHeader"
+        },
+        "HTTPMethod": {
+          "$ref": "#/definitions/RateLimitHTTPMethod"
+        },
+        "IP": {
+          "$ref": "#/definitions/RateLimitIP"
+        },
+        "LabelNamespace": {
+          "$ref": "#/definitions/RateLimitLabelNamespace"
+        },
+        "QueryArgument": {
+          "$ref": "#/definitions/RateLimitQueryArgument"
+        },
+        "QueryString": {
+          "$ref": "#/definitions/RateLimitQueryString"
+        },
+        "UriPath": {
+          "$ref": "#/definitions/RateLimitUriPath"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RateLimitCookie": {
+      "description": "Specifies a cookie as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the cookie to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitForwardedIP": {
+      "description": "Specifies the first IP address in an HTTP header as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitHeader": {
+      "description": "Specifies a header as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the header to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitHTTPMethod": {
+      "description": "Specifies the request's HTTP method as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitIP": {
+      "description": "Specifies the IP address in the web request as an aggregate key for a rate-based rule.",
+      "type": "object"
+    },
+    "RateLimitLabelNamespace": {
+      "description": "Specifies a label namespace to use as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Namespace": {
+          "description": "The namespace to use for aggregation.",
+          "type": "string",
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Namespace"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitQueryArgument": {
+      "description": "Specifies a query argument in the request as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "Name": {
+          "description": "The name of the query argument to use.",
+          "type": "string",
+          "pattern": ".*\\S.*",
+          "minLength": 1,
+          "maxLength": 64
+        },
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "Name",
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitQueryString": {
+      "description": "Specifies the request's query string as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "TextTransformations"
+      ],
+      "additionalProperties": false
+    },
+    "RateLimitUriPath": {
+      "description": "Specifies the request's URI Path as an aggregate key for a rate-based rule.",
+      "type": "object",
+      "properties": {
+        "TextTransformations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextTransformation"
+          }
+        }
+      },
+      "required": [
+        "TextTransformations"
       ],
       "additionalProperties": false
     },
@@ -1235,7 +1410,17 @@
     "list": {
       "permissions": [
         "wafv2:listRuleGroups"
-      ]
+      ],
+      "handlerSchema": {
+        "properties": {
+          "Scope": {
+            "$ref": "resource-schema.json#/properties/Scope"
+          }
+        },
+        "required": [
+          "Scope"
+        ]
+      }
     }
   }
 }

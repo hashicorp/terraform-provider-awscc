@@ -1557,6 +1557,7 @@
       "permissions": [
         "pipes:CreatePipe",
         "pipes:DescribePipe",
+        "pipes:TagResource",
         "iam:PassRole"
       ]
     },

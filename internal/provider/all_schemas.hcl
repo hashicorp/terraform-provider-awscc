@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 786 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 789 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -1600,6 +1600,10 @@ resource_schema "aws_iam_group_policy" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_iam_managed_policy" {
+  cloudformation_type_name = "AWS::IAM::ManagedPolicy"
+}
+
 resource_schema "aws_iam_oidc_provider" {
   cloudformation_type_name = "AWS::IAM::OIDCProvider"
 }
@@ -2118,6 +2122,11 @@ resource_schema "aws_lambda_event_source_mapping" {
 
 resource_schema "aws_lambda_function" {
   cloudformation_type_name = "AWS::Lambda::Function"
+}
+
+resource_schema "aws_lambda_permission" {
+  cloudformation_type_name               = "AWS::Lambda::Permission"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_lambda_url" {
@@ -3124,6 +3133,11 @@ resource_schema "aws_sns_topic" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_sns_topic_inline_policy" {
+  cloudformation_type_name               = "AWS::SNS::TopicInlinePolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_sns_topic_policy" {

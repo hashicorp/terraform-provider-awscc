@@ -21,9 +21,18 @@ Data Source schema for AWS::SageMaker::ImageVersion
 
 ### Read-Only
 
+- `alias` (String) The alias of the image version.
+- `aliases` (List of String) List of aliases for the image version.
 - `base_image` (String) The registry path of the container image on which this image version is based.
 - `container_image` (String) The registry path of the container image that contains this image version.
+- `horovod` (Boolean) Indicates Horovod compatibility.
 - `image_arn` (String) The Amazon Resource Name (ARN) of the parent image.
 - `image_name` (String) The name of the image this version belongs to.
 - `image_version_arn` (String) The Amazon Resource Name (ARN) of the image version.
+- `job_type` (String) Indicates SageMaker job type compatibility.
+- `ml_framework` (String) The machine learning framework vended in the image version.
+- `processor` (String) Indicates CPU or GPU compatibility.
+- `programming_lang` (String) The supported programming language and its version.
+- `release_notes` (String) The maintainer description of the image version.
+- `vendor_guidance` (String) The availability of the image version specified by the maintainer.
 - `version` (Number) The version number of the image version.

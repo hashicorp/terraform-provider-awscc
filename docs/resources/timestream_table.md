@@ -23,6 +23,7 @@ The AWS::Timestream::Table resource creates a Timestream Table.
 
 - `magnetic_store_write_properties` (Attributes) The properties that determine whether magnetic store writes are enabled. (see [below for nested schema](#nestedatt--magnetic_store_write_properties))
 - `retention_properties` (Attributes) The retention duration of the memory store and the magnetic store. (see [below for nested schema](#nestedatt--retention_properties))
+- `schema` (Attributes) A Schema specifies the expected data model of the table. (see [below for nested schema](#nestedatt--schema))
 - `table_name` (String) The name for the table. If you don't specify a name, AWS CloudFormation generates a unique physical ID and uses that ID for the table name.
 - `tags` (Attributes List) An array of key-value pairs to apply to this resource. (see [below for nested schema](#nestedatt--tags))
 
@@ -73,6 +74,27 @@ Optional:
 
 - `magnetic_store_retention_period_in_days` (String) The duration for which data must be stored in the magnetic store.
 - `memory_store_retention_period_in_hours` (String) The duration for which data must be stored in the memory store.
+
+
+<a id="nestedatt--schema"></a>
+### Nested Schema for `schema`
+
+Optional:
+
+- `composite_partition_key` (Attributes List) A list of partition keys defining the attributes used to partition the table data. The order of the list determines the partition hierarchy. The name and type of each partition key as well as the partition key order cannot be changed after the table is created. However, the enforcement level of each partition key can be changed. (see [below for nested schema](#nestedatt--schema--composite_partition_key))
+
+<a id="nestedatt--schema--composite_partition_key"></a>
+### Nested Schema for `schema.composite_partition_key`
+
+Required:
+
+- `type` (String) The type of the partition key. Options are DIMENSION (dimension key) and MEASURE (measure key).
+
+Optional:
+
+- `enforcement_in_record` (String) The level of enforcement for the specification of a dimension key in ingested records. Options are REQUIRED (dimension key must be specified) and OPTIONAL (dimension key does not have to be specified).
+- `name` (String) The name of the attribute used for a dimension key.
+
 
 
 <a id="nestedatt--tags"></a>

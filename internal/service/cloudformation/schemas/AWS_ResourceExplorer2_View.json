@@ -93,6 +93,7 @@
     "delete": {
       "permissions": [
         "resource-explorer-2:DeleteView",
+        "resource-explorer-2:GetView",
         "resource-explorer-2:UntagResource"
       ]
     },
