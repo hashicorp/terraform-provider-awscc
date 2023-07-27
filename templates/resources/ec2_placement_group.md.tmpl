@@ -1,0 +1,32 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+To create cluster ec2 placement group with tags
+{{ tffile (printf "examples/resources/%s/placement_group_cluster.tf" .Name)}}
+
+To create partition ec2 placement group with tags
+{{ tffile (printf "examples/resources/%s/placement_group_partition.tf" .Name)}}
+
+To create spread ec2 placement group with tags
+{{ tffile (printf "examples/resources/%s/placement_group_spread.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
