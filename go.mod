@@ -3,12 +3,12 @@ module github.com/hashicorp/terraform-provider-awscc
 go 1.19
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.19.0
+	github.com/aws/aws-sdk-go-v2 v1.20.0
 	github.com/aws/aws-sdk-go-v2/config v1.18.29
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.13.5
 	github.com/aws/aws-sdk-go-v2/service/cloudcontrol v1.11.15
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.32.0
-	github.com/aws/smithy-go v1.13.5
+	github.com/aws/smithy-go v1.14.0
 	github.com/google/go-cmp v0.5.9
 	github.com/hashicorp/aws-cloudformation-resource-schema-sdk-go v0.21.0
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.32
