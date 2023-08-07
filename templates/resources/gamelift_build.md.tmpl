@@ -12,6 +12,8 @@ description: |-
 ## Example Usage
 
 ### GameLift Build from file in existing S3 Bucket
+**IMPORTANT:** The S3 permissions listed in the example are meant for testing purposes only. Restrict these permissions further for enhanced security. Currently the valid values for `operating_system` are `WINDOWS_2012`, `AMAZON_LINUX`, or `AMAZON_LINUX_2`.
+
 To use {{.Name}} to create a GameLift build:
 {{ tffile (printf "examples/resources/%s/gamelift_build.tf" .Name)}}
 
