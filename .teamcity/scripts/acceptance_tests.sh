@@ -6,7 +6,7 @@ echo "go env:"
 go env
 
 # shellcheck disable=2157 # These aren't constant strings, they're TeamCity variable substitution
-if [[ -n "%ACCTEST_ROLE_ARN%" || -n "%ACCTEST_ALTERNATE_ROLE_ARN%" ]]; then
+if [[ -n "%ACCTEST_ROLE_ARN%" ]]; then
 	conf=$(pwd)/aws.conf
 
 	function cleanup {
@@ -35,24 +35,6 @@ EOF
 		unset AWS_SECRET_ACCESS_KEY
 
 		export AWS_PROFILE=primary
-	fi
-
-	# shellcheck disable=2157 # This isn't a constant string, it's a TeamCity variable substitution
-	if [[ -n "%ACCTEST_ALTERNATE_ROLE_ARN%" ]]; then
-		cat <<EOF >>"${conf}"
-[profile alternate]
-role_arn       = %ACCTEST_ALTERNATE_ROLE_ARN%
-source_profile = alternate_user
-
-[profile alternate_user]
-aws_access_key_id     = %AWS_ALTERNATE_ACCESS_KEY_ID%
-aws_secret_access_key = %AWS_ALTERNATE_SECRET_ACCESS_KEY%
-EOF
-
-		unset AWS_ALTERNATE_ACCESS_KEY_ID
-		unset AWS_ALTERNATE_SECRET_ACCESS_KEY
-
-		export AWS_ALTERNATE_PROFILE=alternate
 	fi
 fi
 
