@@ -1,6 +1,5 @@
 import jetbrains.buildServer.configs.kotlin.* // ktlint-disable no-wildcard-imports
 import jetbrains.buildServer.configs.kotlin.buildFeatures.golang
-import jetbrains.buildServer.configs.kotlin.buildFeatures.notifications
 import jetbrains.buildServer.configs.kotlin.buildSteps.script
 import jetbrains.buildServer.configs.kotlin.failureConditions.failOnText
 import jetbrains.buildServer.configs.kotlin.failureConditions.BuildFailureOnText
