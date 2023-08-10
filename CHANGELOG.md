@@ -1,4 +1,41 @@
 ## 0.58.0 (Unreleased)
+
+FEATURES:
+
+* **New Data Source:** `awscc_cloudwatch_alarm`
+* **New Data Source:** `awscc_cloudwatch_alarms`
+* **New Data Source:** `awscc_config_config_rule`
+* **New Data Source:** `awscc_config_config_rules`
+* **New Data Source:** `awscc_connect_traffic_distribution_group`
+* **New Data Source:** `awscc_datasync_location_azure_blob`
+* **New Data Source:** `awscc_datasync_location_azure_blobs`
+* **New Data Source:** `awscc_dms_replication_config`
+* **New Data Source:** `awscc_dms_replication_configs`
+* **New Data Source:** `awscc_ec2_network_interface_attachment`
+* **New Data Source:** `awscc_ec2_network_interface_attachments`
+* **New Data Source:** `awscc_ec2_route`
+* **New Data Source:** `awscc_lambda_layer_version_permission`
+* **New Data Source:** `awscc_mediatailor_channel`
+* **New Data Source:** `awscc_mediatailor_channel_policy`
+* **New Data Source:** `awscc_mediatailor_channels`
+* **New Data Source:** `awscc_mediatailor_live_source`
+* **New Data Source:** `awscc_mediatailor_vod_source`
+* **New Data Source:** `awscc_pipes_pipes`
+* **New Data Source:** `awscc_sqs_queue_inline_policy`
+* **New Resource:** `awscc_cloudwatch_alarm`
+* **New Resource:** `awscc_config_config_rule`
+* **New Resource:** `awscc_connect_traffic_distribution_group`
+* **New Resource:** `awscc_datasync_location_azure_blob`
+* **New Resource:** `awscc_dms_replication_config`
+* **New Resource:** `awscc_ec2_network_interface_attachment`
+* **New Resource:** `awscc_ec2_route`
+* **New Resource:** `awscc_lambda_layer_version_permission`
+* **New Resource:** `awscc_mediatailor_channel`
+* **New Resource:** `awscc_mediatailor_channel_policy`
+* **New Resource:** `awscc_mediatailor_live_source`
+* **New Resource:** `awscc_mediatailor_vod_source`
+* **New Resource:** `awscc_sqs_queue_inline_policy`
+
 ## 0.57.0 (July 27, 2023)
 
 FEATURES:
