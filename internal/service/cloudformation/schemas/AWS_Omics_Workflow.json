@@ -21,7 +21,16 @@
       "minLength": 1,
       "enum": [
         "WDL",
-        "NEXTFLOW"
+        "NEXTFLOW",
+        "CWL"
+      ]
+    },
+    "Accelerators": {
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 1,
+      "enum": [
+        "GPU"
       ]
     },
     "WorkflowParameter": {
@@ -121,6 +130,9 @@
     "Status": {
       "$ref": "#/definitions/WorkflowStatus"
     },
+    "Accelerators": {
+      "$ref": "#/definitions/Accelerators"
+    },
     "StorageCapacity": {
       "type": "number",
       "maximum": 100000,
@@ -148,7 +160,8 @@
     "/properties/Engine",
     "/properties/Main",
     "/properties/ParameterTemplate",
-    "/properties/StorageCapacity"
+    "/properties/StorageCapacity",
+    "/properties/Accelerators"
   ],
   "primaryIdentifier": [
     "/properties/Id"
@@ -163,6 +176,7 @@
     "create": {
       "permissions": [
         "omics:CreateWorkflow",
+        "omics:GetWorkflow",
         "omics:TagResource",
         "s3:PutObject",
         "s3:GetObject",
@@ -184,13 +198,16 @@
     "update": {
       "permissions": [
         "omics:UpdateWorkflow",
+        "omics:GetWorkflow",
         "omics:TagResource",
+        "omics:ListTagsForResource",
         "omics:UntagResource"
       ]
     },
     "delete": {
       "permissions": [
-        "omics:DeleteWorkflow"
+        "omics:DeleteWorkflow",
+        "omics:GetWorkflow"
       ]
     },
     "list": {

@@ -217,7 +217,8 @@
     "create": {
       "permissions": [
         "autoscaling:CreateLaunchConfiguration",
-        "autoscaling:DescribeLaunchConfigurations"
+        "autoscaling:DescribeLaunchConfigurations",
+        "iam:PassRole"
       ]
     },
     "read": {

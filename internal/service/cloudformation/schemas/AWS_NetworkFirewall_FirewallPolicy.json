@@ -307,6 +307,9 @@
       }
     }
   },
+  "tagging": {
+    "taggable": true
+  },
   "required": [
     "FirewallPolicyName",
     "FirewallPolicy"
@@ -326,7 +329,8 @@
       "permissions": [
         "network-firewall:CreateFirewallPolicy",
         "network-firewall:DescribeFirewallPolicy",
-        "network-firewall:TagResource"
+        "network-firewall:TagResource",
+        "network-firewall:ListRuleGroups"
       ]
     },
     "read": {
@@ -340,7 +344,8 @@
         "network-firewall:UpdateFirewallPolicy",
         "network-firewall:DescribeFirewallPolicy",
         "network-firewall:TagResource",
-        "network-firewall:UntagResource"
+        "network-firewall:UntagResource",
+        "network-firewall:ListRuleGroups"
       ]
     },
     "delete": {

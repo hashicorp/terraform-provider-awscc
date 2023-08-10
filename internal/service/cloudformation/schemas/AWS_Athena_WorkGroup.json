@@ -339,7 +339,17 @@
     "create": {
       "permissions": [
         "athena:CreateWorkGroup",
-        "athena:TagResource"
+        "athena:TagResource",
+        "iam:PassRole",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:AbortMultipartUpload",
+        "s3:PutObject",
+        "s3:ListMultipartUploadParts",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     },
     "read": {
@@ -356,6 +366,7 @@
     "delete": {
       "permissions": [
         "athena:DeleteWorkGroup",
+        "athena:GetWorkGroup",
         "athena:UntagResource"
       ]
     },
@@ -363,7 +374,17 @@
       "permissions": [
         "athena:UpdateWorkGroup",
         "athena:TagResource",
-        "athena:UntagResource"
+        "athena:UntagResource",
+        "iam:PassRole",
+        "s3:GetBucketLocation",
+        "s3:GetObject",
+        "s3:ListBucket",
+        "s3:ListBucketMultipartUploads",
+        "s3:AbortMultipartUpload",
+        "s3:PutObject",
+        "s3:ListMultipartUploadParts",
+        "kms:Decrypt",
+        "kms:GenerateDataKey"
       ]
     }
   },

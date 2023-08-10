@@ -654,6 +654,9 @@
       }
     }
   },
+  "tagging": {
+    "taggable": true
+  },
   "required": [
     "Type",
     "Capacity",
@@ -676,7 +679,10 @@
       "permissions": [
         "network-firewall:CreateRuleGroup",
         "network-firewall:DescribeRuleGroup",
-        "network-firewall:TagResource"
+        "network-firewall:TagResource",
+        "network-firewall:ListRuleGroups",
+        "iam:CreateServiceLinkedRole",
+        "ec2:GetManagedPrefixListEntries"
       ]
     },
     "read": {
@@ -690,7 +696,9 @@
         "network-firewall:UpdateRuleGroup",
         "network-firewall:DescribeRuleGroup",
         "network-firewall:TagResource",
-        "network-firewall:UntagResource"
+        "network-firewall:UntagResource",
+        "iam:CreateServiceLinkedRole",
+        "ec2:GetManagedPrefixListEntries"
       ]
     },
     "delete": {

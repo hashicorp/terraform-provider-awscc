@@ -144,7 +144,13 @@
     "create": {
       "permissions": [
         "omics:CreateVariantStore",
-        "omics:TagResource"
+        "omics:TagResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:CreateGrant",
+        "ram:AcceptResourceShareInvitation",
+        "ram:GetResourceShareInvitations",
+        "omics:GetVariantStore"
       ]
     },
     "read": {
@@ -156,12 +162,15 @@
       "permissions": [
         "omics:UpdateVariantStore",
         "omics:TagResource",
-        "omics:UntagResource"
+        "omics:UntagResource",
+        "omics:ListTagsForResource",
+        "omics:GetVariantStore"
       ]
     },
     "delete": {
       "permissions": [
-        "omics:DeleteVariantStore"
+        "omics:DeleteVariantStore",
+        "omics:ListVariantStores"
       ]
     },
     "list": {

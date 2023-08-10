@@ -37,7 +37,8 @@
       "description": "The possible types for the collection",
       "enum": [
         "SEARCH",
-        "TIMESERIES"
+        "TIMESERIES",
+        "VECTORSEARCH"
       ]
     }
   },

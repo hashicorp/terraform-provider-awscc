@@ -41,6 +41,9 @@
   "readOnlyProperties": [
     "/properties/Id"
   ],
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [

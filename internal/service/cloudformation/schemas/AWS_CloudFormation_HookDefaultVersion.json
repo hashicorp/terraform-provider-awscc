@@ -43,6 +43,12 @@
   "primaryIdentifier": [
     "/properties/Arn"
   ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -60,9 +66,7 @@
       ]
     },
     "delete": {
-      "permissions": [
-        ""
-      ]
+      "permissions": []
     },
     "list": {
       "permissions": [

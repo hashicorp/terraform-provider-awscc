@@ -929,14 +929,21 @@
   "readOnlyProperties": [
     "/properties/Id"
   ],
+  "writeOnlyProperties": [
+    "/properties/SpotFleetRequestConfigData/TagSpecifications",
+    "/properties/SpotFleetRequestConfigData/LaunchSpecifications/*/NetworkInterfaces/*/Groups"
+  ],
   "primaryIdentifier": [
     "/properties/Id"
   ],
   "handlers": {
     "create": {
       "permissions": [
+        "iam:PassRole",
+        "ec2:CreateTags",
         "ec2:RequestSpotFleet",
-        "ec2:DescribeSpotFleetRequests"
+        "ec2:DescribeSpotFleetRequests",
+        "ec2:RunInstances"
       ]
     },
     "delete": {

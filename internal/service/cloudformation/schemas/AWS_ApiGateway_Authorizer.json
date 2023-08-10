@@ -77,7 +77,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "apigateway:POST"
+        "apigateway:POST",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -88,7 +89,8 @@
     "update": {
       "permissions": [
         "apigateway:GET",
-        "apigateway:PATCH"
+        "apigateway:PATCH",
+        "iam:PassRole"
       ]
     },
     "delete": {

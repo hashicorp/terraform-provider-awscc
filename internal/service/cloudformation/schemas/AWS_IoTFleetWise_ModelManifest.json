@@ -101,7 +101,10 @@
       "permissions": [
         "iotfleetwise:CreateModelManifest",
         "iotfleetwise:GetModelManifest",
-        "iotfleetwise:UpdateModelManifest"
+        "iotfleetwise:UpdateModelManifest",
+        "iotfleetwise:ListModelManifestNodes",
+        "iotfleetwise:ListTagsForResource",
+        "iotfleetwise:TagResource"
       ]
     },
     "read": {
@@ -116,6 +119,7 @@
         "iotfleetwise:UpdateModelManifest",
         "iotfleetwise:GetModelManifest",
         "iotfleetwise:ListModelManifestNodes",
+        "iotfleetwise:ListTagsForResource",
         "iotfleetwise:TagResource",
         "iotfleetwise:UntagResource"
       ]
