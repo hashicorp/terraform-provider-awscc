@@ -31,6 +31,31 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::Omics::Workflow resource.
 func workflowResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Accelerators
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "GPU"
+		//	  ],
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"accelerators": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.String{ /*START VALIDATORS*/
+				stringvalidator.LengthBetween(1, 64),
+				stringvalidator.OneOf(
+					"GPU",
+				),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -107,7 +132,8 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "enum": [
 		//	    "WDL",
-		//	    "NEXTFLOW"
+		//	    "NEXTFLOW",
+		//	    "CWL"
 		//	  ],
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
@@ -121,6 +147,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"WDL",
 					"NEXTFLOW",
+					"CWL",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
@@ -338,6 +365,7 @@ func workflowResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(false)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerators":       "Accelerators",
 		"arn":                "Arn",
 		"creation_time":      "CreationTime",
 		"definition_uri":     "DefinitionUri",

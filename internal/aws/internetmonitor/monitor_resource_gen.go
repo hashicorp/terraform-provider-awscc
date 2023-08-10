@@ -55,10 +55,56 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AvailabilityLocalHealthEventsConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "HealthScoreThreshold": {
+		//	          "maximum": 100.0,
+		//	          "minimum": 0.0,
+		//	          "type": "number"
+		//	        },
+		//	        "MinTrafficImpact": {
+		//	          "maximum": 100.0,
+		//	          "minimum": 0.0,
+		//	          "type": "number"
+		//	        },
+		//	        "Status": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
+		//	    },
 		//	    "AvailabilityScoreThreshold": {
 		//	      "maximum": 100.0,
 		//	      "minimum": 0.0,
 		//	      "type": "number"
+		//	    },
+		//	    "PerformanceLocalHealthEventsConfig": {
+		//	      "additionalProperties": false,
+		//	      "properties": {
+		//	        "HealthScoreThreshold": {
+		//	          "maximum": 100.0,
+		//	          "minimum": 0.0,
+		//	          "type": "number"
+		//	        },
+		//	        "MinTrafficImpact": {
+		//	          "maximum": 100.0,
+		//	          "minimum": 0.0,
+		//	          "type": "number"
+		//	        },
+		//	        "Status": {
+		//	          "enum": [
+		//	            "ENABLED",
+		//	            "DISABLED"
+		//	          ],
+		//	          "type": "string"
+		//	        }
+		//	      },
+		//	      "type": "object"
 		//	    },
 		//	    "PerformanceScoreThreshold": {
 		//	      "maximum": 100.0,
@@ -70,6 +116,52 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AvailabilityLocalHealthEventsConfig
+				"availability_local_health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HealthScoreThreshold
+						"health_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 100.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinTrafficImpact
+						"min_traffic_impact": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 100.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: AvailabilityScoreThreshold
 				"availability_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
 					Optional: true,
@@ -79,6 +171,52 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
 						float64planmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: PerformanceLocalHealthEventsConfig
+				"performance_local_health_events_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+						// Property: HealthScoreThreshold
+						"health_score_threshold": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 100.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: MinTrafficImpact
+						"min_traffic_impact": schema.Float64Attribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.Float64{ /*START VALIDATORS*/
+								float64validator.Between(0.000000, 100.000000),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+								float64planmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+						// Property: Status
+						"status": schema.StringAttribute{ /*START ATTRIBUTE*/
+							Optional: true,
+							Computed: true,
+							Validators: []validator.String{ /*START VALIDATORS*/
+								stringvalidator.OneOf(
+									"ENABLED",
+									"DISABLED",
+								),
+							}, /*END VALIDATORS*/
+							PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+								stringplanmodifier.UseStateForUnknown(),
+							}, /*END PLAN MODIFIERS*/
+						}, /*END ATTRIBUTE*/
+					}, /*END SCHEMA*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: PerformanceScoreThreshold
@@ -476,29 +614,33 @@ func monitorResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"availability_score_threshold":       "AvailabilityScoreThreshold",
-		"bucket_name":                        "BucketName",
-		"bucket_prefix":                      "BucketPrefix",
-		"created_at":                         "CreatedAt",
-		"health_events_config":               "HealthEventsConfig",
-		"internet_measurements_log_delivery": "InternetMeasurementsLogDelivery",
-		"key":                                "Key",
-		"log_delivery_status":                "LogDeliveryStatus",
-		"max_city_networks_to_monitor":       "MaxCityNetworksToMonitor",
-		"modified_at":                        "ModifiedAt",
-		"monitor_arn":                        "MonitorArn",
-		"monitor_name":                       "MonitorName",
-		"performance_score_threshold":        "PerformanceScoreThreshold",
-		"processing_status":                  "ProcessingStatus",
-		"processing_status_info":             "ProcessingStatusInfo",
-		"resources":                          "Resources",
-		"resources_to_add":                   "ResourcesToAdd",
-		"resources_to_remove":                "ResourcesToRemove",
-		"s3_config":                          "S3Config",
-		"status":                             "Status",
-		"tags":                               "Tags",
-		"traffic_percentage_to_monitor":      "TrafficPercentageToMonitor",
-		"value":                              "Value",
+		"availability_local_health_events_config": "AvailabilityLocalHealthEventsConfig",
+		"availability_score_threshold":            "AvailabilityScoreThreshold",
+		"bucket_name":                             "BucketName",
+		"bucket_prefix":                           "BucketPrefix",
+		"created_at":                              "CreatedAt",
+		"health_events_config":                    "HealthEventsConfig",
+		"health_score_threshold":                  "HealthScoreThreshold",
+		"internet_measurements_log_delivery":      "InternetMeasurementsLogDelivery",
+		"key":                                     "Key",
+		"log_delivery_status":                     "LogDeliveryStatus",
+		"max_city_networks_to_monitor":            "MaxCityNetworksToMonitor",
+		"min_traffic_impact":                      "MinTrafficImpact",
+		"modified_at":                             "ModifiedAt",
+		"monitor_arn":                             "MonitorArn",
+		"monitor_name":                            "MonitorName",
+		"performance_local_health_events_config":  "PerformanceLocalHealthEventsConfig",
+		"performance_score_threshold":             "PerformanceScoreThreshold",
+		"processing_status":                       "ProcessingStatus",
+		"processing_status_info":                  "ProcessingStatusInfo",
+		"resources":                               "Resources",
+		"resources_to_add":                        "ResourcesToAdd",
+		"resources_to_remove":                     "ResourcesToRemove",
+		"s3_config":                               "S3Config",
+		"status":                                  "Status",
+		"tags":                                    "Tags",
+		"traffic_percentage_to_monitor":           "TrafficPercentageToMonitor",
+		"value":                                   "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{

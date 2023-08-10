@@ -31,6 +31,20 @@ func init() {
 // This Terraform resource corresponds to the CloudFormation AWS::SageMaker::FeatureGroup resource.
 func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: CreationTime
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "A timestamp of FeatureGroup creation time.",
+		//	  "type": "string"
+		//	}
+		"creation_time": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "A timestamp of FeatureGroup creation time.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -155,6 +169,20 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: FeatureGroupStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The status of the feature group.",
+		//	  "type": "string"
+		//	}
+		"feature_group_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "The status of the feature group.",
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: OfflineStoreConfig
@@ -494,6 +522,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"catalog":                        "Catalog",
+		"creation_time":                  "CreationTime",
 		"data_catalog_config":            "DataCatalogConfig",
 		"database":                       "Database",
 		"description":                    "Description",
@@ -502,6 +531,7 @@ func featureGroupResource(ctx context.Context) (resource.Resource, error) {
 		"event_time_feature_name":        "EventTimeFeatureName",
 		"feature_definitions":            "FeatureDefinitions",
 		"feature_group_name":             "FeatureGroupName",
+		"feature_group_status":           "FeatureGroupStatus",
 		"feature_name":                   "FeatureName",
 		"feature_type":                   "FeatureType",
 		"key":                            "Key",

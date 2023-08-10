@@ -61,6 +61,7 @@ func publisherResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ConnectionArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: IdentityProvider
 		// CloudFormation resource type schema:
@@ -164,6 +165,9 @@ func publisherResource(ctx context.Context) (resource.Resource, error) {
 
 	opts = opts.IsImmutableType(true)
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ConnectionArn",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	v, err := generic.NewResource(ctx, opts...)

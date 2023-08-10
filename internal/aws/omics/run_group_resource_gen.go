@@ -109,6 +109,24 @@ func runGroupResource(ctx context.Context) (resource.Resource, error) {
 				float64planmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: MaxGpus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 100000,
+		//	  "minimum": 1,
+		//	  "type": "number"
+		//	}
+		"max_gpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Optional: true,
+			Computed: true,
+			Validators: []validator.Float64{ /*START VALIDATORS*/
+				float64validator.Between(1.000000, 100000.000000),
+			}, /*END VALIDATORS*/
+			PlanModifiers: []planmodifier.Float64{ /*START PLAN MODIFIERS*/
+				float64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: MaxRuns
 		// CloudFormation resource type schema:
 		//
@@ -192,6 +210,7 @@ func runGroupResource(ctx context.Context) (resource.Resource, error) {
 		"id":            "Id",
 		"max_cpus":      "MaxCpus",
 		"max_duration":  "MaxDuration",
+		"max_gpus":      "MaxGpus",
 		"max_runs":      "MaxRuns",
 		"name":          "Name",
 		"tags":          "Tags",

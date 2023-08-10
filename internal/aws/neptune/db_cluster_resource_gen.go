@@ -221,6 +221,21 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END PLAN MODIFIERS*/
 			// DBInstanceParameterGroupName is a write-only property.
 		}, /*END ATTRIBUTE*/
+		// Property: DBPort
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
+		//	  "type": "integer"
+		//	}
+		"db_port": schema.Int64Attribute{ /*START ATTRIBUTE*/
+			Description: "The port number on which the DB instances in the DB cluster accept connections. \n\nIf not specified, the default port used is `8182`. \n\nNote: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+				int64planmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: DBSubnetGroupName
 		// CloudFormation resource type schema:
 		//
@@ -280,11 +295,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The connection endpoint for the DB cluster. For example: mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com",
+		//	  "description": "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 		//	  "type": "string"
 		//	}
 		"endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The connection endpoint for the DB cluster. For example: mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com",
+			Description: "The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -340,11 +355,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the port that the database engine is listening on.",
+		//	  "description": "The port number on which the DB cluster accepts connections. For example: `8182`.",
 		//	  "type": "string"
 		//	}
 		"port": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the port that the database engine is listening on.",
+			Description: "The port number on which the DB cluster accepts connections. For example: `8182`.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -384,11 +399,11 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "The reader endpoint for the DB cluster. For example: mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com",
+		//	  "description": "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 		//	  "type": "string"
 		//	}
 		"read_endpoint": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "The reader endpoint for the DB cluster. For example: mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com",
+			Description: "The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -670,6 +685,7 @@ func dBClusterResource(ctx context.Context) (resource.Resource, error) {
 		"db_cluster_identifier":            "DBClusterIdentifier",
 		"db_cluster_parameter_group_name":  "DBClusterParameterGroupName",
 		"db_instance_parameter_group_name": "DBInstanceParameterGroupName",
+		"db_port":                          "DBPort",
 		"db_subnet_group_name":             "DBSubnetGroupName",
 		"deletion_protection":              "DeletionProtection",
 		"enable_cloudwatch_logs_exports":   "EnableCloudwatchLogsExports",
