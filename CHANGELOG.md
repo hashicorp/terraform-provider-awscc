@@ -1,4 +1,5 @@
-## 0.58.0 (Unreleased)
+## 0.59.0 (Unreleased)
+## 0.58.0 (August 10, 2023)
 
 FEATURES:
 
