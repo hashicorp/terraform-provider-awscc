@@ -44,6 +44,10 @@ Required:
 
 - `linked_account_ids` (Set of String)
 
+Optional:
+
+- `auto_associate` (Boolean)
+
 
 <a id="nestedatt--computation_preference"></a>
 ### Nested Schema for `computation_preference`

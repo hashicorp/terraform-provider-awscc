@@ -19,6 +19,7 @@ Definition of AWS::Omics::RunGroup Resource Type
 
 - `max_cpus` (Number)
 - `max_duration` (Number)
+- `max_gpus` (Number)
 - `max_runs` (Number)
 - `name` (String)
 - `tags` (Map of String) A map of resource tags

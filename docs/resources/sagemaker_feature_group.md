@@ -32,6 +32,8 @@ Resource Type definition for AWS::SageMaker::FeatureGroup
 
 ### Read-Only
 
+- `creation_time` (String) A timestamp of FeatureGroup creation time.
+- `feature_group_status` (String) The status of the feature group.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--feature_definitions"></a>

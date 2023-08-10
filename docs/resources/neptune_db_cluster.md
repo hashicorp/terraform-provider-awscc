@@ -24,6 +24,11 @@ The AWS::Neptune::DBCluster resource creates an Amazon Neptune DB cluster.
 - `db_cluster_identifier` (String) The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.
 - `db_cluster_parameter_group_name` (String) Provides the name of the DB cluster parameter group.
 - `db_instance_parameter_group_name` (String) The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.
+- `db_port` (Number) The port number on which the DB instances in the DB cluster accept connections. 
+
+If not specified, the default port used is `8182`. 
+
+Note: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.
 - `db_subnet_group_name` (String) Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.
 - `deletion_protection` (Boolean) Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
 - `enable_cloudwatch_logs_exports` (List of String) Specifies a list of log types that are enabled for export to CloudWatch Logs.
@@ -69,10 +74,10 @@ If a DB cluster snapshot is specified, the target DB cluster is created from the
 ### Read-Only
 
 - `cluster_resource_id` (String) The resource id for the DB cluster. For example: `cluster-ABCD1234EFGH5678IJKL90MNOP`. The cluster ID uniquely identifies the cluster and is used in things like IAM authentication policies.
-- `endpoint` (String) The connection endpoint for the DB cluster. For example: mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com
+- `endpoint` (String) The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`
 - `id` (String) Uniquely identifies the resource.
-- `port` (String) Specifies the port that the database engine is listening on.
-- `read_endpoint` (String) The reader endpoint for the DB cluster. For example: mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com
+- `port` (String) The port number on which the DB cluster accepts connections. For example: `8182`.
+- `read_endpoint` (String) The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`
 
 <a id="nestedatt--associated_roles"></a>
 ### Nested Schema for `associated_roles`

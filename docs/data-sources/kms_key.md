@@ -22,6 +22,7 @@ Data Source schema for AWS::KMS::Key
 ### Read-Only
 
 - `arn` (String)
+- `bypass_policy_lockout_safety_check` (Boolean) Skips ("bypasses") the key policy lockout safety check. The default value is false.
 - `description` (String) A description of the AWS KMS key. Use a description that helps you to distinguish this AWS KMS key from others in the account, such as its intended use.
 - `enable_key_rotation` (Boolean) Enables automatic rotation of the key material for the specified AWS KMS key. By default, automation key rotation is not enabled.
 - `enabled` (Boolean) Specifies whether the AWS KMS key is enabled. Disabled AWS KMS keys cannot be used in cryptographic operations.

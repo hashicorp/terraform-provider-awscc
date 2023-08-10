@@ -29,17 +29,22 @@ Data Source schema for AWS::Neptune::DBCluster
 - `db_cluster_identifier` (String) The DB cluster identifier. Contains a user-supplied DB cluster identifier. This identifier is the unique key that identifies a DB cluster stored as a lowercase string.
 - `db_cluster_parameter_group_name` (String) Provides the name of the DB cluster parameter group.
 - `db_instance_parameter_group_name` (String) The name of the DB parameter group to apply to all instances of the DB cluster. Used only in case of a major EngineVersion upgrade request.
+- `db_port` (Number) The port number on which the DB instances in the DB cluster accept connections. 
+
+If not specified, the default port used is `8182`. 
+
+Note: `Port` property will soon be deprecated from this resource. Please update existing templates to rename it with new property `DBPort` having same functionalities.
 - `db_subnet_group_name` (String) Specifies information on the subnet group associated with the DB cluster, including the name, description, and subnets in the subnet group.
 - `deletion_protection` (Boolean) Indicates whether or not the DB cluster has deletion protection enabled. The database can't be deleted when deletion protection is enabled.
 - `enable_cloudwatch_logs_exports` (List of String) Specifies a list of log types that are enabled for export to CloudWatch Logs.
-- `endpoint` (String) The connection endpoint for the DB cluster. For example: mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com
+- `endpoint` (String) The connection endpoint for the DB cluster. For example: `mystack-mydbcluster-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`
 - `engine_version` (String) Indicates the database engine version.
 - `iam_auth_enabled` (Boolean) True if mapping of Amazon Identity and Access Management (IAM) accounts to database accounts is enabled, and otherwise false.
 - `kms_key_id` (String) If `StorageEncrypted` is true, the Amazon KMS key identifier for the encrypted DB cluster.
-- `port` (String) Specifies the port that the database engine is listening on.
+- `port` (String) The port number on which the DB cluster accepts connections. For example: `8182`.
 - `preferred_backup_window` (String) Specifies the daily time range during which automated backups are created if automated backups are enabled, as determined by the BackupRetentionPeriod.
 - `preferred_maintenance_window` (String) Specifies the weekly time range during which system maintenance can occur, in Universal Coordinated Time (UTC).
-- `read_endpoint` (String) The reader endpoint for the DB cluster. For example: mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com
+- `read_endpoint` (String) The reader endpoint for the DB cluster. For example: `mystack-mydbcluster-ro-1apw1j4phylrk.cg034hpkmmjt.us-east-2.rds.amazonaws.com`
 - `restore_to_time` (String) Creates a new DB cluster from a DB snapshot or DB cluster snapshot.
 
 If a DB snapshot is specified, the target DB cluster is created from the source DB snapshot with a default configuration and default security group.

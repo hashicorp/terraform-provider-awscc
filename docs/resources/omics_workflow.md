@@ -17,6 +17,7 @@ Definition of AWS::Omics::Workflow Resource Type
 
 ### Optional
 
+- `accelerators` (String)
 - `definition_uri` (String)
 - `description` (String)
 - `engine` (String)

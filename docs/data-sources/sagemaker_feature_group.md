@@ -21,10 +21,12 @@ Data Source schema for AWS::SageMaker::FeatureGroup
 
 ### Read-Only
 
+- `creation_time` (String) A timestamp of FeatureGroup creation time.
 - `description` (String) Description about the FeatureGroup.
 - `event_time_feature_name` (String) The Event Time Feature Name.
 - `feature_definitions` (Attributes List) An Array of Feature Definition (see [below for nested schema](#nestedatt--feature_definitions))
 - `feature_group_name` (String) The Name of the FeatureGroup.
+- `feature_group_status` (String) The status of the feature group.
 - `offline_store_config` (Attributes) (see [below for nested schema](#nestedatt--offline_store_config))
 - `online_store_config` (Attributes) (see [below for nested schema](#nestedatt--online_store_config))
 - `record_identifier_feature_name` (String) The Record Identifier Feature Name.

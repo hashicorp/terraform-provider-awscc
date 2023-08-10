@@ -22,11 +22,14 @@ The AWS::EC2::NetworkInterface resource creates network interface
 ### Optional
 
 - `description` (String) A description for the network interface.
-- `enable_primary_ipv_6` (Boolean) If you have instances or ENIs that rely on the IPv6 address not changing, to avoid disrupting traffic to instances or ENIs, you can enable a primary IPv6 address. Enable this option to automatically assign an IPv6 associated with the ENI attached to your instance to be the primary IPv6 address. When you enable an IPv6 address to be a primary IPv6, you cannot disable it. Traffic will be routed to the primary IPv6 address until the instance is terminated or the ENI is detached. If you have multiple IPv6 addresses associated with an ENI and you enable a primary IPv6 address, the first IPv6 address associated with the ENI becomes the primary IPv6 address.
 - `group_set` (List of String) A list of security group IDs associated with this network interface.
 - `interface_type` (String) Indicates the type of network interface.
+- `ipv_4_prefix_count` (Number) The number of IPv4 prefixes to assign to a network interface. When you specify a number of IPv4 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /28 prefixes. You can't specify a count of IPv4 prefixes if you've specified one of the following: specific IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses.
+- `ipv_4_prefixes` (Attributes List) Assigns a list of IPv4 prefixes to the network interface. If you want EC2 to automatically assign IPv4 prefixes, use the Ipv4PrefixCount property and do not specify this property. Presently, only /28 prefixes are supported. You can't specify IPv4 prefixes if you've specified one of the following: a count of IPv4 prefixes, specific private IPv4 addresses, or a count of private IPv4 addresses. (see [below for nested schema](#nestedatt--ipv_4_prefixes))
 - `ipv_6_address_count` (Number) The number of IPv6 addresses to assign to a network interface. Amazon EC2 automatically selects the IPv6 addresses from the subnet range. To specify specific IPv6 addresses, use the Ipv6Addresses property and don't specify this property.
 - `ipv_6_addresses` (Attributes Set) One or more specific IPv6 addresses from the IPv6 CIDR block range of your subnet to associate with the network interface. If you're specifying a number of IPv6 addresses, use the Ipv6AddressCount property and don't specify this property. (see [below for nested schema](#nestedatt--ipv_6_addresses))
+- `ipv_6_prefix_count` (Number) The number of IPv6 prefixes to assign to a network interface. When you specify a number of IPv6 prefixes, Amazon EC2 selects these prefixes from your existing subnet CIDR reservations, if available, or from free spaces in the subnet. By default, these will be /80 prefixes. You can't specify a count of IPv6 prefixes if you've specified one of the following: specific IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses.
+- `ipv_6_prefixes` (Attributes List) Assigns a list of IPv6 prefixes to the network interface. If you want EC2 to automatically assign IPv6 prefixes, use the Ipv6PrefixCount property and do not specify this property. Presently, only /80 prefixes are supported. You can't specify IPv6 prefixes if you've specified one of the following: a count of IPv6 prefixes, specific IPv6 addresses, or a count of IPv6 addresses. (see [below for nested schema](#nestedatt--ipv_6_prefixes))
 - `private_ip_address` (String) Assigns a single private IP address to the network interface, which is used as the primary private IP address. If you want to specify multiple private IP address, use the PrivateIpAddresses property.
 - `private_ip_addresses` (Attributes List) Assigns a list of private IP addresses to the network interface. You can specify a primary private IP address by setting the value of the Primary property to true in the PrivateIpAddressSpecification property. If you want EC2 to automatically assign private IP addresses, use the SecondaryPrivateIpAddressCount property and do not specify this property. (see [below for nested schema](#nestedatt--private_ip_addresses))
 - `secondary_private_ip_address_count` (Number) The number of secondary private IPv4 addresses to assign to a network interface. When you specify a number of secondary IPv4 addresses, Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR range. You can't specify this option and specify more than one private IP address using privateIpAddresses
@@ -39,12 +42,28 @@ The AWS::EC2::NetworkInterface resource creates network interface
 - `primary_private_ip_address` (String) Returns the primary private IP address of the network interface.
 - `secondary_private_ip_addresses` (List of String) Returns the secondary private IP addresses of the network interface.
 
+<a id="nestedatt--ipv_4_prefixes"></a>
+### Nested Schema for `ipv_4_prefixes`
+
+Required:
+
+- `ipv_4_prefix` (String)
+
+
 <a id="nestedatt--ipv_6_addresses"></a>
 ### Nested Schema for `ipv_6_addresses`
 
 Required:
 
 - `ipv_6_address` (String)
+
+
+<a id="nestedatt--ipv_6_prefixes"></a>
+### Nested Schema for `ipv_6_prefixes`
+
+Required:
+
+- `ipv_6_prefix` (String)
 
 
 <a id="nestedatt--private_ip_addresses"></a>
