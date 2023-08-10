@@ -37,6 +37,9 @@
             "pattern": "[0-9]{12}"
           },
           "minItems": 1
+        },
+        "AutoAssociate": {
+          "type": "boolean"
         }
       },
       "required": [
@@ -188,7 +191,8 @@
       "permissions": [
         "billingconductor:DeleteBillingGroup",
         "billingconductor:ListBillingGroups",
-        "billingconductor:UntagResource"
+        "billingconductor:UntagResource",
+        "billingconductor:UpdateBillingGroup"
       ]
     }
   }

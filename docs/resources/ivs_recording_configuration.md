@@ -23,6 +23,7 @@ Resource Type definition for AWS::IVS::RecordingConfiguration
 
 - `name` (String) Recording Configuration Name.
 - `recording_reconnect_window_seconds` (Number) Recording Reconnect Window Seconds. (0 means disabled)
+- `rendition_configuration` (Attributes) Rendition Configuration describes which renditions should be recorded for a stream. (see [below for nested schema](#nestedatt--rendition_configuration))
 - `tags` (Attributes Set) A list of key-value pairs that contain metadata for the asset model. (see [below for nested schema](#nestedatt--tags))
 - `thumbnail_configuration` (Attributes) Recording Thumbnail Configuration. (see [below for nested schema](#nestedatt--thumbnail_configuration))
 
@@ -35,7 +36,7 @@ Resource Type definition for AWS::IVS::RecordingConfiguration
 <a id="nestedatt--destination_configuration"></a>
 ### Nested Schema for `destination_configuration`
 
-Required:
+Optional:
 
 - `s3` (Attributes) Recording S3 Destination Configuration. (see [below for nested schema](#nestedatt--destination_configuration--s3))
 
@@ -46,6 +47,15 @@ Required:
 
 - `bucket_name` (String)
 
+
+
+<a id="nestedatt--rendition_configuration"></a>
+### Nested Schema for `rendition_configuration`
+
+Optional:
+
+- `rendition_selection` (String) Resolution Selection indicates which set of renditions are recorded for a stream.
+- `renditions` (Set of String) Renditions indicates which renditions are recorded for a stream.
 
 
 <a id="nestedatt--tags"></a>
@@ -60,13 +70,12 @@ Required:
 <a id="nestedatt--thumbnail_configuration"></a>
 ### Nested Schema for `thumbnail_configuration`
 
-Required:
-
-- `recording_mode` (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
-
 Optional:
 
-- `target_interval_seconds` (Number) Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
+- `recording_mode` (String) Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.
+- `resolution` (String) Resolution indicates the desired resolution of recorded thumbnails.
+- `storage` (Set of String) Storage indicates the format in which thumbnails are recorded.
+- `target_interval_seconds` (Number) Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
 
 ## Import
 

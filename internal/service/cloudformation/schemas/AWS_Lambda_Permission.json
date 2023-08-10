@@ -93,6 +93,9 @@
     "/properties/FunctionName",
     "/properties/Id"
   ],
+  "propertyTransform": {
+    "/properties/Principal": "$join([\"^arn:aws[a-zA-Z-]*:iam::\",Principal,\":[a-zA-Z-]*\"]) $OR Principal"
+  },
   "readOnlyProperties": [
     "/properties/Id"
   ],

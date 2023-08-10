@@ -153,7 +153,8 @@ func collectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The possible types for the collection",
 		//	  "enum": [
 		//	    "SEARCH",
-		//	    "TIMESERIES"
+		//	    "TIMESERIES",
+		//	    "VECTORSEARCH"
 		//	  ],
 		//	  "type": "string"
 		//	}

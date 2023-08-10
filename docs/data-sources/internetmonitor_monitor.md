@@ -42,8 +42,30 @@ Data Source schema for AWS::InternetMonitor::Monitor
 
 Read-Only:
 
+- `availability_local_health_events_config` (Attributes) (see [below for nested schema](#nestedatt--health_events_config--availability_local_health_events_config))
 - `availability_score_threshold` (Number)
+- `performance_local_health_events_config` (Attributes) (see [below for nested schema](#nestedatt--health_events_config--performance_local_health_events_config))
 - `performance_score_threshold` (Number)
+
+<a id="nestedatt--health_events_config--availability_local_health_events_config"></a>
+### Nested Schema for `health_events_config.availability_local_health_events_config`
+
+Read-Only:
+
+- `health_score_threshold` (Number)
+- `min_traffic_impact` (Number)
+- `status` (String)
+
+
+<a id="nestedatt--health_events_config--performance_local_health_events_config"></a>
+### Nested Schema for `health_events_config.performance_local_health_events_config`
+
+Read-Only:
+
+- `health_score_threshold` (Number)
+- `min_traffic_impact` (Number)
+- `status` (String)
+
 
 
 <a id="nestedatt--internet_measurements_log_delivery"></a>

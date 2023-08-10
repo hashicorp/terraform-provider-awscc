@@ -71,12 +71,14 @@
     "create": {
       "permissions": [
         "rolesanywhere:ImportCrl",
+        "rolesanywhere:TagResource",
         "rolesanywhere:ListTagsForResource"
       ]
     },
     "read": {
       "permissions": [
-        "rolesanywhere:GetCrl"
+        "rolesanywhere:GetCrl",
+        "rolesanywhere:ListTagsForResource"
       ]
     },
     "update": {

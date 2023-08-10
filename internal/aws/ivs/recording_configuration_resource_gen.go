@@ -18,10 +18,10 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -38,7 +38,7 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 		//	{
 		//	  "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 		//	  "maxLength": 128,
-		//	  "minLength": 1,
+		//	  "minLength": 0,
 		//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
@@ -73,9 +73,6 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "S3"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -96,8 +93,10 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 						}, /*END ATTRIBUTE*/
 					}, /*END SCHEMA*/
 					Description: "Recording S3 Destination Configuration.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+						objectplanmodifier.UseStateForUnknown(),
 						objectplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
@@ -152,6 +151,94 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 				generic.Int64DefaultValue(0),
 				int64planmodifier.UseStateForUnknown(),
 				int64planmodifier.RequiresReplace(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
+		// Property: RenditionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Rendition Configuration describes which renditions should be recorded for a stream.",
+		//	  "properties": {
+		//	    "RenditionSelection": {
+		//	      "default": "ALL",
+		//	      "description": "Resolution Selection indicates which set of renditions are recorded for a stream.",
+		//	      "enum": [
+		//	        "ALL",
+		//	        "NONE",
+		//	        "CUSTOM"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Renditions": {
+		//	      "description": "Renditions indicates which renditions are recorded for a stream.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "FULL_HD",
+		//	          "HD",
+		//	          "SD",
+		//	          "LOWEST_RESOLUTION"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 4,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"rendition_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RenditionSelection
+				"rendition_selection": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Resolution Selection indicates which set of renditions are recorded for a stream.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"ALL",
+							"NONE",
+							"CUSTOM",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						generic.StringDefaultValue("ALL"),
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Renditions
+				"renditions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Renditions indicates which renditions are recorded for a stream.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(0, 4),
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"FULL_HD",
+								"HD",
+								"SD",
+								"LOWEST_RESOLUTION",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Rendition Configuration describes which renditions should be recorded for a stream.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -240,6 +327,7 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 		//	  "description": "Recording Thumbnail Configuration.",
 		//	  "properties": {
 		//	    "RecordingMode": {
+		//	      "default": "INTERVAL",
 		//	      "description": "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
 		//	      "enum": [
 		//	        "INTERVAL",
@@ -247,16 +335,39 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Resolution": {
+		//	      "description": "Resolution indicates the desired resolution of recorded thumbnails.",
+		//	      "enum": [
+		//	        "FULL_HD",
+		//	        "HD",
+		//	        "SD",
+		//	        "LOWEST_RESOLUTION"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Storage": {
+		//	      "description": "Storage indicates the format in which thumbnails are recorded.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "SEQUENTIAL",
+		//	          "LATEST"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "TargetIntervalSeconds": {
-		//	      "description": "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+		//	      "default": 60,
+		//	      "description": "Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
 		//	      "maximum": 60,
-		//	      "minimum": 5,
+		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "RecordingMode"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -264,7 +375,8 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 				// Property: RecordingMode
 				"recording_mode": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
-					Required:    true,
+					Optional:    true,
+					Computed:    true,
 					Validators: []validator.String{ /*START VALIDATORS*/
 						stringvalidator.OneOf(
 							"INTERVAL",
@@ -272,18 +384,59 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 						),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						generic.StringDefaultValue("INTERVAL"),
+						stringplanmodifier.UseStateForUnknown(),
 						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Resolution
+				"resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Resolution indicates the desired resolution of recorded thumbnails.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.OneOf(
+							"FULL_HD",
+							"HD",
+							"SD",
+							"LOWEST_RESOLUTION",
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+						stringplanmodifier.RequiresReplace(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: Storage
+				"storage": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Storage indicates the format in which thumbnails are recorded.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.Set{ /*START VALIDATORS*/
+						setvalidator.SizeBetween(0, 2),
+						setvalidator.ValueStringsAre(
+							stringvalidator.OneOf(
+								"SEQUENTIAL",
+								"LATEST",
+							),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
+						setplanmodifier.UseStateForUnknown(),
+						setplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
 				}, /*END ATTRIBUTE*/
 				// Property: TargetIntervalSeconds
 				"target_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+					Description: "Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
 					Optional:    true,
 					Computed:    true,
 					Validators: []validator.Int64{ /*START VALIDATORS*/
-						int64validator.Between(5, 60),
+						int64validator.Between(1, 60),
 					}, /*END VALIDATORS*/
 					PlanModifiers: []planmodifier.Int64{ /*START PLAN MODIFIERS*/
+						generic.Int64DefaultValue(60),
 						int64planmodifier.UseStateForUnknown(),
 						int64planmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
@@ -326,8 +479,13 @@ func recordingConfigurationResource(ctx context.Context) (resource.Resource, err
 		"name":                               "Name",
 		"recording_mode":                     "RecordingMode",
 		"recording_reconnect_window_seconds": "RecordingReconnectWindowSeconds",
+		"rendition_configuration":            "RenditionConfiguration",
+		"rendition_selection":                "RenditionSelection",
+		"renditions":                         "Renditions",
+		"resolution":                         "Resolution",
 		"s3":                                 "S3",
 		"state":                              "State",
+		"storage":                            "Storage",
 		"tags":                               "Tags",
 		"target_interval_seconds":            "TargetIntervalSeconds",
 		"thumbnail_configuration":            "ThumbnailConfiguration",

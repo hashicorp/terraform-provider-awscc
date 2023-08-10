@@ -220,7 +220,8 @@
       "permissions": [
         "apigateway:POST",
         "apigateway:PATCH",
-        "apigateway:GET"
+        "apigateway:GET",
+        "apigateway:PUT"
       ]
     },
     "read": {

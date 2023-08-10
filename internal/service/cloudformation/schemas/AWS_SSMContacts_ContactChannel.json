@@ -66,7 +66,8 @@
   "handlers": {
     "create": {
       "permissions": [
-        "ssm-contacts:CreateContactChannel"
+        "ssm-contacts:CreateContactChannel",
+        "ssm-contacts:GetContactChannel"
       ]
     },
     "read": {
@@ -76,12 +77,14 @@
     },
     "update": {
       "permissions": [
-        "ssm-contacts:UpdateContactChannel"
+        "ssm-contacts:UpdateContactChannel",
+        "ssm-contacts:GetContactChannel"
       ]
     },
     "delete": {
       "permissions": [
-        "ssm-contacts:DeleteContactChannel"
+        "ssm-contacts:DeleteContactChannel",
+        "ssm-contacts:GetContactChannel"
       ]
     },
     "list": {

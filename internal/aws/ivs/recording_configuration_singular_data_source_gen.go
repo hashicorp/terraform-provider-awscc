@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -29,7 +29,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	{
 		//	  "description": "Recording Configuration ARN is automatically generated on creation and assigned as the unique identifier.",
 		//	  "maxLength": 128,
-		//	  "minLength": 1,
+		//	  "minLength": 0,
 		//	  "pattern": "^arn:aws[-a-z]*:ivs:[a-z0-9-]+:[0-9]+:recording-configuration/[a-zA-Z0-9-]+$",
 		//	  "type": "string"
 		//	}
@@ -61,9 +61,6 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	      "type": "object"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "S3"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"destination_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -109,6 +106,60 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	}
 		"recording_reconnect_window_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
 			Description: "Recording Reconnect Window Seconds. (0 means disabled)",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: RenditionConfiguration
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Rendition Configuration describes which renditions should be recorded for a stream.",
+		//	  "properties": {
+		//	    "RenditionSelection": {
+		//	      "default": "ALL",
+		//	      "description": "Resolution Selection indicates which set of renditions are recorded for a stream.",
+		//	      "enum": [
+		//	        "ALL",
+		//	        "NONE",
+		//	        "CUSTOM"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Renditions": {
+		//	      "description": "Renditions indicates which renditions are recorded for a stream.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "FULL_HD",
+		//	          "HD",
+		//	          "SD",
+		//	          "LOWEST_RESOLUTION"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 4,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"rendition_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: RenditionSelection
+				"rendition_selection": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Resolution Selection indicates which set of renditions are recorded for a stream.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Renditions
+				"renditions": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Renditions indicates which renditions are recorded for a stream.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Rendition Configuration describes which renditions should be recorded for a stream.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: State
@@ -181,6 +232,7 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	  "description": "Recording Thumbnail Configuration.",
 		//	  "properties": {
 		//	    "RecordingMode": {
+		//	      "default": "INTERVAL",
 		//	      "description": "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
 		//	      "enum": [
 		//	        "INTERVAL",
@@ -188,16 +240,39 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		//	      ],
 		//	      "type": "string"
 		//	    },
+		//	    "Resolution": {
+		//	      "description": "Resolution indicates the desired resolution of recorded thumbnails.",
+		//	      "enum": [
+		//	        "FULL_HD",
+		//	        "HD",
+		//	        "SD",
+		//	        "LOWEST_RESOLUTION"
+		//	      ],
+		//	      "type": "string"
+		//	    },
+		//	    "Storage": {
+		//	      "description": "Storage indicates the format in which thumbnails are recorded.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "enum": [
+		//	          "SEQUENTIAL",
+		//	          "LATEST"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 2,
+		//	      "minItems": 0,
+		//	      "type": "array",
+		//	      "uniqueItems": true
+		//	    },
 		//	    "TargetIntervalSeconds": {
-		//	      "description": "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+		//	      "default": 60,
+		//	      "description": "Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
 		//	      "maximum": 60,
-		//	      "minimum": 5,
+		//	      "minimum": 1,
 		//	      "type": "integer"
 		//	    }
 		//	  },
-		//	  "required": [
-		//	    "RecordingMode"
-		//	  ],
 		//	  "type": "object"
 		//	}
 		"thumbnail_configuration": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
@@ -207,9 +282,20 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 					Description: "Thumbnail Recording Mode, which determines whether thumbnails are recorded at an interval or are disabled.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
+				// Property: Resolution
+				"resolution": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Resolution indicates the desired resolution of recorded thumbnails.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Storage
+				"storage": schema.SetAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Storage indicates the format in which thumbnails are recorded.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: TargetIntervalSeconds
 				"target_interval_seconds": schema.Int64Attribute{ /*START ATTRIBUTE*/
-					Description: "Thumbnail recording Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
+					Description: "Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.",
 					Computed:    true,
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
@@ -240,8 +326,13 @@ func recordingConfigurationDataSource(ctx context.Context) (datasource.DataSourc
 		"name":                               "Name",
 		"recording_mode":                     "RecordingMode",
 		"recording_reconnect_window_seconds": "RecordingReconnectWindowSeconds",
+		"rendition_configuration":            "RenditionConfiguration",
+		"rendition_selection":                "RenditionSelection",
+		"renditions":                         "Renditions",
+		"resolution":                         "Resolution",
 		"s3":                                 "S3",
 		"state":                              "State",
+		"storage":                            "Storage",
 		"tags":                               "Tags",
 		"target_interval_seconds":            "TargetIntervalSeconds",
 		"thumbnail_configuration":            "ThumbnailConfiguration",

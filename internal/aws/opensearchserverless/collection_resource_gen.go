@@ -201,7 +201,8 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The possible types for the collection",
 		//	  "enum": [
 		//	    "SEARCH",
-		//	    "TIMESERIES"
+		//	    "TIMESERIES",
+		//	    "VECTORSEARCH"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -213,6 +214,7 @@ func collectionResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"SEARCH",
 					"TIMESERIES",
+					"VECTORSEARCH",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

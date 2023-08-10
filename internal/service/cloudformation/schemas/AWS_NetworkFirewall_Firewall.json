@@ -117,6 +117,9 @@
       }
     }
   },
+  "tagging": {
+    "taggable": true
+  },
   "required": [
     "FirewallName",
     "FirewallPolicyArn",
@@ -146,7 +149,10 @@
         "network-firewall:CreateFirewall",
         "network-firewall:DescribeFirewallPolicy",
         "network-firewall:DescribeRuleGroup",
-        "network-firewall:TagResource"
+        "network-firewall:TagResource",
+        "network-firewall:AssociateSubnets",
+        "network-firewall:AssociateFirewallPolicy",
+        "network-firewall:DescribeFirewall"
       ]
     },
     "read": {
@@ -178,7 +184,8 @@
         "logs:GetLogDelivery",
         "logs:ListLogDeliveries",
         "network-firewall:DeleteFirewall",
-        "network-firewall:UntagResource"
+        "network-firewall:UntagResource",
+        "network-firewall:DescribeFirewall"
       ]
     },
     "list": {

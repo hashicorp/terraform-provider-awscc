@@ -114,13 +114,18 @@
     "create": {
       "permissions": [
         "proton:CreateEnvironmentAccountConnection",
-        "proton:TagResource"
+        "proton:TagResource",
+        "iam:PassRole",
+        "proton:ListTagsForResource",
+        "proton:GetEnvironmentAccountConnection"
       ]
     },
     "read": {
       "permissions": [
         "proton:GetEnvironmentAccountConnection",
-        "proton:ListTagsForResource"
+        "proton:ListTagsForResource",
+        "iam:PassRole",
+        "proton:GetEnvironmentAccountConnection"
       ]
     },
     "update": {
@@ -129,13 +134,18 @@
         "proton:ListTagsForResource",
         "proton:TagResource",
         "proton:UntagResource",
-        "proton:UpdateEnvironmentAccountConnection"
+        "proton:UpdateEnvironmentAccountConnection",
+        "iam:PassRole",
+        "proton:GetEnvironmentAccountConnection"
       ]
     },
     "delete": {
       "permissions": [
         "proton:DeleteEnvironmentAccountConnection",
-        "proton:UntagResource"
+        "proton:UntagResource",
+        "iam:PassRole",
+        "proton:ListTagsForResource",
+        "proton:GetEnvironmentAccountConnection"
       ]
     },
     "list": {

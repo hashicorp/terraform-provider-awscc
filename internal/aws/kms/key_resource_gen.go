@@ -43,6 +43,24 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: BypassPolicyLockoutSafetyCheck
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "default": false,
+		//	  "description": "Skips (\"bypasses\") the key policy lockout safety check. The default value is false.",
+		//	  "type": "boolean"
+		//	}
+		"bypass_policy_lockout_safety_check": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "Skips (\"bypasses\") the key policy lockout safety check. The default value is false.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				generic.BoolDefaultValue(false),
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// BypassPolicyLockoutSafetyCheck is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: Description
 		// CloudFormation resource type schema:
 		//
@@ -109,12 +127,18 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
+		//	  "default": "{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"key-default\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:\u003cpartition\u003e:iam::\u003caccount-id\u003e:root\"\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        }\n    ]\n}",
 		//	  "description": "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
 		//	  "type": "string"
 		//	}
 		"key_policy": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "The key policy that authorizes use of the AWS KMS key. The key policy must observe the following rules.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				generic.StringDefaultValue("{\n    \"Version\": \"2012-10-17\",\n    \"Id\": \"key-default\",\n    \"Statement\": [\n        {\n            \"Sid\": \"Enable IAM User Permissions\",\n            \"Effect\": \"Allow\",\n            \"Principal\": {\n                \"AWS\": \"arn:<partition>:iam::<account-id>:root\"\n            },\n            \"Action\": \"kms:*\",\n            \"Resource\": \"*\"\n        }\n    ]\n}"),
+				stringplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: KeySpec
 		// CloudFormation resource type schema:
@@ -341,24 +365,26 @@ func keyResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
-		"arn":                    "Arn",
-		"description":            "Description",
-		"enable_key_rotation":    "EnableKeyRotation",
-		"enabled":                "Enabled",
-		"key":                    "Key",
-		"key_id":                 "KeyId",
-		"key_policy":             "KeyPolicy",
-		"key_spec":               "KeySpec",
-		"key_usage":              "KeyUsage",
-		"multi_region":           "MultiRegion",
-		"origin":                 "Origin",
-		"pending_window_in_days": "PendingWindowInDays",
-		"tags":                   "Tags",
-		"value":                  "Value",
+		"arn":                                "Arn",
+		"bypass_policy_lockout_safety_check": "BypassPolicyLockoutSafetyCheck",
+		"description":                        "Description",
+		"enable_key_rotation":                "EnableKeyRotation",
+		"enabled":                            "Enabled",
+		"key":                                "Key",
+		"key_id":                             "KeyId",
+		"key_policy":                         "KeyPolicy",
+		"key_spec":                           "KeySpec",
+		"key_usage":                          "KeyUsage",
+		"multi_region":                       "MultiRegion",
+		"origin":                             "Origin",
+		"pending_window_in_days":             "PendingWindowInDays",
+		"tags":                               "Tags",
+		"value":                              "Value",
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
 		"/properties/PendingWindowInDays",
+		"/properties/BypassPolicyLockoutSafetyCheck",
 	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 

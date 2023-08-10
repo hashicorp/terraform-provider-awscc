@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -41,14 +41,14 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the connector.",
 		//	  "maxLength": 1600,
 		//	  "minLength": 20,
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+			Description: "Specifies the unique Amazon Resource Name (ARN) for the connector.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: As2Config
@@ -58,6 +58,12 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration for an AS2 connector.",
 		//	  "properties": {
+		//	    "BasicAuthSecretId": {
+		//	      "description": "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
 		//	    "Compression": {
 		//	      "description": "Compression setting for this AS2 connector configuration.",
 		//	      "enum": [
@@ -133,6 +139,11 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"as_2_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BasicAuthSecretId
+				"basic_auth_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
 				// Property: Compression
 				"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Compression setting for this AS2 connector configuration.",
@@ -205,11 +216,57 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "Specifies the logging role for the connector.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: SftpConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for an SFTP connector.",
+		//	  "properties": {
+		//	    "TrustedHostKeys": {
+		//	      "description": "List of public host keys, for the external server to which you are connecting.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The public host key for the external server to which you are connecting.",
+		//	        "maxLength": 2048,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "UserSecretId": {
+		//	      "description": "ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sftp_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TrustedHostKeys
+				"trusted_host_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of public host keys, for the external server to which you are connecting.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: UserSecretId
+				"user_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for an SFTP connector.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+		//	  "description": "Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -253,7 +310,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+			Description: "Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: Url
@@ -288,6 +345,7 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"access_role":           "AccessRole",
 		"arn":                   "Arn",
 		"as_2_config":           "As2Config",
+		"basic_auth_secret_id":  "BasicAuthSecretId",
 		"compression":           "Compression",
 		"connector_id":          "ConnectorId",
 		"encryption_algorithm":  "EncryptionAlgorithm",
@@ -298,9 +356,12 @@ func connectorDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"mdn_signing_algorithm": "MdnSigningAlgorithm",
 		"message_subject":       "MessageSubject",
 		"partner_profile_id":    "PartnerProfileId",
+		"sftp_config":           "SftpConfig",
 		"signing_algorithm":     "SigningAlgorithm",
 		"tags":                  "Tags",
+		"trusted_host_keys":     "TrustedHostKeys",
 		"url":                   "Url",
+		"user_secret_id":        "UserSecretId",
 		"value":                 "Value",
 	})
 

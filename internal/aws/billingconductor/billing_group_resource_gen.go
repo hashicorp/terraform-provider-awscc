@@ -11,6 +11,7 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/int64planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
@@ -36,6 +37,9 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AutoAssociate": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "LinkedAccountIds": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -54,6 +58,14 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"account_grouping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoAssociate
+				"auto_associate": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Optional: true,
+					Computed: true,
+					PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+						boolplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: LinkedAccountIds
 				"linked_account_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -311,6 +323,7 @@ func billingGroupResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_grouping":       "AccountGrouping",
 		"arn":                    "Arn",
+		"auto_associate":         "AutoAssociate",
 		"computation_preference": "ComputationPreference",
 		"creation_time":          "CreationTime",
 		"description":            "Description",

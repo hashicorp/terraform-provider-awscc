@@ -29,6 +29,9 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	{
 		//	  "additionalProperties": false,
 		//	  "properties": {
+		//	    "AutoAssociate": {
+		//	      "type": "boolean"
+		//	    },
 		//	    "LinkedAccountIds": {
 		//	      "insertionOrder": false,
 		//	      "items": {
@@ -47,6 +50,10 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	}
 		"account_grouping": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: AutoAssociate
+				"auto_associate": schema.BoolAttribute{ /*START ATTRIBUTE*/
+					Computed: true,
+				}, /*END ATTRIBUTE*/
 				// Property: LinkedAccountIds
 				"linked_account_ids": schema.SetAttribute{ /*START ATTRIBUTE*/
 					ElementType: types.StringType,
@@ -245,6 +252,7 @@ func billingGroupDataSource(ctx context.Context) (datasource.DataSource, error) 
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_grouping":       "AccountGrouping",
 		"arn":                    "Arn",
+		"auto_associate":         "AutoAssociate",
 		"computation_preference": "ComputationPreference",
 		"creation_time":          "CreationTime",
 		"description":            "Description",

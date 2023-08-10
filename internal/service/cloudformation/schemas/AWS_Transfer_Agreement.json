@@ -1,6 +1,7 @@
 {
   "typeName": "AWS::Transfer::Agreement",
   "description": "Resource Type definition for AWS::Transfer::Agreement",
+  "sourceUrl": "https://github.com/aws-cloudformation/aws-cloudformation-resource-providers-transfer",
   "definitions": {
     "Tag": {
       "description": "Creates a key-value pair for a specific resource.",
@@ -154,6 +155,16 @@
       ]
     },
     "list": {
+      "handlerSchema": {
+        "properties": {
+          "ServerId": {
+            "$ref": "resource-schema.json#/properties/ServerId"
+          }
+        },
+        "required": [
+          "ServerId"
+        ]
+      },
       "permissions": [
         "transfer:ListAgreements"
       ]

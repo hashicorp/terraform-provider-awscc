@@ -21,6 +21,7 @@ Data Source schema for AWS::Omics::Workflow
 
 ### Read-Only
 
+- `accelerators` (String)
 - `arn` (String)
 - `creation_time` (String)
 - `definition_uri` (String)

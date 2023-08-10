@@ -58,6 +58,7 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
 				boolplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// AutoUpdate is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: ExecutionRoleArn
 		// CloudFormation resource type schema:
@@ -72,8 +73,8 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// ExecutionRoleArn is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: LoggingConfig
 		// CloudFormation resource type schema:
@@ -133,6 +134,7 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 				objectplanmodifier.UseStateForUnknown(),
 				objectplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// LoggingConfig is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: MajorVersion
 		// CloudFormation resource type schema:
@@ -153,6 +155,7 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// MajorVersion is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: PublicTypeArn
 		// CloudFormation resource type schema:
@@ -173,7 +176,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: PublisherId
@@ -196,7 +198,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: Type
@@ -224,8 +225,8 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Type is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: TypeName
 		// CloudFormation resource type schema:
@@ -244,7 +245,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TypeNameAlias
@@ -267,7 +267,6 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
-				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: VersionBump
@@ -294,6 +293,7 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// VersionBump is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -332,6 +332,14 @@ func typeActivationResource(ctx context.Context) (resource.Resource, error) {
 		"version_bump":       "VersionBump",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/ExecutionRoleArn",
+		"/properties/Type",
+		"/properties/LoggingConfig",
+		"/properties/VersionBump",
+		"/properties/AutoUpdate",
+		"/properties/MajorVersion",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

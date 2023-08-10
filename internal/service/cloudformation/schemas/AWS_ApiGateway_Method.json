@@ -294,7 +294,8 @@
     "create": {
       "permissions": [
         "apigateway:PUT",
-        "apigateway:GET"
+        "apigateway:GET",
+        "iam:PassRole"
       ]
     },
     "read": {
@@ -306,7 +307,8 @@
       "permissions": [
         "apigateway:GET",
         "apigateway:DELETE",
-        "apigateway:PUT"
+        "apigateway:PUT",
+        "iam:PassRole"
       ]
     },
     "delete": {

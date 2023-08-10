@@ -95,6 +95,12 @@
   "primaryIdentifier": [
     "/properties/Arn"
   ],
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "handlers": {
     "create": {
       "permissions": [
@@ -130,7 +136,8 @@
         }
       },
       "permissions": [
-        "cloudformation:ListTypes"
+        "cloudformation:ListTypes",
+        "cloudformation:ListTypeVersions"
       ]
     }
   },

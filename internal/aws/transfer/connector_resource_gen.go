@@ -7,18 +7,21 @@ package transfer
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/listplanmodifier"
+	"github.com/hashicorp/terraform-plugin-framework/resource/schema/objectplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/setplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"regexp"
-
+	"github.com/hashicorp/terraform-plugin-framework/types"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
+	"regexp"
 )
 
 func init() {
@@ -51,14 +54,14 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+		//	  "description": "Specifies the unique Amazon Resource Name (ARN) for the connector.",
 		//	  "maxLength": 1600,
 		//	  "minLength": 20,
 		//	  "pattern": "arn:.*",
 		//	  "type": "string"
 		//	}
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
-			Description: "Specifies the unique Amazon Resource Name (ARN) for the workflow.",
+			Description: "Specifies the unique Amazon Resource Name (ARN) for the connector.",
 			Computed:    true,
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
@@ -71,6 +74,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	  "additionalProperties": false,
 		//	  "description": "Configuration for an AS2 connector.",
 		//	  "properties": {
+		//	    "BasicAuthSecretId": {
+		//	      "description": "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
+		//	      "maxLength": 2048,
+		//	      "minLength": 0,
+		//	      "type": "string"
+		//	    },
 		//	    "Compression": {
 		//	      "description": "Compression setting for this AS2 connector configuration.",
 		//	      "enum": [
@@ -146,6 +155,18 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		//	}
 		"as_2_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: BasicAuthSecretId
+				"basic_auth_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN or name of the secret in AWS Secrets Manager which contains the credentials for Basic authentication. If empty, Basic authentication is disabled for the AS2 connector",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(0, 2048),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
 				// Property: Compression
 				"compression": schema.StringAttribute{ /*START ATTRIBUTE*/
 					Description: "Compression setting for this AS2 connector configuration.",
@@ -270,7 +291,11 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "Configuration for an AS2 connector.",
-			Required:    true,
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ConnectorId
 		// CloudFormation resource type schema:
@@ -311,11 +336,79 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: SftpConfig
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Configuration for an SFTP connector.",
+		//	  "properties": {
+		//	    "TrustedHostKeys": {
+		//	      "description": "List of public host keys, for the external server to which you are connecting.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "description": "The public host key for the external server to which you are connecting.",
+		//	        "maxLength": 2048,
+		//	        "minLength": 1,
+		//	        "type": "string"
+		//	      },
+		//	      "maxItems": 10,
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "UserSecretId": {
+		//	      "description": "ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.",
+		//	      "maxLength": 2048,
+		//	      "minLength": 1,
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "type": "object"
+		//	}
+		"sftp_config": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: TrustedHostKeys
+				"trusted_host_keys": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "List of public host keys, for the external server to which you are connecting.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.List{ /*START VALIDATORS*/
+						listvalidator.SizeAtMost(10),
+						listvalidator.ValueStringsAre(
+							stringvalidator.LengthBetween(1, 2048),
+						),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+						generic.Multiset(),
+						listplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+				// Property: UserSecretId
+				"user_secret_id": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "ARN or name of the secret in AWS Secrets Manager which contains the SFTP user's private keys or passwords.",
+					Optional:    true,
+					Computed:    true,
+					Validators: []validator.String{ /*START VALIDATORS*/
+						stringvalidator.LengthBetween(1, 2048),
+					}, /*END VALIDATORS*/
+					PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+						stringplanmodifier.UseStateForUnknown(),
+					}, /*END PLAN MODIFIERS*/
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Configuration for an SFTP connector.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+				objectplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+		}, /*END ATTRIBUTE*/
 		// Property: Tags
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "description": "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+		//	  "description": "Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.",
 		//	  "insertionOrder": false,
 		//	  "items": {
 		//	    "additionalProperties": false,
@@ -365,7 +458,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END ATTRIBUTE*/
 				}, /*END SCHEMA*/
 			}, /*END NESTED OBJECT*/
-			Description: "Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.",
+			Description: "Key-value pairs that can be used to group and search for connectors. Tags are metadata attached to connectors for any purpose.",
 			Optional:    true,
 			Computed:    true,
 			Validators: []validator.Set{ /*START VALIDATORS*/
@@ -415,6 +508,7 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"access_role":           "AccessRole",
 		"arn":                   "Arn",
 		"as_2_config":           "As2Config",
+		"basic_auth_secret_id":  "BasicAuthSecretId",
 		"compression":           "Compression",
 		"connector_id":          "ConnectorId",
 		"encryption_algorithm":  "EncryptionAlgorithm",
@@ -425,9 +519,12 @@ func connectorResource(ctx context.Context) (resource.Resource, error) {
 		"mdn_signing_algorithm": "MdnSigningAlgorithm",
 		"message_subject":       "MessageSubject",
 		"partner_profile_id":    "PartnerProfileId",
+		"sftp_config":           "SftpConfig",
 		"signing_algorithm":     "SigningAlgorithm",
 		"tags":                  "Tags",
+		"trusted_host_keys":     "TrustedHostKeys",
 		"url":                   "Url",
+		"user_secret_id":        "UserSecretId",
 		"value":                 "Value",
 	})
 

@@ -580,7 +580,8 @@
       "permissions": [
         "sagemaker:CreateModelBiasJobDefinition",
         "sagemaker:DescribeModelBiasJobDefinition",
-        "iam:PassRole"
+        "iam:PassRole",
+        "sagemaker:AddTags"
       ]
     },
     "delete": {
@@ -595,7 +596,8 @@
     },
     "list": {
       "permissions": [
-        "sagemaker:ListModelBiasJobDefinitions"
+        "sagemaker:ListModelBiasJobDefinitions",
+        "sagemaker:ListTags"
       ]
     }
   },
@@ -613,6 +615,13 @@
     "/properties/NetworkConfig",
     "/properties/RoleArn",
     "/properties/StoppingCondition",
-    "/properties/Tags"
+    "/properties/Tags",
+    "/properties/EndpointName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/EndpointName",
+    "/properties/Tags",
+    "/properties/Tags/*/Key",
+    "/properties/Tags/*/Value"
   ]
 }

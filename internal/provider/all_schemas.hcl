@@ -10,7 +10,7 @@ meta_schema {
   path = "../service/cloudformation/meta-schemas/provider.definition.schema.v1.json"
 }
 
-# 789 CloudFormation resource types schemas are available for use with the Cloud Control API.
+# 801 CloudFormation resource types schemas are available for use with the Cloud Control API.
 
 resource_schema "aws_acmpca_certificate" {
   cloudformation_type_name               = "AWS::ACMPCA::Certificate"
@@ -620,6 +620,10 @@ resource_schema "aws_cloudtrail_trail" {
   cloudformation_type_name = "AWS::CloudTrail::Trail"
 }
 
+resource_schema "aws_cloudwatch_alarm" {
+  cloudformation_type_name = "AWS::CloudWatch::Alarm"
+}
+
 resource_schema "aws_cloudwatch_composite_alarm" {
   cloudformation_type_name = "AWS::CloudWatch::CompositeAlarm"
 }
@@ -684,6 +688,10 @@ resource_schema "aws_config_aggregation_authorization" {
   cloudformation_type_name = "AWS::Config::AggregationAuthorization"
 }
 
+resource_schema "aws_config_config_rule" {
+  cloudformation_type_name = "AWS::Config::ConfigRule"
+}
+
 resource_schema "aws_config_configuration_aggregator" {
   cloudformation_type_name = "AWS::Config::ConfigurationAggregator"
 }
@@ -712,6 +720,11 @@ resource_schema "aws_connect_contact_flow" {
 
 resource_schema "aws_connect_contact_flow_module" {
   cloudformation_type_name               = "AWS::Connect::ContactFlowModule"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_connect_traffic_distribution_group" {
+  cloudformation_type_name               = "AWS::Connect::TrafficDistributionGroup"
   suppress_plural_data_source_generation = true
 }
 
@@ -838,6 +851,10 @@ resource_schema "aws_customerprofiles_object_type" {
   suppress_plural_data_source_generation = true
 }
 
+resource_schema "aws_dms_replication_config" {
+  cloudformation_type_name = "AWS::DMS::ReplicationConfig"
+}
+
 resource_schema "aws_databrew_dataset" {
   cloudformation_type_name = "AWS::DataBrew::Dataset"
 }
@@ -872,6 +889,10 @@ resource_schema "aws_datapipeline_pipeline" {
 
 resource_schema "aws_datasync_agent" {
   cloudformation_type_name = "AWS::DataSync::Agent"
+}
+
+resource_schema "aws_datasync_location_azure_blob" {
+  cloudformation_type_name = "AWS::DataSync::LocationAzureBlob"
 }
 
 resource_schema "aws_datasync_location_efs" {
@@ -1095,6 +1116,10 @@ resource_schema "aws_ec2_network_interface" {
   cloudformation_type_name = "AWS::EC2::NetworkInterface"
 }
 
+resource_schema "aws_ec2_network_interface_attachment" {
+  cloudformation_type_name = "AWS::EC2::NetworkInterfaceAttachment"
+}
+
 resource_schema "aws_ec2_network_performance_metric_subscription" {
   cloudformation_type_name = "AWS::EC2::NetworkPerformanceMetricSubscription"
 }
@@ -1105,6 +1130,11 @@ resource_schema "aws_ec2_placement_group" {
 
 resource_schema "aws_ec2_prefix_list" {
   cloudformation_type_name = "AWS::EC2::PrefixList"
+}
+
+resource_schema "aws_ec2_route" {
+  cloudformation_type_name               = "AWS::EC2::Route"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_ec2_route_table" {
@@ -2124,6 +2154,11 @@ resource_schema "aws_lambda_function" {
   cloudformation_type_name = "AWS::Lambda::Function"
 }
 
+resource_schema "aws_lambda_layer_version_permission" {
+  cloudformation_type_name               = "AWS::Lambda::LayerVersionPermission"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_lambda_permission" {
   cloudformation_type_name               = "AWS::Lambda::Permission"
   suppress_plural_data_source_generation = true
@@ -2402,6 +2437,20 @@ resource_schema "aws_mediapackage_packaging_group" {
   cloudformation_type_name = "AWS::MediaPackage::PackagingGroup"
 }
 
+resource_schema "aws_mediatailor_channel" {
+  cloudformation_type_name = "AWS::MediaTailor::Channel"
+}
+
+resource_schema "aws_mediatailor_channel_policy" {
+  cloudformation_type_name               = "AWS::MediaTailor::ChannelPolicy"
+  suppress_plural_data_source_generation = true
+}
+
+resource_schema "aws_mediatailor_live_source" {
+  cloudformation_type_name               = "AWS::MediaTailor::LiveSource"
+  suppress_plural_data_source_generation = true
+}
+
 resource_schema "aws_mediatailor_playback_configuration" {
   cloudformation_type_name = "AWS::MediaTailor::PlaybackConfiguration"
 
@@ -2409,6 +2458,11 @@ resource_schema "aws_mediatailor_playback_configuration" {
   suppress_resource_generation             = true
   suppress_singular_data_source_generation = true
   suppress_plural_data_source_generation   = true
+}
+
+resource_schema "aws_mediatailor_vod_source" {
+  cloudformation_type_name               = "AWS::MediaTailor::VodSource"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_memorydb_acl" {
@@ -2680,8 +2734,7 @@ resource_schema "aws_pinpoint_in_app_template" {
 }
 
 resource_schema "aws_pipes_pipe" {
-  cloudformation_type_name               = "AWS::Pipes::Pipe"
-  suppress_plural_data_source_generation = true
+  cloudformation_type_name = "AWS::Pipes::Pipe"
 }
 
 resource_schema "aws_proton_environment_account_connection" {
@@ -3206,6 +3259,11 @@ resource_schema "aws_sso_permission_set" {
 
 resource_schema "aws_sqs_queue" {
   cloudformation_type_name = "AWS::SQS::Queue"
+}
+
+resource_schema "aws_sqs_queue_inline_policy" {
+  cloudformation_type_name               = "AWS::SQS::QueueInlinePolicy"
+  suppress_plural_data_source_generation = true
 }
 
 resource_schema "aws_sagemaker_app" {

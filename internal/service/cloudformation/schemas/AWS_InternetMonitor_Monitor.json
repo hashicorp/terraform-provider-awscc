@@ -81,6 +81,35 @@
           "type": "number",
           "minimum": 0.0,
           "maximum": 100.0
+        },
+        "AvailabilityLocalHealthEventsConfig": {
+          "$ref": "#/definitions/LocalHealthEventsConfig"
+        },
+        "PerformanceLocalHealthEventsConfig": {
+          "$ref": "#/definitions/LocalHealthEventsConfig"
+        }
+      },
+      "additionalProperties": false
+    },
+    "LocalHealthEventsConfig": {
+      "type": "object",
+      "properties": {
+        "Status": {
+          "type": "string",
+          "enum": [
+            "ENABLED",
+            "DISABLED"
+          ]
+        },
+        "HealthScoreThreshold": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
+        },
+        "MinTrafficImpact": {
+          "type": "number",
+          "minimum": 0.0,
+          "maximum": 100.0
         }
       },
       "additionalProperties": false

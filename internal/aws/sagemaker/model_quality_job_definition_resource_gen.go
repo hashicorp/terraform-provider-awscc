@@ -67,7 +67,9 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
 				stringplanmodifier.UseStateForUnknown(),
+				stringplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// EndpointName is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: JobDefinitionArn
 		// CloudFormation resource type schema:
@@ -1342,6 +1344,7 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 				listplanmodifier.UseStateForUnknown(),
 				listplanmodifier.RequiresReplace(),
 			}, /*END PLAN MODIFIERS*/
+			// Tags is a write-only property.
 		}, /*END ATTRIBUTE*/
 	} /*END SCHEMA*/
 
@@ -1425,6 +1428,12 @@ func modelQualityJobDefinitionResource(ctx context.Context) (resource.Resource, 
 		"vpc_config":                                "VpcConfig",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EndpointName",
+		"/properties/Tags",
+		"/properties/Tags/*/Key",
+		"/properties/Tags/*/Value",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

@@ -534,7 +534,8 @@
       "permissions": [
         "sagemaker:CreateModelExplainabilityJobDefinition",
         "sagemaker:DescribeModelExplainabilityJobDefinition",
-        "iam:PassRole"
+        "iam:PassRole",
+        "sagemaker:AddTags"
       ]
     },
     "delete": {
@@ -549,7 +550,8 @@
     },
     "list": {
       "permissions": [
-        "sagemaker:ListModelExplainabilityJobDefinitions"
+        "sagemaker:ListModelExplainabilityJobDefinitions",
+        "sagemaker:ListTags"
       ]
     }
   },
@@ -567,6 +569,13 @@
     "/properties/NetworkConfig",
     "/properties/RoleArn",
     "/properties/StoppingCondition",
-    "/properties/Tags"
+    "/properties/Tags",
+    "/properties/EndpointName"
+  ],
+  "writeOnlyProperties": [
+    "/properties/EndpointName",
+    "/properties/Tags",
+    "/properties/Tags/*/Key",
+    "/properties/Tags/*/Value"
   ]
 }

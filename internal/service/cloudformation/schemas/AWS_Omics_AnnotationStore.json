@@ -254,7 +254,13 @@
     "create": {
       "permissions": [
         "omics:CreateAnnotationStore",
-        "omics:TagResource"
+        "omics:TagResource",
+        "kms:DescribeKey",
+        "kms:GenerateDataKey",
+        "kms:CreateGrant",
+        "ram:AcceptResourceShareInvitation",
+        "ram:GetResourceShareInvitations",
+        "omics:GetAnnotationStore"
       ]
     },
     "read": {
@@ -266,12 +272,15 @@
       "permissions": [
         "omics:UpdateAnnotationStore",
         "omics:TagResource",
-        "omics:UntagResource"
+        "omics:UntagResource",
+        "omics:GetAnnotationStore",
+        "omics:ListTagsForResource"
       ]
     },
     "delete": {
       "permissions": [
-        "omics:DeleteAnnotationStore"
+        "omics:DeleteAnnotationStore",
+        "omics:ListAnnotationStores"
       ]
     },
     "list": {

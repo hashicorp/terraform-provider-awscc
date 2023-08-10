@@ -442,7 +442,11 @@
       "permissions": [
         "iotfleetwise:CreateDecoderManifest",
         "iotfleetwise:GetDecoderManifest",
-        "iotfleetwise:UpdateDecoderManifest"
+        "iotfleetwise:UpdateDecoderManifest",
+        "iotfleetwise:ListDecoderManifestSignals",
+        "iotfleetwise:ListDecoderManifestNetworkInterfaces",
+        "iotfleetwise:ListTagsForResource",
+        "iotfleetwise:TagResource"
       ]
     },
     "read": {
@@ -459,6 +463,7 @@
         "iotfleetwise:GetDecoderManifest",
         "iotfleetwise:ListDecoderManifestSignals",
         "iotfleetwise:ListDecoderManifestNetworkInterfaces",
+        "iotfleetwise:ListTagsForResource",
         "iotfleetwise:TagResource",
         "iotfleetwise:UntagResource"
       ]

@@ -99,28 +99,35 @@
     "create": {
       "permissions": [
         "proton:CreateServiceTemplate",
-        "proton:TagResource"
+        "proton:TagResource",
+        "kms:*",
+        "proton:GetServiceTemplate"
       ]
     },
     "read": {
       "permissions": [
         "proton:GetServiceTemplate",
-        "proton:ListTagsForResource"
+        "proton:ListTagsForResource",
+        "kms:*"
       ]
     },
     "update": {
       "permissions": [
+        "proton:GetServiceTemplate",
         "proton:CreateServiceTemplate",
         "proton:ListTagsForResource",
         "proton:TagResource",
         "proton:UntagResource",
-        "proton:UpdateServiceTemplate"
+        "proton:UpdateServiceTemplate",
+        "kms:*"
       ]
     },
     "delete": {
       "permissions": [
         "proton:DeleteServiceTemplate",
-        "proton:UntagResource"
+        "proton:UntagResource",
+        "kms:*",
+        "proton:GetServiceTemplate"
       ]
     },
     "list": {

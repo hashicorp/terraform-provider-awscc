@@ -3036,6 +3036,7 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 						listplanmodifier.UseStateForUnknown(),
 						listplanmodifier.RequiresReplace(),
 					}, /*END PLAN MODIFIERS*/
+					// TagSpecifications is a write-only property.
 				}, /*END ATTRIBUTE*/
 				// Property: TargetCapacity
 				"target_capacity": schema.Int64Attribute{ /*START ATTRIBUTE*/
@@ -3229,6 +3230,10 @@ func spotFleetResource(ctx context.Context) (resource.Resource, error) {
 		"weighted_capacity":                                "WeightedCapacity",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/SpotFleetRequestConfigData/TagSpecifications",
+		"/properties/SpotFleetRequestConfigData/LaunchSpecifications/*/NetworkInterfaces/*/Groups",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)
