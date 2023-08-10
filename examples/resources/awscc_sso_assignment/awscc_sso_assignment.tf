@@ -1,25 +1,3 @@
-// Note: Currently there is no data source for fetching the IAM Identity Center (formerly AWS SSO)
-//instance arn in the awscc provider so we must use both the aws and awscc providers.
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-    awscc = {
-      source = "hashicorp/awscc"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
-
-provider "awscc" {
-  region = "us-east-1"
-}
-
-
 data "aws_ssoadmin_instances" "example" {} // fetch IAM Identity Center instance arn
 
 data "aws_ssoadmin_permission_set" "example" {

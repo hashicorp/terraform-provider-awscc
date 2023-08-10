@@ -12,6 +12,7 @@ description: |-
 ## Example Usage
 
 ### Existing Permission Set
+**Note:** Currently there is no data source for fetching the IAM Identity Center (formerly AWS SSO) instance arn in the `awscc` provider so you must use both the `aws` and `awscc` providers.
 {{ tffile (printf "examples/resources/%s/awscc_sso_assignment.tf" .Name)}}
 
 ### Existing Permission Set

@@ -12,29 +12,8 @@ Resource Type definition for SSO assignmet
 ## Example Usage
 
 ### Existing Permission Set
+**Note:** Currently there is no data source for fetching the IAM Identity Center (formerly AWS SSO) instance arn in the `awscc` provider so you must use both the `aws` and `awscc` providers.
 ```terraform
-// Note: Currently there is no data source for fetching the IAM Identity Center (formerly AWS SSO)
-//instance arn in the awscc provider so we must use both the aws and awscc providers.
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-    awscc = {
-      source = "hashicorp/awscc"
-    }
-  }
-}
-
-provider "aws" {
-  region = "us-east-1"
-}
-
-provider "awscc" {
-  region = "us-east-1"
-}
-
-
 data "aws_ssoadmin_instances" "example" {} // fetch IAM Identity Center instance arn
 
 data "aws_ssoadmin_permission_set" "example" {
@@ -69,19 +48,6 @@ resource "awscc_sso_assignment" "example" {
 
 ### Existing Permission Set
 ```terraform
-// Note: Currently there is no data source for fetching the IAM Identity Center (formerly AWS SSO)
-//instance arn in the awscc provider so we must use both the aws and awscc providers.
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-    awscc = {
-      source = "hashicorp/awscc"
-    }
-  }
-}
-
 data "aws_ssoadmin_instances" "example" {} // fetch IAM Identity Center instance arn
 
 // create new permission set
@@ -91,7 +57,6 @@ resource "awscc_sso_permission_set" "example" {
   description  = "An example Permission Set"                 // add desired description for permission set
   // add multiple managed policies
   managed_policies = [
-    "arn:aws:iam::aws:policy/AdministratorAccess",
     "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess",
   ]
   // redirect to S3 in us-east-1 upon sign-in
@@ -123,7 +88,7 @@ resource "awscc_sso_assignment" "example" {
   permission_set_arn = awscc_sso_permission_set.example.permission_set_arn
 
   principal_id   = data.aws_identitystore_group.example.group_id // reference group id that was fetched by the data source
-  principal_type = "GROUP"                                       // valid values are 'USER' or 'GROUP'                                   // valid values are 'USER' or 'GROUP'
+  principal_type = "GROUP"                                       // valid values are 'USER' or 'GROUP'
 
   target_id   = "012347678910"
   target_type = "AWS_ACCOUNT"
