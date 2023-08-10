@@ -1,0 +1,35 @@
+---
+page_title: "{{.Name}} {{.Type}} - {{.ProviderName}}"
+subcategory: ""
+description: |-
+{{ .Description | plainmarkdown | trimspace | prefixlines "  " }}
+---
+
+# {{.Name}} ({{.Type}})
+
+{{ .Description | trimspace }}
+
+## Example Usage
+
+### Allocate an Elastic IP (EIP) address
+
+To use {{.Name}} to allocate an Elastic IP (EIP) address:
+
+{{ tffile (printf "examples/resources/%s/ec2_eip.tf" .Name)}}
+
+### Allocate an Elastic IP (EIP) address and assign it to an Amazon EC2 instance
+
+To use {{.Name}} to allocate an Elastic IP (EIP) address and assign it to an Amazon EC2 instance:
+
+{{ tffile (printf "examples/resources/%s/ec2_eip_association.tf" .Name)}}
+
+{{ .SchemaMarkdown | trimspace }}
+{{- if .HasImport }}
+
+## Import
+
+Import is supported using the following syntax:
+
+{{ codefile "shell" .ImportFile }}
+
+{{- end }}
