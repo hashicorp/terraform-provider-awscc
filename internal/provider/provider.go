@@ -14,6 +14,7 @@ import (
 	"github.com/aws/smithy-go/logging"
 	awsbase "github.com/hashicorp/aws-sdk-go-base/v2"
 	hclog "github.com/hashicorp/go-hclog"
+	multierror "github.com/hashicorp/go-multierror"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
@@ -514,13 +515,13 @@ func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Cl
 
 	if awsDiags.HasError() {
 		errDiags := awsDiags.Errors()
-		var errs []error
+		var errs *multierror.Error
 
 		for _, d := range errDiags {
-			errs = append(errs, errors.New(d.Summary()))
+			errs = multierror.Append(errs, errors.New(d.Summary()))
 		}
 
-		return nil, "", errors.Join(errs...)
+		return nil, "", errs.ErrorOrNil()
 	}
 
 	return cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) { o.Logger = awsSdkLogger{} }), cfg.Region, nil
