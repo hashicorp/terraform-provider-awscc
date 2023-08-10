@@ -23,6 +23,20 @@ func init() {
 // This Terraform data source corresponds to the CloudFormation AWS::Omics::Workflow resource.
 func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	attributes := map[string]schema.Attribute{ /*START SCHEMA*/
+		// Property: Accelerators
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "enum": [
+		//	    "GPU"
+		//	  ],
+		//	  "maxLength": 64,
+		//	  "minLength": 1,
+		//	  "type": "string"
+		//	}
+		"accelerators": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: Arn
 		// CloudFormation resource type schema:
 		//
@@ -75,7 +89,8 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "enum": [
 		//	    "WDL",
-		//	    "NEXTFLOW"
+		//	    "NEXTFLOW",
+		//	    "CWL"
 		//	  ],
 		//	  "maxLength": 64,
 		//	  "minLength": 1,
@@ -242,6 +257,7 @@ func workflowDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithCloudFormationTypeName("AWS::Omics::Workflow").WithTerraformTypeName("awscc_omics_workflow")
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
+		"accelerators":       "Accelerators",
 		"arn":                "Arn",
 		"creation_time":      "CreationTime",
 		"definition_uri":     "DefinitionUri",

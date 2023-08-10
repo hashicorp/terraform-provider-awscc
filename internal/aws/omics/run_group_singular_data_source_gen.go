@@ -79,6 +79,17 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"max_duration": schema.Float64Attribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: MaxGpus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "maximum": 100000,
+		//	  "minimum": 1,
+		//	  "type": "number"
+		//	}
+		"max_gpus": schema.Float64Attribute{ /*START ATTRIBUTE*/
+			Computed: true,
+		}, /*END ATTRIBUTE*/
 		// Property: MaxRuns
 		// CloudFormation resource type schema:
 		//
@@ -146,6 +157,7 @@ func runGroupDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"id":            "Id",
 		"max_cpus":      "MaxCpus",
 		"max_duration":  "MaxDuration",
+		"max_gpus":      "MaxGpus",
 		"max_runs":      "MaxRuns",
 		"name":          "Name",
 		"tags":          "Tags",
