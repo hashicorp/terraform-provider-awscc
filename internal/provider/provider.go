@@ -5,6 +5,7 @@ package provider
 
 import (
 	"context"
+	"errors"
 	"fmt"
 	"time"
 
@@ -509,10 +510,17 @@ func newCloudControlAPIClient(ctx context.Context, pd *config) (*cloudcontrol.Cl
 		config.EC2MetadataServiceEnableState = imds.ClientEnabled
 	}
 
-	_, cfg, err := awsbase.GetAwsConfig(ctx, &config)
+	_, cfg, awsDiags := awsbase.GetAwsConfig(ctx, &config)
 
-	if err != nil {
-		return nil, "", err
+	if awsDiags.HasError() {
+		errDiags := awsDiags.Errors()
+		var errs []error
+
+		for _, d := range errDiags {
+			errs = append(errs, errors.New(d.Summary()))
+		}
+
+		return nil, "", errors.Join(errs...)
 	}
 
 	return cloudcontrol.NewFromConfig(cfg, func(o *cloudcontrol.Options) { o.Logger = awsSdkLogger{} }), cfg.Region, nil
