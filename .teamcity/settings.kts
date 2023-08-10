@@ -113,7 +113,7 @@ object FullBuild : BuildType({
                         minutes = triggerHM.getMinute().toString()
                         timezone = ZoneId.from(triggerTime).toString()
                     }
-                    branchFilter = "+:refs/heads/td-teamcity_config"
+                    branchFilter = "+:refs/heads/main"
                     triggerBuild = always()
                     withPendingChangesOnly = false
                     enableQueueOptimization = false
