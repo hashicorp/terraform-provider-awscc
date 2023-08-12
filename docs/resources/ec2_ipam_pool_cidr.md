@@ -69,7 +69,7 @@ resource "awscc_ec2_ipam_pool" "level_2" {
 
 resource "awscc_ec2_ipam_pool_cidr" "level2_cidr1" {
   ipam_pool_id   = awscc_ec2_ipam_pool.level_2.id
-  netmask_length = "24"
+  netmask_length = 24
 }
 ```
 
