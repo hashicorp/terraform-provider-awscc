@@ -1,14 +1,14 @@
-name: Add new issues to Project
-on:
-  issues:
-    types:
-      - opened
-jobs:
-  add-to-project:
-    name: Add issue to project
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/add-to-project@31b3f3ccdc584546fc445612dec3f38ff5edb41c # v0.5.0
-        with:
-          project-url: https://github.com/orgs/hashicorp/projects/116
-          github-token: ${{ secrets.ORGSCOPED_GITHUB_TOKEN }}
+# name: Add new issues to Project
+# on:
+#   issues:
+#     types:
+#       - opened
+# jobs:
+#   add-to-project:
+#     name: Add issue to project
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/add-to-project@31b3f3ccdc584546fc445612dec3f38ff5edb41c # v0.5.0
+#         with:
+#           project-url: https://github.com/orgs/hashicorp/projects/116
+#           github-token: ${{ secrets.ORGSCOPED_GITHUB_TOKEN }}

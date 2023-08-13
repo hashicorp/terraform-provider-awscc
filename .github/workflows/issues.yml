@@ -1,22 +1,22 @@
-on:
-  issues:
-    types: [opened]
-name: Issue triage
-jobs:
-  markIssuesForTriage:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
-    - name: Apply Issue needs-triage Label
-      if: github.event.action == 'opened' && !contains(fromJSON('["breathingdust", "ewbankkit", "gdavison", "johnsonaj", "YakDriver", "zhelding"]'), github.actor)
-      uses: github/issue-labeler@98b5412841f6c4b0b3d9c29d53c13fad16bd7de2 # v3.2
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        configuration-path: .github/labeler-issue-needs-triage.yml
-        enable-versioned-regex: 0
-    - name: Apply Issue Triage Labels
-      uses: github/issue-labeler@98b5412841f6c4b0b3d9c29d53c13fad16bd7de2 # v3.2
-      with:
-        repo-token: "${{ secrets.GITHUB_TOKEN }}"
-        configuration-path: .github/labeler-issue-triage.yml
-        enable-versioned-regex: 0
+# on:
+#   issues:
+#     types: [opened]
+# name: Issue triage
+# jobs:
+#   markIssuesForTriage:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+#     - name: Apply Issue needs-triage Label
+#       if: github.event.action == 'opened' && !contains(fromJSON('["breathingdust", "ewbankkit", "gdavison", "johnsonaj", "YakDriver", "zhelding"]'), github.actor)
+#       uses: github/issue-labeler@98b5412841f6c4b0b3d9c29d53c13fad16bd7de2 # v3.2
+#       with:
+#         repo-token: "${{ secrets.GITHUB_TOKEN }}"
+#         configuration-path: .github/labeler-issue-needs-triage.yml
+#         enable-versioned-regex: 0
+#     - name: Apply Issue Triage Labels
+#       uses: github/issue-labeler@98b5412841f6c4b0b3d9c29d53c13fad16bd7de2 # v3.2
+#       with:
+#         repo-token: "${{ secrets.GITHUB_TOKEN }}"
+#         configuration-path: .github/labeler-issue-triage.yml
+#         enable-versioned-regex: 0

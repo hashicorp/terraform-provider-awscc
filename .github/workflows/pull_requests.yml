@@ -1,15 +1,15 @@
-on:
-  - pull_request_target
+# on:
+#   - pull_request_target
 
-name: Pull Request Target (All types)
-jobs:
-  NeedsTriageLabeler:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
-    - name: Apply needs-triage Label
-      uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4.3.0
-      if: github.event.action == 'opened' && !contains(fromJSON('["breathingdust", "ewbankkit", "gdavison", "johnsonaj", "YakDriver", "zhelding"]'), github.actor)
-      with:
-        configuration-path: .github/labeler-pr-needs-triage.yml
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
+# name: Pull Request Target (All types)
+# jobs:
+#   NeedsTriageLabeler:
+#     runs-on: ubuntu-latest
+#     steps:
+#     - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+#     - name: Apply needs-triage Label
+#       uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4.3.0
+#       if: github.event.action == 'opened' && !contains(fromJSON('["breathingdust", "ewbankkit", "gdavison", "johnsonaj", "YakDriver", "zhelding"]'), github.actor)
+#       with:
+#         configuration-path: .github/labeler-pr-needs-triage.yml
+#         repo-token: ${{ secrets.GITHUB_TOKEN }}

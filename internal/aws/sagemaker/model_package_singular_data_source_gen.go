@@ -2486,7 +2486,7 @@ func modelPackageDataSource(ctx context.Context) (datasource.DataSource, error) 
 		//	        "type": "object"
 		//	      },
 		//	      "maxItems": 1,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array"
 		//	    },
 		//	    "ValidationRole": {

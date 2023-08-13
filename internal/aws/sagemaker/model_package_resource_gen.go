@@ -3386,7 +3386,7 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 		//	        "type": "object"
 		//	      },
 		//	      "maxItems": 1,
-		//	      "minItems": 1,
+		//	      "minItems": 0,
 		//	      "type": "array"
 		//	    },
 		//	    "ValidationRole": {
@@ -3657,7 +3657,7 @@ func modelPackageResource(ctx context.Context) (resource.Resource, error) {
 					}, /*END NESTED OBJECT*/
 					Required: true,
 					Validators: []validator.List{ /*START VALIDATORS*/
-						listvalidator.SizeBetween(1, 1),
+						listvalidator.SizeBetween(0, 1),
 					}, /*END VALIDATORS*/
 				}, /*END ATTRIBUTE*/
 				// Property: ValidationRole

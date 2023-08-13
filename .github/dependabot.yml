@@ -1,40 +1,40 @@
-# See GitHub's docs for more information on this file:
-# https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/configuration-options-for-dependency-updates
-version: 2
-updates:
-  # Maintain dependencies for GitHub Actions
-  - package-ecosystem: "github-actions"
-    directory: "/"
-    schedule:
-      # Check for updates to GitHub Actions every weekday
-      interval: "daily"
+# # See GitHub's docs for more information on this file:
+# # https://docs.github.com/en/free-pro-team@latest/github/administering-a-repository/configuration-options-for-dependency-updates
+# version: 2
+# updates:
+#   # Maintain dependencies for GitHub Actions
+#   - package-ecosystem: "github-actions"
+#     directory: "/"
+#     schedule:
+#       # Check for updates to GitHub Actions every weekday
+#       interval: "daily"
 
-  # Maintain dependencies for Go modules
-  - package-ecosystem: "gomod"
-    directory: "/"
-    groups:
-      aws-sdk-go:
-        patterns:
-          - "github.com/aws/aws-sdk-go"
-          - "github.com/aws/aws-sdk-go-v2"
-          - "github.com/aws/aws-sdk-go-v2/*"
-          - "github.com/aws/smithy-go"
-    ignore:
-      # terraform-plugin-go should only be updated via terraform-plugin-framework
-      - dependency-name: "github.com/hashicorp/terraform-plugin-go"
-      # terraform-plugin-log should only be updated via terraform-plugin-framework
-      - dependency-name: "github.com/hashicorp/terraform-plugin-log"
-      # go-hclog should only be updated via terraform-plugin-log
-      - dependency-name: "github.com/hashicorp/go-hclog"
-    schedule:
-      # Check for updates to Go modules every weekday
-      interval: "daily"
-    open-pull-requests-limit: 30
+#   # Maintain dependencies for Go modules
+#   - package-ecosystem: "gomod"
+#     directory: "/"
+#     groups:
+#       aws-sdk-go:
+#         patterns:
+#           - "github.com/aws/aws-sdk-go"
+#           - "github.com/aws/aws-sdk-go-v2"
+#           - "github.com/aws/aws-sdk-go-v2/*"
+#           - "github.com/aws/smithy-go"
+#     ignore:
+#       # terraform-plugin-go should only be updated via terraform-plugin-framework
+#       - dependency-name: "github.com/hashicorp/terraform-plugin-go"
+#       # terraform-plugin-log should only be updated via terraform-plugin-framework
+#       - dependency-name: "github.com/hashicorp/terraform-plugin-log"
+#       # go-hclog should only be updated via terraform-plugin-log
+#       - dependency-name: "github.com/hashicorp/go-hclog"
+#     schedule:
+#       # Check for updates to Go modules every weekday
+#       interval: "daily"
+#     open-pull-requests-limit: 30
 
-  - package-ecosystem: "gomod"
-    directory: "/tools"
-    ignore:
-      - dependency-name: "golang.org/x/tools"
-      - dependency-name: "google.golang.org/grpc"
-    schedule:
-      interval: "daily"
+#   - package-ecosystem: "gomod"
+#     directory: "/tools"
+#     ignore:
+#       - dependency-name: "golang.org/x/tools"
+#       - dependency-name: "google.golang.org/grpc"
+#     schedule:
+#       interval: "daily"
