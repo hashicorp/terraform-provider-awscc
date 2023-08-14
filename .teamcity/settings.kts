@@ -14,7 +14,7 @@ import java.time.format.DateTimeFormatter
 version = "2023.05"
 
 val defaultRegion = DslContext.getParameter("default_region")
-val freeDiskSpace = DslContext.getParameter("free_disk_space")
+val freeDiskSpace = DslContext.getParameter("free_disk_space", "")
 val awsAccountID = DslContext.getParameter("aws_account.account_id")
 val acctestParallelism = DslContext.getParameter("acctest_parallelism", "")
 val tfAccAssumeRoleArn = DslContext.getParameter("tf_acc_assume_role_arn", "")
@@ -29,14 +29,6 @@ project {
     if (DslContext.getParameter("build_full", "true").toBoolean()) {
         buildType(FullBuild)
     }
-
-    // if (DslContext.getParameter("build_pullrequest", "").toBoolean() || DslContext.getParameter("pullrequest_build", "").toBoolean()) {
-    //     buildType(PullRequest)
-    // }
-
-    // if (DslContext.getParameter("build_sweeperonly", "").toBoolean()) {
-    //     buildType(Sweeper)
-    // }
 
     params {
         if (acctestParallelism != "") {
