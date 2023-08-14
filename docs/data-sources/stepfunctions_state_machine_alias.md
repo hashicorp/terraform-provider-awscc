@@ -46,3 +46,5 @@ Read-Only:
 
 - `state_machine_version_arn` (String) The Amazon Resource Name (ARN) that identifies one or two state machine versions defined in the routing configuration.
 - `weight` (Number) The percentage of traffic you want to route to the state machine version. The sum of the weights in the routing configuration must be equal to 100.
+
+

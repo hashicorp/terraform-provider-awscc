@@ -26,3 +26,5 @@ Data Source schema for AWS::ApiGatewayV2::ApiMapping
 - `api_mapping_key` (String) The API mapping key
 - `domain_name` (String) The domain name
 - `stage` (String) The API stage
+
+

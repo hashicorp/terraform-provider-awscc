@@ -27,3 +27,5 @@ Data Source schema for AWS::IoT::Certificate
 - `certificate_pem` (String)
 - `certificate_signing_request` (String)
 - `status` (String)
+
+

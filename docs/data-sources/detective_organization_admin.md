@@ -23,3 +23,5 @@ Data Source schema for AWS::Detective::OrganizationAdmin
 
 - `account_id` (String) The account ID of the account that should be registered as your Organization's delegated administrator for Detective
 - `graph_arn` (String) The Detective graph ARN
+
+

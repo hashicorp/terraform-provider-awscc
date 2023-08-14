@@ -19,3 +19,5 @@ Plural Data Source schema for AWS::Route53::HostedZone
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
+
+

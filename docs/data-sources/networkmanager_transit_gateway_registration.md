@@ -23,3 +23,5 @@ Data Source schema for AWS::NetworkManager::TransitGatewayRegistration
 
 - `global_network_id` (String) The ID of the global network.
 - `transit_gateway_arn` (String) The Amazon Resource Name (ARN) of the transit gateway.
+
+

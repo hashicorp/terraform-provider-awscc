@@ -39,3 +39,5 @@ Read-Only:
 Read-Only:
 
 - `optimized_shared_delivery` (String) Whether emails sent from this account have optimized delivery algorithm enabled.
+
+

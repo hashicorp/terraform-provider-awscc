@@ -24,3 +24,5 @@ Data Source schema for AWS::VpcLattice::AuthPolicy
 - `policy` (Map of String)
 - `resource_identifier` (String)
 - `state` (String)
+
+

@@ -22,3 +22,5 @@ Data Source schema for AWS::DevOpsGuru::LogAnomalyDetectionIntegration
 ### Read-Only
 
 - `account_id` (String) User account id, used as the primary identifier for the resource
+
+

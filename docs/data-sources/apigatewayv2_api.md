@@ -63,3 +63,5 @@ Read-Only:
 - `allow_origins` (List of String)
 - `expose_headers` (List of String)
 - `max_age` (Number)
+
+

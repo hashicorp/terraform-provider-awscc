@@ -25,3 +25,5 @@ Data Source schema for AWS::ApiGatewayV2::Deployment
 - `deployment_id` (String)
 - `description` (String)
 - `stage_name` (String)
+
+

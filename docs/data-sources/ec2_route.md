@@ -35,3 +35,5 @@ Data Source schema for AWS::EC2::Route
 - `transit_gateway_id` (String) The ID of a transit gateway.
 - `vpc_endpoint_id` (String) The ID of a VPC endpoint. Supported for Gateway Load Balancer endpoints only.
 - `vpc_peering_connection_id` (String) The ID of a VPC peering connection.
+
+

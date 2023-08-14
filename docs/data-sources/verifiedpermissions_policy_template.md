@@ -25,3 +25,5 @@ Data Source schema for AWS::VerifiedPermissions::PolicyTemplate
 - `policy_store_id` (String)
 - `policy_template_id` (String)
 - `statement` (String)
+
+

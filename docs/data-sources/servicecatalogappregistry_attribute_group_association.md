@@ -25,3 +25,5 @@ Data Source schema for AWS::ServiceCatalogAppRegistry::AttributeGroupAssociation
 - `application_arn` (String)
 - `attribute_group` (String) The name or the Id of the AttributeGroup.
 - `attribute_group_arn` (String)
+
+

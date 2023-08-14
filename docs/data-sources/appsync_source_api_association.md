@@ -41,3 +41,5 @@ Data Source schema for AWS::AppSync::SourceApiAssociation
 Read-Only:
 
 - `merge_type` (String) Configuration of the merged behavior for the association. For example when it could be auto or has to be manual.
+
+

@@ -25,3 +25,5 @@ Data Source schema for AWS::Athena::PreparedStatement
 - `query_statement` (String) The query string for the prepared statement.
 - `statement_name` (String) The name of the prepared statement.
 - `work_group` (String) The name of the workgroup to which the prepared statement belongs.
+
+

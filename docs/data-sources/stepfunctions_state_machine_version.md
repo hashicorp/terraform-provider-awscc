@@ -25,3 +25,5 @@ Data Source schema for AWS::StepFunctions::StateMachineVersion
 - `description` (String)
 - `state_machine_arn` (String)
 - `state_machine_revision_id` (String)
+
+

@@ -31,3 +31,5 @@ Data Source schema for AWS::Chatbot::MicrosoftTeamsChannelConfiguration
 - `teams_channel_id` (String) The id of the Microsoft Teams channel
 - `teams_tenant_id` (String) The id of the Microsoft Teams tenant
 - `user_role_required` (Boolean) Enables use of a user role requirement in your chat configuration
+
+

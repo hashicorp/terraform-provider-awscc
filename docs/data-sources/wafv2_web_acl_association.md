@@ -23,3 +23,5 @@ Data Source schema for AWS::WAFv2::WebACLAssociation
 
 - `resource_arn` (String)
 - `web_acl_arn` (String)
+
+

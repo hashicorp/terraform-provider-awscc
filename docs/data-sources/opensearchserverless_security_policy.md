@@ -25,3 +25,5 @@ Data Source schema for AWS::OpenSearchServerless::SecurityPolicy
 - `name` (String) The name of the policy
 - `policy` (String) The JSON policy document that is the content for the policy
 - `type` (String) The possible types for the network policy
+
+

@@ -32,3 +32,5 @@ Read-Only:
 
 - `cidr_list` (Set of String) A list of CIDR blocks.
 - `location_name` (String) The name of the location that is associated with the CIDR collection.
+
+

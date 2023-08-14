@@ -33,3 +33,5 @@ Data Source schema for AWS::S3Outposts::AccessPoint
 Read-Only:
 
 - `vpc_id` (String) Virtual Private Cloud (VPC) Id from which AccessPoint will allow requests.
+
+

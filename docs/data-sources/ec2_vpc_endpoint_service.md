@@ -27,3 +27,5 @@ Data Source schema for AWS::EC2::VPCEndpointService
 - `network_load_balancer_arns` (List of String)
 - `payer_responsibility` (String)
 - `service_id` (String)
+
+

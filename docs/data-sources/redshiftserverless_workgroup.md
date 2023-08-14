@@ -106,3 +106,5 @@ Read-Only:
 - `network_interface_id` (String)
 - `private_ip_address` (String)
 - `subnet_id` (String)
+
+

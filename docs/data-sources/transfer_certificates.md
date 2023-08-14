@@ -19,3 +19,5 @@ Plural Data Source schema for AWS::Transfer::Certificate
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
+
+

@@ -283,3 +283,5 @@ Read-Only:
 
 - `predefined_metric_type` (String)
 - `resource_label` (String)
+
+

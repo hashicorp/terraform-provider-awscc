@@ -39,3 +39,5 @@ Read-Only:
 
 - `key_arn` (String) <p>The ARN for a KMS key that is used to encrypt studio data.</p>
 - `key_type` (String) <p>The type of KMS key that is used to encrypt studio data.</p>
+
+

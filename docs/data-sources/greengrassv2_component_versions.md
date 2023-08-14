@@ -19,3 +19,5 @@ Plural Data Source schema for AWS::GreengrassV2::ComponentVersion
 
 - `id` (String) Uniquely identifies the data source.
 - `ids` (Set of String) Set of Resource Identifiers.
+
+

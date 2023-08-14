@@ -23,3 +23,5 @@ Data Source schema for AWS::Connect::ApprovedOrigin
 
 - `instance_id` (String) Amazon Connect instance identifier
 - `origin` (String) Domain name to be added to the allowlist of instance
+
+

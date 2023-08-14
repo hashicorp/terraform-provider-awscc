@@ -58,3 +58,5 @@ Read-Only:
 
 - `application_name` (String) The name of the application associated with the configuration.
 - `template_name` (String) The name of the configuration template.
+
+

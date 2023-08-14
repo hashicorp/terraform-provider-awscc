@@ -66,3 +66,5 @@ Read-Only:
 - `architecture` (String) The target processor architecture for the application.
 - `s3_bucket` (String) The Amazon S3 bucket name.
 - `s3_key` (String) The s3 object key.
+
+

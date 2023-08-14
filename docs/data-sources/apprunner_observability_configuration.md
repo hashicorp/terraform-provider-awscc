@@ -43,3 +43,5 @@ Read-Only:
 Read-Only:
 
 - `vendor` (String) The implementation provider chosen for tracing App Runner services.
+
+

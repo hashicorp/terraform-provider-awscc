@@ -29,3 +29,5 @@ Data Source schema for AWS::Lambda::Permission
 - `principal_org_id` (String) The identifier for your organization in AWS Organizations. Use this to grant permissions to all the AWS accounts under this organization.
 - `source_account` (String) For Amazon S3, the ID of the account that owns the resource. Use this together with SourceArn to ensure that the resource is owned by the specified account. It is possible for an Amazon S3 bucket to be deleted by its owner and recreated by another account.
 - `source_arn` (String) For AWS services, the ARN of the AWS resource that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.
+
+

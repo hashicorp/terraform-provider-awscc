@@ -23,3 +23,5 @@ Data Source schema for AWS::MediaTailor::ChannelPolicy
 
 - `channel_name` (String)
 - `policy` (String) <p>The IAM policy for the channel. IAM policies are used to control access to your channel.</p>
+
+

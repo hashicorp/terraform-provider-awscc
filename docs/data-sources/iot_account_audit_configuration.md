@@ -192,3 +192,5 @@ Read-Only:
 - `enabled` (Boolean) True if notifications to the target are enabled.
 - `role_arn` (String) The ARN of the role that grants permission to send notifications to the target.
 - `target_arn` (String) The ARN of the target (SNS topic) to which audit notifications are sent.
+
+

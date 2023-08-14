@@ -31,3 +31,5 @@ Data Source schema for AWS::Location::Tracker
 - `tracker_arn` (String)
 - `tracker_name` (String)
 - `update_time` (String) The datetime value in ISO 8601 format. The timezone is always UTC. (YYYY-MM-DDThh:mm:ss.sssZ)
+
+

@@ -26,3 +26,5 @@ Data Source schema for AWS::MSK::Configuration
 - `kafka_versions_list` (List of String)
 - `name` (String)
 - `server_properties` (String)
+
+

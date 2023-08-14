@@ -34,3 +34,5 @@ Data Source schema for AWS::ApiGatewayV2::Route
 - `route_key` (String)
 - `route_response_selection_expression` (String)
 - `target` (String)
+
+

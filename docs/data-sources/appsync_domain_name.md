@@ -26,3 +26,5 @@ Data Source schema for AWS::AppSync::DomainName
 - `description` (String)
 - `domain_name` (String)
 - `hosted_zone_id` (String)
+
+

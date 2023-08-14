@@ -60,3 +60,5 @@ Read-Only:
 
 - `linear_interval` (Number)
 - `linear_percentage` (Number)
+
+

@@ -22,3 +22,5 @@ Data Source schema for AWS::Route53::DNSSEC
 ### Read-Only
 
 - `hosted_zone_id` (String) The unique string (ID) used to identify a hosted zone.
+
+

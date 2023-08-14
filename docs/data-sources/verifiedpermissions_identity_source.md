@@ -53,3 +53,5 @@ Read-Only:
 - `discovery_url` (String)
 - `open_id_issuer` (String)
 - `user_pool_arn` (String)
+
+

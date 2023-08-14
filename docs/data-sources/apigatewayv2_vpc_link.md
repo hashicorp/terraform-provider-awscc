@@ -26,3 +26,5 @@ Data Source schema for AWS::ApiGatewayV2::VpcLink
 - `subnet_ids` (List of String)
 - `tags` (Map of String) This resource type use map for Tags, suggest to use List of Tag
 - `vpc_link_id` (String)
+
+

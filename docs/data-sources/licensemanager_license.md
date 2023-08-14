@@ -100,3 +100,5 @@ Read-Only:
 
 - `begin` (String) Validity begin date for the license.
 - `end` (String) Validity begin date for the license.
+
+

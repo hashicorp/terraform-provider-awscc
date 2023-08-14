@@ -33,3 +33,5 @@ Data Source schema for AWS::Panorama::PackageVersion
 - `status` (String)
 - `status_description` (String)
 - `updated_latest_patch_version` (String)
+
+

@@ -23,3 +23,5 @@ Data Source schema for AWS::EC2::VPNConnectionRoute
 
 - `destination_cidr_block` (String) The CIDR block associated with the local subnet of the customer network.
 - `vpn_connection_id` (String) The ID of the VPN connection.
+
+

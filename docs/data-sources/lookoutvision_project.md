@@ -23,3 +23,5 @@ Data Source schema for AWS::LookoutVision::Project
 
 - `arn` (String)
 - `project_name` (String) The name of the Amazon Lookout for Vision project
+
+

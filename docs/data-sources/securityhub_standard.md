@@ -32,3 +32,5 @@ Read-Only:
 
 - `reason` (String) the reason the standard control is disabled
 - `standards_control_arn` (String) the Arn for the standard control.
+
+

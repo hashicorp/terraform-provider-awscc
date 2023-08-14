@@ -26,3 +26,5 @@ Data Source schema for AWS::EC2::NetworkInterfaceAttachment
 - `device_index` (String) The network interface's position in the attachment order. For example, the first attached network interface has a DeviceIndex of 0.
 - `instance_id` (String) The ID of the instance to which you will attach the ENI.
 - `network_interface_id` (String) The ID of the ENI that you want to attach.
+
+

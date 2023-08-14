@@ -23,3 +23,5 @@ Data Source schema for AWS::VpcLattice::ResourcePolicy
 
 - `policy` (Map of String)
 - `resource_arn` (String)
+
+

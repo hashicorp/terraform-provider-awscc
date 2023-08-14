@@ -87,3 +87,5 @@ Read-Only:
 - `event_source` (String) Source of event that can trigger the rule
 - `maximum_execution_frequency` (String) Frequency at which the rule has to be evaluated
 - `message_type` (String) Notification type that can trigger the rule
+
+

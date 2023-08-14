@@ -27,3 +27,5 @@ Data Source schema for AWS::Organizations::Organization
 - `management_account_email` (String) The email address that is associated with the AWS account that is designated as the management account for the organization.
 - `management_account_id` (String) The unique identifier (ID) of the management account of an organization.
 - `root_id` (String) The unique identifier (ID) for the root.
+
+

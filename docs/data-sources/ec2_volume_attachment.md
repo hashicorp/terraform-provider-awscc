@@ -24,3 +24,5 @@ Data Source schema for AWS::EC2::VolumeAttachment
 - `device` (String) The device name
 - `instance_id` (String) The ID of the instance to which the volume attaches
 - `volume_id` (String) The ID of the Amazon EBS volume
+
+

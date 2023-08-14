@@ -23,3 +23,5 @@ Data Source schema for AWS::Logs::ResourcePolicy
 
 - `policy_document` (String) The policy document
 - `policy_name` (String) A name for resource policy
+
+

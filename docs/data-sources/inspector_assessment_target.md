@@ -24,3 +24,5 @@ Data Source schema for AWS::Inspector::AssessmentTarget
 - `arn` (String)
 - `assessment_target_name` (String)
 - `resource_group_arn` (String)
+
+

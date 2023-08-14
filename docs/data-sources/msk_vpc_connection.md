@@ -28,3 +28,5 @@ Data Source schema for AWS::MSK::VpcConnection
 - `tags` (Map of String) A key-value pair to associate with a resource.
 - `target_cluster_arn` (String) The Amazon Resource Name (ARN) of the target cluster
 - `vpc_id` (String)
+
+

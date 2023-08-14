@@ -36,3 +36,5 @@ Data Source schema for AWS::SageMaker::ImageVersion
 - `release_notes` (String) The maintainer description of the image version.
 - `vendor_guidance` (String) The availability of the image version specified by the maintainer.
 - `version` (Number) The version number of the image version.
+
+

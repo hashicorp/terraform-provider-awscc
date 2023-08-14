@@ -27,3 +27,5 @@ Data Source schema for AWS::Route53Resolver::ResolverQueryLoggingConfigAssociati
 - `resolver_query_log_config_id` (String) ResolverQueryLogConfigId
 - `resource_id` (String) ResourceId
 - `status` (String) ResolverQueryLogConfigAssociationStatus
+
+

@@ -46,3 +46,5 @@ Read-Only:
 
 - `backup_vault_events` (List of String)
 - `sns_topic_arn` (String)
+
+

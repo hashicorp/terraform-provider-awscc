@@ -145,3 +145,5 @@ Read-Only:
 Read-Only:
 
 - `detect_sentiment` (Boolean) Enable to call Amazon Comprehend for Sentiment natively within Lex
+
+

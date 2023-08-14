@@ -22,3 +22,5 @@ Data Source schema for AWS::ApiGateway::Account
 ### Read-Only
 
 - `cloudwatch_role_arn` (String) The Amazon Resource Name (ARN) of an IAM role that has write access to CloudWatch Logs in your account.
+
+

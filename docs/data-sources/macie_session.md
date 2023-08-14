@@ -25,3 +25,5 @@ Data Source schema for AWS::Macie::Session
 - `finding_publishing_frequency` (String) A enumeration value that specifies how frequently finding updates are published.
 - `service_role` (String) Service role used by Macie
 - `status` (String) A enumeration value that specifies the status of the Macie Session.
+
+

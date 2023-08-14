@@ -73,3 +73,5 @@ Read-Only:
 - `resolution` (String) Resolution indicates the desired resolution of recorded thumbnails.
 - `storage` (Set of String) Storage indicates the format in which thumbnails are recorded.
 - `target_interval_seconds` (Number) Target Interval Seconds defines the interval at which thumbnails are recorded. This field is required if RecordingMode is INTERVAL.
+
+

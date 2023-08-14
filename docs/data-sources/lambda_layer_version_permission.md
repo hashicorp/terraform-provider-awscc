@@ -25,3 +25,5 @@ Data Source schema for AWS::Lambda::LayerVersionPermission
 - `layer_version_arn` (String) The name or Amazon Resource Name (ARN) of the layer.
 - `organization_id` (String) With the principal set to *, grant permission to all accounts in the specified organization.
 - `principal` (String) An account ID, or * to grant layer usage permission to all accounts in an organization, or all AWS accounts (if organizationId is not specified).
+
+

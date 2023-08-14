@@ -63,3 +63,5 @@ Read-Only:
 - `name` (String) The name of this environment tier.
 - `type` (String) The type of this environment tier.
 - `version` (String) The version of this environment tier. When you don't set a value to it, Elastic Beanstalk uses the latest compatible worker tier version.
+
+

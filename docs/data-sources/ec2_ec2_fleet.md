@@ -276,3 +276,5 @@ Read-Only:
 - `spot_target_capacity` (Number)
 - `target_capacity_unit_type` (String)
 - `total_target_capacity` (Number)
+
+

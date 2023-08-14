@@ -81,3 +81,5 @@ Read-Only:
 
 - `encryption_type` (String) Specifies default encryption using AWS KMS-Managed Keys
 - `key_id` (String) Specifies the encryption key id
+
+

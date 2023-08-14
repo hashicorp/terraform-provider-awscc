@@ -69,3 +69,5 @@ Read-Only:
 
 - `pipeline_execution_start_condition` (String) The condition configures when the pipeline should trigger a new image build.
 - `schedule_expression` (String) The expression determines how often EC2 Image Builder evaluates your pipelineExecutionStartCondition.
+
+

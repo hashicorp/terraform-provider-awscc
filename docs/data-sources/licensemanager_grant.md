@@ -29,3 +29,5 @@ Data Source schema for AWS::LicenseManager::Grant
 - `principals` (List of String)
 - `status` (String)
 - `version` (String) The version of the grant.
+
+

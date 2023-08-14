@@ -25,3 +25,5 @@ Data Source schema for AWS::IAM::ServiceLinkedRole
 - `custom_suffix` (String) A string that you provide, which is combined with the service-provided prefix to form the complete role name.
 - `description` (String) The description of the role.
 - `role_name` (String) The name of the role.
+
+

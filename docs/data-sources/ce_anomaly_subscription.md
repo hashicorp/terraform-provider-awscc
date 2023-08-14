@@ -48,3 +48,5 @@ Read-Only:
 - `address` (String)
 - `status` (String)
 - `type` (String)
+
+

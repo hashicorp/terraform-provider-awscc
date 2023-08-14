@@ -23,3 +23,5 @@ Data Source schema for AWS::EMR::SecurityConfiguration
 
 - `name` (String) The name of the security configuration.
 - `security_configuration` (String) The security configuration details in JSON format.
+
+

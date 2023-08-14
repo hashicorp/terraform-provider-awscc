@@ -28,3 +28,5 @@ Data Source schema for AWS::IAM::ManagedPolicy
 - `policy_document` (Map of String)
 - `roles` (List of String)
 - `users` (List of String)
+
+

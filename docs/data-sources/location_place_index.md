@@ -37,3 +37,5 @@ Data Source schema for AWS::Location::PlaceIndex
 Read-Only:
 
 - `intended_use` (String)
+
+

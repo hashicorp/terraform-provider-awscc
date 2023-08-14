@@ -24,3 +24,5 @@ Data Source schema for AWS::NetworkManager::LinkAssociation
 - `device_id` (String) The ID of the device
 - `global_network_id` (String) The ID of the global network.
 - `link_id` (String) The ID of the link
+
+

@@ -47,3 +47,5 @@ Read-Only:
 
 - `key` (String) The key for an AWS resource tag.
 - `value` (String) The value for an AWS resource tag.
+
+

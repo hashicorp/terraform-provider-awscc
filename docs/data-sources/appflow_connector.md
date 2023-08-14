@@ -40,3 +40,5 @@ Read-Only:
 Read-Only:
 
 - `lambda_arn` (String) Lambda ARN of the connector being registered.
+
+

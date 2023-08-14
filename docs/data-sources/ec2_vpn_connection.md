@@ -46,3 +46,5 @@ Read-Only:
 
 - `pre_shared_key` (String)
 - `tunnel_inside_cidr` (String)
+
+

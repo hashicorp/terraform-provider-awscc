@@ -53,3 +53,5 @@ Enabling this setting doesn't affect previously stored bucket policies, except t
 Read-Only:
 
 - `vpc_id` (String) If this field is specified, this access point will only allow connections from the specified VPC ID.
+
+

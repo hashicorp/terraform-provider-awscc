@@ -42,3 +42,5 @@ Read-Only:
 
 - `share_identifier` (String)
 - `weight_factor` (Number)
+
+
