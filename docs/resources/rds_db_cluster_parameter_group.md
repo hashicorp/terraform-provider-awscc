@@ -12,7 +12,7 @@ The AWS::RDS::DBClusterParameterGroup resource creates a new Amazon RDS DB clust
 ## Example Usage
 
 ### Basic example
-To create a simple db parameter group
+To create a RDS db cluster parameter group
 ```terraform
 resource "awscc_rds_db_cluster_parameter_group" "this" {
   db_cluster_parameter_group_name = "rds-db-cluster-pg"
