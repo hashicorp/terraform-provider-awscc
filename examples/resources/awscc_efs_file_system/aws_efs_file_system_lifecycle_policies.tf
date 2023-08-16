@@ -3,8 +3,14 @@ resource "awscc_efs_file_system" "this" {
     transition_to_ia = "AFTER_30_DAYS"
   }]
 
-  file_system_tags = [{
-    key   = "Name"
-    value = "this"
-  }]
+  file_system_tags = [
+    {
+      key   = "Name"
+      value = "this"
+    },
+    {
+      key   = "Modified By"
+      value = "AWSCC"
+    }
+  ]
 }
