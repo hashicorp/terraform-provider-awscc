@@ -11,21 +11,11 @@ Resource Type definition for SSO PermissionSet
 
 ## Example Usage
 
+**Note**: Currently there is no data source for fetching the IAM Identity Center (formerly AWS SSO)
+instance arn in the `awscc` provider so you must use both the `aws` and `awscc` providers.
+
 ### Managed Policies
 ```terraform
-// Note: Currently there is no data source for fetching the IAM Identity Center (formerly AWS SSO)
-//instance arn in the awscc provider so we must use both the aws and awscc providers.
-terraform {
-  required_providers {
-    aws = {
-      source = "hashicorp/aws"
-    }
-    awscc = {
-      source = "hashicorp/awscc"
-    }
-  }
-}
-
 data "aws_ssoadmin_instances" "example" {} // fetch IAM Identity Center instance arn
 
 // create new permission set
@@ -35,7 +25,6 @@ resource "awscc_sso_permission_set" "example" {
   description  = "An example Permission Set"                 // add desired description for permission set
   // add multiple managed policies
   managed_policies = [
-    "arn:aws:iam::aws:policy/AdministratorAccess",
     "arn:aws:iam::aws:policy/job-function/ViewOnlyAccess",
   ]
   // redirect to S3 in us-east-1 upon sign-in
