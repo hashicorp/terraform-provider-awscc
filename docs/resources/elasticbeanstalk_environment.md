@@ -12,6 +12,7 @@ Resource Type definition for AWS::ElasticBeanstalk::Environment
 ## Example Usage
 
 ### Basic usage with Python platform
+In this example, we are going to create an AWS Elastic Beanstalk environment using Python platform. Please refer to [Python platform history](https://docs.aws.amazon.com/elasticbeanstalk/latest/platforms/platform-history-python.html) and use the current platform version and solution stack name. Also, please replace `example-aws-elasticbeanstalk-ec2-role` with an existing [instance profile](https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/iam-instanceprofile.html).
 ```terraform
 resource "awscc_elasticbeanstalk_application" "example-app" {
   application_name = "example-app"
@@ -20,7 +21,7 @@ resource "awscc_elasticbeanstalk_application" "example-app" {
 
 resource "awscc_elasticbeanstalk_environment" "example-env" {
   application_name    = awscc_elasticbeanstalk_application.example-app.application_name
-  solution_stack_name = "64bit Amazon Linux 2023 v4.0.2 running Python 3.11"
+  solution_stack_name = "64bit Amazon Linux 2023 v4.0.3 running Python 3.11"
   option_settings = [{
     namespace   = "aws:autoscaling:launchconfiguration"
     option_name = "IamInstanceProfile"
