@@ -9,6 +9,8 @@ description: |-
 
 The AWS::ECR::PublicRepository resource specifies an Amazon Elastic Container Public Registry (Amazon Public ECR) repository, where users can push and pull Docker images. For more information, see https://docs.aws.amazon.com/AmazonECR
 
+~> **NOTE:** This resource can only be used in the `us-east-1` region.
+
 ## Example Usage
 
 ### Basic usage
