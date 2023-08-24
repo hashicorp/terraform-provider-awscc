@@ -73,6 +73,71 @@
         "MappingType",
         "PhysicalResourceId"
       ]
+    },
+    "IamRoleArn": {
+      "type": "string",
+      "pattern": ""
+    },
+    "PermissionModel": {
+      "description": "Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Type": {
+          "description": "Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.",
+          "type": "string",
+          "enum": [
+            "LegacyIAMUser",
+            "RoleBased"
+          ]
+        },
+        "InvokerRoleName": {
+          "description": "Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.",
+          "type": "string",
+          "pattern": ""
+        },
+        "CrossAccountRoleArns": {
+          "description": "Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.",
+          "type": "array",
+          "uniqueItems": false,
+          "insertionOrder": false,
+          "items": {
+            "$ref": "#/definitions/IamRoleArn"
+          }
+        }
+      },
+      "required": [
+        "Type"
+      ]
+    },
+    "EventSubscription": {
+      "description": "Indicates an event you would like to subscribe and get notification for.",
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "Name": {
+          "description": "Unique name to identify an event subscription.",
+          "type": "string",
+          "maxLength": 256
+        },
+        "EventType": {
+          "description": "The type of event you would like to subscribe and get notification for.",
+          "type": "string",
+          "enum": [
+            "ScheduledAssessmentFailure",
+            "DriftDetected"
+          ]
+        },
+        "SnsTopicArn": {
+          "description": "Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.",
+          "type": "string",
+          "pattern": ""
+        }
+      },
+      "required": [
+        "Name",
+        "EventType"
+      ]
     }
   },
   "properties": {
@@ -104,7 +169,7 @@
       "description": "A string containing full ResilienceHub app template body.",
       "type": "string",
       "minLength": 0,
-      "maxLength": 5000,
+      "maxLength": 409600,
       "pattern": "^[\\w\\s:,-\\.'\\/{}\\[\\]:\"]+$"
     },
     "ResourceMappings": {
@@ -122,6 +187,27 @@
       "enum": [
         "Disabled",
         "Daily"
+      ]
+    },
+    "PermissionModel": {
+      "$ref": "#/definitions/PermissionModel"
+    },
+    "EventSubscriptions": {
+      "description": "The list of events you would like to subscribe and get notification for.",
+      "type": "array",
+      "uniqueItems": false,
+      "insertionOrder": false,
+      "items": {
+        "$ref": "#/definitions/EventSubscription"
+      }
+    },
+    "DriftStatus": {
+      "description": "Indicates if compliance drifts (deviations) were detected while running an assessment for your application.",
+      "type": "string",
+      "enum": [
+        "NotChecked",
+        "NotDetected",
+        "Detected"
       ]
     }
   },
@@ -142,7 +228,8 @@
     "/properties/Name"
   ],
   "readOnlyProperties": [
-    "/properties/AppArn"
+    "/properties/AppArn",
+    "/properties/DriftStatus"
   ],
   "primaryIdentifier": [
     "/properties/AppArn"
@@ -162,12 +249,13 @@
         "eks:DescribeCluster",
         "elasticfilesystem:DescribeFileSystems",
         "elasticloadbalancing:DescribeLoadBalancers",
-        "lambda:GetFunction",
+        "lambda:GetFunction*",
         "rds:Describe*",
         "dynamodb:Describe*",
         "sqs:GetQueueAttributes",
         "sns:GetTopicAttributes",
         "route53:List*",
+        "iam:PassRole",
         "resiliencehub:*"
       ]
     },
@@ -193,12 +281,13 @@
         "eks:DescribeCluster",
         "elasticfilesystem:DescribeFileSystems",
         "elasticloadbalancing:DescribeLoadBalancers",
-        "lambda:GetFunction",
+        "lambda:GetFunction*",
         "rds:Describe*",
         "dynamodb:Describe*",
         "sqs:GetQueueAttributes",
         "sns:GetTopicAttributes",
         "route53:List*",
+        "iam:PassRole",
         "resiliencehub:*"
       ]
     },

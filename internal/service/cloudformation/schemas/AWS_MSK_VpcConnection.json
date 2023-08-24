@@ -116,24 +116,36 @@
         "iam:CreateServiceLinkedRole",
         "iam:PutRolePolicy",
         "kafka:CreateVpcConnection",
-        "kafka:TagResource"
+        "kafka:DescribeVpcConnection",
+        "kafka:TagResource",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
       ]
     },
     "read": {
       "permissions": [
-        "kafka:DescribeVpcConnection"
+        "kafka:DescribeVpcConnection",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
       ]
     },
     "delete": {
       "permissions": [
         "ec2:DeleteVpcEndpoint",
         "ec2:DeleteVpcEndpoints",
-        "kafka:DeleteVpcConnection"
+        "ec2:DescribeVpcEndpoints",
+        "ec2:DescribeVpcEndpointConnections",
+        "kafka:DeleteVpcConnection",
+        "kafka:DescribeVpcConnection",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
       ]
     },
     "list": {
       "permissions": [
-        "kafka:ListVpcConnections"
+        "kafka:ListVpcConnections",
+        "kms:CreateGrant",
+        "kms:DescribeKey"
       ]
     }
   }

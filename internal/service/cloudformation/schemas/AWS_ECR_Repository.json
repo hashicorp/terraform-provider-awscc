@@ -95,9 +95,16 @@
       "description": "If you use the KMS encryption type, specify the CMK to use for encryption. The alias, key ID, or full ARN of the CMK can be specified. The key must exist in the same Region as the repository. If no key is specified, the default AWS managed CMK for Amazon ECR will be used.",
       "minLength": 1,
       "maxLength": 2048
+    },
+    "EmptyOnDelete": {
+      "type": "boolean",
+      "description": "If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories."
     }
   },
   "properties": {
+    "EmptyOnDelete": {
+      "$ref": "#/definitions/EmptyOnDelete"
+    },
     "LifecyclePolicy": {
       "$ref": "#/definitions/LifecyclePolicy"
     },
@@ -155,6 +162,9 @@
   "readOnlyProperties": [
     "/properties/Arn",
     "/properties/RepositoryUri"
+  ],
+  "writeOnlyProperties": [
+    "/properties/EmptyOnDelete"
   ],
   "primaryIdentifier": [
     "/properties/RepositoryName"

@@ -146,6 +146,13 @@
             "$ref": "#/definitions/Account"
           }
         },
+        "AccountsUrl": {
+          "description": "Returns the value of the AccountsUrl property.",
+          "type": "string",
+          "minLength": 1,
+          "maxLength": 5120,
+          "pattern": "(s3://|http(s?)://).+"
+        },
         "OrganizationalUnitIds": {
           "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
           "type": "array",
