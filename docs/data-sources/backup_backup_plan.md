@@ -57,6 +57,7 @@ Read-Only:
 - `recovery_point_tags` (Map of String)
 - `rule_name` (String)
 - `schedule_expression` (String)
+- `schedule_expression_timezone` (String)
 - `start_window_minutes` (Number)
 - `target_backup_vault` (String)
 

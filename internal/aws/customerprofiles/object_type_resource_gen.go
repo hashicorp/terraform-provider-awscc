@@ -310,7 +310,10 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 		//	                  "UNIQUE",
 		//	                  "SECONDARY",
 		//	                  "LOOKUP_ONLY",
-		//	                  "NEW_ONLY"
+		//	                  "NEW_ONLY",
+		//	                  "ASSET",
+		//	                  "CASE",
+		//	                  "ORDER"
 		//	                ],
 		//	                "type": "string"
 		//	              },
@@ -375,6 +378,9 @@ func objectTypeResource(ctx context.Context) (resource.Resource, error) {
 												"SECONDARY",
 												"LOOKUP_ONLY",
 												"NEW_ONLY",
+												"ASSET",
+												"CASE",
+												"ORDER",
 											),
 										),
 									}, /*END VALIDATORS*/

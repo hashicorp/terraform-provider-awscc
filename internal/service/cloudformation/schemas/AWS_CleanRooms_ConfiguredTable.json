@@ -198,6 +198,49 @@
       ],
       "additionalProperties": false
     },
+    "AllowedAnalysis": {
+      "type": "string",
+      "minLength": 0,
+      "maxLength": 200,
+      "pattern": "(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)"
+    },
+    "AllowedAnalyses": {
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/AllowedAnalysis"
+      }
+    },
+    "AllowedAnalysisProvider": {
+      "type": "string",
+      "minLength": 12,
+      "maxLength": 12,
+      "pattern": "\\d+"
+    },
+    "AllowedAnalysisProviders": {
+      "type": "array",
+      "insertionOrder": false,
+      "minItems": 0,
+      "items": {
+        "$ref": "#/definitions/AllowedAnalysisProvider"
+      }
+    },
+    "AnalysisRuleCustom": {
+      "type": "object",
+      "properties": {
+        "AllowedAnalyses": {
+          "$ref": "#/definitions/AllowedAnalyses"
+        },
+        "AllowedAnalysisProviders": {
+          "$ref": "#/definitions/AllowedAnalysisProviders"
+        }
+      },
+      "required": [
+        "AllowedAnalyses"
+      ],
+      "additionalProperties": false
+    },
     "ConfiguredTableAnalysisRulePolicy": {
       "type": "object",
       "title": "V1",
@@ -238,6 +281,19 @@
             "Aggregation"
           ],
           "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "title": "Custom",
+          "properties": {
+            "Custom": {
+              "$ref": "#/definitions/AnalysisRuleCustom"
+            }
+          },
+          "required": [
+            "Custom"
+          ],
+          "additionalProperties": false
         }
       ]
     },
@@ -245,7 +301,8 @@
       "type": "string",
       "enum": [
         "AGGREGATION",
-        "LIST"
+        "LIST",
+        "CUSTOM"
       ]
     },
     "GlueTableReference": {

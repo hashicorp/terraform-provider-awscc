@@ -27,6 +27,7 @@
   "handlers": {
     "create": {
       "permissions": [
+        "devops-guru:DescribeServiceIntegration",
         "devops-guru:UpdateServiceIntegration",
         "logs:TagLogGroup",
         "logs:UntagLogGroup"
@@ -46,6 +47,7 @@
     },
     "delete": {
       "permissions": [
+        "devops-guru:DescribeServiceIntegration",
         "devops-guru:UpdateServiceIntegration",
         "logs:TagLogGroup",
         "logs:UntagLogGroup"

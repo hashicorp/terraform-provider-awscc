@@ -86,6 +86,9 @@
         "ScheduleExpression": {
           "type": "string"
         },
+        "ScheduleExpressionTimezone": {
+          "type": "string"
+        },
         "RecoveryPointTags": {
           "type": "object",
           "additionalProperties": false,

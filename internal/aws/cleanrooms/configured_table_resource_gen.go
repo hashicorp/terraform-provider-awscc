@@ -236,6 +236,37 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "Custom": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "AllowedAnalyses": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 200,
+		//	                      "minLength": 0,
+		//	                      "pattern": "(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "AllowedAnalysisProviders": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 12,
+		//	                      "minLength": 12,
+		//	                      "pattern": "\\d+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "AllowedAnalyses"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "List": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
@@ -291,7 +322,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		//	      "Type": {
 		//	        "enum": [
 		//	          "AGGREGATION",
-		//	          "LIST"
+		//	          "LIST",
+		//	          "CUSTOM"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -492,6 +524,48 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 											objectplanmodifier.UseStateForUnknown(),
 										}, /*END PLAN MODIFIERS*/
 									}, /*END ATTRIBUTE*/
+									// Property: Custom
+									"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AllowedAnalyses
+											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Required:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeAtLeast(0),
+													listvalidator.ValueStringsAre(
+														stringvalidator.LengthBetween(0, 200),
+														stringvalidator.RegexMatches(regexp.MustCompile("(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)"), ""),
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+											// Property: AllowedAnalysisProviders
+											"allowed_analysis_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Optional:    true,
+												Computed:    true,
+												Validators: []validator.List{ /*START VALIDATORS*/
+													listvalidator.SizeAtLeast(0),
+													listvalidator.ValueStringsAre(
+														stringvalidator.LengthBetween(12, 12),
+														stringvalidator.RegexMatches(regexp.MustCompile("\\d+"), ""),
+													),
+												}, /*END VALIDATORS*/
+												PlanModifiers: []planmodifier.List{ /*START PLAN MODIFIERS*/
+													generic.Multiset(),
+													listplanmodifier.UseStateForUnknown(),
+												}, /*END PLAN MODIFIERS*/
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Optional: true,
+										Computed: true,
+										PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
+											objectplanmodifier.UseStateForUnknown(),
+										}, /*END PLAN MODIFIERS*/
+									}, /*END ATTRIBUTE*/
 									// Property: List
 									"list": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
@@ -563,6 +637,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 							stringvalidator.OneOf(
 								"AGGREGATION",
 								"LIST",
+								"CUSTOM",
 							),
 						}, /*END VALIDATORS*/
 					}, /*END ATTRIBUTE*/
@@ -780,6 +855,8 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregate_columns":           "AggregateColumns",
 		"aggregation":                 "Aggregation",
+		"allowed_analyses":            "AllowedAnalyses",
+		"allowed_analysis_providers":  "AllowedAnalysisProviders",
 		"allowed_columns":             "AllowedColumns",
 		"allowed_join_operators":      "AllowedJoinOperators",
 		"analysis_method":             "AnalysisMethod",
@@ -788,6 +865,7 @@ func configuredTableResource(ctx context.Context) (resource.Resource, error) {
 		"column_name":                 "ColumnName",
 		"column_names":                "ColumnNames",
 		"configured_table_identifier": "ConfiguredTableIdentifier",
+		"custom":                      "Custom",
 		"database_name":               "DatabaseName",
 		"description":                 "Description",
 		"dimension_columns":           "DimensionColumns",

@@ -329,6 +329,13 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	            "type": "array",
 		//	            "uniqueItems": true
 		//	          },
+		//	          "AccountsUrl": {
+		//	            "description": "Returns the value of the AccountsUrl property.",
+		//	            "maxLength": 5120,
+		//	            "minLength": 1,
+		//	            "pattern": "(s3://|http(s?)://).+",
+		//	            "type": "string"
+		//	          },
 		//	          "OrganizationalUnitIds": {
 		//	            "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 		//	            "insertionOrder": false,
@@ -403,6 +410,11 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 							"accounts": schema.SetAttribute{ /*START ATTRIBUTE*/
 								ElementType: types.StringType,
 								Description: "AWS accounts that you want to create stack instances in the specified Region(s) for.",
+								Computed:    true,
+							}, /*END ATTRIBUTE*/
+							// Property: AccountsUrl
+							"accounts_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Returns the value of the AccountsUrl property.",
 								Computed:    true,
 							}, /*END ATTRIBUTE*/
 							// Property: OrganizationalUnitIds
@@ -566,6 +578,7 @@ func stackSetDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_filter_type":              "AccountFilterType",
 		"accounts":                         "Accounts",
+		"accounts_url":                     "AccountsUrl",
 		"active":                           "Active",
 		"administration_role_arn":          "AdministrationRoleARN",
 		"auto_deployment":                  "AutoDeployment",

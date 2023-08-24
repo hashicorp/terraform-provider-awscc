@@ -127,6 +127,9 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		//	          "ScheduleExpression": {
 		//	            "type": "string"
 		//	          },
+		//	          "ScheduleExpressionTimezone": {
+		//	            "type": "string"
+		//	          },
 		//	          "StartWindowMinutes": {
 		//	            "type": "number"
 		//	          },
@@ -287,6 +290,14 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
+							// Property: ScheduleExpressionTimezone
+							"schedule_expression_timezone": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Optional: true,
+								Computed: true,
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
 							// Property: StartWindowMinutes
 							"start_window_minutes": schema.Float64Attribute{ /*START ATTRIBUTE*/
 								Optional: true,
@@ -404,6 +415,7 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 		"resource_type":                   "ResourceType",
 		"rule_name":                       "RuleName",
 		"schedule_expression":             "ScheduleExpression",
+		"schedule_expression_timezone":    "ScheduleExpressionTimezone",
 		"start_window_minutes":            "StartWindowMinutes",
 		"target_backup_vault":             "TargetBackupVault",
 		"version_id":                      "VersionId",

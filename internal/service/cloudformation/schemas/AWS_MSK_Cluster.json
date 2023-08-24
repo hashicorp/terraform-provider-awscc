@@ -515,8 +515,7 @@
     "/properties/BrokerNodeGroupInfo/SecurityGroups",
     "/properties/EncryptionInfo/EncryptionAtRest",
     "/properties/EncryptionInfo/EncryptionInTransit/InCluster",
-    "/properties/ClusterName",
-    "/properties/Tags"
+    "/properties/ClusterName"
   ],
   "primaryIdentifier": [
     "/properties/Arn"
@@ -527,7 +526,7 @@
   "tagging": {
     "taggable": true,
     "tagOnCreate": true,
-    "tagUpdatable": false,
+    "tagUpdatable": true,
     "cloudFormationSystemTags": true,
     "tagProperty": "/properties/Tags"
   },
@@ -553,7 +552,8 @@
         "logs:PutResourcePolicy",
         "logs:DescribeResourcePolicies",
         "logs:DescribeLogGroups",
-        "firehose:TagDeliveryStream"
+        "firehose:TagDeliveryStream",
+        "acm-pca:GetCertificateAuthorityCertificate"
       ],
       "timeoutInMinutes": 120
     },
@@ -569,6 +569,8 @@
         "kafka:UpdateSecurity",
         "kafka:UpdateConnectivity",
         "kafka:DescribeClusterOperation",
+        "kafka:TagResource",
+        "kafka:UntagResource",
         "ec2:DescribeSubnets",
         "ec2:DescribeVpcs",
         "ec2:DescribeSecurityGroups",
@@ -586,7 +588,8 @@
         "logs:PutResourcePolicy",
         "logs:DescribeResourcePolicies",
         "logs:DescribeLogGroups",
-        "firehose:TagDeliveryStream"
+        "firehose:TagDeliveryStream",
+        "acm-pca:GetCertificateAuthorityCertificate"
       ],
       "timeoutInMinutes": 720
     },

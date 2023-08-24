@@ -43,6 +43,22 @@ func repositoryResource(ctx context.Context) (resource.Resource, error) {
 				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
+		// Property: EmptyOnDelete
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories.",
+		//	  "type": "boolean"
+		//	}
+		"empty_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories.",
+			Optional:    true,
+			Computed:    true,
+			PlanModifiers: []planmodifier.Bool{ /*START PLAN MODIFIERS*/
+				boolplanmodifier.UseStateForUnknown(),
+			}, /*END PLAN MODIFIERS*/
+			// EmptyOnDelete is a write-only property.
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -360,6 +376,7 @@ func repositoryResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithSyntheticIDAttribute(true)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                          "Arn",
+		"empty_on_delete":              "EmptyOnDelete",
 		"encryption_configuration":     "EncryptionConfiguration",
 		"encryption_type":              "EncryptionType",
 		"image_scanning_configuration": "ImageScanningConfiguration",
@@ -377,6 +394,9 @@ func repositoryResource(ctx context.Context) (resource.Resource, error) {
 		"value":                        "Value",
 	})
 
+	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/EmptyOnDelete",
+	})
 	opts = opts.WithCreateTimeoutInMinutes(0).WithDeleteTimeoutInMinutes(0)
 
 	opts = opts.WithUpdateTimeoutInMinutes(0)

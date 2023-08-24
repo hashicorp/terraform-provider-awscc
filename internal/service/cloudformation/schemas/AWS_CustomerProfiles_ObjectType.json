@@ -112,7 +112,10 @@
               "UNIQUE",
               "SECONDARY",
               "LOOKUP_ONLY",
-              "NEW_ONLY"
+              "NEW_ONLY",
+              "ASSET",
+              "CASE",
+              "ORDER"
             ]
           }
         }
