@@ -10,7 +10,7 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -45,11 +45,12 @@ func policyDataSource(ctx context.Context) (datasource.DataSource, error) {
 		// CloudFormation resource type schema:
 		//
 		//	{
-		//	  "type": "object"
+		//	  "maxLength": 404600,
+		//	  "minLength": 1,
+		//	  "type": "string"
 		//	}
-		"policy_document": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"policy_document": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Computed: true,
 		}, /*END ATTRIBUTE*/
 		// Property: PolicyName
 		// CloudFormation resource type schema:

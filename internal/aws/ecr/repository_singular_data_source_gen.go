@@ -32,6 +32,17 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"arn": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Computed: true,
 		}, /*END ATTRIBUTE*/
+		// Property: EmptyOnDelete
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories.",
+		//	  "type": "boolean"
+		//	}
+		"empty_on_delete": schema.BoolAttribute{ /*START ATTRIBUTE*/
+			Description: "If true, deleting the repository force deletes the contents of the repository. Without a force delete, you can only delete empty repositories.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: EncryptionConfiguration
 		// CloudFormation resource type schema:
 		//
@@ -257,6 +268,7 @@ func repositoryDataSource(ctx context.Context) (datasource.DataSource, error) {
 	opts = opts.WithTerraformSchema(schema)
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"arn":                          "Arn",
+		"empty_on_delete":              "EmptyOnDelete",
 		"encryption_configuration":     "EncryptionConfiguration",
 		"encryption_type":              "EncryptionType",
 		"image_scanning_configuration": "ImageScanningConfiguration",
