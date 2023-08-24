@@ -25,12 +25,15 @@ Resource Type Definition for AWS::ResilienceHub::App.
 
 - `app_assessment_schedule` (String) Assessment execution schedule.
 - `description` (String) App description.
+- `event_subscriptions` (Attributes List) The list of events you would like to subscribe and get notification for. (see [below for nested schema](#nestedatt--event_subscriptions))
+- `permission_model` (Attributes) Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment. (see [below for nested schema](#nestedatt--permission_model))
 - `resiliency_policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
 - `tags` (Map of String)
 
 ### Read-Only
 
 - `app_arn` (String) Amazon Resource Name (ARN) of the App.
+- `drift_status` (String) Indicates if compliance drifts (deviations) were detected while running an assessment for your application.
 - `id` (String) Uniquely identifies the resource.
 
 <a id="nestedatt--resource_mappings"></a>
@@ -60,6 +63,33 @@ Optional:
 
 - `aws_account_id` (String)
 - `aws_region` (String)
+
+
+
+<a id="nestedatt--event_subscriptions"></a>
+### Nested Schema for `event_subscriptions`
+
+Required:
+
+- `event_type` (String) The type of event you would like to subscribe and get notification for.
+- `name` (String) Unique name to identify an event subscription.
+
+Optional:
+
+- `sns_topic_arn` (String) Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.
+
+
+<a id="nestedatt--permission_model"></a>
+### Nested Schema for `permission_model`
+
+Required:
+
+- `type` (String) Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.
+
+Optional:
+
+- `cross_account_role_arns` (List of String) Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.
+- `invoker_role_name` (String) Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.
 
 ## Import
 

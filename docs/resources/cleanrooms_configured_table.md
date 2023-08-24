@@ -72,6 +72,7 @@ Required:
 Optional:
 
 - `aggregation` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--aggregation))
+- `custom` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--custom))
 - `list` (Attributes) (see [below for nested schema](#nestedatt--analysis_rules--policy--v1--list))
 
 <a id="nestedatt--analysis_rules--policy--v1--aggregation"></a>
@@ -108,6 +109,18 @@ Required:
 - `minimum` (Number)
 - `type` (String)
 
+
+
+<a id="nestedatt--analysis_rules--policy--v1--custom"></a>
+### Nested Schema for `analysis_rules.policy.v1.list`
+
+Required:
+
+- `allowed_analyses` (List of String)
+
+Optional:
+
+- `allowed_analysis_providers` (List of String)
 
 
 <a id="nestedatt--analysis_rules--policy--v1--list"></a>

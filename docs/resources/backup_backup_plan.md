@@ -58,6 +58,7 @@ Optional:
 - `lifecycle` (Attributes) (see [below for nested schema](#nestedatt--backup_plan--backup_plan_rule--lifecycle))
 - `recovery_point_tags` (Map of String)
 - `schedule_expression` (String)
+- `schedule_expression_timezone` (String)
 - `start_window_minutes` (Number)
 
 <a id="nestedatt--backup_plan--backup_plan_rule--copy_actions"></a>
