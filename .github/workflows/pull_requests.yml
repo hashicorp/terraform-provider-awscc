@@ -6,7 +6,7 @@ jobs:
   NeedsTriageLabeler:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@c85c95e3d7251135ab7dc9ce3241c5835cc595a9 # v3.5.3
+    - uses: actions/checkout@f43a0e5ff2bd294095638e18286ca9a3d1956744 # v3.6.0
     - name: Apply needs-triage Label
       uses: actions/labeler@ac9175f8a1f3625fd0d4fb234536d26811351594 # v4.3.0
       if: github.event.action == 'opened' && !contains(fromJSON('["breathingdust", "ewbankkit", "gdavison", "johnsonaj", "YakDriver", "zhelding"]'), github.actor)
