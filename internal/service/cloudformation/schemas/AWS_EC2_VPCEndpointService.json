@@ -53,7 +53,8 @@
         "ec2:ModifyVpcEndpointServicePayerResponsibility",
         "cloudwatch:ListManagedInsightRules",
         "cloudwatch:DeleteInsightRules",
-        "cloudwatch:PutManagedInsightsRules"
+        "cloudwatch:PutManagedInsightRules",
+        "ec2:DescribeVpcEndpointServiceConfigurations"
       ]
     },
     "update": {
@@ -64,7 +65,7 @@
         "ec2:ModifyVpcEndpointServicePayerResponsibility",
         "cloudwatch:ListManagedInsightRules",
         "cloudwatch:DeleteInsightRules",
-        "cloudwatch:PutManagedInsightsRules"
+        "cloudwatch:PutManagedInsightRules"
       ]
     },
     "read": {

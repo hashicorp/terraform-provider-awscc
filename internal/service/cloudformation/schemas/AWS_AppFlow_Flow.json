@@ -39,7 +39,8 @@
       "type": "string",
       "enum": [
         "Active",
-        "Suspended"
+        "Suspended",
+        "Draft"
       ]
     },
     "SourceFlowConfig": {
@@ -1698,6 +1699,7 @@
         "appflow:TagResource",
         "appflow:UntagResource",
         "appflow:ListTagsForResource",
+        "appflow:UseConnectorProfile",
         "iam:PassRole",
         "s3:ListAllMyBuckets",
         "s3:GetBucketLocation",
@@ -1717,5 +1719,11 @@
         "appflow:ListFlows"
       ]
     }
+  },
+  "tagging": {
+    "taggable": true,
+    "tagOnCreate": true,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
   }
 }

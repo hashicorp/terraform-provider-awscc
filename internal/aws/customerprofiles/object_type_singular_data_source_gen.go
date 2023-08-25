@@ -221,7 +221,10 @@ func objectTypeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	                  "UNIQUE",
 		//	                  "SECONDARY",
 		//	                  "LOOKUP_ONLY",
-		//	                  "NEW_ONLY"
+		//	                  "NEW_ONLY",
+		//	                  "ASSET",
+		//	                  "CASE",
+		//	                  "ORDER"
 		//	                ],
 		//	                "type": "string"
 		//	              },

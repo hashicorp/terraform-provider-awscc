@@ -1792,7 +1792,8 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "Flow activation status for Scheduled- and Event-triggered flows",
 		//	  "enum": [
 		//	    "Active",
-		//	    "Suspended"
+		//	    "Suspended",
+		//	    "Draft"
 		//	  ],
 		//	  "type": "string"
 		//	}
@@ -1804,6 +1805,7 @@ func flowResource(ctx context.Context) (resource.Resource, error) {
 				stringvalidator.OneOf(
 					"Active",
 					"Suspended",
+					"Draft",
 				),
 			}, /*END VALIDATORS*/
 			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/

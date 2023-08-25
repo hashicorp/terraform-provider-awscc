@@ -17,7 +17,7 @@ Resource Type definition for AWS::IoT::Policy
 
 ### Required
 
-- `policy_document` (Map of String)
+- `policy_document` (String)
 
 ### Optional
 

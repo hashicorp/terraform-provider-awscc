@@ -331,8 +331,17 @@
   ],
   "createOnlyProperties": [
     "/properties/Name",
-    "/properties/ReleaseLabel",
     "/properties/Type"
+  ],
+  "conditionalCreateOnlyProperties": [
+    "/properties/Architecture",
+    "/properties/ReleaseLabel",
+    "/properties/WorkerTypeSpecifications",
+    "/properties/MaximumCapacity",
+    "/properties/InitialCapacity",
+    "/properties/AutoStartConfiguration",
+    "/properties/AutoStopConfiguration",
+    "/properties/NetworkConfiguration"
   ],
   "readOnlyProperties": [
     "/properties/Arn",
@@ -352,7 +361,11 @@
         "emr-serverless:CreateApplication",
         "emr-serverless:TagResource",
         "emr-serverless:GetApplication",
-        "iam:CreateServiceLinkedRole"
+        "iam:CreateServiceLinkedRole",
+        "ec2:CreateNetworkInterface",
+        "ecr:BatchGetImage",
+        "ecr:DescribeImages",
+        "ecr:GetDownloadUrlForLayer"
       ]
     },
     "read": {
@@ -365,7 +378,11 @@
         "emr-serverless:UpdateApplication",
         "emr-serverless:TagResource",
         "emr-serverless:UntagResource",
-        "emr-serverless:GetApplication"
+        "emr-serverless:GetApplication",
+        "ec2:CreateNetworkInterface",
+        "ecr:BatchGetImage",
+        "ecr:DescribeImages",
+        "ecr:GetDownloadUrlForLayer"
       ]
     },
     "delete": {

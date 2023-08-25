@@ -2,6 +2,12 @@
   "typeName": "AWS::IoT::Policy",
   "description": "Resource Type definition for AWS::IoT::Policy",
   "additionalProperties": false,
+  "tagging": {
+    "taggable": false,
+    "tagOnCreate": false,
+    "tagUpdatable": false,
+    "cloudFormationSystemTags": false
+  },
   "properties": {
     "Id": {
       "type": "string"
@@ -10,7 +16,12 @@
       "type": "string"
     },
     "PolicyDocument": {
-      "type": "object"
+      "type": [
+        "object",
+        "string"
+      ],
+      "minLength": 1,
+      "maxLength": 404600
     },
     "PolicyName": {
       "type": "string"

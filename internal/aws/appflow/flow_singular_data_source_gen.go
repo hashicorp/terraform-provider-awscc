@@ -1167,7 +1167,8 @@ func flowDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Flow activation status for Scheduled- and Event-triggered flows",
 		//	  "enum": [
 		//	    "Active",
-		//	    "Suspended"
+		//	    "Suspended",
+		//	    "Draft"
 		//	  ],
 		//	  "type": "string"
 		//	}

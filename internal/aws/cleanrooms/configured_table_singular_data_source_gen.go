@@ -208,6 +208,37 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	                ],
 		//	                "type": "object"
 		//	              },
+		//	              "Custom": {
+		//	                "additionalProperties": false,
+		//	                "properties": {
+		//	                  "AllowedAnalyses": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 200,
+		//	                      "minLength": 0,
+		//	                      "pattern": "(ANY_QUERY|arn:[\\w]{3}:cleanrooms:[\\w]{2}-[\\w]{4,9}-[\\d]:[\\d]{12}:membership/[\\d\\w-]+/analysistemplate/[\\d\\w-]+)",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  },
+		//	                  "AllowedAnalysisProviders": {
+		//	                    "insertionOrder": false,
+		//	                    "items": {
+		//	                      "maxLength": 12,
+		//	                      "minLength": 12,
+		//	                      "pattern": "\\d+",
+		//	                      "type": "string"
+		//	                    },
+		//	                    "minItems": 0,
+		//	                    "type": "array"
+		//	                  }
+		//	                },
+		//	                "required": [
+		//	                  "AllowedAnalyses"
+		//	                ],
+		//	                "type": "object"
+		//	              },
 		//	              "List": {
 		//	                "additionalProperties": false,
 		//	                "properties": {
@@ -263,7 +294,8 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		//	      "Type": {
 		//	        "enum": [
 		//	          "AGGREGATION",
-		//	          "LIST"
+		//	          "LIST",
+		//	          "CUSTOM"
 		//	        ],
 		//	        "type": "string"
 		//	      }
@@ -348,6 +380,22 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 											}, /*END ATTRIBUTE*/
 											// Property: ScalarFunctions
 											"scalar_functions": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+										}, /*END SCHEMA*/
+										Computed: true,
+									}, /*END ATTRIBUTE*/
+									// Property: Custom
+									"custom": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+										Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+											// Property: AllowedAnalyses
+											"allowed_analyses": schema.ListAttribute{ /*START ATTRIBUTE*/
+												ElementType: types.StringType,
+												Computed:    true,
+											}, /*END ATTRIBUTE*/
+											// Property: AllowedAnalysisProviders
+											"allowed_analysis_providers": schema.ListAttribute{ /*START ATTRIBUTE*/
 												ElementType: types.StringType,
 												Computed:    true,
 											}, /*END ATTRIBUTE*/
@@ -549,6 +597,8 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"aggregate_columns":           "AggregateColumns",
 		"aggregation":                 "Aggregation",
+		"allowed_analyses":            "AllowedAnalyses",
+		"allowed_analysis_providers":  "AllowedAnalysisProviders",
 		"allowed_columns":             "AllowedColumns",
 		"allowed_join_operators":      "AllowedJoinOperators",
 		"analysis_method":             "AnalysisMethod",
@@ -557,6 +607,7 @@ func configuredTableDataSource(ctx context.Context) (datasource.DataSource, erro
 		"column_name":                 "ColumnName",
 		"column_names":                "ColumnNames",
 		"configured_table_identifier": "ConfiguredTableIdentifier",
+		"custom":                      "Custom",
 		"database_name":               "DatabaseName",
 		"description":                 "Description",
 		"dimension_columns":           "DimensionColumns",

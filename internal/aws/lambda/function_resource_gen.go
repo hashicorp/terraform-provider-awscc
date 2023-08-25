@@ -739,6 +739,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 							"None",
 						),
 					}, /*END VALIDATORS*/
+					// ApplyOn is a write-only property.
 				}, /*END ATTRIBUTE*/
 			}, /*END SCHEMA*/
 			Description: "The SnapStart setting of your function",
@@ -747,6 +748,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 			PlanModifiers: []planmodifier.Object{ /*START PLAN MODIFIERS*/
 				objectplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
+			// SnapStart is a write-only property.
 		}, /*END ATTRIBUTE*/
 		// Property: SnapStartResponse
 		// CloudFormation resource type schema:
@@ -992,7 +994,7 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 	}
 
 	schema := schema.Schema{
-		Description: "Resource Type definition for AWS::Lambda::Function",
+		Description: "Resource Type definition for AWS::Lambda::Function in region",
 		Version:     1,
 		Attributes:  attributes,
 	}
@@ -1053,6 +1055,8 @@ func functionResource(ctx context.Context) (resource.Resource, error) {
 	})
 
 	opts = opts.WithWriteOnlyPropertyPaths([]string{
+		"/properties/SnapStart",
+		"/properties/SnapStart/ApplyOn",
 		"/properties/Code",
 		"/properties/Code/ImageUri",
 		"/properties/Code/S3Bucket",
