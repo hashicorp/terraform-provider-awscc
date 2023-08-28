@@ -11,13 +11,13 @@ description: |-
 
 ## Example Usage
 
-To create a SQS queue with tags
+To create a Simple cassandra keyspace
 {{ tffile (printf "examples/resources/%s/keyspace_basic.tf" .Name)}}
 
-To create a SQS FIFO queue
+To create a cassandra keyspace with tags
 {{ tffile (printf "examples/resources/%s/keyspace_tags.tf" .Name)}}
 
-To create a SQS High-throughput FIFO queue
+To create a cassandra keyspace with replication
 {{ tffile (printf "examples/resources/%s/keyspace_replication.tf" .Name)}}
 
 {{ .SchemaMarkdown | trimspace }}
