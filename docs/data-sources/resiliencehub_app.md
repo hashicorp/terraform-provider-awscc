@@ -25,10 +25,33 @@ Data Source schema for AWS::ResilienceHub::App
 - `app_assessment_schedule` (String) Assessment execution schedule.
 - `app_template_body` (String) A string containing full ResilienceHub app template body.
 - `description` (String) App description.
+- `drift_status` (String) Indicates if compliance drifts (deviations) were detected while running an assessment for your application.
+- `event_subscriptions` (Attributes List) The list of events you would like to subscribe and get notification for. (see [below for nested schema](#nestedatt--event_subscriptions))
 - `name` (String) Name of the app.
+- `permission_model` (Attributes) Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment. (see [below for nested schema](#nestedatt--permission_model))
 - `resiliency_policy_arn` (String) Amazon Resource Name (ARN) of the Resiliency Policy.
 - `resource_mappings` (Attributes List) An array of ResourceMapping objects. (see [below for nested schema](#nestedatt--resource_mappings))
 - `tags` (Map of String)
+
+<a id="nestedatt--event_subscriptions"></a>
+### Nested Schema for `event_subscriptions`
+
+Read-Only:
+
+- `event_type` (String) The type of event you would like to subscribe and get notification for.
+- `name` (String) Unique name to identify an event subscription.
+- `sns_topic_arn` (String) Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.
+
+
+<a id="nestedatt--permission_model"></a>
+### Nested Schema for `permission_model`
+
+Read-Only:
+
+- `cross_account_role_arns` (List of String) Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.
+- `invoker_role_name` (String) Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.
+- `type` (String) Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.
+
 
 <a id="nestedatt--resource_mappings"></a>
 ### Nested Schema for `resource_mappings`

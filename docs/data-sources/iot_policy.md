@@ -22,5 +22,5 @@ Data Source schema for AWS::IoT::Policy
 ### Read-Only
 
 - `arn` (String)
-- `policy_document` (Map of String)
+- `policy_document` (String)
 - `policy_name` (String)

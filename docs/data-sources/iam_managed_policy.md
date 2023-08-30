@@ -21,10 +21,18 @@ Data Source schema for AWS::IAM::ManagedPolicy
 
 ### Read-Only
 
-- `description` (String)
-- `groups` (List of String)
-- `managed_policy_name` (String)
-- `path` (String)
-- `policy_document` (Map of String)
-- `roles` (List of String)
-- `users` (List of String)
+- `attachment_count` (Number) The number of entities (users, groups, and roles) that the policy is attached to.
+- `create_date` (String) The date and time, in ISO 8601 date-time format, when the policy was created.
+- `default_version_id` (String) The identifier for the version of the policy that is set as the default version.
+- `description` (String) A friendly description of the policy.
+- `groups` (Set of String) The name (friendly name, not ARN) of the group to attach the policy to.
+- `is_attachable` (Boolean) Specifies whether the policy can be attached to an IAM user, group, or role.
+- `managed_policy_name` (String) The friendly name of the policy.
+- `path` (String) The path for the policy.
+- `permissions_boundary_usage_count` (Number) The number of entities (users and roles) for which the policy is used to set the permissions boundary.
+- `policy_arn` (String) Amazon Resource Name (ARN) of the managed policy
+- `policy_document` (String) The JSON policy document that you want to use as the content for the new policy.
+- `policy_id` (String) The stable and unique string identifying the policy.
+- `roles` (Set of String) The name (friendly name, not ARN) of the role to attach the policy to.
+- `update_date` (String) The date and time, in ISO 8601 date-time format, when the policy was last updated.
+- `users` (Set of String) The name (friendly name, not ARN) of the IAM user to attach the policy to.

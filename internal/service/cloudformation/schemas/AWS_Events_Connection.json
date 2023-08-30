@@ -195,10 +195,6 @@
     }
   },
   "additionalProperties": false,
-  "required": [
-    "AuthorizationType",
-    "AuthParameters"
-  ],
   "createOnlyProperties": [
     "/properties/Name"
   ],
@@ -212,10 +208,14 @@
   "primaryIdentifier": [
     "/properties/Name"
   ],
+  "tagging": {
+    "taggable": false
+  },
   "handlers": {
     "create": {
       "permissions": [
         "events:CreateConnection",
+        "events:DescribeConnection",
         "secretsmanager:CreateSecret",
         "secretsmanager:GetSecretValue",
         "secretsmanager:PutSecretValue",
@@ -239,7 +239,8 @@
     },
     "delete": {
       "permissions": [
-        "events:DeleteConnection"
+        "events:DeleteConnection",
+        "events:DescribeConnection"
       ]
     },
     "list": {

@@ -471,6 +471,13 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 		//	            "type": "array",
 		//	            "uniqueItems": true
 		//	          },
+		//	          "AccountsUrl": {
+		//	            "description": "Returns the value of the AccountsUrl property.",
+		//	            "maxLength": 5120,
+		//	            "minLength": 1,
+		//	            "pattern": "(s3://|http(s?)://).+",
+		//	            "type": "string"
+		//	          },
 		//	          "OrganizationalUnitIds": {
 		//	            "description": "The organization root ID or organizational unit (OU) IDs to which StackSets deploys.",
 		//	            "insertionOrder": false,
@@ -567,6 +574,19 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 								}, /*END VALIDATORS*/
 								PlanModifiers: []planmodifier.Set{ /*START PLAN MODIFIERS*/
 									setplanmodifier.UseStateForUnknown(),
+								}, /*END PLAN MODIFIERS*/
+							}, /*END ATTRIBUTE*/
+							// Property: AccountsUrl
+							"accounts_url": schema.StringAttribute{ /*START ATTRIBUTE*/
+								Description: "Returns the value of the AccountsUrl property.",
+								Optional:    true,
+								Computed:    true,
+								Validators: []validator.String{ /*START VALIDATORS*/
+									stringvalidator.LengthBetween(1, 5120),
+									stringvalidator.RegexMatches(regexp.MustCompile("(s3://|http(s?)://).+"), ""),
+								}, /*END VALIDATORS*/
+								PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+									stringplanmodifier.UseStateForUnknown(),
 								}, /*END PLAN MODIFIERS*/
 							}, /*END ATTRIBUTE*/
 							// Property: OrganizationalUnitIds
@@ -798,6 +818,7 @@ func stackSetResource(ctx context.Context) (resource.Resource, error) {
 	opts = opts.WithAttributeNameMap(map[string]string{
 		"account_filter_type":              "AccountFilterType",
 		"accounts":                         "Accounts",
+		"accounts_url":                     "AccountsUrl",
 		"active":                           "Active",
 		"administration_role_arn":          "AdministrationRoleARN",
 		"auto_deployment":                  "AutoDeployment",

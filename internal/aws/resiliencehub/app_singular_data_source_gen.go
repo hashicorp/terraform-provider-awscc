@@ -55,7 +55,7 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//
 		//	{
 		//	  "description": "A string containing full ResilienceHub app template body.",
-		//	  "maxLength": 5000,
+		//	  "maxLength": 409600,
 		//	  "minLength": 0,
 		//	  "pattern": "^[\\w\\s:,-\\.'\\/{}\\[\\]:\"]+$",
 		//	  "type": "string"
@@ -77,6 +77,83 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 			Description: "App description.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
+		// Property: DriftStatus
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "Indicates if compliance drifts (deviations) were detected while running an assessment for your application.",
+		//	  "enum": [
+		//	    "NotChecked",
+		//	    "NotDetected",
+		//	    "Detected"
+		//	  ],
+		//	  "type": "string"
+		//	}
+		"drift_status": schema.StringAttribute{ /*START ATTRIBUTE*/
+			Description: "Indicates if compliance drifts (deviations) were detected while running an assessment for your application.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: EventSubscriptions
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "description": "The list of events you would like to subscribe and get notification for.",
+		//	  "insertionOrder": false,
+		//	  "items": {
+		//	    "additionalProperties": false,
+		//	    "description": "Indicates an event you would like to subscribe and get notification for.",
+		//	    "properties": {
+		//	      "EventType": {
+		//	        "description": "The type of event you would like to subscribe and get notification for.",
+		//	        "enum": [
+		//	          "ScheduledAssessmentFailure",
+		//	          "DriftDetected"
+		//	        ],
+		//	        "type": "string"
+		//	      },
+		//	      "Name": {
+		//	        "description": "Unique name to identify an event subscription.",
+		//	        "maxLength": 256,
+		//	        "type": "string"
+		//	      },
+		//	      "SnsTopicArn": {
+		//	        "description": "Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.",
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      }
+		//	    },
+		//	    "required": [
+		//	      "Name",
+		//	      "EventType"
+		//	    ],
+		//	    "type": "object"
+		//	  },
+		//	  "type": "array",
+		//	  "uniqueItems": false
+		//	}
+		"event_subscriptions": schema.ListNestedAttribute{ /*START ATTRIBUTE*/
+			NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
+				Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+					// Property: EventType
+					"event_type": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "The type of event you would like to subscribe and get notification for.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: Name
+					"name": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Unique name to identify an event subscription.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+					// Property: SnsTopicArn
+					"sns_topic_arn": schema.StringAttribute{ /*START ATTRIBUTE*/
+						Description: "Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic.",
+						Computed:    true,
+					}, /*END ATTRIBUTE*/
+				}, /*END SCHEMA*/
+			}, /*END NESTED OBJECT*/
+			Description: "The list of events you would like to subscribe and get notification for.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
 		// Property: Name
 		// CloudFormation resource type schema:
 		//
@@ -87,6 +164,64 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	}
 		"name": schema.StringAttribute{ /*START ATTRIBUTE*/
 			Description: "Name of the app.",
+			Computed:    true,
+		}, /*END ATTRIBUTE*/
+		// Property: PermissionModel
+		// CloudFormation resource type schema:
+		//
+		//	{
+		//	  "additionalProperties": false,
+		//	  "description": "Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment.",
+		//	  "properties": {
+		//	    "CrossAccountRoleArns": {
+		//	      "description": "Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.",
+		//	      "insertionOrder": false,
+		//	      "items": {
+		//	        "pattern": "",
+		//	        "type": "string"
+		//	      },
+		//	      "type": "array",
+		//	      "uniqueItems": false
+		//	    },
+		//	    "InvokerRoleName": {
+		//	      "description": "Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.",
+		//	      "pattern": "",
+		//	      "type": "string"
+		//	    },
+		//	    "Type": {
+		//	      "description": "Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.",
+		//	      "enum": [
+		//	        "LegacyIAMUser",
+		//	        "RoleBased"
+		//	      ],
+		//	      "type": "string"
+		//	    }
+		//	  },
+		//	  "required": [
+		//	    "Type"
+		//	  ],
+		//	  "type": "object"
+		//	}
+		"permission_model": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
+			Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
+				// Property: CrossAccountRoleArns
+				"cross_account_role_arns": schema.ListAttribute{ /*START ATTRIBUTE*/
+					ElementType: types.StringType,
+					Description: "Defines a list of role Amazon Resource Names (ARNs) to be used in other accounts. These ARNs are used for querying purposes while importing resources and assessing your application.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: InvokerRoleName
+				"invoker_role_name": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Existing AWS IAM role name in the primary AWS account that will be assumed by AWS Resilience Hub Service Principle to obtain a read-only access to your application resources while running an assessment.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+				// Property: Type
+				"type": schema.StringAttribute{ /*START ATTRIBUTE*/
+					Description: "Defines how AWS Resilience Hub scans your resources. It can scan for the resources by using a pre-existing role in your AWS account, or by using the credentials of the current IAM user.",
+					Computed:    true,
+				}, /*END ATTRIBUTE*/
+			}, /*END SCHEMA*/
+			Description: "Defines the roles and credentials that AWS Resilience Hub would use while creating the application, importing its resources, and running an assessment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
 		// Property: ResiliencyPolicyArn
@@ -255,16 +390,23 @@ func appDataSource(ctx context.Context) (datasource.DataSource, error) {
 		"app_template_body":       "AppTemplateBody",
 		"aws_account_id":          "AwsAccountId",
 		"aws_region":              "AwsRegion",
+		"cross_account_role_arns": "CrossAccountRoleArns",
 		"description":             "Description",
+		"drift_status":            "DriftStatus",
 		"eks_source_name":         "EksSourceName",
+		"event_subscriptions":     "EventSubscriptions",
+		"event_type":              "EventType",
 		"identifier":              "Identifier",
+		"invoker_role_name":       "InvokerRoleName",
 		"logical_stack_name":      "LogicalStackName",
 		"mapping_type":            "MappingType",
 		"name":                    "Name",
+		"permission_model":        "PermissionModel",
 		"physical_resource_id":    "PhysicalResourceId",
 		"resiliency_policy_arn":   "ResiliencyPolicyArn",
 		"resource_mappings":       "ResourceMappings",
 		"resource_name":           "ResourceName",
+		"sns_topic_arn":           "SnsTopicArn",
 		"tags":                    "Tags",
 		"terraform_source_name":   "TerraformSourceName",
 		"type":                    "Type",

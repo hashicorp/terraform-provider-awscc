@@ -4,6 +4,7 @@
   "definitions": {
     "KafkaVersionsList": {
       "type": "array",
+      "insertionOrder": false,
       "items": {
         "type": "string"
       }
