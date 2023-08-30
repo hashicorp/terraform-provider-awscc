@@ -128,6 +128,9 @@ func (g *Generator) GenerateTemplateData(cfTypeSchemaFile, resType, tfResourceTy
 	if codeFeatures.UsesFrameworkTypes {
 		templateData.ImportFrameworkTypes = true
 	}
+	if codeFeatures.UsesFrameworkTypesJsonType {
+		templateData.ImportFrameworkTypesJsonType = true
+	}
 	if codeFeatures.HasValidator {
 		templateData.ImportFrameworkValidator = true
 	}
@@ -205,6 +208,7 @@ type TemplateData struct {
 	HasRequiredAttribute          bool
 	HasUpdateMethod               bool
 	ImportFrameworkTypes          bool
+	ImportFrameworkTypesJsonType  bool
 	ImportFrameworkValidator      bool
 	ImportInternalValidate        bool
 	ImportRegexp                  bool

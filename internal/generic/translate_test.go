@@ -419,6 +419,7 @@ func TestTranslateToTerraform(t *testing.T) {
 					},
 				},
 				"JsonString": map[string]interface{}{
+					"Key2": float64(43),
 					"Key1": float64(42),
 				},
 			},
@@ -460,7 +461,7 @@ func TestTranslateToTerraform(t *testing.T) {
 						}),
 					}),
 				}),
-				"json_string": tftypes.NewValue(tftypes.String, `{"Key1":42}`),
+				"json_string": tftypes.NewValue(tftypes.String, `{"Key1":42,"Key2":43}`),
 			}),
 		},
 	}

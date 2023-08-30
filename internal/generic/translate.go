@@ -9,6 +9,7 @@ import (
 	"fmt"
 	"math/big"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-go/tftypes"
 	"github.com/hashicorp/terraform-plugin-log/tflog"
 )
@@ -92,7 +93,9 @@ func (t toCloudControl) rawFromValue(ctx context.Context, schema typeAtTerraform
 		if err := val.As(&s); err != nil {
 			return nil, err
 		}
-		if JSONStringType.Equal(attributeType) {
+
+		js := jsontypes.NormalizedType{}
+		if js.Equal(attributeType) {
 			return expandJSONFromString(s)
 		}
 		return s, nil
