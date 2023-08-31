@@ -7,6 +7,7 @@ package connect
 
 import (
 	"context"
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/setvalidator"
 	"github.com/hashicorp/terraform-plugin-framework-validators/stringvalidator"
@@ -189,8 +190,8 @@ func viewResource(ctx context.Context) (resource.Resource, error) {
 		//	  "description": "The template of the view as JSON.",
 		//	  "type": "object"
 		//	}
-		"template": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"template": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The template of the view as JSON.",
 			Required:    true,
 		}, /*END ATTRIBUTE*/

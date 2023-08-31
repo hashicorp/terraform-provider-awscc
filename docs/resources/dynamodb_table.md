@@ -17,7 +17,7 @@ Version: None. Resource Type definition for AWS::DynamoDB::Table
 
 ### Required
 
-- `key_schema` (Map of String)
+- `key_schema` (String)
 
 ### Optional
 

@@ -8,6 +8,7 @@ package apigatewayv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -87,12 +88,12 @@ func apiResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "object"
 		//	}
-		"body": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Optional:    true,
-			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
+		"body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Optional:   true,
+			Computed:   true,
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 			// Body is a write-only property.
 		}, /*END ATTRIBUTE*/

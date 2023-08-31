@@ -8,6 +8,7 @@ package shield
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -67,14 +68,14 @@ func protectionDataSource(ctx context.Context) (datasource.DataSource, error) {
 				"action": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 					Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 						// Property: Block
-						"block": schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
+						"block": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
 							Description: "Specifies that Shield Advanced should configure its AWS WAF rules with the AWS WAF `Block` action.\nYou must specify exactly one action, either `Block` or `Count`.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/
 						// Property: Count
-						"count": schema.MapAttribute{ /*START ATTRIBUTE*/
-							ElementType: types.StringType,
+						"count": schema.StringAttribute{ /*START ATTRIBUTE*/
+							CustomType:  jsontypes.NormalizedType{},
 							Description: "Specifies that Shield Advanced should configure its AWS WAF rules with the AWS WAF `Count` action.\nYou must specify exactly one action, either `Block` or `Count`.",
 							Computed:    true,
 						}, /*END ATTRIBUTE*/

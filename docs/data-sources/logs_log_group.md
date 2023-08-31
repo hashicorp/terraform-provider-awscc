@@ -22,7 +22,7 @@ Data Source schema for AWS::Logs::LogGroup
 ### Read-Only
 
 - `arn` (String) The CloudWatch log group ARN.
-- `data_protection_policy` (Map of String) The body of the policy document you want to use for this topic.
+- `data_protection_policy` (String) The body of the policy document you want to use for this topic.
 
 You can only add one policy per topic.
 

@@ -14,10 +14,11 @@ import (
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/schema/validator"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+	"regexp"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
-	"regexp"
 )
 
 func init() {
@@ -56,8 +57,8 @@ func multiRegionAccessPointPolicyResource(ctx context.Context) (resource.Resourc
 		//	  "description": "Policy document to apply to a Multi Region Access Point",
 		//	  "type": "object"
 		//	}
-		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "Policy document to apply to a Multi Region Access Point",
 			Required:    true,
 		}, /*END ATTRIBUTE*/

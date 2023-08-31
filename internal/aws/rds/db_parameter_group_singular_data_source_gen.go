@@ -10,7 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -64,8 +65,8 @@ func dBParameterGroupDataSource(ctx context.Context) (datasource.DataSource, err
 		//	  "description": "An array of parameter names and values for the parameter update.",
 		//	  "type": "object"
 		//	}
-		"parameters": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "An array of parameter names and values for the parameter update.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

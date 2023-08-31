@@ -28,8 +28,8 @@ Resource Type definition for AWS::ApiGatewayV2::Route
 - `authorizer_id` (String)
 - `model_selection_expression` (String)
 - `operation_name` (String)
-- `request_models` (Map of String)
-- `request_parameters` (Map of String)
+- `request_models` (String)
+- `request_parameters` (String)
 - `route_response_selection_expression` (String)
 - `target` (String)
 

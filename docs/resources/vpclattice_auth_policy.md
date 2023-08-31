@@ -17,7 +17,7 @@ Creates or updates the auth policy.
 
 ### Required
 
-- `policy` (Map of String)
+- `policy` (String)
 - `resource_identifier` (String)
 
 ### Read-Only

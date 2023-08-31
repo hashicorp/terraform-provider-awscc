@@ -78,7 +78,7 @@ resource "awscc_efs_file_system" "this" {
 - `backup_policy` (Attributes) (see [below for nested schema](#nestedatt--backup_policy))
 - `bypass_policy_lockout_safety_check` (Boolean) Whether to bypass the FileSystemPolicy lockout safety check. The policy lockout safety check determines whether the policy in the request will prevent the principal making the request to be locked out from making future PutFileSystemPolicy requests on the file system. Set BypassPolicyLockoutSafetyCheck to True only when you intend to prevent the principal that is making the request from making a subsequent PutFileSystemPolicy request on the file system. Defaults to false
 - `encrypted` (Boolean)
-- `file_system_policy` (Map of String)
+- `file_system_policy` (String)
 - `file_system_tags` (Attributes List) (see [below for nested schema](#nestedatt--file_system_tags))
 - `kms_key_id` (String)
 - `lifecycle_policies` (Attributes List) (see [below for nested schema](#nestedatt--lifecycle_policies))

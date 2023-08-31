@@ -24,8 +24,8 @@ Schema for ApiGatewayV2 Integration Response
 ### Optional
 
 - `content_handling_strategy` (String) Specifies how to handle response payload content type conversions
-- `response_parameters` (Map of String) A key-value map specifying response parameters that are passed to the method response from the backend
-- `response_templates` (Map of String) The collection of response templates for the integration response as a string-to-string map of key-value pairs
+- `response_parameters` (String) A key-value map specifying response parameters that are passed to the method response from the backend
+- `response_templates` (String) The collection of response templates for the integration response as a string-to-string map of key-value pairs
 - `template_selection_expression` (String) The template selection expression for the integration response. Supported only for WebSocket APIs
 
 ### Read-Only

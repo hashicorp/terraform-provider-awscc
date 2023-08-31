@@ -10,7 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -44,8 +45,8 @@ func multiRegionAccessPointPolicyDataSource(ctx context.Context) (datasource.Dat
 		//	  "description": "Policy document to apply to a Multi Region Access Point",
 		//	  "type": "object"
 		//	}
-		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "Policy document to apply to a Multi Region Access Point",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

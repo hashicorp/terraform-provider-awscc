@@ -8,6 +8,7 @@ package mwaa
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -30,8 +31,8 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
 		//	  "type": "object"
 		//	}
-		"airflow_configuration_options": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"airflow_configuration_options": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "Key/value pairs representing Airflow configuration variables.\n    Keys are prefixed by their section:\n\n    [core]\n    dags_folder={AIRFLOW_HOME}/dags\n\n    Would be represented as\n\n    \"core.dags_folder\": \"{AIRFLOW_HOME}/dags\"",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -581,8 +582,8 @@ func environmentDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "A map of tags for the environment.",
 		//	  "type": "object"
 		//	}
-		"tags": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"tags": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "A map of tags for the environment.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

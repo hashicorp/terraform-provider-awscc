@@ -19,7 +19,7 @@ Resource Type definition for AWS::ApiGatewayV2::Api
 
 - `api_key_selection_expression` (String)
 - `base_path` (String)
-- `body` (Map of String)
+- `body` (String)
 - `body_s3_location` (Attributes) (see [below for nested schema](#nestedatt--body_s3_location))
 - `cors_configuration` (Attributes) (see [below for nested schema](#nestedatt--cors_configuration))
 - `credentials_arn` (String)

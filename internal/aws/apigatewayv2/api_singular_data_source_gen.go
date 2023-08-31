@@ -8,6 +8,7 @@ package apigatewayv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -65,9 +66,9 @@ func apiDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "object"
 		//	}
-		"body": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"body": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: BodyS3Location
 		// CloudFormation resource type schema:

@@ -8,6 +8,7 @@ package oam
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -56,8 +57,8 @@ func sinkDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  "description": "The policy of this ObservabilityAccessManager Sink.",
 		//	  "type": "object"
 		//	}
-		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The policy of this ObservabilityAccessManager Sink.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

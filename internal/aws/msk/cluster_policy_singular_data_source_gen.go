@@ -10,7 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -54,8 +55,8 @@ func clusterPolicyDataSource(ctx context.Context) (datasource.DataSource, error)
 		//	  "description": "A policy document containing permissions to add to the specified cluster.",
 		//	  "type": "object"
 		//	}
-		"policy": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"policy": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "A policy document containing permissions to add to the specified cluster.",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

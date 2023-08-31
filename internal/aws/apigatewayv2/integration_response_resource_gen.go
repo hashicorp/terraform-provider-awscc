@@ -10,10 +10,10 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/resource/schema/mapplanmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/planmodifier"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/stringplanmodifier"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -101,13 +101,13 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "A key-value map specifying response parameters that are passed to the method response from the backend",
 		//	  "type": "object"
 		//	}
-		"response_parameters": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"response_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "A key-value map specifying response parameters that are passed to the method response from the backend",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: ResponseTemplates
@@ -117,13 +117,13 @@ func integrationResponseResource(ctx context.Context) (resource.Resource, error)
 		//	  "description": "The collection of response templates for the integration response as a string-to-string map of key-value pairs",
 		//	  "type": "object"
 		//	}
-		"response_templates": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"response_templates": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The collection of response templates for the integration response as a string-to-string map of key-value pairs",
 			Optional:    true,
 			Computed:    true,
-			PlanModifiers: []planmodifier.Map{ /*START PLAN MODIFIERS*/
-				mapplanmodifier.UseStateForUnknown(),
+			PlanModifiers: []planmodifier.String{ /*START PLAN MODIFIERS*/
+				stringplanmodifier.UseStateForUnknown(),
 			}, /*END PLAN MODIFIERS*/
 		}, /*END ATTRIBUTE*/
 		// Property: TemplateSelectionExpression

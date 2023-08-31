@@ -8,6 +8,7 @@ package dynamodb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework-validators/listvalidator"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
@@ -469,9 +470,9 @@ func tableResource(ctx context.Context) (resource.Resource, error) {
 		//	{
 		//	  "type": "object"
 		//	}
-		"key_schema": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Required:    true,
+		"key_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Required:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: KinesisStreamSpecification
 		// CloudFormation resource type schema:

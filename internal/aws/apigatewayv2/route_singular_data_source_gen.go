@@ -8,6 +8,7 @@ package apigatewayv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -97,9 +98,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "object"
 		//	}
-		"request_models": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"request_models": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: RequestParameters
 		// CloudFormation resource type schema:
@@ -110,9 +111,9 @@ func routeDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	  },
 		//	  "type": "object"
 		//	}
-		"request_parameters": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"request_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: RouteId
 		// CloudFormation resource type schema:

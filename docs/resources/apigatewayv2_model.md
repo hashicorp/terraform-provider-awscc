@@ -19,7 +19,7 @@ Resource Type definition for AWS::ApiGatewayV2::Model
 
 - `api_id` (String)
 - `name` (String)
-- `schema` (Map of String)
+- `schema` (String)
 
 ### Optional
 

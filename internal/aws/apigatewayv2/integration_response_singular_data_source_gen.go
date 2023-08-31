@@ -10,7 +10,8 @@ import (
 
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
-	"github.com/hashicorp/terraform-plugin-framework/types"
+
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-provider-awscc/internal/generic"
 	"github.com/hashicorp/terraform-provider-awscc/internal/registry"
 )
@@ -85,8 +86,8 @@ func integrationResponseDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "A key-value map specifying response parameters that are passed to the method response from the backend",
 		//	  "type": "object"
 		//	}
-		"response_parameters": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"response_parameters": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "A key-value map specifying response parameters that are passed to the method response from the backend",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/
@@ -97,8 +98,8 @@ func integrationResponseDataSource(ctx context.Context) (datasource.DataSource, 
 		//	  "description": "The collection of response templates for the integration response as a string-to-string map of key-value pairs",
 		//	  "type": "object"
 		//	}
-		"response_templates": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
+		"response_templates": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType:  jsontypes.NormalizedType{},
 			Description: "The collection of response templates for the integration response as a string-to-string map of key-value pairs",
 			Computed:    true,
 		}, /*END ATTRIBUTE*/

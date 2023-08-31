@@ -17,7 +17,7 @@ Resource Schema for AWS::ServiceCatalogAppRegistry::AttributeGroup.
 
 ### Required
 
-- `attributes` (Map of String)
+- `attributes` (String)
 - `name` (String) The name of the attribute group.
 
 ### Optional

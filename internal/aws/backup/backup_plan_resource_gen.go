@@ -8,6 +8,7 @@ package backup
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/resource"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/resource/schema/boolplanmodifier"
@@ -160,9 +161,9 @@ func backupPlanResource(ctx context.Context) (resource.Resource, error) {
 					NestedObject: schema.NestedAttributeObject{ /*START NESTED OBJECT*/
 						Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 							// Property: BackupOptions
-							"backup_options": schema.MapAttribute{ /*START ATTRIBUTE*/
-								ElementType: types.StringType,
-								Required:    true,
+							"backup_options": schema.StringAttribute{ /*START ATTRIBUTE*/
+								CustomType: jsontypes.NormalizedType{},
+								Required:   true,
 							}, /*END ATTRIBUTE*/
 							// Property: ResourceType
 							"resource_type": schema.StringAttribute{ /*START ATTRIBUTE*/

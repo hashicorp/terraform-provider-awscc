@@ -8,6 +8,7 @@ package wafv2
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -318,8 +319,8 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 							"match_pattern": schema.SingleNestedAttribute{ /*START ATTRIBUTE*/
 								Attributes: map[string]schema.Attribute{ /*START SCHEMA*/
 									// Property: All
-									"all": schema.MapAttribute{ /*START ATTRIBUTE*/
-										ElementType: types.StringType,
+									"all": schema.StringAttribute{ /*START ATTRIBUTE*/
+										CustomType:  jsontypes.NormalizedType{},
 										Description: "Match all of the elements. See also MatchScope in JsonBody. You must specify either this setting or the IncludedPaths setting, but not both.",
 										Computed:    true,
 									}, /*END ATTRIBUTE*/
@@ -343,14 +344,14 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: Method
-					"method": schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
+					"method": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  jsontypes.NormalizedType{},
 						Description: "Inspect the HTTP method. The method indicates the type of operation that the request is asking the origin to perform. ",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: QueryString
-					"query_string": schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
+					"query_string": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  jsontypes.NormalizedType{},
 						Description: "Inspect the query string. This is the part of a URL that appears after a ? character, if any. ",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
@@ -367,8 +368,8 @@ func loggingConfigurationDataSource(ctx context.Context) (datasource.DataSource,
 						Computed:    true,
 					}, /*END ATTRIBUTE*/
 					// Property: UriPath
-					"uri_path": schema.MapAttribute{ /*START ATTRIBUTE*/
-						ElementType: types.StringType,
+					"uri_path": schema.StringAttribute{ /*START ATTRIBUTE*/
+						CustomType:  jsontypes.NormalizedType{},
 						Description: "Inspect the request URI path. This is the part of a web request that identifies a resource, for example, /images/daily-ad.jpg. ",
 						Computed:    true,
 					}, /*END ATTRIBUTE*/

@@ -8,6 +8,7 @@ package dynamodb
 import (
 	"context"
 
+	"github.com/hashicorp/terraform-plugin-framework-jsontypes/jsontypes"
 	"github.com/hashicorp/terraform-plugin-framework/datasource"
 	"github.com/hashicorp/terraform-plugin-framework/datasource/schema"
 	"github.com/hashicorp/terraform-plugin-framework/types"
@@ -380,9 +381,9 @@ func tableDataSource(ctx context.Context) (datasource.DataSource, error) {
 		//	{
 		//	  "type": "object"
 		//	}
-		"key_schema": schema.MapAttribute{ /*START ATTRIBUTE*/
-			ElementType: types.StringType,
-			Computed:    true,
+		"key_schema": schema.StringAttribute{ /*START ATTRIBUTE*/
+			CustomType: jsontypes.NormalizedType{},
+			Computed:   true,
 		}, /*END ATTRIBUTE*/
 		// Property: KinesisStreamSpecification
 		// CloudFormation resource type schema:
