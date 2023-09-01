@@ -10,5 +10,5 @@ resource "awscc_chatbot_slack_channel_configuration" "example" {
   slack_channel_id = var.channel-id
 
   # Replease <workspace-id> with the id of the Slack workspace
-  slack_workspace_id = "<workspace-id>"
+  slack_workspace_id = "var.workspace-id"
 }
