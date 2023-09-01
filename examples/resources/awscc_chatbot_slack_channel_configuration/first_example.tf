@@ -7,7 +7,7 @@ resource "awscc_chatbot_slack_channel_configuration" "example" {
   iam_role_arn = "arn:aws:iam::<account_id>:role/<role-name>"
 
   # Replace <channel-id> with the id of the Slack channel you want to send message to
-  slack_channel_id = "<channel-id>"
+  slack_channel_id = var.channel-id
 
   # Replease <workspace-id> with the id of the Slack workspace
   slack_workspace_id = "<workspace-id>"
