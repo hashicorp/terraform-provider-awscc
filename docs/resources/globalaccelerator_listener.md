@@ -16,6 +16,7 @@ Resource Type definition for AWS::GlobalAccelerator::Listener
 resource "awscc_globalaccelerator_listener" "example" {
   accelerator_arn = awscc_globalaccelerator_accelerator.example.id
   protocol        = "TCP"
+
   port_ranges = [{
     from_port = "80"
     to_port   = "80"
@@ -34,8 +35,8 @@ resource "awscc_globalaccelerator_listener" "example" {
 
 ### Optional
 
-- `client_affinity` (String) Client affinity ensures consistent routing for stateful applications by directing all user requests to the same endpoint, regardless of port or protocol. AWS Global Accelerator uses a hashing algorithm to choose the best endpoint based on either a "five-tuple" or "two-tuple" property set. To ensure a specific client is always routed to the same endpoint, set client affinity to SOURCE_IP, which uses the "two-tuple" properties. Valid values are `NONE` and `SOURCE_IP`.
-- `protocol` (String) The protocol for the connections from clients to the accelerator. Valid values are `TCP`, `UDP`.
+- `client_affinity` (String) Client affinity lets you direct all requests from a user to the same endpoint.
+- `protocol` (String) The protocol for the listener.
 
 ### Read-Only
 
