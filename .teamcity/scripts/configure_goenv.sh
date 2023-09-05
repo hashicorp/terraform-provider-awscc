@@ -5,5 +5,6 @@
 
 set -euo pipefail
 
-go_version="$(goenv local)"
+go_version="$(GOENV_GOMOD_VERSION_ENABLE=1 goenv local)"
+
 goenv install --skip-existing "${go_version}" && goenv rehash
